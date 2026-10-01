@@ -27,6 +27,26 @@ def labwc_rc(tmp_path, monkeypatch):
     return path
 
 
+_PAGES = []
+
+
+@pytest.fixture(autouse=True)
+def pages_live_like_in_the_app(monkeypatch):
+    """In MAYA the main window's stack owns every page for the whole run. A test page that only
+    Python holds can be freed while widgets it cleared are still waiting on deleteLater (their
+    buttons' slots are what keep it alive): Qt then deletes those widgets twice, and the process
+    dies in whichever later test first runs an event loop. So test pages are kept too."""
+    from app.pages.base import BasePage
+
+    init = BasePage.__init__
+
+    def keep(self, *args, **kwargs):
+        init(self, *args, **kwargs)
+        _PAGES.append(self)
+
+    monkeypatch.setattr(BasePage, "__init__", keep)
+
+
 @pytest.fixture(scope="session")
 def qapp():
     # One QApplication for the whole run. A test file that created a plain QCoreApplication
