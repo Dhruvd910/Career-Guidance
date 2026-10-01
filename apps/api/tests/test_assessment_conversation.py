@@ -37,9 +37,9 @@ def test_every_reply_knows_the_results_even_without_the_memory_permission(db_ses
     lines = text.splitlines()
     assert lines[1].startswith("- Career directions — strong alignment: ")
     assert "Computer Science & Software Engineering" in lines[1]
-    assert "- What you enjoy (today): enjoys maths, computers and coding" in text
+    assert "- What you enjoy [interests] (today): enjoys maths, computers and coding" in text
     assert "; matters to them: earning well" in text
-    assert "- Thinking skills (today): " in text and "understanding words 4 of 5 right" in text
+    assert "- Thinking skills [aptitude] (today): " in text and "understanding words 4 of 5 right" in text
     assert lines[-1].startswith("- Not taken yet: ") and "Your skills" in lines[-1]
     assert len(text) <= 1400
 
@@ -64,20 +64,23 @@ def test_the_tools(db_session):
     why = execute_tool(db_session, asha, "explain_direction", {"career_key": "cse"})
     assert why["band"] == "strong" and why["why"] and "evidence" not in why
     assert "error" in execute_tool(db_session, asha, "explain_direction", {"career_key": "astronaut"})
-    one = execute_tool(db_session, asha, "compare_assessments", {"instrument_key": "interests"})
-    assert one["attempts"] == 1 and "needs two attempts" in one["note"]
+    one = execute_tool(db_session, asha, "compare_assessments", {})
+    assert one["compared"] == {} and one["taken_once"] == ["interests"] and "taken twice" in one["note"]
 
 
 def test_how_much_have_i_improved(db_session):
     asha = student(db_session)
     take(db_session, asha, "aptitude", choose=lambda i: right(i, wrong={"a_num_1", "a_num_2", "a_num_3"}))
     take(db_session, asha, "aptitude", choose=right)
-    out = execute_tool(db_session, asha, "compare_assessments", {"instrument_key": "aptitude"})
-    numbers = next(r for r in out["since_previous"] if r["dimension"] == "working with numbers")
+    take(db_session, asha, "skills")  # taken once: nothing to compare there
+    out = execute_tool(db_session, asha, "compare_assessments", {})  # without a key: everything retaken
+    assert set(out["compared"]) == {"aptitude"}
+    rows = out["compared"]["aptitude"]["since_previous"]
+    numbers = next(r for r in rows if r["dimension"] == "working with numbers")
     assert numbers == {"dimension": "working with numbers", "before": "2 of 5 right", "after": "5 of 5 right",
                        "change": 1, "note": None}
-    words = next(r for r in out["since_previous"] if r["dimension"] == "understanding words")
-    assert words["change"] == 0
+    assert next(r for r in rows if r["dimension"] == "understanding words")["change"] == 0
+    assert "taken 2 times — compare_assessments shows the change" in assessment_context(db_session, asha)
 
 
 def test_offering_an_assessment_puts_a_button_on_screen(client, db_session, services):

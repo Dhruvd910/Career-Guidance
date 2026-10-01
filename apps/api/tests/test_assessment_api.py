@@ -105,13 +105,18 @@ def test_unclear_spoken_answers_are_interpreted_but_never_invented(client, monke
     assert 'key "love"' in prompt and "maths toh meri jaan hai yaar" in prompt
 
 
-def test_marks_can_be_interpreted_too(client, db_session, monkeypatch):
+def test_measured_answers_are_never_left_to_a_model(client, monkeypatch):
+    """Marks and problems are matched on the Pi or tapped: a model misreading "sattasi" (87) as 37,
+    or leaning towards the right answer, would quietly change a score."""
     token = register(client)
-    monkeypatch.setattr(assessment_router, "get_llm_provider", lambda: FakeLLM('{"value": 87}'))
-    view = client.post("/api/assessment/start", json={"instrument_key": "academic"}, headers=auth(token)).json()
-    out = client.post("/api/assessment/interpret", headers=auth(token), json={
-        "attempt_id": view["attempt_id"], "item_key": view["item"]["key"], "transcript": "sattasi percent"}).json()
-    assert out == {"answer": {"value": 87.0}, "skip": False}
+    llm = FakeLLM('{"option": "b"}')
+    monkeypatch.setattr(assessment_router, "get_llm_provider", lambda: llm)
+    for key in ("academic", "aptitude"):
+        view = client.post("/api/assessment/start", json={"instrument_key": key}, headers=auth(token)).json()
+        out = client.post("/api/assessment/interpret", headers=auth(token), json={
+            "attempt_id": view["attempt_id"], "item_key": view["item"]["key"], "transcript": "sattasi"}).json()
+        assert out == {"answer": None, "skip": False}
+    assert llm.seen == []
 
 
 def test_the_old_quiz_still_works_and_lands_in_the_new_tables(client, db_session):

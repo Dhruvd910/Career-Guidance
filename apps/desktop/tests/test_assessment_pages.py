@@ -342,3 +342,14 @@ def test_no_directions_before_what_you_enjoy(qapp, api, monkeypatch):
     page = DirectionsPage(Window())
     page.on_show()
     assert "Start with “What you enjoy”" in texts(page)
+
+
+def test_a_problem_not_understood_is_asked_again_not_interpreted(qapp, api):
+    page = AssessmentRunnerPage(Window())
+    page.isVisible = lambda: True
+    api.first = view(PROBLEM)
+    page.on_show(key="aptitude")
+    _, _, on_answer, _ = page.ctx.voice.asked[-1]
+    on_answer("hmm I think it's the bigger one")
+    assert not [c for c in api.calls if c[0] in ("interpret", "answer")]
+    assert page.ctx.voice.asked[-1][0].startswith("Sorry, I didn't catch that.")

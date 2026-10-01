@@ -2,8 +2,9 @@
 
 The server says which question comes next and what MAYA should say for it; this page shows it,
 reads it out and listens. A spoken answer is matched here first (app/answer_matching.py) — in
-English, Hindi or Hinglish — and only if that fails does the server's interpreter get a look;
-if neither is sure, MAYA asks once more and then leaves it to a tap. "Go back" / "peeche" and
+English, Hindi or Hinglish — and only if that fails does the server's interpreter get a look
+(never for marks or a problem's answer: those are taken as heard, or tapped); if neither is
+sure, MAYA asks once more and then leaves it to a tap. "Go back" / "peeche" and
 "skip" / "chhodo" work by voice too. Leaving midway is fine: it picks up where you stopped.
 """
 
@@ -26,6 +27,7 @@ from app.widgets.icons import mic_icon
 from app.workers import run_async
 
 RETRIES = 1
+MEASURED = ("problem", "marks")  # answered as heard or tapped — never interpreted (see the API's interpret.py)
 LETTERS = "ABCDEFGH"
 WORDS = {
     "en": {"question": "Question {n} of about {total}", "sorry": "Sorry, I didn't catch that.",
@@ -299,6 +301,9 @@ class AssessmentRunnerPage(BasePage):
         matched = match_answer(transcript, self.item)
         if matched is not None:
             self._act(matched, transcript, "keywords")
+            return
+        if self.item["type"] in MEASURED:
+            self._missed(token, "unclear")  # a mark or a problem's answer is never left to a model's reading
             return
         # Not something the Pi could place: one quick look by the server's interpreter.
         self.hint.setText(self._words("checking"))

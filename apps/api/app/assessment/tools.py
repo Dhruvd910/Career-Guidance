@@ -52,25 +52,38 @@ def explain_direction(db: Session, profile: StudentProfile, args: dict) -> dict:
     return {k: found[k] for k in keep}
 
 
-def compare_assessments(db: Session, profile: StudentProfile, args: dict) -> dict:
-    key = args.get("instrument_key")
-    if key not in KEYS:
-        return {"error": f"instrument_key must be one of {list(KEYS)}"}
+def _compare_one(db: Session, profile: StudentProfile, key: str) -> dict:
     history = service.history(db, profile, key)
     attempts = history["attempts"]
     if len(attempts) < 2:
-        return {"attempts": len(attempts), "note": "There's nothing to compare yet — this needs two attempts. "
-                "Suggest taking it again in a few weeks (suggest_assessment)."}
+        return {"attempts": len(attempts)}
 
     def rows(changes):
         return [{"dimension": r["label"]["en"], "before": r["before"]["en"], "after": r["after"]["en"],
-                 "change": r["change"], "note": r["note"]} for r in changes]
+                 "change": r["change"], "note": r["note"]} for r in changes if not r["dimension"].startswith("learning:")]
 
     return {"attempts": len(attempts), "first_taken": attempts[0]["completed_at"],
             "latest_taken": attempts[-1]["completed_at"],
-            "since_first": rows(history["since_first"]), "since_previous": rows(history["since_previous"]),
-            "note": "change 0 means within the noise for that many questions: call it 'about the same', not "
-                    "better or worse."}
+            "since_first": rows(history["since_first"]), "since_previous": rows(history["since_previous"])}
+
+
+def compare_assessments(db: Session, profile: StudentProfile, args: dict) -> dict:
+    """One assessment, or — without instrument_key — every one taken more than once."""
+    key = args.get("instrument_key")
+    if key and key not in KEYS:
+        return {"error": f"instrument_key must be one of {list(KEYS)}"}
+    compared = {k: _compare_one(db, profile, k) for k in KEYS}
+    retaken = {k: v for k, v in compared.items() if v["attempts"] >= 2}
+    if key in retaken:
+        retaken = {key: retaken[key]}  # just the one asked about — otherwise whatever there is to compare
+    if not retaken:
+        taken_once = [k for k, v in compared.items() if v["attempts"] == 1]
+        return {"compared": {}, "taken_once": taken_once,
+                "note": "There's nothing to compare yet — that needs the same assessment taken twice. Suggest a "
+                        "retake in a few weeks (suggest_assessment)."}
+    return {"compared": retaken,
+            "note": "change +1 = better, -1 = lower, 0 = within the noise for that many questions: call 0 'about "
+                    "the same', never better or worse."}
 
 
 def suggest_assessment(db: Session, profile: StudentProfile, args: dict) -> dict:

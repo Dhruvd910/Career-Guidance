@@ -55,6 +55,10 @@ class FakeKeyboard(QObject):
         pass
 
 
+INSTRUMENTS = [{"key": "interests", "title": {"en": "What you enjoy", "hi": "आपको क्या पसंद है"}, "est_minutes": 6,
+                "last_completed": {"attempt_id": 1, "completed_at": "2026-10-01T10:00:00+00:00"}}]
+
+
 class FakeWindow:
     def __init__(self):
         self.voice = Voice()
@@ -73,6 +77,7 @@ def page(qapp, monkeypatch):
     monkeypatch.setattr(audio_io.StreamPlayer, "LEAD_IN_SECONDS", 0.0)
     monkeypatch.setattr(maya_page.api_client, "get_consent",
                         lambda: {"long_term_memory": {"granted": False, "decided_at": None}})
+    monkeypatch.setattr(maya_page.api_client, "assessment_instruments", lambda: INSTRUMENTS)
     p = maya_page.MayaPage(FakeWindow())
     p.isVisible = lambda: True
     p.socket = socket
@@ -240,3 +245,12 @@ def test_maya_offering_an_assessment_shows_a_start_button(qapp, page):
     page.suggestion_btn.click()
     assert went == [("assessment_run", {"key": "aptitude", "language": "hi"})]
     assert not page.suggestion_btn.isVisibleTo(page)
+
+
+def test_before_any_assessment_what_you_enjoy_waits_as_a_start_button(qapp, page, monkeypatch):
+    fresh = [{**INSTRUMENTS[0], "last_completed": None}]
+    monkeypatch.setattr(maya_page.api_client, "assessment_instruments", lambda: fresh)
+    monkeypatch.setattr(maya_page, "run_async",
+                        lambda fn, *a, on_success=None, on_error=None: on_success and on_success(fn(*a)))
+    page.on_show()
+    assert page.suggestion_btn.isVisibleTo(page) and page.suggestion_btn.text() == "Start: What you enjoy · about 6 min"

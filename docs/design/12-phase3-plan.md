@@ -145,3 +145,30 @@ The 2 existing `career_assessments` rows become `interests_v1` attempts. The old
 3. A retake of the aptitude check uses the other form, and "How I've changed" only calls a change a change when it is bigger than the noise.
 4. MAYA answers "Mere liye kaunse careers sahi hain?" and "Main kitna improve hua hoon?" from stored results, and offers an assessment when there are none.
 5. Old assessments are migrated, the old endpoints still answer, and all earlier tests still pass.
+
+## As built (2026-10-01) — what changed after the live rehearsal
+
+A rehearsal with the real model, on the throwaway test database and with invented students,
+turned up four problems. Each was fixed:
+
+| Seen | Fixed by |
+|---|---|
+| The AI interpreter read "sattasi" (87) as 37 | **Marks and problem answers never go to a model.** They are matched on the Pi (which reads Hindi number words) or tapped. A model leaning towards the right answer to a problem would also quietly inflate a score |
+| "Main kitna improve hua hoon?" compared the wrong assessment ("Thinking skills" vs the key `aptitude`) | Context lines carry each assessment's key. `compare_assessments` with no key compares everything retaken, and falls back to what was retaken when asked about something taken once |
+| With no assessments, the model said "the button is on your screen" without calling `suggest_assessment` | MAYA's page shows "Start: What you enjoy" until a first assessment is done, so the button exists whatever the model does. The prompt also tells it to call the tool rather than describe it. gpt-4o-mini still sometimes calls it only on the next turn |
+| The interpreter treated an unrelated answer as "skip" | Skip now needs an explicit request |
+
+Also, skill levels are reported counted from 1 ("level 3 of 4"), matching how the four lines are
+numbered on screen and read out. Your two existing `career_assessments` rows were from the old
+slider tool (no question-by-question answers), so there was nothing to bring over. They stay
+in the old table.
+
+Rehearsal results:
+
+- **Directions.** For a maths/computers student with mixed aptitude, CSE, AI & Data and pure
+  science came out strong; ECE and aerospace potential.
+- **Retakes.** The retake used form B. "Working with numbers 2 → 4 of 5" was called an
+  improvement; logic and words "about the same".
+- **Spoken answers.** "maths toh meri jaan hai" → *love*. "theek thaak, kabhi accha kabhi nahi"
+  → not understood (correct: it's ambiguous).
+- **Replies.** Typed replies took 2–3 s (non-streamed).

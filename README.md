@@ -263,19 +263,46 @@ cd apps/api && ./.venv/bin/python -m app.seed.questions --reset
 The loader refuses malformed entries (wrong option count, missing explanation, no exam link),
 so a bad question can't silently mark students down.
 
-## Careers: MAYA's assessment and career guides
+## Assessments and career directions
 
-**Careers → Find careers that fit me** starts a conversation, not a form of 1–10 sliders:
-MAYA asks about 30 questions — what you enjoy, how you like to work, and deep-dives into
-physics, chemistry, biology, maths and computers ("Would you rather treat patients or
-research diseases?"). Tap an answer or say it; "skip" and "go back" work too. Follow-up
-questions depend on earlier answers.
+**Menu → My assessment** (or Careers → *Find careers that fit me*) has five short checks, in
+English or Hindi, taken by voice or touch and in any order:
 
-Every career gets a fit score, and the result says plainly which is the **best match** and
-which are **not a natural fit**, with the reasons from your answers and what to watch out
-for. Tap a career for its guide: what to do this week, how to prepare step by step, entrance
-exams, free resources (tap a link to get a QR code for your phone), a day in the job, what
-you can become, the future of the field, and what it pays — with the sources for the pay.
+| Check | What it measures | Time |
+|---|---|---|
+| What you enjoy | subjects, the kind of person you are (RIASEC), how you'd like to work and learn, what matters to you | ~6 min |
+| Thinking skills | numbers, logic and words: 15 short problems, two parallel sets for retakes | ~10 min |
+| Your skills | eight skills, each picked from four concrete levels ("I've built something small on my own") | ~3 min |
+| Your marks | your latest marks per subject (by class and stream; also saved to your academic record) | ~2 min |
+| Coding check | eight short pieces of pseudo-code to read | ~6 min |
+
+MAYA reads each question out and understands answers in English, Hindi and Hinglish ("mujhe
+maths bahut pasand hai", "doosra wala", "sattasi percent", "peeche", "chhodo"). The Pi matches
+them first; for an unusual answer to an interests or skills question, a quick AI call reads it,
+and never picks an answer that isn't clear. Marks and problem answers are never left to the AI:
+they're taken as heard, or tapped. Leaving midway is fine, because it picks up where you stopped.
+
+Results are honest counts ("4 of 5 right, 1 skipped", "level 3 of 4"), never IQ-style scores or
+percentiles. Problems can be gone through afterwards with the right answers. **Career
+directions** put every career in a band — strong alignment, potential alignment, needs
+exploration, or less likely (one tap away, never hidden) — grouped by domain. Each one has:
+
+- **Why it may fit**, taken from your answers.
+- **What it draws on**, with your own results, or "not measured yet".
+- **Strengths, and things to work on**, each with a next step.
+- **Questions to ask yourself**, things to try, and how people get there.
+
+There's no overall score and no "best match"; you decide. MAYA uses all of this in
+conversation. Ask "Main kitna improve hua hoon?" after a retake: she only calls a change an
+improvement when it's bigger than the noise for that many questions. Every result can be deleted.
+
+Each career also has a guide: what to do this week, how to prepare, entrance exams, free
+resources (tap a link for a QR code), a day in the job, and what it pays, with sources.
+
+The instruments are versioned JSON files in `apps/api/app/assessment/instruments/`, loaded at
+first use. An instrument already in use can't be edited in place: bump its version and run
+`./.venv/bin/python -m app.assessment.loader --lock`. Answers from MAYA's original quiz are
+brought over with `./.venv/bin/python scripts/migrate_legacy_assessments.py` (safe to repeat).
 
 ## Colleges: real cutoffs, compared properly
 

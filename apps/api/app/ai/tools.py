@@ -221,7 +221,8 @@ TOOL_SPECS: list[dict[str, Any]] = [
             "name": "explain_direction",
             "description": "Why one career is in its band for this student: the components with their scores, "
                            "why it may fit, strengths, development areas with next steps, questions to "
-                           "investigate, things to try, and the usual education path.",
+                           "investigate, things to try, and the usual education path. Call it whenever the "
+                           "student asks about one career for themselves — whether it suits them, what to work on.",
             "parameters": {
                 "type": "object",
                 "properties": {"career_key": {"type": "string", "description": "e.g. cse, ai_data, mbbs, law"}},
@@ -233,14 +234,16 @@ TOOL_SPECS: list[dict[str, Any]] = [
         "type": "function",
         "function": {
             "name": "compare_assessments",
-            "description": "How the student's results changed between attempts at one assessment — for "
-                           "'how much have I improved?'. change is +1/-1 only when bigger than the noise; 0 means "
-                           "about the same.",
+            "description": "How the student's results changed between attempts — for 'how much have I improved?'. "
+                           "Leave instrument_key out to compare every assessment they've taken more than once. "
+                           "change is +1/-1 only when bigger than the noise; 0 means about the same.",
             "parameters": {
                 "type": "object",
                 "properties": {"instrument_key": {"type": "string",
-                                                  "enum": ["interests", "aptitude", "skills", "academic", "coding_check"]}},
-                "required": ["instrument_key"],
+                                                  "enum": ["interests", "aptitude", "skills", "academic", "coding_check"],
+                                                  "description": "optional: just this one (interests = What you "
+                                                                 "enjoy, aptitude = Thinking skills, skills = Your "
+                                                                 "skills, academic = Your marks)"}},
             },
         },
     },
@@ -248,9 +251,11 @@ TOOL_SPECS: list[dict[str, Any]] = [
         "type": "function",
         "function": {
             "name": "suggest_assessment",
-            "description": "Offer the student an assessment: puts a button to start it on their screen. Use when "
-                           "they're unsure what suits them, ask about their strengths, or a direction needs "
-                           "something measured. Then tell them what it is and how long it takes.",
+            "description": "Offer the student an assessment: puts a Start button for it on their screen. It "
+                           "starts nothing by itself — they tap if they want to — so call it straight away (don't "
+                           "ask first, and don't just mention the assessment) when they're unsure what suits them, "
+                           "ask about their strengths, or a direction needs something measured. Only after calling "
+                           "it, tell them in a sentence what it is and how long it takes.",
             "parameters": {
                 "type": "object",
                 "properties": {

@@ -179,6 +179,7 @@ class MayaPage(BasePage):
         run_async(api_client.get_consent,
                   on_success=lambda c: self.memory_invite.setVisible(c["long_term_memory"]["decided_at"] is None),
                   on_error=lambda _e: self.memory_invite.setVisible(False))
+        run_async(api_client.assessment_instruments, on_success=self._invite_to_assess, on_error=lambda _e: None)
         if self._opening and not ask and not wake:
             self._say_opening()
             return
@@ -419,6 +420,16 @@ class MayaPage(BasePage):
             text = f"Start: {title}" + (f" · about {minutes} min" if minutes else "")
         self.suggestion_btn.setText(text)
         self.suggestion_btn.setVisible(True)
+
+    def _invite_to_assess(self, instruments: list) -> None:
+        """Until a first assessment is done, "What you enjoy" waits as a Start button — so it's there
+        whenever MAYA mentions it, whether or not she offers it herself."""
+        if self._suggestion is not None or any(i.get("last_completed") for i in instruments):
+            return
+        first = next((i for i in instruments if i["key"] == "interests"), None)
+        if first is not None:
+            self.offer({"action": "open_assessment", "instrument_key": "interests", "title": first["title"],
+                        "est_minutes": first["est_minutes"]})
 
     def _take_suggestion(self) -> None:
         suggestion, self._suggestion = self._suggestion, None

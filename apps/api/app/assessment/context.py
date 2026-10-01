@@ -20,8 +20,10 @@ from app.models.student import StudentProfile
 
 HEADER = ("The student's assessments — their own results, measured on the day, not verdicts. Use them, and say "
           "where they came from; never present one career as the answer:")
-NONE_YET = ("The student hasn't taken any assessment yet. If they're unsure what suits them, don't guess their "
-            "strengths: offer one with suggest_assessment (\"What you enjoy\" takes about six minutes).")
+NONE_YET = ("The student hasn't taken any assessment yet. If they're unsure what suits them or ask what they're good "
+            "at, don't guess their strengths: call suggest_assessment for \"interests\" (\"What you enjoy\", about six "
+            "minutes) right away — it only puts a Start button on their screen, they decide whether to tap it — and "
+            "say so in a sentence.")
 BUDGET_CHARS = 1400  # ~350 tokens
 SHOWN_PER_BAND = 3
 
@@ -38,6 +40,11 @@ def _ago(when: datetime | None, now: datetime) -> str:
 def assessment_context(db: Session, profile: StudentProfile) -> str:
     now = datetime.now(timezone.utc)
     latest = alignment.latest_attempts(db, profile)
+    attempts_by_key: dict[str, list] = {}
+    for attempt in db.execute(select(AssessmentAttempt).join(AssessmentInstrument)
+                              .where(AssessmentAttempt.student_profile_id == profile.id,
+                                     AssessmentAttempt.status == "completed")).scalars():
+        attempts_by_key.setdefault(attempt.instrument.key, []).append(attempt)
     lines: list[str] = []
     for key, attempt in latest.items():
         title = attempt.instrument.title["en"]
@@ -55,7 +62,9 @@ def assessment_context(db: Session, profile: StudentProfile) -> str:
                 shown += "; matters to them: " + ", ".join(values)
         else:
             shown = "; ".join(f"{r['label']['en']} {r['says']['en']}" for r in service.result(db, attempt)["scores"])
-        lines.append(f"- {title} ({_ago(attempt.completed_at, now)}): {shown}")
+        times = sum(1 for a in attempts_by_key.get(key, []))
+        retaken = f", taken {times} times — compare_assessments shows the change" if times > 1 else ""
+        lines.append(f"- {title} [{key}] ({_ago(attempt.completed_at, now)}{retaken}): {shown}")
 
     open_attempt = db.execute(
         select(AssessmentAttempt).join(AssessmentInstrument)
