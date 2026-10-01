@@ -134,14 +134,8 @@ class ApiClient:
     def list_careers(self) -> list:
         return self.get("/api/careers")
 
-    def assessment_questions(self) -> dict:
-        return self.get("/api/careers/assessment/questions")
-
     def career_by_key(self, key: str) -> dict:
         return self.get(f"/api/careers/key/{key}")
-
-    def submit_career_assessment(self, assessment_type: str, responses: dict) -> dict:
-        return self.post("/api/careers/assessment", {"assessment_type": assessment_type, "responses": responses})
 
     def search_colleges(self, **params) -> list:
         return self.get("/api/colleges", params={k: v for k, v in params.items() if v})
@@ -191,6 +185,45 @@ class ApiClient:
 
     def delete_saved_item(self, item_id: int) -> None:
         return self.delete(f"/api/saved-items/{item_id}")
+
+    # ---------------- assessments and career directions ----------------
+
+    def assessment_instruments(self) -> list:
+        return self.get("/api/assessment/instruments")
+
+    def assessment_start(self, key: str, language: str = "en", mode: str = "touch") -> dict:
+        """Starts one — or picks up the unfinished one where it stopped."""
+        return self.post("/api/assessment/start", {"instrument_key": key, "language": language, "mode": mode})
+
+    def assessment_answer(self, attempt_id: int, item_key: str, answer: dict | None = None, skipped: bool = False,
+                          transcript: str | None = None, interpreted_by: str = "touch",
+                          response_ms: int | None = None) -> dict:
+        return self.post("/api/assessment/answer", {
+            "attempt_id": attempt_id, "item_key": item_key, "answer": answer, "skipped": skipped,
+            "transcript": transcript, "interpreted_by": interpreted_by, "response_ms": response_ms})
+
+    def assessment_back(self, attempt_id: int) -> dict:
+        return self.post("/api/assessment/back", {"attempt_id": attempt_id})
+
+    def assessment_interpret(self, attempt_id: int, item_key: str, transcript: str) -> dict:
+        """A spoken answer the Pi couldn't match itself: {"answer": … | None, "skip": bool}."""
+        return self.post("/api/assessment/interpret",
+                         {"attempt_id": attempt_id, "item_key": item_key, "transcript": transcript})
+
+    def assessment_result(self, attempt_id: int) -> dict:
+        return self.get("/api/assessment/result", params={"attempt_id": attempt_id})
+
+    def assessment_history(self, key: str) -> dict:
+        return self.get("/api/assessment/history", params={"instrument_key": key})
+
+    def delete_assessment_attempt(self, attempt_id: int) -> None:
+        return self.delete(f"/api/assessment/attempts/{attempt_id}")
+
+    def career_directions(self) -> dict:
+        return self.get("/api/careers/directions")
+
+    def career_direction(self, key: str) -> dict:
+        return self.get(f"/api/careers/directions/{key}")
 
     # ---------------- MAYA's memory ----------------
 

@@ -227,3 +227,16 @@ def test_an_opening_that_arrives_while_she_is_busy_waits_for_her_next_wake(qapp,
     assert said == ["Welcome back!"], 'instead of "Yes? How can I help?"'
     page.wake(greet=True)
     assert said[-1] == "Yes? How can I help?", "only once"
+
+
+def test_maya_offering_an_assessment_shows_a_start_button(qapp, page):
+    went = []
+    page.ctx.navigate = lambda name, **kw: went.append((name, kw))
+    turn = type_question(page, "Mujhe nahi pata main kis cheez mein accha hoon")
+    page.socket.server({"type": "ui.suggest", "turn_id": turn, "action": "open_assessment", "instrument_key": "aptitude",
+                        "title": {"en": "Thinking skills", "hi": "सोचने की क्षमता"}, "est_minutes": 10, "reason": ""})
+    answer(page, turn, "Chalo ek chhota sa check karte hain.", language="hinglish")
+    assert page.suggestion_btn.isVisibleTo(page) and page.suggestion_btn.text() == "शुरू करें: सोचने की क्षमता · लगभग 10 मिनट"
+    page.suggestion_btn.click()
+    assert went == [("assessment_run", {"key": "aptitude", "language": "hi"})]
+    assert not page.suggestion_btn.isVisibleTo(page)

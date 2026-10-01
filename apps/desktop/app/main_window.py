@@ -31,7 +31,10 @@ from app.pages.maya import MayaPage
 from app.pages.memory import MemoryPage
 from app.pages.practice import PracticeTestPage
 from app.pages.calibrate import CalibrationPage
-from app.pages.assessment import CareerAssessmentPage
+from app.pages.assessments import AssessmentsPage
+from app.pages.assessment_result import AssessmentHistoryPage, AssessmentResultPage
+from app.pages.assessment_runner import AssessmentRunnerPage
+from app.pages.directions import DirectionPage, DirectionsPage
 from app.pages.career_detail import CareerDetailPage
 from app import touch_calibration
 
@@ -40,7 +43,9 @@ PAGE_TITLES = {
     "maya": "MAYA Assistant", "jee": "JEE", "neet": "NEET", "mock_tests": "Mock Tests", "practice_test": "Practice test",
     "careers": "Careers", "colleges": "Colleges", "college_detail": "College",
     "compare": "Compare colleges", "roadmap": "Roadmap", "calibrate": "Touch calibration",
-    "assessment": "Career assessment", "career_detail": "Career guide", "memory": "MAYA's memory",
+    "assessment": "My assessment", "assessment_run": "Assessment", "assessment_result": "My result",
+    "assessment_history": "How I've changed", "directions": "Career directions", "direction": "Career direction",
+    "career_detail": "Career guide", "memory": "MAYA's memory",
 }
 # Screens that belong to starting up, not to using the app: no top bar, no
 # wake word, and never somewhere Back returns to.
@@ -246,6 +251,8 @@ class MainWindow(QMainWindow):
         menu.addAction("Edit my details", lambda: self.navigate("setup", edit=True))
         menu.addAction("Change goal", self.pages["dashboard"].change_goal)
         menu.addAction("Talk to MAYA", lambda: self.navigate("maya"))
+        menu.addAction("My assessment", lambda: self.navigate("assessment"))
+        menu.addAction("Career directions", lambda: self.navigate("directions"))
         menu.addAction("MAYA's memory", lambda: self.navigate("memory"))
         menu.addAction("Calibrate touch", lambda: self.navigate("calibrate"))
         below = self.settings_btn.mapToGlobal(self.settings_btn.rect().bottomRight())
@@ -301,7 +308,12 @@ class MainWindow(QMainWindow):
         self.pages["maya"] = MayaPage(self)
         self.pages["practice_test"] = PracticeTestPage(self)
         self.pages["calibrate"] = CalibrationPage(self)
-        self.pages["assessment"] = CareerAssessmentPage(self)
+        self.pages["assessment"] = AssessmentsPage(self)
+        self.pages["assessment_run"] = AssessmentRunnerPage(self)
+        self.pages["assessment_result"] = AssessmentResultPage(self)
+        self.pages["assessment_history"] = AssessmentHistoryPage(self)
+        self.pages["directions"] = DirectionsPage(self)
+        self.pages["direction"] = DirectionPage(self)
         self.pages["career_detail"] = CareerDetailPage(self)
         self.pages["memory"] = MemoryPage(self)
         for name, page in self.pages.items():

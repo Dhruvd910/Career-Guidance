@@ -211,10 +211,11 @@ class Voice(QObject):
 
     # ---------------- listening ----------------
 
-    def ask(self, text: str, on_answer: Callable[[str], None], on_no_answer: Callable[[str], None] | None = None) -> None:
+    def ask(self, text: str, on_answer: Callable[[str], None], on_no_answer: Callable[[str], None] | None = None,
+            language: str | None = None) -> None:
         """Speak a question, then listen for the answer. on_no_answer gets a reason:
-        'silence', 'unclear', 'no_mic', or 'error'."""
-        self.say(text, on_done=lambda: self.listen(on_answer, on_no_answer))
+        'silence', 'unclear', 'no_mic', or 'error'. language: as for say()."""
+        self.say(text, on_done=lambda: self.listen(on_answer, on_no_answer), language=language)
         self._asking = (self._token, on_answer, on_no_answer)
 
     # ---------------- being interrupted by speech ----------------

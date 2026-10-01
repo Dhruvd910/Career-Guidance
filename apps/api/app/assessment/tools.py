@@ -47,7 +47,7 @@ def explain_direction(db: Session, profile: StudentProfile, args: dict) -> dict:
     if found is None:
         return {"error": "No direction for that career — either the key is wrong or the student hasn't taken "
                          "the 'What you enjoy' assessment yet."}
-    keep = ("name", "band", "band_label", "components", "why", "strengths", "development_areas", "questions",
+    keep = ("name", "band", "band_label", "components", "measures", "why", "strengths", "development_areas", "questions",
             "not_measured", "things_to_try", "education_path", "exams")
     return {k: found[k] for k in keep}
 

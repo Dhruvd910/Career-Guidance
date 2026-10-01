@@ -1,7 +1,7 @@
-"""Careers: every career in MAYA's library, with a way in to the assessment.
+"""Careers: every career in MAYA's library, with a way in to the assessments.
 
-Tap a career for its full guide. "Find careers that fit me" starts MAYA's question-by-question
-assessment, which ranks all of these for you. Careers on the student's own exam track come
+Tap a career for its full guide. "Find careers that fit me" opens My assessment, whose checks
+turn into career directions — bands with reasons, never a ranking. Careers on the student's own exam track come
 first — this page is for exploring, so nothing is hidden, but a NEET student shouldn't have
 to scroll past engineering to reach medicine.
 """
@@ -30,12 +30,12 @@ class CareersPage(BasePage):
         start = Card()
         start.addWidget(heading("Not sure what suits you?"))
         start.addWidget(muted(
-            "MAYA asks about 30 quick questions — your subjects, what you enjoy, how you like to work — "
-            "then ranks every career from best fit to least, and tells you why. Answer by voice or tap."
+            "Short checks — what you enjoy, how you think, your skills and marks — turn into career "
+            "directions: strong, potential and worth exploring, each with the reasons. Answer by voice or tap."
         ))
         self.start_btn = primary_button("Find careers that fit me")
         self.start_btn.setMinimumHeight(46)
-        self.start_btn.clicked.connect(lambda: self.ctx.navigate("assessment", type=self._assessment_type()))
+        self.start_btn.clicked.connect(lambda: self.ctx.navigate("assessment"))
         start.addWidget(self.start_btn)
         layout.addWidget(start)
 
@@ -48,18 +48,10 @@ class CareersPage(BasePage):
         layout.addWidget(self.list_holder)
         layout.addStretch(1)
 
-    def _assessment_type(self) -> str:
-        from app.session import session
-
-        level = (session.profile or {}).get("class_level") or 12
-        if level <= 9:
-            return "class8_9_exploration"
-        return "class10_stream" if level == 10 else "class11_12_career"
-
     def on_show(self, type: str | None = None, **kwargs) -> None:  # noqa: A002 — the navigate() kwarg
         if type:
-            # Onboarding sends students straight to the assessment.
-            self.ctx.navigate("assessment", type=type)
+            # Onboarding sends students straight to the assessments.
+            self.ctx.navigate("assessment")
             return
         set_error(self.error, None)
         run_async(api_client.list_careers, on_success=self._render, on_error=self._failed)

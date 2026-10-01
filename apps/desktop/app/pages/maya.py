@@ -129,6 +129,12 @@ class MayaPage(BasePage):
         self.memory_invite.clicked.connect(lambda: self.ctx.navigate("memory", tab="permissions"))
         self.memory_invite.setVisible(False)
         right.addWidget(self.memory_invite)
+        # MAYA offering an assessment ("ui.suggest"): one tap starts it — she never starts one herself.
+        self.suggestion_btn = primary_button("")
+        self.suggestion_btn.setVisible(False)
+        self.suggestion_btn.clicked.connect(self._take_suggestion)
+        right.addWidget(self.suggestion_btn)
+        self._suggestion: dict | None = None
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
         # The transcript stretches into whatever room is left instead of asking for a height of
@@ -260,6 +266,8 @@ class MayaPage(BasePage):
             return
         self.language = response.get("language") or "en"
         self._add_bubble("assistant", response["reply"])
+        for suggestion in response.get("suggestions") or []:
+            self.offer(suggestion)
         if current and self._should_speak(request_id):
             self.voice.say(response["reply"], language=self.language)
 
@@ -354,7 +362,9 @@ class MayaPage(BasePage):
         if self._turn is None or message.get("turn_id") != self._turn:
             return  # an earlier turn, already cut short
         kind = message["type"]
-        if kind == "turn.transcript":
+        if kind == "ui.suggest":
+            self.offer(message)
+        elif kind == "turn.transcript":
             self.language = message.get("language") or self.language
             if self._turn_by_voice:
                 self._add_bubble("user", message["text"])
@@ -367,6 +377,7 @@ class MayaPage(BasePage):
         elif kind == "reply.done":
             turn, self._turn = self._turn, None
             self.language = message.get("language") or self.language
+            self._label_suggestion()
             # Asked something by voice and answered with a question: listen for the answer.
             asks = self._turn_by_voice and message.get("text", "").rstrip().endswith("?")
             self.voice.end_stream(turn, on_done=self._listen_for_answer if asks else None)
@@ -386,6 +397,36 @@ class MayaPage(BasePage):
             turn, self._turn = self._turn, None
             self.voice.end_stream(turn)
             self._add_bubble("assistant", f"⚠ {message.get('message') or 'Something went wrong.'}")
+
+    def offer(self, suggestion: dict) -> None:
+        """A button for what MAYA just offered — today, starting an assessment."""
+        if suggestion.get("action") != "open_assessment":
+            return
+        self._suggestion = suggestion
+        self._label_suggestion()
+
+    def _label_suggestion(self) -> None:
+        """In the language of the conversation — again once the reply's language is known."""
+        suggestion = self._suggestion
+        if suggestion is None:
+            return
+        lang = "hi" if self.language in ("hi", "hinglish") else "en"
+        title = (suggestion.get("title") or {}).get(lang) or suggestion.get("instrument_key", "")
+        minutes = suggestion.get("est_minutes")
+        if lang == "hi":
+            text = f"शुरू करें: {title}" + (f" · लगभग {minutes} मिनट" if minutes else "")
+        else:
+            text = f"Start: {title}" + (f" · about {minutes} min" if minutes else "")
+        self.suggestion_btn.setText(text)
+        self.suggestion_btn.setVisible(True)
+
+    def _take_suggestion(self) -> None:
+        suggestion, self._suggestion = self._suggestion, None
+        self.suggestion_btn.setVisible(False)
+        if suggestion:
+            self.voice.cancel()
+            language = "hi" if self.language in ("hi", "hinglish") else "en"
+            self.ctx.navigate("assessment_run", key=suggestion["instrument_key"], language=language)
 
     def _say_opening(self) -> None:
         """Where we left off — then she listens for the answer to her check-in."""

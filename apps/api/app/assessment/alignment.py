@@ -182,6 +182,7 @@ def align(career: CareerOption, results: dict[str, dict], labels: dict) -> dict:
 
     components = {"interest": interest, "work_style": style}
     evidence, strengths, development, not_measured, questions = [], [], [], [], []
+    measures = []  # each need, labelled, with the student's result — for showing "what it draws on"
     ability_total = ability_got = 0.0
     central_gap = False
     for need, weight in sorted(needs_entry["needs"].items(), key=lambda kv: -kv[1]):
@@ -189,6 +190,8 @@ def align(career: CareerOption, results: dict[str, dict], labels: dict) -> dict:
         found = _measure(results, need)
         if found is None:
             components[need] = None
+            measures.append({"dimension": need, "label": {"en": label["en"], "hi": label["hi"]}, "weight": weight,
+                             "score": None, "says": None})
             if weight >= 2:
                 which = WHICH_ASSESSMENT.get(need.split(":")[0])
                 not_measured.append({"dimension": need, "assessment": which,
@@ -197,6 +200,9 @@ def align(career: CareerOption, results: dict[str, dict], labels: dict) -> dict:
             continue
         measured_as, r = found
         components[need] = r["score"]
+        shown_label = labels.get(measured_as, label)
+        measures.append({"dimension": need, "label": {"en": shown_label["en"], "hi": shown_label["hi"]},
+                         "weight": weight, "score": r["score"], "says": r["says"]})
         evidence.append({"dimension": need, "measured_as": measured_as, "instrument": r["instrument"],
                          "attempt_id": r["attempt_id"]})
         ability_total += weight
@@ -256,7 +262,8 @@ def align(career: CareerOption, results: dict[str, dict], labels: dict) -> dict:
 
     return {
         "career_key": career.key, "name": career.name, "domain": career.category, "band": band,
-        "band_label": BAND_LABELS[band], "components": components, "why": why, "strengths": strengths,
+        "band_label": BAND_LABELS[band], "components": components, "measures": measures, "why": why,
+        "strengths": strengths,
         "development_areas": development, "questions": _unique(questions), "not_measured": not_measured,
         "things_to_try": list(career.explore_next or []), "education_path": career.education_path,
         "exams": list(career.typical_entrance_exam_codes or []), "evidence": evidence,
