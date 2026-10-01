@@ -15,6 +15,11 @@ class StudentProfileUpdate(BaseModel):
     knows_career_goal: bool | None = None
     target_exam_code: str | None = None
     onboarding_completed: bool | None = None
+    education_stage: str | None = None  # class_6…class_12 | dropper | ug_y1…ug_y5 | pg | graduate
+    stream: str | None = None  # PCM | PCB | PCMB | commerce | humanities
+    birth_year: int | None = Field(default=None, ge=1950, le=2030)
+    city: str | None = None
+    study_hours_per_week: int | None = Field(default=None, ge=0, le=100)
 
 
 class StudentProfileOut(BaseModel):
@@ -31,6 +36,11 @@ class StudentProfileOut(BaseModel):
     knows_career_goal: bool | None
     target_exam_code: str | None
     onboarding_completed: bool
+    education_stage: str | None = None
+    stream: str | None = None
+    birth_year: int | None = None
+    city: str | None = None
+    study_hours_per_week: int | None = None
     created_at: datetime
 
     model_config = {"from_attributes": True}
