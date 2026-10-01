@@ -267,7 +267,8 @@ def validate(snap: Snapshot, library: list[dict] | None = None, measures: set[st
             for needed in ("entered_through", "part_of", "requires_skill"):
                 if not out.get(f"{key}|{needed}"):
                     problems.append(f"{key}: no {needed} edge")
-        if node["type"] == "degree" and not out.get(f"{key}|requires_subject"):
+        # A postgraduate degree follows another degree, not class 12 subjects.
+        if node["type"] == "degree" and node["attrs"].get("level") != "PG" and not out.get(f"{key}|requires_subject"):
             problems.append(f"{key}: no requires_subject edge")
         for measure in node["attrs"].get("measured_by", []) if measures is not None else []:
             if measure not in measures:

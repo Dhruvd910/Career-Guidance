@@ -35,7 +35,7 @@ EDGE_TYPES: dict[str, tuple[set[str], set[str]]] = {
     "stream_includes": ({"stream"}, {"subject"}),
     "entered_through": ({"career"}, {"degree"}),
     "requires_subject": ({"degree"}, {"subject"}),
-    "requires_exam": ({"degree"}, {"exam"}),
+    "requires_exam": ({"degree", "career"}, {"exam"}),  # a career's own gate, e.g. UPSC for civil services
     "continues_to": ({"degree"}, {"degree"}),
     "offered_at": ({"degree"}, {"college"}),
     "part_of": ({"career"}, {"domain"}),

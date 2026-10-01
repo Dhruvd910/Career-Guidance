@@ -265,6 +265,137 @@
       }
     },
     {
+      "key": "cybersecurity",
+      "name": "Cybersecurity",
+      "category": "Engineering & Technology",
+      "description": "Protect computers, networks and people's data from attacks — find the weak spots before criminals do.",
+      "required_subjects": [
+        "maths",
+        "computer"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in CSE or CSE (Cyber Security) via JEE Main/Advanced or state CETs, or BCA / B.Sc Computer Science via CUET → hands-on practice (CTF competitions) and security certifications.",
+      "skills_required": [
+        "networking",
+        "Linux",
+        "programming",
+        "problem solving"
+      ],
+      "timeline": "3–4 years after class 12; practice and certifications count as much as the degree.",
+      "possible_challenges": [
+        "Attacks and tools change every year — you keep learning all the time",
+        "Entry-level security-operations jobs often include night shifts"
+      ],
+      "explore_next": [
+        "Try the beginner challenges on picoCTF",
+        "Take Cisco Networking Academy's free Introduction to Cybersecurity"
+      ],
+      "profile": {
+        "computer": 3,
+        "maths": 2,
+        "investigative": 3,
+        "tech": 3,
+        "conventional": 1,
+        "money": 1
+      },
+      "must": [
+        "computer"
+      ],
+      "related": [
+        "cse",
+        "ai_data",
+        "ece"
+      ],
+      "details": {
+        "overview": "Cybersecurity professionals defend banks, hospitals, companies and government systems against hackers, fraud and data leaks. Some watch for attacks as they happen, some test systems by trying to break in (with permission), and some design systems to be safe from the start.",
+        "day_in_life": "Watching alerts in a security operations centre, investigating suspicious activity, testing websites and apps for weaknesses, fixing what's found, and explaining risks to people who aren't technical.",
+        "how_to_prepare": [
+          "Class 11-12: PCM, with computer science if your school offers it.",
+          "JEE Main/Advanced or state CETs for B.Tech in CSE or CSE (Cyber Security); or CUET for BCA / B.Sc Computer Science.",
+          "Learn networking and the Linux command line early — most security work builds on them.",
+          "Practise legally on Capture-the-Flag (CTF) platforms; certifications like CompTIA Security+ help with a first job."
+        ],
+        "start_now": [
+          "picoCTF — free beginner security challenges",
+          "OverTheWire Bandit — learn Linux by solving puzzles"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "B.Tech CSE / Cyber Security at NITs, IIITs and many state colleges"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "B.Tech at the IITs"
+          },
+          {
+            "name": "CUET-UG",
+            "url": "https://cuet.nta.nic.in",
+            "note": "BCA / B.Sc Computer Science at central universities"
+          }
+        ],
+        "resources": [
+          {
+            "name": "picoCTF — free security challenges for beginners",
+            "kind": "Practice",
+            "url": "https://picoctf.org"
+          },
+          {
+            "name": "Cisco Networking Academy — Introduction to Cybersecurity (free)",
+            "kind": "Course",
+            "url": "https://www.netacad.com"
+          },
+          {
+            "name": "OverTheWire — learn Linux and security through games",
+            "kind": "Practice",
+            "url": "https://overthewire.org/wargames/"
+          },
+          {
+            "name": "CERT-In — India's national cyber security agency",
+            "kind": "Website",
+            "url": "https://www.cert-in.org.in"
+          }
+        ],
+        "roles": [
+          "Security analyst",
+          "SOC analyst",
+          "Penetration tester",
+          "Security engineer",
+          "Cyber forensics investigator"
+        ],
+        "sectors": [
+          "Banks & insurance",
+          "IT services",
+          "Government & defence",
+          "Tech companies",
+          "Consulting firms"
+        ],
+        "future_scope": "Demand keeps rising as more of India's payments, records and services go online, and as data-protection rules make companies responsible for keeping data safe.",
+        "after_completion": [
+          "SOC Analyst → Security Engineer",
+          "Penetration Tester → Red Team Lead",
+          "Security Architect / CISO with experience"
+        ],
+        "earnings": {
+          "entry": "₹4–6 LPA typical for freshers (PayScale's average about ₹4.7 LPA)",
+          "mid": "₹7–20 LPA after 3–6 years, depending on employer and specialisation",
+          "senior": "₹20–35 LPA after 7–10 years; more at top multinationals",
+          "note": "Recognised certifications often add to a fresher's starting offer. Ranges vary widely by city and employer.",
+          "sources": [
+            {
+              "name": "Futurense — cybersecurity analyst salaries in India",
+              "url": "https://futurense.com/blog/cybersecurity-analyst-salary-in-india"
+            }
+          ]
+        }
+      }
+    },
+    {
       "key": "ece",
       "name": "Electronics & Communication Engineering",
       "category": "Engineering & Technology",
@@ -384,6 +515,128 @@
             {
               "name": "KAHE — EEE/ECE salary guide",
               "url": "https://kahedu.edu.in/eee-engineering-salary-india-fresher-to-experienced/"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "robotics",
+      "name": "Robotics & Automation",
+      "category": "Engineering & Technology",
+      "description": "Design machines that sense, think and move — factory robot arms, drones, warehouse robots and rovers.",
+      "required_subjects": [
+        "maths",
+        "physics",
+        "computer"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in Robotics/Mechatronics, Mechanical, Electronics or Electrical via JEE Main/Advanced or state CETs → an M.Tech in robotics for research and advanced roles.",
+      "skills_required": [
+        "mechanics",
+        "electronics",
+        "programming",
+        "maths"
+      ],
+      "timeline": "4 years after class 12; many advanced robotics roles prefer a master's.",
+      "possible_challenges": [
+        "You need mechanics, electronics and coding together — few people are strong in all three at first",
+        "Pure robotics jobs are fewer than general engineering jobs; many start in automation or embedded roles"
+      ],
+      "explore_next": [
+        "Build a line-follower robot with an Arduino kit",
+        "Join or start a school robotics club, or enter a robotics competition"
+      ],
+      "profile": {
+        "physics": 3,
+        "maths": 2,
+        "computer": 2,
+        "realistic": 3,
+        "investigative": 2,
+        "tech": 3
+      },
+      "must": [
+        "physics"
+      ],
+      "related": [
+        "mechanical",
+        "ece",
+        "ai_data"
+      ],
+      "details": {
+        "overview": "Robotics engineers bring together mechanical design, electronics and software to build machines that work on their own — in factories, warehouses, hospitals, farms and space missions. Much of the work in India today is industrial automation.",
+        "day_in_life": "Designing parts in CAD, wiring sensors and motors, writing the code that controls them, testing robots and figuring out why they didn't do what you expected.",
+        "how_to_prepare": [
+          "Class 11-12: PCM, with computer science if possible.",
+          "JEE Main/Advanced or state CETs for B.Tech in Robotics/Mechatronics, Mechanical, Electronics or Electrical.",
+          "Build things: Arduino or Raspberry Pi projects teach electronics and coding together.",
+          "In college: robotics clubs and competitions (e.g. e-Yantra, Robocon) and internships in automation."
+        ],
+        "start_now": [
+          "Arduino's free tutorials — make an LED blink, then a motor move",
+          "Build a line-follower robot from a kit"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "B.Tech at NITs, IIITs and many state colleges"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "B.Tech at the IITs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Arduino — official tutorials",
+            "kind": "Course",
+            "url": "https://docs.arduino.cc"
+          },
+          {
+            "name": "e-Yantra (IIT Bombay) — robotics competitions and projects",
+            "kind": "Programme",
+            "url": "https://www.e-yantra.org"
+          },
+          {
+            "name": "NPTEL — robotics and control courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          }
+        ],
+        "roles": [
+          "Robotics engineer",
+          "Automation engineer",
+          "Embedded systems engineer",
+          "Controls engineer",
+          "Robotics researcher"
+        ],
+        "sectors": [
+          "Manufacturing & automotive",
+          "Warehousing & logistics",
+          "Space & defence",
+          "Healthcare devices",
+          "Research labs"
+        ],
+        "future_scope": "Automation in Indian factories and warehouses is growing, along with drones and robots in agriculture and healthcare; robotics combined with AI is where much of the newest work is.",
+        "after_completion": [
+          "Automation Engineer → Robotics Engineer",
+          "Embedded / Controls Engineer",
+          "Research (M.Tech/PhD)"
+        ],
+        "earnings": {
+          "entry": "₹4–6 LPA typical to start (PayScale's entry-level average about ₹3.9 LPA)",
+          "mid": "About ₹5–10 LPA after a few years; more at larger automation and product companies",
+          "senior": "Up to about ₹20 LPA for experienced engineers",
+          "note": "There are few reliable salary surveys for robotics in India and they rest on small samples; figures vary a lot by city and employer.",
+          "sources": [
+            {
+              "name": "PayScale — robotics engineer salary in India",
+              "url": "https://www.payscale.com/research/IN/Job=Robotics_Engineer/Salary"
             }
           ]
         }

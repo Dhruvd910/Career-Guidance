@@ -23,10 +23,18 @@
    "ask_yourself": [
     {"en": "Do you enjoy finding patterns in numbers, like what your marks say about your study habits?", "hi": "क्या आपको संख्याओं में पैटर्न ढूँढना अच्छा लगता है, जैसे आपके अंक आपकी पढ़ाई की आदतों के बारे में क्या बताते हैं?"},
     {"en": "Are you ready for a lot of maths — statistics and probability — along with coding?", "hi": "क्या आप कोडिंग के साथ बहुत सारी मैथ्स — स्टैटिस्टिक्स और प्रोबेबिलिटी — के लिए तैयार हैं?"}]},
+  "cybersecurity": {"needs": {"aptitude:logical": 3, "skill:programming": 2, "academic:maths": 2, "skill:english": 1},
+   "ask_yourself": [
+    {"en": "Do you enjoy finding the one weak spot in a system — a puzzle, a lock, a game's loophole?", "hi": "क्या आपको किसी सिस्टम की एक कमज़ोरी ढूँढना अच्छा लगता है — कोई पहेली, ताला, या गेम की कोई चूक?"},
+    {"en": "Could you keep learning new tools every year, and work some night shifts at the start?", "hi": "क्या आप हर साल नए टूल सीखते रह सकते हैं, और शुरुआत में कुछ रात की शिफ़्ट कर सकते हैं?"}]},
   "ece": {"needs": {"academic:physics": 3, "academic:maths": 2, "aptitude:numerical": 2, "aptitude:logical": 2, "skill:hands_on": 1},
    "ask_yourself": [
     {"en": "Are you curious how a phone, a radio or a chip actually works inside?", "hi": "क्या आप जानना चाहते हैं कि फ़ोन, रेडियो या चिप अंदर से असल में कैसे काम करते हैं?"},
     {"en": "Would you enjoy both the maths of circuits and building them with your hands?", "hi": "क्या आपको सर्किट की मैथ्स और उन्हें हाथ से बनाना, दोनों अच्छे लगेंगे?"}]},
+  "robotics": {"needs": {"academic:physics": 3, "academic:maths": 2, "skill:hands_on": 2, "skill:programming": 2, "aptitude:logical": 2},
+   "ask_yourself": [
+    {"en": "Have you enjoyed building something that moves — a model, a kit, a robot?", "hi": "क्या आपको कुछ ऐसा बनाना अच्छा लगा है जो चलता हो — कोई मॉडल, किट या रोबोट?"},
+    {"en": "Are you ready for maths, electronics and coding together, not just one of them?", "hi": "क्या आप मैथ्स, इलेक्ट्रॉनिक्स और कोडिंग — तीनों साथ में — के लिए तैयार हैं?"}]},
   "electrical": {"needs": {"academic:physics": 3, "academic:maths": 2, "aptitude:numerical": 2, "skill:hands_on": 2},
    "ask_yourself": [
     {"en": "Does the idea of bringing power — solar, grids, motors — to millions of people excite you?", "hi": "क्या लाखों लोगों तक बिजली पहुँचाने — सोलर, ग्रिड, मोटर — का विचार आपको उत्साहित करता है?"},

@@ -70,8 +70,8 @@ def test_choosing_to_care_rather_than_treat_puts_nursing_first(careers):
 
 def test_a_coder_gets_computing_and_medicine_is_clearly_a_poor_fit(careers):
     ranked = eng.rank_careers(careers, CODER)
-    top_keys = [r["career"].key for r in ranked[:2]]
-    assert set(top_keys) == {"cse", "ai_data"}
+    top_keys = [r["career"].key for r in ranked[:3]]
+    assert {"cse", "ai_data"} <= set(top_keys)  # with cybersecurity, also a coder's career, since Phase 4
     mbbs = next(r for r in ranked if r["career"].key == "mbbs")
     assert mbbs["label"] == "Not a natural fit"
     assert any("blood and hospitals" in w for w in mbbs["watch_outs"]), "it says why"

@@ -1,0 +1,149 @@
+# Domains, RIASEC traits, school subjects and streams — the frame everything else hangs on.
+# Curated by MAYA's editor (Claude), not yet reviewed by a person. Subject names follow NCERT's
+# senior-secondary subjects; streams list what Indian schools usually offer in class 11-12.
+source: {kind: curated, ref: maya_editorial_v1}
+nodes:
+  # ---------------- domains (spec §11's exploration tree) ----------------
+  - key: domain:technology
+    name: {en: Technology, hi: टेक्नोलॉजी}
+    attrs: {order: 1}
+  - key: domain:engineering
+    name: {en: Engineering, hi: इंजीनियरिंग}
+    attrs: {order: 2}
+  - key: domain:health
+    name: {en: Medicine & Health, hi: मेडिकल और हेल्थ}
+    attrs: {order: 3}
+  - key: domain:science
+    name: {en: Science & Research, hi: विज्ञान और रिसर्च}
+    attrs: {order: 4}
+  - key: domain:design
+    name: {en: Design & Architecture, hi: डिज़ाइन और आर्किटेक्चर}
+    attrs: {order: 5}
+  - key: domain:business
+    name: {en: Commerce & Finance, hi: कॉमर्स और फ़ाइनेंस}
+    attrs: {order: 6}
+  - key: domain:law
+    name: {en: Law, hi: क़ानून}
+    attrs: {order: 7}
+  - key: domain:public_service
+    name: {en: Government & Defence, hi: सरकारी सेवा और रक्षा}
+    attrs: {order: 8}
+  - key: domain:media
+    name: {en: Media & Communication, hi: मीडिया और संचार}
+    attrs: {order: 9}
+  - key: domain:people
+    name: {en: Education & Society, hi: शिक्षा और समाज}
+    attrs: {order: 10}
+  - key: domain:hospitality
+    name: {en: Hospitality & Services, hi: हॉस्पिटैलिटी और सेवाएँ}
+    attrs: {order: 11}
+
+  # ---------------- Holland's RIASEC traits (what the interests check measures) ----------------
+  - key: trait:realistic
+    name: {en: Hands-on (Realistic), hi: व्यावहारिक}
+  - key: trait:investigative
+    name: {en: Curious (Investigative), hi: खोजी}
+  - key: trait:artistic
+    name: {en: Creative (Artistic), hi: रचनात्मक}
+  - key: trait:social
+    name: {en: Helping (Social), hi: सामाजिक}
+  - key: trait:enterprising
+    name: {en: Leading (Enterprising), hi: उद्यमी}
+  - key: trait:conventional
+    name: {en: Organised (Conventional), hi: व्यवस्थित}
+
+  # ---------------- school subjects (class 11-12) ----------------
+  - key: subject:mathematics
+    name: {en: Mathematics, hi: गणित}
+    aliases: [maths, math]
+  - key: subject:physics
+    name: {en: Physics, hi: भौतिकी}
+  - key: subject:chemistry
+    name: {en: Chemistry, hi: रसायन विज्ञान}
+  - key: subject:biology
+    name: {en: Biology, hi: जीव विज्ञान}
+  - key: subject:computer_science
+    name: {en: Computer Science, hi: कंप्यूटर साइंस}
+    aliases: [informatics practices, computer]
+  - key: subject:english
+    name: {en: English, hi: अंग्रेज़ी}
+  - key: subject:hindi
+    name: {en: Hindi, hi: हिंदी}
+  - key: subject:accountancy
+    name: {en: Accountancy, hi: लेखाशास्त्र}
+  - key: subject:business_studies
+    name: {en: Business Studies, hi: व्यवसाय अध्ययन}
+  - key: subject:economics
+    name: {en: Economics, hi: अर्थशास्त्र}
+  - key: subject:history
+    name: {en: History, hi: इतिहास}
+  - key: subject:political_science
+    name: {en: Political Science, hi: राजनीति विज्ञान}
+  - key: subject:geography
+    name: {en: Geography, hi: भूगोल}
+  - key: subject:psychology
+    name: {en: Psychology, hi: मनोविज्ञान}
+  - key: subject:fine_arts
+    name: {en: Fine Arts, hi: ललित कला}
+  - key: subject:physical_education
+    name: {en: Physical Education, hi: शारीरिक शिक्षा}
+
+  # ---------------- streams ----------------
+  # optional: true = many schools let you add it to this stream, not everyone takes it.
+  - key: stream:pcm
+    name: {en: Science — PCM, hi: विज्ञान — पी.सी.एम.}
+    aliases: [non medical, non-medical, maths science]
+    edges:
+      stream_includes:
+        - subject:physics
+        - subject:chemistry
+        - subject:mathematics
+        - subject:english
+        - {to: subject:computer_science, optional: true}
+        - {to: subject:physical_education, optional: true}
+  - key: stream:pcb
+    name: {en: Science — PCB, hi: विज्ञान — पी.सी.बी.}
+    aliases: [medical, bio science]
+    edges:
+      stream_includes:
+        - subject:physics
+        - subject:chemistry
+        - subject:biology
+        - subject:english
+        - {to: subject:psychology, optional: true}
+        - {to: subject:physical_education, optional: true}
+  - key: stream:pcmb
+    name: {en: Science — PCMB, hi: विज्ञान — पी.सी.एम.बी.}
+    edges:
+      stream_includes:
+        - subject:physics
+        - subject:chemistry
+        - subject:mathematics
+        - subject:biology
+        - subject:english
+  - key: stream:commerce
+    name: {en: Commerce, hi: कॉमर्स}
+    edges:
+      stream_includes:
+        - subject:accountancy
+        - subject:business_studies
+        - subject:economics
+        - subject:english
+        - {to: subject:mathematics, optional: true}
+        - {to: subject:computer_science, optional: true}
+        - {to: subject:physical_education, optional: true}
+  - key: stream:humanities
+    name: {en: Humanities / Arts, hi: ह्यूमैनिटीज़ / आर्ट्स}
+    aliases: [arts]
+    edges:
+      stream_includes:
+        - subject:history
+        - subject:political_science
+        - subject:geography
+        - subject:economics
+        - subject:english
+        - {to: subject:psychology, optional: true}
+        - {to: subject:mathematics, optional: true}
+        - {to: subject:fine_arts, optional: true}
+        - {to: subject:hindi, optional: true}
+        - {to: subject:physical_education, optional: true}

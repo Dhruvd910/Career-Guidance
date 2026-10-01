@@ -1,0 +1,411 @@
+# Degrees: what they require at class 12 (requires_subject: mandatory, or one_of a group, or a
+# recommendation with a note), which entrance exams lead to them, what can follow (continues_to),
+# and — for degrees in the official JoSAA/MCC 2026 data — which programme names are theirs
+# (programmes: course/branch patterns, checked in match_order, first match wins; the loader
+# reports any programme that matches nothing).
+# Curated by MAYA's editor (Claude), not yet reviewed by a person. Requirements vary by college
+# and change; students should confirm with the official admission notice.
+source: {kind: curated, ref: maya_editorial_v1}
+nodes:
+  # ---------------- engineering (B.Tech / B.E.) ----------------
+  - key: degree:btech_robotics
+    name: {en: B.Tech in Robotics / Mechatronics, hi: बी.टेक रोबोटिक्स / मेकाट्रॉनिक्स}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 9
+      programmes: [{course: "^B\\.Tech", branch: "robotic|mechatronic"}]
+    edges: &btech
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:mathematics, mandatory: true}]
+      requires_exam: [exam:JEE_MAIN, exam:JEE_ADVANCED, exam:STATE_CET, exam:BITSAT]
+      continues_to: [degree:mtech_ms, degree:mba]
+  - key: degree:btech_cybersecurity
+    name: {en: B.Tech in CSE (Cyber Security), hi: बी.टेक सीएसई (साइबर सुरक्षा)}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 10
+      programmes: [{course: "^B\\.Tech", branch: "cyber security|block ?chain"}]
+    edges: *btech
+  - key: degree:btech_ai_ds
+    name: {en: B.Tech in AI / Data Science, hi: बी.टेक एआई / डेटा साइंस}
+    aliases: [AIML, AI and ML, AI & DS]
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 11
+      programmes:
+        - {course: "^B\\.Tech", branch: "artificial|ntellig|machine learning|\\bAI\\b|\\bML\\b|data scien|data analytic|data engineer|computational and data", except: "chemical|agricultur|robotic"}
+    edges: *btech
+  - key: degree:btech_math_computing
+    name: {en: B.Tech / B.S. in Mathematics and Computing, hi: बी.टेक / बी.एस. मैथमेटिक्स एंड कंप्यूटिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 12
+      programmes: [{course: "^B\\.Tech|^B\\.S\\.|Integrated M\\.Sc", branch: "mathematics (and|&) (scientific )?computing|mathematics and data science|computational mathematics|mathematics and computing technology"}]
+    edges: *btech
+  - key: degree:btech_cse
+    name: {en: B.Tech in Computer Science / IT, hi: बी.टेक कंप्यूटर साइंस / आईटी}
+    aliases: [CSE, computer science engineering, IT]
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 13
+      programmes: [{course: "^B\\.Tech", branch: "computer|information technology|\\(IT\\)|informatics|\\bCSE\\b|computing", except: "mechanics|^bio"}]
+    edges: *btech
+  - key: degree:btech_aerospace
+    name: {en: B.Tech in Aerospace / Aeronautical Engineering, hi: बी.टेक एयरोस्पेस / एरोनॉटिकल इंजीनियरिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 14
+      programmes: [{course: "^B\\.Tech", branch: "aerospace|aeronautic|aviation engineering|space science"}]
+    edges: *btech
+  - key: degree:btech_biotech
+    name: {en: B.Tech in Biotechnology / Biomedical Engineering, hi: बी.टेक बायोटेक्नोलॉजी / बायोमेडिकल इंजीनियरिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 15
+      programmes: [{course: "^B\\.Tech", branch: "bio", except: "^chemical"}]
+    edges: *btech
+  - key: degree:btech_chemical
+    name: {en: B.Tech in Chemical Engineering, hi: बी.टेक केमिकल इंजीनियरिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 16
+      programmes: [{course: "^B\\.Tech", branch: "chemical|petroleum|industrial chemistry|pharmaceutical engineering|ceramic"}]
+    edges: *btech
+  - key: degree:btech_electrical
+    name: {en: B.Tech in Electrical Engineering, hi: बी.टेक इलेक्ट्रिकल इंजीनियरिंग}
+    aliases: [EE, EEE]
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 19
+      programmes: [{course: "^B\\.Tech", branch: "electrical|elctrical|energy|power|mobility", except: "communication"}]
+    edges: *btech
+  - key: degree:btech_ece
+    name: {en: B.Tech in Electronics and Communication, hi: बी.टेक इलेक्ट्रॉनिक्स एंड कम्युनिकेशन}
+    aliases: [ECE, electronics]
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 20
+      programmes: [{course: "^B\\.Tech", branch: "electronic|communication|vlsi|telecommunication|instrumentation|internet of things|\\bIoT\\b|integrated circuit|microelectronic|avionics"}]
+    edges: *btech
+  - key: degree:btech_mechanical
+    name: {en: B.Tech in Mechanical Engineering, hi: बी.टेक मैकेनिकल इंजीनियरिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 21
+      programmes: [{course: "^B\\.Tech", branch: "mechanical|production|industrial|manufactur|mechanics|automobile|naval|maritime|ocean", except: "industrial design"}]
+    edges: *btech
+  - key: degree:btech_civil
+    name: {en: B.Tech in Civil Engineering, hi: बी.टेक सिविल इंजीनियरिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 22
+      programmes: [{course: "^B\\.Tech", branch: "civil|infrastructure|construction|environmental|structural|geotechnical"}]
+    edges: *btech
+  - key: degree:btech_engineering_physics
+    name: {en: B.Tech in Engineering Physics, hi: बी.टेक इंजीनियरिंग फ़िज़िक्स}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      match_order: 23
+      programmes: [{course: "^B\\.Tech", branch: "physics|quantum|engineering science"}]
+    edges: *btech
+  - key: degree:btech_other
+    name: {en: B.Tech in another engineering branch, hi: बी.टेक किसी अन्य इंजीनियरिंग शाखा में}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: AICTE
+      note: "Materials, metallurgy, mining, textiles, food, agriculture and other branches"
+      match_order: 90
+      programmes: [{course: "^B\\.Tech"}]
+    edges: *btech
+
+  # ---------------- design, architecture, planning ----------------
+  - key: degree:barch
+    name: {en: B.Arch, hi: बी.आर्क}
+    attrs:
+      level: UG
+      duration_years: 5
+      regulator: Council of Architecture
+      programmes: [{course: "^B\\.Arch"}]
+    edges:
+      requires_subject: [{to: subject:mathematics, mandatory: true}, {to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}]
+      requires_exam: [exam:NATA, {to: exam:JEE_MAIN, note: "Paper 2A"}]
+      continues_to: [degree:mtech_ms]
+  - key: degree:bplan
+    name: {en: B.Planning, hi: बी.प्लानिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      programmes: [{course: "^B\\.Plan"}]
+    edges:
+      requires_subject: [{to: subject:mathematics, mandatory: true}]
+      requires_exam: [{to: exam:JEE_MAIN, note: "Paper 2B"}]
+  - key: degree:bdes
+    name: {en: B.Des (Bachelor of Design), hi: बी.डेस (बैचलर ऑफ़ डिज़ाइन)}
+    attrs:
+      level: UG
+      duration_years: 4
+      match_order: 8
+      programmes: [{course: "^B\\.Des"}, {course: "^B\\.Tech", branch: "^design$|industrial design|design engineering|engineering design"}]
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+      requires_exam: [exam:UCEED, exam:NID_DAT, exam:NIFT]
+      continues_to: [degree:mba]
+
+  # ---------------- sciences (B.S., B.Sc, integrated M.Sc) ----------------
+  - key: degree:bs_economics
+    name: {en: B.S. in Economics (IITs), hi: बी.एस. इकोनॉमिक्स (आईआईटी)}
+    attrs:
+      level: UG
+      duration_years: 4
+      match_order: 38
+      programmes: [{course: "^B\\.S\\.|Integrated M\\.Sc", branch: "econom"}]
+    edges:
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:mathematics, mandatory: true}]
+      requires_exam: [exam:JEE_ADVANCED]
+      continues_to: [degree:mba, degree:msc_phd]
+  - key: degree:bs_maths_stats
+    name: {en: B.S. / B.Sc in Mathematics or Statistics, hi: बी.एस. / बी.एससी गणित या सांख्यिकी}
+    attrs:
+      level: UG
+      duration_years: 3
+      match_order: 39
+      programmes: [{course: "^B\\.S\\.|Integrated M\\.Sc", branch: "mathemat|statistic|scientific computing"}]
+    edges:
+      requires_subject: [{to: subject:mathematics, mandatory: true}]
+      requires_exam: [exam:CUET_UG, exam:JEE_ADVANCED, exam:IISER_IAT, exam:NEST]
+      continues_to: [degree:msc_phd, degree:mtech_ms]
+  - key: degree:bs_physical_sciences
+    name: {en: B.S. / B.Sc / Integrated M.Sc in Physics or Chemistry, hi: बी.एस. / बी.एससी / इंटीग्रेटेड एम.एससी भौतिकी या रसायन}
+    attrs:
+      level: UG
+      duration_years: 4
+      match_order: 40
+      programmes: [{course: "^B\\.S\\.|Integrated M\\.Sc", branch: "physic|chemi|geolog|geophysic|earth"}]
+    edges:
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:mathematics, mandatory: true}]
+      requires_exam: [exam:JEE_ADVANCED, exam:IISER_IAT, exam:NEST, exam:CUET_UG]
+      continues_to: [degree:msc_phd]
+  - key: degree:bs_life_sciences
+    name: {en: B.S. / B.Sc in Life Sciences or Biotechnology, hi: बी.एस. / बी.एससी लाइफ़ साइंसेज़ या बायोटेक्नोलॉजी}
+    attrs:
+      level: UG
+      duration_years: 3
+      match_order: 41
+      programmes: [{course: "^B\\.S\\.|Integrated M\\.Sc", branch: "biolog|life science"}]
+    edges:
+      requires_subject: [{to: subject:biology, mandatory: true}, {to: subject:chemistry, mandatory: true}]
+      requires_exam: [exam:CUET_UG, exam:IISER_IAT, exam:NEST]
+      continues_to: [degree:msc_phd]
+
+  # ---------------- medicine and health ----------------
+  - key: degree:mbbs
+    name: {en: MBBS, hi: एमबीबीएस}
+    attrs:
+      level: UG
+      duration_years: 5.5
+      regulator: National Medical Commission
+      programmes: [{course: "^MBBS$"}]
+    edges: &medical
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:biology, mandatory: true}, {to: subject:english, mandatory: true}]
+      requires_exam: [exam:NEET_UG]
+      continues_to: [degree:md_ms]
+  - key: degree:bds
+    name: {en: BDS, hi: बीडीएस}
+    attrs:
+      level: UG
+      duration_years: 5
+      regulator: Dental Council of India
+      programmes: [{course: "^BDS$"}]
+    edges:
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:biology, mandatory: true}, {to: subject:english, mandatory: true}]
+      requires_exam: [exam:NEET_UG]
+  - key: degree:bsc_nursing
+    name: {en: B.Sc Nursing, hi: बी.एससी नर्सिंग}
+    attrs:
+      level: UG
+      duration_years: 4
+      regulator: Indian Nursing Council
+      programmes: [{course: "Nursing"}]
+    edges:
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:biology, mandatory: true}, {to: subject:english, mandatory: true}]
+      requires_exam: [exam:NEET_UG, exam:STATE_CET]
+  - key: degree:bpharm
+    name: {en: B.Pharm, hi: बी.फ़ार्म}
+    attrs: {level: UG, duration_years: 4, regulator: Pharmacy Council of India}
+    edges:
+      requires_subject:
+        - {to: subject:physics, mandatory: true}
+        - {to: subject:chemistry, mandatory: true}
+        - {to: subject:mathematics, one_of: maths_or_biology}
+        - {to: subject:biology, one_of: maths_or_biology}
+      requires_exam: [exam:STATE_CET, exam:CUET_UG]
+      continues_to: [degree:mtech_ms, degree:mba]
+  - key: degree:bpt
+    name: {en: BPT (Bachelor of Physiotherapy), hi: बीपीटी (बैचलर ऑफ़ फ़िज़ियोथेरेपी)}
+    attrs: {level: UG, duration_years: 4.5}
+    edges:
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:biology, mandatory: true}]
+      requires_exam: [exam:STATE_CET, exam:NEET_UG]
+  - key: degree:bvsc
+    name: {en: BVSc & AH (Veterinary Science), hi: बीवीएससी और एएच (पशु चिकित्सा विज्ञान)}
+    attrs: {level: UG, duration_years: 5.5, regulator: Veterinary Council of India}
+    edges:
+      requires_subject: [{to: subject:physics, mandatory: true}, {to: subject:chemistry, mandatory: true}, {to: subject:biology, mandatory: true}, {to: subject:english, mandatory: true}]
+      requires_exam: [exam:NEET_UG]
+
+  # ---------------- commerce, humanities, law, media, teaching, hospitality ----------------
+  - key: degree:bcom
+    name: {en: B.Com, hi: बी.कॉम}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}, {to: subject:accountancy, mandatory: false, note: "helps; many colleges prefer it"}, {to: subject:mathematics, mandatory: false, note: "needed for B.Com (Hons) at some colleges"}]
+      requires_exam: [exam:CUET_UG]
+      continues_to: [degree:ca, degree:mba, degree:bed]
+  - key: degree:ca
+    name: {en: Chartered Accountancy (CA course), hi: चार्टर्ड अकाउंटेंसी (CA कोर्स)}
+    attrs: {level: professional, duration_years: 4.5, regulator: ICAI, note: "Foundation → Intermediate → articleship → Final"}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}, {to: subject:accountancy, mandatory: false, note: "makes the start much easier"}]
+      requires_exam: [exam:CA_FOUNDATION]
+  - key: degree:bba
+    name: {en: BBA / Integrated Programme in Management, hi: बीबीए / इंटीग्रेटेड प्रोग्राम इन मैनेजमेंट}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}, {to: subject:mathematics, mandatory: false, note: "IPMAT tests maths"}]
+      requires_exam: [exam:CUET_UG, exam:IPMAT]
+      continues_to: [degree:mba]
+  - key: degree:ba_economics
+    name: {en: BA / B.Sc in Economics, hi: बीए / बी.एससी अर्थशास्त्र}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}, {to: subject:mathematics, mandatory: false, note: "many colleges require maths for Economics (Hons)"}, {to: subject:economics, mandatory: false}]
+      requires_exam: [exam:CUET_UG]
+      continues_to: [degree:mba, degree:msc_phd]
+  - key: degree:ba_humanities
+    name: {en: BA in History, Political Science or similar, hi: बीए इतिहास, राजनीति विज्ञान या इसी तरह के विषय}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+      requires_exam: [exam:CUET_UG]
+      continues_to: [degree:bed, degree:llb, degree:msc_phd]
+  - key: degree:ba_bsc_psychology
+    name: {en: BA / B.Sc in Psychology, hi: बीए / बी.एससी मनोविज्ञान}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}, {to: subject:psychology, mandatory: false}]
+      requires_exam: [exam:CUET_UG]
+      continues_to: [degree:ma_msc_psychology]
+  - key: degree:ba_llb
+    name: {en: BA LLB (5-year integrated law), hi: बीए एलएलबी (5 साल का इंटीग्रेटेड क़ानून)}
+    attrs: {level: UG, duration_years: 5, regulator: Bar Council of India}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+      requires_exam: [exam:CLAT, exam:AILET]
+  - key: degree:llb
+    name: {en: LLB (3-year, after graduation), hi: एलएलबी (3 साल, स्नातक के बाद)}
+    attrs: {level: PG, duration_years: 3, regulator: Bar Council of India}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+  - key: degree:bjmc
+    name: {en: BJMC (Journalism and Mass Communication), hi: बीजेएमसी (पत्रकारिता और जनसंचार)}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+      requires_exam: [exam:CUET_UG]
+  - key: degree:itep
+    name: {en: Integrated Teacher Education (BA/B.Sc/B.Com B.Ed), hi: इंटीग्रेटेड टीचर एजुकेशन (बीए/बी.एससी/बी.कॉम बी.एड)}
+    attrs: {level: UG, duration_years: 4}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+      requires_exam: [exam:NCET]
+  - key: degree:bed
+    name: {en: B.Ed (after graduation), hi: बी.एड (स्नातक के बाद)}
+    attrs: {level: PG, duration_years: 2}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+  - key: degree:bhm
+    name: {en: B.Sc Hospitality and Hotel Administration, hi: बी.एससी हॉस्पिटैलिटी एंड होटल एडमिनिस्ट्रेशन}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+      requires_exam: [exam:NCHM_JEE]
+      continues_to: [degree:mba]
+  - key: degree:nda
+    name: {en: NDA (National Defence Academy), hi: एनडीए (नेशनल डिफ़ेंस एकेडमी)}
+    attrs: {level: UG, duration_years: 3, note: "Army wing: any stream. Air Force and Navy wings: physics and maths."}
+    edges:
+      requires_subject:
+        - {to: subject:english, mandatory: true}
+        - {to: subject:physics, mandatory: false, note: "needed for the Air Force and Navy wings"}
+        - {to: subject:mathematics, mandatory: false, note: "needed for the Air Force and Navy wings"}
+      requires_exam: [exam:NDA]
+  - key: degree:any_bachelors
+    name: {en: Any bachelor's degree, hi: कोई भी स्नातक डिग्री}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}]
+      requires_exam: [exam:CUET_UG]
+      continues_to: [degree:llb, degree:bed, degree:mba]
+  - key: degree:bca
+    name: {en: BCA (Bachelor of Computer Applications), hi: बीसीए (बैचलर ऑफ़ कंप्यूटर एप्लिकेशंस)}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:english, mandatory: true}, {to: subject:mathematics, mandatory: false, note: "many colleges ask for maths"}]
+      requires_exam: [exam:CUET_UG]
+      continues_to: [degree:mtech_ms, degree:mba]
+  - key: degree:bsc_cs
+    name: {en: B.Sc Computer Science, hi: बी.एससी कंप्यूटर साइंस}
+    attrs: {level: UG, duration_years: 3}
+    edges:
+      requires_subject: [{to: subject:mathematics, mandatory: true}]
+      requires_exam: [exam:CUET_UG]
+      continues_to: [degree:mtech_ms, degree:msc_phd]
+
+  # ---------------- after the first degree ----------------
+  - key: degree:mtech_ms
+    name: {en: M.Tech / M.S., hi: एम.टेक / एम.एस.}
+    attrs: {level: PG, duration_years: 2}
+    edges:
+      requires_exam: [exam:GATE]
+  - key: degree:mba
+    name: {en: MBA, hi: एमबीए}
+    attrs: {level: PG, duration_years: 2}
+    edges:
+      requires_exam: [exam:CAT]
+  - key: degree:msc_phd
+    name: {en: M.Sc / PhD (research), hi: एम.एससी / पीएचडी (शोध)}
+    attrs: {level: PG, duration_years: 2}
+  - key: degree:md_ms
+    name: {en: MD / MS (medical specialisation), hi: एमडी / एमएस (मेडिकल विशेषज्ञता)}
+    attrs: {level: PG, duration_years: 3}
+    edges:
+      requires_exam: [exam:NEET_PG]
+  - key: degree:ma_msc_psychology
+    name: {en: MA / M.Sc in Psychology, hi: एमए / एम.एससी मनोविज्ञान}
+    attrs: {level: PG, duration_years: 2}

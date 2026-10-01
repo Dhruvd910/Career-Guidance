@@ -1,0 +1,454 @@
+# Careers: their domains (the first is the main one), the skills they need (level, importance
+# 0-1), and how people get in (entered_through: common or alternative routes). The long-form guide
+# for each lives in app/seed/careers.json under the same key; traits, subjects, related careers,
+# roles and sectors come from there too. Curated by MAYA's editor (Claude), not yet reviewed by a
+# person.
+source: {kind: curated, ref: maya_editorial_v1}
+nodes:
+  # ---------------- technology ----------------
+  - key: career:cse
+    name: {en: Computer Science & Software Engineering, hi: कंप्यूटर साइंस और सॉफ़्टवेयर इंजीनियरिंग}
+    aliases: [software engineer, software developer, programmer, coder]
+    edges:
+      part_of: [domain:technology]
+      requires_skill:
+        - {to: skill:programming_fundamentals, level: advanced, importance: 1.0}
+        - {to: skill:problem_solving, level: advanced, importance: 0.9}
+        - {to: skill:data_structures_algorithms, level: advanced, importance: 0.9}
+        - {to: skill:software_engineering, level: intermediate, importance: 0.8}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.7}
+        - {to: skill:databases_sql, level: intermediate, importance: 0.6}
+        - {to: skill:web_development, level: intermediate, importance: 0.5}
+        - {to: skill:english_communication, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:btech_cse, commonness: common}
+        - {to: degree:btech_ai_ds, commonness: common}
+        - {to: degree:btech_math_computing, commonness: alternative}
+        - {to: degree:bca, commonness: alternative}
+        - {to: degree:bsc_cs, commonness: alternative}
+  - key: career:ai_data
+    name: {en: Data Science & Artificial Intelligence, hi: डेटा साइंस और आर्टिफ़िशियल इंटेलिजेंस}
+    aliases: [AI engineer, ML engineer, machine learning, data scientist, AI, artificial intelligence]
+    edges:
+      part_of: [domain:technology]
+      requires_skill:
+        - {to: skill:python, level: advanced, importance: 1.0}
+        - {to: skill:machine_learning, level: advanced, importance: 1.0}
+        - {to: skill:data_analysis, level: advanced, importance: 0.9}
+        - {to: skill:probability_statistics, level: advanced, importance: 0.9}
+        - {to: skill:linear_algebra, level: intermediate, importance: 0.8}
+        - {to: skill:programming_fundamentals, level: advanced, importance: 0.8}
+        - {to: skill:calculus, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:btech_ai_ds, commonness: common}
+        - {to: degree:btech_cse, commonness: common}
+        - {to: degree:btech_math_computing, commonness: common}
+        - {to: degree:bs_maths_stats, commonness: alternative}
+        - {to: degree:mtech_ms, commonness: alternative}
+  - key: career:cybersecurity
+    name: {en: Cybersecurity, hi: साइबर सुरक्षा}
+    aliases: [ethical hacker, security analyst, cyber security, hacking]
+    edges:
+      part_of: [domain:technology]
+      requires_skill:
+        - {to: skill:cybersecurity_fundamentals, level: advanced, importance: 1.0}
+        - {to: skill:computer_networks, level: advanced, importance: 0.9}
+        - {to: skill:linux_command_line, level: advanced, importance: 0.8}
+        - {to: skill:ethical_hacking, level: intermediate, importance: 0.8}
+        - {to: skill:programming_fundamentals, level: intermediate, importance: 0.7}
+        - {to: skill:problem_solving, level: intermediate, importance: 0.7}
+        - {to: skill:english_communication, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:btech_cybersecurity, commonness: common}
+        - {to: degree:btech_cse, commonness: common}
+        - {to: degree:bca, commonness: alternative}
+        - {to: degree:bsc_cs, commonness: alternative}
+  - key: career:robotics
+    name: {en: Robotics & Automation, hi: रोबोटिक्स और ऑटोमेशन}
+    aliases: [robotics engineer, automation, mechatronics, robots]
+    edges:
+      part_of: [domain:technology, domain:engineering]
+      requires_skill:
+        - {to: skill:robot_motion, level: advanced, importance: 0.9}
+        - {to: skill:embedded_systems, level: advanced, importance: 0.9}
+        - {to: skill:sensors_actuators, level: advanced, importance: 0.8}
+        - {to: skill:control_systems, level: intermediate, importance: 0.8}
+        - {to: skill:programming_fundamentals, level: intermediate, importance: 0.8}
+        - {to: skill:mechanics, level: intermediate, importance: 0.7}
+        - {to: skill:hands_on_building, level: intermediate, importance: 0.7}
+        - {to: skill:engineering_drawing_cad, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:btech_robotics, commonness: common}
+        - {to: degree:btech_mechanical, commonness: common}
+        - {to: degree:btech_ece, commonness: common}
+        - {to: degree:btech_electrical, commonness: alternative}
+        - {to: degree:mtech_ms, commonness: alternative}
+
+  # ---------------- engineering ----------------
+  - key: career:ece
+    name: {en: Electronics & Communication Engineering, hi: इलेक्ट्रॉनिक्स और कम्युनिकेशन इंजीनियरिंग}
+    aliases: [electronics engineer, chip design, VLSI]
+    edges:
+      part_of: [domain:engineering]
+      requires_skill:
+        - {to: skill:circuits_electronics, level: advanced, importance: 1.0}
+        - {to: skill:physics_fundamentals, level: advanced, importance: 0.8}
+        - {to: skill:school_mathematics, level: advanced, importance: 0.8}
+        - {to: skill:embedded_systems, level: intermediate, importance: 0.7}
+        - {to: skill:programming_fundamentals, level: intermediate, importance: 0.6}
+        - {to: skill:control_systems, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:btech_ece, commonness: common}
+        - {to: degree:btech_electrical, commonness: alternative}
+        - {to: degree:btech_engineering_physics, commonness: alternative}
+  - key: career:electrical
+    name: {en: Electrical Engineering, hi: इलेक्ट्रिकल इंजीनियरिंग}
+    edges:
+      part_of: [domain:engineering]
+      requires_skill:
+        - {to: skill:electrical_power, level: advanced, importance: 1.0}
+        - {to: skill:circuits_electronics, level: advanced, importance: 0.9}
+        - {to: skill:physics_fundamentals, level: advanced, importance: 0.8}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.7}
+        - {to: skill:control_systems, level: intermediate, importance: 0.6}
+        - {to: skill:hands_on_building, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:btech_electrical, commonness: common}
+        - {to: degree:btech_ece, commonness: alternative}
+  - key: career:mechanical
+    name: {en: Mechanical Engineering, hi: मैकेनिकल इंजीनियरिंग}
+    edges:
+      part_of: [domain:engineering]
+      requires_skill:
+        - {to: skill:mechanics, level: advanced, importance: 1.0}
+        - {to: skill:thermodynamics, level: advanced, importance: 0.9}
+        - {to: skill:physics_fundamentals, level: advanced, importance: 0.8}
+        - {to: skill:engineering_drawing_cad, level: intermediate, importance: 0.8}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.7}
+        - {to: skill:hands_on_building, level: intermediate, importance: 0.7}
+      entered_through:
+        - {to: degree:btech_mechanical, commonness: common}
+        - {to: degree:btech_robotics, commonness: alternative}
+        - {to: degree:btech_aerospace, commonness: alternative}
+  - key: career:civil
+    name: {en: Civil Engineering, hi: सिविल इंजीनियरिंग}
+    edges:
+      part_of: [domain:engineering]
+      requires_skill:
+        - {to: skill:structural_design, level: advanced, importance: 1.0}
+        - {to: skill:mechanics, level: intermediate, importance: 0.8}
+        - {to: skill:engineering_drawing_cad, level: intermediate, importance: 0.7}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.7}
+        - {to: skill:planning_organisation, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:btech_civil, commonness: common}
+        - {to: degree:bplan, commonness: alternative}
+  - key: career:chemical
+    name: {en: Chemical Engineering, hi: केमिकल इंजीनियरिंग}
+    edges:
+      part_of: [domain:engineering]
+      requires_skill:
+        - {to: skill:chemical_processes, level: advanced, importance: 1.0}
+        - {to: skill:thermodynamics, level: advanced, importance: 0.9}
+        - {to: skill:chemistry_fundamentals, level: advanced, importance: 0.9}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.7}
+        - {to: skill:lab_techniques, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:btech_chemical, commonness: common}
+        - {to: degree:btech_biotech, commonness: alternative}
+  - key: career:aerospace
+    name: {en: Aerospace Engineering, hi: एयरोस्पेस इंजीनियरिंग}
+    edges:
+      part_of: [domain:engineering]
+      requires_skill:
+        - {to: skill:aerodynamics, level: advanced, importance: 1.0}
+        - {to: skill:mechanics, level: advanced, importance: 0.9}
+        - {to: skill:calculus, level: advanced, importance: 0.9}
+        - {to: skill:physics_fundamentals, level: advanced, importance: 0.9}
+        - {to: skill:engineering_drawing_cad, level: intermediate, importance: 0.6}
+        - {to: skill:programming_fundamentals, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:btech_aerospace, commonness: common}
+        - {to: degree:btech_mechanical, commonness: common}
+        - {to: degree:btech_ece, commonness: alternative}
+        - {to: degree:mtech_ms, commonness: alternative}
+
+  # ---------------- design & architecture ----------------
+  - key: career:architecture
+    name: {en: Architecture, hi: आर्किटेक्चर}
+    edges:
+      part_of: [domain:design]
+      requires_skill:
+        - {to: skill:spatial_visualisation, level: advanced, importance: 1.0}
+        - {to: skill:drawing_sketching, level: advanced, importance: 0.9}
+        - {to: skill:engineering_drawing_cad, level: intermediate, importance: 0.7}
+        - {to: skill:visual_design, level: intermediate, importance: 0.6}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:barch, commonness: common}
+        - {to: degree:bplan, commonness: alternative}
+  - key: career:design
+    name: {en: Design (UX, Product & Communication), hi: डिज़ाइन (UX, प्रोडक्ट और कम्युनिकेशन)}
+    aliases: [UX designer, product designer, graphic designer]
+    edges:
+      part_of: [domain:design, domain:technology]
+      requires_skill:
+        - {to: skill:visual_design, level: advanced, importance: 1.0}
+        - {to: skill:user_research, level: advanced, importance: 0.9}
+        - {to: skill:drawing_sketching, level: intermediate, importance: 0.8}
+        - {to: skill:empathy_listening, level: intermediate, importance: 0.6}
+        - {to: skill:public_speaking, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:bdes, commonness: common}
+        - {to: degree:barch, commonness: alternative}
+
+  # ---------------- medicine & health ----------------
+  - key: career:mbbs
+    name: {en: Doctor (MBBS), hi: डॉक्टर (MBBS)}
+    aliases: [doctor, physician, surgeon]
+    edges:
+      part_of: [domain:health]
+      requires_skill:
+        - {to: skill:anatomy_physiology, level: advanced, importance: 1.0}
+        - {to: skill:clinical_reasoning, level: advanced, importance: 1.0}
+        - {to: skill:patient_care, level: advanced, importance: 0.9}
+        - {to: skill:biology_fundamentals, level: advanced, importance: 0.9}
+        - {to: skill:pharmacology, level: advanced, importance: 0.8}
+        - {to: skill:empathy_listening, level: intermediate, importance: 0.8}
+        - {to: skill:chemistry_fundamentals, level: intermediate, importance: 0.7}
+      entered_through:
+        - {to: degree:mbbs, commonness: common}
+  - key: career:bds
+    name: {en: Dentist (BDS), hi: डेंटिस्ट (BDS)}
+    edges:
+      part_of: [domain:health]
+      requires_skill:
+        - {to: skill:anatomy_physiology, level: advanced, importance: 0.9}
+        - {to: skill:biology_fundamentals, level: advanced, importance: 0.8}
+        - {to: skill:clinical_reasoning, level: intermediate, importance: 0.8}
+        - {to: skill:patient_care, level: intermediate, importance: 0.8}
+        - {to: skill:hands_on_building, level: intermediate, importance: 0.7}
+      entered_through:
+        - {to: degree:bds, commonness: common}
+  - key: career:pharmacy
+    name: {en: Pharmacy, hi: फ़ार्मेसी}
+    edges:
+      part_of: [domain:health]
+      requires_skill:
+        - {to: skill:pharmacology, level: advanced, importance: 1.0}
+        - {to: skill:chemistry_fundamentals, level: advanced, importance: 0.9}
+        - {to: skill:lab_techniques, level: intermediate, importance: 0.7}
+        - {to: skill:anatomy_physiology, level: intermediate, importance: 0.6}
+        - {to: skill:planning_organisation, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:bpharm, commonness: common}
+  - key: career:nursing
+    name: {en: Nursing, hi: नर्सिंग}
+    edges:
+      part_of: [domain:health]
+      requires_skill:
+        - {to: skill:patient_care, level: advanced, importance: 1.0}
+        - {to: skill:empathy_listening, level: advanced, importance: 0.9}
+        - {to: skill:anatomy_physiology, level: intermediate, importance: 0.8}
+        - {to: skill:pharmacology, level: intermediate, importance: 0.6}
+        - {to: skill:planning_organisation, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:bsc_nursing, commonness: common}
+  - key: career:physiotherapy
+    name: {en: Physiotherapy, hi: फ़िज़ियोथेरेपी}
+    edges:
+      part_of: [domain:health]
+      requires_skill:
+        - {to: skill:anatomy_physiology, level: advanced, importance: 1.0}
+        - {to: skill:patient_care, level: advanced, importance: 0.9}
+        - {to: skill:empathy_listening, level: intermediate, importance: 0.7}
+        - {to: skill:physics_fundamentals, level: intermediate, importance: 0.5}
+        - {to: skill:physical_fitness, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:bpt, commonness: common}
+  - key: career:veterinary
+    name: {en: Veterinary Doctor, hi: पशु चिकित्सक}
+    aliases: [vet, animal doctor]
+    edges:
+      part_of: [domain:health]
+      requires_skill:
+        - {to: skill:animal_care, level: advanced, importance: 1.0}
+        - {to: skill:anatomy_physiology, level: advanced, importance: 0.9}
+        - {to: skill:biology_fundamentals, level: advanced, importance: 0.8}
+        - {to: skill:clinical_reasoning, level: intermediate, importance: 0.8}
+        - {to: skill:pharmacology, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:bvsc, commonness: common}
+
+  # ---------------- science & research ----------------
+  - key: career:biotech
+    name: {en: Biotechnology & Life Sciences Research, hi: बायोटेक्नोलॉजी और लाइफ़ साइंसेज़ रिसर्च}
+    edges:
+      part_of: [domain:science]
+      requires_skill:
+        - {to: skill:lab_techniques, level: advanced, importance: 1.0}
+        - {to: skill:research_methods, level: advanced, importance: 0.9}
+        - {to: skill:biology_fundamentals, level: advanced, importance: 0.9}
+        - {to: skill:chemistry_fundamentals, level: intermediate, importance: 0.8}
+        - {to: skill:probability_statistics, level: intermediate, importance: 0.6}
+        - {to: skill:python, level: foundation, importance: 0.4}
+      entered_through:
+        - {to: degree:btech_biotech, commonness: common}
+        - {to: degree:bs_life_sciences, commonness: common}
+        - {to: degree:msc_phd, commonness: alternative}
+  - key: career:pure_science
+    name: {en: Scientific Research (Physics, Maths, Chemistry), hi: वैज्ञानिक शोध (भौतिकी, गणित, रसायन)}
+    aliases: [scientist, researcher]
+    edges:
+      part_of: [domain:science]
+      requires_skill:
+        - {to: skill:research_methods, level: advanced, importance: 1.0}
+        - {to: skill:calculus, level: advanced, importance: 0.9}
+        - {to: skill:physics_fundamentals, level: advanced, importance: 0.9}
+        - {to: skill:problem_solving, level: advanced, importance: 0.9}
+        - {to: skill:programming_fundamentals, level: intermediate, importance: 0.5}
+        - {to: skill:writing, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:bs_physical_sciences, commonness: common}
+        - {to: degree:bs_maths_stats, commonness: common}
+        - {to: degree:btech_engineering_physics, commonness: alternative}
+        - {to: degree:msc_phd, commonness: common}
+
+  # ---------------- commerce & finance ----------------
+  - key: career:ca
+    name: {en: Chartered Accountancy (CA), hi: चार्टर्ड अकाउंटेंसी (CA)}
+    aliases: [chartered accountant, CA]
+    edges:
+      part_of: [domain:business]
+      requires_skill:
+        - {to: skill:accounting, level: advanced, importance: 1.0}
+        - {to: skill:taxation_audit, level: advanced, importance: 1.0}
+        - {to: skill:arithmetic, level: advanced, importance: 0.8}
+        - {to: skill:planning_organisation, level: advanced, importance: 0.8}
+        - {to: skill:english_communication, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:ca, commonness: common}
+        - {to: degree:bcom, commonness: common}
+  - key: career:finance_econ
+    name: {en: Economics & Finance, hi: अर्थशास्त्र और फ़ाइनेंस}
+    aliases: [economist, banker, investment, finance]
+    edges:
+      part_of: [domain:business]
+      requires_skill:
+        - {to: skill:financial_analysis, level: advanced, importance: 1.0}
+        - {to: skill:economics_concepts, level: advanced, importance: 0.9}
+        - {to: skill:probability_statistics, level: advanced, importance: 0.8}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.7}
+        - {to: skill:english_communication, level: intermediate, importance: 0.6}
+        - {to: skill:data_analysis, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:ba_economics, commonness: common}
+        - {to: degree:bcom, commonness: common}
+        - {to: degree:bs_economics, commonness: alternative}
+        - {to: degree:bba, commonness: alternative}
+        - {to: degree:mba, commonness: common}
+
+  # ---------------- law, government & defence ----------------
+  - key: career:law
+    name: {en: Law, hi: क़ानून}
+    aliases: [lawyer, advocate, judge]
+    edges:
+      part_of: [domain:law]
+      requires_skill:
+        - {to: skill:legal_reasoning, level: advanced, importance: 1.0}
+        - {to: skill:argument_research, level: advanced, importance: 1.0}
+        - {to: skill:reading_comprehension, level: advanced, importance: 0.9}
+        - {to: skill:public_speaking, level: advanced, importance: 0.8}
+        - {to: skill:writing, level: advanced, importance: 0.8}
+        - {to: skill:english_communication, level: advanced, importance: 0.7}
+      entered_through:
+        - {to: degree:ba_llb, commonness: common}
+        - {to: degree:llb, commonness: alternative}
+  - key: career:civil_services
+    name: {en: Civil Services (IAS, IPS, IFS), hi: सिविल सेवा (IAS, IPS, IFS)}
+    aliases: [IAS, IPS, IFS, UPSC, collector]
+    edges:
+      part_of: [domain:public_service]
+      requires_skill:
+        - {to: skill:governance_polity, level: advanced, importance: 1.0}
+        - {to: skill:current_affairs, level: advanced, importance: 0.9}
+        - {to: skill:writing, level: advanced, importance: 0.8}
+        - {to: skill:reading_comprehension, level: advanced, importance: 0.8}
+        - {to: skill:leadership_teamwork, level: intermediate, importance: 0.6}
+        - {to: skill:planning_organisation, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:any_bachelors, commonness: common}
+      requires_exam: [exam:UPSC_CSE]
+  - key: career:defence
+    name: {en: Defence Officer (Army, Navy, Air Force), hi: रक्षा अधिकारी (सेना, नौसेना, वायुसेना)}
+    aliases: [army officer, navy, air force, fauji]
+    edges:
+      part_of: [domain:public_service]
+      requires_skill:
+        - {to: skill:physical_fitness, level: advanced, importance: 1.0}
+        - {to: skill:leadership_teamwork, level: advanced, importance: 0.9}
+        - {to: skill:planning_organisation, level: intermediate, importance: 0.6}
+        - {to: skill:english_communication, level: intermediate, importance: 0.6}
+        - {to: skill:school_mathematics, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:nda, commonness: common}
+        - {to: degree:any_bachelors, commonness: alternative, note: "then CDS, AFCAT or other UPSC/service entries"}
+
+  # ---------------- media, education & society, hospitality ----------------
+  - key: career:journalism
+    name: {en: Journalism & Media, hi: पत्रकारिता और मीडिया}
+    aliases: [journalist, reporter, news anchor]
+    edges:
+      part_of: [domain:media]
+      requires_skill:
+        - {to: skill:reporting_storytelling, level: advanced, importance: 1.0}
+        - {to: skill:writing, level: advanced, importance: 1.0}
+        - {to: skill:current_affairs, level: advanced, importance: 0.8}
+        - {to: skill:reading_comprehension, level: advanced, importance: 0.7}
+        - {to: skill:public_speaking, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:bjmc, commonness: common}
+        - {to: degree:ba_humanities, commonness: alternative}
+  - key: career:psychology
+    name: {en: Psychology, hi: मनोविज्ञान}
+    aliases: [psychologist, counsellor, therapist]
+    edges:
+      part_of: [domain:people]
+      requires_skill:
+        - {to: skill:empathy_listening, level: advanced, importance: 1.0}
+        - {to: skill:research_methods, level: intermediate, importance: 0.8}
+        - {to: skill:reading_comprehension, level: advanced, importance: 0.7}
+        - {to: skill:writing, level: intermediate, importance: 0.6}
+        - {to: skill:probability_statistics, level: intermediate, importance: 0.6}
+      entered_through:
+        - {to: degree:ba_bsc_psychology, commonness: common}
+        - {to: degree:ma_msc_psychology, commonness: common}
+  - key: career:teaching
+    name: {en: Teaching & Education, hi: शिक्षण}
+    aliases: [teacher, professor, lecturer]
+    edges:
+      part_of: [domain:people]
+      requires_skill:
+        - {to: skill:teaching_explaining, level: advanced, importance: 1.0}
+        - {to: skill:public_speaking, level: advanced, importance: 0.8}
+        - {to: skill:empathy_listening, level: advanced, importance: 0.8}
+        - {to: skill:planning_organisation, level: intermediate, importance: 0.7}
+        - {to: skill:writing, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:itep, commonness: common}
+        - {to: degree:bed, commonness: common}
+        - {to: degree:ba_humanities, commonness: alternative}
+  - key: career:hotel
+    name: {en: Hotel Management & Hospitality, hi: होटल मैनेजमेंट और हॉस्पिटैलिटी}
+    aliases: [hotel manager, chef, hospitality]
+    edges:
+      part_of: [domain:hospitality]
+      requires_skill:
+        - {to: skill:hospitality_service, level: advanced, importance: 1.0}
+        - {to: skill:english_communication, level: advanced, importance: 0.8}
+        - {to: skill:planning_organisation, level: intermediate, importance: 0.7}
+        - {to: skill:leadership_teamwork, level: intermediate, importance: 0.7}
+        - {to: skill:public_speaking, level: intermediate, importance: 0.5}
+      entered_through:
+        - {to: degree:bhm, commonness: common}
+        - {to: degree:bba, commonness: alternative}

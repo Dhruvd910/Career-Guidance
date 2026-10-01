@@ -4,7 +4,7 @@ import json
 
 from app.assessment import alignment
 from app.models.assessment import CareerAlignmentSnapshot
-from app.seed.careers import seed_careers
+from app.seed.careers import load_library, seed_careers
 from tests.test_assessment_service import right, student, take
 
 TECH = {"int_maths": "love", "maths_style": "logic", "int_physics": "like", "physics_side": "numericals",
@@ -42,7 +42,7 @@ def test_several_directions_in_bands_and_never_one_answer(db_session):
     out = alignment.directions(db_session, asha)
     assert {"cse", "ai_data"} <= set(out["summary"]["strong"])
     assert "mbbs" in out["summary"]["weak"], "shown last, but still shown"
-    assert sum(len(d["careers"]) for d in out["domains"]) == 27
+    assert sum(len(d["careers"]) for d in out["domains"]) == len(load_library())
     assert out["domains"][0]["domain"] == "Engineering & Technology"
     text = json.dumps(out).lower()
     for banned in ("best match", "closest match", '"rank"', "fit_score", "your career is"):

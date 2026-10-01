@@ -1,0 +1,62 @@
+# Things a student can do to build a skill: projects (doable at school age, mostly free), free
+# courses, and a few certifications. Courses link to their official sites. Curated by MAYA's
+# editor (Claude), not yet reviewed by a person. hours = a rough effort, not a promise.
+source: {kind: curated, ref: maya_editorial_v1}
+nodes:
+  # ---------------- projects ----------------
+  - {key: project:python_calculator, name: {en: Build a calculator in Python, hi: पाइथन में कैलकुलेटर बनाइए}, attrs: {hours: 6, level: 1}}
+  - {key: project:quiz_game, name: {en: Make a quiz game, hi: एक क्विज़ गेम बनाइए}, attrs: {hours: 8, level: 1}}
+  - {key: project:personal_website, name: {en: Make your own website, hi: अपनी वेबसाइट बनाइए}, attrs: {hours: 15, level: 2}}
+  - {key: project:marks_analysis, name: {en: Analyse your own exam marks with a spreadsheet or Python, hi: स्प्रेडशीट या पाइथन से अपने अंकों का विश्लेषण कीजिए}, attrs: {hours: 6, level: 1}}
+  - {key: project:first_ml_model, name: {en: Train a first machine-learning model on a public dataset, hi: किसी सार्वजनिक डेटासेट पर पहला मशीन-लर्निंग मॉडल बनाइए}, attrs: {hours: 15, level: 3}}
+  - {key: project:picoctf, name: {en: Solve beginner security challenges on picoCTF, hi: picoCTF पर शुरुआती सुरक्षा चुनौतियाँ हल कीजिए}, attrs: {hours: 10, level: 2, url: "https://picoctf.org"}}
+  - {key: project:linux_wargame, name: {en: Learn the Linux command line with OverTheWire Bandit, hi: OverTheWire Bandit से लिनक्स कमांड लाइन सीखिए}, attrs: {hours: 10, level: 2, url: "https://overthewire.org/wargames/bandit/"}}
+  - {key: project:home_network_map, name: {en: Map how your home Wi-Fi and devices connect, hi: घर के वाई-फ़ाई और डिवाइस कैसे जुड़े हैं इसका नक्शा बनाइए}, attrs: {hours: 4, level: 1}}
+  - {key: project:password_audit, name: {en: Check and improve your family's passwords and phone security, hi: परिवार के पासवर्ड और फ़ोन की सुरक्षा जाँचकर सुधारिए}, attrs: {hours: 3, level: 1}}
+  - {key: project:line_follower_robot, name: {en: Build a line-follower robot, hi: लाइन-फ़ॉलोअर रोबोट बनाइए}, attrs: {hours: 20, level: 2}}
+  - {key: project:arduino_sensor, name: {en: Build an Arduino weather station, hi: Arduino से मौसम-स्टेशन बनाइए}, attrs: {hours: 12, level: 2}}
+  - {key: project:simple_circuit, name: {en: Build simple circuits on a breadboard, hi: ब्रेडबोर्ड पर सरल सर्किट बनाइए}, attrs: {hours: 4, level: 1}}
+  - {key: project:solar_charger, name: {en: Build a small solar phone charger, hi: छोटा सोलर फ़ोन चार्जर बनाइए}, attrs: {hours: 8, level: 2}}
+  - {key: project:take_apart_rebuild, name: {en: Take apart and rebuild a mechanical gadget, hi: किसी मशीनी चीज़ को खोलकर दोबारा जोड़िए}, attrs: {hours: 4, level: 1}}
+  - {key: project:cad_model, name: {en: Design a part in free CAD software (FreeCAD), hi: मुफ़्त CAD सॉफ़्टवेयर (FreeCAD) में कोई पुर्ज़ा डिज़ाइन कीजिए}, attrs: {hours: 8, level: 2, url: "https://www.freecad.org"}}
+  - {key: project:bridge_model, name: {en: Build and load-test a model bridge, hi: मॉडल पुल बनाकर उसकी ताक़त जाँचिए}, attrs: {hours: 8, level: 1}}
+  - {key: project:glider, name: {en: Build a glider and test different wing shapes, hi: ग्लाइडर बनाकर पंखों के अलग आकार आज़माइए}, attrs: {hours: 6, level: 1}}
+  - {key: project:home_chemistry, name: {en: Do safe kitchen chemistry experiments and write them up like lab reports, hi: रसोई में सुरक्षित रसायन प्रयोग करके लैब रिपोर्ट की तरह लिखिए}, attrs: {hours: 6, level: 1}}
+  - {key: project:plant_experiment, name: {en: Run a plant-growth experiment and record the results, hi: पौधों की बढ़त पर प्रयोग करके नतीजे दर्ज कीजिए}, attrs: {hours: 10, level: 1}}
+  - {key: project:science_fair, name: {en: Enter a school science fair or INSPIRE-MANAK, hi: स्कूल साइंस फ़ेयर या इंस्पायर-मानक में भाग लीजिए}, attrs: {hours: 20, level: 2}}
+  - {key: project:olympiad_practice, name: {en: Practise olympiad-style problems, hi: ओलंपियाड जैसे सवालों का अभ्यास कीजिए}, attrs: {hours: 20, level: 2}}
+  - {key: project:clinic_shadowing, name: {en: Spend a day observing at a clinic or hospital, hi: किसी क्लिनिक या अस्पताल में एक दिन देखकर सीखिए}, attrs: {hours: 8, level: 1}}
+  - {key: project:animal_shelter, name: {en: Volunteer at an animal shelter or vet clinic, hi: किसी पशु आश्रय या पशु क्लिनिक में स्वयंसेवा कीजिए}, attrs: {hours: 10, level: 1}}
+  - {key: project:body_systems_notes, name: {en: Make illustrated notes on the body's systems, hi: शरीर के तंत्रों पर चित्रों वाले नोट्स बनाइए}, attrs: {hours: 10, level: 1}}
+  - {key: project:app_redesign, name: {en: Redesign one screen of an app you use and explain why, hi: किसी ऐप की एक स्क्रीन नए सिरे से डिज़ाइन करके कारण बताइए}, attrs: {hours: 6, level: 1}}
+  - {key: project:sketchbook, name: {en: Keep a sketchbook for a month, hi: एक महीने तक स्केचबुक रखिए}, attrs: {hours: 15, level: 1}}
+  - {key: project:room_plan, name: {en: Draw a scaled plan of your room or school, hi: अपने कमरे या स्कूल का स्केल वाला नक्शा बनाइए}, attrs: {hours: 5, level: 1}}
+  - {key: project:family_budget, name: {en: Track a family budget for a month, hi: एक महीने तक घर का बजट लिखिए}, attrs: {hours: 6, level: 1}}
+  - {key: project:paper_portfolio, name: {en: Run a pretend stock portfolio for three months, hi: तीन महीने तक काल्पनिक शेयर पोर्टफ़ोलियो चलाइए}, attrs: {hours: 8, level: 2}}
+  - {key: project:moot_court, name: {en: Take part in a moot court or mock parliament, hi: मूट कोर्ट या मॉक संसद में हिस्सा लीजिए}, attrs: {hours: 10, level: 2}}
+  - {key: project:debate, name: {en: Join a debate competition, hi: डिबेट प्रतियोगिता में हिस्सा लीजिए}, attrs: {hours: 8, level: 1}}
+  - {key: project:newsletter, name: {en: Start a school newsletter or blog, hi: स्कूल न्यूज़लेटर या ब्लॉग शुरू कीजिए}, attrs: {hours: 15, level: 2}}
+  - {key: project:interview_story, name: {en: Interview someone and write their story, hi: किसी का इंटरव्यू लेकर उनकी कहानी लिखिए}, attrs: {hours: 4, level: 1}}
+  - {key: project:tutor, name: {en: Tutor a younger student for a month, hi: एक महीने तक किसी छोटे छात्र को पढ़ाइए}, attrs: {hours: 12, level: 1}}
+  - {key: project:organise_event, name: {en: Organise a school or family event from start to finish, hi: स्कूल या परिवार का कोई कार्यक्रम शुरू से आख़िर तक आयोजित कीजिए}, attrs: {hours: 10, level: 1}}
+  - {key: project:ncc, name: {en: Join the NCC, hi: NCC से जुड़िए}, attrs: {hours: 100, level: 2, url: "https://indiancc.nic.in"}}
+  - {key: project:daily_news, name: {en: Read a newspaper daily and summarise one story, hi: रोज़ अख़बार पढ़कर एक ख़बर का सार लिखिए}, attrs: {hours: 15, level: 1}}
+  - {key: project:peer_support, name: {en: Learn and practise active listening, hi: ध्यान से सुनना सीखिए और उसका अभ्यास कीजिए}, attrs: {hours: 4, level: 1}}
+  - {key: project:cook_for_guests, name: {en: Plan and cook a meal for guests, hi: मेहमानों के लिए खाना योजना बनाकर पकाइए}, attrs: {hours: 4, level: 1}}
+  - {key: project:fitness_routine, name: {en: Keep a running and fitness routine for two months, hi: दो महीने तक दौड़ और फ़िटनेस की दिनचर्या रखिए}, attrs: {hours: 30, level: 1}}
+
+  # ---------------- free courses (official sites) ----------------
+  - {key: course:ncert, name: {en: NCERT textbooks (free), hi: एनसीईआरटी की किताबें (मुफ़्त)}, attrs: {free: true, url: "https://ncert.nic.in/textbook.php"}}
+  - {key: course:khan_academy, name: {en: Khan Academy (free), hi: ख़ान एकेडमी (मुफ़्त)}, attrs: {free: true, url: "https://www.khanacademy.org"}}
+  - {key: course:nptel, name: {en: NPTEL courses from IITs and IISc (free), hi: आईआईटी और आईआईएससी के एनपीटीईएल कोर्स (मुफ़्त)}, attrs: {free: true, url: "https://nptel.ac.in"}}
+  - {key: course:swayam, name: {en: SWAYAM courses (free), hi: स्वयं के कोर्स (मुफ़्त)}, attrs: {free: true, url: "https://swayam.gov.in"}}
+  - {key: course:cs50x, name: {en: CS50x — Harvard's introduction to computer science (free), hi: CS50x — हार्वर्ड का कंप्यूटर साइंस परिचय (मुफ़्त)}, attrs: {free: true, url: "https://cs50.harvard.edu/x/"}}
+  - {key: course:freecodecamp, name: {en: freeCodeCamp (free), hi: फ़्रीकोडकैंप (मुफ़्त)}, attrs: {free: true, url: "https://www.freecodecamp.org"}}
+  - {key: course:kaggle_learn, name: {en: Kaggle Learn — Python and machine learning (free), hi: कैगल लर्न — पाइथन और मशीन लर्निंग (मुफ़्त)}, attrs: {free: true, url: "https://www.kaggle.com/learn"}}
+  - {key: course:cisco_intro_cyber, name: {en: Cisco Networking Academy — Introduction to Cybersecurity (free), hi: सिस्को नेटवर्किंग एकेडमी — साइबर सुरक्षा परिचय (मुफ़्त)}, attrs: {free: true, url: "https://www.netacad.com"}}
+  - {key: course:arduino_docs, name: {en: Arduino's own tutorials (free), hi: Arduino के अपने ट्यूटोरियल (मुफ़्त)}, attrs: {free: true, url: "https://docs.arduino.cc"}}
+
+  # ---------------- certifications ----------------
+  - {key: certification:comptia_security_plus, name: {en: CompTIA Security+ (paid), hi: CompTIA सिक्योरिटी+ (सशुल्क)}, attrs: {free: false, url: "https://www.comptia.org/certifications/security"}}
+  - {key: certification:first_aid, name: {en: First-aid training (Indian Red Cross Society), hi: प्राथमिक चिकित्सा प्रशिक्षण (इंडियन रेड क्रॉस सोसाइटी)}, attrs: {url: "https://www.indianredcross.org"}}
+  - {key: certification:ncc_certificate, name: {en: NCC 'B' and 'C' certificates, hi: NCC 'B' और 'C' प्रमाणपत्र}, attrs: {url: "https://indiancc.nic.in"}}

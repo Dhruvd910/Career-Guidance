@@ -1,0 +1,97 @@
+# Entrance exams, each with the body that runs it and its official site. The exam and its site
+# are official facts; which degrees use which exam is curated (see degrees.yaml). Dates, fees and
+# syllabi change every year and are NOT kept here — they're Phase 6 facts, checked against the
+# official notice each cycle.
+source: {kind: curated, ref: maya_editorial_v1}
+nodes:
+  - key: exam:JEE_MAIN
+    name: {en: JEE Main, hi: जेईई मेन}
+    attrs: {exam_code: JEE_MAIN, body: National Testing Agency (NTA), for: "B.Tech at NITs, IIITs and GFTIs; B.Arch and B.Planning (Paper 2); the gateway to JEE Advanced"}
+    source: {kind: official, ref: NTA, url: "https://jeemain.nta.nic.in"}
+  - key: exam:JEE_ADVANCED
+    name: {en: JEE Advanced, hi: जेईई एडवांस्ड}
+    attrs: {exam_code: JEE_ADVANCED, body: The IITs (one organises it each year), for: "B.Tech and B.S. at the IITs"}
+    source: {kind: official, ref: JEE Advanced, url: "https://jeeadv.ac.in"}
+  - key: exam:NEET_UG
+    name: {en: NEET-UG, hi: नीट-यूजी}
+    attrs: {exam_code: NEET_UG, body: National Testing Agency (NTA), for: "MBBS, BDS, BVSc & AH and other medical courses"}
+    source: {kind: official, ref: NTA, url: "https://neet.nta.nic.in"}
+  - key: exam:CUET_UG
+    name: {en: CUET-UG, hi: सीयूईटी-यूजी}
+    attrs: {body: National Testing Agency (NTA), for: "Undergraduate courses at central and many other universities"}
+    source: {kind: official, ref: NTA, url: "https://cuet.nta.nic.in"}
+  - key: exam:BITSAT
+    name: {en: BITSAT, hi: बिटसैट}
+    attrs: {body: BITS Pilani, for: "B.E. at BITS Pilani, Goa and Hyderabad"}
+    source: {kind: official, ref: BITS Pilani, url: "https://www.bitsadmission.com"}
+  - key: exam:STATE_CET
+    name: {en: State entrance tests, hi: राज्य प्रवेश परीक्षाएँ}
+    aliases: [MHT-CET, KCET, WBJEE, TS EAMCET, AP EAPCET]
+    attrs: {for: "Engineering, pharmacy and other courses at colleges in that state", examples: [MHT-CET, KCET, WBJEE, TS EAMCET, AP EAPCET]}
+  - key: exam:NATA
+    name: {en: NATA, hi: नाटा}
+    attrs: {body: Council of Architecture, for: "B.Arch"}
+    source: {kind: official, ref: Council of Architecture, url: "https://www.nata.in"}
+  - key: exam:UCEED
+    name: {en: UCEED, hi: यूसीड}
+    attrs: {body: IIT Bombay, for: "B.Des at the IITs"}
+    source: {kind: official, ref: IIT Bombay, url: "https://www.uceed.iitb.ac.in"}
+  - key: exam:NID_DAT
+    name: {en: NID Design Aptitude Test, hi: एनआईडी डिज़ाइन एप्टीट्यूड टेस्ट}
+    attrs: {body: National Institute of Design, for: "B.Des at NID"}
+    source: {kind: official, ref: NID, url: "https://admissions.nid.edu"}
+  - key: exam:NIFT
+    name: {en: NIFT entrance, hi: निफ़्ट प्रवेश परीक्षा}
+    attrs: {body: National Institute of Fashion Technology, for: "B.Des and B.F.Tech at NIFT"}
+    source: {kind: official, ref: NIFT, url: "https://www.nift.ac.in"}
+  - key: exam:CLAT
+    name: {en: CLAT, hi: क्लैट}
+    attrs: {body: Consortium of National Law Universities, for: "5-year integrated law (BA LLB and others) at national law universities"}
+    source: {kind: official, ref: Consortium of NLUs, url: "https://consortiumofnlus.ac.in"}
+  - key: exam:AILET
+    name: {en: AILET, hi: एआईएलईटी}
+    attrs: {body: National Law University Delhi, for: "BA LLB at NLU Delhi"}
+    source: {kind: official, ref: NLU Delhi, url: "https://nationallawuniversitydelhi.in"}
+  - key: exam:CA_FOUNDATION
+    name: {en: CA Foundation, hi: सीए फ़ाउंडेशन}
+    attrs: {body: Institute of Chartered Accountants of India (ICAI), for: "The first level of Chartered Accountancy"}
+    source: {kind: official, ref: ICAI, url: "https://www.icai.org"}
+  - key: exam:NDA
+    name: {en: NDA & NA exam, hi: एनडीए और एनए परीक्षा}
+    attrs: {body: Union Public Service Commission (UPSC), for: "National Defence Academy and Naval Academy after class 12"}
+    source: {kind: official, ref: UPSC, url: "https://upsc.gov.in"}
+  - key: exam:UPSC_CSE
+    name: {en: UPSC Civil Services Examination, hi: यूपीएससी सिविल सेवा परीक्षा}
+    attrs: {body: Union Public Service Commission (UPSC), for: "IAS, IPS, IFS and other central services; open to graduates"}
+    source: {kind: official, ref: UPSC, url: "https://upsc.gov.in"}
+  - key: exam:NCHM_JEE
+    name: {en: NCHM JEE, hi: एनसीएचएम जेईई}
+    attrs: {body: National Testing Agency (NTA), for: "B.Sc Hospitality & Hotel Administration at IHMs"}
+    source: {kind: official, ref: NTA, url: "https://exams.nta.ac.in/NCHM/"}
+  - key: exam:IPMAT
+    name: {en: IPMAT, hi: आईपीमैट}
+    attrs: {body: IIM Indore, for: "5-year Integrated Programme in Management (BBA + MBA)"}
+    source: {kind: official, ref: IIM Indore, url: "https://www.iimidr.ac.in"}
+  - key: exam:NCET
+    name: {en: NCET, hi: एनसीईटी}
+    attrs: {body: National Testing Agency (NTA), for: "4-year Integrated Teacher Education Programme (ITEP)"}
+    source: {kind: official, ref: NTA, url: "https://exams.nta.ac.in/NCET/"}
+  - key: exam:IISER_IAT
+    name: {en: IISER Aptitude Test, hi: आईआईएसईआर एप्टीट्यूड टेस्ट}
+    attrs: {body: The IISERs, for: "BS-MS at the IISERs"}
+    source: {kind: official, ref: IISER, url: "https://www.iiseradmission.in"}
+  - key: exam:NEST
+    name: {en: NEST, hi: नेस्ट}
+    attrs: {body: NISER Bhubaneswar and UM-DAE CEBS, for: "Integrated M.Sc in basic sciences"}
+    source: {kind: official, ref: NEST, url: "https://www.nestexam.in"}
+  - key: exam:CAT
+    name: {en: CAT, hi: कैट}
+    attrs: {body: The IIMs, for: "MBA at the IIMs and many other business schools"}
+    source: {kind: official, ref: IIMs, url: "https://iimcat.ac.in"}
+  - key: exam:GATE
+    name: {en: GATE, hi: गेट}
+    attrs: {body: IISc and the IITs (one organises it each year), for: "M.Tech/M.S. admissions and some public-sector jobs"}
+  - key: exam:NEET_PG
+    name: {en: NEET-PG, hi: नीट-पीजी}
+    attrs: {body: National Board of Examinations in Medical Sciences, for: "MD/MS after MBBS"}
+    source: {kind: official, ref: NBEMS, url: "https://natboard.edu.in"}

@@ -1,0 +1,1450 @@
+{
+ "_about": "Every distinct course/branch name in the official JoSAA and MCC 2026 data on this Pi, with the degree node the graph's patterns assign it (app/knowledge/graph/degrees.yaml). A pattern change that moves any of them shows up as a test failure to review.",
+ "programmes": [
+  {
+   "course": "B.Arch",
+   "branch": "Architecture",
+   "degree": "degree:barch"
+  },
+  {
+   "course": "B.Des",
+   "branch": "Bachelor of Design",
+   "degree": "degree:bdes"
+  },
+  {
+   "course": "BDS",
+   "branch": null,
+   "degree": "degree:bds"
+  },
+  {
+   "course": "B.Plan",
+   "branch": "Planning",
+   "degree": "degree:bplan"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Applied and Industrial Chemistry",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Applied Geology",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Applied Geophysics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Biological Science",
+   "degree": "degree:bs_life_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "BS in Chemical Sciences",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "BS in Mathematics",
+   "degree": "degree:bs_maths_stats"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Chemistry",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Earth Sciences",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Economics",
+   "degree": "degree:bs_economics"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Engineering Chemistry",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Engineering Physics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Exploration Geophysics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Major in Mathematics",
+   "degree": "degree:bs_maths_stats"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Major in Physics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Mathematics and Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Mathematics and Scientific Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Physics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S.",
+   "branch": "Statistics and Data Science",
+   "degree": "degree:bs_maths_stats"
+  },
+  {
+   "course": "B.Sc Nursing",
+   "branch": null,
+   "degree": "degree:bsc_nursing"
+  },
+  {
+   "course": "B.S. + MBA (Dual Degree)",
+   "branch": "BS in Economics with MBA (IIM Bodh Gaya)",
+   "degree": "degree:bs_economics"
+  },
+  {
+   "course": "B.S. + M.S. (Dual Degree)",
+   "branch": "Chemical Sciences",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S. + M.S. (Dual Degree)",
+   "branch": "Chemistry",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S. + M.S. (Dual Degree)",
+   "branch": "Economics",
+   "degree": "degree:bs_economics"
+  },
+  {
+   "course": "B.S. + M.S. (Dual Degree)",
+   "branch": "Mathematics & Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.S. + M.S. (Dual Degree)",
+   "branch": "Physics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S. + M.S. (Integrated)",
+   "branch": "Chemical Science",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S. + M.S. (Integrated)",
+   "branch": "Chemistry",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S. + M.S. (Integrated)",
+   "branch": "Mathematics",
+   "degree": "degree:bs_maths_stats"
+  },
+  {
+   "course": "B.S. + M.S. (Integrated)",
+   "branch": "Physical Science",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.S. + M.S. (Integrated)",
+   "branch": "Physics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Abu Dhabi Campus - Chemical Engineering",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Abu Dhabi Campus - Computer Science and Engineering",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Abu Dhabi Campus - Electrical Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Abu Dhabi Campus - Energy Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Aeronautical Engineering",
+   "degree": "degree:btech_aerospace"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Aerospace Engineering",
+   "degree": "degree:btech_aerospace"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Agricultural and Food Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Agricultural Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Agricultural Engineering with Data Analytics",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Animation and VFX",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Applied and Computational Physics",
+   "degree": "degree:btech_engineering_physics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Artificial Intelligence",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Artificial Intelligence and Computing",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Artificial Intelligence and Data Analytics",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Artificial Intelligence and Data Engineering",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Artificial Intelligence and Data Science",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Artificial Intelligence and Machine Learning",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Artificial Intelligence & Data Science - Aviation Systems",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biochemical Engineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Bio Engineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biological Engineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biological Sciences and Bioengineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biomedical Engineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Bio Medical Engineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biomedical Engineering and Data Science",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biosciences and Bioengineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Bio Technology",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biotechnology and Biochemical Engineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Biotechnology and Bioinformatics",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Artificial Intelligenece and Data Science (Transportation and Logistics)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Aviation Engineering",
+   "degree": "degree:btech_aerospace"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Civil Engineering (Rail Engineering)",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in CSE (AI and ML)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Electrical Engineering ( Rail Engineering)",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B. Tech in Electronics and Communication Engineering with minor in Wearable Electronics",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Electronics & Communication Engineering (Rail Engineering)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in General Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Materials Science and Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Mathematics and Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Mechanical Engineering ( Rail Engineering)",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "B.Tech in Microelectronics & VLSI",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Carpet and Textile Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Ceramic Engineering",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Chemical and Biochemical Engineering",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Chemical Engineering",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Chemical Engineering with Data Analytics",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Chemical Science and Technology",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Chemical Technology (Bioprocess Technology)",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Civil and Environmental Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Civil and Infrastructure Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Civil Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computational and Data Science",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computational Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computational Engineering and Mechanics",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Engineering",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Artificial Intelligence",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Business",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (Artificial Intelligence)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (Artificial Intelligence and Data Science)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (Artificial Intelligence and Machine Learning)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering ( Artificial Intelligence & Data Science)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (Cyber Physical System)",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (Cyber Security)",
+   "degree": "degree:btech_cybersecurity"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (Data Science)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (Internet of Things, Cyber Security including Block Chain Technology )",
+   "degree": "degree:btech_cybersecurity"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering with Major in Artificial Intelligence",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering with minor in AI and ML",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering with specialization in Artificial Intelligence and Data Science",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering with specialization in Cyber Security",
+   "degree": "degree:btech_cybersecurity"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering with specialization in Quantum Technologies",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science and Engineering (with Specialization of Data Science and Artificial Intelligence)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science Engineering (Artificial Intelligence)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science Engineering (Artificial lntelligence and Machine Learning)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science Engineering (Data Science)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science & Engineering (Data Science and Analytics)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science Engineering (Data Science and Analytics)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Computer Science Engineering (Human Computer lnteraction and Gaming Technology)",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Cyber Security",
+   "degree": "degree:btech_cybersecurity"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Dairy Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Data Science and Artificial Intelligence",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Data Science and Engineering",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Design",
+   "degree": "degree:bdes"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Design Engineering",
+   "degree": "degree:bdes"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Digital Agriculture",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Digital Manufacturing and IoT",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electrical and Electronics Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electrical and Electronics Engineering (Electric Mobility)",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electrical Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electrical Engineering (IC Design and Technology)",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electrical Engineering (Integrated Circuit Design and Technology)",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electrical Engineering (Power and Automation)",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electrical Engineering with E Mobility",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronic Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering (Avionics)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering (Internet of Things)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering (VLSI Design)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering (VLSI Design and Technology)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering with specialization in Design and Manufacturing",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering with specialization in VLSI and Embedded Systems",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Communication Engineering (with Specialization of Embedded Systems and Internet of Things)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Electrical Communication Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Electrical Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Instrumentation Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and Telecommunication Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics and VLSI Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics Communication and Artificial Intelligence",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Electronics Engineering (VLSI Design and Technology)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Energy and Electrical Vehicle Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Energy Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Engineering and Computational Mechanics",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Engineering Physics",
+   "degree": "degree:btech_engineering_physics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Engineering Science",
+   "degree": "degree:btech_engineering_physics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Environmental Economics and Sustainable Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Environmental Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Environmental Science and Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Fashion and Apparel Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Food Engineering and Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Food Process Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Food Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Food Technology and Management",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Geological Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Geophysical Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Handloom and Textile Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Industrial and Production Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Industrial and Systems Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Industrial Chemistry",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Industrial Design",
+   "degree": "degree:bdes"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Industrial Engineering and Operations Research",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Industrial Internet of Things",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Information Technology",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Information Technology-Business Informatics",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Instrumentation and Biomedical Engineering",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Instrumentation and Control Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Instrumentation Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Integrated Circuit Design & Technology",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Intelligent Systems",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Internet of Things (IoT)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Manufacturing Science and Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Maritime Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Materials and Metallurgical Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Materials Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Materials Science and Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Materials Science and Metallurgical Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Materials Science and Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mathematics and Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mathematics and Scientific Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mechanical Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mechanical Engineering with specialization in Design and Manufacturing",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mechanics and Computing",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mechatronics and Automation Engineering",
+   "degree": "degree:btech_robotics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mechatronics Engineering",
+   "degree": "degree:btech_robotics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Metallurgical and Materials Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Metallurgical Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Metallurgical Engineering and Materials Science",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Metallurgy and Materials Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Microelectronics and VLSI Design",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Microelectronics & VLSI Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mineral and Metallurgical Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mining Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Mining Machinery Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Naval Architecture and Ocean Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Ocean Engineering and Naval Architecture",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Petroleum Engineering",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Pharmaceutical Engineering & Technology",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Physics and Computational Engineering",
+   "degree": "degree:btech_engineering_physics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Printing and Packaging Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Production and Industrial Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Production Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Quantum Science and Engineering",
+   "degree": "degree:btech_engineering_physics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Robotics and AI",
+   "degree": "degree:btech_robotics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "ROBOTICS & AUTOMATION",
+   "degree": "degree:btech_robotics"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Smart Manufacturing",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Space Science and Engineering",
+   "degree": "degree:btech_aerospace"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "SUSTAINABLE ENERGY TECHNOLOGIES",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Textile Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "Unified Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech",
+   "branch": "VLSI Design and Technology",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Artificial Intelligence and Data Science) - MBA in Digital Business Management (IIM Bodh Gaya)",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Chemical Engineering) - MBA in Hospital and Health Care Management (IIM Bodh Gaya)",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Chemical Science and Technology) - MBA in Hospital and Health Care Management (IIM Bodh Gaya)",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech. (Civil Engineering) - MBA",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Civil Engineering) - MBA (IIM Bodh Gaya)",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech. (Computer Science and Engineering) - MBA",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Computer Science and Engineering) - MBA in Digital Business Management (IIM Bodh Gaya)",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech. (Elctrical Engineering) - MBA",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Electrical and Electronics Engineering) - MBA (IIM Bodh Gaya)",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech. (Electronics and Communication Engineering) - MBA",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Electronics and Communication Engineering) - MBA in Hospital and Healthcare Management (IIM Bodh Gaya)",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Engineering Physics) - MBA (IIM Bodh Gaya)",
+   "degree": "degree:btech_engineering_physics"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech. (Food Engineering and Technology) - MBA",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B. Tech. Information Technology-Business Informatics (IT- BIn) - Master of Business Administration (MBA)",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Mathematics and Computing) - MBA in Digital Business Management (IIM Bodh Gaya)",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech. (Mechanical Engineering) - MBA",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Mechanical Engineering) - MBA (IIM Mumbai)",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech (Metallurgical and Materials Engineering) - MBA (IIM Bodh Gaya)",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + MBA (Dual Degree)",
+   "branch": "B.Tech Mining Engineering and MBA in Logistic and Supply Chain Management (IIM Mumbai)",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + MBA (Integrated)",
+   "branch": "Integrated B. Tech.(IT) and MBA",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Aerospace Engineering",
+   "degree": "degree:btech_aerospace"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Artificial Intelligence and Data Science",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Artificial Intelligence and Machine Learning",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Biotechnology",
+   "degree": "degree:btech_biotech"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "B. Tech. and M. Tech. in Engineering and Computational Mechanics (Dual Degree)",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "B.Tech. in Electronics and Communication Engineering and M.Tech. in Communication Systems",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "B.Tech. in Electronics and Communication Engineering and M.Tech. in Microelectronics and VLSI Systems",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Ceramic Engineering and M.Tech Industrial Ceramic",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Chemical Engineering",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Chemical Technology",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Civil Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Civil Engineering with Specialization in Construction Technology and Management",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Computational Mathematics",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Computer Science and Engineering",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Computer Science and Engineering with Specialization in Cyber Security",
+   "degree": "degree:btech_cybersecurity"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Computer Science and Engineering with Specialization in Data Science",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Electrical Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Electrical Engineering with Specialization In Power System Engineering",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Electronics and Communication Engineering",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Electronics and Communication Engineering with Specialization in Microelectronics and VLSI System Design",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Engineering Design",
+   "degree": "degree:bdes"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Engineering Physics",
+   "degree": "degree:btech_engineering_physics"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Information Technology",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Material Science and Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Mathematics and Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Mathematics and Computing Technology",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Mathematics and Data Science",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Mechanical Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Mechanical Engineering with Specialization in Manufacturing and Industrial Engineering",
+   "degree": "degree:btech_mechanical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Metallurgical and Materials Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + M.Tech (Dual Degree)",
+   "branch": "Mining Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + M.Tech (Integrated)",
+   "branch": "Artificial Intelligence",
+   "degree": "degree:btech_ai_ds"
+  },
+  {
+   "course": "B.Tech + M.Tech (Integrated)",
+   "branch": "Chemical Engineering",
+   "degree": "degree:btech_chemical"
+  },
+  {
+   "course": "B.Tech + M.Tech (Integrated)",
+   "branch": "Computer Science and Engineering",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + M.Tech (Integrated)",
+   "branch": "Geological Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + M.Tech (Integrated)",
+   "branch": "Geophysical Technology",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + M.Tech (Integrated)",
+   "branch": "Integrated B. Tech.(IT) and M. Tech (IT)",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + M.Tech (Integrated)",
+   "branch": "Materials Engineering",
+   "degree": "degree:btech_other"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B. Tech. (CSE) and M.Tech in CSE",
+   "degree": "degree:btech_cse"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B. Tech. (ECE) -M. Tech. in VLSI",
+   "degree": "degree:btech_ece"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B. Tech. (EEE)-M. Tech. in (Power &. Control)",
+   "degree": "degree:btech_electrical"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B. Tech in CE. - M. Tech. in Geotechnical Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B. Tech in CE. - M. Tech. in Structural Engineering",
+   "degree": "degree:btech_civil"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B.Tech in Mechanical Engineering and M.Tech in AI and Robotics",
+   "degree": "degree:btech_robotics"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B. Tech. (Mathematics & Computing) M. Tech. in (Mathematics & Computing)",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "B.Tech + M.Tech/MS (Dual Degree)",
+   "branch": "B. Tech. (ME) - M. Tech. in Mechatronics",
+   "degree": "degree:btech_robotics"
+  },
+  {
+   "course": "Integrated M.Sc",
+   "branch": "Applied Geology",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "Integrated M.Sc",
+   "branch": "Chemistry",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "Integrated M.Sc",
+   "branch": "Life Science",
+   "degree": "degree:bs_life_sciences"
+  },
+  {
+   "course": "Integrated M.Sc",
+   "branch": "Mathematics",
+   "degree": "degree:bs_maths_stats"
+  },
+  {
+   "course": "Integrated M.Sc",
+   "branch": "Mathematics and Computing",
+   "degree": "degree:btech_math_computing"
+  },
+  {
+   "course": "Integrated M.Sc",
+   "branch": "Physics",
+   "degree": "degree:bs_physical_sciences"
+  },
+  {
+   "course": "Integrated M.Sc",
+   "branch": "Quantitative Economics & Data Science",
+   "degree": "degree:bs_economics"
+  },
+  {
+   "course": "MBBS",
+   "branch": null,
+   "degree": "degree:mbbs"
+  }
+ ]
+}
