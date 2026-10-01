@@ -85,6 +85,7 @@ nodes:
     name: {en: Psychology, hi: मनोविज्ञान}
   - key: subject:fine_arts
     name: {en: Fine Arts, hi: ललित कला}
+    aliases: [drawing, painting, art, sketching]
   - key: subject:physical_education
     name: {en: Physical Education, hi: शारीरिक शिक्षा}
 

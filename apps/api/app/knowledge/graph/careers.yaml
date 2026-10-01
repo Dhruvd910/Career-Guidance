@@ -8,7 +8,7 @@ nodes:
   # ---------------- technology ----------------
   - key: career:cse
     name: {en: Computer Science & Software Engineering, hi: कंप्यूटर साइंस और सॉफ़्टवेयर इंजीनियरिंग}
-    aliases: [software engineer, software developer, programmer, coder]
+    aliases: [software engineer, software developer, programmer, coder, coding, programming, apps, IT]
     edges:
       part_of: [domain:technology]
       requires_skill:
@@ -65,7 +65,7 @@ nodes:
         - {to: degree:bsc_cs, commonness: alternative}
   - key: career:robotics
     name: {en: Robotics & Automation, hi: रोबोटिक्स और ऑटोमेशन}
-    aliases: [robotics engineer, automation, mechatronics, robots]
+    aliases: [robotics, robotics engineer, automation, mechatronics, robots, robot, drones]
     edges:
       part_of: [domain:technology, domain:engineering]
       requires_skill:
@@ -158,6 +158,7 @@ nodes:
         - {to: degree:btech_biotech, commonness: alternative}
   - key: career:aerospace
     name: {en: Aerospace Engineering, hi: एयरोस्पेस इंजीनियरिंग}
+    aliases: [rockets, ISRO, aircraft, aeroplanes, planes, space technology]
     edges:
       part_of: [domain:engineering]
       requires_skill:
@@ -189,7 +190,7 @@ nodes:
         - {to: degree:bplan, commonness: alternative}
   - key: career:design
     name: {en: Design (UX, Product & Communication), hi: डिज़ाइन (UX, प्रोडक्ट और कम्युनिकेशन)}
-    aliases: [UX designer, product designer, graphic designer]
+    aliases: [UX designer, product designer, graphic designer, designing, design]
     edges:
       part_of: [domain:design, domain:technology]
       requires_skill:
@@ -268,7 +269,7 @@ nodes:
         - {to: degree:bpt, commonness: common}
   - key: career:veterinary
     name: {en: Veterinary Doctor, hi: पशु चिकित्सक}
-    aliases: [vet, animal doctor]
+    aliases: [vet, animal doctor, animals]
     edges:
       part_of: [domain:health]
       requires_skill:
@@ -331,7 +332,7 @@ nodes:
         - {to: degree:bcom, commonness: common}
   - key: career:finance_econ
     name: {en: Economics & Finance, hi: अर्थशास्त्र और फ़ाइनेंस}
-    aliases: [economist, banker, investment, finance]
+    aliases: [economist, banker, investment, finance, stock market, banking]
     edges:
       part_of: [domain:business]
       requires_skill:
@@ -381,7 +382,7 @@ nodes:
       requires_exam: [exam:UPSC_CSE]
   - key: career:defence
     name: {en: Defence Officer (Army, Navy, Air Force), hi: रक्षा अधिकारी (सेना, नौसेना, वायुसेना)}
-    aliases: [army officer, navy, air force, fauji]
+    aliases: [army officer, army, navy, air force, fauji]
     edges:
       part_of: [domain:public_service]
       requires_skill:
@@ -397,7 +398,7 @@ nodes:
   # ---------------- media, education & society, hospitality ----------------
   - key: career:journalism
     name: {en: Journalism & Media, hi: पत्रकारिता और मीडिया}
-    aliases: [journalist, reporter, news anchor]
+    aliases: [journalist, reporter, news anchor, news, media]
     edges:
       part_of: [domain:media]
       requires_skill:
@@ -425,7 +426,7 @@ nodes:
         - {to: degree:ma_msc_psychology, commonness: common}
   - key: career:teaching
     name: {en: Teaching & Education, hi: शिक्षण}
-    aliases: [teacher, professor, lecturer]
+    aliases: [teacher, professor, lecturer, teaching]
     edges:
       part_of: [domain:people]
       requires_skill:
@@ -440,7 +441,7 @@ nodes:
         - {to: degree:ba_humanities, commonness: alternative}
   - key: career:hotel
     name: {en: Hotel Management & Hospitality, hi: होटल मैनेजमेंट और हॉस्पिटैलिटी}
-    aliases: [hotel manager, chef, hospitality]
+    aliases: [hotel manager, chef, hospitality, cooking]
     edges:
       part_of: [domain:hospitality]
       requires_skill:

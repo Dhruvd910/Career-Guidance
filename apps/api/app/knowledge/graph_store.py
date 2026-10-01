@@ -40,6 +40,7 @@ class GraphStore:
     def __init__(self, db: Session):
         self.db = db
         self._nodes: dict[str, dict] = {}
+        self._edges: dict[tuple, list[dict]] = {}  # per request: the graph doesn't change mid-request
 
     # ---------------- basics ----------------
 
@@ -59,22 +60,31 @@ class GraphStore:
         return {k: self._nodes[k] for k in keys if k in self._nodes}
 
     def of_type(self, node_type: str) -> list[dict]:
-        found = self.db.execute(select(KgNode).where(KgNode.type == node_type).order_by(KgNode.key)).scalars().all()
-        for n in found:
-            self._nodes.setdefault(n.key, _view(n))
-        return [self._nodes[n.key] for n in found]
+        cache_key = ("type", node_type)
+        if cache_key not in self._edges:
+            found = self.db.execute(select(KgNode).where(KgNode.type == node_type).order_by(KgNode.key)).scalars().all()
+            for n in found:
+                self._nodes.setdefault(n.key, _view(n))
+            self._edges[cache_key] = [self._nodes[n.key] for n in found]
+        return self._edges[cache_key]
 
     def out(self, key: str, *types: str) -> list[dict]:
-        query = select(KgEdge).where(KgEdge.src_key == key)
-        if types:
-            query = query.where(KgEdge.type.in_(types))
-        return [self._edge(e, e.dst_key) for e in self.db.execute(query.order_by(KgEdge.id)).scalars()]
+        cache_key = ("out", key, types)
+        if cache_key not in self._edges:
+            query = select(KgEdge).where(KgEdge.src_key == key)
+            if types:
+                query = query.where(KgEdge.type.in_(types))
+            self._edges[cache_key] = [self._edge(e, e.dst_key) for e in self.db.execute(query.order_by(KgEdge.id)).scalars()]
+        return self._edges[cache_key]
 
     def into(self, key: str, *types: str) -> list[dict]:
-        query = select(KgEdge).where(KgEdge.dst_key == key)
-        if types:
-            query = query.where(KgEdge.type.in_(types))
-        return [self._edge(e, e.src_key) for e in self.db.execute(query.order_by(KgEdge.id)).scalars()]
+        cache_key = ("into", key, types)
+        if cache_key not in self._edges:
+            query = select(KgEdge).where(KgEdge.dst_key == key)
+            if types:
+                query = query.where(KgEdge.type.in_(types))
+            self._edges[cache_key] = [self._edge(e, e.src_key) for e in self.db.execute(query.order_by(KgEdge.id)).scalars()]
+        return self._edges[cache_key]
 
     def _edge(self, edge: KgEdge, other: str) -> dict:
         return {"type": edge.type, "src": edge.src_key, "dst": edge.dst_key, "other": other, "attrs": edge.attrs,
@@ -301,6 +311,20 @@ class GraphStore:
         return tree
 
     # ---------------- colleges (official programmes only) ----------------
+
+    def college_counts(self, career: str, state: str | None = None) -> dict:
+        """How many colleges have an official programme on a route into this career — in all, and
+        in one state. Cheap: the whole offered_at list is read once per request."""
+        if "offered" not in self._edges:
+            rows = self.db.execute(select(KgEdge.src_key, KgEdge.dst_key).where(KgEdge.type == "offered_at")).all()
+            self._edges["offered"] = rows
+            self.nodes({dst for _src, dst in rows})
+        degrees = {e["other"] for e in self.out(career, "entered_through")}
+        colleges = {dst for src, dst in self._edges["offered"] if src in degrees}
+        in_state = None
+        if state:
+            in_state = sum(1 for c in colleges if (self._nodes[c]["attrs"].get("state") or "").lower() == state.lower())
+        return {"total": len(colleges), "in_state": in_state, "state": state}
 
     def colleges_for(self, key: str, state: str | None = None, city: str | None = None, limit: int = 25) -> dict:
         """Colleges with an official 2026 programme on a route into `key` (a career or a degree),
