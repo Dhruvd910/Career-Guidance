@@ -1,3 +1,5 @@
+import logging
+import time
 import uuid
 
 from PySide6.QtCore import QSize, Qt
@@ -15,6 +17,8 @@ from app.widgets.common import error_label, heading, primary_button, set_error, 
 from app.widgets.icons import mic_icon, stop_icon
 from app.widgets.maya_status import MayaStatus
 from app.workers import run_async
+
+logger = logging.getLogger(__name__)
 
 # The kiosk panel is only 800x480, where a 420px-wide mascot plus a 460px side panel
 # overflows the screen before the chat column even gets a say. Scale both down on small
@@ -57,6 +61,7 @@ class MayaPage(BasePage):
         self.voice.stream_sentence_played.connect(self._on_sentence_played)
         self.voice.barge_in.connect(self._on_barge_in)
         self._turn: str | None = None  # the live turn being answered
+        self._turn_sent_at, self._turn_heard_at = 0.0, None
         self._turn_by_voice = False
         self._turn_bubble: ChatBubble | None = None
         self._follow_up = False  # listening for the answer to a question MAYA just asked
@@ -319,6 +324,8 @@ class MayaPage(BasePage):
             self.voice.cancel()
             return False
         self._turn, self._turn_by_voice, self._turn_bubble = turn_id, by_voice, None
+        # For the one latency the student feels: end of their speech (or Send) to MAYA's first sound.
+        self._turn_sent_at, self._turn_heard_at = time.monotonic(), None
         set_error(self.not_configured_label, None)
         return True
 
@@ -361,6 +368,10 @@ class MayaPage(BasePage):
 
     def _on_live_audio(self, header: dict, pcm: bytes) -> None:
         if header.get("turn_id") == self._turn:
+            if self._turn_heard_at is None:
+                self._turn_heard_at = time.monotonic()
+                logger.info("turn %s (%s): first audio %.0f ms after the question was sent", self._turn,
+                            "voice" if self._turn_by_voice else "text", (self._turn_heard_at - self._turn_sent_at) * 1000)
             self.voice.stream_audio(self._turn, int(header["seq"]), int(header["sample_rate"]), pcm)
 
     def _on_sentence_played(self, turn_id: str, seq: int) -> None:

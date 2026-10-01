@@ -327,3 +327,16 @@ def test_a_real_barge_in_goes_ahead(client, services):
 ])
 def test_echo_means_nearly_every_word_was_hers(heard, said, echo):
     assert conversation_session.is_echo(heard, said) is echo
+
+
+def test_with_no_voice_configured_the_student_is_told_once(client, services):
+    services["tts"] = None
+    with connect(client, register(client)) as ws:
+        ws.receive_json()
+        for turn in ("t1", "t2"):
+            ws.send_json({"type": "turn.text", "turn_id": turn, "text": "Options?"})
+            services["llm"].turns.append(REPLY)
+            messages = until(ws, "reply.done")
+            errors = [m["code"] for m in messages if m["type"] == "error"]
+            assert errors == (["tts_unavailable"] if turn == "t1" else []), "once per conversation"
+            assert "reply.audio" not in types(messages)

@@ -108,6 +108,7 @@ class ConversationSession:
         self._send_lock = asyncio.Lock()
         self._pending_audio: dict | None = None
         self.turn: Turn | None = None
+        self._said_no_voice = False  # told the student, once, that answers will be text only
 
     async def warm_up(self) -> None:
         """Opens the connections to the AI services while the student is still speaking, so the
@@ -301,6 +302,10 @@ class ConversationSession:
         """Speaks each sentence in order as it comes; synthesis runs faster than speech, so one
         at a time keeps the device ahead. If the voice fails, the rest of the turn is text-only."""
         tts = get_tts_provider()
+        if tts is None and not self._said_no_voice:
+            self._said_no_voice = True
+            await self.send({"type": "error", "turn_id": turn.id, "code": "tts_unavailable",
+                             "message": "My voice isn't set up, so I'll answer on screen.", "retryable": False})
         while (seq := await to_speak.get()) is not None:
             if tts is None:
                 continue

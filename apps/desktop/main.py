@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from PySide6.QtWidgets import QApplication
@@ -9,6 +10,9 @@ from app.theme import STYLESHEET
 
 
 def main() -> None:
+    # Timings and decisions (which microphone, how interruptions work) go to the app log
+    # (.run/desktop.log when started by start.sh).
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
     app = QApplication(sys.argv)
     load_fonts()
     app.setStyleSheet(STYLESHEET)
