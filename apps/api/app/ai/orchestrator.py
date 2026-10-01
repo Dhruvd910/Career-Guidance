@@ -10,8 +10,10 @@ from dataclasses import dataclass
 from sqlalchemy.orm import Session
 
 from app.ai.language import detect, reply_instruction, updated_stats, usual_language
+from app.ai import safety
 from app.ai.tools import TOOL_SPECS, execute_tool
 from app.memory.retrieval import build_memory_context
+from app.memory.state import schedule_analysis, tone_note
 from app.providers.llm import LLMProvider, TextDelta, ToolCall
 from app.providers.registry import get_embedding_provider, get_llm_provider
 from app.models.chat import Conversation, Message
@@ -54,6 +56,9 @@ get_exam_profile.
 - Everything you say is read aloud by MAYA's voice. Talk like a person, not a document: usually two to \
 four short sentences, no markdown, no bullet or numbered lists, no tables. If there is more to cover, give \
 the most useful part, then offer to go on or ask a question that narrows it down.
+- If a student says anything suggesting they might hurt themselves, end their life, or that someone is \
+hurting them: career talk stops. Respond with care, don't diagnose, encourage a trusted adult, and give \
+Tele-MANAS 14416 (free, 24x7) — and Childline 1098 for abuse, 112 in an emergency.
 - You speak English, Hindi and Hinglish. Always answer in the language the student is using right now \
 (each message carries a note saying which), and switch whenever they do.
 """
@@ -163,7 +168,13 @@ class Reply:
         remembered = build_memory_context(db, profile, message, get_embedding_provider())
         if remembered:
             self.messages.insert(1, {"role": "system", "content": remembered})
+        tone = tone_note(db, conversation.id)
+        if tone:
+            self.messages.append({"role": "system", "content": tone})
         self.messages.append({"role": "system", "content": reply_instruction(self.tag)})
+        self.safety = safety.concern(message)
+        if self.safety:
+            self.messages.append({"role": "system", "content": safety.INSTRUCTION[self.safety]})
         self.messages.append({"role": "user", "content": message})
         self.text = ""
         self.tool_calls_used: list[str] = []
@@ -222,11 +233,13 @@ async def handle_chat(
     ("en"/"hi"); the reply's language is decided from the words themselves (see Reply)."""
     conversation = _get_or_create_conversation(db, profile, conversation_id)
     reply = Reply(db, profile, conversation, message, language)
-    db.add(Message(conversation_id=conversation.id, role="user", content=message, language=reply.tag.lang,
-                   modality="voice" if language else "text"))
+    said = Message(conversation_id=conversation.id, role="user", content=message, language=reply.tag.lang,
+                   modality="voice" if language else "text")
+    db.add(said)
     db.commit()
 
     llm = get_llm_provider()
+    schedule_analysis(db, profile, said.id, llm)
     if llm is None:
         return ChatResponse(conversation_id=conversation.id, reply=NOT_CONFIGURED, tool_calls_used=[],
                             ai_configured=False, language=reply.tag.lang)

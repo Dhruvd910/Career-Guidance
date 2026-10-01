@@ -27,6 +27,7 @@ from sqlalchemy.orm import Session
 from app.ai.orchestrator import NOT_CONFIGURED, Reply, ToolActivity
 from app.conversation.chunker import SentenceSplitter
 from app.memory.opening import opening_line
+from app.memory.state import schedule_analysis
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile
 from app.providers.http import ProviderError, warm
@@ -260,10 +261,12 @@ class ConversationSession:
 
             reply = Reply(self.db, self.profile, self.conversation, text, heard_language)
             turn.reply, turn.language = reply, reply.tag.lang
-            self.db.add(Message(conversation_id=self.conversation.id, role="user", content=text,
-                                turn_id=turn.id, language=reply.tag.lang, stt_confidence=stt_confidence,
-                                modality="voice" if audio is not None else "text"))
+            said = Message(conversation_id=self.conversation.id, role="user", content=text, turn_id=turn.id,
+                           language=reply.tag.lang, stt_confidence=stt_confidence,
+                           modality="voice" if audio is not None else "text")
+            self.db.add(said)
             self.db.commit()
+            schedule_analysis(self.db, self.profile, said.id, get_llm_provider())
             await self.send({"type": "turn.transcript", "turn_id": turn.id, "text": text,
                              "language": reply.tag.lang, "script": reply.tag.script, "confidence": stt_confidence})
 
