@@ -17,10 +17,21 @@ class Settings(BaseSettings):
 
     cors_origins: list[str] = ["http://localhost:3000"]
 
-    # LLM (OpenRouter — OpenAI-compatible chat completions + tool calling)
+    # Which implementation each AI service uses (see app/providers/registry.py).
+    llm_provider: str = "openrouter"  # openrouter | openai_compatible
+    stt_provider: str = "groq"  # groq | none
+    tts_provider: str = "cartesia"  # cartesia | none
+
+    # LLM via OpenRouter — OpenAI-compatible chat completions + tool calling
     openrouter_api_key: str | None = None
     openrouter_model: str = "openai/gpt-4o-mini"
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
+
+    # LLM via any other OpenAI-compatible server (OpenAI, llama.cpp, Ollama…), when
+    # llm_provider=openai_compatible. A local server usually needs no key.
+    llm_base_url: str | None = None
+    llm_api_key: str | None = None
+    llm_model: str | None = None
 
     # STT (Groq — Whisper)
     groq_api_key: str | None = None
@@ -32,10 +43,7 @@ class Settings(BaseSettings):
     cartesia_voice_id: str | None = None
     cartesia_model: str = "sonic-3.6"
     cartesia_base_url: str = "https://api.cartesia.ai"
-
-    @property
-    def ai_configured(self) -> bool:
-        return bool(self.openrouter_api_key)
+    tts_sample_rate: int = 44100  # of the streamed PCM sent to the device
 
 
 @lru_cache

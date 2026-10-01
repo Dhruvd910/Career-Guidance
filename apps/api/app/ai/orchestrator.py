@@ -8,7 +8,7 @@ import json
 from sqlalchemy.orm import Session
 
 from app.ai.language import REPLY_INSTRUCTIONS, language_of_text
-from app.ai.providers import get_llm_provider
+from app.providers.registry import get_llm_provider
 from app.ai.tools import TOOL_SPECS, execute_tool
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile

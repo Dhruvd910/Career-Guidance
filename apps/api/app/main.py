@@ -1,12 +1,24 @@
-from fastapi import FastAPI
+import logging
+
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.core.config import get_settings
+from app.providers.http import ProviderError
 from app.routers import ai, auth, careers, colleges, exams, mock_tests, practice, predictions, roadmap, saved_items, student
 
 settings = get_settings()
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
+
+
+@app.exception_handler(ProviderError)
+async def provider_unavailable(_request: Request, exc: ProviderError) -> JSONResponse:
+    """An AI service failing (no credits, outage, timeout) is "unavailable right now", not a bug."""
+    logger.warning("AI provider failed: %s", exc)
+    return JSONResponse(status_code=503, content={"detail": f"The {exc.provider} service is unavailable right now."})
 
 app.add_middleware(
     CORSMiddleware,

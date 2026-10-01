@@ -4,7 +4,7 @@ comparison explanation). Returns None (never a guess) when the LLM isn't configu
 
 import json
 
-from app.ai.providers import get_llm_provider
+from app.providers.registry import get_llm_provider
 
 COMPARISON_SYSTEM_PROMPT = """You write short, balanced comparison summaries for Indian students choosing \
 between colleges. You are given ONLY structured comparison data — use nothing else. Do not invent any \

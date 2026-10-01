@@ -1,11 +1,11 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app.ai import providers
-from app.ai.providers import TTSProvider
 from app.core.db import get_db
 from app.main import app
+from app.providers import registry
 from app.routers import ai as ai_router
+from tests.fakes import FakeSTT, FakeTTS
 
 
 def _with_client_host(asgi_app, host: str):
@@ -37,20 +37,10 @@ def client_from(db_session):
     app.dependency_overrides.clear()
 
 
-class _FakeSTT:
-    async def transcribe(self, audio_bytes: bytes, filename: str) -> str:
-        return "  My name is Dhruv.  "
-
-
-class _FakeTTS(TTSProvider):
-    async def synthesize(self, text: str):
-        return b"RIFFfake", "audio/wav"
-
-
 @pytest.fixture()
 def fake_voice(monkeypatch):
-    monkeypatch.setattr(ai_router, "get_stt_provider", lambda: _FakeSTT())
-    monkeypatch.setattr(ai_router, "get_tts_provider", lambda: _FakeTTS())
+    monkeypatch.setattr(ai_router, "get_stt_provider", lambda: FakeSTT("  My name is Dhruv.  "))
+    monkeypatch.setattr(ai_router, "get_tts_provider", lambda: FakeTTS())
 
 
 AUDIO_FILE = {"audio": ("clip.wav", b"RIFF....WAVE", "audio/wav")}
@@ -113,22 +103,18 @@ def test_chat_still_requires_login_even_from_loopback(client_from, fake_voice):
 # ---- TTS configuration ----
 
 def test_no_tts_provider_without_cartesia_key(monkeypatch):
-    monkeypatch.setattr(providers.settings, "cartesia_api_key", None)
-    assert providers.get_tts_provider() is None
+    monkeypatch.setattr(registry.settings, "cartesia_api_key", None)
+    assert registry.get_tts_provider() is None
 
 
 def test_no_tts_provider_without_cartesia_voice(monkeypatch):
-    monkeypatch.setattr(providers.settings, "cartesia_api_key", "configured")
-    monkeypatch.setattr(providers.settings, "cartesia_voice_id", None)
-    assert providers.get_tts_provider() is None
+    monkeypatch.setattr(registry.settings, "cartesia_api_key", "configured")
+    monkeypatch.setattr(registry.settings, "cartesia_voice_id", None)
+    assert registry.get_tts_provider() is None
 
 
 def test_speak_returns_no_audio_instead_of_erroring_when_tts_fails(client_from, monkeypatch):
-    class _Broken(TTSProvider):
-        async def synthesize(self, text):
-            raise RuntimeError("401 from provider")
-
-    monkeypatch.setattr(ai_router, "get_tts_provider", lambda: _Broken())
+    monkeypatch.setattr(ai_router, "get_tts_provider", lambda: FakeTTS(fail=RuntimeError("401 from provider")))
     r = client_from("127.0.0.1").post("/api/ai/speak", json={"text": "Good morning!"})
     assert r.status_code == 200
     assert r.json()["audio_base64"] is None

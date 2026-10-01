@@ -1,15 +1,15 @@
+import base64
 import logging
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from sqlalchemy.orm import Session
 
-from app.ai.language import language_of_text
 from app.ai.orchestrator import handle_chat
-from app.ai.providers import audio_to_base64, get_stt_provider, get_tts_provider
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile, require_local_or_authenticated
 from app.models.chat import Conversation
 from app.models.student import StudentProfile
+from app.providers.registry import get_stt_provider, get_tts_provider
 from app.schemas.ai import (
     ChatMessageOut, ChatRequest, ChatResponse, SpeakRequest, SpeakResponse, TranscribeResponse, VoiceChatResponse,
 )
@@ -36,16 +36,7 @@ async def _synthesize(text: str) -> tuple[str | None, str | None]:
     if result is None:
         return None, None
     audio_bytes, content_type = result
-    return audio_to_base64(audio_bytes), content_type
-
-
-async def _transcribe(stt, audio_bytes: bytes, filename: str) -> tuple[str, str]:
-    """Transcript and spoken language. A provider that can't tell the language is judged by
-    the script of what it wrote."""
-    if hasattr(stt, "transcribe_with_language"):
-        return await stt.transcribe_with_language(audio_bytes, filename)
-    text = await stt.transcribe(audio_bytes, filename)
-    return text, language_of_text(text)
+    return base64.b64encode(audio_bytes).decode("ascii"), content_type
 
 
 @router.post("/chat", response_model=ChatResponse)
@@ -71,8 +62,8 @@ async def voice_chat(
             "Voice input isn't configured yet — a GROQ_API_KEY is needed on the server.",
         )
 
-    audio_bytes = await audio.read()
-    transcript, language = await _transcribe(stt, audio_bytes, audio.filename or "audio.webm")
+    heard = await stt.transcribe(await audio.read(), audio.filename or "audio.webm")
+    transcript, language = heard.text, heard.language
 
     chat_response = await handle_chat(db, profile, transcript, conversation_id, language=language)
     audio_base64, audio_content_type = await _synthesize(chat_response.reply)
@@ -99,9 +90,8 @@ async def transcribe(
             status.HTTP_503_SERVICE_UNAVAILABLE,
             "Voice input isn't configured yet — a GROQ_API_KEY is needed on the server.",
         )
-    audio_bytes = await audio.read()
-    transcript = await stt.transcribe(audio_bytes, audio.filename or "audio.wav")
-    return TranscribeResponse(transcript=transcript.strip())
+    heard = await stt.transcribe(await audio.read(), audio.filename or "audio.wav")
+    return TranscribeResponse(transcript=heard.text.strip())
 
 
 @router.post("/speak", response_model=SpeakResponse)
