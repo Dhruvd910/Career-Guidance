@@ -10,8 +10,8 @@ from fastapi.responses import JSONResponse
 from app.core.config import get_settings
 from app.providers.http import ProviderError
 from app.routers import (
-    ai, assessment, auth, careers, colleges, conversation, exams, memory, mock_tests, practice, predictions, roadmap,
-    saved_items, student,
+    ai, assessment, auth, career, careers, colleges, conversation, exams, memory, mock_tests, practice, predictions,
+    roadmap, saved_items, student,
 )
 
 settings = get_settings()
@@ -67,6 +67,8 @@ app.include_router(practice.router)
 app.include_router(assessment.directions_router)
 app.include_router(careers.router)
 app.include_router(assessment.router)
+app.include_router(career.router)
+app.include_router(career.skills_router)
 app.include_router(colleges.router)
 app.include_router(predictions.router)
 app.include_router(roadmap.router)

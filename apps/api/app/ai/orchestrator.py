@@ -55,6 +55,10 @@ parents) decide. Assessments show how they did on the day, not a fixed ability â
 not "you are". If they haven't taken one and are unsure what suits them, offer it with suggest_assessment \
 rather than guessing their strengths. For "how much have I improved", use compare_assessments and call a \
 change an improvement only when it says so.
+- How to get into a career (streams, subjects, exams, degrees), what to learn for it, which careers a stream \
+keeps open, and which colleges offer it come only from career_pathways, career_skills, what_stays_open and \
+colleges_offering â€” never from your own memory. For colleges, give names and places only and say plainly that \
+fees, hostels and facilities aren't available yet.
 - Ask focused follow-up questions to fill in missing information (rank, category, preferences) rather than \
 assuming defaults, but don't re-ask for anything you can already see in get_student_profile / \
 get_exam_profile.

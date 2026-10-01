@@ -10,6 +10,7 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.assessment.tools import ASSESSMENT_TOOLS
+from app.knowledge.tools import GRAPH_TOOLS
 from app.models.student import StudentProfile
 from app.schemas.prediction import PredictionRequest, PreferenceListRequest
 from app.services import college_profiles, college_service
@@ -270,6 +271,56 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "career_pathways",
+            "description": "How people get into a career: the common and alternative routes, each with the degree, the class "
+                           "11-12 subjects it needs, which streams lead there, the entrance exams (with official sites) and "
+                           "what can follow. Use for 'how do I become…', 'which stream/exam for…'.",
+            "parameters": {"type": "object", "properties": {"career": {"type": "string", "description": "a career key (ai_data, cse, mbbs…) or its everyday name (AI, doctor, IAS)"}}, "required": ["career"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "career_skills",
+            "description": "The skills a career needs, the student's own results for the ones an assessment measured, the "
+                           "gaps (only measured ones), and a learning path in prerequisite order with projects. Use for "
+                           "'what do I need to learn for…', 'what should I work on'.",
+            "parameters": {"type": "object", "properties": {"career": {"type": "string", "description": "a career key (ai_data, cse, mbbs…) or its everyday name (AI, doctor, IAS)"}}, "required": ["career"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "related_careers",
+            "description": "Careers related to one career — named as related, or sharing many of its skills.",
+            "parameters": {"type": "object", "properties": {"career": {"type": "string", "description": "a career key (ai_data, cse, mbbs…) or its everyday name (AI, doctor, IAS)"}}, "required": ["career"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "what_stays_open",
+            "description": "For a class 11-12 stream (PCM, PCB, PCMB, commerce, humanities): which careers stay open, "
+                           "which open only if they add an optional subject, and which close — with the subject that "
+                           "decides it. Use for stream choices ('PCB lu toh kya khula rahega?').",
+            "parameters": {"type": "object", "properties": {"stream": {"type": "string"}}, "required": ["stream"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "colleges_offering",
+            "description": "Colleges with an official JoSAA/MCC 2026 programme on a route into a career — near the student "
+                           "(their state) unless another state or city is given. Names, places and programmes only: fees, "
+                           "hostels and facilities aren't available yet.",
+            "parameters": {"type": "object", "properties": {
+                "career": {"type": "string"}, "state": {"type": "string"}, "city": {"type": "string"}},
+                "required": ["career"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "generate_roadmap",
             "description": "Generate the student's personalized step-by-step career roadmap.",
             "parameters": {"type": "object", "properties": {}},
@@ -349,6 +400,8 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
             return _dump(generate_preference_list(db, PreferenceListRequest(**args)))
         if name in ASSESSMENT_TOOLS:
             return ASSESSMENT_TOOLS[name](db, profile, args)
+        if name in GRAPH_TOOLS:
+            return GRAPH_TOOLS[name](db, profile, args)
         if name == "generate_roadmap":
             return _dump(generate_roadmap(db, profile))
         if name == "get_onboarding_next_step":

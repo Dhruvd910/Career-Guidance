@@ -83,13 +83,17 @@ what was heard. Bad frames get an `error` and never drop the connection.
 
 An item view: `{key, type: choice\|anchored\|problem\|marks, section, prompt {en,hi}, options [{key, label {en,hi}, keywords {en,hi,hinglish}}], say (what MAYA reads out, in the attempt's language), answer (when going back), code?}`.
 
-## 5. Careers (P4)
+## 5. Careers (P4) — as built
 
 | Method & path | Notes |
 |---|---|
-| `GET /api/career/options` | personalised directions: `[{career_key, name, domain, alignment_band, why_it_may_fit[], strengths[], skill_gaps[], education_required, typical_pathway, alternative_pathways[], explore_next[], questions_to_ask_yourself[]}]` |
-| `GET /api/career/{key}` | career guide + graph neighbourhood (skills, degrees, related careers) |
-| `GET /api/careers…` | existing catalog endpoints kept |
+| `GET /api/career/options` | Phase 3's directions grouped by graph domain, each career with `domain`, `required_education` (degree, class 11-12 subjects, streams, exams with official URLs), `typical_pathway` (steps: stream → exam → degree → roles), `alternative_pathways`, `skills` (each with the student's result where measured, else `not_measured`), `skill_gaps` (measured only), `foundation_gaps`, `colleges` `{total, in_state}` and `from_memory` reasons. Without an interests check: `{ready: false, tree, from_memory}` |
+| `GET /api/career/{key}` | one career in full: the above plus `learning_path` (prerequisite order, with projects/courses), `related`, `colleges_in_state`, `sources` (curated vs official, unreviewed count). Works without assessments (no band) |
+| `GET /api/career/explore` | the domain tree (spec §11) |
+| `GET /api/career/stream/{pcm\|pcb\|pcmb\|commerce\|humanities}` | `open`, `if_you_add` (an optional subject), `closed` — each with the deciding degree and subjects |
+| `GET /api/career/{key}/colleges?state=&city=&limit=` | colleges with an official JoSAA/MCC 2026 programme on a route in; never fees/facilities |
+| `GET /api/skills/{key}/path` | prerequisite-ordered steps, each with what builds it |
+| `GET /api/careers…` | the older catalogue and long-form guides, unchanged |
 
 ## 6. Roadmap & progress (P5)
 
