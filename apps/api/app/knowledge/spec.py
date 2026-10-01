@@ -20,7 +20,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 NODE_TYPES = {
     "career", "job_role", "industry", "domain", "skill", "subject", "stream", "degree", "course", "exam",
@@ -48,11 +48,17 @@ EDGE_TYPES: dict[str, tuple[set[str], set[str]]] = {
 
 
 class Name(BaseModel):
+    # Unknown fields are an error, not ignored: in YAML's one-line form an unquoted comma splits a
+    # name — {en: Civil Services (IAS, IPS, IFS)} — and the rest would otherwise vanish silently.
+    model_config = ConfigDict(extra="forbid")
+
     en: str = Field(min_length=1)
     hi: str = Field(min_length=1)
 
 
 class Source(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     kind: Literal["official", "curated", "derived"]
     ref: str
     url: str | None = None
@@ -71,6 +77,8 @@ class EdgeSpec(BaseModel):
 
 
 class NodeSpec(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
     key: str = Field(pattern=r"^[a-z_]+:[A-Za-z0-9_]+$")
     name: Name
     aliases: list[str] = []

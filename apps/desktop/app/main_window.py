@@ -35,6 +35,7 @@ from app.pages.assessments import AssessmentsPage
 from app.pages.assessment_result import AssessmentHistoryPage, AssessmentResultPage
 from app.pages.assessment_runner import AssessmentRunnerPage
 from app.pages.directions import DirectionPage, DirectionsPage
+from app.pages.streams import StreamExplorerPage
 from app.pages.career_detail import CareerDetailPage
 from app import touch_calibration
 
@@ -44,7 +45,7 @@ PAGE_TITLES = {
     "careers": "Careers", "colleges": "Colleges", "college_detail": "College",
     "compare": "Compare colleges", "roadmap": "Roadmap", "calibrate": "Touch calibration",
     "assessment": "My assessment", "assessment_run": "Assessment", "assessment_result": "My result",
-    "assessment_history": "How I've changed", "directions": "Career directions", "direction": "Career direction",
+    "assessment_history": "How I've changed", "directions": "Career directions", "direction": "Career direction", "streams": "Stream explorer",
     "career_detail": "Career guide", "memory": "MAYA's memory",
 }
 # Screens that belong to starting up, not to using the app: no top bar, no
@@ -253,6 +254,7 @@ class MainWindow(QMainWindow):
         menu.addAction("Talk to MAYA", lambda: self.navigate("maya"))
         menu.addAction("My assessment", lambda: self.navigate("assessment"))
         menu.addAction("Career directions", lambda: self.navigate("directions"))
+        menu.addAction("Stream explorer", lambda: self.navigate("streams"))
         menu.addAction("MAYA's memory", lambda: self.navigate("memory"))
         menu.addAction("Calibrate touch", lambda: self.navigate("calibrate"))
         below = self.settings_btn.mapToGlobal(self.settings_btn.rect().bottomRight())
@@ -314,6 +316,7 @@ class MainWindow(QMainWindow):
         self.pages["assessment_history"] = AssessmentHistoryPage(self)
         self.pages["directions"] = DirectionsPage(self)
         self.pages["direction"] = DirectionPage(self)
+        self.pages["streams"] = StreamExplorerPage(self)
         self.pages["career_detail"] = CareerDetailPage(self)
         self.pages["memory"] = MemoryPage(self)
         for name, page in self.pages.items():

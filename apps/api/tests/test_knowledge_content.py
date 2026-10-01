@@ -86,3 +86,15 @@ def test_the_official_programme_names_map_as_reviewed(snap):
              if match(p["course"], p["branch"]) != p["degree"]]
     assert moved == [], "a pattern change moved these — review, then refresh the fixture"
     assert all(match(p["course"], p["branch"]) for p in FIXTURE["programmes"]), "every official programme has a degree"
+
+
+def test_no_name_is_cut_short_by_a_comma():
+    """In YAML's one-line form, {en: Civil Services (IAS, IPS, IFS)} silently becomes "Civil Services (IAS"."""
+    import yaml
+
+    from app.knowledge.loader import GRAPH_DIR
+
+    for path in GRAPH_DIR.glob("*.yaml"):
+        for node in yaml.safe_load(path.read_text())["nodes"]:
+            assert set(node["name"]) == {"en", "hi"}, (path.name, node["key"], node["name"])
+            assert node["name"]["en"].count("(") == node["name"]["en"].count(")"), node["key"]

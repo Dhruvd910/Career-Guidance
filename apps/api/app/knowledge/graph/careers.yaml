@@ -189,7 +189,7 @@ nodes:
         - {to: degree:barch, commonness: common}
         - {to: degree:bplan, commonness: alternative}
   - key: career:design
-    name: {en: Design (UX, Product & Communication), hi: डिज़ाइन (UX, प्रोडक्ट और कम्युनिकेशन)}
+    name: {en: "Design (UX, Product & Communication)", hi: "डिज़ाइन (UX, प्रोडक्ट और कम्युनिकेशन)"}
     aliases: [UX designer, product designer, graphic designer, designing, design]
     edges:
       part_of: [domain:design, domain:technology]
@@ -298,7 +298,7 @@ nodes:
         - {to: degree:bs_life_sciences, commonness: common}
         - {to: degree:msc_phd, commonness: alternative}
   - key: career:pure_science
-    name: {en: Scientific Research (Physics, Maths, Chemistry), hi: वैज्ञानिक शोध (भौतिकी, गणित, रसायन)}
+    name: {en: "Scientific Research (Physics, Maths, Chemistry)", hi: "वैज्ञानिक शोध (भौतिकी, गणित, रसायन)"}
     aliases: [scientist, researcher]
     edges:
       part_of: [domain:science]
@@ -366,7 +366,7 @@ nodes:
         - {to: degree:ba_llb, commonness: common}
         - {to: degree:llb, commonness: alternative}
   - key: career:civil_services
-    name: {en: Civil Services (IAS, IPS, IFS), hi: सिविल सेवा (IAS, IPS, IFS)}
+    name: {en: "Civil Services (IAS, IPS, IFS)", hi: "सिविल सेवा (IAS, IPS, IFS)"}
     aliases: [IAS, IPS, IFS, UPSC, collector]
     edges:
       part_of: [domain:public_service]
@@ -381,7 +381,7 @@ nodes:
         - {to: degree:any_bachelors, commonness: common}
       requires_exam: [exam:UPSC_CSE]
   - key: career:defence
-    name: {en: Defence Officer (Army, Navy, Air Force), hi: रक्षा अधिकारी (सेना, नौसेना, वायुसेना)}
+    name: {en: "Defence Officer (Army, Navy, Air Force)", hi: "रक्षा अधिकारी (सेना, नौसेना, वायुसेना)"}
     aliases: [army officer, army, navy, air force, fauji]
     edges:
       part_of: [domain:public_service]

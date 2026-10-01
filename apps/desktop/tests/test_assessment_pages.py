@@ -91,10 +91,10 @@ class FakeApi:
     def delete_assessment_attempt(self, attempt_id):
         self.calls.append(("delete", attempt_id))
 
-    def career_directions(self):
+    def career_options(self):
         return DIRECTIONS
 
-    def career_direction(self, key):
+    def career_explain(self, key):
         return CSE
 
 
@@ -108,7 +108,31 @@ CSE = {"career_key": "cse", "name": "Computer Science & Software Engineering", "
        "why": [T("You enjoy maths", "आपको मैथ्स पसंद है")], "strengths": [T("Maths marks: 78%", "मैथ्स के अंक: 78%")],
        "development_areas": [], "questions": [T("Could you sit with one stubborn bug?", "क्या आप…?")],
        "not_measured": [], "things_to_try": ["Try CS50"], "education_path": "PCM → B.Tech", "exams": ["JEE_MAIN"],
-       "evidence": []}
+       "evidence": [],
+       # from the career engine (Phase 4)
+       "from_memory": [T("You told MAYA you're interested in coding", "आपने MAYA को बताया था कि आपकी रुचि coding में है")],
+       "required_education": {"degree": {"key": "degree:btech_cse", "name": T("B.Tech in Computer Science / IT", "बी.टेक कंप्यूटर साइंस / आईटी")},
+                              "subjects": {"mandatory": [{"key": "subject:physics", "name": T("Physics", "भौतिकी")},
+                                                         {"key": "subject:mathematics", "name": T("Mathematics", "गणित")}],
+                                           "one_of": [], "recommended": []},
+                              "streams": [], "exams": [], "then": [], "colleges_on_record": 119},
+       "typical_pathway": [{"kind": "stream", "items": [T("Science — PCM", "विज्ञान — पी.सी.एम.")]},
+                           {"kind": "exam", "items": [T("JEE Main", "जेईई मेन")]},
+                           {"kind": "degree", "items": [T("B.Tech in Computer Science / IT", "बी.टेक कंप्यूटर साइंस / आईटी")]}],
+       "alternative_pathways": [{"degree": {"key": "degree:bca", "name": T("BCA", "बीसीए")}, "commonness": "alternative",
+                                 "exams": [{"key": "exam:CUET_UG", "name": T("CUET-UG", "सीयूईटी-यूजी")}], "note": None,
+                                 "subjects": {}, "streams": [], "then": []}],
+       "skills": [{"key": "skill:programming_fundamentals", "name": T("Programming fundamentals", "प्रोग्रामिंग की बुनियाद"),
+                   "status": "gap", "status_label": T("to work on", "इस पर काम करना है"), "says": T("2 of 8 right", "8 में से 2 सही")},
+                  {"key": "skill:databases_sql", "name": T("Databases and SQL", "डेटाबेस और SQL"),
+                   "status": "not_measured", "status_label": T("not measured yet", "अभी मापा नहीं गया"), "says": None}],
+       "learning_path": [{"key": "skill:programming_fundamentals", "name": T("Programming fundamentals", "प्रोग्रामिंग की बुनियाद"),
+                          "status": "gap", "try": [{"key": "course:cs50x", "name": T("CS50x", "CS50x")}]}],
+       "foundation_gaps": [],
+       "related": [{"key": "career:ai_data", "name": T("Data Science & AI", "डेटा साइंस और एआई"), "via": "related"}],
+       "colleges": {"total": 119, "in_state": 1, "state": "Madhya Pradesh"},
+       "colleges_in_state": {"colleges": [{"college_id": 42, "name": "MANIT Bhopal", "city": "Bhopal"}]},
+       "sources": {"note": T("Skills and routes are MAYA's curated knowledge, not yet reviewed by a person.", "…")}}
 LAW = {**CSE, "career_key": "law", "name": "Law", "domain": "Law", "band": "weak",
        "band_label": T("Less likely from your answers", "कम मेल"), "why": []}
 DIRECTIONS = {"ready": True, "missing": ["aptitude"], "inputs": {"interests": 1},
@@ -314,7 +338,9 @@ def test_directions_in_bands_with_the_less_likely_one_tap_away(qapp, api):
     page = DirectionsPage(Window())
     page.on_show()
     shown = texts(page)
-    assert "Engineering & Technology" in shown and "Strong alignment" in shown and "You enjoy maths" in shown
+    assert "Engineering & Technology" in shown and "Strong alignment" in shown
+    assert "You told MAYA you're interested in coding" in shown, "what they said comes first"
+    assert "Usually: B.Tech in Computer Science / IT · 1 college in Madhya Pradesh" in shown
     assert "Law" not in " ".join(shown).replace("Show 1 less likely from your answers", "")
     assert not any("best" in t.lower() for t in shown)
     button(page, "Show 1 less likely from your answers").click()
@@ -329,7 +355,17 @@ def test_one_direction_explained_and_talked_over_with_maya(qapp, api):
     shown = texts(page)
     assert "Why it may fit" in shown and "•  You enjoy maths" in shown
     assert "Logical reasoning — not measured yet" in shown and "78%" in shown
-    assert "•  Could you sit with one stubborn bug?" in shown and "•  PCM → B.Tech" in shown
+    assert "•  Could you sit with one stubborn bug?" in shown
+    assert "•  You told MAYA you're interested in coding" in shown
+    assert "1.  Stream: Science — PCM" in shown and "3.  Degree: B.Tech in Computer Science / IT" in shown
+    assert "Class 11–12 subjects needed: Physics, Mathematics" in shown and "•  BCA — CUET-UG" in shown
+    assert "to work on · 2 of 8 right" in shown and "not measured yet" in shown
+    assert "1.  Programming fundamentals" in shown and "Try: CS50x" in shown
+    assert "119 colleges have an official 2026 programme on a route in — 1 in Madhya Pradesh." in shown
+    button(page, "MANIT Bhopal · Bhopal  ›").click()
+    assert page.ctx.went[-1] == ("college_detail", {"college_id": 42})
+    button(page, "Data Science & AI  ›").click()
+    assert page.ctx.went[-1] == ("direction", {"key": "ai_data"})
     page.talk.click()
     name, kwargs = page.ctx.went[-1]
     assert name == "maya" and "Computer Science & Software Engineering" in kwargs["ask"]
@@ -338,10 +374,25 @@ def test_one_direction_explained_and_talked_over_with_maya(qapp, api):
 
 
 def test_no_directions_before_what_you_enjoy(qapp, api, monkeypatch):
-    monkeypatch.setattr(api, "career_directions", lambda: {"ready": False, "missing": ["interests"], "domains": []})
+    remembered = {**CSE, "band": None, "band_label": None, "why": []}
+    monkeypatch.setattr(api, "career_options", lambda: {"ready": False, "missing": ["interests"], "tree": [],
+                                                        "from_memory": [remembered]})
     page = DirectionsPage(Window())
     page.on_show()
-    assert "Start with “What you enjoy”" in texts(page)
+    shown = texts(page)
+    assert "Start with “What you enjoy”" in shown and "From what you've told MAYA" in shown
+    assert "Not assessed yet" in shown and "You told MAYA you're interested in coding" in shown
+
+
+def test_a_career_page_before_any_assessment(qapp, api, monkeypatch):
+    monkeypatch.setattr(api, "career_explain", lambda key: {**CSE, "band": None, "band_label": None, "why": [],
+                                                            "components": {}, "measures": []})
+    page = DirectionPage(Window())
+    page.on_show(key="cse")
+    shown = texts(page)
+    assert "Not assessed yet" in shown and "Is it right for you?" in shown and "What it draws on" not in shown
+    page.talk.click()
+    assert "how do people get into it" in page.ctx.went[-1][1]["ask"]
 
 
 def test_a_problem_not_understood_is_asked_again_not_interpreted(qapp, api):

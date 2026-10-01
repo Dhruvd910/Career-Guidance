@@ -308,7 +308,7 @@ nodes:
       requires_exam: [exam:CUET_UG]
       continues_to: [degree:mba, degree:msc_phd]
   - key: degree:ba_humanities
-    name: {en: BA in History, Political Science or similar, hi: बीए इतिहास, राजनीति विज्ञान या इसी तरह के विषय}
+    name: {en: "BA in History, Political Science or similar", hi: "बीए इतिहास, राजनीति विज्ञान या इसी तरह के विषय"}
     attrs: {level: UG, duration_years: 3}
     edges:
       requires_subject: [{to: subject:english, mandatory: true}]
@@ -328,7 +328,7 @@ nodes:
       requires_subject: [{to: subject:english, mandatory: true}]
       requires_exam: [exam:CLAT, exam:AILET]
   - key: degree:llb
-    name: {en: LLB (3-year, after graduation), hi: एलएलबी (3 साल, स्नातक के बाद)}
+    name: {en: "LLB (3-year, after graduation)", hi: "एलएलबी (3 साल, स्नातक के बाद)"}
     attrs: {level: PG, duration_years: 3, regulator: Bar Council of India}
     edges:
       requires_subject: [{to: subject:english, mandatory: true}]
