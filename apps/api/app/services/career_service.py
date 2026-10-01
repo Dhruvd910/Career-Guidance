@@ -127,6 +127,11 @@ def run_career_assessment(
         db.add(assessment)
         db.commit()
         db.refresh(assessment)
+        # The same answers as a Phase 3 interests attempt, so the directions, MAYA and the
+        # history all see them (docs/design/12-phase3-plan.md, Step 4).
+        from app.assessment.service import import_answers
+
+        import_answers(db, profile, payload.responses["answers"], legacy_assessment_id=assessment.id)
         return assessment, highlights
 
     # The older slider-based form (still used by the web app).

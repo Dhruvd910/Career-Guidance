@@ -10,8 +10,8 @@ from fastapi.responses import JSONResponse
 from app.core.config import get_settings
 from app.providers.http import ProviderError
 from app.routers import (
-    ai, auth, careers, colleges, conversation, exams, memory, mock_tests, practice, predictions, roadmap, saved_items,
-    student,
+    ai, assessment, auth, careers, colleges, conversation, exams, memory, mock_tests, practice, predictions, roadmap,
+    saved_items, student,
 )
 
 settings = get_settings()
@@ -63,7 +63,10 @@ app.include_router(student.router)
 app.include_router(exams.router)
 app.include_router(mock_tests.router)
 app.include_router(practice.router)
+# Before careers: /api/careers/{career_id} would otherwise claim /api/careers/directions.
+app.include_router(assessment.directions_router)
 app.include_router(careers.router)
+app.include_router(assessment.router)
 app.include_router(colleges.router)
 app.include_router(predictions.router)
 app.include_router(roadmap.router)

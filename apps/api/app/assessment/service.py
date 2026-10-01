@@ -208,7 +208,7 @@ def start(db: Session, profile: StudentProfile, key: str, language: str = "en", 
 
 # ---------------- answering ----------------
 
-def _attempt(db: Session, profile: StudentProfile, attempt_id: int) -> AssessmentAttempt:
+def get_attempt(db: Session, profile: StudentProfile, attempt_id: int) -> AssessmentAttempt:
     attempt = db.get(AssessmentAttempt, attempt_id)
     if attempt is None or attempt.student_profile_id != profile.id:
         raise AssessmentError("That assessment wasn't found.", not_found=True)
@@ -232,7 +232,7 @@ def _validate(item: AssessmentItem, answer: dict | None) -> dict:
 def answer(db: Session, profile: StudentProfile, attempt_id: int, item_key: str, answer: dict | None = None,
            skipped: bool = False, transcript: str | None = None, interpreted_by: str = "touch",
            response_ms: int | None = None) -> dict:
-    attempt = _attempt(db, profile, attempt_id)
+    attempt = get_attempt(db, profile, attempt_id)
     if attempt.status != "in_progress":
         raise AssessmentError("This assessment is already finished — start it again to retake it.")
     item = next((i for i in attempt.instrument.items if i.key == item_key), None)
@@ -264,7 +264,7 @@ def answer(db: Session, profile: StudentProfile, attempt_id: int, item_key: str,
 
 def back(db: Session, profile: StudentProfile, attempt_id: int) -> dict:
     """One step back: the last answered item comes up again, its answer shown, until it's answered again."""
-    attempt = _attempt(db, profile, attempt_id)
+    attempt = get_attempt(db, profile, attempt_id)
     if attempt.status != "in_progress":
         raise AssessmentError("This assessment is already finished.")
     if attempt.path:
@@ -282,13 +282,14 @@ def _shown(attempt: AssessmentAttempt) -> list[scoring.Shown]:
     return [scoring.Shown(items[k].content, by_key[k].answer, by_key[k].skipped) for k in attempt.path if k in by_key]
 
 
-def complete(db: Session, attempt: AssessmentAttempt, profile: StudentProfile) -> None:
+def complete(db: Session, attempt: AssessmentAttempt, profile: StudentProfile,
+             completed_at: datetime | None = None) -> None:
     for old in list(attempt.scores):
         db.delete(old)
     attempt.scores = [AssessmentScore(dimension_key=s.dimension, score=s.score, n_items=s.n_items, detail=s.detail)
                       for s in scoring.score(attempt.instrument.scoring_method, _shown(attempt))]
     attempt.status = "completed"
-    attempt.completed_at = _now()
+    attempt.completed_at = completed_at or _now()
     if attempt.instrument.key == "academic":
         _record_marks(db, attempt, profile)
     db.flush()
@@ -323,6 +324,29 @@ def _note_on_timeline(db: Session, attempt: AssessmentAttempt, profile: StudentP
                         entity_type="assessment_attempt", entity_id=str(attempt.id),
                         payload={"instrument": attempt.instrument.key, "version": attempt.instrument.version,
                                  "title": attempt.instrument.title["en"]}))
+
+
+def import_answers(db: Session, profile: StudentProfile, answers: dict[str, str], legacy_assessment_id: int | None = None,
+                   completed_at: datetime | None = None) -> AssessmentAttempt:
+    """A finished interests attempt from MAYA's original quiz answers ({question id: option id} —
+    the same ids interests v1 uses): how old assessments, and the old endpoint, reach the new tables."""
+    instrument = _current_instrument(db, "interests")
+    attempt = AssessmentAttempt(student_profile_id=profile.id, instrument=instrument, language="en", mode="touch",
+                                path=[], legacy_assessment_id=legacy_assessment_id)
+    if completed_at is not None:
+        attempt.started_at = attempt.last_activity_at = completed_at
+    db.add(attempt)
+    given: dict[str, dict] = {}
+    for item in instrument.items:
+        option = answers.get(item.key)
+        if option is None or option not in {o["key"] for o in item.content["options"]} \
+                or not _applies(item, attempt, profile, given):
+            continue
+        given[item.key] = {"option": option}
+        attempt.responses.append(AssessmentResponse(item=item, answer={"option": option}, interpreted_by="touch"))
+        attempt.path = [*attempt.path, item.key]
+    complete(db, attempt, profile, completed_at=completed_at)
+    return attempt
 
 
 # ---------------- results ----------------
@@ -436,7 +460,7 @@ def compare(before: dict, after: dict) -> list[dict]:
 def delete_attempt(db: Session, profile: StudentProfile, attempt_id: int) -> None:
     """A real delete: the answers, the scores, the directions worked out from them, and the
     timeline entry."""
-    attempt = _attempt(db, profile, attempt_id)
+    attempt = get_attempt(db, profile, attempt_id)
     for snap in db.execute(select(CareerAlignmentSnapshot)
                            .where(CareerAlignmentSnapshot.student_profile_id == profile.id)).scalars():
         if attempt.id in (snap.inputs or {}).values():
