@@ -11,6 +11,7 @@ from app.models.exam import Exam, ExamProfile
 from app.models.facility import Facility
 from app.models.fee import Fee
 from app.models.hostel import Hostel
+from app.models.knowledge import KgEdge, KgNode, KgVersion
 from app.models.memory import (
     Consent, CounsellingThread, DataRequest, MemoryItem, SessionSummary, StudentConstraint, StudentEvent,
     StudentGoal, StudentInterest, TurnAnalysis,
@@ -68,4 +69,7 @@ __all__ = [
     "AssessmentResponse",
     "AssessmentScore",
     "CareerAlignmentSnapshot",
+    "KgNode",
+    "KgEdge",
+    "KgVersion",
 ]
