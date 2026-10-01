@@ -7,6 +7,10 @@ from app.models.exam import Exam, ExamProfile
 from app.models.facility import Facility
 from app.models.fee import Fee
 from app.models.hostel import Hostel
+from app.models.memory import (
+    Consent, CounsellingThread, DataRequest, MemoryItem, SessionSummary, StudentConstraint, StudentEvent,
+    StudentGoal, StudentInterest, TurnAnalysis,
+)
 from app.models.mock_test import MockTest
 from app.models.nearby import NearbyPlace
 from app.models.placement import Placement
@@ -44,4 +48,14 @@ __all__ = [
     "Conversation",
     "Message",
     "SavedItem",
+    "Consent",
+    "DataRequest",
+    "StudentInterest",
+    "StudentGoal",
+    "StudentConstraint",
+    "CounsellingThread",
+    "SessionSummary",
+    "StudentEvent",
+    "MemoryItem",
+    "TurnAnalysis",
 ]

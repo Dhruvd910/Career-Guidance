@@ -37,3 +37,6 @@ apps/desktop/assets/maya/scaled/
 
 # Original mascot art; the app uses the identical copies in apps/desktop/assets/maya/
 Animations/
+
+# Embedding model for MAYA's memory (downloaded, ~135 MB)
+apps/api/models/

@@ -75,3 +75,24 @@ class FakeLLM(LLMProvider):
             for word in turn.split(" "):  # piece by piece, the way a model streams
                 yield TextDelta(word + " ")
         yield Done("stop")
+
+
+class FakeEmbedding:
+    """Deterministic stand-in: each word lights one of 384 dimensions, so texts sharing words
+    are close and texts sharing none are orthogonal."""
+
+    model_id, dim = "fake", 384
+
+    def embed(self, texts, kind):
+        import zlib
+
+        import numpy as np
+
+        out = []
+        for text in texts:
+            v = np.zeros(self.dim, dtype=np.float32)
+            for word in text.lower().split():
+                v[zlib.crc32(word.strip(".,!?").encode()) % self.dim] += 1.0
+            norm = np.linalg.norm(v)
+            out.append((v / norm if norm else v).tolist())
+        return out

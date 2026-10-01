@@ -14,6 +14,13 @@ class StudentProfile(Base, TimestampMixin):
 
     name: Mapped[str] = mapped_column(String(255))
     class_level: Mapped[int] = mapped_column(Integer)  # 8-12
+    # Beyond class 12 too (spec §18): class_6…class_12 | dropper | ug_y1…ug_y5 | pg | graduate
+    education_stage: Mapped[str | None] = mapped_column(String(20), nullable=True)
+    stream: Mapped[str | None] = mapped_column(String(20), nullable=True)  # PCM | PCB | PCMB | commerce | humanities
+    # Year only: enough to know whether a guardian must consent, without a full date of birth.
+    birth_year: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    city: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    study_hours_per_week: Mapped[int | None] = mapped_column(Integer, nullable=True)
     school_board: Mapped[str | None] = mapped_column(String(50), nullable=True)
     state: Mapped[str | None] = mapped_column(String(100), nullable=True)
     domicile_state: Mapped[str | None] = mapped_column(String(100), nullable=True)

@@ -49,6 +49,10 @@ class Settings(BaseSettings):
     cartesia_base_url: str = "https://api.cartesia.ai"
     tts_sample_rate: int = 44100  # of the streamed PCM sent to the device
 
+    # Embeddings for MAYA's memory, computed on the Pi (app/providers/embedding.py)
+    embedding_provider: str = "local_e5"  # local_e5 | none
+    embedding_model_dir: str = "models/multilingual-e5-small"
+
 
 @lru_cache
 def get_settings() -> Settings:
