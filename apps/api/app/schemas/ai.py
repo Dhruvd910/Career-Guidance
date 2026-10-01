@@ -26,6 +26,8 @@ class ChatResponse(BaseModel):
     # The language the student used and the reply is in: "en", "hi" or "hinglish". Pass it on
     # to /speak so the reply is read with the right voice.
     language: str = "en"
+    # What the reply offers on screen, e.g. {"action": "open_assessment", "instrument_key": "aptitude", …}
+    suggestions: list[dict] = []
 
 
 class VoiceChatResponse(ChatResponse):

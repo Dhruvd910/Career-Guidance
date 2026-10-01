@@ -9,11 +9,10 @@ from typing import Any
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
+from app.assessment.tools import ASSESSMENT_TOOLS
 from app.models.student import StudentProfile
-from app.schemas.career import CareerAssessmentRequest
 from app.schemas.prediction import PredictionRequest, PreferenceListRequest
 from app.services import college_profiles, college_service
-from app.services.career_service import run_career_assessment
 from app.services.exam_service import get_exam_profile, list_exams, to_out
 from app.services.prediction_service import generate_preference_list, predict
 from app.services.roadmap_service import generate_roadmap
@@ -209,19 +208,57 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
-            "name": "assess_career_fit",
-            "description": "Run the career-fit heuristic from subject-interest and trait ratings (0-10 scale) gathered in conversation.",
+            "name": "get_my_assessments",
+            "description": "The student's assessment results (latest of each: interests, thinking skills, skills, "
+                           "marks, coding check) and their career directions by band. Use before talking about "
+                           "their strengths or which careers suit them.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "explain_direction",
+            "description": "Why one career is in its band for this student: the components with their scores, "
+                           "why it may fit, strengths, development areas with next steps, questions to "
+                           "investigate, things to try, and the usual education path.",
+            "parameters": {
+                "type": "object",
+                "properties": {"career_key": {"type": "string", "description": "e.g. cse, ai_data, mbbs, law"}},
+                "required": ["career_key"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "compare_assessments",
+            "description": "How the student's results changed between attempts at one assessment — for "
+                           "'how much have I improved?'. change is +1/-1 only when bigger than the noise; 0 means "
+                           "about the same.",
+            "parameters": {
+                "type": "object",
+                "properties": {"instrument_key": {"type": "string",
+                                                  "enum": ["interests", "aptitude", "skills", "academic", "coding_check"]}},
+                "required": ["instrument_key"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "suggest_assessment",
+            "description": "Offer the student an assessment: puts a button to start it on their screen. Use when "
+                           "they're unsure what suits them, ask about their strengths, or a direction needs "
+                           "something measured. Then tell them what it is and how long it takes.",
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "assessment_type": {
-                        "type": "string",
-                        "enum": ["class8_9_exploration", "class10_stream", "class11_12_career"],
-                    },
-                    "subject_interest": {"type": "object", "description": "e.g. {maths: 8, biology: 4}"},
-                    "traits": {"type": "object", "description": "e.g. {creativity: 7, analytical: 9}"},
+                    "instrument_key": {"type": "string",
+                                       "enum": ["interests", "aptitude", "skills", "academic", "coding_check"]},
+                    "reason": {"type": "string", "description": "a few words on why, for the button"},
                 },
-                "required": ["assessment_type"],
+                "required": ["instrument_key"],
             },
         },
     },
@@ -305,15 +342,8 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
             return _dump(predict(db, PredictionRequest(**args)))
         if name == "generate_preference_list":
             return _dump(generate_preference_list(db, PreferenceListRequest(**args)))
-        if name == "assess_career_fit":
-            responses = {
-                "subject_interest": args.get("subject_interest", {}),
-                "traits": args.get("traits", {}),
-            }
-            assessment, _highlights = run_career_assessment(
-                db, profile, CareerAssessmentRequest(assessment_type=args["assessment_type"], responses=responses)
-            )
-            return _dump(assessment.results)
+        if name in ASSESSMENT_TOOLS:
+            return ASSESSMENT_TOOLS[name](db, profile, args)
         if name == "generate_roadmap":
             return _dump(generate_roadmap(db, profile))
         if name == "get_onboarding_next_step":

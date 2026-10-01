@@ -24,7 +24,7 @@ from dataclasses import dataclass, field
 
 from sqlalchemy.orm import Session
 
-from app.ai.orchestrator import NOT_CONFIGURED, Reply, ToolActivity
+from app.ai.orchestrator import NOT_CONFIGURED, Reply, ToolActivity, UiSuggestion
 from app.conversation.chunker import SentenceSplitter
 from app.memory.opening import opening_line
 from app.memory.state import schedule_analysis
@@ -306,6 +306,9 @@ class ConversationSession:
             async for event in reply.events(llm):
                 if isinstance(event, ToolActivity):
                     await self.send({"type": "turn.thinking", "turn_id": turn.id, "activity": event.name})
+                    continue
+                if isinstance(event, UiSuggestion):
+                    await self.send({"type": "ui.suggest", "turn_id": turn.id, **event.data})
                     continue
                 turn.latency.setdefault("first_token", ms())
                 for sentence in splitter.feed(event):

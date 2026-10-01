@@ -45,6 +45,7 @@ audio as binary frames that always directly follow the JSON frame announcing the
 | `reply.delta` | `turn_id, seq, text` | Sentence `seq`, for the screen — always before any of its audio |
 | `reply.audio` | `turn_id, seq, sample_rate, encoding:"pcm_s16le"` + 1 binary frame | A chunk of sentence `seq`'s speech, as it's synthesised; in order |
 | `reply.done` | `turn_id, text, language, tool_calls_used` | No more for this turn |
+| `ui.suggest` | `turn_id, action:"open_assessment", instrument_key, title {en,hi}, est_minutes, reason` | (P3) MAYA offers something on screen — a button to start an assessment. Never acted on without a tap |
 | `turn.cancelled` | `turn_id` | Ack of an interrupt; nothing more follows for that turn |
 | `error` | `turn_id?, code, message, retryable` | `stt_unavailable`, `llm_unavailable`, `tts_unavailable` (text still arrives), `internal_error`, `bad_message`, `audio_too_long` |
 
@@ -65,15 +66,22 @@ what was heard. Bad frames get an `error` and never drop the connection.
 | `GET /api/counselling/threads` / `PATCH /api/counselling/threads/{id}` | student can park/resolve a topic |
 | `POST /api/consent` / `GET /api/consent` | consent kinds from doc 02 §2 |
 
-## 4. Assessment (P3)
+## 4. Assessment (P3) — as built
 
 | Method & path | Notes |
 |---|---|
-| `GET /api/assessment/instruments` | available for the student's stage |
-| `POST /api/assessment/start` | `{instrument_key}` → `{attempt_id, item}` |
-| `POST /api/assessment/answer` | `{attempt_id, item_key, answer, transcript?, response_ms}` → `{next_item}` or `{complete: true}` |
-| `GET /api/assessment/result?attempt_id=` | dimension scores + career alignments (`strong`/`potential`/`explore`, strengths, development_areas, reasons, questions_to_investigate). Never a single "your career is X" |
-| `GET /api/assessment/history?instrument_key=` | for reassessment comparisons |
+| `GET /api/assessment/instruments` | each instrument: title/about `{en,hi}`, est_minutes, times_taken, last_completed, in_progress `{attempt_id, answered}` |
+| `POST /api/assessment/start` | `{instrument_key, language: en\|hi, mode}` → a view: `{attempt_id, status, language, instrument, complete:false, item, progress {answered, estimate}, can_go_back}`. Resumes an unfinished attempt (≤ 7 days); a retake of aptitude gets the other form |
+| `POST /api/assessment/answer` | `{attempt_id, item_key, answer: {option}\|{value}, skipped?, transcript?, interpreted_by: touch\|keywords\|llm, response_ms?}` → the next view, or `{complete:true, result}` |
+| `POST /api/assessment/back` | `{attempt_id}` → the previous item again, with its answer |
+| `POST /api/assessment/interpret` | `{attempt_id, item_key, transcript}` → `{answer: {option}\|{value}\|null, skip}` — the LLM fallback for spoken answers; records nothing |
+| `GET /api/assessment/result?attempt_id=` | scores per dimension: `{dimension, group, label {en,hi}, score 0–1, n_items, detail, says {en,hi}}` (e.g. "7 of 10 right"); problems also get a `review` with the right answers and why |
+| `GET /api/assessment/history?instrument_key=` | completed attempts oldest first + `since_first`/`since_previous`: per dimension `change` +1/0/−1, non-zero only beyond the noise |
+| `DELETE /api/assessment/attempts/{id}` | real delete: answers, scores, the directions worked out from them, the timeline entry |
+| `GET /api/careers/directions` | `{ready, missing, inputs, domains: [{domain, label, best_band, careers: [...]}], summary {strong, potential, explore, weak}}`; each career: band + label, components, why, strengths, development_areas (with next_step), questions, not_measured, things_to_try, education_path, exams, evidence. No overall score, no ranking |
+| `GET /api/careers/directions/{career_key}` | one career from the above |
+
+An item view: `{key, type: choice\|anchored\|problem\|marks, section, prompt {en,hi}, options [{key, label {en,hi}, keywords {en,hi,hinglish}}], say (what MAYA reads out, in the attempt's language), answer (when going back), code?}`.
 
 ## 5. Careers (P4)
 

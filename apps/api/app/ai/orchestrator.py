@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 from app.ai.language import detect, reply_instruction, updated_stats, usual_language
 from app.ai import safety
 from app.ai.tools import TOOL_SPECS, execute_tool
+from app.assessment.context import assessment_context
 from app.memory.retrieval import build_memory_context
 from app.memory.state import schedule_analysis, tone_note
 from app.providers.llm import LLMProvider, TextDelta, ToolCall
@@ -47,8 +48,13 @@ tell the student this is sample/demo data, not verified real-world information.
 - Category (General/EWS/OBC/SC/ST) is only ever used because it is operationally required for admission \
 prediction. Never treat it as a signal of a student's ability, and never comment on it beyond what's \
 needed to run a prediction.
-- For career guidance, never tell a student they "must" pick one path. Present fit levels (strong/moderate/ \
-possible) with reasoning, mention alternatives, and let the student (and their parents) decide.
+- For career guidance, never tell a student they "must" pick one path, and never present one career as \
+"the" answer. Use their assessment results and career directions (strong / potential / needs exploration), \
+give the reasons behind them (explain_direction), mention alternatives, and let the student (and their \
+parents) decide. Assessments show how they did on the day, not a fixed ability — say "your answers suggest", \
+not "you are". If they haven't taken one and are unsure what suits them, offer it with suggest_assessment \
+rather than guessing their strengths. For "how much have I improved", use compare_assessments and call a \
+change an improvement only when it says so.
 - Ask focused follow-up questions to fill in missing information (rank, category, preferences) rather than \
 assuming defaults, but don't re-ask for anything you can already see in get_student_profile / \
 get_exam_profile.
@@ -152,13 +158,21 @@ class ToolActivity:
     name: str
 
 
+@dataclass(frozen=True)
+class UiSuggestion:
+    """Something for the student's screen to offer — e.g. a button to start an assessment."""
+
+    data: dict
+
+
 class Reply:
     """One reply to one student message, generated as a stream.
 
-    Iterate events() for the reply's text as it's written (str pieces) and a ToolActivity
-    whenever a tool runs; afterwards `text` is the whole reply and `tool_calls_used` what it
-    looked up. Build it before saving the student's message: the history it sends is
-    everything said *before* this message, which it then adds itself.
+    Iterate events() for the reply's text as it's written (str pieces), a ToolActivity
+    whenever a tool runs, and a UiSuggestion when one offers the screen something; afterwards
+    `text` is the whole reply, `tool_calls_used` what it looked up and `suggestions` what it
+    offered. Build it before saving the student's message: the history it sends is everything
+    said *before* this message, which it then adds itself.
     """
 
     def __init__(self, db: Session, profile: StudentProfile, conversation: Conversation, message: str,
@@ -170,6 +184,7 @@ class Reply:
         remembered = build_memory_context(db, profile, message, get_embedding_provider())
         if remembered:
             self.messages.insert(1, {"role": "system", "content": remembered})
+        self.messages.insert(2 if remembered else 1, {"role": "system", "content": assessment_context(db, profile)})
         tone = tone_note(db, conversation.id)
         if tone:
             self.messages.append({"role": "system", "content": tone})
@@ -180,6 +195,7 @@ class Reply:
         self.messages.append({"role": "user", "content": message})
         self.text = ""
         self.tool_calls_used: list[str] = []
+        self.suggestions: list[dict] = []
 
     def _add(self, piece: str) -> str:
         if self.text and not self.text[-1].isspace() and not piece[:1].isspace():
@@ -191,7 +207,7 @@ class Reply:
         self.text += piece
         return piece
 
-    async def events(self, llm: LLMProvider) -> AsyncIterator[str | ToolActivity]:
+    async def events(self, llm: LLMProvider) -> AsyncIterator[str | ToolActivity | UiSuggestion]:
         for _ in range(MAX_TOOL_ITERATIONS):
             written, calls = "", []
             async for event in llm.stream(self.messages, tools=TOOL_SPECS):
@@ -216,6 +232,10 @@ class Reply:
                     args = {}
                 result = execute_tool(self.db, self.profile, call.name, args)
                 self.tool_calls_used.append(call.name)
+                if isinstance(result, dict) and isinstance(result.get("ui"), dict):
+                    ui = result.pop("ui")  # for the screen, not the model
+                    self.suggestions.append(ui)
+                    yield UiSuggestion(ui)
                 self.messages.append({"role": "tool", "tool_call_id": call.id,
                                       "content": json.dumps(result, default=str)})
         yield self._add(GAVE_UP)
@@ -259,4 +279,5 @@ async def handle_chat(
         tool_calls_used=reply.tool_calls_used,
         ai_configured=True,
         language=reply.tag.lang,
+        suggestions=reply.suggestions,
     )
