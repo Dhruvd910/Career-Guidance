@@ -172,6 +172,39 @@ It prints every candidate and whether it counted as a wake. A name that keeps co
 with a different spelling can be added to `VERIFIED_WAKE_WORDS` in `app/wake_word.py`, and
 the accepted greetings are `WAKE_GREETINGS` in the same file.
 
+## MAYA's memory
+
+With permission — for anyone under 18, a parent's or guardian's (menu → **MAYA's memory** →
+Permissions) — MAYA remembers across conversations: the topics you're still deciding (PCM vs PCB),
+what you've said about your interests, goals and constraints, a summary of each conversation, and
+a timeline of your journey. Coming back after a while, she opens with where you left off.
+
+- **Written when a conversation ends** (10 minutes without a new turn, or leaving): a stronger model
+  (`MEMORY_MODEL`, default `anthropic/claude-haiku-4.5` via OpenRouter) writes the notes in the
+  background, and every item must quote what you actually said — anything it can't back up is dropped.
+- **Read before every reply**: open topics, the last conversation, and the memories closest in
+  meaning to what you just said, found by a multilingual embedding model that runs on the Pi
+  (no extra wait, and your memories aren't sent anywhere to be indexed). Private things (family,
+  money) come up only when you're talking about them.
+- **Yours to see and delete**: MAYA's memory → *What she remembers* (delete any item, or
+  everything) and *My journey*. Switching memory off deletes what it covered.
+- **How you seem** (confused, under pressure…) is a separate permission: uncertain signals that only
+  shape her tone, never a diagnosis, never shown to anyone. **Safety** is always on: if you mention
+  hurting yourself or being hurt, she stops career talk, responds with care, and gives Tele-MANAS
+  14416 and Childline 1098.
+
+Guardian consent is recorded as *declared*: India's DPDP Act asks for verifiable parental consent,
+which needs an identity check this app doesn't do — get legal advice before real students use it.
+
+The embedding model (multilingual-e5-small, int8 ONNX, ~135 MB):
+
+```bash
+cd apps/api && mkdir -p models/multilingual-e5-small && cd models/multilingual-e5-small
+for f in onnx/model_quantized.onnx tokenizer.json config.json; do
+  curl -LO "https://huggingface.co/Xenova/multilingual-e5-small/resolve/main/$f"
+done
+```
+
 ## Touch: calibration and scrolling
 
 The ADS7846 resistive panel reports raw 0–4095 values with no relation to the screen, so

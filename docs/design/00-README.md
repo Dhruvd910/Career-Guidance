@@ -1,7 +1,7 @@
 # Design: AI Career Counsellor & Personal Career Mentor
 
-Status: **design only — nothing in this folder is implemented yet.** Written 2026-10-01
-against the code as it stands in `apps/` (MAYA, API tests 82/82 passing).
+Status (2026-10-01): **Phases 1 and 2 built** (voice mentor; memory) and awaiting their hands-on
+tests; Phases 3-7 designed, not built. Written against the code in `apps/` (MAYA).
 
 | # | Document | Answers |
 |---|---|---|
@@ -15,6 +15,8 @@ against the code as it stands in `apps/` (MAYA, API tests 82/82 passing).
 | 08 | [Voice pipeline](08-voice-pipeline.md) | VAD, STT, language, streaming, barge-in, latency budget |
 | 09 | [Roadmap data model](09-roadmap-model.md) | Class-aware templates, versioning, adaptation rules, progress |
 | 10 | [Phase 1 plan](10-phase1-plan.md) | Concrete steps, files, tests, exit criteria |
+| 11 | [Phase 2 plan](11-phase2-plan.md) | Memory: PostgreSQL, on-device embeddings, consent, writing and reading memory |
+| — | [Phase 1 test](phase1-test-script.md) · [Phase 2 test](phase2-test-script.md) | Hands-on checks with a person |
 
 ---
 
