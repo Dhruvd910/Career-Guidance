@@ -71,6 +71,8 @@ def page(qapp, monkeypatch):
     monkeypatch.setattr(maya_page, "ConversationClient", lambda token: real_client(lambda: "tok", socket=socket))
     monkeypatch.setattr(audio_io.sd, "OutputStream", FakeOutput)
     monkeypatch.setattr(audio_io.StreamPlayer, "LEAD_IN_SECONDS", 0.0)
+    monkeypatch.setattr(maya_page.api_client, "get_consent",
+                        lambda: {"long_term_memory": {"granted": False, "decided_at": None}})
     p = maya_page.MayaPage(FakeWindow())
     p.isVisible = lambda: True
     p.socket = socket

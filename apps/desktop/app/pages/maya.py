@@ -13,7 +13,7 @@ from app.conversation_client import ConversationClient
 from app.theme import CARD_BORDER, FOREGROUND, PRIMARY
 from app.pages.base import BasePage
 from app.voice import LISTENING, THINKING
-from app.widgets.common import error_label, heading, primary_button, set_error, subtitle
+from app.widgets.common import error_label, ghost_button, heading, primary_button, set_error, subtitle
 from app.widgets.icons import mic_icon, stop_icon
 from app.widgets.maya_status import MayaStatus
 from app.workers import run_async
@@ -124,6 +124,11 @@ class MayaPage(BasePage):
         right.setSpacing(8)
         if compact:
             right.addWidget(self.not_configured_label)  # the mascot band has no room for it
+        # Until memory has been decided either way: an invitation, never a nag.
+        self.memory_invite = ghost_button("MAYA can remember your conversations — set it up")
+        self.memory_invite.clicked.connect(lambda: self.ctx.navigate("memory", tab="permissions"))
+        self.memory_invite.setVisible(False)
+        right.addWidget(self.memory_invite)
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
         # The transcript stretches into whatever room is left instead of asking for a height of
@@ -165,6 +170,9 @@ class MayaPage(BasePage):
     def on_show(self, wake: bool = False, greet: bool = True, ask: str | None = None, **kwargs) -> None:
         set_error(self.not_configured_label, None)
         self.client.open()
+        run_async(api_client.get_consent,
+                  on_success=lambda c: self.memory_invite.setVisible(c["long_term_memory"]["decided_at"] is None),
+                  on_error=lambda _e: self.memory_invite.setVisible(False))
         if self._opening and not ask and not wake:
             self._say_opening()
             return

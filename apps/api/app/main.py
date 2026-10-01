@@ -71,6 +71,8 @@ app.include_router(saved_items.router)
 app.include_router(ai.router)
 app.include_router(conversation.router)
 app.include_router(memory.router)
+app.include_router(memory.memory_router)
+app.include_router(memory.counselling_router)
 
 
 @app.get("/api/health")

@@ -192,6 +192,29 @@ class ApiClient:
     def delete_saved_item(self, item_id: int) -> None:
         return self.delete(f"/api/saved-items/{item_id}")
 
+    # ---------------- MAYA's memory ----------------
+
+    def get_consent(self) -> dict:
+        return self.get("/api/consent")
+
+    def set_consent(self, kind: str, granted: bool, guardian: dict | None = None) -> dict:
+        body = {"kind": kind, "granted": granted}
+        if guardian:
+            body["guardian"] = guardian
+        return self.post("/api/consent", body)
+
+    def get_memory(self) -> dict:
+        return self.get("/api/student/memory")
+
+    def forget(self, kind: str, item_id: int) -> dict:
+        return self.delete(f"/api/student/memory/{kind}/{item_id}")
+
+    def forget_everything(self) -> dict:
+        return self.delete("/api/student/memory")
+
+    def timeline(self) -> list:
+        return self.get("/api/student/timeline")
+
     def chat(self, message: str, conversation_id: int | None = None) -> dict:
         return self.post("/api/ai/chat", {"message": message, "conversation_id": conversation_id})
 

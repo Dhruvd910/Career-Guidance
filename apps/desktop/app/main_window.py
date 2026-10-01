@@ -28,6 +28,7 @@ from app.pages.college_detail import CollegeDetailPage
 from app.pages.compare import ComparePage
 from app.pages.roadmap import RoadmapPage
 from app.pages.maya import MayaPage
+from app.pages.memory import MemoryPage
 from app.pages.practice import PracticeTestPage
 from app.pages.calibrate import CalibrationPage
 from app.pages.assessment import CareerAssessmentPage
@@ -39,7 +40,7 @@ PAGE_TITLES = {
     "maya": "MAYA Assistant", "jee": "JEE", "neet": "NEET", "mock_tests": "Mock Tests", "practice_test": "Practice test",
     "careers": "Careers", "colleges": "Colleges", "college_detail": "College",
     "compare": "Compare colleges", "roadmap": "Roadmap", "calibrate": "Touch calibration",
-    "assessment": "Career assessment", "career_detail": "Career guide",
+    "assessment": "Career assessment", "career_detail": "Career guide", "memory": "MAYA's memory",
 }
 # Screens that belong to starting up, not to using the app: no top bar, no
 # wake word, and never somewhere Back returns to.
@@ -245,6 +246,7 @@ class MainWindow(QMainWindow):
         menu.addAction("Edit my details", lambda: self.navigate("setup", edit=True))
         menu.addAction("Change goal", self.pages["dashboard"].change_goal)
         menu.addAction("Talk to MAYA", lambda: self.navigate("maya"))
+        menu.addAction("MAYA's memory", lambda: self.navigate("memory"))
         menu.addAction("Calibrate touch", lambda: self.navigate("calibrate"))
         below = self.settings_btn.mapToGlobal(self.settings_btn.rect().bottomRight())
         menu.exec(below - QPoint(menu.sizeHint().width(), 0))
@@ -301,6 +303,7 @@ class MainWindow(QMainWindow):
         self.pages["calibrate"] = CalibrationPage(self)
         self.pages["assessment"] = CareerAssessmentPage(self)
         self.pages["career_detail"] = CareerDetailPage(self)
+        self.pages["memory"] = MemoryPage(self)
         for name, page in self.pages.items():
             # Every page scrolls. When the keyboard takes the bottom ~195px of the 480px panel,
             # a page taller than what's left scrolls instead of forcing the window taller than

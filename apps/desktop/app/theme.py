@@ -107,6 +107,14 @@ QPushButton[variant="secondary"] {{
     border: 1px solid {CARD_BORDER};
 }}
 QPushButton[variant="secondary"]:hover {{ background: {CARD_BORDER}; }}
+/* A secondary button used as a tab: the selected one is filled. */
+QPushButton[variant="secondary"]:checked {{ background: {PRIMARY}; color: {PRIMARY_FOREGROUND}; border-color: {PRIMARY}; }}
+
+QCheckBox {{ spacing: 10px; padding: 4px 0; }}
+QCheckBox::indicator {{
+    width: 24px; height: 24px; border: 2px solid {CARD_BORDER}; border-radius: 6px; background: white;
+}}
+QCheckBox::indicator:checked {{ background: {PRIMARY}; border-color: {PRIMARY}; }}
 QPushButton[variant="ghost"] {{
     background: transparent;
     color: {PRIMARY};
