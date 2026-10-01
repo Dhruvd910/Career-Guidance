@@ -177,7 +177,7 @@ def test_skills_are_levels(db_session):
     view, _ = take(db_session, asha, "skills", choose=lambda item: {"option": "l2"})
     scores = {s["dimension"]: s for s in view["result"]["scores"]}
     assert round(scores["skill:programming"]["score"], 3) == 0.667
-    assert scores["skill:programming"]["says"]["en"] == "level 2 of 3"
+    assert scores["skill:programming"]["says"]["en"] == "level 3 of 4"
 
 
 def test_marks_by_class_with_the_stream_already_known(db_session):

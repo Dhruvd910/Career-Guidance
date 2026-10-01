@@ -357,7 +357,8 @@ def _phrase(dim: str, s: AssessmentScore, method: str, lang: str) -> str:
         extra = (f", {d['skipped']} skipped" if lang == "en" else f", {d['skipped']} छोड़े") if d.get("skipped") else ""
         return f"{d['correct']} of {d['asked']} right{extra}" if lang == "en" else f"{d['asked']} में से {d['correct']} सही{extra}"
     if method == "anchored_levels":
-        return f"level {d['level']} of {d['of']}" if lang == "en" else f"स्तर {d['of']} में से {d['level']}"
+        # Counted from 1, the way the four lines are numbered on screen and read out.
+        return f"level {d['level'] + 1} of {d['of'] + 1}" if lang == "en" else f"स्तर {d['of'] + 1} में से {d['level'] + 1}"
     if method == "marks":
         return f"{d['percent']:g}%"
     return f"{round(s.score * 100)}%"
