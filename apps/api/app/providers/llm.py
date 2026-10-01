@@ -46,8 +46,10 @@ class LLMProvider(ABC):
     model_id: str
 
     @abstractmethod
-    async def chat(self, messages: list[dict[str, Any]], tools: list[dict[str, Any]] | None = None) -> dict[str, Any]:
-        """The whole reply, as an OpenAI-style message: {role, content, tool_calls?}."""
+    async def chat(self, messages: list[dict[str, Any]], tools: list[dict[str, Any]] | None = None,
+                   json_mode: bool = False) -> dict[str, Any]:
+        """The whole reply, as an OpenAI-style message: {role, content, tool_calls?}. json_mode
+        asks for a single JSON object as the content (OpenAI-style response_format)."""
 
     @abstractmethod
     def stream(self, messages: list[dict[str, Any]], tools: list[dict[str, Any]] | None = None) -> AsyncIterator[LLMEvent]:
@@ -63,8 +65,10 @@ class OpenAICompatibleLLM(LLMProvider):
     def _http(self) -> httpx.AsyncClient:
         return self._client or client_for(self.base_url)
 
-    def _build(self, messages, tools, stream: bool):
+    def _build(self, messages, tools, stream: bool, json_mode: bool = False):
         body: dict[str, Any] = {"model": self.model_id, "messages": messages}
+        if json_mode:
+            body["response_format"] = {"type": "json_object"}
         if tools:
             body["tools"] = tools
             body["tool_choice"] = "auto"
@@ -77,8 +81,9 @@ class OpenAICompatibleLLM(LLMProvider):
         return lambda: http.build_request("POST", "chat/completions", json=body, headers=headers,
                                           timeout=CHAT_TIMEOUT)
 
-    async def chat(self, messages, tools=None):
-        response = await send(self._http(), self._build(messages, tools, stream=False), provider=self.name)
+    async def chat(self, messages, tools=None, json_mode=False):
+        response = await send(self._http(), self._build(messages, tools, stream=False, json_mode=json_mode),
+                              provider=self.name)
         try:
             return response.json()["choices"][0]["message"]
         except (ValueError, KeyError, IndexError) as e:

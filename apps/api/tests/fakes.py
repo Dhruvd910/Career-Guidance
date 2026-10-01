@@ -57,7 +57,7 @@ class FakeLLM(LLMProvider):
         self.seen.append([dict(m) for m in messages])
         return self.turns.pop(0) if self.turns else "OK."
 
-    async def chat(self, messages, tools=None):
+    async def chat(self, messages, tools=None, json_mode=False):
         turn = self._next(messages)
         if isinstance(turn, list):
             return {"role": "assistant", "content": "", "tool_calls": [

@@ -174,9 +174,21 @@ class ConversationSession:
         told apart from the student's."""
         if self.turn is not None:
             await self._end_previous(self.turn)
+        await self._continue_or_start_session()
         turn = Turn(id=turn_id or str(uuid.uuid4()))
         self.turn = turn
         turn.task = asyncio.create_task(self._run(turn, text=text, audio=audio, over=over))
+
+    async def _continue_or_start_session(self) -> None:
+        """The session may have ended while the page sat open (idle → its memory was written):
+        then this turn starts a new one, and the device is told its new id."""
+        self.db.refresh(self.conversation)
+        if self.conversation.status != "closed":
+            return
+        self.conversation = Conversation(student_profile_id=self.profile.id, channel=self.conversation.channel)
+        self.db.add(self.conversation)
+        self.db.commit()
+        await self.send({"type": "session.ready", "session_id": self.conversation.id, "opening": None})
 
     async def interrupt(self, turn_id: str | None, seq: int, played_ms: float) -> None:
         turn = self.turn

@@ -1,4 +1,7 @@
+import asyncio
+import contextlib
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,7 +19,24 @@ settings = get_settings()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title=settings.app_name, version="0.1.0")
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    """Background work for the server's lifetime: closing idle sessions and writing their memory."""
+    sweeper = None
+    if settings.memory_sweeper:
+        from app.memory.lifecycle import sweep_forever
+
+        sweeper = asyncio.create_task(sweep_forever())
+    yield
+    if sweeper is not None:
+        sweeper.cancel()
+        with contextlib.suppress(asyncio.CancelledError):
+            await sweeper
+
+
+app = FastAPI(title=settings.app_name, version="0.1.0", lifespan=lifespan)
 
 
 @app.exception_handler(ProviderError)

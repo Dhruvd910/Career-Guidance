@@ -49,6 +49,14 @@ class Settings(BaseSettings):
     cartesia_base_url: str = "https://api.cartesia.ai"
     tts_sample_rate: int = 44100  # of the streamed PCM sent to the device
 
+    # The model that writes session notes into memory. It runs in the background after a session,
+    # so it can be stronger than the live one: on a test session, claude-haiku-4.5 caught the
+    # stated constraints and worries that gpt-4o-mini missed, for under a cent. Empty = the live model.
+    memory_model: str = "anthropic/claude-haiku-4.5"
+    # A conversation with no new turn for this long is over: its memory is written.
+    session_idle_minutes: int = 10
+    memory_sweeper: bool = True  # off in tests, which must never touch the real database
+
     # Embeddings for MAYA's memory, computed on the Pi (app/providers/embedding.py)
     embedding_provider: str = "local_e5"  # local_e5 | none
     embedding_model_dir: str = "models/multilingual-e5-small"

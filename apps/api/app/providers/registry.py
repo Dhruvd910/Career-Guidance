@@ -32,6 +32,15 @@ def get_llm_provider() -> LLMProvider | None:
     raise ValueError(f"Unknown LLM_PROVIDER {settings.llm_provider!r}")
 
 
+def get_notes_llm_provider() -> LLMProvider | None:
+    """The model that writes session notes (MEMORY_MODEL) — on OpenRouter, where any model is a
+    name away. With another LLM provider, the live model does it."""
+    if settings.llm_provider == "openrouter" and settings.memory_model and settings.openrouter_api_key:
+        return OpenAICompatibleLLM(settings.openrouter_base_url, settings.memory_model, settings.openrouter_api_key,
+                                   name="openrouter-notes")
+    return get_llm_provider()
+
+
 def get_stt_provider() -> STTProvider | None:
     if settings.stt_provider == "none":
         return None

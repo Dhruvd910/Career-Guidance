@@ -15,6 +15,8 @@ from sqlalchemy.orm import Session
 
 from app.ai.orchestrator import handle_chat
 from app.conversation.session import ConversationSession
+from app.memory.lifecycle import remember_soon
+from app.core.config import get_settings
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile, student_profile_for_token
 from app.models.chat import Conversation
@@ -23,6 +25,7 @@ from app.schemas.ai import ChatResponse
 
 router = APIRouter(tags=["conversation"])
 logger = logging.getLogger(__name__)
+settings = get_settings()
 
 
 class StartRequest(BaseModel):
@@ -87,6 +90,8 @@ def end(payload: EndRequest, profile: StudentProfile = Depends(get_current_stude
     if conversation.status != "closed":
         conversation.status, conversation.ended_at = "closed", datetime.now(timezone.utc)
         db.commit()
+        if settings.memory_sweeper:
+            remember_soon(conversation.id)  # its memory, in the background
     return EndResponse(session_id=conversation.id, status=conversation.status)
 
 
