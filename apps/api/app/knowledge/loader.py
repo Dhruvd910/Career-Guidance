@@ -147,8 +147,11 @@ def _curated(snap: Snapshot, files: list[GraphFile]) -> None:
             source = node.source or graph_file.source
             snap.node(node.key, node.name.model_dump(), source, node.attrs, node.aliases)
             for edge_type, targets in node.edges.items():
-                for target in targets:
-                    snap.edge(node.key, edge_type, target.to, target.source or source, target.attrs, target.weight)
+                for n, target in enumerate(targets):
+                    attrs = dict(target.attrs)
+                    if edge_type == "part_of":
+                        attrs["primary"] = n == 0  # a career's first domain is its main one
+                    snap.edge(node.key, edge_type, target.to, target.source or source, attrs, target.weight)
 
 
 def _from_library(snap: Snapshot, library: list[dict]) -> None:
