@@ -225,6 +225,26 @@ class ApiClient:
     def career_direction(self, key: str) -> dict:
         return self.get(f"/api/careers/directions/{key}")
 
+    # ---------------- the career engine (Phase 4) ----------------
+
+    def career_options(self) -> dict:
+        """Directions grouped by domain, each with education, pathways, skills and colleges."""
+        return self.get("/api/career/options")
+
+    def career_explain(self, key: str) -> dict:
+        """One career in full — works with or without assessments."""
+        return self.get(f"/api/career/{key}")
+
+    def career_explore(self) -> dict:
+        return self.get("/api/career/explore")
+
+    def career_stream(self, stream: str) -> dict:
+        return self.get(f"/api/career/stream/{stream}")
+
+    def career_colleges(self, key: str, state: str | None = None, limit: int = 25) -> dict:
+        params = {"limit": limit, **({"state": state} if state else {})}
+        return self.get(f"/api/career/{key}/colleges", params=params)
+
     # ---------------- MAYA's memory ----------------
 
     def get_consent(self) -> dict:
