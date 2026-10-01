@@ -78,7 +78,7 @@ def test_not_enough_time_defers_optional_work_but_never_exams(store):
     deferred = [k for k, n in nodes.items() if n["state"] == "deferred"]
     assert deferred and all(nodes[k]["attrs"].get("optional") for k in deferred)
     assert all(n["state"] == "active" for n in nodes.values() if n["attrs"].get("exam_critical"))
-    assert "1 hours a week" in nodes[deferred[0]]["attrs"]["reason"]["en"]
+    assert "1 hour a week" in nodes[deferred[0]]["attrs"]["reason"]["en"]
 
 
 def test_a_hard_subject_gets_a_foundation_before_everything_built_on_it(store):

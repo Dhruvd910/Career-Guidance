@@ -23,7 +23,7 @@ from app.memory import consent
 from app.models.memory import StudentEvent, StudentGoal
 from app.models.roadmap import Roadmap, RoadmapChange, RoadmapNode, RoadmapProgress, RoadmapVersion
 from app.models.student import StudentProfile
-from app.roadmap.generator import STRONG, SUBJECT_NAMES, SUBJECT_SKILLS, Inputs, band_for, build, t
+from app.roadmap.generator import STRONG, SUBJECT_NAMES, SUBJECT_SKILLS, Inputs, band_for, build, hours_phrase, t
 
 KINDS = ("initial", "time_budget", "difficulty", "interest_change", "focus", "reassessment", "profile_change", "manual")
 SUBJECT_WORDS = {"maths": "mathematics", "math": "mathematics", "mathematics": "mathematics", "physics": "physics",
@@ -99,7 +99,8 @@ def _default_reason(trigger: dict, op: str) -> dict:
     hi = trigger.get("detail_hi") or detail
     texts = {
         "initial": t("Your first roadmap.", "आपका पहला रोडमैप।"),
-        "time_budget": t(f"You now have {detail} hours a week for it.", f"अब आपके पास हफ़्ते में {detail} घंटे हैं।"),
+        "time_budget": t(f"You now have {hours_phrase(int(detail)) if detail.isdigit() else detail} a week for it.",
+                         f"अब आपके पास हफ़्ते में {detail} घंटे हैं।"),
         "difficulty": t(f"You said {detail} feels hard.", f"आपने कहा कि {hi} मुश्किल लगता है।"),
         "interest_change": t(f"Your interests changed: {detail}.", f"आपकी रुचि बदली: {hi}।"),
         "focus": t(f"You chose a new focus: {detail}.", f"आपने नया लक्ष्य चुना: {hi}।"),

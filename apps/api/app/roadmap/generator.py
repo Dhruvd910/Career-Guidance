@@ -50,6 +50,11 @@ def t(en: str, hi: str) -> dict:
     return {"en": en, "hi": hi}
 
 
+def hours_phrase(n: float) -> str:
+    """'1 hour', '2 hours'."""
+    return f"{n:g} hour" + ("" if n == 1 else "s")
+
+
 @dataclass
 class Inputs:
     """What a roadmap is built from (spec §18) — stored with every version."""
@@ -637,7 +642,7 @@ class Builder:
             if node["attrs"].get("optional") and not node["attrs"].get("exam_critical"):
                 node["state"] = "deferred"
                 node["attrs"]["reason"] = t(
-                    f"Moved to later: it doesn't fit in {self.inputs.hours_per_week} hours a week this year.",
+                    f"Moved to later: it doesn't fit in {hours_phrase(self.inputs.hours_per_week)} a week this year.",
                     f"बाद के लिए रखा: इस साल हफ़्ते के {self.inputs.hours_per_week} घंटों में यह नहीं समाता।")
                 total -= node["est_hours"] or 0
         hours = 0.0

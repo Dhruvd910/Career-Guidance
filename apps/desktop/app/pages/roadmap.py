@@ -222,8 +222,9 @@ class RoadmapPage(BasePage):
         card = Card()
         card.addWidget(heading(words(lang, "Your time", "आपका समय")))
         time = data["time"]
-        line = words(lang, f"This stage still has about {time['hours_needed']} hours of work; at {data['hours_per_week']} "
-                           f"hours a week you have about {time['hours_available']} until March.",
+        per_week = f"{data['hours_per_week']} hour{'' if data['hours_per_week'] == 1 else 's'}"
+        line = words(lang, f"This stage still has about {time['hours_needed']} hours of work; at {per_week} "
+                           f"a week you have about {time['hours_available']} until March.",
                      f"इस चरण में लगभग {time['hours_needed']} घंटे का काम बाक़ी है; हफ़्ते के {data['hours_per_week']} घंटों से "
                      f"मार्च तक लगभग {time['hours_available']} घंटे हैं।")
         card.addWidget(muted(line))
@@ -244,7 +245,7 @@ class RoadmapPage(BasePage):
             card.addWidget(muted(words(lang, "Hours a week for your roadmap, on top of school:",
                                        "स्कूल के अलावा, रोडमैप के लिए हफ़्ते में कितने घंटे:")))
             card.addWidget(self._chips([(str(h), str(h)) for h in HOURS],
-                                       lambda h: self._adapt("time_budget", hours_per_week=int(h), detail=f"{h} hours a week")))
+                                       lambda h: self._adapt("time_budget", hours_per_week=int(h), detail=f"{h} hour{'' if h == 1 else 's'} a week")))
         elif self.panel == "hard":
             card.addWidget(muted(words(lang, "Which subject feels hard? A foundation step goes in before everything that "
                                              "builds on it.", "कौन सा विषय मुश्किल लगता है? उस पर टिकी हर चीज़ से पहले एक "

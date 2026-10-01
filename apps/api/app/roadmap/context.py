@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.models.student import StudentProfile
 from app.roadmap import service
+from app.roadmap.generator import hours_phrase
 
 OFFER = ("If they say a career they want (\"doctor banna hai\", \"I want to do AI\"), offer in one short question to "
          "build their roadmap around it and, on yes, call set_roadmap_focus — don't first ask for their class (you "
@@ -21,7 +22,7 @@ def roadmap_context(db: Session, profile: StudentProfile) -> str:
         return NONE_YET
     v = service.view(db, profile)
     stage = next((s for s in v["stages"] if s["stage"] == v["current_stage"]), None)
-    lines = [f"The student's roadmap (version {v['version']}, {v['hours_per_week']} hours a week on top of school): "
+    lines = [f"The student's roadmap (version {v['version']}, {hours_phrase(v['hours_per_week'])} a week on top of school): "
              f"focus {v['focus']['name']['en'] if v['focus'] else 'not chosen yet'}"
              + (f"; also exploring {', '.join(b['name']['en'] for b in v['branches'])}" if v["branches"] else "")
              + (f"; moved away from {', '.join(d['name']['en'] for d in v['dropped'])}" if v["dropped"] else "") + "."]

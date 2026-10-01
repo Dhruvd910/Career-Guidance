@@ -160,3 +160,63 @@ The old `generate_roadmap` tool goes.
 4. MAYA answers "Mera next step kya hai?" from the roadmap, and "Main kitna improve hua hoon?" with skills' initial → current.
 5. The progress screen shows skills initial vs current visually, roadmap completion, milestones and projects.
 6. All Phase 1–4 tests still pass.
+
+## As built (2026-10-02)
+
+All six exit criteria are met. 436 server tests pass on SQLite and on PostgreSQL, and 381 Pi-app
+tests pass. A class 10 roadmap with a focus career has about 60 steps across its stages. Each
+version keeps its inputs, its trigger, and a reason for every change.
+
+**Changes from the plan:**
+
+- **MAYA shows a change before making it.** `adjust_roadmap` and `set_roadmap_focus` take
+  `save`. With `save` false, the tool works the change out and returns what would change, saving
+  nothing. With `save` true, it makes the change. The plan had her "confirm first" by prompt alone;
+  in the rehearsal she twice said "I've updated your roadmap" without calling anything. The prompt
+  now also forbids claiming a change that no tool returned.
+- **Time is taken as the student says it.** "I only have two hours a day" was passed as 14 hours
+  a week, which gave *more* roadmap, not less. The tool now takes `hours_a_day` and gives about one
+  roadmap hour a week per hour a day, since school and exam study come first, and it says so.
+  `hours_a_week` is for when the student says exactly that. The screen's chips stay in hours a week.
+- **A new focus can drop the old one.** "I no longer want AI, I like cybersecurity" sets the
+  focus to Cybersecurity and moves AI to *moved away from*. AI's own skills are parked, not
+  deleted. Every result states the focus, the careers being explored and the ones left behind,
+  so her reply can't drift from them.
+- **Ticking a step is strict.** A step matches when everything said is in its name, or when the
+  two mostly overlap; otherwise she asks which step. Before, one stray word ("foundation") could
+  tick the wrong step.
+- **The old exam roadmap is now the "study plan".** It holds the JEE/NEET chapters with their
+  NCERT references and has its own screen, opened from the roadmap and from exam steps. It's
+  served at `/api/roadmap/legacy` and by the `exam_study_plan` tool.
+- Version notes use Hindi names in Hindi, and English and Hindi say "1 hour", not "1 hours".
+- **A desktop test crash, test-only.** A test page held only by Python could be freed while
+  widgets it had cleared were still waiting on `deleteLater`. Qt then deleted them twice, and the
+  next test that ran an event loop crashed; it looked like an onnxruntime crash. Test pages are
+  now kept alive, as the app's page stack keeps them.
+
+**Rehearsal with the real model** (gpt-4o-mini; test database; invented students; three rounds
+of fixes):
+
+| Said | What happened |
+|---|---|
+| "Mujhe AI mein career banana hai. Mera roadmap bana do." | `set_roadmap_focus` straight away (she was asked outright) → v2 |
+| "I only have two hours a day." | First: 14 hours a week (fixed). Then she previewed, asked, and on yes saved v3: *You now have 2 hours a week for it* |
+| "Maths is difficult for me." | First: claimed the change with no tool call (fixed). Then she asked, and on yes v4 added *Maths foundation*, because you said maths feels hard |
+| "I no longer want AI. I'm interested in cybersecurity." | First: AI kept as a branch, then a claim with no tool call (both fixed). Then she asked, and on yes v5 set *Cybersecurity, moving away from Data Science & AI*, with AI-only skills parked |
+| "Mera next step kya hai?" | Maths foundation, with its reason, from the roadmap in her context |
+| "Main kitna improve hua hoon?" | `compare_assessments` + `my_progress`: logical reasoning 2 of 5 → 5 of 5, an improvement; other skills unchanged; roadmap 12% done |
+| "Maine logical reasoning wala step poora kar liya." | Once the model sent "Problem Solving"; the tool now asks for the student's own words, and 4 of 4 runs were right after that. Her replies were in English because "maine", "poora" and "liya" weren't known Hinglish words; now they are |
+| Ravi, class 12 PCB: "doctor banna hai. Mera roadmap kya hoga?" | First: questions instead of a roadmap (fixed: she builds around a career the student names). Then: a Doctor (MBBS) roadmap; next step NEET-UG |
+
+**Timing:** replies took 1.5–5 s (not streamed). Reading the roadmap takes 19 ms. A new version
+takes about 0.19 s. The very first build, which includes loading the graph, takes 1.0 s.
+Progress takes 31 ms, and the roadmap lines added to every reply take 17 ms.
+
+**Still imperfect (the model):**
+
+- Now and then she addresses the student informally ("tera") or in feminine forms despite the
+  rule.
+- Saving relies on her calling again with `save` true after a yes. She did every time in the
+  rehearsal.
+
+The templates and the graph are curated and not yet reviewed by a person.

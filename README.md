@@ -357,11 +357,37 @@ cd apps/api
 ./.venv/bin/python -m app.seed.mcc
 ```
 
-## Roadmap
+## Roadmap and progress
 
-The roadmap follows your exam: milestones, a pacing plan, and every subject's chapters with
-the NCERT book and chapter to learn each from (high-weight chapters starred), plus free
-resources — NCERT, NTA's own practice, YouTube channels — as QR codes. "Practise now" opens a
+**My roadmap** (menu) is built for your class and grows with you. It runs Class 10 → Class 11 →
+Class 12 → Degree → Specialisation → Internship → Career, with each step's months, why it's
+there and when it counts as done. A class 8 roadmap is about exploring. Class 10 adds choosing a
+stream, class 12 adds entrance exams and degrees, and in college it's skills, projects and
+internships. Choose a focus career (**Make this my focus** on a career's page, or tell MAYA)
+and its skills come in from the career engine in the order they build on each other, with
+projects. Skills you already scored strongly on are ticked, with the result as evidence.
+
+It changes when your situation does. Each change makes a new version and says what moved and
+why, and nothing is deleted: **What changed** lists the latest changes and every version so far.
+You can change it yourself on the screen (**I have less (or more) time**, **Something's hard**,
+**Change focus**) or tell MAYA:
+
+- "I only have two hours a day": optional steps move later. Exam preparation never does.
+- "Maths is difficult for me": a maths foundation step goes in before everything built on it.
+- "I no longer want AI. I'm interested in cybersecurity": a new focus. AI's own steps are
+  parked, not deleted, and anything you'd finished still counts.
+
+MAYA tells you what would change and asks before changing anything. She also answers "Mera
+next step kya hai?" and records steps you finish ("Maine Python wala step poora kar liya").
+
+**My progress** shows each measured skill first vs now, with the results behind it ("2 of 5
+right" → "5 of 5 right"). It also shows the roadmap's completion, milestones, projects and
+assessments done, and the careers you've explored. Skill levels come only from assessments and
+practice papers; ticking a step done is progress on the roadmap, not a skill score.
+
+For JEE and NEET, the **exam study plan** (from the roadmap, or "Open my exam study plan" on an
+exam step) still has every subject's chapters with the NCERT book and chapter to learn each from
+(high-weight chapters starred). It also has free resources as QR codes, and "Practise now" opens a
 practice paper in that subject.
 
 ## One goal at a time

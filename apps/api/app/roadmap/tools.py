@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session
 from app.models.student import StudentProfile
 from app.knowledge.graph_store import graph
 from app.roadmap import progress, service
+from app.roadmap.generator import hours_phrase
 from app.roadmap.service import RoadmapError
 
 STATUS = {"done": "done", "in_progress": "in progress", "not_started": "not started", "skipped": "skipped"}
@@ -77,8 +78,8 @@ def adjust_roadmap(db: Session, profile: StudentProfile, args: dict) -> dict:
     hours, how = args.get("hours_a_week") or args.get("hours_per_week"), None
     if args.get("hours_a_day") and not hours:
         hours = roadmap_hours(float(args["hours_a_day"]))
-        how = (f"{args['hours_a_day']:g} hours a day of study in all leaves about {hours} hours a week for the "
-               "roadmap's own steps — school and exam study come first.")
+        how = (f"{hours_phrase(float(args['hours_a_day']))} a day of study in all leaves about {hours_phrase(hours)} a week for "
+               "the roadmap's own steps — school and exam study come first.")
     if args.get("kind") == "time_budget" and not hours:
         return {"error": "How much time? Pass hours_a_day (what they said) or hours_a_week."}
     save = args.get("save") is True
