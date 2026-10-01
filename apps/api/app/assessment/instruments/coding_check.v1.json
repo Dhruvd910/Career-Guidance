@@ -1,0 +1,463 @@
+{
+ "key": "coding_check",
+ "version": 1,
+ "category": "skill",
+ "title": {
+  "en": "Coding check",
+  "hi": "कोडिंग जाँच"
+ },
+ "about": {
+  "en": "8 short pieces of code to read — no programming language needed. Best done on the screen.",
+  "hi": "पढ़ने के लिए कोड के 8 छोटे टुकड़े — कोई प्रोग्रामिंग भाषा आना ज़रूरी नहीं। स्क्रीन पर करना सबसे अच्छा है।"
+ },
+ "intro": {
+  "en": "Eight short pieces of code. You don't need to know any programming language — just follow what each line does. It's easiest on the screen.",
+  "hi": "कोड के आठ छोटे टुकड़े। कोई प्रोग्रामिंग भाषा आना ज़रूरी नहीं — बस देखिए कि हर लाइन क्या करती है। स्क्रीन पर करना सबसे आसान है।"
+ },
+ "scoring_method": "correct_answers",
+ "est_minutes": 6,
+ "dimensions": {
+  "check:programming": {
+   "en": "reading code",
+   "hi": "कोड पढ़ना",
+   "group": "skill"
+  }
+ },
+ "items": [
+  {
+   "key": "c1",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "53",
+      "hi": "53"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "x starts at 5, then becomes 5 + 3 = 8.",
+    "hi": "x पहले 5 है, फिर 5 + 3 = 8 हो जाता है।"
+   },
+   "code": "x = 5\nx = x + 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "c2",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is b at the end?",
+    "hi": "आख़िर में b क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "b was worked out when a was 4; changing a later doesn't change b.",
+    "hi": "b तब निकला जब a = 4 था; बाद में a बदलने से b नहीं बदलता।"
+   },
+   "code": "a = 4\nb = a * 2\na = 10",
+   "speak": {
+    "en": "Look at the code on the screen. What is b at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में b क्या है?"
+   }
+  },
+  {
+   "key": "c3",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is printed when marks is 33?",
+    "hi": "जब marks 33 हो, तो क्या छपेगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "pass",
+      "hi": "pass"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "fail",
+      "hi": "fail"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "nothing",
+      "hi": "कुछ नहीं"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "an error",
+      "hi": "एरर"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": ">= means 'at least', so 33 passes.",
+    "hi": ">= का मतलब 'कम से कम', इसलिए 33 पास है।"
+   },
+   "code": "if marks >= 33:\n    print(\"pass\")\nelse:\n    print(\"fail\")",
+   "speak": {
+    "en": "Look at the code on the screen. What is printed when marks is 33?",
+    "hi": "स्क्रीन पर कोड देखिए। जब marks 33 हो, तो क्या छपेगा?"
+   }
+  },
+  {
+   "key": "c4",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "1 + 2 + 3 + 4 = 10.",
+    "hi": "1 + 2 + 3 + 4 = 10।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 4:\n    total = total + i",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "c5",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is count at the end?",
+    "hi": "आख़िर में count क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "'banana' has three a's.",
+    "hi": "'banana' में तीन a हैं।"
+   },
+   "code": "count = 0\nfor each letter in \"banana\":\n    if letter == \"a\":\n        count = count + 1",
+   "speak": {
+    "en": "Look at the code on the screen. What is count at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में count क्या है?"
+   }
+  },
+  {
+   "key": "c6",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is n at the end?",
+    "hi": "आख़िर में n क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "27",
+      "hi": "27"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "81",
+      "hi": "81"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "n goes 1 → 3 → 9 → 27, and stops because 27 is not less than 20.",
+    "hi": "n: 1 → 3 → 9 → 27, और रुक जाता है क्योंकि 27, 20 से कम नहीं है।"
+   },
+   "code": "n = 1\nwhile n < 20:\n    n = n * 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is n at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में n क्या है?"
+   }
+  },
+  {
+   "key": "c7",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is biggest at the end?",
+    "hi": "आख़िर में biggest क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "It keeps the largest number it has seen: 9.",
+    "hi": "यह अब तक की सबसे बड़ी संख्या रखता है: 9।"
+   },
+   "code": "nums = [4, 9, 2, 7]\nbiggest = nums[0]\nfor each x in nums:\n    if x > biggest:\n        biggest = x",
+   "speak": {
+    "en": "Look at the code on the screen. What is biggest at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में biggest क्या है?"
+   }
+  },
+  {
+   "key": "c8",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "a is 3 and b is 5. Which steps swap them, so a is 5 and b is 3?",
+    "hi": "a = 3 और b = 5 है। कौन से स्टेप इन्हें अदल-बदल देंगे, ताकि a = 5 और b = 3 हो?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "a = b, then b = a",
+      "hi": "a = b, फिर b = a"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "t = a, then a = b, then b = t",
+      "hi": "t = a, फिर a = b, फिर b = t"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "b = a, then a = b",
+      "hi": "b = a, फिर a = b"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "a = a + b",
+      "hi": "a = a + b"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Without a spare variable, the first copy overwrites a value you still need.",
+    "hi": "एक अतिरिक्त वेरिएबल के बिना पहली ही कॉपी वह मान मिटा देती है जिसकी ज़रूरत है।"
+   }
+  }
+ ]
+}

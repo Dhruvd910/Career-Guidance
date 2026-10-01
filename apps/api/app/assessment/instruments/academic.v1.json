@@ -1,0 +1,682 @@
+{
+ "key": "academic",
+ "version": 1,
+ "category": "academic",
+ "title": {
+  "en": "Your marks",
+  "hi": "आपके अंक"
+ },
+ "about": {
+  "en": "Your latest marks, subject by subject. Skip any subject you don't take.",
+  "hi": "विषय के हिसाब से आपके सबसे हाल के अंक। जो विषय आपके पास नहीं है, उसे छोड़ दीजिए।"
+ },
+ "intro": {
+  "en": "Let's note down your latest marks. Just tell me the percentage for each subject, or skip ones you don't take.",
+  "hi": "चलिए आपके हाल के अंक लिख लेते हैं। हर विषय का प्रतिशत बताइए, या जो विषय नहीं है उसे छोड़ दीजिए।"
+ },
+ "scoring_method": "marks",
+ "est_minutes": 2,
+ "dimensions": {
+  "academic:maths": {
+   "en": "Maths marks",
+   "hi": "मैथ्स के अंक",
+   "group": "academic"
+  },
+  "academic:science": {
+   "en": "Science marks",
+   "hi": "विज्ञान के अंक",
+   "group": "academic"
+  },
+  "academic:social_science": {
+   "en": "Social science marks",
+   "hi": "सामाजिक विज्ञान के अंक",
+   "group": "academic"
+  },
+  "academic:english": {
+   "en": "English marks",
+   "hi": "अंग्रेज़ी के अंक",
+   "group": "academic"
+  },
+  "academic:hindi": {
+   "en": "Hindi marks",
+   "hi": "हिंदी के अंक",
+   "group": "academic"
+  },
+  "academic:physics": {
+   "en": "Physics marks",
+   "hi": "फ़िज़िक्स के अंक",
+   "group": "academic"
+  },
+  "academic:chemistry": {
+   "en": "Chemistry marks",
+   "hi": "केमिस्ट्री के अंक",
+   "group": "academic"
+  },
+  "academic:biology": {
+   "en": "Biology marks",
+   "hi": "बायोलॉजी के अंक",
+   "group": "academic"
+  },
+  "academic:computer": {
+   "en": "Computer science marks",
+   "hi": "कंप्यूटर साइंस के अंक",
+   "group": "academic"
+  },
+  "academic:accountancy": {
+   "en": "Accountancy marks",
+   "hi": "अकाउंटेंसी के अंक",
+   "group": "academic"
+  },
+  "academic:business_studies": {
+   "en": "Business studies marks",
+   "hi": "बिज़नेस स्टडीज़ के अंक",
+   "group": "academic"
+  },
+  "academic:economics": {
+   "en": "Economics marks",
+   "hi": "अर्थशास्त्र के अंक",
+   "group": "academic"
+  },
+  "academic:history": {
+   "en": "History marks",
+   "hi": "इतिहास के अंक",
+   "group": "academic"
+  },
+  "academic:political_science": {
+   "en": "Political science marks",
+   "hi": "राजनीति विज्ञान के अंक",
+   "group": "academic"
+  },
+  "academic:geography": {
+   "en": "Geography marks",
+   "hi": "भूगोल के अंक",
+   "group": "academic"
+  }
+ },
+ "items": [
+  {
+   "key": "jr_maths",
+   "type": "marks",
+   "dimension": "academic:maths",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Maths: what percentage did you get in your last exam?",
+    "hi": "मैथ्स: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Maths — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "मैथ्स — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  },
+  {
+   "key": "jr_science",
+   "type": "marks",
+   "dimension": "academic:science",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Science: what percentage did you get in your last exam?",
+    "hi": "विज्ञान: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Science — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "विज्ञान — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  },
+  {
+   "key": "jr_social_science",
+   "type": "marks",
+   "dimension": "academic:social_science",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Social science: what percentage did you get in your last exam?",
+    "hi": "सामाजिक विज्ञान: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Social science — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "सामाजिक विज्ञान — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  },
+  {
+   "key": "jr_english",
+   "type": "marks",
+   "dimension": "academic:english",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "English: what percentage did you get in your last exam?",
+    "hi": "अंग्रेज़ी: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "English — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "अंग्रेज़ी — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  },
+  {
+   "key": "jr_hindi",
+   "type": "marks",
+   "dimension": "academic:hindi",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Hindi: what percentage did you get in your last exam?",
+    "hi": "हिंदी: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Hindi — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "हिंदी — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  },
+  {
+   "key": "stream",
+   "type": "choice",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Which stream are you in?",
+    "hi": "आप किस स्ट्रीम में हैं?"
+   },
+   "speak": {
+    "en": "Which stream are you in? PCM, PCB, PCMB, commerce or humanities?",
+    "hi": "आप किस स्ट्रीम में हैं? पी.सी.एम., पी.सी.बी., पी.सी.एम.बी., कॉमर्स या ह्यूमैनिटीज़?"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "options": [
+    {
+     "key": "pcm",
+     "label": {
+      "en": "PCM",
+      "hi": "PCM"
+     },
+     "keywords": {
+      "en": [
+       "pcm",
+       "maths",
+       "non medical",
+       "non-medical"
+      ],
+      "hinglish": [],
+      "hi": [
+       "पीसीएम"
+      ]
+     }
+    },
+    {
+     "key": "pcb",
+     "label": {
+      "en": "PCB",
+      "hi": "PCB"
+     },
+     "keywords": {
+      "en": [
+       "pcb",
+       "bio",
+       "medical"
+      ],
+      "hinglish": [],
+      "hi": [
+       "पीसीबी"
+      ]
+     }
+    },
+    {
+     "key": "pcmb",
+     "label": {
+      "en": "PCMB",
+      "hi": "PCMB"
+     },
+     "keywords": {
+      "en": [
+       "pcmb",
+       "both"
+      ],
+      "hinglish": [
+       "dono"
+      ],
+      "hi": [
+       "पीसीएमबी",
+       "दोनों"
+      ]
+     }
+    },
+    {
+     "key": "commerce",
+     "label": {
+      "en": "Commerce",
+      "hi": "कॉमर्स"
+     },
+     "keywords": {
+      "en": [
+       "commerce"
+      ],
+      "hinglish": [],
+      "hi": [
+       "कॉमर्स"
+      ]
+     }
+    },
+    {
+     "key": "humanities",
+     "label": {
+      "en": "Humanities / Arts",
+      "hi": "ह्यूमैनिटीज़ / आर्ट्स"
+     },
+     "keywords": {
+      "en": [
+       "humanities",
+       "arts"
+      ],
+      "hinglish": [],
+      "hi": [
+       "आर्ट्स",
+       "ह्यूमैनिटीज़"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "sr_physics",
+   "type": "marks",
+   "dimension": "academic:physics",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Physics: what percentage did you get in your last exam?",
+    "hi": "फ़िज़िक्स: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Physics — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "फ़िज़िक्स — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "pcm",
+     "pcb",
+     "pcmb"
+    ]
+   }
+  },
+  {
+   "key": "sr_chemistry",
+   "type": "marks",
+   "dimension": "academic:chemistry",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Chemistry: what percentage did you get in your last exam?",
+    "hi": "केमिस्ट्री: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Chemistry — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "केमिस्ट्री — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "pcm",
+     "pcb",
+     "pcmb"
+    ]
+   }
+  },
+  {
+   "key": "sr_maths",
+   "type": "marks",
+   "dimension": "academic:maths",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Maths: what percentage did you get in your last exam?",
+    "hi": "मैथ्स: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Maths — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "मैथ्स — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "pcm",
+     "pcmb",
+     "commerce"
+    ]
+   }
+  },
+  {
+   "key": "sr_biology",
+   "type": "marks",
+   "dimension": "academic:biology",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Biology: what percentage did you get in your last exam?",
+    "hi": "बायोलॉजी: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Biology — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "बायोलॉजी — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "pcb",
+     "pcmb"
+    ]
+   }
+  },
+  {
+   "key": "sr_computer",
+   "type": "marks",
+   "dimension": "academic:computer",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Computer science: what percentage did you get in your last exam?",
+    "hi": "कंप्यूटर साइंस: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Computer science — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "कंप्यूटर साइंस — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "pcm"
+    ]
+   }
+  },
+  {
+   "key": "sr_accountancy",
+   "type": "marks",
+   "dimension": "academic:accountancy",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Accountancy: what percentage did you get in your last exam?",
+    "hi": "अकाउंटेंसी: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Accountancy — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "अकाउंटेंसी — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "commerce"
+    ]
+   }
+  },
+  {
+   "key": "sr_business_studies",
+   "type": "marks",
+   "dimension": "academic:business_studies",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Business studies: what percentage did you get in your last exam?",
+    "hi": "बिज़नेस स्टडीज़: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Business studies — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "बिज़नेस स्टडीज़ — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "commerce"
+    ]
+   }
+  },
+  {
+   "key": "sr_economics",
+   "type": "marks",
+   "dimension": "academic:economics",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Economics: what percentage did you get in your last exam?",
+    "hi": "अर्थशास्त्र: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Economics — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "अर्थशास्त्र — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "commerce",
+     "humanities"
+    ]
+   }
+  },
+  {
+   "key": "sr_history",
+   "type": "marks",
+   "dimension": "academic:history",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "History: what percentage did you get in your last exam?",
+    "hi": "इतिहास: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "History — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "इतिहास — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "humanities"
+    ]
+   }
+  },
+  {
+   "key": "sr_political_science",
+   "type": "marks",
+   "dimension": "academic:political_science",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Political science: what percentage did you get in your last exam?",
+    "hi": "राजनीति विज्ञान: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Political science — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "राजनीति विज्ञान — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "humanities"
+    ]
+   }
+  },
+  {
+   "key": "sr_geography",
+   "type": "marks",
+   "dimension": "academic:geography",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "Geography: what percentage did you get in your last exam?",
+    "hi": "भूगोल: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "Geography — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "भूगोल — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   },
+   "requires": {
+    "stream": [
+     "humanities"
+    ]
+   }
+  },
+  {
+   "key": "sr_english",
+   "type": "marks",
+   "dimension": "academic:english",
+   "section": {
+    "en": "Marks",
+    "hi": "अंक"
+   },
+   "prompt": {
+    "en": "English: what percentage did you get in your last exam?",
+    "hi": "अंग्रेज़ी: पिछली परीक्षा में कितने प्रतिशत अंक आए?"
+   },
+   "speak": {
+    "en": "English — what percentage did you get in your last exam? Say skip if you don't take it.",
+    "hi": "अंग्रेज़ी — पिछली परीक्षा में कितने प्रतिशत अंक आए? अगर यह विषय नहीं है तो 'छोड़ो' कहिए।"
+   },
+   "applies_to": {
+    "class_levels": [
+     11,
+     12
+    ]
+   }
+  }
+ ]
+}

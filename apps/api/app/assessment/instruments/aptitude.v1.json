@@ -1,0 +1,1535 @@
+{
+ "key": "aptitude",
+ "version": 1,
+ "category": "aptitude",
+ "title": {
+  "en": "Thinking skills",
+  "hi": "सोचने की क्षमता"
+ },
+ "about": {
+  "en": "15 short problems with numbers, logic and words. It shows how you did today — it isn't an IQ test and doesn't decide anything about you.",
+  "hi": "संख्याओं, तर्क और शब्दों के 15 छोटे सवाल। यह बताता है कि आज आपने कैसा किया — यह IQ टेस्ट नहीं है और आपके बारे में कुछ तय नहीं करता।"
+ },
+ "intro": {
+  "en": "Fifteen short problems — numbers, logic and words. Take your time; if you're not sure, have a go or say skip. This isn't an exam, it just shows how you think.",
+  "hi": "पंद्रह छोटे सवाल — संख्याएँ, तर्क और शब्द। आराम से कीजिए; पक्का न हो तो अंदाज़ा लगाइए या 'छोड़ो' कहिए। यह परीक्षा नहीं है, बस यह दिखाता है कि आप कैसे सोचते हैं।"
+ },
+ "scoring_method": "correct_answers",
+ "est_minutes": 10,
+ "forms": [
+  "A",
+  "B"
+ ],
+ "dimensions": {
+  "aptitude:numerical": {
+   "en": "working with numbers",
+   "hi": "संख्याओं के साथ काम",
+   "group": "aptitude"
+  },
+  "aptitude:logical": {
+   "en": "logical reasoning",
+   "hi": "तार्किक सोच",
+   "group": "aptitude"
+  },
+  "aptitude:verbal": {
+   "en": "understanding words",
+   "hi": "शब्दों की समझ",
+   "group": "aptitude"
+  }
+ },
+ "items": [
+  {
+   "key": "a_num_1",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A pen costs ₹12. How much do 5 pens cost?",
+    "hi": "एक पेन ₹12 का है। 5 पेन कितने के होंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹50",
+      "hi": "₹50"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹60",
+      "hi": "₹60"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹62",
+      "hi": "₹62"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹72",
+      "hi": "₹72"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "12 × 5 = 60.",
+    "hi": "12 × 5 = 60।"
+   }
+  },
+  {
+   "key": "a_log_1",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Riya is taller than Aman. Aman is taller than Sara. Who is the shortest?",
+    "hi": "रिया अमन से लंबी है। अमन सारा से लंबा है। सबसे छोटा कौन है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Riya",
+      "hi": "रिया"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Aman",
+      "hi": "अमन"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Sara",
+      "hi": "सारा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Can't tell",
+      "hi": "पता नहीं चल सकता"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Riya > Aman > Sara, so Sara is the shortest.",
+    "hi": "रिया > अमन > सारा, इसलिए सारा सबसे छोटी है।"
+   }
+  },
+  {
+   "key": "a_verb_1",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'ancient'?",
+    "hi": "'प्राचीन' का विलोम (उल्टा) क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "old",
+      "hi": "पुराना"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "modern",
+      "hi": "आधुनिक"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "famous",
+      "hi": "प्रसिद्ध"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "broken",
+      "hi": "टूटा हुआ"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Ancient means very old; modern means new.",
+    "hi": "प्राचीन यानी बहुत पुराना; आधुनिक यानी नया।"
+   }
+  },
+  {
+   "key": "a_num_2",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What comes next: 3, 6, 12, 24 …?",
+    "hi": "आगे क्या आएगा: 3, 6, 12, 24 …?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "36",
+      "hi": "36"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "48",
+      "hi": "48"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "42",
+      "hi": "42"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Each number doubles: 24 × 2 = 48.",
+    "hi": "हर संख्या दोगुनी होती है: 24 × 2 = 48।"
+   }
+  },
+  {
+   "key": "a_log_2",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "All roses are flowers. Some flowers fade quickly. Does it follow that some roses fade quickly?",
+    "hi": "सभी गुलाब फूल हैं। कुछ फूल जल्दी मुरझा जाते हैं। क्या इससे यह साबित होता है कि कुछ गुलाब जल्दी मुरझाते हैं?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Yes",
+      "hi": "हाँ"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "No",
+      "hi": "नहीं"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Can't tell from this",
+      "hi": "इससे पता नहीं चल सकता"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "The flowers that fade quickly might not include any roses.",
+    "hi": "जो फूल जल्दी मुरझाते हैं, ज़रूरी नहीं कि उनमें कोई गुलाब हो।"
+   }
+  },
+  {
+   "key": "a_verb_2",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Book is to reading as fork is to …?",
+    "hi": "जैसे किताब का संबंध पढ़ने से है, वैसे ही काँटे (फ़ोर्क) का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "drawing",
+      "hi": "चित्र बनाने से"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "writing",
+      "hi": "लिखने से"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "eating",
+      "hi": "खाने से"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "cooking",
+      "hi": "पकाने से"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "A book is used for reading; a fork is used for eating.",
+    "hi": "किताब पढ़ने के काम आती है; काँटा खाने के।"
+   }
+  },
+  {
+   "key": "a_num_3",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A shirt costs ₹800. In a sale it is 25% off. What is the sale price?",
+    "hi": "एक शर्ट ₹800 की है। सेल में 25% की छूट है। सेल में दाम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹575",
+      "hi": "₹575"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹600",
+      "hi": "₹600"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹625",
+      "hi": "₹625"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹700",
+      "hi": "₹700"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "25% of 800 is 200; 800 − 200 = 600.",
+    "hi": "800 का 25% है 200; 800 − 200 = 600।"
+   }
+  },
+  {
+   "key": "a_log_3",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If CAT is written as DBU, how is DOG written?",
+    "hi": "अगर CAT को DBU लिखा जाए, तो DOG को कैसे लिखेंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "EPH",
+      "hi": "EPH"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "EPG",
+      "hi": "EPG"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "DPH",
+      "hi": "DPH"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "FQI",
+      "hi": "FQI"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Each letter moves one step forward: D→E, O→P, G→H.",
+    "hi": "हर अक्षर एक आगे खिसकता है: D→E, O→P, G→H।"
+   }
+  },
+  {
+   "key": "a_verb_3",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: apple, mango, carrot, banana?",
+    "hi": "इनमें से कौन अलग है: सेब, आम, गाजर, केला?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "apple",
+      "hi": "सेब"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "mango",
+      "hi": "आम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "carrot",
+      "hi": "गाजर"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "banana",
+      "hi": "केला"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Carrot is a vegetable; the rest are fruits.",
+    "hi": "गाजर सब्ज़ी है; बाक़ी फल हैं।"
+   }
+  },
+  {
+   "key": "a_num_4",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A train travels 180 km in 3 hours. At the same speed, how long will it take to travel 300 km?",
+    "hi": "एक ट्रेन 3 घंटे में 180 किलोमीटर जाती है। इसी रफ़्तार से 300 किलोमीटर में कितना समय लगेगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "4 hours",
+      "hi": "4 घंटे"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4½ hours",
+      "hi": "साढ़े 4 घंटे"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "5 hours",
+      "hi": "5 घंटे"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6 hours",
+      "hi": "6 घंटे"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "60 km per hour, so 300 km takes 5 hours.",
+    "hi": "60 किलोमीटर प्रति घंटा, तो 300 किलोमीटर में 5 घंटे।"
+   }
+  },
+  {
+   "key": "a_log_4",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "In a row of children, Meena is 7th from the left and 5th from the right. How many children are in the row?",
+    "hi": "बच्चों की एक लाइन में मीना बाएँ से 7वीं और दाएँ से 5वीं है। लाइन में कितने बच्चे हैं?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "7 + 5 counts Meena twice: 7 + 5 − 1 = 11.",
+    "hi": "7 + 5 में मीना दो बार गिनी गई: 7 + 5 − 1 = 11।"
+   }
+  },
+  {
+   "key": "a_verb_4",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "'Although the test was difficult, most students finished it on time.' What does this tell us?",
+    "hi": "'हालाँकि परीक्षा कठिन थी, फिर भी ज़्यादातर छात्रों ने उसे समय पर पूरा कर लिया।' इससे क्या पता चलता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "The test was easy",
+      "hi": "परीक्षा आसान थी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Most students did not finish",
+      "hi": "ज़्यादातर छात्र पूरा नहीं कर पाए"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Most finished even though it was hard",
+      "hi": "कठिन होने के बावजूद ज़्यादातर ने पूरा किया"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "The test had no time limit",
+      "hi": "परीक्षा में समय की कोई सीमा नहीं थी"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "'Although' means despite the difficulty, they finished.",
+    "hi": "'हालाँकि' यानी कठिनाई के बावजूद उन्होंने पूरा किया।"
+   }
+  },
+  {
+   "key": "a_num_5",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "The average of four numbers is 15. Three of them are 10, 12 and 20. What is the fourth?",
+    "hi": "चार संख्याओं का औसत 15 है। उनमें से तीन हैं 10, 12 और 20। चौथी संख्या क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Four numbers averaging 15 add up to 60; 60 − 42 = 18.",
+    "hi": "चार संख्याओं का औसत 15 तो जोड़ 60; 60 − 42 = 18।"
+   }
+  },
+  {
+   "key": "a_log_5",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If tomorrow is Friday, what day was the day before yesterday?",
+    "hi": "अगर आने वाला कल शुक्रवार है, तो बीता हुआ परसों कौन सा दिन था?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Monday",
+      "hi": "सोमवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Thursday",
+      "hi": "गुरुवार"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Today is Thursday, so the day before yesterday was Tuesday.",
+    "hi": "आज गुरुवार है, तो बीता हुआ परसों मंगलवार था।"
+   }
+  },
+  {
+   "key": "a_verb_5",
+   "type": "problem",
+   "form": "A",
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'reluctant'?",
+    "hi": "'हिचकिचाहट' के सबसे क़रीबी अर्थ वाला शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "eager",
+      "hi": "उत्साह"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "unwilling",
+      "hi": "झिझक"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "careful",
+      "hi": "सावधानी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "angry",
+      "hi": "ग़ुस्सा"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Reluctant means not wanting to do something.",
+    "hi": "हिचकिचाहट यानी झिझक, कुछ करने में संकोच।"
+   }
+  },
+  {
+   "key": "b_num_1",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A notebook costs ₹15. How much do 4 notebooks cost?",
+    "hi": "एक कॉपी ₹15 की है। 4 कॉपियाँ कितने की होंगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹45",
+      "hi": "₹45"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹55",
+      "hi": "₹55"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹60",
+      "hi": "₹60"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹65",
+      "hi": "₹65"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "15 × 4 = 60.",
+    "hi": "15 × 4 = 60।"
+   }
+  },
+  {
+   "key": "b_log_1",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Ravi is older than Kiran. Kiran is older than Neha. Who is the oldest?",
+    "hi": "रवि किरण से बड़ा है। किरण नेहा से बड़ी है। सबसे बड़ा कौन है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Ravi",
+      "hi": "रवि"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Kiran",
+      "hi": "किरण"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Neha",
+      "hi": "नेहा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Can't tell",
+      "hi": "पता नहीं चल सकता"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Ravi > Kiran > Neha, so Ravi is the oldest.",
+    "hi": "रवि > किरण > नेहा, इसलिए रवि सबसे बड़ा है।"
+   }
+  },
+  {
+   "key": "b_verb_1",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'generous'?",
+    "hi": "'उदार' का विलोम (उल्टा) क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "kind",
+      "hi": "दयालु"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "stingy",
+      "hi": "कंजूस"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "rich",
+      "hi": "अमीर"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "brave",
+      "hi": "बहादुर"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Generous people give freely; stingy people don't.",
+    "hi": "उदार व्यक्ति खुलकर देता है; कंजूस नहीं।"
+   }
+  },
+  {
+   "key": "b_num_2",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What comes next: 2, 5, 10, 17, 26 …?",
+    "hi": "आगे क्या आएगा: 2, 5, 10, 17, 26 …?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "35",
+      "hi": "35"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "36",
+      "hi": "36"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "37",
+      "hi": "37"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "38",
+      "hi": "38"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "The gaps are 3, 5, 7, 9 — next is 11: 26 + 11 = 37.",
+    "hi": "अंतर 3, 5, 7, 9 हैं — अगला 11: 26 + 11 = 37।"
+   }
+  },
+  {
+   "key": "b_log_2",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Some students in a class play chess. Every chess player in the class is in the maths club. Which must be true?",
+    "hi": "एक क्लास के कुछ छात्र शतरंज खेलते हैं। क्लास का हर शतरंज खिलाड़ी मैथ्स क्लब में है। क्या ज़रूर सच है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Every student is in the maths club",
+      "hi": "हर छात्र मैथ्स क्लब में है"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Some students are in the maths club",
+      "hi": "कुछ छात्र मैथ्स क्लब में हैं"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "No student is in the maths club",
+      "hi": "कोई छात्र मैथ्स क्लब में नहीं है"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Everyone in the maths club plays chess",
+      "hi": "मैथ्स क्लब का हर सदस्य शतरंज खेलता है"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "The chess players are students, and they are all in the club.",
+    "hi": "शतरंज खिलाड़ी छात्र हैं, और वे सब क्लब में हैं।"
+   }
+  },
+  {
+   "key": "b_verb_2",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Doctor is to hospital as teacher is to …?",
+    "hi": "जैसे डॉक्टर का संबंध अस्पताल से है, वैसे ही शिक्षक का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "library",
+      "hi": "पुस्तकालय"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "school",
+      "hi": "स्कूल"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "office",
+      "hi": "दफ़्तर"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "market",
+      "hi": "बाज़ार"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "A doctor works in a hospital; a teacher works in a school.",
+    "hi": "डॉक्टर अस्पताल में काम करता है; शिक्षक स्कूल में।"
+   }
+  },
+  {
+   "key": "b_num_3",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A bag costs ₹1,200. In a sale it is 20% off. What is the sale price?",
+    "hi": "एक बैग ₹1,200 का है। सेल में 20% की छूट है। सेल में दाम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹940",
+      "hi": "₹940"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹960",
+      "hi": "₹960"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹980",
+      "hi": "₹980"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹1,000",
+      "hi": "₹1,000"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "20% of 1,200 is 240; 1,200 − 240 = 960.",
+    "hi": "1,200 का 20% है 240; 1,200 − 240 = 960।"
+   }
+  },
+  {
+   "key": "b_log_3",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If BOOK is written as CPPL, how is DESK written?",
+    "hi": "अगर BOOK को CPPL लिखा जाए, तो DESK को कैसे लिखेंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "EFTL",
+      "hi": "EFTL"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "EFSL",
+      "hi": "EFSL"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "DFTL",
+      "hi": "DFTL"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "EETL",
+      "hi": "EETL"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Each letter moves one step forward: D→E, E→F, S→T, K→L.",
+    "hi": "हर अक्षर एक आगे खिसकता है: D→E, E→F, S→T, K→L।"
+   }
+  },
+  {
+   "key": "b_verb_3",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: chair, table, sofa, spoon?",
+    "hi": "इनमें से कौन अलग है: कुर्सी, मेज़, सोफ़ा, चम्मच?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "chair",
+      "hi": "कुर्सी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "table",
+      "hi": "मेज़"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "sofa",
+      "hi": "सोफ़ा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "spoon",
+      "hi": "चम्मच"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "A spoon isn't furniture.",
+    "hi": "चम्मच फ़र्नीचर नहीं है।"
+   }
+  },
+  {
+   "key": "b_num_4",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "4 workers build a wall in 6 days. How many days would 3 workers take, working at the same rate?",
+    "hi": "4 मज़दूर एक दीवार 6 दिन में बनाते हैं। उसी रफ़्तार से 3 मज़दूरों को कितने दिन लगेंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "4½ days",
+      "hi": "साढ़े 4 दिन"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7 days",
+      "hi": "7 दिन"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "8 days",
+      "hi": "8 दिन"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "9 days",
+      "hi": "9 दिन"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "The wall takes 4 × 6 = 24 worker-days; 24 ÷ 3 = 8.",
+    "hi": "दीवार में 4 × 6 = 24 मज़दूर-दिन लगते हैं; 24 ÷ 3 = 8।"
+   }
+  },
+  {
+   "key": "b_log_4",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "In a queue, Arjun is 6th from the front and 9th from the back. How many people are in the queue?",
+    "hi": "एक कतार में अर्जुन आगे से 6वाँ और पीछे से 9वाँ है। कतार में कितने लोग हैं?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "6 + 9 counts Arjun twice: 6 + 9 − 1 = 14.",
+    "hi": "6 + 9 में अर्जुन दो बार गिना गया: 6 + 9 − 1 = 14।"
+   }
+  },
+  {
+   "key": "b_verb_4",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "'The shop opens only from Monday to Friday, and today it is open.' What can we say about today?",
+    "hi": "'दुकान सिर्फ़ सोमवार से शुक्रवार तक खुलती है, और आज खुली है।' आज के बारे में क्या कह सकते हैं?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "It is a Sunday",
+      "hi": "आज रविवार है"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "It is a day from Monday to Friday",
+      "hi": "आज सोमवार से शुक्रवार के बीच का दिन है"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "The shop is closing soon",
+      "hi": "दुकान जल्दी बंद होने वाली है"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "It is a holiday",
+      "hi": "आज छुट्टी है"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "It opens only Monday to Friday, so today must be one of those days.",
+    "hi": "दुकान सिर्फ़ सोमवार से शुक्रवार खुलती है, तो आज उन्हीं में से कोई दिन है।"
+   }
+  },
+  {
+   "key": "b_num_5",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "The average of five numbers is 12. Four of them are 8, 10, 14 and 15. What is the fifth?",
+    "hi": "पाँच संख्याओं का औसत 12 है। उनमें से चार हैं 8, 10, 14 और 15। पाँचवीं संख्या क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Five numbers averaging 12 add up to 60; 60 − 47 = 13.",
+    "hi": "पाँच संख्याओं का औसत 12 तो जोड़ 60; 60 − 47 = 13।"
+   }
+  },
+  {
+   "key": "b_log_5",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If yesterday was Monday, what day will it be the day after tomorrow?",
+    "hi": "अगर बीता हुआ कल सोमवार था, तो आने वाला परसों कौन सा दिन होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Thursday",
+      "hi": "गुरुवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Friday",
+      "hi": "शुक्रवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Saturday",
+      "hi": "शनिवार"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Today is Tuesday, so the day after tomorrow is Thursday.",
+    "hi": "आज मंगलवार है, तो आने वाला परसों गुरुवार।"
+   }
+  },
+  {
+   "key": "b_verb_5",
+   "type": "problem",
+   "form": "B",
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'abundant'?",
+    "hi": "'प्रचुर' का सबसे क़रीबी अर्थ क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "rare",
+      "hi": "दुर्लभ"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "plentiful",
+      "hi": "भरपूर"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "empty",
+      "hi": "ख़ाली"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "costly",
+      "hi": "महँगा"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Abundant means more than enough.",
+    "hi": "प्रचुर यानी ज़रूरत से ज़्यादा, भरपूर।"
+   }
+  }
+ ]
+}

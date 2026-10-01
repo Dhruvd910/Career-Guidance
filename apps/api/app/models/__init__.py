@@ -1,4 +1,8 @@
 from app.core.db import Base
+from app.models.assessment import (
+    AssessmentAttempt, AssessmentInstrument, AssessmentItem, AssessmentResponse, AssessmentScore,
+    CareerAlignmentSnapshot,
+)
 from app.models.career import CareerAssessment, CareerOption
 from app.models.chat import Conversation, Message
 from app.models.college import Branch, College, CollegeCourse, Course
@@ -58,4 +62,10 @@ __all__ = [
     "StudentEvent",
     "MemoryItem",
     "TurnAnalysis",
+    "AssessmentInstrument",
+    "AssessmentItem",
+    "AssessmentAttempt",
+    "AssessmentResponse",
+    "AssessmentScore",
+    "CareerAlignmentSnapshot",
 ]

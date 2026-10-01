@@ -1,0 +1,439 @@
+{
+ "key": "skills",
+ "version": 1,
+ "category": "skill",
+ "title": {
+  "en": "Your skills",
+  "hi": "आपके हुनर"
+ },
+ "about": {
+  "en": "Eight skills. For each, pick the line most like you — what you've actually done, not what you hope to do.",
+  "hi": "आठ हुनर। हर एक के लिए वह लाइन चुनिए जो आप पर सबसे ज़्यादा लागू हो — जो आपने सच में किया है, जो आप करना चाहते हैं वह नहीं।"
+ },
+ "intro": {
+  "en": "Now eight skills. For each one I'll read four lines — pick the one most like you, by what you've actually done so far. You can say the number.",
+  "hi": "अब आठ हुनर। हर एक के लिए मैं चार लाइनें पढ़ूँगी — जो आप पर सबसे ज़्यादा लागू हो, वह चुनिए, जो आपने अब तक सच में किया है उसके हिसाब से। आप नंबर बोल सकते हैं।"
+ },
+ "scoring_method": "anchored_levels",
+ "est_minutes": 3,
+ "dimensions": {
+  "skill:programming": {
+   "en": "coding",
+   "hi": "कोडिंग",
+   "group": "skill"
+  },
+  "skill:speaking": {
+   "en": "speaking in front of people",
+   "hi": "लोगों के सामने बोलना",
+   "group": "skill"
+  },
+  "skill:writing": {
+   "en": "writing",
+   "hi": "लिखना",
+   "group": "skill"
+  },
+  "skill:design": {
+   "en": "drawing and design",
+   "hi": "ड्रॉइंग और डिज़ाइन",
+   "group": "skill"
+  },
+  "skill:hands_on": {
+   "en": "building and fixing things",
+   "hi": "चीज़ें बनाना और ठीक करना",
+   "group": "skill"
+  },
+  "skill:leadership": {
+   "en": "leading a group",
+   "hi": "ग्रुप को लीड करना",
+   "group": "skill"
+  },
+  "skill:organising": {
+   "en": "planning and organising",
+   "hi": "योजना बनाना और व्यवस्थित रहना",
+   "group": "skill"
+  },
+  "skill:english": {
+   "en": "English",
+   "hi": "अंग्रेज़ी",
+   "group": "skill"
+  }
+ },
+ "items": [
+  {
+   "key": "programming",
+   "type": "anchored",
+   "dimension": "skill:programming",
+   "section": {
+    "en": "Coding",
+    "hi": "कोडिंग"
+   },
+   "prompt": {
+    "en": "Coding — which is most like you?",
+    "hi": "कोडिंग — इनमें से आप पर सबसे ज़्यादा क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I've never written code",
+      "hi": "मैंने कभी कोड नहीं लिखा"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I've followed a tutorial or done class exercises",
+      "hi": "मैंने कोई ट्यूटोरियल या क्लास की एक्सरसाइज़ की है"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I've built something small on my own — a game, a website, a script",
+      "hi": "मैंने ख़ुद कुछ छोटा बनाया है — कोई गेम, वेबसाइट या स्क्रिप्ट"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "I code regularly, or I've built something other people use",
+      "hi": "नियमित कोडिंग मेरी आदत है, या मैंने कुछ ऐसा बनाया है जो दूसरे इस्तेमाल करते हैं"
+     }
+    }
+   ]
+  },
+  {
+   "key": "speaking",
+   "type": "anchored",
+   "dimension": "skill:speaking",
+   "section": {
+    "en": "Speaking",
+    "hi": "बोलना"
+   },
+   "prompt": {
+    "en": "Speaking in front of people — which is most like you?",
+    "hi": "लोगों के सामने बोलना — इनमें से आप पर क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I avoid it",
+      "hi": "इससे बचना ही पसंद है"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I can if I have to, with notes",
+      "hi": "ज़रूरत पड़ने पर नोट्स देखकर बोलना आता है"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I've spoken at assemblies, debates or presentations a few times",
+      "hi": "मैंने कुछ बार असेंबली, डिबेट या प्रेज़ेंटेशन में बोला है"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "I often present or debate, and people say I'm good at it",
+      "hi": "प्रेज़ेंटेशन और डिबेट मेरे लिए आम बात है, और लोग मेरे बोलने की तारीफ़ करते हैं"
+     }
+    }
+   ]
+  },
+  {
+   "key": "writing",
+   "type": "anchored",
+   "dimension": "skill:writing",
+   "section": {
+    "en": "Writing",
+    "hi": "लिखना"
+   },
+   "prompt": {
+    "en": "Writing — which is most like you?",
+    "hi": "लिखना — इनमें से आप पर क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I only write for school when I have to",
+      "hi": "लिखना सिर्फ़ स्कूल के लिए, जब ज़रूरी हो"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I can write a clear essay or letter",
+      "hi": "साफ़-साफ़ निबंध या पत्र लिखना आता है"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I write on my own — stories, a blog, a diary",
+      "hi": "अपने मन से लिखना — कहानियाँ, ब्लॉग, डायरी"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "Others regularly read my writing, or it has won something",
+      "hi": "दूसरे मेरा लिखा नियमित पढ़ते हैं, या उसने कोई इनाम जीता है"
+     }
+    }
+   ]
+  },
+  {
+   "key": "design",
+   "type": "anchored",
+   "dimension": "skill:design",
+   "section": {
+    "en": "Drawing and design",
+    "hi": "ड्रॉइंग और डिज़ाइन"
+   },
+   "prompt": {
+    "en": "Drawing and design — which is most like you?",
+    "hi": "ड्रॉइंग और डिज़ाइन — इनमें से आप पर क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I don't really draw or design",
+      "hi": "ड्रॉइंग या डिज़ाइन से ज़्यादा वास्ता नहीं"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I doodle, or make school projects look nice",
+      "hi": "कभी-कभी स्केच, या स्कूल प्रोजेक्ट को सुंदर बनाना"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I've made posters, artwork or digital designs on my own",
+      "hi": "मैंने ख़ुद पोस्टर, आर्टवर्क या डिजिटल डिज़ाइन बनाए हैं"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "People ask me to design things, or my work has been shown or won something",
+      "hi": "लोग मुझसे डिज़ाइन करवाते हैं, या मेरा काम दिखाया गया है या जीता है"
+     }
+    }
+   ]
+  },
+  {
+   "key": "hands_on",
+   "type": "anchored",
+   "dimension": "skill:hands_on",
+   "section": {
+    "en": "Building and fixing",
+    "hi": "बनाना और ठीक करना"
+   },
+   "prompt": {
+    "en": "Building and fixing things — which is most like you?",
+    "hi": "चीज़ें बनाना और ठीक करना — इनमें से आप पर क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I haven't really tried",
+      "hi": "मैंने ज़्यादा कोशिश नहीं की"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I've helped fix or put something together",
+      "hi": "मैंने कुछ ठीक करने या जोड़ने में मदद की है"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I've built a model, circuit or gadget on my own",
+      "hi": "मैंने ख़ुद कोई मॉडल, सर्किट या गैजेट बनाया है"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "I often build or repair things, and they work",
+      "hi": "अक्सर चीज़ें बनाना या ठीक करना, और वे सच में चलती हैं"
+     }
+    }
+   ]
+  },
+  {
+   "key": "leadership",
+   "type": "anchored",
+   "dimension": "skill:leadership",
+   "section": {
+    "en": "Leading",
+    "hi": "नेतृत्व"
+   },
+   "prompt": {
+    "en": "Leading a group — which is most like you?",
+    "hi": "किसी ग्रुप को लीड करना — इनमें से आप पर क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I'd rather not lead",
+      "hi": "लीड न करना ही पसंद है"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I've led a small part of a group project",
+      "hi": "मैंने ग्रुप प्रोजेक्ट का कोई छोटा हिस्सा लीड किया है"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I've been a monitor or captain, or organised an event",
+      "hi": "मॉनिटर या कैप्टन बनने का मौक़ा मिला है, या मैंने कोई इवेंट आयोजित किया है"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "I've led a team or club for a long time",
+      "hi": "मैंने लंबे समय तक कोई टीम या क्लब लीड किया है"
+     }
+    }
+   ]
+  },
+  {
+   "key": "organising",
+   "type": "anchored",
+   "dimension": "skill:organising",
+   "section": {
+    "en": "Planning",
+    "hi": "योजना बनाना"
+   },
+   "prompt": {
+    "en": "Planning and organising — which is most like you?",
+    "hi": "योजना बनाना और व्यवस्थित रहना — इनमें से आप पर क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I usually do things at the last minute",
+      "hi": "अक्सर काम आख़िरी समय पर होता है"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I make plans but often don't follow them",
+      "hi": "योजना बनती है, पर अक्सर उस पर चलना नहीं हो पाता"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I keep a timetable or to-do list most of the time",
+      "hi": "ज़्यादातर समय टाइमटेबल या टू-डू लिस्ट रहती है"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "I plan well, and others rely on me to organise things",
+      "hi": "अच्छी योजना बनाना आता है, और दूसरे चीज़ें व्यवस्थित करने के लिए मुझ पर भरोसा करते हैं"
+     }
+    }
+   ]
+  },
+  {
+   "key": "english",
+   "type": "anchored",
+   "dimension": "skill:english",
+   "section": {
+    "en": "English",
+    "hi": "अंग्रेज़ी"
+   },
+   "prompt": {
+    "en": "English — which is most like you?",
+    "hi": "अंग्रेज़ी — इनमें से आप पर क्या लागू होता है?"
+   },
+   "options": [
+    {
+     "key": "l0",
+     "level": 0,
+     "label": {
+      "en": "I find it hard to understand or speak",
+      "hi": "मुझे समझने और बोलने में मुश्किल होती है"
+     }
+    },
+    {
+     "key": "l1",
+     "level": 1,
+     "label": {
+      "en": "I understand most of it, but speaking is hard",
+      "hi": "ज़्यादातर समझ आती है, पर बोलना मुश्किल है"
+     }
+    },
+    {
+     "key": "l2",
+     "level": 2,
+     "label": {
+      "en": "I can talk and write in everyday English comfortably",
+      "hi": "रोज़मर्रा की अंग्रेज़ी आराम से बोलना और लिखना आता है"
+     }
+    },
+    {
+     "key": "l3",
+     "level": 3,
+     "label": {
+      "en": "I'm fluent — I read books and speak easily in English",
+      "hi": "धाराप्रवाह — अंग्रेज़ी की किताबें पढ़ना और आसानी से बोलना"
+     }
+    }
+   ]
+  }
+ ]
+}

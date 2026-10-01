@@ -1,0 +1,127 @@
+{
+ "_about": "What each career in app/seed/careers.json draws on that an assessment can actually measure (weights 1-3: 3 = central), two questions a student should ask themselves about it, and how each domain reads in English and Hindi. Interest and values fit come from careers.json `profile`/`must`; this file adds aptitude, academic and skill needs. Written for MAYA's Phase 3 (docs/design/12-phase3-plan.md); Phase 4 moves these into the career knowledge graph as requires_skill / related_subject edges.",
+ "version": 1,
+ "domains": {
+  "Engineering & Technology": {"en": "Engineering & Technology", "hi": "इंजीनियरिंग और टेक्नोलॉजी"},
+  "Medical & Health": {"en": "Medical & Health", "hi": "मेडिकल और हेल्थ"},
+  "Design": {"en": "Design", "hi": "डिज़ाइन"},
+  "Science & Research": {"en": "Science & Research", "hi": "विज्ञान और रिसर्च"},
+  "Commerce & Finance": {"en": "Commerce & Finance", "hi": "कॉमर्स और फ़ाइनेंस"},
+  "Government & Public Service": {"en": "Government & Public Service", "hi": "सरकारी सेवा"},
+  "Social Sciences": {"en": "Social Sciences", "hi": "सामाजिक विज्ञान"},
+  "Law": {"en": "Law", "hi": "क़ानून"},
+  "Media & Communication": {"en": "Media & Communication", "hi": "मीडिया और संचार"},
+  "Education": {"en": "Education", "hi": "शिक्षा"},
+  "Hospitality": {"en": "Hospitality", "hi": "हॉस्पिटैलिटी"}
+ },
+ "careers": {
+  "cse": {"needs": {"aptitude:logical": 3, "academic:maths": 3, "aptitude:numerical": 2, "skill:programming": 2},
+   "ask_yourself": [
+    {"en": "Could you sit with one stubborn bug for an hour and enjoy finally fixing it?", "hi": "क्या आप एक ज़िद्दी गड़बड़ (बग) के साथ घंटा भर बैठकर, आख़िर में उसे ठीक करने का मज़ा ले सकते हैं?"},
+    {"en": "Do you want to build things people use, or understand how computers work deep down — or both?", "hi": "आप ऐसी चीज़ें बनाना चाहते हैं जो लोग इस्तेमाल करें, या यह समझना कि कंप्यूटर अंदर से कैसे काम करता है — या दोनों?"}]},
+  "ai_data": {"needs": {"aptitude:logical": 3, "aptitude:numerical": 3, "academic:maths": 3, "skill:programming": 2},
+   "ask_yourself": [
+    {"en": "Do you enjoy finding patterns in numbers, like what your marks say about your study habits?", "hi": "क्या आपको संख्याओं में पैटर्न ढूँढना अच्छा लगता है, जैसे आपके अंक आपकी पढ़ाई की आदतों के बारे में क्या बताते हैं?"},
+    {"en": "Are you ready for a lot of maths — statistics and probability — along with coding?", "hi": "क्या आप कोडिंग के साथ बहुत सारी मैथ्स — स्टैटिस्टिक्स और प्रोबेबिलिटी — के लिए तैयार हैं?"}]},
+  "ece": {"needs": {"academic:physics": 3, "academic:maths": 2, "aptitude:numerical": 2, "aptitude:logical": 2, "skill:hands_on": 1},
+   "ask_yourself": [
+    {"en": "Are you curious how a phone, a radio or a chip actually works inside?", "hi": "क्या आप जानना चाहते हैं कि फ़ोन, रेडियो या चिप अंदर से असल में कैसे काम करते हैं?"},
+    {"en": "Would you enjoy both the maths of circuits and building them with your hands?", "hi": "क्या आपको सर्किट की मैथ्स और उन्हें हाथ से बनाना, दोनों अच्छे लगेंगे?"}]},
+  "electrical": {"needs": {"academic:physics": 3, "academic:maths": 2, "aptitude:numerical": 2, "skill:hands_on": 2},
+   "ask_yourself": [
+    {"en": "Does the idea of bringing power — solar, grids, motors — to millions of people excite you?", "hi": "क्या लाखों लोगों तक बिजली पहुँचाने — सोलर, ग्रिड, मोटर — का विचार आपको उत्साहित करता है?"},
+    {"en": "Would you be comfortable working at plants and sites, not only at a desk?", "hi": "क्या आप सिर्फ़ डेस्क पर ही नहीं, प्लांट और साइट पर काम करने में सहज होंगे?"}]},
+  "mechanical": {"needs": {"academic:physics": 3, "academic:maths": 2, "aptitude:numerical": 2, "skill:hands_on": 2},
+   "ask_yourself": [
+    {"en": "When you see an engine or a machine, do you want to know how every part moves?", "hi": "जब आप कोई इंजन या मशीन देखते हैं, क्या आप जानना चाहते हैं कि उसका हर हिस्सा कैसे चलता है?"},
+    {"en": "Would you enjoy working in factories and workshops as well as on a computer?", "hi": "क्या आपको कंप्यूटर के साथ-साथ फ़ैक्ट्री और वर्कशॉप में काम करना अच्छा लगेगा?"}]},
+  "civil": {"needs": {"academic:physics": 2, "academic:maths": 2, "aptitude:numerical": 2, "skill:organising": 1, "skill:hands_on": 1},
+   "ask_yourself": [
+    {"en": "Would you like to see something you designed — a bridge, a building — stand for decades?", "hi": "क्या आप चाहेंगे कि आपका डिज़ाइन किया हुआ कुछ — पुल, इमारत — दशकों तक खड़ा रहे?"},
+    {"en": "Are you happy spending a lot of time outdoors at construction sites?", "hi": "क्या आप निर्माण स्थलों पर बाहर काफ़ी समय बिताकर ख़ुश रहेंगे?"}]},
+  "chemical": {"needs": {"academic:chemistry": 3, "academic:maths": 2, "aptitude:numerical": 2},
+   "ask_yourself": [
+    {"en": "Are you interested in how everyday things — fuel, plastic, medicine — are made at a huge scale?", "hi": "क्या आपको यह जानने में रुचि है कि रोज़ की चीज़ें — ईंधन, प्लास्टिक, दवाइयाँ — बड़े पैमाने पर कैसे बनती हैं?"},
+    {"en": "Would you be comfortable working in industrial plants?", "hi": "क्या आप इंडस्ट्रियल प्लांट में काम करने में सहज होंगे?"}]},
+  "aerospace": {"needs": {"academic:physics": 3, "academic:maths": 3, "aptitude:numerical": 3, "aptitude:logical": 2},
+   "ask_yourself": [
+    {"en": "Do aircraft, rockets and satellites fascinate you enough for years of hard physics and maths?", "hi": "क्या हवाई जहाज़, रॉकेट और सैटेलाइट आपको इतना खींचते हैं कि आप सालों तक कठिन फ़िज़िक्स और मैथ्स कर सकें?"},
+    {"en": "This field has fewer jobs than most — would you also be happy in mechanical or electronics work?", "hi": "इस क्षेत्र में ज़्यादातर क्षेत्रों से कम नौकरियाँ हैं — क्या आप मैकेनिकल या इलेक्ट्रॉनिक्स के काम में भी ख़ुश रहेंगे?"}]},
+  "architecture": {"needs": {"skill:design": 3, "academic:maths": 2, "aptitude:numerical": 1},
+   "ask_yourself": [
+    {"en": "Do you notice how buildings and spaces make people feel?", "hi": "क्या आप ध्यान देते हैं कि इमारतें और जगहें लोगों को कैसा महसूस कराती हैं?"},
+    {"en": "Are you ready for a five-year course with a lot of drawing and late-night projects?", "hi": "क्या आप पाँच साल के कोर्स के लिए तैयार हैं, जिसमें बहुत ड्रॉइंग और देर रात तक प्रोजेक्ट होते हैं?"}]},
+  "design": {"needs": {"skill:design": 3, "aptitude:verbal": 1, "skill:speaking": 1},
+   "ask_yourself": [
+    {"en": "When an app or product is confusing, do you think about how you'd make it better?", "hi": "जब कोई ऐप या प्रोडक्ट उलझाने वाला होता है, क्या आप सोचते हैं कि आप उसे बेहतर कैसे बनाते?"},
+    {"en": "Can you take criticism of your work and keep improving it?", "hi": "क्या आप अपने काम की आलोचना सुनकर उसे बेहतर करते रह सकते हैं?"}]},
+  "mbbs": {"needs": {"academic:biology": 3, "academic:chemistry": 2, "academic:physics": 2, "aptitude:logical": 1},
+   "ask_yourself": [
+    {"en": "Are you ready for about ten years of study and training before you settle?", "hi": "क्या आप सेटल होने से पहले लगभग दस साल की पढ़ाई और ट्रेनिंग के लिए तैयार हैं?"},
+    {"en": "Could you stay calm with patients who are in pain, every day?", "hi": "क्या आप हर दिन दर्द में मरीज़ों के साथ शांत रह सकते हैं?"}]},
+  "bds": {"needs": {"academic:biology": 3, "academic:chemistry": 2, "academic:physics": 1, "skill:hands_on": 1},
+   "ask_yourself": [
+    {"en": "Would you enjoy precise work with your hands, close to people's faces, all day?", "hi": "क्या आपको पूरे दिन लोगों के चेहरे के पास, हाथों से बारीक काम करना अच्छा लगेगा?"},
+    {"en": "Would you like to run your own clinic one day?", "hi": "क्या आप एक दिन अपना क्लिनिक चलाना चाहेंगे?"}]},
+  "pharmacy": {"needs": {"academic:chemistry": 3, "academic:biology": 2, "aptitude:numerical": 1},
+   "ask_yourself": [
+    {"en": "Are you curious how a medicine is discovered, tested and made?", "hi": "क्या आप जानना चाहते हैं कि कोई दवा कैसे खोजी, जाँची और बनाई जाती है?"},
+    {"en": "Would you enjoy careful, exact work where small mistakes matter?", "hi": "क्या आपको ऐसा सावधानी भरा, सटीक काम अच्छा लगेगा जिसमें छोटी ग़लती भी मायने रखती है?"}]},
+  "nursing": {"needs": {"academic:biology": 2, "academic:chemistry": 1, "skill:speaking": 1, "skill:organising": 1},
+   "ask_yourself": [
+    {"en": "Do you feel good when you take care of someone who is unwell?", "hi": "क्या किसी बीमार की देखभाल करके आपको अच्छा लगता है?"},
+    {"en": "Could you handle long shifts, including nights?", "hi": "क्या आप लंबी शिफ़्ट, रात की भी, संभाल सकते हैं?"}]},
+  "physiotherapy": {"needs": {"academic:biology": 3, "academic:physics": 1, "skill:speaking": 1},
+   "ask_yourself": [
+    {"en": "Would you enjoy helping someone walk or play again, over weeks of sessions?", "hi": "क्या आपको हफ़्तों के सेशन में किसी को फिर से चलने या खेलने में मदद करना अच्छा लगेगा?"},
+    {"en": "Are you interested in how muscles, bones and movement work?", "hi": "क्या आपको यह जानने में रुचि है कि मांसपेशियाँ, हड्डियाँ और हरकत कैसे काम करती हैं?"}]},
+  "veterinary": {"needs": {"academic:biology": 3, "academic:chemistry": 2, "academic:physics": 1},
+   "ask_yourself": [
+    {"en": "Would you care for animals even when the work is messy or sad?", "hi": "क्या आप जानवरों की देखभाल तब भी करेंगे जब काम गंदा या दुखद हो?"},
+    {"en": "Would you be happy working on farms and in villages, not only in a city clinic?", "hi": "क्या आप सिर्फ़ शहर के क्लिनिक में ही नहीं, खेतों और गाँवों में काम करके भी ख़ुश रहेंगे?"}]},
+  "biotech": {"needs": {"academic:biology": 3, "academic:chemistry": 2, "aptitude:logical": 2, "academic:maths": 1},
+   "ask_yourself": [
+    {"en": "Would you enjoy lab work where most experiments fail before one works?", "hi": "क्या आपको ऐसा लैब का काम अच्छा लगेगा जहाँ एक प्रयोग सफल होने से पहले ज़्यादातर नाकाम होते हैं?"},
+    {"en": "Are you ready to study to a master's or PhD for the best research jobs?", "hi": "क्या आप अच्छी रिसर्च नौकरियों के लिए मास्टर्स या पीएचडी तक पढ़ने को तैयार हैं?"}]},
+  "psychology": {"needs": {"aptitude:verbal": 2, "skill:writing": 1, "skill:speaking": 1, "academic:english": 1},
+   "ask_yourself": [
+    {"en": "Do friends come to you to talk about their problems — and do you like listening?", "hi": "क्या दोस्त अपनी परेशानियाँ बताने आपके पास आते हैं — और क्या आपको सुनना अच्छा लगता है?"},
+    {"en": "Are you ready for a master's degree, which most psychology jobs need?", "hi": "क्या आप मास्टर्स डिग्री के लिए तैयार हैं, जो ज़्यादातर साइकोलॉजी नौकरियों के लिए ज़रूरी है?"}]},
+  "pure_science": {"needs": {"academic:physics": 3, "academic:maths": 3, "aptitude:logical": 2, "aptitude:numerical": 2},
+   "ask_yourself": [
+    {"en": "Do you ask 'why' about things long after the exam is over?", "hi": "क्या परीक्षा ख़त्म होने के बाद भी आप चीज़ों के बारे में 'क्यों' पूछते रहते हैं?"},
+    {"en": "Are you happy with a long path — a PhD — before a steady job?", "hi": "क्या आप पक्की नौकरी से पहले लंबे रास्ते — पीएचडी — से ख़ुश हैं?"}]},
+  "ca": {"needs": {"aptitude:numerical": 3, "academic:accountancy": 3, "skill:organising": 2, "academic:maths": 1},
+   "ask_yourself": [
+    {"en": "Do you like getting numbers exactly right, and checking them twice?", "hi": "क्या आपको संख्याएँ बिल्कुल सही रखना, और उन्हें दो बार जाँचना पसंद है?"},
+    {"en": "CA exams are hard and many people need several attempts — could you keep going?", "hi": "CA की परीक्षाएँ कठिन हैं और कई लोगों को कई प्रयास लगते हैं — क्या आप डटे रह सकते हैं?"}]},
+  "finance_econ": {"needs": {"aptitude:numerical": 3, "academic:economics": 2, "academic:maths": 2, "aptitude:logical": 2},
+   "ask_yourself": [
+    {"en": "Do you wonder why prices rise, or how the stock market moves?", "hi": "क्या आप सोचते हैं कि दाम क्यों बढ़ते हैं, या शेयर बाज़ार कैसे चलता है?"},
+    {"en": "Would you enjoy reading the news to understand money and policy?", "hi": "क्या आपको पैसे और नीतियों को समझने के लिए ख़बरें पढ़ना अच्छा लगेगा?"}]},
+  "law": {"needs": {"aptitude:verbal": 3, "aptitude:logical": 2, "skill:speaking": 2, "skill:writing": 2, "skill:english": 2},
+   "ask_yourself": [
+    {"en": "Do you enjoy arguing a point with reasons — and reading a lot to back it up?", "hi": "क्या आपको तर्क के साथ अपनी बात रखना — और उसके लिए बहुत पढ़ना — अच्छा लगता है?"},
+    {"en": "Would you be patient with cases that take years to finish?", "hi": "क्या आप उन मुक़दमों के साथ धैर्य रख पाएँगे जो सालों में ख़त्म होते हैं?"}]},
+  "civil_services": {"needs": {"aptitude:verbal": 2, "aptitude:logical": 2, "skill:writing": 2, "skill:organising": 1},
+   "ask_yourself": [
+    {"en": "Do you follow the news and care about how the country is run?", "hi": "क्या आप ख़बरें पढ़ते हैं और देश कैसे चलता है, इसकी परवाह करते हैं?"},
+    {"en": "Very few candidates are selected each year — what is your plan B while you prepare?", "hi": "हर साल बहुत कम उम्मीदवार चुने जाते हैं — तैयारी के दौरान आपका प्लान बी क्या है?"}]},
+  "defence": {"needs": {"skill:leadership": 2, "aptitude:numerical": 1, "aptitude:logical": 1, "academic:maths": 1, "academic:physics": 1, "skill:english": 1},
+   "ask_yourself": [
+    {"en": "Are you ready for strict discipline and physical training every day?", "hi": "क्या आप हर दिन सख़्त अनुशासन और शारीरिक ट्रेनिंग के लिए तैयार हैं?"},
+    {"en": "Would you be okay living far from home, in different parts of the country?", "hi": "क्या आप घर से दूर, देश के अलग-अलग हिस्सों में रहने को तैयार हैं?"}]},
+  "journalism": {"needs": {"aptitude:verbal": 3, "skill:writing": 3, "skill:speaking": 2},
+   "ask_yourself": [
+    {"en": "Do you like asking people questions and telling their stories?", "hi": "क्या आपको लोगों से सवाल पूछना और उनकी कहानियाँ बताना अच्छा लगता है?"},
+    {"en": "Could you work to tight deadlines, sometimes at odd hours?", "hi": "क्या आप कड़ी डेडलाइन पर, कभी-कभी बेवक़्त भी, काम कर सकते हैं?"}]},
+  "teaching": {"needs": {"skill:speaking": 3, "aptitude:verbal": 2, "skill:organising": 1},
+   "ask_yourself": [
+    {"en": "Do you feel happy when someone finally understands something you explained?", "hi": "जब कोई आपकी समझाई बात आख़िरकार समझ जाता है, क्या आपको ख़ुशी होती है?"},
+    {"en": "Which subject would you love to teach for many years?", "hi": "आप कौन सा विषय कई सालों तक पढ़ाना पसंद करेंगे?"}]},
+  "hotel": {"needs": {"skill:speaking": 2, "skill:english": 2, "skill:organising": 2, "skill:leadership": 1},
+   "ask_yourself": [
+    {"en": "Do you enjoy making guests feel welcome, even when they're difficult?", "hi": "क्या आपको मेहमानों का स्वागत करना अच्छा लगता है, तब भी जब वे मुश्किल हों?"},
+    {"en": "Would you be okay working weekends and festivals, when others are on holiday?", "hi": "क्या आप वीकेंड और त्योहारों पर, जब बाक़ी लोग छुट्टी पर हों, काम करने को तैयार हैं?"}]}
+ }
+}

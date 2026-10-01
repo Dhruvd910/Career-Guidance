@@ -1,0 +1,4257 @@
+{
+ "key": "interests",
+ "version": 1,
+ "category": "interest",
+ "title": {
+  "en": "What you enjoy",
+  "hi": "आपको क्या पसंद है"
+ },
+ "about": {
+  "en": "Subjects, the kind of person you are, how you like to work and learn, and what matters to you. There are no right or wrong answers.",
+  "hi": "विषय, आप किस तरह के इंसान हैं, आप कैसे काम करना और सीखना पसंद करते हैं, और आपके लिए क्या ज़रूरी है। कोई जवाब सही या ग़लत नहीं है।"
+ },
+ "intro": {
+  "en": "Let's find out what you enjoy. I'll ask about thirty quick questions — there are no right or wrong answers, so just answer naturally, or tap.",
+  "hi": "चलिए पता करते हैं कि आपको क्या पसंद है। मैं लगभग तीस छोटे सवाल पूछूँगी — कोई जवाब सही या ग़लत नहीं है, बस जैसा लगे वैसा बताइए, या टैप कीजिए।"
+ },
+ "scoring_method": "weighted_options",
+ "est_minutes": 6,
+ "dimensions": {
+  "maths": {
+   "en": "maths",
+   "hi": "मैथ्स",
+   "group": "subject"
+  },
+  "physics": {
+   "en": "physics",
+   "hi": "फ़िज़िक्स",
+   "group": "subject"
+  },
+  "chemistry": {
+   "en": "chemistry",
+   "hi": "केमिस्ट्री",
+   "group": "subject"
+  },
+  "biology": {
+   "en": "biology",
+   "hi": "बायोलॉजी",
+   "group": "subject"
+  },
+  "computer": {
+   "en": "computers and coding",
+   "hi": "कंप्यूटर और कोडिंग",
+   "group": "subject"
+  },
+  "commerce": {
+   "en": "business and money",
+   "hi": "बिज़नेस और पैसा",
+   "group": "subject"
+  },
+  "arts": {
+   "en": "drawing and design",
+   "hi": "ड्रॉइंग और डिज़ाइन",
+   "group": "subject"
+  },
+  "language": {
+   "en": "reading, writing and speaking",
+   "hi": "पढ़ना, लिखना और बोलना",
+   "group": "subject"
+  },
+  "society": {
+   "en": "history and how the country runs",
+   "hi": "इतिहास और देश कैसे चलता है",
+   "group": "subject"
+  },
+  "tech": {
+   "en": "technology",
+   "hi": "टेक्नोलॉजी",
+   "group": "subject"
+  },
+  "realistic": {
+   "en": "hands-on building and fixing",
+   "hi": "हाथ से बनाना और ठीक करना",
+   "group": "riasec"
+  },
+  "investigative": {
+   "en": "figuring out how things work",
+   "hi": "चीज़ें कैसे काम करती हैं, ये समझना",
+   "group": "riasec"
+  },
+  "artistic": {
+   "en": "creativity",
+   "hi": "रचनात्मकता",
+   "group": "riasec"
+  },
+  "social": {
+   "en": "helping people",
+   "hi": "लोगों की मदद",
+   "group": "riasec"
+  },
+  "enterprising": {
+   "en": "leading and persuading",
+   "hi": "नेतृत्व और लोगों को मनाना",
+   "group": "riasec"
+  },
+  "conventional": {
+   "en": "careful, organised work",
+   "hi": "ध्यान से, व्यवस्थित काम",
+   "group": "riasec"
+  },
+  "communication": {
+   "en": "talking with people",
+   "hi": "लोगों से बात करना",
+   "group": "work_style"
+  },
+  "outdoor": {
+   "en": "active, on-site work",
+   "hi": "भाग-दौड़ वाला, फ़ील्ड का काम",
+   "group": "work_style"
+  },
+  "clinical": {
+   "en": "diagnosing and treating patients",
+   "hi": "मरीज़ों का इलाज",
+   "group": "work_style"
+  },
+  "caregiving": {
+   "en": "caring for patients",
+   "hi": "मरीज़ों की देखभाल",
+   "group": "work_style"
+  },
+  "blood_ok": {
+   "en": "comfort with hospitals and blood",
+   "hi": "अस्पताल और खून से सहजता",
+   "group": "values"
+  },
+  "long_study": {
+   "en": "readiness for a long study path",
+   "hi": "लंबी पढ़ाई के लिए तैयारी",
+   "group": "values"
+  },
+  "stability": {
+   "en": "a secure job",
+   "hi": "पक्की नौकरी",
+   "group": "values"
+  },
+  "money": {
+   "en": "earning well",
+   "hi": "अच्छी कमाई",
+   "group": "values"
+  },
+  "learning:watching": {
+   "en": "learning by watching",
+   "hi": "देखकर सीखना",
+   "group": "learning"
+  },
+  "learning:reading": {
+   "en": "learning by reading",
+   "hi": "पढ़कर सीखना",
+   "group": "learning"
+  },
+  "learning:doing": {
+   "en": "learning by doing",
+   "hi": "करके सीखना",
+   "group": "learning"
+  },
+  "learning:discussing": {
+   "en": "learning by discussing",
+   "hi": "चर्चा करके सीखना",
+   "group": "learning"
+  },
+  "learning:solo": {
+   "en": "studying alone",
+   "hi": "अकेले पढ़ना",
+   "group": "learning"
+  },
+  "learning:group": {
+   "en": "studying with others",
+   "hi": "दूसरों के साथ पढ़ना",
+   "group": "learning"
+  },
+  "learning:morning": {
+   "en": "studying in the morning",
+   "hi": "सुबह पढ़ना",
+   "group": "learning"
+  },
+  "learning:evening": {
+   "en": "studying in the evening",
+   "hi": "शाम को पढ़ना",
+   "group": "learning"
+  },
+  "learning:night": {
+   "en": "studying late at night",
+   "hi": "देर रात पढ़ना",
+   "group": "learning"
+  }
+ },
+ "items": [
+  {
+   "key": "int_maths",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "How do you feel about maths?",
+    "hi": "मैथ्स आपको कैसा लगता है?"
+   },
+   "speak": {
+    "en": "Let's start with subjects. How do you feel about maths? You love it, you like it, it's not really your thing, or you struggle with it?",
+    "hi": "चलिए विषयों से शुरू करते हैं। मैथ्स आपको कैसा लगता है? बहुत पसंद है, पसंद है, ज़्यादा नहीं, या मुश्किल लगता है?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "I love it",
+      "hi": "बहुत पसंद है"
+     },
+     "weights": {
+      "maths": 3
+     },
+     "keywords": {
+      "en": [
+       "love",
+       "favourite",
+       "favorite",
+       "best subject",
+       "really enjoy"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "I like it",
+      "hi": "पसंद है"
+     },
+     "weights": {
+      "maths": 2
+     },
+     "keywords": {
+      "en": [
+       "like",
+       "okay",
+       "ok",
+       "fine",
+       "good",
+       "enjoy"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "meh",
+     "label": {
+      "en": "Not really my thing",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "maths": 0.5
+     },
+     "keywords": {
+      "en": [
+       "not really",
+       "don't like",
+       "do not like",
+       "boring",
+       "not my thing",
+       "not much"
+      ],
+      "hinglish": [
+       "zyada nahi",
+       "jyada nahi",
+       "nahi pasand",
+       "pasand nahi",
+       "boring",
+       "khaas nahi"
+      ],
+      "hi": [
+       "ज़्यादा नहीं",
+       "ज्यादा नहीं",
+       "पसंद नहीं",
+       "बोरिंग"
+      ]
+     }
+    },
+    {
+     "key": "hard",
+     "label": {
+      "en": "I struggle with it",
+      "hi": "मुश्किल लगता है"
+     },
+     "weights": {
+      "maths": 0
+     },
+     "keywords": {
+      "en": [
+       "struggle",
+       "hate",
+       "difficult",
+       "hard",
+       "weak",
+       "bad at"
+      ],
+      "hinglish": [
+       "mushkil",
+       "kamzor",
+       "samajh nahi aata",
+       "dikkat",
+       "tough"
+      ],
+      "hi": [
+       "मुश्किल",
+       "कमज़ोर",
+       "कमजोर",
+       "समझ नहीं आता"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "maths_style",
+   "type": "choice",
+   "section": {
+    "en": "Maths",
+    "hi": "मैथ्स"
+   },
+   "prompt": {
+    "en": "What kind of maths do you enjoy most?",
+    "hi": "मैथ्स में आपको सबसे ज़्यादा क्या अच्छा लगता है?"
+   },
+   "speak": {
+    "en": "What kind of maths do you enjoy most? Puzzles and logic, numbers and money, shapes and geometry, or calculus and equations?",
+    "hi": "मैथ्स में आपको सबसे ज़्यादा क्या अच्छा लगता है? पहेलियाँ और लॉजिक, नंबर और पैसे का हिसाब, आकार और ज्यामिति, या कैलकुलस और समीकरण?"
+   },
+   "options": [
+    {
+     "key": "logic",
+     "label": {
+      "en": "Puzzles and logic",
+      "hi": "पहेलियाँ और लॉजिक"
+     },
+     "weights": {
+      "maths": 2,
+      "computer": 2,
+      "investigative": 2
+     },
+     "keywords": {
+      "en": [
+       "puzzle",
+       "logic",
+       "reasoning",
+       "brain"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "money",
+     "label": {
+      "en": "Numbers and money",
+      "hi": "नंबर और पैसे का हिसाब"
+     },
+     "weights": {
+      "maths": 1,
+      "commerce": 3,
+      "conventional": 1
+     },
+     "keywords": {
+      "en": [
+       "money",
+       "numbers",
+       "accounts",
+       "percent",
+       "interest"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "shapes",
+     "label": {
+      "en": "Shapes and geometry",
+      "hi": "आकार और ज्यामिति"
+     },
+     "weights": {
+      "maths": 2,
+      "arts": 2,
+      "realistic": 1
+     },
+     "keywords": {
+      "en": [
+       "shape",
+       "geometry",
+       "drawing",
+       "figures",
+       "space"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "calculus",
+     "label": {
+      "en": "Calculus and equations",
+      "hi": "कैलकुलस और समीकरण"
+     },
+     "weights": {
+      "maths": 3,
+      "physics": 1,
+      "investigative": 1
+     },
+     "keywords": {
+      "en": [
+       "calculus",
+       "equation",
+       "algebra",
+       "formula",
+       "derivative"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_maths": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "int_physics",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "And physics?",
+    "hi": "और फ़िज़िक्स?"
+   },
+   "speak": {
+    "en": "And physics? Love it, like it, not really, or struggle?",
+    "hi": "और फ़िज़िक्स? बहुत पसंद, पसंद, ज़्यादा नहीं, या मुश्किल?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "I love it",
+      "hi": "बहुत पसंद है"
+     },
+     "weights": {
+      "physics": 3
+     },
+     "keywords": {
+      "en": [
+       "love",
+       "favourite",
+       "favorite",
+       "really enjoy"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "I like it",
+      "hi": "पसंद है"
+     },
+     "weights": {
+      "physics": 2
+     },
+     "keywords": {
+      "en": [
+       "like",
+       "okay",
+       "ok",
+       "fine",
+       "good",
+       "enjoy"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "meh",
+     "label": {
+      "en": "Not really my thing",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "physics": 0.5
+     },
+     "keywords": {
+      "en": [
+       "not really",
+       "don't like",
+       "do not like",
+       "boring",
+       "not my thing"
+      ],
+      "hinglish": [
+       "zyada nahi",
+       "jyada nahi",
+       "nahi pasand",
+       "pasand nahi",
+       "boring",
+       "khaas nahi"
+      ],
+      "hi": [
+       "ज़्यादा नहीं",
+       "ज्यादा नहीं",
+       "पसंद नहीं",
+       "बोरिंग"
+      ]
+     }
+    },
+    {
+     "key": "hard",
+     "label": {
+      "en": "I struggle with it",
+      "hi": "मुश्किल लगता है"
+     },
+     "weights": {
+      "physics": 0
+     },
+     "keywords": {
+      "en": [
+       "struggle",
+       "hate",
+       "difficult",
+       "hard",
+       "weak"
+      ],
+      "hinglish": [
+       "mushkil",
+       "kamzor",
+       "samajh nahi aata",
+       "dikkat",
+       "tough"
+      ],
+      "hi": [
+       "मुश्किल",
+       "कमज़ोर",
+       "कमजोर",
+       "समझ नहीं आता"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "physics_side",
+   "type": "choice",
+   "section": {
+    "en": "Physics",
+    "hi": "फ़िज़िक्स"
+   },
+   "prompt": {
+    "en": "Which side of physics excites you more?",
+    "hi": "फ़िज़िक्स का कौन सा हिस्सा आपको ज़्यादा रोमांचित करता है?"
+   },
+   "speak": {
+    "en": "Which side of physics excites you more? How machines and electricity work, how space and the universe work, or solving numericals?",
+    "hi": "फ़िज़िक्स का कौन सा हिस्सा आपको ज़्यादा अच्छा लगता है? मशीनें और बिजली कैसे काम करती हैं, अंतरिक्ष और ब्रह्मांड, या न्यूमेरिकल हल करना?"
+   },
+   "options": [
+    {
+     "key": "machines",
+     "label": {
+      "en": "How machines and electricity work",
+      "hi": "मशीनें और बिजली कैसे काम करती हैं"
+     },
+     "weights": {
+      "physics": 2,
+      "realistic": 2,
+      "tech": 1
+     },
+     "keywords": {
+      "en": [
+       "machine",
+       "electric",
+       "engine",
+       "circuit",
+       "motor",
+       "how things work"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "universe",
+     "label": {
+      "en": "Space and how the universe works",
+      "hi": "अंतरिक्ष और ब्रह्मांड कैसे चलता है"
+     },
+     "weights": {
+      "physics": 3,
+      "investigative": 3,
+      "long_study": 1
+     },
+     "keywords": {
+      "en": [
+       "space",
+       "universe",
+       "stars",
+       "planet",
+       "quantum",
+       "black hole"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "numericals",
+     "label": {
+      "en": "Solving numericals",
+      "hi": "न्यूमेरिकल हल करना"
+     },
+     "weights": {
+      "physics": 2,
+      "maths": 2
+     },
+     "keywords": {
+      "en": [
+       "numerical",
+       "problems",
+       "solving",
+       "calculation"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_physics": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "build_things",
+   "type": "choice",
+   "section": {
+    "en": "Physics",
+    "hi": "फ़िज़िक्स"
+   },
+   "prompt": {
+    "en": "Would you enjoy building things with your hands — circuits, robots, engines?",
+    "hi": "क्या आपको अपने हाथों से चीज़ें बनाना अच्छा लगेगा — सर्किट, रोबोट, इंजन?"
+   },
+   "speak": {
+    "en": "Would you enjoy building things with your hands, like circuits, robots or engines? Yes, maybe, or no?",
+    "hi": "क्या आपको अपने हाथों से चीज़ें बनाना अच्छा लगेगा, जैसे सर्किट, रोबोट या इंजन? हाँ, शायद, या नहीं?"
+   },
+   "options": [
+    {
+     "key": "yes",
+     "label": {
+      "en": "Yes, a lot",
+      "hi": "हाँ, बहुत"
+     },
+     "weights": {
+      "realistic": 3,
+      "tech": 2
+     },
+     "keywords": {
+      "en": [
+       "yes",
+       "a lot",
+       "love",
+       "definitely",
+       "sure"
+      ],
+      "hinglish": [
+       "haan",
+       "han",
+       "bilkul",
+       "zaroor"
+      ],
+      "hi": [
+       "हाँ",
+       "बिल्कुल",
+       "ज़रूर"
+      ]
+     }
+    },
+    {
+     "key": "maybe",
+     "label": {
+      "en": "Maybe sometimes",
+      "hi": "शायद, कभी-कभी"
+     },
+     "weights": {
+      "realistic": 1.5,
+      "tech": 1
+     },
+     "keywords": {
+      "en": [
+       "maybe",
+       "sometimes",
+       "might",
+       "not sure"
+      ],
+      "hinglish": [
+       "shayad",
+       "kabhi kabhi"
+      ],
+      "hi": [
+       "शायद",
+       "कभी-कभी"
+      ]
+     }
+    },
+    {
+     "key": "no",
+     "label": {
+      "en": "Not really",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "realistic": 0
+     },
+     "keywords": {
+      "en": [
+       "no",
+       "not really",
+       "nah"
+      ],
+      "hinglish": [
+       "nahi",
+       "zyada nahi"
+      ],
+      "hi": [
+       "नहीं"
+      ]
+     }
+    }
+   ],
+   "requires": {
+    "int_physics": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "int_chemistry",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "How about chemistry?",
+    "hi": "केमिस्ट्री के बारे में क्या ख़याल है?"
+   },
+   "speak": {
+    "en": "How about chemistry? Love it, like it, not really, or struggle?",
+    "hi": "केमिस्ट्री के बारे में क्या ख़याल है? बहुत पसंद, पसंद, ज़्यादा नहीं, या मुश्किल?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "I love it",
+      "hi": "बहुत पसंद है"
+     },
+     "weights": {
+      "chemistry": 3
+     },
+     "keywords": {
+      "en": [
+       "love",
+       "favourite",
+       "favorite",
+       "really enjoy"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "I like it",
+      "hi": "पसंद है"
+     },
+     "weights": {
+      "chemistry": 2
+     },
+     "keywords": {
+      "en": [
+       "like",
+       "okay",
+       "ok",
+       "fine",
+       "good",
+       "enjoy"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "meh",
+     "label": {
+      "en": "Not really my thing",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "chemistry": 0.5
+     },
+     "keywords": {
+      "en": [
+       "not really",
+       "don't like",
+       "do not like",
+       "boring",
+       "not my thing"
+      ],
+      "hinglish": [
+       "zyada nahi",
+       "jyada nahi",
+       "nahi pasand",
+       "pasand nahi",
+       "boring",
+       "khaas nahi"
+      ],
+      "hi": [
+       "ज़्यादा नहीं",
+       "ज्यादा नहीं",
+       "पसंद नहीं",
+       "बोरिंग"
+      ]
+     }
+    },
+    {
+     "key": "hard",
+     "label": {
+      "en": "I struggle with it",
+      "hi": "मुश्किल लगता है"
+     },
+     "weights": {
+      "chemistry": 0
+     },
+     "keywords": {
+      "en": [
+       "struggle",
+       "hate",
+       "difficult",
+       "hard",
+       "weak"
+      ],
+      "hinglish": [
+       "mushkil",
+       "kamzor",
+       "samajh nahi aata",
+       "dikkat",
+       "tough"
+      ],
+      "hi": [
+       "मुश्किल",
+       "कमज़ोर",
+       "कमजोर",
+       "समझ नहीं आता"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "chemistry_side",
+   "type": "choice",
+   "section": {
+    "en": "Chemistry",
+    "hi": "केमिस्ट्री"
+   },
+   "prompt": {
+    "en": "What draws you to chemistry?",
+    "hi": "केमिस्ट्री में आपको क्या खींचता है?"
+   },
+   "speak": {
+    "en": "What draws you to chemistry? Doing experiments in the lab, how medicines work in the body, or making new materials and fuels?",
+    "hi": "केमिस्ट्री में आपको क्या अच्छा लगता है? लैब में प्रयोग करना, दवाइयाँ शरीर में कैसे काम करती हैं, या नए मटीरियल और ईंधन बनाना?"
+   },
+   "options": [
+    {
+     "key": "lab",
+     "label": {
+      "en": "Doing experiments in the lab",
+      "hi": "लैब में प्रयोग करना"
+     },
+     "weights": {
+      "chemistry": 2,
+      "investigative": 2,
+      "realistic": 1
+     },
+     "keywords": {
+      "en": [
+       "lab",
+       "experiment",
+       "reactions",
+       "practical"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "medicines",
+     "label": {
+      "en": "How medicines work in the body",
+      "hi": "दवाइयाँ शरीर में कैसे काम करती हैं"
+     },
+     "weights": {
+      "chemistry": 2,
+      "biology": 2,
+      "social": 1
+     },
+     "keywords": {
+      "en": [
+       "medicine",
+       "drug",
+       "body",
+       "health",
+       "pharma"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "materials",
+     "label": {
+      "en": "Making new materials and fuels",
+      "hi": "नए मटीरियल और ईंधन बनाना"
+     },
+     "weights": {
+      "chemistry": 2,
+      "realistic": 2,
+      "physics": 1
+     },
+     "keywords": {
+      "en": [
+       "material",
+       "fuel",
+       "plastic",
+       "industry",
+       "factory",
+       "process"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_chemistry": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "int_biology",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "And biology?",
+    "hi": "और बायोलॉजी?"
+   },
+   "speak": {
+    "en": "And biology? Love it, like it, not really, or struggle?",
+    "hi": "और बायोलॉजी? बहुत पसंद, पसंद, ज़्यादा नहीं, या मुश्किल?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "I love it",
+      "hi": "बहुत पसंद है"
+     },
+     "weights": {
+      "biology": 3
+     },
+     "keywords": {
+      "en": [
+       "love",
+       "favourite",
+       "favorite",
+       "really enjoy"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "I like it",
+      "hi": "पसंद है"
+     },
+     "weights": {
+      "biology": 2
+     },
+     "keywords": {
+      "en": [
+       "like",
+       "okay",
+       "ok",
+       "fine",
+       "good",
+       "enjoy"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "meh",
+     "label": {
+      "en": "Not really my thing",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "biology": 0.5
+     },
+     "keywords": {
+      "en": [
+       "not really",
+       "don't like",
+       "do not like",
+       "boring",
+       "not my thing"
+      ],
+      "hinglish": [
+       "zyada nahi",
+       "jyada nahi",
+       "nahi pasand",
+       "pasand nahi",
+       "boring",
+       "khaas nahi"
+      ],
+      "hi": [
+       "ज़्यादा नहीं",
+       "ज्यादा नहीं",
+       "पसंद नहीं",
+       "बोरिंग"
+      ]
+     }
+    },
+    {
+     "key": "hard",
+     "label": {
+      "en": "I struggle with it",
+      "hi": "मुश्किल लगता है"
+     },
+     "weights": {
+      "biology": 0
+     },
+     "keywords": {
+      "en": [
+       "struggle",
+       "hate",
+       "difficult",
+       "hard",
+       "weak"
+      ],
+      "hinglish": [
+       "mushkil",
+       "kamzor",
+       "samajh nahi aata",
+       "dikkat",
+       "tough"
+      ],
+      "hi": [
+       "मुश्किल",
+       "कमज़ोर",
+       "कमजोर",
+       "समझ नहीं आता"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "biology_side",
+   "type": "choice",
+   "section": {
+    "en": "Biology",
+    "hi": "बायोलॉजी"
+   },
+   "prompt": {
+    "en": "Which part of biology interests you most?",
+    "hi": "बायोलॉजी का कौन सा हिस्सा आपको सबसे दिलचस्प लगता है?"
+   },
+   "speak": {
+    "en": "Which part of biology interests you most? The human body and health, animals and plants and the environment, or genes, cells and research?",
+    "hi": "बायोलॉजी का कौन सा हिस्सा आपको सबसे दिलचस्प लगता है? मानव शरीर और सेहत, जानवर, पौधे और पर्यावरण, या जीन, कोशिकाएँ और रिसर्च?"
+   },
+   "options": [
+    {
+     "key": "body",
+     "label": {
+      "en": "The human body and health",
+      "hi": "मानव शरीर और सेहत"
+     },
+     "weights": {
+      "biology": 3,
+      "social": 2
+     },
+     "keywords": {
+      "en": [
+       "human",
+       "body",
+       "health",
+       "disease",
+       "doctor"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "nature",
+     "label": {
+      "en": "Animals, plants and the environment",
+      "hi": "जानवर, पौधे और पर्यावरण"
+     },
+     "weights": {
+      "biology": 2,
+      "outdoor": 2,
+      "investigative": 1
+     },
+     "keywords": {
+      "en": [
+       "animal",
+       "plant",
+       "environment",
+       "nature",
+       "wildlife",
+       "ecology"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "genes",
+     "label": {
+      "en": "Genes, cells and research",
+      "hi": "जीन, कोशिकाएँ और रिसर्च"
+     },
+     "weights": {
+      "biology": 3,
+      "investigative": 3,
+      "long_study": 1
+     },
+     "keywords": {
+      "en": [
+       "gene",
+       "dna",
+       "cell",
+       "research",
+       "lab",
+       "microscope"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_biology": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "biology_role",
+   "type": "choice",
+   "section": {
+    "en": "Biology",
+    "hi": "बायोलॉजी"
+   },
+   "prompt": {
+    "en": "If you worked in health, which would you want to do?",
+    "hi": "अगर आप हेल्थ में काम करें, तो क्या करना चाहेंगे?"
+   },
+   "speak": {
+    "en": "If you worked in health, which would you want to do? Diagnose and treat patients, care for patients as they recover, research new cures, or look after animals?",
+    "hi": "अगर आप हेल्थ में काम करें, तो क्या करना चाहेंगे? मरीज़ों की बीमारी पहचानकर इलाज करना, ठीक होते मरीज़ों की देखभाल, नए इलाज पर रिसर्च, या जानवरों की देखभाल?"
+   },
+   "options": [
+    {
+     "key": "treat",
+     "label": {
+      "en": "Diagnose and treat patients",
+      "hi": "बीमारी पहचानना और इलाज करना"
+     },
+     "weights": {
+      "clinical": 3,
+      "long_study": 1
+     },
+     "keywords": {
+      "en": [
+       "diagnose",
+       "treat",
+       "doctor",
+       "surgery",
+       "surgeon"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "care",
+     "label": {
+      "en": "Care for patients as they recover",
+      "hi": "ठीक होते मरीज़ों की देखभाल"
+     },
+     "weights": {
+      "caregiving": 3,
+      "social": 1
+     },
+     "keywords": {
+      "en": [
+       "care",
+       "recover",
+       "nurse",
+       "nursing",
+       "look after patients"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "research",
+     "label": {
+      "en": "Research new cures",
+      "hi": "नए इलाज पर रिसर्च"
+     },
+     "weights": {
+      "investigative": 3,
+      "long_study": 1
+     },
+     "keywords": {
+      "en": [
+       "research",
+       "cure",
+       "lab",
+       "discover",
+       "vaccine"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "animals",
+     "label": {
+      "en": "Look after animals",
+      "hi": "जानवरों की देखभाल"
+     },
+     "weights": {
+      "outdoor": 2,
+      "clinical": 2
+     },
+     "keywords": {
+      "en": [
+       "animal",
+       "pet",
+       "vet",
+       "cow",
+       "dog"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_biology": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "hospital",
+   "type": "choice",
+   "section": {
+    "en": "Biology",
+    "hi": "बायोलॉजी"
+   },
+   "prompt": {
+    "en": "How do you feel about hospitals, blood and injuries?",
+    "hi": "अस्पताल, खून और चोट से आपको कैसा लगता है?"
+   },
+   "speak": {
+    "en": "How do you feel about hospitals, blood and injuries? Totally fine, okay-ish, or you'd rather stay away?",
+    "hi": "अस्पताल, खून और चोट से आपको कैसा लगता है? बिल्कुल ठीक, थोड़ा-बहुत ठीक, या आप दूर रहना चाहेंगे?"
+   },
+   "options": [
+    {
+     "key": "fine",
+     "label": {
+      "en": "Totally fine",
+      "hi": "बिल्कुल ठीक"
+     },
+     "weights": {
+      "blood_ok": 3
+     },
+     "keywords": {
+      "en": [
+       "fine",
+       "no problem",
+       "comfortable",
+       "totally",
+       "not scared"
+      ],
+      "hinglish": [
+       "koi dikkat nahi",
+       "theek hai",
+       "bilkul theek",
+       "darr nahi"
+      ],
+      "hi": [
+       "कोई दिक्कत नहीं",
+       "बिल्कुल ठीक"
+      ]
+     }
+    },
+    {
+     "key": "okay",
+     "label": {
+      "en": "Okay-ish",
+      "hi": "थोड़ा-बहुत ठीक"
+     },
+     "weights": {
+      "blood_ok": 1.5
+     },
+     "keywords": {
+      "en": [
+       "okay",
+       "ok",
+       "manageable",
+       "a little",
+       "bit"
+      ],
+      "hinglish": [
+       "thoda",
+       "chal jayega"
+      ],
+      "hi": [
+       "थोड़ा",
+       "चल जाएगा"
+      ]
+     }
+    },
+    {
+     "key": "avoid",
+     "label": {
+      "en": "I'd rather stay away",
+      "hi": "दूर रहना ही ठीक"
+     },
+     "weights": {
+      "blood_ok": 0
+     },
+     "keywords": {
+      "en": [
+       "stay away",
+       "avoid",
+       "scared",
+       "faint",
+       "can't",
+       "no"
+      ],
+      "hinglish": [
+       "darr",
+       "dar lagta",
+       "door rehna",
+       "nahi"
+      ],
+      "hi": [
+       "डर",
+       "दूर रहना",
+       "नहीं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "int_computer",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "How much do you enjoy computers and coding?",
+    "hi": "कंप्यूटर और कोडिंग आपको कितना अच्छा लगता है?"
+   },
+   "speak": {
+    "en": "How much do you enjoy computers and coding? A lot, a bit, not much, or never tried it?",
+    "hi": "कंप्यूटर और कोडिंग आपको कितना अच्छा लगता है? बहुत, थोड़ा, ज़्यादा नहीं, या कभी आज़माया ही नहीं?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "A lot",
+      "hi": "बहुत"
+     },
+     "weights": {
+      "computer": 3,
+      "tech": 3
+     },
+     "keywords": {
+      "en": [
+       "a lot",
+       "love",
+       "really",
+       "favourite",
+       "favorite"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "A bit",
+      "hi": "थोड़ा"
+     },
+     "weights": {
+      "computer": 2,
+      "tech": 2
+     },
+     "keywords": {
+      "en": [
+       "a bit",
+       "little",
+       "like",
+       "okay",
+       "ok"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "meh",
+     "label": {
+      "en": "Not much",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "computer": 0.5,
+      "tech": 1
+     },
+     "keywords": {
+      "en": [
+       "not much",
+       "not really",
+       "don't like",
+       "boring"
+      ],
+      "hinglish": [
+       "zyada nahi",
+       "jyada nahi",
+       "nahi pasand",
+       "pasand nahi",
+       "boring",
+       "khaas nahi"
+      ],
+      "hi": [
+       "ज़्यादा नहीं",
+       "ज्यादा नहीं",
+       "पसंद नहीं",
+       "बोरिंग"
+      ]
+     }
+    },
+    {
+     "key": "never",
+     "label": {
+      "en": "Never really tried",
+      "hi": "कभी आज़माया नहीं"
+     },
+     "weights": {
+      "computer": 1,
+      "tech": 1
+     },
+     "keywords": {
+      "en": [
+       "never",
+       "not tried",
+       "haven't",
+       "no idea"
+      ],
+      "hinglish": [
+       "kabhi nahi",
+       "try nahi",
+       "nahi kiya"
+      ],
+      "hi": [
+       "कभी नहीं",
+       "आज़माया नहीं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "computer_side",
+   "type": "choice",
+   "section": {
+    "en": "Computers",
+    "hi": "कंप्यूटर"
+   },
+   "prompt": {
+    "en": "Which of these sounds most fun?",
+    "hi": "इनमें से सबसे मज़ेदार क्या लगता है?"
+   },
+   "speak": {
+    "en": "Which of these sounds most fun? Making apps and websites, making games and animations, or teaching computers with data and A.I.?",
+    "hi": "इनमें से सबसे मज़ेदार क्या लगता है? ऐप और वेबसाइट बनाना, गेम और एनीमेशन बनाना, या डेटा और ए.आई. से कंप्यूटर को सिखाना?"
+   },
+   "options": [
+    {
+     "key": "apps",
+     "label": {
+      "en": "Making apps and websites",
+      "hi": "ऐप और वेबसाइट बनाना"
+     },
+     "weights": {
+      "computer": 3,
+      "realistic": 1,
+      "tech": 2
+     },
+     "keywords": {
+      "en": [
+       "app",
+       "website",
+       "web",
+       "software",
+       "coding"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "games",
+     "label": {
+      "en": "Games, graphics and animation",
+      "hi": "गेम, ग्राफ़िक्स और एनीमेशन"
+     },
+     "weights": {
+      "computer": 2,
+      "artistic": 2,
+      "arts": 1
+     },
+     "keywords": {
+      "en": [
+       "game",
+       "graphic",
+       "animation",
+       "design",
+       "3d"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "ai",
+     "label": {
+      "en": "Data and AI",
+      "hi": "डेटा और ए.आई."
+     },
+     "weights": {
+      "computer": 2,
+      "maths": 2,
+      "investigative": 2
+     },
+     "keywords": {
+      "en": [
+       "data",
+       "ai",
+       "a.i",
+       "artificial",
+       "machine learning",
+       "robot"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_computer": [
+     "love",
+     "like",
+     "never"
+    ]
+   }
+  },
+  {
+   "key": "int_commerce",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "Do you find business, money and the economy interesting?",
+    "hi": "क्या बिज़नेस, पैसा और अर्थव्यवस्था आपको दिलचस्प लगते हैं?"
+   },
+   "speak": {
+    "en": "Do you find business, money and the economy interesting? Very, a little, or not at all?",
+    "hi": "क्या बिज़नेस, पैसा और अर्थव्यवस्था आपको दिलचस्प लगते हैं? बहुत, थोड़ा, या बिल्कुल नहीं?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "Very interesting",
+      "hi": "बहुत दिलचस्प"
+     },
+     "weights": {
+      "commerce": 3
+     },
+     "keywords": {
+      "en": [
+       "very",
+       "love",
+       "a lot",
+       "really"
+      ],
+      "hinglish": [
+       "bahut",
+       "bahut interesting",
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत",
+       "बहुत पसंद",
+       "बहुत अच्छा"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "A little",
+      "hi": "थोड़ा"
+     },
+     "weights": {
+      "commerce": 1.5
+     },
+     "keywords": {
+      "en": [
+       "little",
+       "bit",
+       "somewhat",
+       "okay",
+       "ok",
+       "like"
+      ],
+      "hinglish": [
+       "thoda",
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda bahut"
+      ],
+      "hi": [
+       "थोड़ा",
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक"
+      ]
+     }
+    },
+    {
+     "key": "no",
+     "label": {
+      "en": "Not at all",
+      "hi": "बिल्कुल नहीं"
+     },
+     "weights": {
+      "commerce": 0
+     },
+     "keywords": {
+      "en": [
+       "not at all",
+       "no",
+       "boring",
+       "not really"
+      ],
+      "hinglish": [
+       "bilkul nahi",
+       "zyada nahi",
+       "nahi",
+       "boring"
+      ],
+      "hi": [
+       "बिल्कुल नहीं",
+       "ज़्यादा नहीं",
+       "नहीं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "commerce_side",
+   "type": "choice",
+   "section": {
+    "en": "Business",
+    "hi": "बिज़नेस"
+   },
+   "prompt": {
+    "en": "Which would you rather do?",
+    "hi": "आप इनमें से क्या करना पसंद करेंगे?"
+   },
+   "speak": {
+    "en": "Which would you rather do? Start and run your own business, manage accounts and taxes carefully, or study markets and the economy?",
+    "hi": "आप इनमें से क्या करना पसंद करेंगे? अपना बिज़नेस शुरू करना और चलाना, ध्यान से हिसाब-किताब और टैक्स संभालना, या बाज़ार और अर्थव्यवस्था को समझना?"
+   },
+   "options": [
+    {
+     "key": "business",
+     "label": {
+      "en": "Start and run my own business",
+      "hi": "अपना बिज़नेस शुरू करना और चलाना"
+     },
+     "weights": {
+      "commerce": 2,
+      "enterprising": 3,
+      "money": 1
+     },
+     "keywords": {
+      "en": [
+       "own business",
+       "start",
+       "business",
+       "entrepreneur",
+       "startup"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "accounts",
+     "label": {
+      "en": "Manage accounts and taxes carefully",
+      "hi": "ध्यान से हिसाब-किताब और टैक्स संभालना"
+     },
+     "weights": {
+      "commerce": 3,
+      "conventional": 3,
+      "maths": 1
+     },
+     "keywords": {
+      "en": [
+       "account",
+       "tax",
+       "audit",
+       "careful",
+       "manage"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "markets",
+     "label": {
+      "en": "Study markets and the economy",
+      "hi": "बाज़ार और अर्थव्यवस्था को समझना"
+     },
+     "weights": {
+      "commerce": 3,
+      "investigative": 2,
+      "maths": 1
+     },
+     "keywords": {
+      "en": [
+       "market",
+       "economy",
+       "economics",
+       "stock",
+       "invest"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_commerce": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "int_arts",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "How much do you enjoy drawing, design or making things look good?",
+    "hi": "ड्रॉइंग, डिज़ाइन या चीज़ों को सुंदर बनाना आपको कितना अच्छा लगता है?"
+   },
+   "speak": {
+    "en": "How much do you enjoy drawing, design, or making things look good? A lot, a bit, or not much?",
+    "hi": "ड्रॉइंग, डिज़ाइन या चीज़ों को सुंदर बनाना आपको कितना अच्छा लगता है? बहुत, थोड़ा, या ज़्यादा नहीं?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "A lot",
+      "hi": "बहुत"
+     },
+     "weights": {
+      "arts": 3,
+      "artistic": 2
+     },
+     "keywords": {
+      "en": [
+       "a lot",
+       "love",
+       "really",
+       "always"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "A bit",
+      "hi": "थोड़ा"
+     },
+     "weights": {
+      "arts": 1.5,
+      "artistic": 1
+     },
+     "keywords": {
+      "en": [
+       "a bit",
+       "little",
+       "sometimes",
+       "okay",
+       "like"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "no",
+     "label": {
+      "en": "Not much",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "arts": 0,
+      "artistic": 0
+     },
+     "keywords": {
+      "en": [
+       "not much",
+       "no",
+       "not really",
+       "can't draw"
+      ],
+      "hinglish": [
+       "bilkul nahi",
+       "zyada nahi",
+       "nahi",
+       "boring"
+      ],
+      "hi": [
+       "बिल्कुल नहीं",
+       "ज़्यादा नहीं",
+       "नहीं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "arts_side",
+   "type": "choice",
+   "section": {
+    "en": "Design",
+    "hi": "डिज़ाइन"
+   },
+   "prompt": {
+    "en": "What would you most like to design?",
+    "hi": "आप सबसे ज़्यादा क्या डिज़ाइन करना चाहेंगे?"
+   },
+   "speak": {
+    "en": "What would you most like to design? Buildings and spaces, apps and products people use, or films, photos and media?",
+    "hi": "आप सबसे ज़्यादा क्या डिज़ाइन करना चाहेंगे? इमारतें और जगहें, लोगों के इस्तेमाल के ऐप और प्रोडक्ट, या फ़िल्में, फ़ोटो और मीडिया?"
+   },
+   "options": [
+    {
+     "key": "buildings",
+     "label": {
+      "en": "Buildings and spaces",
+      "hi": "इमारतें और जगहें"
+     },
+     "weights": {
+      "arts": 2,
+      "maths": 1,
+      "realistic": 2
+     },
+     "keywords": {
+      "en": [
+       "building",
+       "house",
+       "space",
+       "interior",
+       "city"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "products",
+     "label": {
+      "en": "Apps and products people use",
+      "hi": "ऐप और प्रोडक्ट जो लोग इस्तेमाल करें"
+     },
+     "weights": {
+      "arts": 2,
+      "computer": 1,
+      "artistic": 2
+     },
+     "keywords": {
+      "en": [
+       "app",
+       "product",
+       "gadget",
+       "ux",
+       "interface"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "media",
+     "label": {
+      "en": "Films, photos and media",
+      "hi": "फ़िल्में, फ़ोटो और मीडिया"
+     },
+     "weights": {
+      "artistic": 3,
+      "communication": 2,
+      "language": 1
+     },
+     "keywords": {
+      "en": [
+       "film",
+       "photo",
+       "video",
+       "media",
+       "youtube",
+       "movie"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_arts": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "int_language",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "Do you enjoy reading, writing and speaking — essays, debates, stories?",
+    "hi": "क्या आपको पढ़ना, लिखना और बोलना अच्छा लगता है — निबंध, डिबेट, कहानियाँ?"
+   },
+   "speak": {
+    "en": "Do you enjoy reading, writing and speaking, like essays, debates or stories? A lot, a bit, or not much?",
+    "hi": "क्या आपको पढ़ना, लिखना और बोलना अच्छा लगता है, जैसे निबंध, डिबेट या कहानियाँ? बहुत, थोड़ा, या ज़्यादा नहीं?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "A lot",
+      "hi": "बहुत"
+     },
+     "weights": {
+      "language": 3,
+      "communication": 2
+     },
+     "keywords": {
+      "en": [
+       "a lot",
+       "love",
+       "really",
+       "always"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "A bit",
+      "hi": "थोड़ा"
+     },
+     "weights": {
+      "language": 1.5,
+      "communication": 1
+     },
+     "keywords": {
+      "en": [
+       "a bit",
+       "little",
+       "sometimes",
+       "okay",
+       "like"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "no",
+     "label": {
+      "en": "Not much",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "language": 0
+     },
+     "keywords": {
+      "en": [
+       "not much",
+       "no",
+       "not really",
+       "boring"
+      ],
+      "hinglish": [
+       "bilkul nahi",
+       "zyada nahi",
+       "nahi",
+       "boring"
+      ],
+      "hi": [
+       "बिल्कुल नहीं",
+       "ज़्यादा नहीं",
+       "नहीं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "language_side",
+   "type": "choice",
+   "section": {
+    "en": "Language",
+    "hi": "भाषा"
+   },
+   "prompt": {
+    "en": "Which one is most you?",
+    "hi": "इनमें से आप सबसे ज़्यादा कौन हैं?"
+   },
+   "speak": {
+    "en": "Which one is most you? Arguing a case and winning a debate, writing articles and telling stories, or explaining things so others understand?",
+    "hi": "इनमें से आप सबसे ज़्यादा कौन हैं? अपनी बात रखकर डिबेट जीतना, लेख और कहानियाँ लिखना, या दूसरों को चीज़ें समझाना?"
+   },
+   "options": [
+    {
+     "key": "debate",
+     "label": {
+      "en": "Arguing a case, winning a debate",
+      "hi": "अपनी बात रखना, डिबेट जीतना"
+     },
+     "weights": {
+      "language": 2,
+      "enterprising": 2,
+      "communication": 3,
+      "society": 1
+     },
+     "keywords": {
+      "en": [
+       "argue",
+       "debate",
+       "case",
+       "win",
+       "convince"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "writing",
+     "label": {
+      "en": "Writing articles and stories",
+      "hi": "लेख और कहानियाँ लिखना"
+     },
+     "weights": {
+      "language": 3,
+      "artistic": 2
+     },
+     "keywords": {
+      "en": [
+       "write",
+       "writing",
+       "article",
+       "story",
+       "journal",
+       "blog"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "teaching",
+     "label": {
+      "en": "Explaining things to others",
+      "hi": "दूसरों को चीज़ें समझाना"
+     },
+     "weights": {
+      "language": 2,
+      "social": 3,
+      "communication": 2
+     },
+     "keywords": {
+      "en": [
+       "explain",
+       "teach",
+       "help understand",
+       "tutor"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ],
+   "requires": {
+    "int_language": [
+     "love",
+     "like"
+    ]
+   }
+  },
+  {
+   "key": "int_society",
+   "type": "choice",
+   "section": {
+    "en": "Subjects",
+    "hi": "विषय"
+   },
+   "prompt": {
+    "en": "Are you interested in history, politics and how the country is run?",
+    "hi": "क्या आपको इतिहास, राजनीति और देश कैसे चलता है, इसमें रुचि है?"
+   },
+   "speak": {
+    "en": "Are you interested in history, politics, and how the country is run? Very, a little, or not really?",
+    "hi": "क्या आपको इतिहास, राजनीति और देश कैसे चलता है, इसमें रुचि है? बहुत, थोड़ी, या ज़्यादा नहीं?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "Very",
+      "hi": "बहुत"
+     },
+     "weights": {
+      "society": 3
+     },
+     "keywords": {
+      "en": [
+       "very",
+       "love",
+       "a lot",
+       "really"
+      ],
+      "hinglish": [
+       "bahut pasand",
+       "bahut accha",
+       "bahut achha",
+       "pyaar",
+       "favourite",
+       "favorite",
+       "bahut",
+       "zabardast"
+      ],
+      "hi": [
+       "बहुत पसंद",
+       "बहुत अच्छा",
+       "बहुत"
+      ]
+     }
+    },
+    {
+     "key": "like",
+     "label": {
+      "en": "A little",
+      "hi": "थोड़ी"
+     },
+     "weights": {
+      "society": 1.5
+     },
+     "keywords": {
+      "en": [
+       "little",
+       "bit",
+       "somewhat",
+       "okay",
+       "ok"
+      ],
+      "hinglish": [
+       "pasand hai",
+       "accha lagta",
+       "achha lagta",
+       "theek",
+       "thik",
+       "thoda",
+       "thoda bahut"
+      ],
+      "hi": [
+       "पसंद है",
+       "अच्छा लगता",
+       "ठीक",
+       "थोड़ा"
+      ]
+     }
+    },
+    {
+     "key": "no",
+     "label": {
+      "en": "Not really",
+      "hi": "ज़्यादा नहीं"
+     },
+     "weights": {
+      "society": 0
+     },
+     "keywords": {
+      "en": [
+       "not really",
+       "no",
+       "boring",
+       "not at all"
+      ],
+      "hinglish": [
+       "bilkul nahi",
+       "zyada nahi",
+       "nahi",
+       "boring"
+      ],
+      "hi": [
+       "बिल्कुल नहीं",
+       "ज़्यादा नहीं",
+       "नहीं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "saturday",
+   "type": "choice",
+   "section": {
+    "en": "Personality",
+    "hi": "आपके बारे में"
+   },
+   "prompt": {
+    "en": "On a free Saturday, which would you pick?",
+    "hi": "छुट्टी वाले शनिवार को आप क्या चुनेंगे?"
+   },
+   "speak": {
+    "en": "Now a bit about you. On a free Saturday, which would you pick? Fix or build something, read about how something works, make art, music or videos, hang out and help friends, or organise an event?",
+    "hi": "अब थोड़ा आपके बारे में। छुट्टी वाले शनिवार को आप क्या चुनेंगे? कुछ ठीक करना या बनाना, कोई चीज़ कैसे काम करती है ये पढ़ना, कला, संगीत या वीडियो बनाना, दोस्तों के साथ रहना और उनकी मदद करना, या कोई इवेंट आयोजित करना?"
+   },
+   "options": [
+    {
+     "key": "build",
+     "label": {
+      "en": "Fix or build something",
+      "hi": "कुछ ठीक करना या बनाना"
+     },
+     "weights": {
+      "realistic": 3
+     },
+     "keywords": {
+      "en": [
+       "fix",
+       "build",
+       "repair",
+       "make something"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "read",
+     "label": {
+      "en": "Read about how something works",
+      "hi": "कोई चीज़ कैसे काम करती है, ये पढ़ना"
+     },
+     "weights": {
+      "investigative": 3
+     },
+     "keywords": {
+      "en": [
+       "read",
+       "how something works",
+       "learn",
+       "research",
+       "documentary"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "create",
+     "label": {
+      "en": "Make art, music or videos",
+      "hi": "कला, संगीत या वीडियो बनाना"
+     },
+     "weights": {
+      "artistic": 3
+     },
+     "keywords": {
+      "en": [
+       "art",
+       "music",
+       "video",
+       "draw",
+       "paint",
+       "create"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "friends",
+     "label": {
+      "en": "Hang out and help friends",
+      "hi": "दोस्तों के साथ रहना, उनकी मदद करना"
+     },
+     "weights": {
+      "social": 3
+     },
+     "keywords": {
+      "en": [
+       "friends",
+       "help",
+       "hang out",
+       "volunteer",
+       "people"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "organise",
+     "label": {
+      "en": "Organise an event or sell something",
+      "hi": "कोई इवेंट आयोजित करना या कुछ बेचना"
+     },
+     "weights": {
+      "enterprising": 3,
+      "conventional": 1
+     },
+     "keywords": {
+      "en": [
+       "organise",
+       "organize",
+       "event",
+       "sell",
+       "plan"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ]
+  },
+  {
+   "key": "group_role",
+   "type": "choice",
+   "section": {
+    "en": "Personality",
+    "hi": "आपके बारे में"
+   },
+   "prompt": {
+    "en": "In a group project, what do you usually end up doing?",
+    "hi": "ग्रुप प्रोजेक्ट में आप अक्सर क्या करते हैं?"
+   },
+   "speak": {
+    "en": "In a group project, what do you usually end up doing? The hands-on building, the research, making it look great, keeping everyone together, leading the team, or tracking deadlines and details?",
+    "hi": "ग्रुप प्रोजेक्ट में आप अक्सर क्या करते हैं? हाथ से बनाने का काम, रिसर्च, उसे सुंदर बनाना, सबको साथ रखना, टीम को लीड करना, या डेडलाइन और बारीकियों पर नज़र रखना?"
+   },
+   "options": [
+    {
+     "key": "hands",
+     "label": {
+      "en": "The hands-on building",
+      "hi": "हाथ से बनाने का काम"
+     },
+     "weights": {
+      "realistic": 3
+     },
+     "keywords": {
+      "en": [
+       "build",
+       "hands",
+       "making",
+       "model"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "research",
+     "label": {
+      "en": "Researching the answers",
+      "hi": "जवाब ढूँढना, रिसर्च"
+     },
+     "weights": {
+      "investigative": 3
+     },
+     "keywords": {
+      "en": [
+       "research",
+       "find",
+       "answers",
+       "figure"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "design",
+     "label": {
+      "en": "Making it look great",
+      "hi": "उसे सुंदर बनाना"
+     },
+     "weights": {
+      "artistic": 3
+     },
+     "keywords": {
+      "en": [
+       "look",
+       "design",
+       "presentation",
+       "creative",
+       "poster"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "together",
+     "label": {
+      "en": "Keeping everyone together",
+      "hi": "सबको साथ रखना"
+     },
+     "weights": {
+      "social": 3,
+      "communication": 1
+     },
+     "keywords": {
+      "en": [
+       "together",
+       "everyone",
+       "happy",
+       "help",
+       "team"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "lead",
+     "label": {
+      "en": "Leading the team",
+      "hi": "टीम को लीड करना"
+     },
+     "weights": {
+      "enterprising": 3,
+      "communication": 2
+     },
+     "keywords": {
+      "en": [
+       "lead",
+       "leader",
+       "charge",
+       "divide"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "details",
+     "label": {
+      "en": "Tracking deadlines and details",
+      "hi": "डेडलाइन और बारीकियों पर नज़र"
+     },
+     "weights": {
+      "conventional": 3
+     },
+     "keywords": {
+      "en": [
+       "deadline",
+       "detail",
+       "track",
+       "organise",
+       "organize",
+       "schedule"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ]
+  },
+  {
+   "key": "compliment",
+   "type": "choice",
+   "section": {
+    "en": "Personality",
+    "hi": "आपके बारे में"
+   },
+   "prompt": {
+    "en": "Which compliment would make you happiest?",
+    "hi": "कौन सी तारीफ़ सुनकर आपको सबसे ज़्यादा ख़ुशी होगी?"
+   },
+   "speak": {
+    "en": "Which compliment would make you happiest? You're so practical, so smart, so creative, so kind, a natural leader, or so reliable?",
+    "hi": "कौन सी तारीफ़ सुनकर आपको सबसे ज़्यादा ख़ुशी होगी? तुम बहुत प्रैक्टिकल हो, बहुत समझदार हो, बहुत क्रिएटिव हो, बहुत दयालु हो, जन्मजात लीडर हो, या बहुत भरोसेमंद हो?"
+   },
+   "options": [
+    {
+     "key": "practical",
+     "label": {
+      "en": "\"You're so practical\"",
+      "hi": "\"तुम बहुत प्रैक्टिकल हो\""
+     },
+     "weights": {
+      "realistic": 3
+     },
+     "keywords": {
+      "en": [
+       "practical"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "smart",
+     "label": {
+      "en": "\"You're so smart\"",
+      "hi": "\"तुम बहुत समझदार हो\""
+     },
+     "weights": {
+      "investigative": 3
+     },
+     "keywords": {
+      "en": [
+       "smart",
+       "clever",
+       "intelligent",
+       "brilliant"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "creative",
+     "label": {
+      "en": "\"You're so creative\"",
+      "hi": "\"तुम बहुत क्रिएटिव हो\""
+     },
+     "weights": {
+      "artistic": 3
+     },
+     "keywords": {
+      "en": [
+       "creative",
+       "artistic",
+       "original"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "kind",
+     "label": {
+      "en": "\"You're so kind\"",
+      "hi": "\"तुम बहुत दयालु हो\""
+     },
+     "weights": {
+      "social": 3
+     },
+     "keywords": {
+      "en": [
+       "kind",
+       "caring",
+       "helpful",
+       "nice"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "leader",
+     "label": {
+      "en": "\"You're a natural leader\"",
+      "hi": "\"तुम जन्मजात लीडर हो\""
+     },
+     "weights": {
+      "enterprising": 3
+     },
+     "keywords": {
+      "en": [
+       "leader",
+       "leadership",
+       "confident"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "reliable",
+     "label": {
+      "en": "\"You're so reliable\"",
+      "hi": "\"तुम बहुत भरोसेमंद हो\""
+     },
+     "weights": {
+      "conventional": 3
+     },
+     "keywords": {
+      "en": [
+       "reliable",
+       "responsible",
+       "dependable",
+       "trust"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    }
+   ]
+  },
+  {
+   "key": "people",
+   "type": "choice",
+   "section": {
+    "en": "Personality",
+    "hi": "आपके बारे में"
+   },
+   "prompt": {
+    "en": "Would you rather work with people all day, or mostly on your own?",
+    "hi": "आप पूरे दिन लोगों के साथ काम करना पसंद करेंगे, या ज़्यादातर अकेले?"
+   },
+   "speak": {
+    "en": "Would you rather work with people all day, a mix of both, or mostly on your own?",
+    "hi": "आप पूरे दिन लोगों के साथ काम करना पसंद करेंगे, दोनों का मिला-जुला, या ज़्यादातर अकेले?"
+   },
+   "options": [
+    {
+     "key": "people",
+     "label": {
+      "en": "With people all day",
+      "hi": "पूरे दिन लोगों के साथ"
+     },
+     "weights": {
+      "social": 2,
+      "communication": 3,
+      "enterprising": 1
+     },
+     "keywords": {
+      "en": [
+       "people",
+       "all day",
+       "team",
+       "others"
+      ],
+      "hinglish": [
+       "logon ke saath",
+       "sabke saath"
+      ],
+      "hi": [
+       "लोगों के साथ"
+      ]
+     }
+    },
+    {
+     "key": "mix",
+     "label": {
+      "en": "A mix of both",
+      "hi": "दोनों का मिला-जुला"
+     },
+     "weights": {
+      "social": 1,
+      "communication": 1.5,
+      "investigative": 1
+     },
+     "keywords": {
+      "en": [
+       "mix",
+       "both",
+       "balance",
+       "depends"
+      ],
+      "hinglish": [
+       "dono",
+       "mix"
+      ],
+      "hi": [
+       "दोनों"
+      ]
+     }
+    },
+    {
+     "key": "alone",
+     "label": {
+      "en": "Mostly on my own",
+      "hi": "ज़्यादातर अकेले"
+     },
+     "weights": {
+      "investigative": 2,
+      "conventional": 1,
+      "communication": 0
+     },
+     "keywords": {
+      "en": [
+       "own",
+       "alone",
+       "myself",
+       "independent",
+       "quiet"
+      ],
+      "hinglish": [
+       "akele",
+       "khud"
+      ],
+      "hi": [
+       "अकेले"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "speaking",
+   "type": "choice",
+   "section": {
+    "en": "Personality",
+    "hi": "आपके बारे में"
+   },
+   "prompt": {
+    "en": "How do you feel about speaking in front of a class?",
+    "hi": "क्लास के सामने बोलना आपको कैसा लगता है?"
+   },
+   "speak": {
+    "en": "How do you feel about speaking in front of a class? You love it, it's fine, or it makes you nervous?",
+    "hi": "क्लास के सामने बोलना आपको कैसा लगता है? बहुत अच्छा लगता है, ठीक है, या घबराहट होती है?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "I love it",
+      "hi": "बहुत अच्छा लगता है"
+     },
+     "weights": {
+      "communication": 3,
+      "enterprising": 2
+     },
+     "keywords": {
+      "en": [
+       "love",
+       "enjoy",
+       "great",
+       "confident"
+      ],
+      "hinglish": [
+       "bahut accha",
+       "maza aata"
+      ],
+      "hi": [
+       "बहुत अच्छा",
+       "मज़ा"
+      ]
+     }
+    },
+    {
+     "key": "fine",
+     "label": {
+      "en": "It's fine",
+      "hi": "ठीक है"
+     },
+     "weights": {
+      "communication": 1.5,
+      "enterprising": 1
+     },
+     "keywords": {
+      "en": [
+       "fine",
+       "okay",
+       "ok",
+       "manageable"
+      ],
+      "hinglish": [
+       "theek",
+       "thik"
+      ],
+      "hi": [
+       "ठीक"
+      ]
+     }
+    },
+    {
+     "key": "nervous",
+     "label": {
+      "en": "It makes me nervous",
+      "hi": "घबराहट होती है"
+     },
+     "weights": {
+      "communication": 0
+     },
+     "keywords": {
+      "en": [
+       "nervous",
+       "scared",
+       "shy",
+       "hate",
+       "anxious"
+      ],
+      "hinglish": [
+       "ghabrahat",
+       "darr",
+       "dar lagta",
+       "sharm"
+      ],
+      "hi": [
+       "घबराहट",
+       "डर"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "broken",
+   "type": "choice",
+   "section": {
+    "en": "Personality",
+    "hi": "आपके बारे में"
+   },
+   "prompt": {
+    "en": "When something breaks at home, what do you do?",
+    "hi": "घर में कुछ ख़राब हो जाए तो आप क्या करते हैं?"
+   },
+   "speak": {
+    "en": "When something breaks at home, what do you do? Try to fix it yourself, look up why it broke, or call someone who knows?",
+    "hi": "घर में कुछ ख़राब हो जाए तो आप क्या करते हैं? ख़ुद ठीक करने की कोशिश, पता करना कि क्यों ख़राब हुआ, या किसी जानकार को बुलाना?"
+   },
+   "options": [
+    {
+     "key": "fix",
+     "label": {
+      "en": "Try to fix it myself",
+      "hi": "ख़ुद ठीक करने की कोशिश"
+     },
+     "weights": {
+      "realistic": 3,
+      "tech": 1
+     },
+     "keywords": {
+      "en": [
+       "fix",
+       "myself",
+       "repair",
+       "try"
+      ],
+      "hinglish": [
+       "khud theek",
+       "khud thik",
+       "khud"
+      ],
+      "hi": [
+       "ख़ुद",
+       "खुद"
+      ]
+     }
+    },
+    {
+     "key": "why",
+     "label": {
+      "en": "Look up why it broke",
+      "hi": "पता करना कि क्यों ख़राब हुआ"
+     },
+     "weights": {
+      "investigative": 3
+     },
+     "keywords": {
+      "en": [
+       "look up",
+       "why",
+       "search",
+       "find out",
+       "google"
+      ],
+      "hinglish": [
+       "pata karna",
+       "kyun",
+       "search"
+      ],
+      "hi": [
+       "क्यों",
+       "पता"
+      ]
+     }
+    },
+    {
+     "key": "call",
+     "label": {
+      "en": "Call someone who knows",
+      "hi": "किसी जानकार को बुलाना"
+     },
+     "weights": {
+      "social": 1,
+      "communication": 1
+     },
+     "keywords": {
+      "en": [
+       "call",
+       "someone",
+       "ask",
+       "parents",
+       "technician"
+      ],
+      "hinglish": [
+       "bulana",
+       "papa",
+       "mummy",
+       "mechanic"
+      ],
+      "hi": [
+       "बुला",
+       "पापा",
+       "मम्मी"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "rules",
+   "type": "choice",
+   "section": {
+    "en": "Personality",
+    "hi": "आपके बारे में"
+   },
+   "prompt": {
+    "en": "Do clear rules and steps help you, or do you prefer figuring things out your own way?",
+    "hi": "साफ़ नियम और स्टेप आपकी मदद करते हैं, या आप अपने तरीके से समझना पसंद करते हैं?"
+   },
+   "speak": {
+    "en": "Do clear rules and steps help you, or do you prefer figuring things out your own way?",
+    "hi": "साफ़ नियम और स्टेप आपकी मदद करते हैं, या आप अपने तरीके से समझना पसंद करते हैं?"
+   },
+   "options": [
+    {
+     "key": "rules",
+     "label": {
+      "en": "Clear rules and steps help me",
+      "hi": "साफ़ नियम और स्टेप मदद करते हैं"
+     },
+     "weights": {
+      "conventional": 3,
+      "stability": 1
+     },
+     "keywords": {
+      "en": [
+       "rules",
+       "steps",
+       "clear",
+       "structure",
+       "help me"
+      ],
+      "hinglish": [
+       "niyam",
+       "steps",
+       "rules"
+      ],
+      "hi": [
+       "नियम"
+      ]
+     }
+    },
+    {
+     "key": "own",
+     "label": {
+      "en": "I prefer my own way",
+      "hi": "अपना तरीका पसंद है"
+     },
+     "weights": {
+      "artistic": 2,
+      "investigative": 1,
+      "enterprising": 1
+     },
+     "keywords": {
+      "en": [
+       "own way",
+       "figure",
+       "myself",
+       "freedom",
+       "creative"
+      ],
+      "hinglish": [
+       "apne tarike",
+       "apna tarika"
+      ],
+      "hi": [
+       "अपने तरीके",
+       "अपना तरीका"
+      ]
+     }
+    },
+    {
+     "key": "both",
+     "label": {
+      "en": "Depends on the task",
+      "hi": "काम पर निर्भर करता है"
+     },
+     "weights": {
+      "conventional": 1,
+      "artistic": 1
+     },
+     "keywords": {
+      "en": [
+       "depends",
+       "both",
+       "mix"
+      ],
+      "hinglish": [
+       "depend",
+       "dono"
+      ],
+      "hi": [
+       "निर्भर",
+       "दोनों"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "workplace",
+   "type": "choice",
+   "section": {
+    "en": "Work style",
+    "hi": "काम का तरीका"
+   },
+   "prompt": {
+    "en": "Where would you most like to work?",
+    "hi": "आप सबसे ज़्यादा कहाँ काम करना चाहेंगे?"
+   },
+   "speak": {
+    "en": "Where would you most like to work? At a desk with a computer, in a lab or hospital, or outdoors and on site?",
+    "hi": "आप सबसे ज़्यादा कहाँ काम करना चाहेंगे? कंप्यूटर के साथ डेस्क पर, लैब या अस्पताल में, या बाहर फ़ील्ड में?"
+   },
+   "options": [
+    {
+     "key": "desk",
+     "label": {
+      "en": "At a desk with a computer",
+      "hi": "कंप्यूटर के साथ डेस्क पर"
+     },
+     "weights": {
+      "tech": 1,
+      "conventional": 1,
+      "outdoor": 0
+     },
+     "keywords": {
+      "en": [
+       "desk",
+       "computer",
+       "office",
+       "laptop"
+      ],
+      "hinglish": [],
+      "hi": []
+     }
+    },
+    {
+     "key": "lab",
+     "label": {
+      "en": "In a lab or hospital",
+      "hi": "लैब या अस्पताल में"
+     },
+     "weights": {
+      "investigative": 1,
+      "blood_ok": 1,
+      "biology": 1
+     },
+     "keywords": {
+      "en": [
+       "lab",
+       "hospital",
+       "clinic"
+      ],
+      "hinglish": [
+       "lab",
+       "hospital",
+       "aspatal"
+      ],
+      "hi": [
+       "लैब",
+       "अस्पताल"
+      ]
+     }
+    },
+    {
+     "key": "outdoors",
+     "label": {
+      "en": "Outdoors or on site",
+      "hi": "बाहर या फ़ील्ड में"
+     },
+     "weights": {
+      "outdoor": 3,
+      "realistic": 1
+     },
+     "keywords": {
+      "en": [
+       "outdoor",
+       "outside",
+       "site",
+       "field",
+       "travel"
+      ],
+      "hinglish": [
+       "bahar",
+       "field"
+      ],
+      "hi": [
+       "बाहर",
+       "फ़ील्ड"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "adventure",
+   "type": "choice",
+   "section": {
+    "en": "Work style",
+    "hi": "काम का तरीका"
+   },
+   "prompt": {
+    "en": "Would you enjoy a job with travel, adventure and physical activity?",
+    "hi": "क्या आपको घूमने-फिरने, रोमांच और भाग-दौड़ वाला काम अच्छा लगेगा?"
+   },
+   "speak": {
+    "en": "Would you enjoy a job with travel, adventure and physical activity? Love it, sometimes, or you prefer a steady routine?",
+    "hi": "क्या आपको घूमने-फिरने, रोमांच और भाग-दौड़ वाला काम अच्छा लगेगा? बहुत, कभी-कभी, या आप एक तय दिनचर्या पसंद करते हैं?"
+   },
+   "options": [
+    {
+     "key": "love",
+     "label": {
+      "en": "Love it",
+      "hi": "बहुत अच्छा लगेगा"
+     },
+     "weights": {
+      "outdoor": 3,
+      "realistic": 1
+     },
+     "keywords": {
+      "en": [
+       "love",
+       "yes",
+       "adventure",
+       "definitely"
+      ],
+      "hinglish": [
+       "bahut accha",
+       "haan"
+      ],
+      "hi": [
+       "बहुत अच्छा",
+       "हाँ"
+      ]
+     }
+    },
+    {
+     "key": "sometimes",
+     "label": {
+      "en": "Sometimes",
+      "hi": "कभी-कभी"
+     },
+     "weights": {
+      "outdoor": 1.5
+     },
+     "keywords": {
+      "en": [
+       "sometimes",
+       "maybe",
+       "a bit"
+      ],
+      "hinglish": [
+       "kabhi kabhi",
+       "shayad"
+      ],
+      "hi": [
+       "कभी-कभी",
+       "शायद"
+      ]
+     }
+    },
+    {
+     "key": "routine",
+     "label": {
+      "en": "I prefer a steady routine",
+      "hi": "तय दिनचर्या पसंद है"
+     },
+     "weights": {
+      "outdoor": 0,
+      "stability": 1
+     },
+     "keywords": {
+      "en": [
+       "routine",
+       "steady",
+       "no",
+       "prefer"
+      ],
+      "hinglish": [
+       "routine",
+       "tay",
+       "nahi"
+      ],
+      "hi": [
+       "दिनचर्या",
+       "नहीं"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "learn_how",
+   "type": "choice",
+   "section": {
+    "en": "How you learn",
+    "hi": "आप कैसे सीखते हैं"
+   },
+   "prompt": {
+    "en": "When you learn something new, what helps most?",
+    "hi": "कुछ नया सीखते समय आपकी सबसे ज़्यादा मदद किससे होती है?"
+   },
+   "speak": {
+    "en": "A few questions on how you learn. When you learn something new, what helps most? Watching a video, reading about it, trying it yourself, or talking it through with someone?",
+    "hi": "अब कुछ सवाल कि आप कैसे सीखते हैं। कुछ नया सीखते समय सबसे ज़्यादा मदद किससे होती है? वीडियो देखकर, पढ़कर, ख़ुद करके, या किसी से बात करके?"
+   },
+   "options": [
+    {
+     "key": "watch",
+     "label": {
+      "en": "Watching a video",
+      "hi": "वीडियो देखकर"
+     },
+     "weights": {
+      "learning:watching": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "video",
+       "dekh"
+      ],
+      "hi": [
+       "वीडियो",
+       "देख"
+      ]
+     }
+    },
+    {
+     "key": "read",
+     "label": {
+      "en": "Reading about it",
+      "hi": "पढ़कर"
+     },
+     "weights": {
+      "learning:reading": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "padh",
+       "kitab"
+      ],
+      "hi": [
+       "पढ़",
+       "किताब"
+      ]
+     }
+    },
+    {
+     "key": "do",
+     "label": {
+      "en": "Trying it myself",
+      "hi": "ख़ुद करके"
+     },
+     "weights": {
+      "learning:doing": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "khud",
+       "karke"
+      ],
+      "hi": [
+       "ख़ुद",
+       "खुद",
+       "करके"
+      ]
+     }
+    },
+    {
+     "key": "talk",
+     "label": {
+      "en": "Talking it through with someone",
+      "hi": "किसी से बात करके"
+     },
+     "weights": {
+      "learning:discussing": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "baat",
+       "discuss",
+       "pooch"
+      ],
+      "hi": [
+       "बात",
+       "चर्चा"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "learn_with",
+   "type": "choice",
+   "section": {
+    "en": "How you learn",
+    "hi": "आप कैसे सीखते हैं"
+   },
+   "prompt": {
+    "en": "Do you study better alone or with friends?",
+    "hi": "आप अकेले बेहतर पढ़ते हैं या दोस्तों के साथ?"
+   },
+   "speak": {
+    "en": "Do you study better alone, with friends, or a mix?",
+    "hi": "आप अकेले बेहतर पढ़ते हैं, दोस्तों के साथ, या दोनों तरह?"
+   },
+   "options": [
+    {
+     "key": "alone",
+     "label": {
+      "en": "Alone",
+      "hi": "अकेले"
+     },
+     "weights": {
+      "learning:solo": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "akele",
+       "khud"
+      ],
+      "hi": [
+       "अकेले"
+      ]
+     }
+    },
+    {
+     "key": "friends",
+     "label": {
+      "en": "With friends",
+      "hi": "दोस्तों के साथ"
+     },
+     "weights": {
+      "learning:group": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "dost",
+       "friends",
+       "saath"
+      ],
+      "hi": [
+       "दोस्त",
+       "साथ"
+      ]
+     }
+    },
+    {
+     "key": "mix",
+     "label": {
+      "en": "A mix",
+      "hi": "दोनों तरह"
+     },
+     "weights": {
+      "learning:solo": 1.5,
+      "learning:group": 1.5
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "dono",
+       "mix"
+      ],
+      "hi": [
+       "दोनों"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "learn_when",
+   "type": "choice",
+   "section": {
+    "en": "How you learn",
+    "hi": "आप कैसे सीखते हैं"
+   },
+   "prompt": {
+    "en": "When do you concentrate best?",
+    "hi": "आपका ध्यान सबसे अच्छा कब लगता है?"
+   },
+   "speak": {
+    "en": "When do you concentrate best? Morning, evening, or late at night?",
+    "hi": "आपका ध्यान सबसे अच्छा कब लगता है? सुबह, शाम, या देर रात?"
+   },
+   "options": [
+    {
+     "key": "morning",
+     "label": {
+      "en": "Morning",
+      "hi": "सुबह"
+     },
+     "weights": {
+      "learning:morning": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "subah",
+       "savere"
+      ],
+      "hi": [
+       "सुबह"
+      ]
+     }
+    },
+    {
+     "key": "evening",
+     "label": {
+      "en": "Evening",
+      "hi": "शाम"
+     },
+     "weights": {
+      "learning:evening": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "shaam",
+       "sham"
+      ],
+      "hi": [
+       "शाम"
+      ]
+     }
+    },
+    {
+     "key": "night",
+     "label": {
+      "en": "Late at night",
+      "hi": "देर रात"
+     },
+     "weights": {
+      "learning:night": 3
+     },
+     "keywords": {
+      "en": [],
+      "hinglish": [
+       "raat",
+       "der raat"
+      ],
+      "hi": [
+       "रात"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "matters",
+   "type": "choice",
+   "section": {
+    "en": "What matters",
+    "hi": "आपके लिए क्या ज़रूरी है"
+   },
+   "prompt": {
+    "en": "What matters most to you in a future job?",
+    "hi": "भविष्य की नौकरी में आपके लिए सबसे ज़रूरी क्या है?"
+   },
+   "speak": {
+    "en": "What matters most to you in a future job? Earning well, helping people, a secure job, being creative, or respect and leadership?",
+    "hi": "भविष्य की नौकरी में आपके लिए सबसे ज़रूरी क्या है? अच्छी कमाई, लोगों की मदद, पक्की नौकरी, क्रिएटिव काम, या इज़्ज़त और नेतृत्व?"
+   },
+   "options": [
+    {
+     "key": "money",
+     "label": {
+      "en": "Earning well",
+      "hi": "अच्छी कमाई"
+     },
+     "weights": {
+      "money": 3
+     },
+     "keywords": {
+      "en": [
+       "money",
+       "earning",
+       "salary",
+       "rich",
+       "earn"
+      ],
+      "hinglish": [
+       "paisa",
+       "kamai",
+       "salary"
+      ],
+      "hi": [
+       "पैसा",
+       "कमाई"
+      ]
+     }
+    },
+    {
+     "key": "helping",
+     "label": {
+      "en": "Helping people",
+      "hi": "लोगों की मदद"
+     },
+     "weights": {
+      "social": 3
+     },
+     "keywords": {
+      "en": [
+       "help",
+       "helping",
+       "people",
+       "society",
+       "serve"
+      ],
+      "hinglish": [
+       "madad",
+       "logon ki madad",
+       "seva"
+      ],
+      "hi": [
+       "मदद",
+       "सेवा"
+      ]
+     }
+    },
+    {
+     "key": "secure",
+     "label": {
+      "en": "A secure, steady job",
+      "hi": "पक्की, स्थिर नौकरी"
+     },
+     "weights": {
+      "stability": 3
+     },
+     "keywords": {
+      "en": [
+       "secure",
+       "stable",
+       "steady",
+       "safe",
+       "security"
+      ],
+      "hinglish": [
+       "pakki naukri",
+       "stable",
+       "surakshit"
+      ],
+      "hi": [
+       "पक्की",
+       "स्थिर"
+      ]
+     }
+    },
+    {
+     "key": "creative",
+     "label": {
+      "en": "Being creative",
+      "hi": "क्रिएटिव काम"
+     },
+     "weights": {
+      "artistic": 3
+     },
+     "keywords": {
+      "en": [
+       "creative",
+       "create",
+       "freedom",
+       "art"
+      ],
+      "hinglish": [
+       "creative",
+       "kuch naya"
+      ],
+      "hi": [
+       "क्रिएटिव"
+      ]
+     }
+    },
+    {
+     "key": "respect",
+     "label": {
+      "en": "Respect and leadership",
+      "hi": "इज़्ज़त और नेतृत्व"
+     },
+     "weights": {
+      "enterprising": 3
+     },
+     "keywords": {
+      "en": [
+       "respect",
+       "lead",
+       "power",
+       "leadership",
+       "name"
+      ],
+      "hinglish": [
+       "izzat",
+       "respect",
+       "naam"
+      ],
+      "hi": [
+       "इज़्ज़त",
+       "इज्जत",
+       "नेतृत्व"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "sector",
+   "type": "choice",
+   "section": {
+    "en": "What matters",
+    "hi": "आपके लिए क्या ज़रूरी है"
+   },
+   "prompt": {
+    "en": "Government job, private company, or your own business?",
+    "hi": "सरकारी नौकरी, प्राइवेट कंपनी, या अपना बिज़नेस?"
+   },
+   "speak": {
+    "en": "Would you prefer a government job, a private company, your own business, or you don't mind?",
+    "hi": "आप क्या पसंद करेंगे — सरकारी नौकरी, प्राइवेट कंपनी, अपना बिज़नेस, या कोई फ़र्क नहीं पड़ता?"
+   },
+   "options": [
+    {
+     "key": "govt",
+     "label": {
+      "en": "Government job",
+      "hi": "सरकारी नौकरी"
+     },
+     "weights": {
+      "stability": 3,
+      "society": 1
+     },
+     "keywords": {
+      "en": [
+       "government",
+       "govt",
+       "sarkari",
+       "public"
+      ],
+      "hinglish": [
+       "sarkari",
+       "government"
+      ],
+      "hi": [
+       "सरकारी"
+      ]
+     }
+    },
+    {
+     "key": "private",
+     "label": {
+      "en": "Private company",
+      "hi": "प्राइवेट कंपनी"
+     },
+     "weights": {
+      "money": 2,
+      "tech": 1
+     },
+     "keywords": {
+      "en": [
+       "private",
+       "company",
+       "corporate",
+       "mnc"
+      ],
+      "hinglish": [
+       "private",
+       "company"
+      ],
+      "hi": [
+       "प्राइवेट",
+       "कंपनी"
+      ]
+     }
+    },
+    {
+     "key": "own",
+     "label": {
+      "en": "My own business",
+      "hi": "अपना बिज़नेस"
+     },
+     "weights": {
+      "enterprising": 3,
+      "money": 1
+     },
+     "keywords": {
+      "en": [
+       "own",
+       "business",
+       "startup",
+       "entrepreneur"
+      ],
+      "hinglish": [
+       "apna business",
+       "khud ka"
+      ],
+      "hi": [
+       "अपना बिज़नेस",
+       "अपना"
+      ]
+     }
+    },
+    {
+     "key": "any",
+     "label": {
+      "en": "I don't mind",
+      "hi": "कोई फ़र्क नहीं पड़ता"
+     },
+     "weights": {
+      "stability": 1,
+      "money": 1
+     },
+     "keywords": {
+      "en": [
+       "don't mind",
+       "any",
+       "whatever",
+       "not sure",
+       "either"
+      ],
+      "hinglish": [
+       "farak nahi",
+       "fark nahi",
+       "kuch bhi",
+       "pata nahi"
+      ],
+      "hi": [
+       "फ़र्क नहीं",
+       "फर्क नहीं",
+       "कुछ भी"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "years",
+   "type": "choice",
+   "section": {
+    "en": "What matters",
+    "hi": "आपके लिए क्या ज़रूरी है"
+   },
+   "prompt": {
+    "en": "How long are you happy to study after class 12?",
+    "hi": "बारहवीं के बाद आप कितने साल पढ़ाई करने को तैयार हैं?"
+   },
+   "speak": {
+    "en": "How long are you happy to study after class twelve? Three or four years, five or six years, or as long as it takes?",
+    "hi": "बारहवीं के बाद आप कितने साल पढ़ाई करने को तैयार हैं? तीन-चार साल, पाँच-छह साल, या जितना लगे?"
+   },
+   "options": [
+    {
+     "key": "short",
+     "label": {
+      "en": "3–4 years",
+      "hi": "3–4 साल"
+     },
+     "weights": {
+      "long_study": 0.5
+     },
+     "keywords": {
+      "en": [
+       "three",
+       "four",
+       "3",
+       "4",
+       "short",
+       "quick"
+      ],
+      "hinglish": [
+       "teen",
+       "char",
+       "chaar",
+       "kam"
+      ],
+      "hi": [
+       "तीन",
+       "चार"
+      ]
+     }
+    },
+    {
+     "key": "medium",
+     "label": {
+      "en": "5–6 years",
+      "hi": "5–6 साल"
+     },
+     "weights": {
+      "long_study": 2
+     },
+     "keywords": {
+      "en": [
+       "five",
+       "six",
+       "5",
+       "6"
+      ],
+      "hinglish": [
+       "paanch",
+       "panch",
+       "chhe",
+       "chhah"
+      ],
+      "hi": [
+       "पाँच",
+       "पांच",
+       "छह"
+      ]
+     }
+    },
+    {
+     "key": "long",
+     "label": {
+      "en": "As long as it takes",
+      "hi": "जितना लगे"
+     },
+     "weights": {
+      "long_study": 3,
+      "investigative": 1
+     },
+     "keywords": {
+      "en": [
+       "long",
+       "takes",
+       "phd",
+       "as much",
+       "any"
+      ],
+      "hinglish": [
+       "jitna lage",
+       "jitna bhi"
+      ],
+      "hi": [
+       "जितना लगे",
+       "जितना"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "key": "pressure",
+   "type": "choice",
+   "section": {
+    "en": "What matters",
+    "hi": "आपके लिए क्या ज़रूरी है"
+   },
+   "prompt": {
+    "en": "How do you handle competition and pressure, like big exams?",
+    "hi": "आप मुक़ाबले और दबाव, जैसे बड़ी परीक्षाओं को कैसे संभालते हैं?"
+   },
+   "speak": {
+    "en": "Last one. How do you handle competition and pressure, like big entrance exams? You thrive on it, it's fine, or it stresses you out?",
+    "hi": "आख़िरी सवाल। आप मुक़ाबले और दबाव को, जैसे बड़ी एंट्रेंस परीक्षाओं को, कैसे संभालते हैं? इससे जोश आता है, ठीक है, या तनाव होता है?"
+   },
+   "options": [
+    {
+     "key": "thrive",
+     "label": {
+      "en": "I thrive on it",
+      "hi": "इससे जोश आता है"
+     },
+     "weights": {
+      "enterprising": 1,
+      "long_study": 1,
+      "stability": 0
+     },
+     "keywords": {
+      "en": [
+       "thrive",
+       "love",
+       "enjoy",
+       "motivates"
+      ],
+      "hinglish": [
+       "josh",
+       "maza",
+       "motivation"
+      ],
+      "hi": [
+       "जोश",
+       "मज़ा"
+      ]
+     }
+    },
+    {
+     "key": "fine",
+     "label": {
+      "en": "It's fine",
+      "hi": "ठीक है"
+     },
+     "weights": {
+      "long_study": 0.5
+     },
+     "keywords": {
+      "en": [
+       "fine",
+       "okay",
+       "ok",
+       "manage"
+      ],
+      "hinglish": [
+       "theek",
+       "thik",
+       "manage"
+      ],
+      "hi": [
+       "ठीक"
+      ]
+     }
+    },
+    {
+     "key": "stress",
+     "label": {
+      "en": "It stresses me out",
+      "hi": "तनाव होता है"
+     },
+     "weights": {
+      "stability": 1
+     },
+     "keywords": {
+      "en": [
+       "stress",
+       "anxious",
+       "pressure",
+       "nervous",
+       "hate"
+      ],
+      "hinglish": [
+       "tension",
+       "stress",
+       "tanav",
+       "darr"
+      ],
+      "hi": [
+       "तनाव",
+       "टेंशन",
+       "डर"
+      ]
+     }
+    }
+   ]
+  }
+ ]
+}
