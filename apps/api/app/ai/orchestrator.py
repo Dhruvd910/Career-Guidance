@@ -13,6 +13,7 @@ from app.ai.language import detect, reply_instruction, updated_stats, usual_lang
 from app.ai import safety
 from app.ai.tools import TOOL_SPECS, execute_tool
 from app.assessment.context import assessment_context
+from app.roadmap.context import roadmap_context
 from app.memory.retrieval import build_memory_context
 from app.memory.state import schedule_analysis, tone_note
 from app.providers.llm import LLMProvider, TextDelta, ToolCall
@@ -60,6 +61,10 @@ keeps open, and which colleges offer it come only from career_pathways, career_s
 colleges_offering — never from your own memory, however well you think you know it (call the tool even for \
 doctor, lawyer or IAS). For colleges, give names and places only and say plainly that \
 fees, hostels and facilities aren't available yet.
+- The student's plan, its next step and their progress come only from the roadmap tools. When their situation \
+changes ("I only have two hours a day", "maths is hard", "I like cybersecurity now"), offer to update the roadmap, \
+and after they agree, call adjust_roadmap and explain what changed and why — finished work still counts and old \
+versions are kept.
 - Ask focused follow-up questions to fill in missing information (rank, category, preferences) rather than \
 assuming defaults, but don't re-ask for anything you can already see in get_student_profile / \
 get_exam_profile.
@@ -190,6 +195,7 @@ class Reply:
         if remembered:
             self.messages.insert(1, {"role": "system", "content": remembered})
         self.messages.insert(2 if remembered else 1, {"role": "system", "content": assessment_context(db, profile)})
+        self.messages.insert(3 if remembered else 2, {"role": "system", "content": roadmap_context(db, profile)})
         tone = tone_note(db, conversation.id)
         if tone:
             self.messages.append({"role": "system", "content": tone})

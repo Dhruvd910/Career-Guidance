@@ -1,0 +1,86 @@
+"""MAYA and the roadmap: what she knows in every reply, and her tools."""
+
+from app.ai import orchestrator
+from app.ai.tools import TOOL_SPECS, execute_tool
+from app.roadmap.context import NONE_YET, roadmap_context
+from app.seed.careers import seed_careers
+from tests.fakes import FakeLLM
+from tests.test_assessment_service import right, student, take
+from tests.test_conversation_ws import register
+
+
+def ready(db):
+    seed_careers(db)
+    asha = student(db, class_level=10)
+    asha.state = "Madhya Pradesh"
+    db.commit()
+    return asha
+
+
+def test_the_tools_replace_the_old_template():
+    names = {t["function"]["name"] for t in TOOL_SPECS}
+    assert "generate_roadmap" not in names
+    assert {"get_my_roadmap", "roadmap_next_step", "adjust_roadmap", "set_roadmap_focus", "update_roadmap_progress",
+            "my_progress", "exam_study_plan"} <= names
+
+
+def test_context_before_and_after_a_roadmap(db_session):
+    asha = ready(db_session)
+    assert roadmap_context(db_session, asha) == NONE_YET, "talking to MAYA doesn't make a roadmap"
+    execute_tool(db_session, asha, "set_roadmap_focus", {"career": "AI"})
+    execute_tool(db_session, asha, "adjust_roadmap", {"kind": "difficulty", "subject": "maths"})
+    text = roadmap_context(db_session, asha)
+    assert "focus Data Science & Artificial Intelligence" in text and "Now: Class 10" in text
+    assert "Next step: Maths foundation." in text, "the foundation comes first once maths is hard"
+    assert "Last change: " in text and "add Maths foundation — Added because you said maths feels hard" in text
+
+
+def test_next_step_and_progress(db_session):
+    asha = ready(db_session)
+    execute_tool(db_session, asha, "set_roadmap_focus", {"career": "cse"})
+    step = execute_tool(db_session, asha, "roadmap_next_step", {})
+    assert step["next_step"] == "What you enjoy" and step["done_when"] == "You've taken it once."
+    done = execute_tool(db_session, asha, "update_roadmap_progress", {"step": "logical reasoning", "status": "done"})
+    assert done["updated"] == "Logical reasoning" and "not a measured skill level" in done["note"]
+    vague = execute_tool(db_session, asha, "update_roadmap_progress", {"step": "skills"})
+    assert vague["error"].startswith("Which step?")
+    roadmap = execute_tool(db_session, asha, "get_my_roadmap", {})
+    now = roadmap["stages"][0]
+    assert now["now"] and any(s["step"] == "Logical reasoning" and s["status"] == "done" for s in now["steps"])
+    assert roadmap["focus"] == "Computer Science & Software Engineering"
+
+
+def test_the_three_sentences_through_the_tools(db_session):
+    asha = ready(db_session)
+    execute_tool(db_session, asha, "set_roadmap_focus", {"career": "AI"})
+    time = execute_tool(db_session, asha, "adjust_roadmap", {"kind": "time_budget", "hours_per_week": 2})
+    assert time["new_version"] == 3 and "finished still counts" in time["note"]
+    maths = execute_tool(db_session, asha, "adjust_roadmap", {"kind": "difficulty", "subject": "Maths"})
+    assert {"change": "add", "step": "Maths foundation", "reason": "Added because you said maths feels hard."} in maths["changes"]
+    swap = execute_tool(db_session, asha, "adjust_roadmap", {"kind": "interest_change", "career": "cybersecurity",
+                                                             "dropping": "AI"})
+    assert any(c["change"] == "park" for c in swap["changes"])
+    assert execute_tool(db_session, asha, "get_my_roadmap", {})["moved_away_from"] == ["Data Science & Artificial Intelligence"]
+    assert "error" in execute_tool(db_session, asha, "adjust_roadmap", {"kind": "difficulty", "subject": "dance"})
+
+
+def test_how_much_have_i_improved(db_session):
+    asha = ready(db_session)
+    take(db_session, asha, "aptitude", choose=lambda i: right(i, wrong={"a_log_1", "a_log_2", "a_log_3"}))
+    take(db_session, asha, "aptitude", choose=right)
+    out = execute_tool(db_session, asha, "my_progress", {})
+    logic = next(s for s in out["skills"] if s["skill"] == "Logical reasoning")
+    assert (logic["first"], logic["now"], logic["change"]) == (40, 100, 1)
+
+
+def test_the_study_plan_only_for_jee_and_neet(db_session):
+    asha = ready(db_session)
+    assert "JEE and NEET" in execute_tool(db_session, asha, "exam_study_plan", {})["note"]
+
+
+def test_every_reply_carries_the_roadmap(client, monkeypatch):
+    token = register(client)
+    llm = FakeLLM("Okay.")
+    monkeypatch.setattr(orchestrator, "get_llm_provider", lambda: llm)
+    client.post("/api/ai/chat", json={"message": "Mera next step kya hai?"}, headers={"Authorization": f"Bearer {token}"})
+    assert NONE_YET in "\n".join(m["content"] for m in llm.seen[0] if m["role"] == "system")

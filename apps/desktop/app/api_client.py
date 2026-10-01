@@ -175,7 +175,8 @@ class ApiClient:
         return self.post("/api/counselling/preference-list", {"exam_code": exam_code, **fields})
 
     def get_roadmap(self) -> dict:
-        return self.get("/api/roadmap")
+        """The JEE/NEET chapter-by-chapter study plan and the old milestone list."""
+        return self.get("/api/roadmap/legacy")
 
     def list_saved_items(self) -> list:
         return self.get("/api/saved-items")

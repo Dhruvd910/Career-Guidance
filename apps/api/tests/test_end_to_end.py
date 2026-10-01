@@ -49,9 +49,11 @@ def test_full_student_journey(client, seeded_jee):
     assert search.status_code == 200
     assert any(c["id"] == college_id for c in search.json())
 
-    roadmap = client.get("/api/roadmap", headers=headers)
-    assert roadmap.status_code == 200
-    assert len(roadmap.json()["steps"]) > 0
+    legacy = client.get("/api/roadmap/legacy", headers=headers)  # the study-plan template
+    assert legacy.status_code == 200
+    assert len(legacy.json()["steps"]) > 0
+    roadmap = client.get("/api/roadmap", headers=headers)  # the versioned roadmap (Phase 5)
+    assert roadmap.status_code == 200 and roadmap.json()["version"] == 1 and roadmap.json()["stages"]
 
 
 # ---------------- study plans ----------------

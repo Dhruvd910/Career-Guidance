@@ -11,12 +11,12 @@ from sqlalchemy.orm import Session
 
 from app.assessment.tools import ASSESSMENT_TOOLS
 from app.knowledge.tools import GRAPH_TOOLS
+from app.roadmap.tools import ROADMAP_TOOLS
 from app.models.student import StudentProfile
 from app.schemas.prediction import PredictionRequest, PreferenceListRequest
 from app.services import college_profiles, college_service
 from app.services.exam_service import get_exam_profile, list_exams, to_out
 from app.services.prediction_service import generate_preference_list, predict
-from app.services.roadmap_service import generate_roadmap
 from app.services.student_service import get_next_onboarding_step
 
 TOOL_SPECS: list[dict[str, Any]] = [
@@ -324,8 +324,74 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
-            "name": "generate_roadmap",
-            "description": "Generate the student's personalized step-by-step career roadmap.",
+            "name": "get_my_roadmap",
+            "description": "The student's roadmap: focus career, current stage with each step's status and months, later "
+                           "stages, % done, weekly hours. Use for 'show my plan', 'what's on my roadmap'.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "roadmap_next_step",
+            "description": "The next thing to do on the roadmap, why, when it's done, and things to try. Use for "
+                           "'Mera next step kya hai?', 'what should I do now?'.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "adjust_roadmap",
+            "description": "Change the roadmap when the student's situation changes (spec §19), making a new version and "
+                           "keeping the old ones. Ask them to confirm first, then call it and explain the changes it "
+                           "returns. kind: time_budget (hours_per_week: the hours a week they have for it, on top of "
+                           "school — '2 hours a day' total study usually leaves 3-5), difficulty (subject they find "
+                           "hard), interest_change (career: the new interest; dropping: one they no longer want), focus "
+                           "(career to build the roadmap around).",
+            "parameters": {"type": "object", "properties": {
+                "kind": {"type": "string", "enum": ["time_budget", "difficulty", "interest_change", "focus"]},
+                "hours_per_week": {"type": "integer"}, "subject": {"type": "string"},
+                "career": {"type": "string"}, "dropping": {"type": "string"},
+                "detail": {"type": "string", "description": "what they said, in a few words"}},
+                "required": ["kind"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "set_roadmap_focus",
+            "description": "Build the roadmap around one career the student has chosen (key or everyday name). Confirm first.",
+            "parameters": {"type": "object", "properties": {"career": {"type": "string"}}, "required": ["career"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "update_roadmap_progress",
+            "description": "Record that the student finished or started a roadmap step ('I finished the Python course'). "
+                           "step: its name as they said it, or its key.",
+            "parameters": {"type": "object", "properties": {
+                "step": {"type": "string"}, "status": {"type": "string", "enum": ["done", "in_progress", "not_started"]},
+                "note": {"type": "string"}}, "required": ["step"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "my_progress",
+            "description": "How the student's measured skills moved (first vs now, from assessments and practice papers), "
+                           "plus roadmap completion, milestones and projects done. Use for 'Main kitna improve hua hoon?' "
+                           "together with compare_assessments.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "exam_study_plan",
+            "description": "For a JEE or NEET student: the chapter-by-chapter study plan (NCERT book and chapter, "
+                           "high-weight chapters marked).",
             "parameters": {"type": "object", "properties": {}},
         },
     },
@@ -405,8 +471,8 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
             return ASSESSMENT_TOOLS[name](db, profile, args)
         if name in GRAPH_TOOLS:
             return GRAPH_TOOLS[name](db, profile, args)
-        if name == "generate_roadmap":
-            return _dump(generate_roadmap(db, profile))
+        if name in ROADMAP_TOOLS:
+            return ROADMAP_TOOLS[name](db, profile, args)
         if name == "get_onboarding_next_step":
             return _dump(get_next_onboarding_step(profile))
         if name == "list_exams":

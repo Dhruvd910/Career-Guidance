@@ -114,3 +114,45 @@ def skill_series(db: Session, profile: StudentProfile) -> list[dict]:
                         "says": p.detail.get("says")} for p in points],
         })
     return sorted(out, key=lambda s: (-len(s["points"]), s["name"]["en"]))
+
+
+def summary(db: Session, profile: StudentProfile) -> dict:
+    """Everything spec §20 tracks, in one place: skill progress (measured), assessments taken,
+    the roadmap's completion, milestones and projects done, goals, and careers explored."""
+    from app.memory import consent
+    from app.models.memory import StudentGoal
+    from app.roadmap import service as roadmaps
+
+    view = roadmaps.view(db, profile)
+    work = list(_walk(view["stages"]))
+    milestones = [n for n in work if n["kind"] == "milestone" and n.get("work")]
+    projects = [n for n in work if n["kind"] == "task" and n["attrs"].get("project")]
+    latest = alignment.latest_attempts(db, profile)
+    taken = db.execute(select(AssessmentAttempt).where(AssessmentAttempt.student_profile_id == profile.id,
+                                                       AssessmentAttempt.status == "completed")).scalars().all()
+    goals = []
+    if consent.allowed(db, profile, consent.LONG_TERM_MEMORY):
+        goals = [{"title": g.title, "status": g.status} for g in db.execute(
+            select(StudentGoal).where(StudentGoal.student_profile_id == profile.id)).scalars()]
+    return {
+        "skills": skill_series(db, profile),
+        "assessments": {"kinds": sorted(latest), "attempts": len(taken)},
+        "roadmap": {"version": view["version"], "completion": view["completion"],
+                    "current_stage": view["current_stage"], "focus": view["focus"]},
+        "milestones": {"done": sum(1 for m in milestones if m["percent"] == 100), "total": len(milestones),
+                       "done_titles": [m["title"] for m in milestones if m["percent"] == 100]},
+        "projects": {"done": sum(1 for p in projects if p["status"] == "done"), "total": len(projects),
+                     "done_titles": [p["title"] for p in projects if p["status"] == "done"]},
+        "goals": goals,
+        "careers_explored": {"focus": view["focus"], "branches": view["branches"], "moved_away_from": view["dropped"]},
+        "note": {"en": "Skill levels come only from assessments and practice papers — ticking a step done is your "
+                       "progress on the roadmap, not a skill score.",
+                 "hi": "हुनर का स्तर सिर्फ़ आकलनों और प्रैक्टिस पेपरों से आता है — किसी कदम को पूरा मार्क करना रोडमैप पर "
+                       "आपकी प्रगति है, हुनर का अंक नहीं।"},
+    }
+
+
+def _walk(nodes: list[dict]):
+    for n in nodes:
+        yield n
+        yield from _walk(n["children"])
