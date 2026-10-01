@@ -26,6 +26,7 @@ from sqlalchemy.orm import Session
 
 from app.ai.orchestrator import NOT_CONFIGURED, Reply, ToolActivity
 from app.conversation.chunker import SentenceSplitter
+from app.memory.opening import opening_line
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile
 from app.providers.http import ProviderError, warm
@@ -109,6 +110,21 @@ class ConversationSession:
         self._pending_audio: dict | None = None
         self.turn: Turn | None = None
         self._said_no_voice = False  # told the student, once, that answers will be text only
+
+    async def send_opening(self) -> None:
+        """MAYA's "where we left off" for a returning student (app/memory/opening.py)."""
+        llm = get_llm_provider()
+        if llm is None:
+            return
+        try:
+            opening = await opening_line(self.db, self.profile, llm)
+        except ProviderError as e:
+            logger.info("no opening line this time: %s", e)
+            return
+        if opening:
+            text, language = opening
+            await self.send({"type": "session.opening", "session_id": self.conversation.id, "text": text,
+                             "language": language})
 
     async def warm_up(self) -> None:
         """Opens the connections to the AI services while the student is still speaking, so the

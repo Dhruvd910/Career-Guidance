@@ -16,11 +16,13 @@ from sqlalchemy.orm import Session
 from app.ai.orchestrator import handle_chat
 from app.conversation.session import ConversationSession
 from app.memory.lifecycle import remember_soon
+from app.memory.opening import opening_line
 from app.core.config import get_settings
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile, student_profile_for_token
 from app.models.chat import Conversation
 from app.models.student import StudentProfile
+from app.providers.registry import get_llm_provider
 from app.schemas.ai import ChatResponse
 
 router = APIRouter(tags=["conversation"])
@@ -34,7 +36,8 @@ class StartRequest(BaseModel):
 
 class StartResponse(BaseModel):
     session_id: int
-    # What MAYA opens with. Phase 2 fills this from memory ("last time we talked about…").
+    # What MAYA opens with when the student returns to something unfinished ("last time we were
+    # discussing…") — None for a first session, a quick return, or without memory permission.
     opening: str | None = None
 
 
@@ -68,9 +71,12 @@ def _start(db: Session, profile: StudentProfile, channel: str) -> Conversation:
 
 
 @router.post("/api/conversation/start", response_model=StartResponse)
-def start(payload: StartRequest, profile: StudentProfile = Depends(get_current_student_profile),
-          db: Session = Depends(get_db)) -> StartResponse:
-    return StartResponse(session_id=_start(db, profile, payload.channel).id)
+async def start(payload: StartRequest, profile: StudentProfile = Depends(get_current_student_profile),
+                db: Session = Depends(get_db)) -> StartResponse:
+    conversation = _start(db, profile, payload.channel)
+    llm = get_llm_provider()
+    opening = await opening_line(db, profile, llm) if llm else None
+    return StartResponse(session_id=conversation.id, opening=opening[0] if opening else None)
 
 
 @router.post("/api/conversation/message", response_model=ChatResponse)
@@ -107,10 +113,17 @@ async def conversation_socket(websocket: WebSocket, session_id: int | None = Que
         await websocket.close(code=4401, reason="Not authenticated")
         return
     await websocket.accept()
-    conversation = _owned(db, profile, session_id) or _start(db, profile, "voice")
+    resumed = _owned(db, profile, session_id)
+    conversation = resumed if resumed is not None and resumed.status == "open" else _start(db, profile, "voice")
     session = ConversationSession(db, profile, conversation, websocket.send_json, websocket.send_bytes)
     warming = asyncio.create_task(session.warm_up())
     await session.send({"type": "session.ready", "session_id": conversation.id, "opening": None})
+    if conversation is not resumed:
+        # A new session: if they're coming back to something unfinished, MAYA opens with it.
+        # Sent when ready (an LLM call), never holding up the session.
+        opening = asyncio.create_task(session.send_opening())
+    else:
+        opening = None
     try:
         while True:
             frame = await websocket.receive()
@@ -132,5 +145,7 @@ async def conversation_socket(websocket: WebSocket, session_id: int | None = Que
         pass
     finally:
         warming.cancel()
+        if opening is not None:
+            opening.cancel()
         await session.close()
         logger.info("conversation %s: connection closed", conversation.id)

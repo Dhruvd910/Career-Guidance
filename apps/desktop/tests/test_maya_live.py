@@ -202,3 +202,26 @@ def test_before_the_live_line_is_up_questions_go_the_older_way(qapp, page, monke
     page._send_text()
     assert calls and calls[0][0] == "chat" and calls[0][1][0] == "Hello?"
     assert sent(page, "turn.text") == []
+
+
+def test_a_returning_student_hears_where_they_left_off(qapp, page, monkeypatch):
+    said = []
+    monkeypatch.setattr(page.voice, "say", lambda text, on_done=None, language=None: said.append((text, language)))
+    page.socket.server({"type": "session.opening", "session_id": 7, "language": "hinglish",
+                        "text": "Pichli baar hum PCM vs PCB pe the. Kuch badla?"})
+    assert said == [("Pichli baar hum PCM vs PCB pe the. Kuch badla?", "hinglish")]
+    assert bubbles(page)[-1] == "Pichli baar hum PCM vs PCB pe the. Kuch badla?"
+    assert page.language == "hinglish"
+
+
+def test_an_opening_that_arrives_while_she_is_busy_waits_for_her_next_wake(qapp, page, monkeypatch):
+    said = []
+    monkeypatch.setattr(page.voice, "say", lambda text, on_done=None, language=None: said.append(text))
+    turn = type_question(page, "Options?")  # she's busy with this
+    page.socket.server({"type": "session.opening", "session_id": 7, "language": "en", "text": "Welcome back!"})
+    assert said == []
+    answer(page, turn, "Engineering.")
+    page.wake(greet=True)
+    assert said == ["Welcome back!"], 'instead of "Yes? How can I help?"'
+    page.wake(greet=True)
+    assert said[-1] == "Yes? How can I help?", "only once"

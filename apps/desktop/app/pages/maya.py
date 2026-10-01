@@ -65,6 +65,9 @@ class MayaPage(BasePage):
         self._turn_by_voice = False
         self._turn_bubble: ChatBubble | None = None
         self._follow_up = False  # listening for the answer to a question MAYA just asked
+        # "Where we left off", from the server when a returning student opens a new session;
+        # said at the first chance (now if she's idle here, else when she's next woken).
+        self._opening: tuple[str, str] | None = None
 
         compact = QApplication.primaryScreen().availableGeometry().width() < COMPACT_SCREEN_WIDTH
         mascot_size = MASCOT_SIZE_COMPACT if compact else MASCOT_SIZE
@@ -162,6 +165,9 @@ class MayaPage(BasePage):
     def on_show(self, wake: bool = False, greet: bool = True, ask: str | None = None, **kwargs) -> None:
         set_error(self.not_configured_label, None)
         self.client.open()
+        if self._opening and not ask and not wake:
+            self._say_opening()
+            return
         if ask:
             # Another screen's "Ask MAYA about it": the question goes straight in.
             self.text_input.setText(ask)
@@ -174,7 +180,9 @@ class MayaPage(BasePage):
         an interruption she skips the "Yes?" — they're already talking."""
         set_error(self.not_configured_label, None)
         self._mic_session = False
-        if greet:
+        if greet and self._opening:
+            self._say_opening()
+        elif greet:
             prompt = "Yes? How can I help?" if self.language == "en" else "हाँ? बताइए, मैं कैसे मदद करूँ?"
             self.voice.say(prompt, on_done=self._listen_after_wake)
         else:
@@ -330,6 +338,11 @@ class MayaPage(BasePage):
         return True
 
     def _on_live_message(self, message: dict) -> None:
+        if message["type"] == "session.opening":
+            self._opening = (message["text"], message.get("language") or "en")
+            if self.isVisible() and not self.voice.busy and self._turn is None and not self.ctx.keyboard.isVisible():
+                self._say_opening()
+            return
         if self._turn is None or message.get("turn_id") != self._turn:
             return  # an earlier turn, already cut short
         kind = message["type"]
@@ -365,6 +378,13 @@ class MayaPage(BasePage):
             turn, self._turn = self._turn, None
             self.voice.end_stream(turn)
             self._add_bubble("assistant", f"⚠ {message.get('message') or 'Something went wrong.'}")
+
+    def _say_opening(self) -> None:
+        """Where we left off — then she listens for the answer to her check-in."""
+        (text, language), self._opening = self._opening, None
+        self.language = language
+        self._add_bubble("assistant", text)
+        self.voice.say(text, language=language, on_done=self._listen_for_answer)
 
     def _on_live_audio(self, header: dict, pcm: bytes) -> None:
         if header.get("turn_id") == self._turn:
