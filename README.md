@@ -135,7 +135,16 @@ curl -LO https://alphacephei.com/vosk/models/vosk-model-small-en-in-0.4.zip
 unzip vosk-model-small-en-in-0.4.zip && rm vosk-model-small-en-in-0.4.zip
 ```
 
-Without it, everything else still works and MAYA wakes on a tap. To check what she hears in
+Without it, everything else still works and MAYA wakes on a tap.
+
+Telling speech from noise uses the Silero VAD model (MIT licence, ~2 MB) through ONNX Runtime
+(in `requirements.txt`). Without the model, MAYA falls back to a loudness check, which a fan or
+traffic can fool:
+
+```bash
+cd apps/desktop/models
+curl -LO https://github.com/snakers4/silero-vad/raw/master/src/silero_vad/data/silero_vad.onnx
+``` To check what she hears in
 your accent and room, say "Hey Maya" a few times at:
 
 ```bash

@@ -1,3 +1,5 @@
+import uuid
+
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtWidgets import (
     QApplication, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QSizePolicy, QVBoxLayout, QWidget,
@@ -5,6 +7,7 @@ from PySide6.QtWidgets import (
 
 from app.api_client import ApiError, api_client
 from app.config import PORTRAIT_RATIO
+from app.conversation_client import ConversationClient
 from app.theme import CARD_BORDER, FOREGROUND, PRIMARY
 from app.pages.base import BasePage
 from app.voice import LISTENING, THINKING
@@ -44,6 +47,18 @@ class MayaPage(BasePage):
         # The language the student last spoke or typed ("en"/"hi"/"hinglish"), as the server
         # judged it, so MAYA's own short prompts ("Yes? How can I help?") follow it too.
         self.language = "en"
+
+        # The live conversation: replies streamed and spoken sentence by sentence. Until it's
+        # connected (or if it can't be), questions go the older way, one whole reply at a time.
+        self.client = ConversationClient(lambda: api_client.token)
+        self.client.message.connect(self._on_live_message)
+        self.client.audio.connect(self._on_live_audio)
+        self.voice.stream_stopped.connect(self._on_stream_stopped)
+        self.voice.stream_sentence_played.connect(self._on_sentence_played)
+        self._turn: str | None = None  # the live turn being answered
+        self._turn_by_voice = False
+        self._turn_bubble: ChatBubble | None = None
+        self._follow_up = False  # listening for the answer to a question MAYA just asked
 
         compact = QApplication.primaryScreen().availableGeometry().width() < COMPACT_SCREEN_WIDTH
         mascot_size = MASCOT_SIZE_COMPACT if compact else MASCOT_SIZE
@@ -140,6 +155,7 @@ class MayaPage(BasePage):
 
     def on_show(self, wake: bool = False, greet: bool = True, ask: str | None = None, **kwargs) -> None:
         set_error(self.not_configured_label, None)
+        self.client.open()
         if ask:
             # Another screen's "Ask MAYA about it": the question goes straight in.
             self.text_input.setText(ask)
@@ -165,7 +181,7 @@ class MayaPage(BasePage):
 
     # ---------------- transcript ----------------
 
-    def _add_bubble(self, role: str, text: str) -> None:
+    def _add_bubble(self, role: str, text: str) -> ChatBubble:
         row = QHBoxLayout()
         bubble = ChatBubble(role, text)
         if role == "user":
@@ -177,6 +193,7 @@ class MayaPage(BasePage):
         row_widget = QWidget()
         row_widget.setLayout(row)
         self.messages_layout.addWidget(row_widget)
+        return bubble
 
     def _begin_request(self) -> int:
         self._request_id += 1
@@ -204,6 +221,8 @@ class MayaPage(BasePage):
             return
         self.text_input.clear()
         self._add_bubble("user", text)
+        if self._start_live_turn(by_voice=False, send=lambda turn_id: self.client.send_text_turn(turn_id, text)):
+            return
         request_id = self._begin_request()
         run_async(
             api_client.chat, text, self.conversation_id,
@@ -236,6 +255,9 @@ class MayaPage(BasePage):
 
     def _send_voice(self, wav_bytes: bytes) -> None:
         self._mic_session = False
+        self._follow_up = False
+        if self._start_live_turn(by_voice=True, send=lambda turn_id: self.client.send_audio_turn(turn_id, wav_bytes)):
+            return
         request_id = self._begin_request()
         run_async(
             api_client.voice_chat, wav_bytes, self.conversation_id,
@@ -258,6 +280,9 @@ class MayaPage(BasePage):
     def _on_no_voice(self, reason: str) -> None:
         self._mic_session = False
         self._refresh_mic_button()
+        follow_up, self._follow_up = self._follow_up, False
+        if follow_up and reason in ("silence", "unclear"):
+            return  # no answer to her question is an answer too; tap Speak to carry on
         if reason == "no_mic":
             set_error(self.not_configured_label, "No microphone detected. You can still type your questions.")
         elif reason == "silence":
@@ -278,3 +303,70 @@ class MayaPage(BasePage):
             self._mic_session = False
         self.mic_btn.setIcon(stop_icon() if listening else mic_icon("#ffffff"))
         self.mic_btn.setText("  Stop" if listening else "  Speak")
+
+    # ---------------- the live conversation ----------------
+
+    def _start_live_turn(self, by_voice: bool, send) -> bool:
+        """Sends a turn over the live connection; False if it isn't connected (the caller then
+        asks the older way)."""
+        if not self.client.ready:
+            return False
+        turn_id = uuid.uuid4().hex
+        self.voice.begin_stream(turn_id)  # stops anything she was saying, and tells the server
+        if not send(turn_id):
+            self.voice.cancel()
+            return False
+        self._turn, self._turn_by_voice, self._turn_bubble = turn_id, by_voice, None
+        set_error(self.not_configured_label, None)
+        return True
+
+    def _on_live_message(self, message: dict) -> None:
+        if self._turn is None or message.get("turn_id") != self._turn:
+            return  # an earlier turn, already cut short
+        kind = message["type"]
+        if kind == "turn.transcript":
+            self.language = message.get("language") or self.language
+            if self._turn_by_voice:
+                self._add_bubble("user", message["text"])
+        elif kind == "reply.delta":
+            self.voice.stream_text(self._turn, message["text"])
+            if self._turn_bubble is None:
+                self._turn_bubble = self._add_bubble("assistant", message["text"])
+            else:
+                self._turn_bubble.setText(f"{self._turn_bubble.text()} {message['text']}")
+        elif kind == "reply.done":
+            turn, self._turn = self._turn, None
+            self.language = message.get("language") or self.language
+            # Asked something by voice and answered with a question: listen for the answer.
+            asks = self._turn_by_voice and message.get("text", "").rstrip().endswith("?")
+            self.voice.end_stream(turn, on_done=self._listen_for_answer if asks else None)
+        elif kind == "turn.no_speech":
+            turn, self._turn = self._turn, None
+            self.voice.end_stream(turn)
+            self._on_no_voice("unclear")
+        elif kind == "error":
+            if message.get("code") == "tts_unavailable":
+                set_error(self.not_configured_label, message.get("message"))  # the words still come
+                return
+            turn, self._turn = self._turn, None
+            self.voice.end_stream(turn)
+            self._add_bubble("assistant", f"⚠ {message.get('message') or 'Something went wrong.'}")
+
+    def _on_live_audio(self, header: dict, pcm: bytes) -> None:
+        if header.get("turn_id") == self._turn:
+            self.voice.stream_audio(self._turn, int(header["seq"]), int(header["sample_rate"]), pcm)
+
+    def _on_sentence_played(self, turn_id: str, seq: int) -> None:
+        self.client.send({"type": "playback.ack", "turn_id": turn_id, "seq": seq})
+
+    def _on_stream_stopped(self, turn_id: str, seq: int, played_ms: float) -> None:
+        """She was cut off — by "Stop Maya", a tap, a new question, leaving the page: the server
+        keeps only what was heard."""
+        self.client.send({"type": "turn.interrupt", "turn_id": turn_id, "seq": seq, "played_ms": played_ms})
+        if turn_id == self._turn:
+            self._turn = None
+
+    def _listen_for_answer(self) -> None:
+        if self.isVisible() and not self.ctx.keyboard.isVisible():
+            self._follow_up = True
+            self._toggle_listening()

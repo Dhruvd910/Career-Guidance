@@ -255,3 +255,15 @@ def test_a_failing_service_answers_503_not_500(client, monkeypatch):
     r = client.post("/api/ai/transcribe", files={"audio": ("a.wav", b"RIFF", "audio/wav")},
                     headers={"Authorization": f"Bearer {token}"})
     assert r.status_code == 503 and "groq" in r.json()["detail"]
+
+
+def test_idle_connections_are_kept_between_turns():
+    assert provider_http.LIMITS.keepalive_expiry >= 60
+
+
+def test_warming_up_opens_the_connection_and_ignores_failure(monkeypatch):
+    client = network(httpx.Response(404), httpx.ConnectError("offline"))
+    monkeypatch.setattr(provider_http, "client_for", lambda base_url: client)
+    asyncio.run(provider_http.warm("https://ai.invalid/v1"))
+    asyncio.run(provider_http.warm("https://ai.invalid/v1"))  # must not raise
+    assert [r.method for r in client.requests] == ["HEAD", "HEAD"]

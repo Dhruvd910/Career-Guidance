@@ -1,10 +1,10 @@
 """Audio for MAYA's voice: microphone capture that stops on its own when you stop talking,
-and speech playback.
+and speech playback — whole clips (SpeechPlayer) or a reply streamed as it is spoken
+(StreamPlayer).
 
-Both go through PortAudio straight to ALSA. The kiosk X session has no PulseAudio or
-PipeWire (neither is even installed), so Qt Multimedia's audio output had nowhere to go
-there and MAYA was silent in kiosk mode. On this Pi, PortAudio's defaults are the USB sound
-card's microphone and the 3.5mm jack.
+Everything goes through PortAudio, so it works with plain ALSA (the original kiosk Pi had no
+PulseAudio or PipeWire, which left Qt Multimedia silent) and through PipeWire on the Pi
+desktop, where the default output is whatever the desktop's volume control points at.
 
 The USB mic only accepts 44.1/48kHz (it rejects 16kHz outright), so capture runs at the
 device's native rate and is resampled to 16kHz — what Whisper uses anyway — before upload.
@@ -22,14 +22,13 @@ import numpy as np
 import sounddevice as sd
 from PySide6.QtCore import QObject, Signal
 
+from app.vad import make_gate, resample_int16
+
 WHISPER_RATE = 16000
 PLAYBACK_RATE = 44100
 
 BLOCK_SECONDS = 0.03
-CALIBRATION_BLOCKS = 10  # ~0.3s of room noise measured before deciding what counts as speech
-MIN_SPEECH_RMS = 350.0  # floor, so a dead-silent room can't set the threshold near zero
-MAX_SPEECH_THRESHOLD = 3000.0  # cap, so a noisy calibration window can't make speech undetectable
-SPEECH_ONSET_BLOCKS = 3  # ~90ms above threshold is speech; shorter is a click or a cough
+SPEECH_ONSET_BLOCKS = 3  # ~90ms that sounds like speech is speech; shorter is a click or a cough
 PRE_ROLL_SECONDS = 0.4  # keep audio from just before onset so the first syllable isn't clipped
 TRAILING_KEEP_SECONDS = 0.3
 
@@ -73,13 +72,6 @@ def input_rate(device: int | str | None) -> int:
     return int(sd.query_devices(device, kind="input")["default_samplerate"])
 
 
-def resample_int16(samples: np.ndarray, from_rate: int, to_rate: int) -> np.ndarray:
-    audio = samples.astype(np.float32)
-    n_out = max(1, int(len(audio) * to_rate / from_rate))
-    resampled = np.interp(np.linspace(0, len(audio) - 1, n_out), np.arange(len(audio)), audio)
-    return np.clip(resampled, -32768, 32767).astype(np.int16)
-
-
 class VoiceRecorder(QObject):
     """Emits exactly one of finished(wav_bytes), no_speech(), or failed(message) per
     listen() — unless cancel() is called first, in which case it emits nothing."""
@@ -100,7 +92,10 @@ class VoiceRecorder(QObject):
     def is_listening(self) -> bool:
         return self._stream is not None
 
-    def listen(self, max_seconds: float = 15.0, no_speech_timeout: float = 7.0, end_silence: float = 1.2) -> None:
+    def listen(self, max_seconds: float = 15.0, no_speech_timeout: float = 7.0,
+               end_silence: float | None = None) -> None:
+        """end_silence: how long a pause ends the utterance — by default the speech gate's own
+        (shorter for the Silero model, which isn't fooled by a quieter syllable)."""
         self.cancel()
         self._gen += 1
         gen = self._gen
@@ -113,10 +108,9 @@ class VoiceRecorder(QObject):
         except Exception as e:  # noqa: BLE001 — PortAudio raises its own exception types
             raise MicUnavailableError(f"No microphone available: {e}") from e
 
+        gate = make_gate()
         self._rate = rate
         self._blocks: list[np.ndarray] = []
-        self._calibration: list[float] = []
-        self._threshold: float | None = None
         self._onset_run = 0
         self._speech_start: int | None = None
         self._last_voice = 0
@@ -124,23 +118,18 @@ class VoiceRecorder(QObject):
 
         max_blocks = int(max_seconds / BLOCK_SECONDS)
         no_speech_blocks = int(no_speech_timeout / BLOCK_SECONDS)
-        end_blocks = int(end_silence / BLOCK_SECONDS)
+        end_blocks = int((end_silence if end_silence is not None else gate.end_silence) / BLOCK_SECONDS)
 
         def callback(indata, frames, time_info, status):
             chunk = indata[:, 0].copy()
             self._blocks.append(chunk)
             i = len(self._blocks) - 1
-            rms = float(np.sqrt(np.mean(chunk.astype(np.float32) ** 2)))
-
-            if i < CALIBRATION_BLOCKS:
-                self._calibration.append(rms)
-                return
-            if self._threshold is None:
-                ambient = float(np.median(self._calibration))
-                self._threshold = min(max(ambient * 2.8, MIN_SPEECH_RMS), MAX_SPEECH_THRESHOLD)
+            speech = gate.is_speech(chunk, rate)
+            if speech is None:
+                return  # still measuring the room
 
             if self._speech_start is None:
-                self._onset_run = self._onset_run + 1 if rms > self._threshold else 0
+                self._onset_run = self._onset_run + 1 if speech else 0
                 if self._onset_run >= SPEECH_ONSET_BLOCKS:
                     self._speech_start = i - SPEECH_ONSET_BLOCKS + 1
                     self._last_voice = i
@@ -148,13 +137,11 @@ class VoiceRecorder(QObject):
                 elif i >= no_speech_blocks:
                     self._outcome = "no_speech"
                     raise sd.CallbackStop
-            else:
-                # Hysteresis: once talking, a slightly quieter syllable still counts as talking.
-                if rms > self._threshold * 0.7:
-                    self._last_voice = i
-                elif i - self._last_voice >= end_blocks:
-                    self._outcome = "speech"
-                    raise sd.CallbackStop
+            elif speech:
+                self._last_voice = i
+            elif i - self._last_voice >= end_blocks:
+                self._outcome = "speech"
+                raise sd.CallbackStop
 
             if i >= max_blocks:
                 self._outcome = "speech" if self._speech_start is not None else "no_speech"
@@ -271,3 +258,135 @@ class SpeechPlayer(QObject):
     def _on_done(self, gen: int) -> None:
         if gen == self._gen:
             self.finished.emit()
+
+
+class StreamPlayer(QObject):
+    """Plays a reply's speech while it is still arriving: 16-bit mono PCM chunks, each tagged
+    with the sentence (`seq`) it belongs to, played back to back with no gaps between them.
+
+    It always knows how far it has got — which sentence, and how many ms into it — so when the
+    student interrupts, stop() can say exactly what they heard. If the next chunk is late, the
+    speaker plays silence until it comes rather than stopping.
+
+    Signals: sentence_played(seq) as each sentence's last sample goes out; drained() once
+    end() has been called and everything queued has played.
+    """
+
+    sentence_played = Signal(int)
+    drained = Signal()
+    _finished = Signal(int)  # stream generation, from PortAudio's thread to the UI thread
+
+    LEAD_IN_SECONDS = 0.05  # the DAC takes a moment to wake; without this the first syllable is lost
+
+    def __init__(self):
+        super().__init__()
+        self._lock = threading.Lock()
+        self._stream = None
+        self._gen = 0
+        self._finished.connect(self._on_finished)
+        self._reset()
+
+    def _reset(self) -> None:
+        self._chunks: list[list] = []  # [seq, int16 samples, offset into them]
+        self._ended = False
+        self._seq: int | None = None  # the sentence now playing
+        self._seq_samples = 0  # of it, played so far
+        self.rate = PLAYBACK_RATE
+
+    @property
+    def active(self) -> bool:
+        return self._stream is not None
+
+    def start(self, rate: int) -> None:
+        self.stop()
+        self._gen += 1
+        gen = self._gen
+        with self._lock:
+            self._reset()
+            self.rate = rate
+            self._chunks.append([None, np.zeros(int(rate * self.LEAD_IN_SECONDS), dtype=np.int16), 0])
+
+        def finished() -> None:
+            self._finished.emit(gen)
+
+        try:
+            stream = sd.OutputStream(samplerate=rate, channels=1, dtype="int16", callback=self._fill,
+                                     finished_callback=finished)
+            stream.start()
+        except Exception:  # noqa: BLE001 — no speaker: the words are on screen anyway
+            self._stream = None
+            self.drained.emit()
+            return
+        self._stream = stream
+
+    def feed(self, seq: int, pcm: bytes) -> None:
+        samples = np.frombuffer(pcm, dtype=np.int16)
+        with self._lock:
+            self._chunks.append([seq, samples, 0])
+
+    def end(self) -> None:
+        """No more chunks are coming: drained() follows once everything queued has played."""
+        with self._lock:
+            self._ended = True
+
+    def position(self) -> tuple[int, float]:
+        """(the sentence playing, ms of it played) — or the next one at 0 ms between sentences."""
+        with self._lock:
+            if self._seq is None:
+                return 0, 0.0
+            return self._seq, self._seq_samples / self.rate * 1000
+
+    def stop(self) -> tuple[int, float] | None:
+        """Stops at once. Returns where it stopped, or None if nothing was playing."""
+        stream, self._stream = self._stream, None
+        if stream is None:
+            return None
+        self._gen += 1  # its finished callback is now stale
+        where = self.position()
+        try:
+            stream.abort()
+            stream.close()
+        except Exception:  # noqa: BLE001
+            pass
+        return where
+
+    def _fill(self, outdata, frames, time_info, status) -> None:
+        out = outdata[:, 0]
+        filled = 0
+        finished_seqs = []
+        with self._lock:
+            while filled < frames and self._chunks:
+                chunk = self._chunks[0]
+                seq, samples, offset = chunk
+                if seq is not None and seq != self._seq:
+                    if self._seq is not None:
+                        finished_seqs.append(self._seq)
+                    self._seq, self._seq_samples = seq, 0
+                take = min(frames - filled, len(samples) - offset)
+                out[filled:filled + take] = samples[offset:offset + take]
+                filled += take
+                chunk[2] += take
+                if seq is not None:
+                    self._seq_samples += take
+                if chunk[2] >= len(samples):
+                    self._chunks.pop(0)
+            out[filled:] = 0  # waiting for the next chunk, or done
+            done = self._ended and not self._chunks
+            if done and self._seq is not None:
+                finished_seqs.append(self._seq)
+                self._seq = None
+        for seq in finished_seqs:
+            self.sentence_played.emit(seq)
+        if done:
+            raise sd.CallbackStop
+
+    def _on_finished(self, gen: int) -> None:
+        if gen != self._gen:
+            return
+        stream, self._stream = self._stream, None
+        if stream is not None:
+            try:
+                stream.close()
+            except Exception:  # noqa: BLE001
+                pass
+        self.drained.emit()

@@ -27,7 +27,7 @@ from app.ai.orchestrator import NOT_CONFIGURED, Reply, ToolActivity
 from app.conversation.chunker import SentenceSplitter
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile
-from app.providers.http import ProviderError
+from app.providers.http import ProviderError, warm
 from app.providers.registry import get_llm_provider, get_stt_provider, get_tts_provider
 
 logger = logging.getLogger(__name__)
@@ -93,6 +93,13 @@ class ConversationSession:
         self._send_lock = asyncio.Lock()
         self._pending_audio: dict | None = None
         self.turn: Turn | None = None
+
+    async def warm_up(self) -> None:
+        """Opens the connections to the AI services while the student is still speaking, so the
+        first turn doesn't wait on them."""
+        providers = (get_llm_provider(), get_stt_provider(), get_tts_provider())
+        urls = {url for p in providers if (url := getattr(p, "base_url", None))}
+        await asyncio.gather(*(warm(url) for url in urls))
 
     # ---------------- sending ----------------
 

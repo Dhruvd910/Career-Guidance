@@ -14,6 +14,7 @@ import pytest  # noqa: E402
 import sounddevice as sd  # noqa: E402
 
 from app import audio_io  # noqa: E402
+from app.vad import EnergyGate  # noqa: E402
 
 RATE = 44100
 BLOCK = int(RATE * audio_io.BLOCK_SECONDS)
@@ -67,6 +68,9 @@ def fake_mic(monkeypatch):
         return {"default_samplerate": RATE}
 
     monkeypatch.setattr(audio_io.sd, "query_devices", query_devices)
+    # These signals are synthetic tones and hiss, which only the loudness gate takes for speech;
+    # the Silero model is tested on a real voice in test_vad.py.
+    monkeypatch.setattr(audio_io, "make_gate", EnergyGate)
     return FakeStream
 
 

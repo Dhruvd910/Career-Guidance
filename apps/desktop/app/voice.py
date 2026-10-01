@@ -15,7 +15,7 @@ from collections.abc import Callable
 from PySide6.QtCore import QObject, QTimer, Signal
 
 from app.api_client import api_client
-from app.audio_io import MicUnavailableError, SpeechPlayer, VoiceRecorder
+from app.audio_io import MicUnavailableError, SpeechPlayer, StreamPlayer, VoiceRecorder
 from app.voice_parsing import is_meaningful
 from app.workers import run_async
 
@@ -31,6 +31,11 @@ NO_AUDIO_PAUSE_MS = 400
 
 class Voice(QObject):
     state_changed = Signal(str)
+    # A streamed reply was cut short: (turn_id, the sentence playing, ms of it played) — what the
+    # conversation server needs to keep only what the student heard.
+    stream_stopped = Signal(str, int, float)
+    # A sentence of the streamed reply finished playing: (turn_id, seq).
+    stream_sentence_played = Signal(str, int)
 
     def __init__(self):
         super().__init__()
@@ -45,9 +50,16 @@ class Voice(QObject):
         # WAV bytes when transcribe is False.
         self._awaiting_answer: tuple[int, Callable, Callable[[str], None] | None, bool] | None = None
 
+        # The streamed reply in progress: its turn id, and what to do once it has all played.
+        self._stream_turn: str | None = None
+        self._stream_done: Callable[[], None] | None = None
+
         self.recorder = VoiceRecorder()
         self.player = SpeechPlayer()
         self.player.finished.connect(self._on_playback_finished)
+        self.stream_player = StreamPlayer()
+        self.stream_player.drained.connect(self._on_stream_drained)
+        self.stream_player.sentence_played.connect(self._on_stream_sentence_played)
         self.recorder.finished.connect(self._on_recording_finished)
         self.recorder.no_speech.connect(lambda: self._on_listen_failed("silence"))
         self.recorder.failed.connect(lambda _message: self._on_listen_failed("error"))
@@ -71,7 +83,60 @@ class Voice(QObject):
         self._after_speech = None
         self._awaiting_answer = None
         self._asking = None
+        if self._stream_turn is not None:
+            turn_id, self._stream_turn, self._stream_done = self._stream_turn, None, None
+            seq, played_ms = self.stream_player.stop() or (0, 0.0)
+            self.stream_stopped.emit(turn_id, seq, played_ms)
         self._set_state(IDLE)
+
+    # ---------------- a streamed reply (the live conversation) ----------------
+
+    def begin_stream(self, turn_id: str) -> None:
+        """A reply is on its way: think until its speech arrives, then speak it as it comes."""
+        self.cancel()
+        self._stream_turn = turn_id
+        self.current_text = ""
+        self._set_state(THINKING)
+
+    def stream_text(self, turn_id: str, text: str) -> None:
+        """A sentence of the reply — kept as what she's saying, so the wake word can tell her
+        own voice saying "…Maya…" from someone calling her."""
+        if turn_id == self._stream_turn:
+            self.current_text = f"{self.current_text} {text}".strip()
+
+    def stream_audio(self, turn_id: str, seq: int, sample_rate: int, pcm: bytes) -> None:
+        if turn_id != self._stream_turn:
+            return
+        if not self.stream_player.active:
+            self.stream_player.start(sample_rate)
+        self.stream_player.feed(seq, pcm)
+        self._set_state(SPEAKING)
+
+    def end_stream(self, turn_id: str, on_done: Callable[[], None] | None = None) -> None:
+        """The whole reply has arrived. on_done runs once it has finished playing — at once if
+        there was no speech (the voice was unavailable)."""
+        if turn_id != self._stream_turn:
+            return
+        if self.stream_player.active:
+            self._stream_done = on_done
+            self.stream_player.end()
+            return
+        self._stream_turn = None
+        self._set_state(IDLE)
+        if on_done:
+            self._later(NO_AUDIO_PAUSE_MS, self._token, on_done)
+
+    def _on_stream_sentence_played(self, seq: int) -> None:
+        if self._stream_turn is not None:
+            self.stream_sentence_played.emit(self._stream_turn, seq)
+
+    def _on_stream_drained(self) -> None:
+        if self._stream_turn is None:
+            return
+        on_done, self._stream_turn, self._stream_done = self._stream_done, None, None
+        self._set_state(IDLE)
+        if on_done:
+            self._later(PAUSE_BEFORE_LISTENING_MS, self._token, on_done)
 
     # ---------------- speaking ----------------
 
@@ -120,7 +185,8 @@ class Voice(QObject):
     @property
     def speaking(self) -> bool:
         """Talking, or about to (the audio is on its way)."""
-        return self._after_speech is not None or (self.state == THINKING and self._awaiting_answer is None)
+        return (self._after_speech is not None or self._stream_turn is not None
+                or (self.state == THINKING and self._awaiting_answer is None))
 
     def interrupt(self) -> bool:
         """Someone said "Hey Maya" / "Stop Maya" over her. She stops talking at once. If she

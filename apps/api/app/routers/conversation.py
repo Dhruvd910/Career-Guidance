@@ -4,6 +4,7 @@ REST covers typed conversation and session bookkeeping; `WS /api/ws/conversation
 spoken turns (docs/design/07-api-contracts.md §2). A session is a `Conversation` row.
 """
 
+import asyncio
 import json
 import logging
 from datetime import datetime, timezone
@@ -103,6 +104,7 @@ async def conversation_socket(websocket: WebSocket, session_id: int | None = Que
     await websocket.accept()
     conversation = _owned(db, profile, session_id) or _start(db, profile, "voice")
     session = ConversationSession(db, profile, conversation, websocket.send_json, websocket.send_bytes)
+    warming = asyncio.create_task(session.warm_up())
     await session.send({"type": "session.ready", "session_id": conversation.id, "opening": None})
     try:
         while True:
@@ -124,5 +126,6 @@ async def conversation_socket(websocket: WebSocket, session_id: int | None = Que
     except WebSocketDisconnect:
         pass
     finally:
+        warming.cancel()
         await session.close()
         logger.info("conversation %s: connection closed", conversation.id)

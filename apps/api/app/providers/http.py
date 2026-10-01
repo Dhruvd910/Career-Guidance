@@ -24,6 +24,9 @@ import httpx
 logger = logging.getLogger(__name__)
 
 TIMEOUT = httpx.Timeout(connect=5.0, read=30.0, write=10.0, pool=5.0)
+# Students pause between turns far longer than httpx's default 5 s keep-alive; reconnecting
+# (TLS) costs ~0.35 s per service per turn, and the first request on a new connection ~1.4 s.
+LIMITS = httpx.Limits(keepalive_expiry=60.0)
 MAX_ATTEMPTS = 3
 RETRY_STATUSES = {429, 500, 502, 503, 504}
 # Failures that say the service is unusable for now (key, credits, outage) — as opposed to a
@@ -87,9 +90,18 @@ def client_for(base_url: str) -> httpx.AsyncClient:
     loop = asyncio.get_running_loop()
     held = _clients.get(base_url)
     if held is None or held[0] is not loop or held[1].is_closed:
-        held = (loop, httpx.AsyncClient(base_url=base_url, timeout=TIMEOUT))
+        held = (loop, httpx.AsyncClient(base_url=base_url, timeout=TIMEOUT, limits=LIMITS))
         _clients[base_url] = held
     return held[1]
+
+
+async def warm(base_url: str) -> None:
+    """Opens the connection before the first real request needs it — a cold one costs over a
+    second of the student's wait. Any answer will do; a failure is left for the real request."""
+    try:
+        await client_for(base_url).head("", timeout=5.0)
+    except httpx.HTTPError:
+        pass
 
 
 def _backoff(attempt: int, retry_after: str | None) -> float:
