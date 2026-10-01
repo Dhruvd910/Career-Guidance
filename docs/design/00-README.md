@@ -1,7 +1,7 @@
 # Design: AI Career Counsellor & Personal Career Mentor
 
 Status (2026-10-02): **Phases 1-5 built** (voice mentor; memory; assessment; career engine; roadmap)
-and awaiting their hands-on tests; Phases 6-7 designed, not built. Written against the code in `apps/` (MAYA).
+and awaiting their hands-on tests; **Phase 6 (college intelligence) in progress**; Phase 7 designed, not built. Written against the code in `apps/` (MAYA).
 
 | # | Document | Answers |
 |---|---|---|
@@ -19,6 +19,7 @@ and awaiting their hands-on tests; Phases 6-7 designed, not built. Written again
 | 12 | [Phase 3 plan](12-phase3-plan.md) | Assessment: interest, aptitude, skills, academic profile, career directions, reassessment |
 | 13 | [Phase 4 plan](13-phase4-plan.md) | Career engine: knowledge graph, pathways, skill paths, stream choices, colleges from official data |
 | 14 | [Phase 5 plan](14-phase5-plan.md) | Roadmap: class-aware and personal, versioned, adapting to time / difficulty / interest changes; progress |
+| 15 | [Phase 6 plan](15-phase6-plan.md) | College intelligence: facts with provenance and freshness, official documents, fees, hostels, admissions, location, discovery |
 | — | [Phase 1 test](phase1-test-script.md) · [Phase 2 test](phase2-test-script.md) · [Phase 3 test](phase3-test-script.md) · [Phase 4 test](phase4-test-script.md) · [Phase 5 test](phase5-test-script.md) | Hands-on checks with a person |
 
 ---
