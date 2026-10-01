@@ -178,6 +178,28 @@ class ApiClient:
         """The JEE/NEET chapter-by-chapter study plan and the old milestone list."""
         return self.get("/api/roadmap/legacy")
 
+    # ---------------- the roadmap and progress (Phase 5) ----------------
+
+    def roadmap(self, version: int | None = None) -> dict:
+        return self.get("/api/roadmap", params={"version": version} if version else None)
+
+    def roadmap_versions(self) -> list:
+        return self.get("/api/roadmap/versions")
+
+    def roadmap_recalculate(self, kind: str, **detail) -> dict:
+        """One of spec §19's changes: time_budget(hours_per_week), difficulty(subject), interest_change(career,
+        dropping), focus(career)."""
+        return self.post("/api/roadmap/recalculate", {"kind": kind, **detail})
+
+    def roadmap_focus(self, career: str) -> dict:
+        return self.post("/api/roadmap/focus", {"career": career})
+
+    def progress(self) -> dict:
+        return self.get("/api/progress")
+
+    def progress_update(self, node_key: str, status: str, note: str | None = None) -> dict:
+        return self.post("/api/progress/update", {"node_key": node_key, "status": status, "note": note})
+
     def list_saved_items(self) -> list:
         return self.get("/api/saved-items")
 

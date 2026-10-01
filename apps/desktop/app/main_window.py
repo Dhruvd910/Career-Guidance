@@ -26,7 +26,9 @@ from app.pages.careers import CareersPage
 from app.pages.colleges import CollegesPage
 from app.pages.college_detail import CollegeDetailPage
 from app.pages.compare import ComparePage
-from app.pages.roadmap import RoadmapPage
+from app.pages.progress import ProgressPage
+from app.pages.roadmap import RoadmapChangesPage, RoadmapNodePage, RoadmapPage
+from app.pages.study_plan import StudyPlanPage
 from app.pages.maya import MayaPage
 from app.pages.memory import MemoryPage
 from app.pages.practice import PracticeTestPage
@@ -43,7 +45,9 @@ PAGE_TITLES = {
     "setup": "Your details", "onboarding": "Getting started", "dashboard": "Dashboard",
     "maya": "MAYA Assistant", "jee": "JEE", "neet": "NEET", "mock_tests": "Mock Tests", "practice_test": "Practice test",
     "careers": "Careers", "colleges": "Colleges", "college_detail": "College",
-    "compare": "Compare colleges", "roadmap": "Roadmap", "calibrate": "Touch calibration",
+    "compare": "Compare colleges", "roadmap": "My roadmap", "calibrate": "Touch calibration",
+    "roadmap_node": "Roadmap step", "roadmap_changes": "What changed", "progress": "My progress",
+    "study_plan": "Study plan",
     "assessment": "My assessment", "assessment_run": "Assessment", "assessment_result": "My result",
     "assessment_history": "How I've changed", "directions": "Career directions", "direction": "Career direction", "streams": "Stream explorer",
     "career_detail": "Career guide", "memory": "MAYA's memory",
@@ -252,6 +256,8 @@ class MainWindow(QMainWindow):
         menu.addAction("Edit my details", lambda: self.navigate("setup", edit=True))
         menu.addAction("Change goal", self.pages["dashboard"].change_goal)
         menu.addAction("Talk to MAYA", lambda: self.navigate("maya"))
+        menu.addAction("My roadmap", lambda: self.navigate("roadmap"))
+        menu.addAction("My progress", lambda: self.navigate("progress"))
         menu.addAction("My assessment", lambda: self.navigate("assessment"))
         menu.addAction("Career directions", lambda: self.navigate("directions"))
         menu.addAction("Stream explorer", lambda: self.navigate("streams"))
@@ -307,6 +313,10 @@ class MainWindow(QMainWindow):
         self.pages["college_detail"] = CollegeDetailPage(self)
         self.pages["compare"] = ComparePage(self)
         self.pages["roadmap"] = RoadmapPage(self)
+        self.pages["roadmap_node"] = RoadmapNodePage(self)
+        self.pages["roadmap_changes"] = RoadmapChangesPage(self)
+        self.pages["progress"] = ProgressPage(self)
+        self.pages["study_plan"] = StudyPlanPage(self)
         self.pages["maya"] = MayaPage(self)
         self.pages["practice_test"] = PracticeTestPage(self)
         self.pages["calibrate"] = CalibrationPage(self)

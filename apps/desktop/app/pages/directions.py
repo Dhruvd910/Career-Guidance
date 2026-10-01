@@ -257,6 +257,9 @@ class DirectionPage(BasePage):
         self.talk = primary_button("Talk to MAYA about this")
         self.talk.clicked.connect(self._talk)
         actions.addWidget(self.talk)
+        self.focus_btn = secondary_button("Make this my focus")
+        self.focus_btn.clicked.connect(self._make_focus)
+        actions.addWidget(self.focus_btn)
         self.guide = secondary_button("Full career guide")
         self.guide.clicked.connect(lambda: self.career and self.ctx.navigate("career_detail", key=self.key))
         actions.addWidget(self.guide)
@@ -456,6 +459,12 @@ class DirectionPage(BasePage):
         else:
             ask = f"Based on my assessments, tell me about {name} for me — why it's in this band, and what I should try."
         self.ctx.navigate("maya", ask=ask)
+
+    def _make_focus(self) -> None:
+        """The roadmap is built around this career from now on (old versions are kept)."""
+        if self.key:
+            run_async(api_client.roadmap_focus, self.key,
+                      on_success=lambda _r: self.ctx.navigate("roadmap"), on_error=self._failed)
 
     def _failed(self, err: Exception) -> None:
         clear_layout(self.body_layout)
