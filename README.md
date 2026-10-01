@@ -304,6 +304,29 @@ first use. An instrument already in use can't be edited in place: bump its versi
 `./.venv/bin/python -m app.assessment.loader --lock`. Answers from MAYA's original quiz are
 brought over with `./.venv/bin/python scripts/migrate_legacy_assessments.py` (safe to repeat).
 
+## The career engine (knowledge graph)
+
+MAYA knows how careers connect: the skills each needs (and what each skill builds on), the
+degrees that lead there, the class 11-12 subjects and entrance exams those need (with their
+official sites), what can follow, related careers, and which colleges offer a route in — from the
+official JoSAA/MCC 2026 programme lists on the Pi. So she can answer:
+
+- "What do I need to learn to become an AI engineer?" — skills in order, foundations first, with a
+  project and a free course for each.
+- "How do people become lawyers?" — the common route, the alternatives, and the exams.
+- "PCB lu toh kya options khule rahenge?" — what each stream keeps open, what needs one more
+  subject, and what closes (menu → **Stream explorer**).
+- "Agar mujhe AI karna hai toh mere aas paas kaunse colleges hain?" — real colleges in your
+  state. Fees, hostels and facilities aren't collected yet, and she says so.
+
+Careers is organised by area, and every career's page shows all of this, with or without an
+assessment. With assessments, gaps are only claimed where something was actually measured.
+
+The knowledge lives in `apps/api/app/knowledge/graph/*.yaml` (reviewed like code; marked "not
+yet reviewed by a person" until someone signs it off), the career library and the official
+tables. It's validated and loaded as one version whenever any of them changes; `python -m
+app.knowledge.loader` loads it and prints what didn't match.
+
 ## Colleges: real cutoffs, compared properly
 
 College data is real, not samples:

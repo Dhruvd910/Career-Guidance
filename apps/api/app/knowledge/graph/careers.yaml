@@ -365,6 +365,7 @@ nodes:
       entered_through:
         - {to: degree:ba_llb, commonness: common}
         - {to: degree:llb, commonness: alternative}
+      requires_exam: [exam:AIBE]
   - key: career:civil_services
     name: {en: "Civil Services (IAS, IPS, IFS)", hi: "सिविल सेवा (IAS, IPS, IFS)"}
     aliases: [IAS, IPS, IFS, UPSC, collector]

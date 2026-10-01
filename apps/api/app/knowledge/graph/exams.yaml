@@ -91,6 +91,10 @@ nodes:
   - key: exam:GATE
     name: {en: GATE, hi: गेट}
     attrs: {body: IISc and the IITs (one organises it each year), for: "M.Tech/M.S. admissions and some public-sector jobs"}
+  - key: exam:AIBE
+    name: {en: All India Bar Examination (AIBE), hi: ऑल इंडिया बार एग्ज़ामिनेशन (AIBE)}
+    attrs: {body: Bar Council of India, for: "A certificate of practice for law graduates who want to argue cases"}
+    source: {kind: official, ref: Bar Council of India, url: "https://www.allindiabarexamination.com"}
   - key: exam:NEET_PG
     name: {en: NEET-PG, hi: नीट-पीजी}
     attrs: {body: National Board of Examinations in Medical Sciences, for: "MD/MS after MBBS"}

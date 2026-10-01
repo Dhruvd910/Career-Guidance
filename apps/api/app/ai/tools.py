@@ -274,7 +274,9 @@ TOOL_SPECS: list[dict[str, Any]] = [
             "name": "career_pathways",
             "description": "How people get into a career: the common and alternative routes, each with the degree, the class "
                            "11-12 subjects it needs, which streams lead there, the entrance exams (with official sites) and "
-                           "what can follow. Use for 'how do I become…', 'which stream/exam for…'.",
+                           "what can follow. Call it before describing the route into ANY career, even well-known ones "
+                           "(doctor, lawyer, IAS): 'how do I become…', 'lawyer kaise bante hain', 'which exam for…'. "
+                           "For what to LEARN, use career_skills instead.",
             "parameters": {"type": "object", "properties": {"career": {"type": "string", "description": "a career key (ai_data, cse, mbbs…) or its everyday name (AI, doctor, IAS)"}}, "required": ["career"]},
         },
     },
@@ -283,8 +285,9 @@ TOOL_SPECS: list[dict[str, Any]] = [
         "function": {
             "name": "career_skills",
             "description": "The skills a career needs, the student's own results for the ones an assessment measured, the "
-                           "gaps (only measured ones), and a learning path in prerequisite order with projects. Use for "
-                           "'what do I need to learn for…', 'what should I work on'.",
+                           "gaps (only measured ones), and a learning path in prerequisite order with projects to try. Use "
+                           "for what to learn or practise: 'what do I need to learn for…', 'kya kya seekhna padega', "
+                           "'what should I work on', 'how do I prepare my skills'. Mention the first steps and a project.",
             "parameters": {"type": "object", "properties": {"career": {"type": "string", "description": "a career key (ai_data, cse, mbbs…) or its everyday name (AI, doctor, IAS)"}}, "required": ["career"]},
         },
     },

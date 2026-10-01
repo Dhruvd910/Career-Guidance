@@ -152,3 +152,49 @@ Plus a prompt rule: education routes, prerequisites and colleges come from these
 4. The career guide and the directions show required education, typical and alternative pathways, skill gaps (only where measured), things to explore and questions to ask yourself — spec §11's full list.
 5. Every node and edge has a source; curated knowledge is labelled as not yet reviewed by a person; the load is validated and versioned.
 6. All Phase 1–3 tests still pass.
+
+## As built (2026-10-01)
+
+**Graph:** 1,713 nodes and 3,808 edges.
+
+| Kind | Count |
+|---|---|
+| Careers | 29 (the spec's Cybersecurity and Robotics are new, with sourced guides) |
+| Skills | 66, with prerequisites |
+| Degrees | 48 |
+| Exams | 24, with official sites |
+| Projects and free courses | 49 |
+| Domains | 11 |
+| Colleges / cities / states | 739 / 447 / 35, from the official data |
+
+All 1,639 JoSAA/MCC programmes match a degree. Three wrong matches were fixed by hand, and the
+mapping is a test fixture. All 405 server tests pass on SQLite and on PostgreSQL; 374 Pi-app tests
+pass.
+
+**Changes from the plan:**
+
+- **Memory links are made lazily.** The engine links remembered interests the first time it
+  reads them and keeps the link on the interest. That covers both new interests and the backfill,
+  with no change to the Phase 2 writer. Matching uses names and aliases first, then meaning above
+  0.875 (calibrated on the Pi), and only to careers, domains and subjects.
+- **The graph's fingerprint includes a build version,** so a change to how the graph is built
+  reloads it, not only a change to its content.
+- **Names refuse unknown fields.** Six names had been silently cut short by an unquoted comma in
+  YAML ("Civil Services (IAS"); a test now catches it.
+
+**Rehearsal with the real model** (test database; invented students; the public programme tables
+copied in):
+
+| Question | What happened |
+|---|---|
+| "PCB lu toh kya options khule rahenge?" | `what_stays_open` — right careers; engineering needs maths |
+| "Agar mujhe AI karna hai toh mere aas paas kaunse colleges hain?" | `colleges_offering` — IIT Indore, MANIT Bhopal, IIITM Gwalior; fees said to be unavailable |
+| "AI engineer banne ke liye kya seekhna padega?" | First try: the routes tool. After a sharper description: `career_skills` — foundations first, with a project |
+| "How do people become lawyers?" | First try: no tool at all. After a firmer rule: `career_pathways`, including the All India Bar Examination, which was added to the graph |
+
+Replies took 3–4.5 s (non-streamed). The graph's first load took 1.4 s; one career in full takes
+0.17 s.
+
+**Noticed, for Phase 6:** asked about "MANIT Bhopal hostel fee", the older college search
+couldn't find the college by its short name. It honestly said it had no data, but colleges
+should be searchable by common short names (MANIT, IIITM…).
