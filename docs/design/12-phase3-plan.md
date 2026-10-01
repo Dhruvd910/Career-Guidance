@@ -159,7 +159,7 @@ turned up four problems. Each was fixed:
 | The interpreter treated an unrelated answer as "skip" | Skip now needs an explicit request |
 
 Also, skill levels are reported counted from 1 ("level 3 of 4"), matching how the four lines are
-numbered on screen and read out. Your two existing `career_assessments` rows were from the old
+numbered on screen and read out. The two existing `career_assessments` rows were from the old
 slider tool (no question-by-question answers), so there was nothing to bring over. They stay
 in the old table.
 
