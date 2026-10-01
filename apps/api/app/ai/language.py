@@ -49,6 +49,8 @@ saath baad pehle pahle aaj roz saal ghar dost logon naukri kaam paisa paise mehn
 darr dar mushkil asaan aasan pasand chalo chaliye koshish samay waqt kabhi hamesha humesha
 jaise aisa aise aisi waisa kaafi kafi zaruri jaruri baat baatein cheez sawal jawab pareshan
 pareshaan tayari taiyari dimag dimaag aas paas
+maine mainne humne tumne aapne usne unhone isko isse usse tera teri tere poora pura poori puri
+liya lia diya diye dia khatam chuka chuki chuke kal
 """.split())
 AMBIGUOUS = frozenset("main to me hi is us the do so he an in use par log mat tab din".split())
 

@@ -8,8 +8,11 @@ from sqlalchemy.orm import Session
 from app.models.student import StudentProfile
 from app.roadmap import service
 
-NONE_YET = ("The student has no roadmap yet. When they talk about what to do next or a direction they've chosen, "
-            "offer one: set_roadmap_focus once they've picked a career, or get_my_roadmap to start from their stage.")
+OFFER = ("If they say a career they want (\"doctor banna hai\", \"I want to do AI\"), offer in one short question to "
+         "build their roadmap around it and, on yes, call set_roadmap_focus — don't first ask for their class (you "
+         "have it), hours or hard subjects; those adjust it later.")
+NONE_YET = ("The student has no roadmap yet. " + OFFER + " If they ask what to do next without a career in mind, call "
+            "get_my_roadmap: it starts from their stage.")
 
 
 def roadmap_context(db: Session, profile: StudentProfile) -> str:
@@ -26,11 +29,14 @@ def roadmap_context(db: Session, profile: StudentProfile) -> str:
         lines.append(f"Now: {stage['title']['en']}, {stage['percent']}% of this stage done.")
     if v["next_step"]:
         overdue = " (overdue)" if v["next_step"]["overdue"] else ""
-        lines.append(f"Next step: {v['next_step']['title']['en']}{overdue}.")
+        why = ((v["next_step"]["detail"] or {}).get("why") or {}).get("en")
+        lines.append(f"Next step: {v['next_step']['title']['en']}{overdue}" + (f" — why: {why.rstrip('.')}" if why else "") + ".")
     shown = [c for c in v["changes"] if c["op"] in ("add", "defer", "park")
              and c["node_key"].split(":")[0] in ("module", "task", "branch")][:2]
     if shown and v["version"] > 1:
         lines.append("Last change: " + "; ".join(f"{c['op']} {(c['title'] or {}).get('en')} — {c['reason']['en'].rstrip('.')}"
                                                  for c in shown) + ".")
+    if not v["focus"]:
+        lines.append("No focus career yet. " + OFFER)
     lines.append("Roadmap questions ('Mera next step kya hai?') come from roadmap_next_step / get_my_roadmap.")
     return " ".join(lines)

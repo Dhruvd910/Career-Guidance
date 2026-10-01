@@ -40,3 +40,17 @@ def test_the_roadmap_endpoints(client, db_session):
     assert mine["roadmap"]["focus"]["key"] == "mbbs" and "not a skill score" in mine["note"]["en"]
     assert client.get("/api/roadmap/next-step", headers=auth(token)).json()["next_step"]
     assert client.get("/api/roadmap").status_code == 401
+
+
+def test_one_student_never_sees_anothers_roadmap(client, db_session):
+    seed_careers(db_session)
+    asha, ravi = register(client, "asha@example.com"), register(client, "ravi@example.com")
+    client.post("/api/roadmap/focus", json={"career": "doctor"}, headers=auth(asha))
+    client.post("/api/progress/update", json={"node_key": "task:assessment:interests", "status": "done"}, headers=auth(asha))
+
+    his = client.get("/api/roadmap", headers=auth(ravi)).json()
+    assert his["version"] == 1 and his["focus"] is None, "his own first roadmap, not her version 2"
+    assert client.get("/api/roadmap", params={"version": 2}, headers=auth(ravi)).status_code == 404
+    assert [v["version"] for v in client.get("/api/roadmap/versions", headers=auth(ravi)).json()] == [1]
+    assert client.get("/api/roadmap/next-step", headers=auth(ravi)).json()["next_step"]["node_key"] == "task:assessment:interests"
+    assert client.get("/api/progress", headers=auth(ravi)).json()["roadmap"]["focus"] is None

@@ -91,6 +91,7 @@ LABELLED = [
     ("I want to continue our career discussion.", ENGLISH),
     ("Mera next step kya hai?", HINGLISH),
     ("Main kitna improve hua hoon?", HINGLISH),
+    ("Maine logical reasoning wala step poora kar liya.", HINGLISH),
     ("Agar mujhe AI karna hai toh mere aas paas kaunse colleges hain?", HINGLISH),
     ("Is college mein hostel aur hospital ki facility hai?", HINGLISH),
     # Hinglish typed in English letters

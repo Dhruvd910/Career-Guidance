@@ -23,7 +23,7 @@ from app.memory import consent
 from app.models.memory import StudentEvent, StudentGoal
 from app.models.roadmap import Roadmap, RoadmapChange, RoadmapNode, RoadmapProgress, RoadmapVersion
 from app.models.student import StudentProfile
-from app.roadmap.generator import STRONG, SUBJECT_SKILLS, Inputs, band_for, build, t
+from app.roadmap.generator import STRONG, SUBJECT_NAMES, SUBJECT_SKILLS, Inputs, band_for, build, t
 
 KINDS = ("initial", "time_budget", "difficulty", "interest_change", "focus", "reassessment", "profile_change", "manual")
 SUBJECT_WORDS = {"maths": "mathematics", "math": "mathematics", "mathematics": "mathematics", "physics": "physics",
@@ -45,7 +45,13 @@ def _now() -> datetime:
 
 # ---------------- inputs ----------------
 
-def inputs_for(db: Session, profile: StudentProfile, roadmap: Roadmap, today: date | None = None) -> Inputs:
+SETTINGS = ("focus_career", "branches", "dropped", "hours_per_week", "difficulties")  # what the student changes
+
+
+def inputs_for(db: Session, profile: StudentProfile, roadmap: Roadmap, today: date | None = None,
+               settings: dict | None = None) -> Inputs:
+    """What the generator needs. `settings` overrides the roadmap's own (for a preview)."""
+    own = {k: getattr(roadmap, k) for k in SETTINGS} | (settings or {})
     store = graph(db)
     latest = alignment.latest_attempts(db, profile)
     results = alignment._results(latest)
@@ -57,7 +63,7 @@ def inputs_for(db: Session, profile: StudentProfile, roadmap: Roadmap, today: da
                 measured[skill["key"]] = {"value": results[found]["score"], "says": results[found]["says"], "dimension": found}
                 break
     directions = []
-    if not roadmap.focus_career and "interests" in latest:
+    if not own["focus_career"] and "interests" in latest:
         summary = alignment.directions(db, profile).get("summary", {})
         directions = (summary.get("strong", []) + summary.get("potential", []))[:3]
     goals = []
@@ -66,9 +72,9 @@ def inputs_for(db: Session, profile: StudentProfile, roadmap: Roadmap, today: da
             StudentGoal.student_profile_id == profile.id, StudentGoal.status == "active")).scalars()]
     today = today or date.today()
     return Inputs(class_level=profile.class_level, education_stage=profile.education_stage, stream=profile.stream,
-                  board=profile.school_board, state=profile.state, hours_per_week=roadmap.hours_per_week,
-                  focus=roadmap.focus_career, branches=list(roadmap.branches or []),
-                  dropped=list(roadmap.dropped or []), difficulties=list(roadmap.difficulties or []),
+                  board=profile.school_board, state=profile.state, hours_per_week=own["hours_per_week"],
+                  focus=own["focus_career"], branches=list(own["branches"] or []),
+                  dropped=list(own["dropped"] or []), difficulties=list(own["difficulties"] or []),
                   measured=measured, directions=directions, assessments_done=sorted(latest), goals=goals,
                   month=f"{today.year:04d}-{today.month:02d}")
 
@@ -90,12 +96,13 @@ def _node_dict(node: RoadmapNode) -> dict:
 
 def _default_reason(trigger: dict, op: str) -> dict:
     kind, detail = trigger.get("kind"), trigger.get("detail") or ""
+    hi = trigger.get("detail_hi") or detail
     texts = {
         "initial": t("Your first roadmap.", "आपका पहला रोडमैप।"),
         "time_budget": t(f"You now have {detail} hours a week for it.", f"अब आपके पास हफ़्ते में {detail} घंटे हैं।"),
-        "difficulty": t(f"You said {detail} feels hard.", f"आपने कहा कि {detail} मुश्किल लगता है।"),
-        "interest_change": t(f"Your interests changed: {detail}.", f"आपकी रुचि बदली: {detail}।"),
-        "focus": t(f"You chose a new focus: {detail}.", f"आपने नया लक्ष्य चुना: {detail}।"),
+        "difficulty": t(f"You said {detail} feels hard.", f"आपने कहा कि {hi} मुश्किल लगता है।"),
+        "interest_change": t(f"Your interests changed: {detail}.", f"आपकी रुचि बदली: {hi}।"),
+        "focus": t(f"You chose a new focus: {detail}.", f"आपने नया लक्ष्य चुना: {hi}।"),
         "reassessment": t(f"A new assessment result: {detail}.", f"नया आकलन नतीजा: {detail}।"),
         "profile_change": t("Your details changed.", "आपकी जानकारी बदली।"),
         "manual": t("Rebuilt from your current details.", "आपकी मौजूदा जानकारी से दोबारा बनाया।"),
@@ -255,27 +262,28 @@ def _career(db: Session, said: str | None) -> str | None:
     return key.split(":", 1)[1] if key else None
 
 
-def adapt(db: Session, profile: StudentProfile, kind: str, detail: str = "", hours_per_week: int | None = None,
-          subject: str | None = None, career: str | None = None, dropping: str | None = None) -> dict:
-    """One of spec §19's changes → a new version (or none, if nothing changed). Returns the
-    changes made, for MAYA (or the screen) to explain."""
+def plan(db: Session, profile: StudentProfile, roadmap: Roadmap, kind: str, detail: str = "",
+         hours_per_week: int | None = None, subject: str | None = None, career: str | None = None,
+         dropping: str | None = None) -> tuple[dict, dict]:
+    """One of spec §19's changes, worked out but not made: the roadmap settings it would give and
+    its trigger. Touches nothing."""
     if kind not in KINDS or kind == "initial":
         raise RoadmapError(f"kind must be one of {list(KINDS[1:])}")
-    roadmap = current(db, profile)
     store = graph(db)
+    settings = {k: getattr(roadmap, k) for k in SETTINGS}
     trigger = {"kind": kind, "detail": detail}
     if kind == "time_budget":
         if not hours_per_week:
             raise RoadmapError("How many hours a week? (hours_per_week)")
-        roadmap.hours_per_week = max(1, min(40, int(hours_per_week)))
-        trigger["detail"] = str(roadmap.hours_per_week)
+        settings["hours_per_week"] = max(1, min(40, int(hours_per_week)))
+        trigger["detail"] = str(settings["hours_per_week"])
     elif kind == "difficulty":
         normalised = SUBJECT_WORDS.get((subject or "").strip().lower())
         if normalised not in SUBJECT_SKILLS:
             raise RoadmapError("Which subject? (mathematics, physics, chemistry, biology, english, accountancy, economics)")
-        if normalised not in roadmap.difficulties:
-            roadmap.difficulties = [*roadmap.difficulties, normalised]
-        trigger["detail"] = normalised
+        if normalised not in settings["difficulties"]:
+            settings["difficulties"] = [*settings["difficulties"], normalised]
+        trigger["detail"], trigger["detail_hi"] = normalised, SUBJECT_NAMES[normalised][1]
     elif kind in ("interest_change", "focus"):
         new = _career(db, career)
         old = _career(db, dropping) if dropping else None
@@ -283,7 +291,7 @@ def adapt(db: Session, profile: StudentProfile, kind: str, detail: str = "", hou
             raise RoadmapError(f"There's no career called '{career}' in MAYA's knowledge.")
         if dropping and old is None:
             raise RoadmapError(f"There's no career called '{dropping}' in MAYA's knowledge.")
-        branches, dropped, focus = list(roadmap.branches), list(roadmap.dropped), roadmap.focus_career
+        branches, dropped, focus = list(settings["branches"]), list(settings["dropped"]), settings["focus_career"]
         if old:
             dropped = [*[d for d in dropped if d != old], old]
             branches = [b for b in branches if b != old]
@@ -296,17 +304,43 @@ def adapt(db: Session, profile: StudentProfile, kind: str, detail: str = "", hou
                     branches = [*branches, focus]  # the old focus stays as something being explored
                 focus = new
                 branches = [b for b in branches if b != new]
-                _event(db, profile, "FOCUS_CHOSEN", {"career": new})
+                trigger["chose"] = new
             elif new not in branches:
                 branches = [*branches, new]
-        roadmap.focus_career, roadmap.branches, roadmap.dropped = focus, branches, dropped
-        names = {k: (store.node(f"career:{k}") or {}).get("name", {}).get("en", k) for k in (new, old) if k}
-        trigger["detail"] = ", ".join(filter(None, [f"+{names[new]}" if new else None, f"−{names[old]}" if old else None]))
+        settings.update(focus_career=focus, branches=branches, dropped=dropped)
+        names = {k: (store.node(f"career:{k}") or {}).get("name", {"en": k, "hi": k}) for k in (new, old) if k}
         if kind == "focus":
-            trigger["detail"] = names.get(new, "")
+            trigger["detail"] = (names[new]["en"] if new else "") + (f", moving away from {names[old]['en']}" if old else "")
+            trigger["detail_hi"] = (names[new]["hi"] if new else "") + (f", {names[old]['hi']} से हटकर" if old else "")
+        else:
+            trigger["detail"] = ", ".join(filter(None, [f"+{names[new]['en']}" if new else None,
+                                                        f"−{names[old]['en']}" if old else None]))
+            trigger["detail_hi"] = ", ".join(filter(None, [f"+{names[new]['hi']}" if new else None,
+                                                           f"−{names[old]['hi']}" if old else None]))
+    return settings, trigger
+
+
+def adapt(db: Session, profile: StudentProfile, kind: str, detail: str = "", hours_per_week: int | None = None,
+          subject: str | None = None, career: str | None = None, dropping: str | None = None,
+          save: bool = True) -> dict:
+    """One of spec §19's changes → a new version (or none, if nothing changed). Returns the
+    changes made, for MAYA (or the screen) to explain. save=False only says what would change."""
+    roadmap = current(db, profile)
+    settings, trigger = plan(db, profile, roadmap, kind, detail, hours_per_week, subject, career, dropping)
+    if not save:
+        nodes = build(graph(db), inputs_for(db, profile, roadmap, settings=settings), date.today())
+        trigger.pop("chose", None)
+        changes = diff([_node_dict(n) for n in active_version(db, roadmap).nodes], nodes, trigger)
+        return {"changed": bool(changes), "version": None, "saved": False, "settings": settings,
+                "changes": [_change_view(RoadmapChange(**c)) for c in changes]}
+    for key, value in settings.items():
+        setattr(roadmap, key, value)
+    chose = trigger.pop("chose", None)
+    if chose:
+        _event(db, profile, "FOCUS_CHOSEN", {"career": chose})
     db.flush()
     version = rebuild(db, profile, trigger)
-    return {"changed": version is not None, "version": version.version_no if version else None,
+    return {"changed": version is not None, "version": version.version_no if version else None, "saved": True,
             "changes": [_change_view(c) for c in (version.changes if version else [])]}
 
 

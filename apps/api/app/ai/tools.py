@@ -344,25 +344,35 @@ TOOL_SPECS: list[dict[str, Any]] = [
         "function": {
             "name": "adjust_roadmap",
             "description": "Change the roadmap when the student's situation changes (spec §19), making a new version and "
-                           "keeping the old ones. Ask them to confirm first, then call it and explain the changes it "
-                           "returns. kind: time_budget (hours_per_week: the hours a week they have for it, on top of "
-                           "school — '2 hours a day' total study usually leaves 3-5), difficulty (subject they find "
-                           "hard), interest_change (career: the new interest; dropping: one they no longer want), focus "
-                           "(career to build the roadmap around).",
+                           "keeping the old ones. Call it as soon as they tell you, with save false: it says what "
+                           "would change without changing anything, so you can tell them and ask. Once they agree, "
+                           "call it again with save true and explain the changes. kind: time_budget (hours_a_day: the study time a day they said, e.g. 2 for "
+                           "'I only have two hours a day'; or hours_a_week: hours a week just for the roadmap's own "
+                           "steps, only if they said exactly that), difficulty (subject: the one they find hard), "
+                           "interest_change (career: a new interest to explore alongside), focus (career: the one "
+                           "to build the roadmap around). With either, pass dropping whenever they say they no "
+                           "longer want a career: 'I no longer want AI, I like cybersecurity' is kind focus, "
+                           "career cybersecurity, dropping AI.",
             "parameters": {"type": "object", "properties": {
                 "kind": {"type": "string", "enum": ["time_budget", "difficulty", "interest_change", "focus"]},
-                "hours_per_week": {"type": "integer"}, "subject": {"type": "string"},
+                "hours_a_day": {"type": "number"}, "hours_a_week": {"type": "integer"}, "subject": {"type": "string"},
                 "career": {"type": "string"}, "dropping": {"type": "string"},
-                "detail": {"type": "string", "description": "what they said, in a few words"}},
-                "required": ["kind"]},
+                "detail": {"type": "string", "description": "what they said, in a few words"},
+                "save": {"type": "boolean", "description": "true only once they've agreed to this change (or asked for "
+                                                           "it outright); false shows what would change"}},
+                "required": ["kind", "save"]},
         },
     },
     {
         "type": "function",
         "function": {
             "name": "set_roadmap_focus",
-            "description": "Build the roadmap around one career the student has chosen (key or everyday name). Confirm first.",
-            "parameters": {"type": "object", "properties": {"career": {"type": "string"}}, "required": ["career"]},
+            "description": "Build the roadmap around one career the student has chosen (key or everyday name). save "
+                           "true when they've asked for it ('mera roadmap bana do') or agreed; save false to show what "
+                           "would change first and ask. dropping: a career they said they no longer want, if they did.",
+            "parameters": {"type": "object", "properties": {"career": {"type": "string"}, "dropping": {"type": "string"},
+                                                            "save": {"type": "boolean"}},
+                           "required": ["career", "save"]},
         },
     },
     {
@@ -370,9 +380,11 @@ TOOL_SPECS: list[dict[str, Any]] = [
         "function": {
             "name": "update_roadmap_progress",
             "description": "Record that the student finished or started a roadmap step ('I finished the Python course'). "
-                           "step: its name as they said it, or its key.",
+                           "It returns the step it recorded: say that name back to them.",
             "parameters": {"type": "object", "properties": {
-                "step": {"type": "string"}, "status": {"type": "string", "enum": ["done", "in_progress", "not_started"]},
+                "step": {"type": "string", "description": "the student's own words for the step, copied as they said "
+                                                          "them ('logical reasoning wala step' → 'logical reasoning'); "
+                                                          "never a different step"}, "status": {"type": "string", "enum": ["done", "in_progress", "not_started"]},
                 "note": {"type": "string"}}, "required": ["step"]},
         },
     },
