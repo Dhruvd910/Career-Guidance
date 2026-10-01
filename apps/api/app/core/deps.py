@@ -47,6 +47,18 @@ def require_local_or_authenticated(
     get_current_user(credentials, db)
 
 
+def student_profile_for_token(db: Session, token: str | None) -> StudentProfile | None:
+    """The student a bearer token belongs to, or None — for WebSockets, which can't use the
+    HTTPException-raising dependencies above."""
+    if not token:
+        return None
+    try:
+        user_id = int(decode_access_token(token)["sub"])
+    except (PyJWTError, KeyError, ValueError):
+        return None
+    return db.query(StudentProfile).filter(StudentProfile.user_id == user_id).first()
+
+
 def get_current_student_profile(
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),

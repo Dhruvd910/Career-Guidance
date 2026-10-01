@@ -6,9 +6,13 @@ from fastapi.responses import JSONResponse
 
 from app.core.config import get_settings
 from app.providers.http import ProviderError
-from app.routers import ai, auth, careers, colleges, exams, mock_tests, practice, predictions, roadmap, saved_items, student
+from app.routers import (
+    ai, auth, careers, colleges, conversation, exams, mock_tests, practice, predictions, roadmap, saved_items, student,
+)
 
 settings = get_settings()
+# The app's own INFO lines (per-turn timings above all) next to uvicorn's in the API log.
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
@@ -44,6 +48,7 @@ app.include_router(predictions.router)
 app.include_router(roadmap.router)
 app.include_router(saved_items.router)
 app.include_router(ai.router)
+app.include_router(conversation.router)
 
 
 @app.get("/api/health")

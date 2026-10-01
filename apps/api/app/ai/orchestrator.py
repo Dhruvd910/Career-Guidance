@@ -4,12 +4,15 @@ college/prediction questions without going through a tool call.
 """
 
 import json
+from collections.abc import AsyncIterator
+from dataclasses import dataclass
 
 from sqlalchemy.orm import Session
 
 from app.ai.language import detect, reply_instruction, updated_stats, usual_language
-from app.providers.registry import get_llm_provider
 from app.ai.tools import TOOL_SPECS, execute_tool
+from app.providers.llm import LLMProvider, TextDelta, ToolCall
+from app.providers.registry import get_llm_provider
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile
 from app.services.student_service import student_track
@@ -113,88 +116,127 @@ def _student_context(profile: StudentProfile) -> str:
     return "\n".join(lines)
 
 
+# Roughly 2,500 tokens of earlier conversation; older turns drop out first.
+HISTORY_BUDGET_CHARS = 10_000
+INTERRUPTED_NOTE = " [The student interrupted you here; they did not hear the rest.]"
+
+
 def _history_as_messages(conversation: Conversation, profile: StudentProfile) -> list[dict]:
-    messages = [{"role": "system", "content": SYSTEM_PROMPT + "\n\n" + _student_context(profile)}]
-    for m in conversation.messages[-20:]:
-        if m.role in ("user", "assistant"):
-            messages.append({"role": m.role, "content": m.content})
-    return messages
+    earlier: list[dict] = []
+    used = 0
+    for m in reversed(conversation.messages):
+        if m.role not in ("user", "assistant"):
+            continue
+        content = m.content + (INTERRUPTED_NOTE if m.interrupted else "")
+        if earlier and used + len(content) > HISTORY_BUDGET_CHARS:
+            break
+        used += len(content)
+        earlier.append({"role": m.role, "content": content})
+    system = {"role": "system", "content": SYSTEM_PROMPT + "\n\n" + _student_context(profile)}
+    return [system, *reversed(earlier)]
+
+
+@dataclass(frozen=True)
+class ToolActivity:
+    """MAYA is looking something up — the moment to say "let me check"."""
+
+    name: str
+
+
+class Reply:
+    """One reply to one student message, generated as a stream.
+
+    Iterate events() for the reply's text as it's written (str pieces) and a ToolActivity
+    whenever a tool runs; afterwards `text` is the whole reply and `tool_calls_used` what it
+    looked up. Build it before saving the student's message: the history it sends is
+    everything said *before* this message, which it then adds itself.
+    """
+
+    def __init__(self, db: Session, profile: StudentProfile, conversation: Conversation, message: str,
+                 heard_language: str | None = None):
+        self.db, self.profile = db, profile
+        self.tag = detect(message, heard=heard_language, previous=usual_language(profile.language_stats))
+        profile.language_stats = updated_stats(profile.language_stats, self.tag)
+        self.messages = _history_as_messages(conversation, profile)
+        self.messages.append({"role": "system", "content": reply_instruction(self.tag)})
+        self.messages.append({"role": "user", "content": message})
+        self.text = ""
+        self.tool_calls_used: list[str] = []
+
+    def _add(self, piece: str) -> str:
+        if self.text and not self.text[-1].isspace() and not piece[:1].isspace():
+            piece = " " + piece  # text before a tool call, then the answer after it
+        self.text += piece
+        return piece
+
+    def _append(self, piece: str) -> str:
+        self.text += piece
+        return piece
+
+    async def events(self, llm: LLMProvider) -> AsyncIterator[str | ToolActivity]:
+        for _ in range(MAX_TOOL_ITERATIONS):
+            written, calls = "", []
+            async for event in llm.stream(self.messages, tools=TOOL_SPECS):
+                if isinstance(event, TextDelta) and event.text:
+                    # Only the first piece of each round may need a space before it.
+                    piece = self._append(event.text) if written else self._add(event.text)
+                    written += event.text
+                    yield piece
+                elif isinstance(event, ToolCall):
+                    calls.append(event)
+            if not calls:
+                return
+            self.messages.append({"role": "assistant", "content": written, "tool_calls": [
+                {"id": c.id, "type": "function", "function": {"name": c.name, "arguments": c.arguments}}
+                for c in calls
+            ]})
+            for call in calls:
+                yield ToolActivity(call.name)
+                try:
+                    args = json.loads(call.arguments or "{}")
+                except json.JSONDecodeError:
+                    args = {}
+                result = execute_tool(self.db, self.profile, call.name, args)
+                self.tool_calls_used.append(call.name)
+                self.messages.append({"role": "tool", "tool_call_id": call.id,
+                                      "content": json.dumps(result, default=str)})
+        yield self._add(GAVE_UP)
+
+
+GAVE_UP = ("I gathered some information but couldn't finish reasoning about it — could you rephrase or "
+           "narrow your question?")
+NOT_CONFIGURED = ("The AI assistant isn't configured yet — an OPENROUTER_API_KEY is needed on the server. "
+                  "The rest of the app (profile, predictions, colleges) works without it.")
 
 
 async def handle_chat(
     db: Session, profile: StudentProfile, message: str, conversation_id: int | None,
     language: str | None = None,
 ) -> ChatResponse:
-    """language: what Whisper heard, for speech ("en"/"hi"). The reply's language is decided
-    from the words themselves, then that and the student's usual language."""
+    """One whole reply, not streamed — for typed chat. language: what Whisper heard, for speech
+    ("en"/"hi"); the reply's language is decided from the words themselves (see Reply)."""
     conversation = _get_or_create_conversation(db, profile, conversation_id)
-    tag = detect(message, heard=language, previous=usual_language(profile.language_stats))
-    profile.language_stats = updated_stats(profile.language_stats, tag)
+    reply = Reply(db, profile, conversation, message, language)
+    db.add(Message(conversation_id=conversation.id, role="user", content=message, language=reply.tag.lang,
+                   modality="voice" if language else "text"))
+    db.commit()
 
     llm = get_llm_provider()
     if llm is None:
-        db.add(Message(conversation_id=conversation.id, role="user", content=message))
-        db.commit()
-        return ChatResponse(
-            conversation_id=conversation.id,
-            reply=(
-                "The AI assistant isn't configured yet — an OPENROUTER_API_KEY is needed on the server. "
-                "The rest of the app (profile, predictions, colleges) works without it."
-            ),
-            tool_calls_used=[],
-            ai_configured=False,
-            language=tag.lang,
-        )
+        return ChatResponse(conversation_id=conversation.id, reply=NOT_CONFIGURED, tool_calls_used=[],
+                            ai_configured=False, language=reply.tag.lang)
 
-    messages = _history_as_messages(conversation, profile)
-    messages.append({"role": "system", "content": reply_instruction(tag)})
-    messages.append({"role": "user", "content": message})
-    db.add(Message(conversation_id=conversation.id, role="user", content=message))
-    db.commit()
-
-    tool_calls_used: list[str] = []
-    final_content = ""
-
-    for _ in range(MAX_TOOL_ITERATIONS):
-        response = await llm.chat(messages, tools=TOOL_SPECS)
-        tool_calls = response.get("tool_calls")
-
-        if not tool_calls:
-            final_content = response.get("content") or "I don't have a response for that right now."
-            break
-
-        messages.append(
-            {
-                "role": "assistant",
-                "content": response.get("content") or "",
-                "tool_calls": tool_calls,
-            }
-        )
-        for call in tool_calls:
-            fn_name = call["function"]["name"]
-            try:
-                fn_args = json.loads(call["function"]["arguments"] or "{}")
-            except json.JSONDecodeError:
-                fn_args = {}
-            result = execute_tool(db, profile, fn_name, fn_args)
-            tool_calls_used.append(fn_name)
-            messages.append(
-                {
-                    "role": "tool",
-                    "tool_call_id": call["id"],
-                    "content": json.dumps(result, default=str),
-                }
-            )
-    else:
-        final_content = "I gathered some information but couldn't finish reasoning about it — could you rephrase or narrow your question?"
-
-    db.add(Message(conversation_id=conversation.id, role="assistant", content=final_content))
+    async for _ in reply.events(llm):
+        pass
+    final_content = reply.text.strip() or "I don't have a response for that right now."
+    db.add(Message(conversation_id=conversation.id, role="assistant", content=final_content,
+                   language=reply.tag.lang))
     db.commit()
 
     return ChatResponse(
         conversation_id=conversation.id,
         reply=final_content,
-        tool_calls_used=tool_calls_used,
+        tool_calls_used=reply.tool_calls_used,
         ai_configured=True,
-        language=tag.lang,
+        language=reply.tag.lang,
     )

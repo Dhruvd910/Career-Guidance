@@ -61,8 +61,8 @@ language switch mid-conversation keeps history and changes only the reply langua
   interrupted turns annotated for the model.
 - `routers/conversation.py`: `POST /conversation/start|message|end` (P1 versions: no memory),
   `WS /api/ws/conversation` (doc 07 §2).
-- `devices` table + `POST /api/devices/pair`; WS requires device key + student token.
-- Migration: additive columns on `conversations`, `messages`; new `devices`.
+- ~~`devices` table + pairing~~ deferred (D9: loopback-only API); the WS requires the student token.
+- Migration: additive columns on `conversations`, `messages`.
 - Structured JSON logging with `request_id`/`session_id`/`turn_id`.
 
 Tests: chunker edge cases (₹1,20,000, B.Tech, "।", URLs, very long sentences); integration
