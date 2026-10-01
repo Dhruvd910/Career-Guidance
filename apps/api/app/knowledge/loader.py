@@ -44,6 +44,8 @@ from app.models.college import Branch, College, CollegeCourse, Course
 from app.models.exam import Exam
 from app.models.knowledge import KgEdge, KgNode, KgVersion
 
+# Bump when the way the graph is built changes (not its content): the next load rebuilds it.
+BUILD_VERSION = 2
 GRAPH_DIR = Path(__file__).parent / "graph"
 LIBRARY = Path(__file__).resolve().parent.parent / "seed" / "careers.json"
 FROM_LIBRARY = Source(kind="derived", ref="careers.json")
@@ -136,7 +138,7 @@ def official_signature(db: Session) -> list:
 
 def inputs_fingerprint(db: Session, graph_dir: Path = GRAPH_DIR) -> str:
     sig = json.dumps([list(row) for row in official_signature(db)], default=str)
-    return hashlib.sha256((_files_sha(graph_dir) + sig).encode()).hexdigest()
+    return hashlib.sha256(f"{BUILD_VERSION}|{_files_sha(graph_dir)}|{sig}".encode()).hexdigest()
 
 
 # ---------------- building the snapshot ----------------
