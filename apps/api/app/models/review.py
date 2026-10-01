@@ -1,7 +1,8 @@
-from sqlalchemy import JSON, ForeignKey, Integer, String
+from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
+from app.core.types import Json
 from app.models.mixins import TimestampMixin
 
 
@@ -17,6 +18,6 @@ class CollegeReview(Base, TimestampMixin):
 
     rating: Mapped[int] = mapped_column(Integer)  # 1-5
     text: Mapped[str] = mapped_column(String(2000), default="")
-    tags: Mapped[list] = mapped_column(JSON, default=list)  # ["good mess", "strict hostel rules"]
+    tags: Mapped[list] = mapped_column(Json, default=list)  # ["good mess", "strict hostel rules"]
 
     college: Mapped["College"] = relationship()  # noqa: F821

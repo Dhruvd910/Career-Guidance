@@ -9,10 +9,11 @@ practice content, not as past papers.
 
 from datetime import UTC, datetime
 
-from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, JSON, String, Text, UniqueConstraint
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
+from app.core.types import Json
 from app.models.mixins import TimestampMixin
 
 SUBJECT_MODE, FULL_MODE = "subject", "full"
@@ -28,7 +29,7 @@ class Question(Base, TimestampMixin):
     difficulty: Mapped[str] = mapped_column(String(20), default="medium")  # easy|medium|hard
 
     stem: Mapped[str] = mapped_column(Text)
-    options: Mapped[list] = mapped_column(JSON)  # ["...", "...", "...", "..."]
+    options: Mapped[list] = mapped_column(Json)  # ["...", "...", "...", "..."]
     correct_index: Mapped[int] = mapped_column(Integer)
     explanation: Mapped[str | None] = mapped_column(Text, nullable=True)
 
@@ -75,7 +76,7 @@ class TestAttempt(Base, TimestampMixin):
     unanswered: Mapped[int] = mapped_column(Integer, default=0)
     score: Mapped[float] = mapped_column(Float, default=0.0)
     max_score: Mapped[float] = mapped_column(Float, default=0.0)
-    subject_scores: Mapped[dict] = mapped_column(JSON, default=dict)  # {"Physics": {"correct": 7, ...}}
+    subject_scores: Mapped[dict] = mapped_column(Json, default=dict)  # {"Physics": {"correct": 7, ...}}
 
     exam: Mapped["Exam"] = relationship()  # noqa: F821
     answers: Mapped[list["AttemptAnswer"]] = relationship(

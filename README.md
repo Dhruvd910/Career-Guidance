@@ -10,7 +10,7 @@ demo data** — fictional college names, not real admissions numbers.
 
 ## Stack
 
-- **Backend**: FastAPI + SQLAlchemy + Alembic, SQLite for now (portable to PostgreSQL later)
+- **Backend**: FastAPI + SQLAlchemy + Alembic on PostgreSQL 17 + pgvector (SQLite until Phase 2; still works without the memory features)
 - **Desktop app (primary frontend)**: PySide6 (Qt) native app — `apps/desktop/`
 - **Web app (kept as-is, no longer the active frontend)**: Next.js 16 + TypeScript + Tailwind — `apps/web/`
 - **AI**: LLM via OpenRouter, speech-to-text via Groq (Whisper), text-to-speech via Cartesia — all behind provider-abstraction interfaces so any can be swapped. OpenRouter and Groq are verified against real keys; Cartesia is MAYA's only voice (see below).
@@ -56,6 +56,23 @@ The touchscreen needs the XPT2046/ADS7846 driver enabled in `/boot/firmware/conf
 dtparam=spi=on
 dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900
 ```
+
+### Database
+
+PostgreSQL 17 with pgvector, on the Pi itself, listening on localhost only:
+
+```bash
+sudo apt install postgresql-17 postgresql-17-pgvector
+sudo -u postgres psql -c "CREATE ROLE maya LOGIN PASSWORD '<password>'" \
+    -c "CREATE DATABASE maya OWNER maya" -c "CREATE DATABASE maya_test OWNER maya"
+sudo -u postgres psql -d maya -c "CREATE EXTENSION vector"
+sudo -u postgres psql -d maya_test -c "CREATE EXTENSION vector"
+cd apps/api && ./.venv/bin/alembic upgrade head      # with DATABASE_URL pointing at it
+```
+
+Moving an existing SQLite install over: put the SQLite URL in `DATABASE_URL` and the PostgreSQL
+one in `POSTGRES_URL`, run `./.venv/bin/python -m scripts.sqlite_to_postgres` (safe to repeat;
+it checks every table's row count), then point `DATABASE_URL` at PostgreSQL.
 
 ### Boot-to-MAYA (kiosk mode, alternative)
 

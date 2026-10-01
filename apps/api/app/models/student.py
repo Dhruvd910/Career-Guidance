@@ -1,7 +1,8 @@
-from sqlalchemy import JSON, Boolean, Float, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
+from app.core.types import Json
 from app.models.mixins import TimestampMixin
 
 
@@ -24,8 +25,8 @@ class StudentProfile(Base, TimestampMixin):
     preferred_language: Mapped[str] = mapped_column(String(50), default="English")
     # Running mix of the languages the student actually uses, e.g. {"en": 0.2, "hinglish": 0.8}
     # (app/ai/language.py) — a habit, not a setting: each turn is still answered in its own language.
-    language_stats: Mapped[dict | None] = mapped_column(JSON, nullable=True)
-    preferred_study_locations: Mapped[list] = mapped_column(JSON, default=list)
+    language_stats: Mapped[dict | None] = mapped_column(Json, nullable=True)
+    preferred_study_locations: Mapped[list] = mapped_column(Json, default=list)
 
     knows_career_goal: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
     # What the student is actually aiming at (JEE_MAIN / NEET_UG / "careers" while still
@@ -50,6 +51,6 @@ class AcademicRecord(Base, TimestampMixin):
     class_level: Mapped[int] = mapped_column(Integer)
     board_percentage: Mapped[float | None] = mapped_column(Float, nullable=True)
     # e.g. {"physics": 85, "chemistry": 78, "maths": 90, "biology": 70, "computer_science": 88}
-    subject_marks: Mapped[dict] = mapped_column(JSON, default=dict)
+    subject_marks: Mapped[dict] = mapped_column(Json, default=dict)
 
     student_profile: Mapped["StudentProfile"] = relationship(back_populates="academic_records")

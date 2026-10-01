@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from sqlalchemy import JSON, Boolean, DateTime, Float, ForeignKey, String, Text
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
+from app.core.types import Json
 from app.models.mixins import TimestampMixin
 
 
@@ -34,7 +35,7 @@ class Message(Base, TimestampMixin):
     # For MAYA's turns: what the student actually heard (or saw) — after an interruption, only
     # the part played before it. generated_content keeps everything the model wrote.
     content: Mapped[str] = mapped_column(String(8000), default="")
-    tool_calls: Mapped[list] = mapped_column(JSON, default=list)
+    tool_calls: Mapped[list] = mapped_column(Json, default=list)
     audio_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
     turn_id: Mapped[str | None] = mapped_column(String(36), nullable=True, index=True)
@@ -44,6 +45,6 @@ class Message(Base, TimestampMixin):
     generated_content: Mapped[str | None] = mapped_column(Text, nullable=True)
     stt_confidence: Mapped[float | None] = mapped_column(Float, nullable=True)
     # Where the time went, in ms: {"stt": …, "first_token": …, "first_audio": …, "total": …}
-    latency: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    latency: Mapped[dict | None] = mapped_column(Json, nullable=True)
 
     conversation: Mapped["Conversation"] = relationship(back_populates="messages")

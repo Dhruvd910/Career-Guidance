@@ -24,7 +24,7 @@ class Cutoff(Base, ProvenanceMixin, TimestampMixin):
     round: Mapped[int] = mapped_column(Integer, default=1)
     category: Mapped[str] = mapped_column(String(20))  # General|EWS|OBC|SC|ST|Other
     quota: Mapped[str] = mapped_column(String(50))  # AI|HS (home state)|OS|AIQ|State Quota|...
-    seat_type: Mapped[str] = mapped_column(String(30), default="Gender-Neutral")
+    seat_type: Mapped[str] = mapped_column(String(60), default="Gender-Neutral")
 
     opening_rank: Mapped[int | None] = mapped_column(Integer, nullable=True)
     closing_rank: Mapped[int] = mapped_column(Integer)

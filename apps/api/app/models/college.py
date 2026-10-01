@@ -1,7 +1,8 @@
-from sqlalchemy import JSON, ForeignKey, Integer, String
+from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
+from app.core.types import Json
 from app.models.mixins import ProvenanceMixin, TimestampMixin
 
 
@@ -13,7 +14,7 @@ class College(Base, TimestampMixin):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     canonical_name: Mapped[str] = mapped_column(String(255), index=True)
-    aliases: Mapped[list] = mapped_column(JSON, default=list)
+    aliases: Mapped[list] = mapped_column(Json, default=list)
 
     college_type: Mapped[str] = mapped_column(String(50))  # IIT|NIT|IIIT|GFTI|State|Private|Deemed|Medical-Govt|...
     ownership: Mapped[str] = mapped_column(String(20))  # government | private | deemed

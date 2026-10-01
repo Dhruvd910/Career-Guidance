@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     environment: str = "development"
 
     database_url: str = "sqlite:///./data/app.db"
+    # PostgreSQL (Phase 2): where scripts/sqlite_to_postgres.py copies to, and the throwaway
+    # database the `postgres`-marked tests use. DATABASE_URL is switched to it once copied.
+    postgres_url: str | None = None
+    postgres_test_url: str | None = None
 
     jwt_secret_key: str = "dev-only-insecure-secret-change-me"
     jwt_algorithm: str = "HS256"

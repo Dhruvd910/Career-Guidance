@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -10,14 +12,17 @@ from app.models.college import Branch, College, CollegeCourse, Course
 from app.models.cutoff import Cutoff
 from app.models.exam import Exam
 
-TEST_DATABASE_URL = "sqlite://"
+# In-memory SQLite by default (fast). MAYA_TEST_DATABASE_URL=<postgres url> runs the same tests
+# against PostgreSQL — what production uses since Phase 2.
+TEST_DATABASE_URL = os.environ.get("MAYA_TEST_DATABASE_URL", "sqlite://")
 
 
 @pytest.fixture()
 def db_session():
-    engine = create_engine(
-        TEST_DATABASE_URL, connect_args={"check_same_thread": False}, poolclass=StaticPool
-    )
+    if TEST_DATABASE_URL.startswith("sqlite"):
+        engine = create_engine(TEST_DATABASE_URL, connect_args={"check_same_thread": False}, poolclass=StaticPool)
+    else:
+        engine = create_engine(TEST_DATABASE_URL)
     Base.metadata.create_all(bind=engine)
     TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
     session = TestingSessionLocal()
@@ -26,6 +31,7 @@ def db_session():
     finally:
         session.close()
         Base.metadata.drop_all(bind=engine)
+        engine.dispose()
 
 
 @pytest.fixture()

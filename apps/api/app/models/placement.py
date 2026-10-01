@@ -1,7 +1,8 @@
-from sqlalchemy import JSON, Float, ForeignKey
+from sqlalchemy import Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
+from app.core.types import Json
 from app.models.mixins import ProvenanceMixin, TimestampMixin
 
 
@@ -21,10 +22,10 @@ class Placement(Base, ProvenanceMixin, TimestampMixin):
     average_package: Mapped[float | None] = mapped_column(Float, nullable=True)
     median_package: Mapped[float | None] = mapped_column(Float, nullable=True)
     highest_package: Mapped[float | None] = mapped_column(Float, nullable=True)
-    major_recruiters: Mapped[list] = mapped_column(JSON, default=list)
+    major_recruiters: Mapped[list] = mapped_column(Json, default=list)
 
     # Medical/other-category metrics: internship_stipend, clinical_exposure,
     # pg_pathways, research_opportunities, residency_opportunities, etc.
-    extra: Mapped[dict] = mapped_column(JSON, default=dict)
+    extra: Mapped[dict] = mapped_column(Json, default=dict)
 
     college: Mapped["College"] = relationship()  # noqa: F821

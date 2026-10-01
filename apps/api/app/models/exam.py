@@ -1,7 +1,8 @@
-from sqlalchemy import JSON, Boolean, Float, ForeignKey, Integer, String, UniqueConstraint
+from sqlalchemy import Boolean, Float, ForeignKey, Integer, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
+from app.core.types import Json
 from app.models.mixins import TimestampMixin
 
 
@@ -36,11 +37,11 @@ class ExamProfile(Base, TimestampMixin):
     category_rank: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
     # exam-specific extras, e.g. JEE Advanced score/rank, subject-wise split
-    extra: Mapped[dict] = mapped_column(JSON, default=dict)
+    extra: Mapped[dict] = mapped_column(Json, default=dict)
 
-    preferred_branches: Mapped[list] = mapped_column(JSON, default=list)
-    preferred_states: Mapped[list] = mapped_column(JSON, default=list)
-    preferred_cities: Mapped[list] = mapped_column(JSON, default=list)
+    preferred_branches: Mapped[list] = mapped_column(Json, default=list)
+    preferred_states: Mapped[list] = mapped_column(Json, default=list)
+    preferred_cities: Mapped[list] = mapped_column(Json, default=list)
     college_type_preference: Mapped[str | None] = mapped_column(String(20), nullable=True)  # government|private|any
     budget_max: Mapped[float | None] = mapped_column(Float, nullable=True)
 
