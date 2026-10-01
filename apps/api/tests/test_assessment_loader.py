@@ -33,14 +33,14 @@ def tiny(version=1, **changes):
 def instruments(tmp_path, monkeypatch):
     """A folder of instrument files the loader reads instead of the real ones."""
     monkeypatch.setattr(loader, "INSTRUMENT_DIR", tmp_path)
-    loader.instrument_files.cache_clear()
+    loader.all_versions.cache_clear()
 
     def write(raw):
         (tmp_path / f"{raw['key']}.v{raw['version']}.json").write_text(json.dumps(raw, ensure_ascii=False))
-        loader.instrument_files.cache_clear()
+        loader.all_versions.cache_clear()
 
     yield write
-    loader.instrument_files.cache_clear()
+    loader.all_versions.cache_clear()
 
 
 def test_an_instrument_is_loaded_once_with_its_items(db_session, instruments):
@@ -99,12 +99,12 @@ def test_broken_files_are_refused(break_it, message):
 def test_the_file_name_must_match_its_version(tmp_path, monkeypatch):
     monkeypatch.setattr(loader, "INSTRUMENT_DIR", tmp_path)
     (tmp_path / "tiny.v2.json").write_text(json.dumps(tiny(version=1)))
-    loader.instrument_files.cache_clear()
+    loader.all_versions.cache_clear()
     try:
         with pytest.raises(ValueError, match="should be named tiny.v1.json"):
-            loader.instrument_files()
+            loader.all_versions()
     finally:
-        loader.instrument_files.cache_clear()
+        loader.all_versions.cache_clear()
 
 
 def test_the_real_instruments_match_their_lock():

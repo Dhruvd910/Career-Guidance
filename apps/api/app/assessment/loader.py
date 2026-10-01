@@ -37,21 +37,33 @@ def fingerprint(raw: dict) -> str:
 
 
 @lru_cache(maxsize=1)
-def instrument_files() -> dict[str, tuple[Instrument, str]]:
-    """{key: (the latest version's spec, its fingerprint)} — one file per version, the newest wins."""
-    latest: dict[str, tuple[Instrument, str]] = {}
+def all_versions() -> dict[tuple[str, int], tuple[Instrument, str]]:
+    """{(key, version): (spec, fingerprint)} for every file, old versions included — results of
+    an old attempt are explained with the words it was taken with."""
+    found: dict[tuple[str, int], tuple[Instrument, str]] = {}
     for path in sorted(INSTRUMENT_DIR.glob("*.v*.json")):
         raw = json.loads(path.read_text())
         spec = Instrument.model_validate(raw)
         if path.name != f"{spec.key}.v{spec.version}.json":
             raise ValueError(f"{path.name}: should be named {spec.key}.v{spec.version}.json")
-        if spec.key not in latest or spec.version > latest[spec.key][0].version:
-            latest[spec.key] = (spec, fingerprint(raw))
+        found[(spec.key, spec.version)] = (spec, fingerprint(raw))
+    return found
+
+
+def instrument_files() -> dict[str, tuple[Instrument, str]]:
+    """{key: (the latest version's spec, its fingerprint)}."""
+    latest: dict[str, tuple[Instrument, str]] = {}
+    for (key, version), entry in all_versions().items():
+        if key not in latest or version > latest[key][0].version:
+            latest[key] = entry
     return latest
 
 
-def spec_for(key: str) -> Instrument:
-    return instrument_files()[key][0]
+def spec_for(key: str, version: int | None = None) -> Instrument:
+    """The current version of an instrument, or a given one."""
+    if version is None:
+        return instrument_files()[key][0]
+    return all_versions()[(key, version)][0]
 
 
 def _insert(db: Session, spec: Instrument, sha: str) -> AssessmentInstrument:
