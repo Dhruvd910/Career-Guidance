@@ -1,0 +1,619 @@
+{
+  "_about": "Researched profiles for the colleges students compare most: ranking, what it costs, placements, and what's around the campus. Figures carry their sources; distances are approximate road distances and should be checked on a map. Cutoffs come separately, from JoSAA and MCC.",
+  "sources": {
+    "nirf_eng_2025": {
+      "name": "NIRF 2025 Engineering ranking",
+      "url": "https://www.nirfindia.org/Rankings/2025/EngineeringRanking.html"
+    },
+    "nirf_med_2025": {
+      "name": "NIRF 2025 Medical ranking",
+      "url": "https://www.nirfindia.org/Rankings/2025/MedicalRanking.html"
+    },
+    "iit_fees": {
+      "name": "IIT Roorkee — institute fees (the common IIT fee structure)",
+      "url": "https://iitr.ac.in/Academics/Institute%20Fees.html"
+    },
+    "nit_fees": {
+      "name": "NIT Tiruchirappalli — B.Tech fee structure 2026",
+      "url": "https://www.nitt.edu/home/academics/fees_section/ug_courses_fee_structure/B.Tech%202026.pdf"
+    },
+    "mbbs_fees": {
+      "name": "Careers360 — MBBS fees in government colleges",
+      "url": "https://medicine.careers360.com/articles/mbbs-fees"
+    },
+    "iit_highest": {
+      "name": "CollegeDekho — IIT placements 2024-25",
+      "url": "https://www.collegedekho.com/articles/iit-placements-2024-25/"
+    }
+  },
+  "templates": {
+    "iit_fees": {
+      "tuition_per_year": 200000,
+      "summary": "₹2 lakh a year tuition (₹1 lakh a semester)",
+      "waivers": "Free for SC/ST/PwD students and families earning under ₹1 lakh a year; two-thirds off for families earning ₹1–5 lakh.",
+      "living": "Hostel and mess are extra — roughly ₹35,000–60,000 a year depending on the IIT.",
+      "source": "iit_fees"
+    },
+    "nit_fees": {
+      "tuition_per_year": 125000,
+      "summary": "₹1.25 lakh a year tuition (₹62,500 a semester)",
+      "waivers": "Free for SC/ST/PwD students and families earning under ₹1 lakh a year; two-thirds off for families earning ₹1–5 lakh.",
+      "living": "Hostel and mess are extra — roughly ₹40,000–70,000 a year depending on the NIT.",
+      "source": "nit_fees"
+    },
+    "medical_placement": {
+      "note": "Medicine doesn't have campus placements. After MBBS comes a paid one-year internship, then most doctors take NEET-PG to specialise or join government service."
+    }
+  },
+  "colleges": {
+    "Indian Institute of Technology Bombay": {
+      "website": "https://www.iitb.ac.in",
+      "established": 1958,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 3,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 19.61,
+        "highest": "₹1.68 crore (domestic, 2024-25)",
+        "source_note": "Median from IIT Bombay's NIRF 2025 data; highest as reported",
+        "source": "iit_highest"
+      },
+      "surroundings": {
+        "area": "Powai, a busy residential and IT area of north-east Mumbai, next to Powai Lake",
+        "airport": "Mumbai airport, about 10 km",
+        "railway": "Kanjurmarg suburban station, about 3 km",
+        "local_transport": "Autos, BEST buses and the suburban train network",
+        "daily_needs": "Hiranandani Gardens market, cafés and a large hospital within 2–3 km; shops on campus"
+      }
+    },
+    "Indian Institute of Technology Delhi": {
+      "website": "https://home.iitd.ac.in",
+      "established": 1961,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 2,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 19.08,
+        "highest": "₹2.05 crore (domestic, 2024-25)",
+        "source_note": "Median from IIT Delhi's NIRF 2025 data; highest as reported",
+        "source": "iit_highest"
+      },
+      "surroundings": {
+        "area": "Hauz Khas, South Delhi — central and well connected",
+        "airport": "Delhi airport (IGI), about 13 km",
+        "railway": "Hazrat Nizamuddin, about 10 km; New Delhi, about 15 km",
+        "local_transport": "Metro: IIT Delhi (Magenta Line) at the gate, Hauz Khas about 1.5 km",
+        "daily_needs": "Hauz Khas, SDA and Ber Sarai markets next door; AIIMS hospital about 4 km"
+      }
+    },
+    "Indian Institute of Technology Madras": {
+      "website": "https://www.iitm.ac.in",
+      "established": 1959,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 1,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 17.78,
+        "source_note": "Median from IIT Madras's NIRF 2025 data"
+      },
+      "surroundings": {
+        "area": "Guindy, Chennai — a green, forested campus inside the city",
+        "airport": "Chennai airport, about 11 km",
+        "railway": "Guindy suburban station, about 3 km; Chennai Central, about 13 km",
+        "local_transport": "Chennai Metro (Guindy / Little Mount) about 3 km, city buses and autos",
+        "daily_needs": "Velachery and Adyar markets and hospitals within 3–5 km"
+      }
+    },
+    "Indian Institute of Technology Kanpur": {
+      "website": "https://www.iitk.ac.in",
+      "established": 1959,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 4,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 19.4,
+        "source_note": "Median from IIT Kanpur's NIRF 2025 data"
+      },
+      "surroundings": {
+        "area": "Kalyanpur, on the edge of Kanpur — a large, self-contained campus",
+        "airport": "Kanpur airport, about 27 km; Lucknow airport, about 90 km",
+        "railway": "Kanpur Central, about 16 km",
+        "local_transport": "Autos and city buses; most daily life happens on campus",
+        "daily_needs": "Shopping centre, health centre and banks on campus; Kanpur city markets about 12 km"
+      }
+    },
+    "Indian Institute of Technology Kharagpur": {
+      "website": "https://www.iitkgp.ac.in",
+      "established": 1951,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 5,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 19.76,
+        "highest": "₹2.14 crore (2024-25)",
+        "source_note": "Median from IIT Kharagpur's NIRF 2025 data; highest as reported",
+        "source": "iit_highest"
+      },
+      "surroundings": {
+        "area": "Kharagpur, a railway town in West Bengal — the oldest and largest IIT campus",
+        "airport": "Kolkata airport, about 130 km",
+        "railway": "Kharagpur Junction, about 3 km (direct trains across India)",
+        "local_transport": "Autos, cycle rickshaws; trains to Kolkata take about 2 hours",
+        "daily_needs": "Tech Market and Prembazar next to campus; B.C. Roy Technology Hospital on campus"
+      }
+    },
+    "National Institute of Technology, Tiruchirappalli": {
+      "website": "https://www.nitt.edu",
+      "established": 1964,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 9,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "nit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 14.35,
+        "source_note": "Median from NIT Trichy's NIRF 2025 data"
+      },
+      "surroundings": {
+        "area": "Thuvakudi, about 20 km from Tiruchirappalli city",
+        "airport": "Tiruchirappalli airport, about 20 km",
+        "railway": "Thiruverumbur, about 7 km; Tiruchirappalli Junction, about 22 km",
+        "local_transport": "Town buses and autos to the city",
+        "daily_needs": "Thuvakudi town at the campus gate for shops and clinics"
+      }
+    },
+    "National Institute of Technology Karnataka, Surathkal": {
+      "website": "https://www.nitk.ac.in",
+      "established": 1960,
+      "fees": "nit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 14.0,
+        "source_note": "Median from NITK's NIRF 2025 data"
+      },
+      "surroundings": {
+        "area": "Surathkal, north of Mangaluru — a campus with its own beach",
+        "airport": "Mangaluru airport, about 15 km",
+        "railway": "Surathkal station, about 3 km; Mangaluru Central, about 20 km",
+        "local_transport": "Frequent private buses along the highway to Mangaluru",
+        "daily_needs": "Surathkal town next to campus; Mangaluru city for bigger shopping and hospitals"
+      }
+    },
+    "National Institute of Technology, Warangal": {
+      "website": "https://www.nitw.ac.in",
+      "established": 1959,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 28,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "nit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 14.2,
+        "source_note": "Median from NIT Warangal's NIRF 2025 data"
+      },
+      "surroundings": {
+        "area": "Kazipet–Hanamkonda, Warangal city in Telangana",
+        "airport": "Hyderabad airport, about 160 km",
+        "railway": "Kazipet Junction, about 2 km (on main north–south routes)",
+        "local_transport": "Autos and city buses; frequent trains and buses to Hyderabad",
+        "daily_needs": "Hanamkonda and Kazipet markets and hospitals within a few km"
+      }
+    },
+    "National Institute of Technology, Rourkela": {
+      "website": "https://www.nitrkl.ac.in",
+      "established": 1961,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 13,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "nit_fees",
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 15.25,
+        "source_note": "Median from NIT Rourkela's NIRF 2025 data"
+      },
+      "surroundings": {
+        "area": "Rourkela, a steel city in western Odisha — a large, green campus",
+        "airport": "Rourkela airport (few flights), about 10 km; Jharsuguda, about 130 km",
+        "railway": "Rourkela Junction, about 7 km",
+        "local_transport": "Autos and buses around town",
+        "daily_needs": "Sector markets and Ispat General Hospital in the city"
+      }
+    },
+    "Indian Institute of Information Technology, Allahabad": {
+      "website": "https://www.iiita.ac.in",
+      "established": 1999,
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 18.5,
+        "source_note": "Median from IIIT Allahabad's NIRF 2025 data"
+      },
+      "surroundings": {
+        "area": "Jhalwa, on the western side of Prayagraj",
+        "airport": "Prayagraj airport, about 15 km",
+        "railway": "Prayagraj Junction, about 12 km",
+        "local_transport": "Autos and e-rickshaws into the city",
+        "daily_needs": "Jhalwa market nearby; Civil Lines for larger shops and hospitals"
+      }
+    },
+    "AIIMS, New Delhi": {
+      "website": "https://www.aiims.edu",
+      "established": 1956,
+      "nirf": {
+        "year": 2025,
+        "category": "Medical",
+        "rank": 1,
+        "source": "nirf_med_2025"
+      },
+      "fees": {
+        "tuition_per_year": 4228,
+        "summary": "About ₹4,200 a year — among the lowest fees anywhere",
+        "living": "Hostel about ₹1,000 a year; mess extra",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "One of India's largest teaching hospitals, attached to the college",
+      "surroundings": {
+        "area": "Ansari Nagar, South Delhi",
+        "airport": "Delhi airport (IGI), about 13 km",
+        "railway": "New Delhi, about 10 km",
+        "local_transport": "AIIMS metro station (Yellow Line) at the gate",
+        "daily_needs": "INA market about 1 km; Green Park and South Extension close by"
+      }
+    },
+    "JIPMER PUDUCHERRY": {
+      "website": "https://jipmer.edu.in",
+      "established": 1823,
+      "nirf": {
+        "year": 2025,
+        "category": "Medical",
+        "rank": 4,
+        "source": "nirf_med_2025"
+      },
+      "fees": {
+        "tuition_per_year": 11620,
+        "summary": "About ₹11,600 a year",
+        "living": "Hostel about ₹14,000 a year; mess extra",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "Large central-government teaching hospital on campus",
+      "surroundings": {
+        "area": "Gorimedu, Puducherry — a calm coastal town",
+        "airport": "Chennai airport, about 150 km (Puducherry airport has few flights)",
+        "railway": "Puducherry station, about 5 km",
+        "local_transport": "Autos and town buses",
+        "daily_needs": "Puducherry town centre about 4 km"
+      }
+    },
+    "Maulana Azad Medical College, New Delhi": {
+      "website": "https://www.mamc.ac.in",
+      "established": 1958,
+      "fees": {
+        "summary": "Low — Delhi government college; reported at up to about ₹20,000 a year",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "Lok Nayak, G.B. Pant and associated Delhi government hospitals",
+      "surroundings": {
+        "area": "Bahadur Shah Zafar Marg, central Delhi",
+        "airport": "Delhi airport (IGI), about 18 km",
+        "railway": "New Delhi, about 3 km",
+        "local_transport": "Delhi Gate and ITO metro stations about 1 km",
+        "daily_needs": "Daryaganj and Old Delhi markets within walking distance"
+      }
+    },
+    "Vardhman Mahavir Medical College & Safdarjung Hospital, Delhi": {
+      "website": "https://vmmc-sjh.mohfw.gov.in",
+      "established": 2001,
+      "placements": "medical_placement",
+      "hospital": "Safdarjung Hospital, one of Delhi's biggest central-government hospitals",
+      "surroundings": {
+        "area": "Safdarjung Enclave, South Delhi, opposite AIIMS",
+        "airport": "Delhi airport (IGI), about 12 km",
+        "railway": "New Delhi, about 10 km",
+        "local_transport": "AIIMS and Green Park metro stations about 1 km",
+        "daily_needs": "INA and Green Park markets nearby"
+      }
+    },
+    "Lady Hardinge Medical College, New Delhi": {
+      "website": "https://lhmc-hosp.gov.in",
+      "established": 1916,
+      "placements": "medical_placement",
+      "hospital": "Smt. Sucheta Kriplani and Kalawati Saran hospitals — a women-only college",
+      "surroundings": {
+        "area": "Connaught Place area, central Delhi",
+        "airport": "Delhi airport (IGI), about 16 km",
+        "railway": "New Delhi, about 2 km",
+        "local_transport": "R K Ashram Marg metro about 1 km",
+        "daily_needs": "Connaught Place and Karol Bagh markets close by"
+      }
+    },
+    "Seth GS Medical College, Mumbai": {
+      "website": "https://www.kem.edu",
+      "established": 1926,
+      "fees": {
+        "tuition_per_year": 133050,
+        "summary": "About ₹1.33 lakh a year (government quota)",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "KEM Hospital, one of Mumbai's busiest public hospitals",
+      "surroundings": {
+        "area": "Parel, central Mumbai",
+        "airport": "Mumbai airport, about 12 km",
+        "railway": "Parel and Dadar stations about 1–2 km",
+        "local_transport": "Suburban trains and BEST buses",
+        "daily_needs": "Parel and Dadar markets within walking distance"
+      }
+    },
+    "B. J. Govt. Medical College, Pune": {
+      "website": "https://bjmcpune.org",
+      "established": 1946,
+      "fees": {
+        "summary": "About ₹1 lakh a year (government quota; around ₹5.3 lakh for the whole course)",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "Sassoon General Hospital, attached",
+      "surroundings": {
+        "area": "Near Pune Railway Station, central Pune",
+        "airport": "Pune airport, about 9 km",
+        "railway": "Pune Junction, about 1 km",
+        "local_transport": "PMPML buses, autos and Pune Metro",
+        "daily_needs": "Camp and station-area markets close by"
+      }
+    },
+    "Madras Medical College, Chennai": {
+      "website": "https://www.mmc.ac.in",
+      "established": 1835,
+      "fees": {
+        "tuition_per_year": 18073,
+        "summary": "About ₹18,000 a year",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "Rajiv Gandhi Government General Hospital, next door",
+      "surroundings": {
+        "area": "Park Town, central Chennai",
+        "airport": "Chennai airport, about 18 km",
+        "railway": "Chennai Central, next to the campus",
+        "local_transport": "Chennai Central metro and suburban trains",
+        "daily_needs": "Parry's Corner and Central markets nearby"
+      }
+    },
+    "Bangalore Medical College and Research Institute, Bangalore": {
+      "website": "https://bmcri.org",
+      "established": 1955,
+      "fees": {
+        "summary": "About ₹60,000–80,000 a year (government quota)",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "Victoria, Vani Vilas and Bowring hospitals",
+      "surroundings": {
+        "area": "K R Market, old central Bengaluru",
+        "airport": "Kempegowda airport, about 40 km",
+        "railway": "KSR Bengaluru City, about 3 km",
+        "local_transport": "K R Market metro about 0.5 km; city buses",
+        "daily_needs": "K R Market and Chickpet — some of the city's busiest markets"
+      }
+    },
+    "King George Medical University, Lucknow": {
+      "website": "https://www.kgmu.org",
+      "established": 1905,
+      "nirf": {
+        "year": 2025,
+        "category": "Medical",
+        "rank": 8,
+        "source": "nirf_med_2025"
+      },
+      "fees": {
+        "tuition_per_year": 54900,
+        "summary": "About ₹55,000 a year",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "Gandhi Memorial and associated hospitals — a very large teaching hospital",
+      "surroundings": {
+        "area": "Chowk, old Lucknow",
+        "airport": "Lucknow airport, about 16 km",
+        "railway": "Charbagh, about 5 km",
+        "local_transport": "Lucknow Metro about 3 km; autos and e-rickshaws",
+        "daily_needs": "Chowk and Aminabad markets nearby"
+      }
+    },
+    "AIIMS, Rishikesh": {
+      "website": "https://aiimsrishikesh.edu.in",
+      "established": 2012,
+      "nirf": {
+        "year": 2025,
+        "category": "Medical",
+        "rank": 13,
+        "source": "nirf_med_2025"
+      },
+      "fees": {
+        "summary": "Nominal — like other AIIMS, a few thousand rupees a year",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "AIIMS Rishikesh hospital on campus",
+      "surroundings": {
+        "area": "Virbhadra Road, Rishikesh — at the foot of the Himalayas",
+        "airport": "Dehradun (Jolly Grant) airport, about 20 km",
+        "railway": "Yog Nagari Rishikesh, about 4 km",
+        "local_transport": "Autos and shared vikrams",
+        "daily_needs": "Rishikesh town markets within a few km"
+      }
+    },
+    "AIIMS, Bhubaneswar": {
+      "website": "https://aiimsbhubaneswar.nic.in",
+      "established": 2012,
+      "nirf": {
+        "year": 2025,
+        "category": "Medical",
+        "rank": 14,
+        "source": "nirf_med_2025"
+      },
+      "fees": {
+        "summary": "Nominal — like other AIIMS, a few thousand rupees a year",
+        "source": "mbbs_fees"
+      },
+      "placements": "medical_placement",
+      "hospital": "AIIMS Bhubaneswar hospital on campus",
+      "surroundings": {
+        "area": "Sijua, on the western edge of Bhubaneswar",
+        "airport": "Bhubaneswar airport, about 12 km",
+        "railway": "Bhubaneswar station, about 13 km",
+        "local_transport": "City buses (Mo Bus) and autos",
+        "daily_needs": "Patrapada and Khandagiri markets nearby"
+      }
+    },
+    "Indian Institute of Technology Roorkee": {
+      "website": "https://iitr.ac.in",
+      "established": 1847,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 6,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "surroundings": {
+        "area": "Roorkee, a small university town in Haridwar district, Uttarakhand",
+        "airport": "Dehradun (Jolly Grant) airport, about 70 km",
+        "railway": "Roorkee station, about 2 km (direct trains to Delhi)",
+        "local_transport": "Autos and e-rickshaws; buses to Delhi (about 4 hours) and Dehradun",
+        "daily_needs": "Civil Lines market next to campus; the town covers everyday needs"
+      }
+    },
+    "Indian Institute of Technology Hyderabad": {
+      "website": "https://www.iith.ac.in",
+      "established": 2008,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 7,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "surroundings": {
+        "area": "Kandi, Sangareddy — on the highway about 60 km from central Hyderabad",
+        "airport": "Hyderabad airport, about 80 km",
+        "railway": "Lingampally, about 35 km; Secunderabad, about 65 km",
+        "local_transport": "Institute buses and TSRTC buses to Hyderabad",
+        "daily_needs": "Shops on campus; Sangareddy town about 8 km"
+      }
+    },
+    "Indian Institute of Technology Guwahati": {
+      "website": "https://www.iitg.ac.in",
+      "established": 1994,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 8,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "surroundings": {
+        "area": "Amingaon, on the north bank of the Brahmaputra, across the river from Guwahati city",
+        "airport": "Guwahati airport, about 25 km",
+        "railway": "Guwahati station, about 20 km",
+        "local_transport": "Institute buses and city buses across the Saraighat bridge",
+        "daily_needs": "Market complex on campus; city markets about 20 km"
+      }
+    },
+    "Indian Institute of Technology (BHU) Varanasi": {
+      "website": "https://www.iitbhu.ac.in",
+      "established": 1919,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 10,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "surroundings": {
+        "area": "Inside the Banaras Hindu University campus, south Varanasi",
+        "airport": "Varanasi airport, about 30 km",
+        "railway": "Varanasi Junction (Cantt), about 10 km",
+        "local_transport": "Autos and e-rickshaws",
+        "daily_needs": "Lanka market at the BHU gate; Sir Sunderlal Hospital on the BHU campus"
+      }
+    },
+    "Indian Institute of Technology Indore": {
+      "website": "https://www.iiti.ac.in",
+      "established": 2009,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 12,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "surroundings": {
+        "area": "Simrol, about 25 km from Indore city",
+        "airport": "Indore airport, about 35 km",
+        "railway": "Indore Junction, about 25 km",
+        "local_transport": "Institute buses and city buses to Indore",
+        "daily_needs": "Shops on campus; Indore city for larger markets and hospitals"
+      },
+      "placements": {
+        "period": "2023-24 (NIRF 2025)",
+        "median_lpa": 19.48,
+        "source_note": "Median from the institute's NIRF 2025 data"
+      }
+    },
+    "Indian Institute of Technology (ISM) Dhanbad": {
+      "website": "https://www.iitism.ac.in",
+      "established": 1926,
+      "nirf": {
+        "year": 2025,
+        "category": "Engineering",
+        "rank": 15,
+        "source": "nirf_eng_2025"
+      },
+      "fees": "iit_fees",
+      "surroundings": {
+        "area": "Sardar Patel Nagar, inside Dhanbad city, Jharkhand",
+        "airport": "Ranchi airport, about 160 km; Kolkata, about 260 km",
+        "railway": "Dhanbad Junction, about 3 km",
+        "local_transport": "Autos and city buses",
+        "daily_needs": "Hirapur and Bank More markets within a few km"
+      }
+    }
+  }
+}

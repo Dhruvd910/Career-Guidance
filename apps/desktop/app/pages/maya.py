@@ -1,0 +1,280 @@
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtWidgets import (
+    QApplication, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QSizePolicy, QVBoxLayout, QWidget,
+)
+
+from app.api_client import ApiError, api_client
+from app.config import PORTRAIT_RATIO
+from app.theme import CARD_BORDER, FOREGROUND, PRIMARY
+from app.pages.base import BasePage
+from app.voice import LISTENING, THINKING
+from app.widgets.common import error_label, heading, primary_button, set_error, subtitle
+from app.widgets.icons import mic_icon, stop_icon
+from app.widgets.maya_status import MayaStatus
+from app.workers import run_async
+
+# The kiosk panel is only 800x480, where a 420px-wide mascot plus a 460px side panel
+# overflows the screen before the chat column even gets a say. Scale both down on small
+# displays rather than letting the layout force a window bigger than the screen.
+MASCOT_SIZE = QSize(int(300 * PORTRAIT_RATIO), 300)
+MASCOT_SIZE_COMPACT = QSize(int(130 * PORTRAIT_RATIO), 130)
+COMPACT_SCREEN_WIDTH = 1000
+
+
+class ChatBubble(QLabel):
+    def __init__(self, role: str, text: str):
+        super().__init__(text)
+        self.setWordWrap(True)
+        self.setMaximumWidth(420)
+        self.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        if role == "user":
+            self.setStyleSheet(f"background:{PRIMARY}; color:white; border-radius:12px; padding:8px 12px;")
+        else:
+            self.setStyleSheet(f"background:white; color:{FOREGROUND}; border:1px solid {CARD_BORDER};"
+                               " border-radius:12px; padding:8px 12px;")
+
+
+class MayaPage(BasePage):
+    def __init__(self, ctx):
+        super().__init__(ctx)
+        self.voice = ctx.voice
+        self.conversation_id: int | None = None
+        self._request_id = 0  # newest chat request; older replies are shown but never spoken
+        self._mic_session = False  # the current listen was started from this page's mic button
+        # The language the student last spoke or typed ("en"/"hi"), so MAYA's own short
+        # prompts ("Yes? How can I help?") follow it too. Her replies already do.
+        self.language = "en"
+
+        compact = QApplication.primaryScreen().availableGeometry().width() < COMPACT_SCREEN_WIDTH
+        mascot_size = MASCOT_SIZE_COMPACT if compact else MASCOT_SIZE
+
+        outer = QVBoxLayout(self) if compact else QHBoxLayout(self)
+        outer.setContentsMargins(*((16, 12, 16, 12) if compact else (28, 28, 28, 28)))
+        outer.setSpacing(12 if compact else 20)
+
+        # ---- MAYA herself: a column beside the chat, or a band above it on a small panel ----
+        titles = QVBoxLayout()
+        titles.setAlignment(Qt.AlignVCenter if compact else (Qt.AlignTop | Qt.AlignHCenter))
+        titles.addWidget(heading("MAYA"))
+        titles.addWidget(subtitle("Your AI career counsellor"))
+
+        self.status = MayaStatus(self.voice, mascot_size, portrait=True)
+
+        self.mic_btn = primary_button("  Speak")
+        self.mic_btn.setIcon(mic_icon("#ffffff"))
+        self.mic_btn.setIconSize(QSize(22, 22))
+        self.mic_btn.clicked.connect(self._toggle_listening)
+
+        self.not_configured_label = error_label()
+
+        if compact:
+            # Two columns don't fit 800x480: the chat ends up too narrow to read or type in.
+            # So MAYA sits in a band across the top, and the chat gets the full width.
+            titles.addWidget(self.mic_btn)
+            titles_widget = QWidget()
+            titles_widget.setLayout(titles)
+            band = QHBoxLayout()
+            band.setSpacing(12)
+            band.addWidget(self.status)
+            band.addWidget(titles_widget, stretch=1)
+            left_widget = QWidget()
+            left_widget.setLayout(band)
+        else:
+            left = QVBoxLayout()
+            left.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+            left.addLayout(titles)
+            left.addWidget(self.status)
+            left.addWidget(self.mic_btn)
+            left.addWidget(self.not_configured_label)
+            left_widget = QWidget()
+            left_widget.setLayout(left)
+            left_widget.setFixedWidth(mascot_size.width() + 40)
+        outer.addWidget(left_widget)
+        if compact:
+            # 480px minus the keyboard leaves ~285px — not enough for the mascot band too, so
+            # it steps aside while typing and the chat gets the room.
+            ctx.keyboard.visibility_changed.connect(lambda shown: left_widget.setVisible(not shown))
+
+        # ---- the conversation ----
+        right = QVBoxLayout()
+        right.setSpacing(8)
+        if compact:
+            right.addWidget(self.not_configured_label)  # the mascot band has no room for it
+        self.scroll = QScrollArea()
+        self.scroll.setWidgetResizable(True)
+        # The transcript stretches into whatever room is left instead of asking for a height of
+        # its own: otherwise a long conversation makes the page taller than the panel, and the
+        # window's own scroll area pushes the text box off the bottom of the screen.
+        self.scroll.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Ignored)
+        self.messages_container = QWidget()
+        self.messages_layout = QVBoxLayout(self.messages_container)
+        self.messages_layout.setAlignment(Qt.AlignTop)
+        self.scroll.setWidget(self.messages_container)
+        self.scroll.verticalScrollBar().rangeChanged.connect(lambda _min, mx: self.scroll.verticalScrollBar().setValue(mx))
+        right.addWidget(self.scroll, stretch=1)
+
+        input_row = QHBoxLayout()
+        self.text_input = QLineEdit()
+        self.text_input.setPlaceholderText("Ask about a career, exam, or college…")
+        self.text_input.returnPressed.connect(self._send_text)
+        input_row.addWidget(self.text_input)
+        self.send_btn = primary_button("Send")
+        self.send_btn.clicked.connect(self._send_text)
+        input_row.addWidget(self.send_btn)
+        input_row_widget = QWidget()
+        input_row_widget.setLayout(input_row)
+        right.addWidget(input_row_widget)
+
+        right_widget = QWidget()
+        right_widget.setLayout(right)
+        right_widget.setMinimumHeight(140)  # the chat keeps room to read even beside the keyboard
+        outer.addWidget(right_widget, stretch=1)
+
+        self.voice.state_changed.connect(self._refresh_mic_button)
+        self._add_bubble(
+            "assistant",
+            "Hi! I'm MAYA, your AI career counsellor. Ask me about careers, JEE/NEET, or any "
+            "college — by voice or by typing, in English or Hindi. I'll only use real data from "
+            "our database, and I'll say so if something isn't available yet.",
+        )
+
+    def on_show(self, wake: bool = False, greet: bool = True, ask: str | None = None, **kwargs) -> None:
+        set_error(self.not_configured_label, None)
+        if ask:
+            # Another screen's "Ask MAYA about it": the question goes straight in.
+            self.text_input.setText(ask)
+            self._send_text()
+        elif wake:
+            self.wake(greet=greet)
+
+    def wake(self, greet: bool = True) -> None:
+        """Someone tapped MAYA's wake button or said "Hey Maya": answer, then listen. After
+        an interruption she skips the "Yes?" — they're already talking."""
+        set_error(self.not_configured_label, None)
+        self._mic_session = False
+        if greet:
+            prompt = "हाँ? बताइए, मैं कैसे मदद करूँ?" if self.language == "hi" else "Yes? How can I help?"
+            self.voice.say(prompt, on_done=self._listen_after_wake)
+        else:
+            self.voice.cancel()
+            self._listen_after_wake()
+
+    def _listen_after_wake(self) -> None:
+        if self.isVisible() and not self.ctx.keyboard.isVisible():
+            self._toggle_listening()
+
+    # ---------------- transcript ----------------
+
+    def _add_bubble(self, role: str, text: str) -> None:
+        row = QHBoxLayout()
+        bubble = ChatBubble(role, text)
+        if role == "user":
+            row.addStretch(1)
+            row.addWidget(bubble)
+        else:
+            row.addWidget(bubble)
+            row.addStretch(1)
+        row_widget = QWidget()
+        row_widget.setLayout(row)
+        self.messages_layout.addWidget(row_widget)
+
+    def _begin_request(self) -> int:
+        self._request_id += 1
+        self.status.hold(THINKING)
+        self.send_btn.setEnabled(False)
+        return self._request_id
+
+    def _end_request(self, request_id: int) -> bool:
+        """Returns True if this reply is still the one the person is waiting on."""
+        if request_id != self._request_id:
+            return False
+        self.status.hold(None)
+        self.send_btn.setEnabled(True)
+        return True
+
+    def _should_speak(self, request_id: int) -> bool:
+        # Don't talk over someone who has started typing, or from a page they've left.
+        return request_id == self._request_id and self.isVisible() and not self.ctx.keyboard.isVisible()
+
+    # ---------------- typed questions ----------------
+
+    def _send_text(self) -> None:
+        text = self.text_input.text().strip()
+        if not text:
+            return
+        self.text_input.clear()
+        self.language = "hi" if any("\u0900" <= ch <= "\u097f" for ch in text) else "en"
+        self._add_bubble("user", text)
+        request_id = self._begin_request()
+        run_async(
+            api_client.chat, text, self.conversation_id,
+            on_success=lambda r: self._on_chat_reply(request_id, r),
+            on_error=lambda e: self._on_error(request_id, e),
+        )
+
+    def _on_chat_reply(self, request_id: int, response: dict) -> None:
+        self.conversation_id = response["conversation_id"]
+        current = self._end_request(request_id)
+        if not response.get("ai_configured", True):
+            set_error(self.not_configured_label, response["reply"])
+            return
+        self._add_bubble("assistant", response["reply"])
+        if current and self._should_speak(request_id):
+            self.voice.say(response["reply"])
+
+    # ---------------- spoken questions ----------------
+
+    def _toggle_listening(self) -> None:
+        if self._mic_session and self.voice.state in (LISTENING, THINKING):
+            self._mic_session = False
+            self.voice.cancel()
+            return
+        set_error(self.not_configured_label, None)
+        self.voice.listen_for_audio(on_audio=self._send_voice, on_no_answer=self._on_no_voice)
+        self._mic_session = self.voice.state == LISTENING
+        self._refresh_mic_button()
+
+    def _send_voice(self, wav_bytes: bytes) -> None:
+        self._mic_session = False
+        request_id = self._begin_request()
+        run_async(
+            api_client.voice_chat, wav_bytes, self.conversation_id,
+            on_success=lambda r: self._on_voice_reply(request_id, r),
+            on_error=lambda e: self._on_error(request_id, e),
+        )
+
+    def _on_voice_reply(self, request_id: int, response: dict) -> None:
+        self.conversation_id = response["conversation_id"]
+        current = self._end_request(request_id)
+        if not response.get("ai_configured", True):
+            set_error(self.not_configured_label, response["reply"])
+            return
+        self.language = response.get("language") or "en"
+        self._add_bubble("user", response.get("transcript") or "(voice message)")
+        self._add_bubble("assistant", response["reply"])
+        if current and self._should_speak(request_id) and response.get("audio_base64"):
+            self.voice.play_audio(response["audio_base64"])
+
+    def _on_no_voice(self, reason: str) -> None:
+        self._mic_session = False
+        self._refresh_mic_button()
+        if reason == "no_mic":
+            set_error(self.not_configured_label, "No microphone detected. You can still type your questions.")
+        elif reason == "silence":
+            set_error(self.not_configured_label, "I didn't hear anything — tap Speak and try again.")
+        elif reason == "unclear":
+            set_error(self.not_configured_label, "Sorry, I didn't catch that. Tap Speak to try again.")
+        else:
+            set_error(self.not_configured_label, "Voice input isn't working right now. You can still type.")
+
+    def _on_error(self, request_id: int, err: Exception) -> None:
+        self._end_request(request_id)
+        message = err.message if isinstance(err, ApiError) else "Could not reach the AI assistant."
+        self._add_bubble("assistant", f"⚠ {message}")
+
+    def _refresh_mic_button(self, *_args) -> None:
+        listening = self._mic_session and self.voice.state in (LISTENING, THINKING)
+        if not listening:
+            self._mic_session = False
+        self.mic_btn.setIcon(stop_icon() if listening else mic_icon("#ffffff"))
+        self.mic_btn.setText("  Stop" if listening else "  Speak")

@@ -1,0 +1,2051 @@
+{
+  "_about": "MAYA's career-assessment conversation. Each option adds points to one or more dimensions (0-3). A question with 'requires' is only asked when an earlier answer was one of the listed options, so subjects the student likes get explored in depth and the rest stay short. Scoring normalises every dimension by the most it could have scored among the questions actually asked.",
+  "dimensions": {
+    "maths": "maths",
+    "physics": "physics",
+    "chemistry": "chemistry",
+    "biology": "biology",
+    "computer": "computers and coding",
+    "commerce": "business, money and economics",
+    "arts": "drawing, design and visual work",
+    "language": "reading, writing and speaking",
+    "society": "history, politics and society",
+    "realistic": "building, fixing and hands-on work",
+    "investigative": "figuring out how things work",
+    "artistic": "creating original things",
+    "social": "helping and caring for people",
+    "enterprising": "leading and persuading",
+    "conventional": "organised, careful, detailed work",
+    "communication": "talking to and convincing people",
+    "outdoor": "active, outdoor or on-site work",
+    "blood_ok": "being comfortable in hospitals",
+    "long_study": "studying for many years",
+    "stability": "a secure, steady job",
+    "money": "earning well",
+    "tech": "technology",
+    "clinical": "diagnosing and treating illness",
+    "caregiving": "caring for patients day to day"
+  },
+  "questions": [
+    {
+      "id": "int_maths",
+      "section": "Subjects",
+      "text": "How do you feel about maths?",
+      "speak": "Let's start with subjects. How do you feel about maths? You love it, you like it, it's not really your thing, or you struggle with it?",
+      "options": [
+        {
+          "id": "love",
+          "label": "I love it",
+          "keywords": [
+            "love",
+            "favourite",
+            "favorite",
+            "best subject",
+            "really enjoy"
+          ],
+          "weights": {
+            "maths": 3
+          }
+        },
+        {
+          "id": "like",
+          "label": "I like it",
+          "keywords": [
+            "like",
+            "okay",
+            "ok",
+            "fine",
+            "good",
+            "enjoy"
+          ],
+          "weights": {
+            "maths": 2
+          }
+        },
+        {
+          "id": "meh",
+          "label": "Not really my thing",
+          "keywords": [
+            "not really",
+            "don't like",
+            "do not like",
+            "boring",
+            "not my thing",
+            "not much"
+          ],
+          "weights": {
+            "maths": 0.5
+          }
+        },
+        {
+          "id": "hard",
+          "label": "I struggle with it",
+          "keywords": [
+            "struggle",
+            "hate",
+            "difficult",
+            "hard",
+            "weak",
+            "bad at"
+          ],
+          "weights": {
+            "maths": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "maths_style",
+      "section": "Maths",
+      "requires": {
+        "int_maths": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "What kind of maths do you enjoy most?",
+      "speak": "What kind of maths do you enjoy most? Puzzles and logic, numbers and money, shapes and geometry, or calculus and equations?",
+      "options": [
+        {
+          "id": "logic",
+          "label": "Puzzles and logic",
+          "keywords": [
+            "puzzle",
+            "logic",
+            "reasoning",
+            "brain"
+          ],
+          "weights": {
+            "maths": 2,
+            "computer": 2,
+            "investigative": 2
+          }
+        },
+        {
+          "id": "money",
+          "label": "Numbers and money",
+          "keywords": [
+            "money",
+            "numbers",
+            "accounts",
+            "percent",
+            "interest"
+          ],
+          "weights": {
+            "maths": 1,
+            "commerce": 3,
+            "conventional": 1
+          }
+        },
+        {
+          "id": "shapes",
+          "label": "Shapes and geometry",
+          "keywords": [
+            "shape",
+            "geometry",
+            "drawing",
+            "figures",
+            "space"
+          ],
+          "weights": {
+            "maths": 2,
+            "arts": 2,
+            "realistic": 1
+          }
+        },
+        {
+          "id": "calculus",
+          "label": "Calculus and equations",
+          "keywords": [
+            "calculus",
+            "equation",
+            "algebra",
+            "formula",
+            "derivative"
+          ],
+          "weights": {
+            "maths": 3,
+            "physics": 1,
+            "investigative": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_physics",
+      "section": "Subjects",
+      "text": "And physics?",
+      "speak": "And physics? Love it, like it, not really, or struggle?",
+      "options": [
+        {
+          "id": "love",
+          "label": "I love it",
+          "keywords": [
+            "love",
+            "favourite",
+            "favorite",
+            "really enjoy"
+          ],
+          "weights": {
+            "physics": 3
+          }
+        },
+        {
+          "id": "like",
+          "label": "I like it",
+          "keywords": [
+            "like",
+            "okay",
+            "ok",
+            "fine",
+            "good",
+            "enjoy"
+          ],
+          "weights": {
+            "physics": 2
+          }
+        },
+        {
+          "id": "meh",
+          "label": "Not really my thing",
+          "keywords": [
+            "not really",
+            "don't like",
+            "do not like",
+            "boring",
+            "not my thing"
+          ],
+          "weights": {
+            "physics": 0.5
+          }
+        },
+        {
+          "id": "hard",
+          "label": "I struggle with it",
+          "keywords": [
+            "struggle",
+            "hate",
+            "difficult",
+            "hard",
+            "weak"
+          ],
+          "weights": {
+            "physics": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "physics_side",
+      "section": "Physics",
+      "requires": {
+        "int_physics": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "Which side of physics excites you more?",
+      "speak": "Which side of physics excites you more? How machines and electricity work, how space and the universe work, or solving numericals?",
+      "options": [
+        {
+          "id": "machines",
+          "label": "How machines and electricity work",
+          "keywords": [
+            "machine",
+            "electric",
+            "engine",
+            "circuit",
+            "motor",
+            "how things work"
+          ],
+          "weights": {
+            "physics": 2,
+            "realistic": 2,
+            "tech": 1
+          }
+        },
+        {
+          "id": "universe",
+          "label": "Space and how the universe works",
+          "keywords": [
+            "space",
+            "universe",
+            "stars",
+            "planet",
+            "quantum",
+            "black hole"
+          ],
+          "weights": {
+            "physics": 3,
+            "investigative": 3,
+            "long_study": 1
+          }
+        },
+        {
+          "id": "numericals",
+          "label": "Solving numericals",
+          "keywords": [
+            "numerical",
+            "problems",
+            "solving",
+            "calculation"
+          ],
+          "weights": {
+            "physics": 2,
+            "maths": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "build_things",
+      "section": "Physics",
+      "requires": {
+        "int_physics": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "Would you enjoy building things with your hands — circuits, robots, engines?",
+      "speak": "Would you enjoy building things with your hands, like circuits, robots or engines? Yes, maybe, or no?",
+      "options": [
+        {
+          "id": "yes",
+          "label": "Yes, a lot",
+          "keywords": [
+            "yes",
+            "a lot",
+            "love",
+            "definitely",
+            "sure"
+          ],
+          "weights": {
+            "realistic": 3,
+            "tech": 2
+          }
+        },
+        {
+          "id": "maybe",
+          "label": "Maybe sometimes",
+          "keywords": [
+            "maybe",
+            "sometimes",
+            "might",
+            "not sure"
+          ],
+          "weights": {
+            "realistic": 1.5,
+            "tech": 1
+          }
+        },
+        {
+          "id": "no",
+          "label": "Not really",
+          "keywords": [
+            "no",
+            "not really",
+            "nah"
+          ],
+          "weights": {
+            "realistic": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_chemistry",
+      "section": "Subjects",
+      "text": "How about chemistry?",
+      "speak": "How about chemistry? Love it, like it, not really, or struggle?",
+      "options": [
+        {
+          "id": "love",
+          "label": "I love it",
+          "keywords": [
+            "love",
+            "favourite",
+            "favorite",
+            "really enjoy"
+          ],
+          "weights": {
+            "chemistry": 3
+          }
+        },
+        {
+          "id": "like",
+          "label": "I like it",
+          "keywords": [
+            "like",
+            "okay",
+            "ok",
+            "fine",
+            "good",
+            "enjoy"
+          ],
+          "weights": {
+            "chemistry": 2
+          }
+        },
+        {
+          "id": "meh",
+          "label": "Not really my thing",
+          "keywords": [
+            "not really",
+            "don't like",
+            "do not like",
+            "boring",
+            "not my thing"
+          ],
+          "weights": {
+            "chemistry": 0.5
+          }
+        },
+        {
+          "id": "hard",
+          "label": "I struggle with it",
+          "keywords": [
+            "struggle",
+            "hate",
+            "difficult",
+            "hard",
+            "weak"
+          ],
+          "weights": {
+            "chemistry": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "chemistry_side",
+      "section": "Chemistry",
+      "requires": {
+        "int_chemistry": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "What draws you to chemistry?",
+      "speak": "What draws you to chemistry? Doing experiments in the lab, how medicines work in the body, or making new materials and fuels?",
+      "options": [
+        {
+          "id": "lab",
+          "label": "Doing experiments in the lab",
+          "keywords": [
+            "lab",
+            "experiment",
+            "reactions",
+            "practical"
+          ],
+          "weights": {
+            "chemistry": 2,
+            "investigative": 2,
+            "realistic": 1
+          }
+        },
+        {
+          "id": "medicines",
+          "label": "How medicines work in the body",
+          "keywords": [
+            "medicine",
+            "drug",
+            "body",
+            "health",
+            "pharma"
+          ],
+          "weights": {
+            "chemistry": 2,
+            "biology": 2,
+            "social": 1
+          }
+        },
+        {
+          "id": "materials",
+          "label": "Making new materials and fuels",
+          "keywords": [
+            "material",
+            "fuel",
+            "plastic",
+            "industry",
+            "factory",
+            "process"
+          ],
+          "weights": {
+            "chemistry": 2,
+            "realistic": 2,
+            "physics": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_biology",
+      "section": "Subjects",
+      "text": "And biology?",
+      "speak": "And biology? Love it, like it, not really, or struggle?",
+      "options": [
+        {
+          "id": "love",
+          "label": "I love it",
+          "keywords": [
+            "love",
+            "favourite",
+            "favorite",
+            "really enjoy"
+          ],
+          "weights": {
+            "biology": 3
+          }
+        },
+        {
+          "id": "like",
+          "label": "I like it",
+          "keywords": [
+            "like",
+            "okay",
+            "ok",
+            "fine",
+            "good",
+            "enjoy"
+          ],
+          "weights": {
+            "biology": 2
+          }
+        },
+        {
+          "id": "meh",
+          "label": "Not really my thing",
+          "keywords": [
+            "not really",
+            "don't like",
+            "do not like",
+            "boring",
+            "not my thing"
+          ],
+          "weights": {
+            "biology": 0.5
+          }
+        },
+        {
+          "id": "hard",
+          "label": "I struggle with it",
+          "keywords": [
+            "struggle",
+            "hate",
+            "difficult",
+            "hard",
+            "weak"
+          ],
+          "weights": {
+            "biology": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "biology_side",
+      "section": "Biology",
+      "requires": {
+        "int_biology": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "Which part of biology interests you most?",
+      "speak": "Which part of biology interests you most? The human body and health, animals and plants and the environment, or genes, cells and research?",
+      "options": [
+        {
+          "id": "body",
+          "label": "The human body and health",
+          "keywords": [
+            "human",
+            "body",
+            "health",
+            "disease",
+            "doctor"
+          ],
+          "weights": {
+            "biology": 3,
+            "social": 2
+          }
+        },
+        {
+          "id": "nature",
+          "label": "Animals, plants and the environment",
+          "keywords": [
+            "animal",
+            "plant",
+            "environment",
+            "nature",
+            "wildlife",
+            "ecology"
+          ],
+          "weights": {
+            "biology": 2,
+            "outdoor": 2,
+            "investigative": 1
+          }
+        },
+        {
+          "id": "genes",
+          "label": "Genes, cells and research",
+          "keywords": [
+            "gene",
+            "dna",
+            "cell",
+            "research",
+            "lab",
+            "microscope"
+          ],
+          "weights": {
+            "biology": 3,
+            "investigative": 3,
+            "long_study": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "biology_role",
+      "section": "Biology",
+      "requires": {
+        "int_biology": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "If you worked in health, which would you want to do?",
+      "speak": "If you worked in health, which would you want to do? Diagnose and treat patients, care for patients as they recover, research new cures, or look after animals?",
+      "options": [
+        {
+          "id": "treat",
+          "label": "Diagnose and treat patients",
+          "keywords": [
+            "diagnose",
+            "treat",
+            "doctor",
+            "surgery",
+            "surgeon"
+          ],
+          "weights": {
+            "clinical": 3,
+            "long_study": 1
+          }
+        },
+        {
+          "id": "care",
+          "label": "Care for patients as they recover",
+          "keywords": [
+            "care",
+            "recover",
+            "nurse",
+            "nursing",
+            "look after patients"
+          ],
+          "weights": {
+            "caregiving": 3,
+            "social": 1
+          }
+        },
+        {
+          "id": "research",
+          "label": "Research new cures",
+          "keywords": [
+            "research",
+            "cure",
+            "lab",
+            "discover",
+            "vaccine"
+          ],
+          "weights": {
+            "investigative": 3,
+            "long_study": 1
+          }
+        },
+        {
+          "id": "animals",
+          "label": "Look after animals",
+          "keywords": [
+            "animal",
+            "pet",
+            "vet",
+            "cow",
+            "dog"
+          ],
+          "weights": {
+            "outdoor": 2,
+            "clinical": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "hospital",
+      "section": "Biology",
+      "text": "How do you feel about hospitals, blood and injuries?",
+      "speak": "How do you feel about hospitals, blood and injuries? Totally fine, okay-ish, or you'd rather stay away?",
+      "options": [
+        {
+          "id": "fine",
+          "label": "Totally fine",
+          "keywords": [
+            "fine",
+            "no problem",
+            "comfortable",
+            "totally",
+            "not scared"
+          ],
+          "weights": {
+            "blood_ok": 3
+          }
+        },
+        {
+          "id": "okay",
+          "label": "Okay-ish",
+          "keywords": [
+            "okay",
+            "ok",
+            "manageable",
+            "a little",
+            "bit"
+          ],
+          "weights": {
+            "blood_ok": 1.5
+          }
+        },
+        {
+          "id": "avoid",
+          "label": "I'd rather stay away",
+          "keywords": [
+            "stay away",
+            "avoid",
+            "scared",
+            "faint",
+            "can't",
+            "no"
+          ],
+          "weights": {
+            "blood_ok": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_computer",
+      "section": "Subjects",
+      "text": "How much do you enjoy computers and coding?",
+      "speak": "How much do you enjoy computers and coding? A lot, a bit, not much, or never tried it?",
+      "options": [
+        {
+          "id": "love",
+          "label": "A lot",
+          "keywords": [
+            "a lot",
+            "love",
+            "really",
+            "favourite",
+            "favorite"
+          ],
+          "weights": {
+            "computer": 3,
+            "tech": 3
+          }
+        },
+        {
+          "id": "like",
+          "label": "A bit",
+          "keywords": [
+            "a bit",
+            "little",
+            "like",
+            "okay",
+            "ok"
+          ],
+          "weights": {
+            "computer": 2,
+            "tech": 2
+          }
+        },
+        {
+          "id": "meh",
+          "label": "Not much",
+          "keywords": [
+            "not much",
+            "not really",
+            "don't like",
+            "boring"
+          ],
+          "weights": {
+            "computer": 0.5,
+            "tech": 1
+          }
+        },
+        {
+          "id": "never",
+          "label": "Never really tried",
+          "keywords": [
+            "never",
+            "not tried",
+            "haven't",
+            "no idea"
+          ],
+          "weights": {
+            "computer": 1,
+            "tech": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "computer_side",
+      "section": "Computers",
+      "requires": {
+        "int_computer": [
+          "love",
+          "like",
+          "never"
+        ]
+      },
+      "text": "Which of these sounds most fun?",
+      "speak": "Which of these sounds most fun? Making apps and websites, making games and animations, or teaching computers with data and A.I.?",
+      "options": [
+        {
+          "id": "apps",
+          "label": "Making apps and websites",
+          "keywords": [
+            "app",
+            "website",
+            "web",
+            "software",
+            "coding"
+          ],
+          "weights": {
+            "computer": 3,
+            "realistic": 1,
+            "tech": 2
+          }
+        },
+        {
+          "id": "games",
+          "label": "Games, graphics and animation",
+          "keywords": [
+            "game",
+            "graphic",
+            "animation",
+            "design",
+            "3d"
+          ],
+          "weights": {
+            "computer": 2,
+            "artistic": 2,
+            "arts": 1
+          }
+        },
+        {
+          "id": "ai",
+          "label": "Data and AI",
+          "keywords": [
+            "data",
+            "ai",
+            "a.i",
+            "artificial",
+            "machine learning",
+            "robot"
+          ],
+          "weights": {
+            "computer": 2,
+            "maths": 2,
+            "investigative": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_commerce",
+      "section": "Subjects",
+      "text": "Do you find business, money and the economy interesting?",
+      "speak": "Do you find business, money and the economy interesting? Very, a little, or not at all?",
+      "options": [
+        {
+          "id": "love",
+          "label": "Very interesting",
+          "keywords": [
+            "very",
+            "love",
+            "a lot",
+            "really"
+          ],
+          "weights": {
+            "commerce": 3
+          }
+        },
+        {
+          "id": "like",
+          "label": "A little",
+          "keywords": [
+            "little",
+            "bit",
+            "somewhat",
+            "okay",
+            "ok",
+            "like"
+          ],
+          "weights": {
+            "commerce": 1.5
+          }
+        },
+        {
+          "id": "no",
+          "label": "Not at all",
+          "keywords": [
+            "not at all",
+            "no",
+            "boring",
+            "not really"
+          ],
+          "weights": {
+            "commerce": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "commerce_side",
+      "section": "Business",
+      "requires": {
+        "int_commerce": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "Which would you rather do?",
+      "speak": "Which would you rather do? Start and run your own business, manage accounts and taxes carefully, or study markets and the economy?",
+      "options": [
+        {
+          "id": "business",
+          "label": "Start and run my own business",
+          "keywords": [
+            "own business",
+            "start",
+            "business",
+            "entrepreneur",
+            "startup"
+          ],
+          "weights": {
+            "commerce": 2,
+            "enterprising": 3,
+            "money": 1
+          }
+        },
+        {
+          "id": "accounts",
+          "label": "Manage accounts and taxes carefully",
+          "keywords": [
+            "account",
+            "tax",
+            "audit",
+            "careful",
+            "manage"
+          ],
+          "weights": {
+            "commerce": 3,
+            "conventional": 3,
+            "maths": 1
+          }
+        },
+        {
+          "id": "markets",
+          "label": "Study markets and the economy",
+          "keywords": [
+            "market",
+            "economy",
+            "economics",
+            "stock",
+            "invest"
+          ],
+          "weights": {
+            "commerce": 3,
+            "investigative": 2,
+            "maths": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_arts",
+      "section": "Subjects",
+      "text": "How much do you enjoy drawing, design or making things look good?",
+      "speak": "How much do you enjoy drawing, design, or making things look good? A lot, a bit, or not much?",
+      "options": [
+        {
+          "id": "love",
+          "label": "A lot",
+          "keywords": [
+            "a lot",
+            "love",
+            "really",
+            "always"
+          ],
+          "weights": {
+            "arts": 3,
+            "artistic": 2
+          }
+        },
+        {
+          "id": "like",
+          "label": "A bit",
+          "keywords": [
+            "a bit",
+            "little",
+            "sometimes",
+            "okay",
+            "like"
+          ],
+          "weights": {
+            "arts": 1.5,
+            "artistic": 1
+          }
+        },
+        {
+          "id": "no",
+          "label": "Not much",
+          "keywords": [
+            "not much",
+            "no",
+            "not really",
+            "can't draw"
+          ],
+          "weights": {
+            "arts": 0,
+            "artistic": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "arts_side",
+      "section": "Design",
+      "requires": {
+        "int_arts": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "What would you most like to design?",
+      "speak": "What would you most like to design? Buildings and spaces, apps and products people use, or films, photos and media?",
+      "options": [
+        {
+          "id": "buildings",
+          "label": "Buildings and spaces",
+          "keywords": [
+            "building",
+            "house",
+            "space",
+            "interior",
+            "city"
+          ],
+          "weights": {
+            "arts": 2,
+            "maths": 1,
+            "realistic": 2
+          }
+        },
+        {
+          "id": "products",
+          "label": "Apps and products people use",
+          "keywords": [
+            "app",
+            "product",
+            "gadget",
+            "ux",
+            "interface"
+          ],
+          "weights": {
+            "arts": 2,
+            "computer": 1,
+            "artistic": 2
+          }
+        },
+        {
+          "id": "media",
+          "label": "Films, photos and media",
+          "keywords": [
+            "film",
+            "photo",
+            "video",
+            "media",
+            "youtube",
+            "movie"
+          ],
+          "weights": {
+            "artistic": 3,
+            "communication": 2,
+            "language": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_language",
+      "section": "Subjects",
+      "text": "Do you enjoy reading, writing and speaking — essays, debates, stories?",
+      "speak": "Do you enjoy reading, writing and speaking, like essays, debates or stories? A lot, a bit, or not much?",
+      "options": [
+        {
+          "id": "love",
+          "label": "A lot",
+          "keywords": [
+            "a lot",
+            "love",
+            "really",
+            "always"
+          ],
+          "weights": {
+            "language": 3,
+            "communication": 2
+          }
+        },
+        {
+          "id": "like",
+          "label": "A bit",
+          "keywords": [
+            "a bit",
+            "little",
+            "sometimes",
+            "okay",
+            "like"
+          ],
+          "weights": {
+            "language": 1.5,
+            "communication": 1
+          }
+        },
+        {
+          "id": "no",
+          "label": "Not much",
+          "keywords": [
+            "not much",
+            "no",
+            "not really",
+            "boring"
+          ],
+          "weights": {
+            "language": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "language_side",
+      "section": "Language",
+      "requires": {
+        "int_language": [
+          "love",
+          "like"
+        ]
+      },
+      "text": "Which one is most you?",
+      "speak": "Which one is most you? Arguing a case and winning a debate, writing articles and telling stories, or explaining things so others understand?",
+      "options": [
+        {
+          "id": "debate",
+          "label": "Arguing a case, winning a debate",
+          "keywords": [
+            "argue",
+            "debate",
+            "case",
+            "win",
+            "convince"
+          ],
+          "weights": {
+            "language": 2,
+            "enterprising": 2,
+            "communication": 3,
+            "society": 1
+          }
+        },
+        {
+          "id": "writing",
+          "label": "Writing articles and stories",
+          "keywords": [
+            "write",
+            "writing",
+            "article",
+            "story",
+            "journal",
+            "blog"
+          ],
+          "weights": {
+            "language": 3,
+            "artistic": 2
+          }
+        },
+        {
+          "id": "teaching",
+          "label": "Explaining things to others",
+          "keywords": [
+            "explain",
+            "teach",
+            "help understand",
+            "tutor"
+          ],
+          "weights": {
+            "language": 2,
+            "social": 3,
+            "communication": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "int_society",
+      "section": "Subjects",
+      "text": "Are you interested in history, politics and how the country is run?",
+      "speak": "Are you interested in history, politics, and how the country is run? Very, a little, or not really?",
+      "options": [
+        {
+          "id": "love",
+          "label": "Very",
+          "keywords": [
+            "very",
+            "love",
+            "a lot",
+            "really"
+          ],
+          "weights": {
+            "society": 3
+          }
+        },
+        {
+          "id": "like",
+          "label": "A little",
+          "keywords": [
+            "little",
+            "bit",
+            "somewhat",
+            "okay",
+            "ok"
+          ],
+          "weights": {
+            "society": 1.5
+          }
+        },
+        {
+          "id": "no",
+          "label": "Not really",
+          "keywords": [
+            "not really",
+            "no",
+            "boring",
+            "not at all"
+          ],
+          "weights": {
+            "society": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "saturday",
+      "section": "Personality",
+      "text": "On a free Saturday, which would you pick?",
+      "speak": "Now a bit about you. On a free Saturday, which would you pick? Fix or build something, read about how something works, make art, music or videos, hang out and help friends, or organise an event?",
+      "options": [
+        {
+          "id": "build",
+          "label": "Fix or build something",
+          "keywords": [
+            "fix",
+            "build",
+            "repair",
+            "make something"
+          ],
+          "weights": {
+            "realistic": 3
+          }
+        },
+        {
+          "id": "read",
+          "label": "Read about how something works",
+          "keywords": [
+            "read",
+            "how something works",
+            "learn",
+            "research",
+            "documentary"
+          ],
+          "weights": {
+            "investigative": 3
+          }
+        },
+        {
+          "id": "create",
+          "label": "Make art, music or videos",
+          "keywords": [
+            "art",
+            "music",
+            "video",
+            "draw",
+            "paint",
+            "create"
+          ],
+          "weights": {
+            "artistic": 3
+          }
+        },
+        {
+          "id": "friends",
+          "label": "Hang out and help friends",
+          "keywords": [
+            "friends",
+            "help",
+            "hang out",
+            "volunteer",
+            "people"
+          ],
+          "weights": {
+            "social": 3
+          }
+        },
+        {
+          "id": "organise",
+          "label": "Organise an event or sell something",
+          "keywords": [
+            "organise",
+            "organize",
+            "event",
+            "sell",
+            "plan"
+          ],
+          "weights": {
+            "enterprising": 3,
+            "conventional": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "group_role",
+      "section": "Personality",
+      "text": "In a group project, what do you usually end up doing?",
+      "speak": "In a group project, what do you usually end up doing? The hands-on building, the research, making it look great, keeping everyone together, leading the team, or tracking deadlines and details?",
+      "options": [
+        {
+          "id": "hands",
+          "label": "The hands-on building",
+          "keywords": [
+            "build",
+            "hands",
+            "making",
+            "model"
+          ],
+          "weights": {
+            "realistic": 3
+          }
+        },
+        {
+          "id": "research",
+          "label": "Researching the answers",
+          "keywords": [
+            "research",
+            "find",
+            "answers",
+            "figure"
+          ],
+          "weights": {
+            "investigative": 3
+          }
+        },
+        {
+          "id": "design",
+          "label": "Making it look great",
+          "keywords": [
+            "look",
+            "design",
+            "presentation",
+            "creative",
+            "poster"
+          ],
+          "weights": {
+            "artistic": 3
+          }
+        },
+        {
+          "id": "together",
+          "label": "Keeping everyone together",
+          "keywords": [
+            "together",
+            "everyone",
+            "happy",
+            "help",
+            "team"
+          ],
+          "weights": {
+            "social": 3,
+            "communication": 1
+          }
+        },
+        {
+          "id": "lead",
+          "label": "Leading the team",
+          "keywords": [
+            "lead",
+            "leader",
+            "charge",
+            "divide"
+          ],
+          "weights": {
+            "enterprising": 3,
+            "communication": 2
+          }
+        },
+        {
+          "id": "details",
+          "label": "Tracking deadlines and details",
+          "keywords": [
+            "deadline",
+            "detail",
+            "track",
+            "organise",
+            "organize",
+            "schedule"
+          ],
+          "weights": {
+            "conventional": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "compliment",
+      "section": "Personality",
+      "text": "Which compliment would make you happiest?",
+      "speak": "Which compliment would make you happiest? You're so practical, so smart, so creative, so kind, a natural leader, or so reliable?",
+      "options": [
+        {
+          "id": "practical",
+          "label": "\"You're so practical\"",
+          "keywords": [
+            "practical"
+          ],
+          "weights": {
+            "realistic": 3
+          }
+        },
+        {
+          "id": "smart",
+          "label": "\"You're so smart\"",
+          "keywords": [
+            "smart",
+            "clever",
+            "intelligent",
+            "brilliant"
+          ],
+          "weights": {
+            "investigative": 3
+          }
+        },
+        {
+          "id": "creative",
+          "label": "\"You're so creative\"",
+          "keywords": [
+            "creative",
+            "artistic",
+            "original"
+          ],
+          "weights": {
+            "artistic": 3
+          }
+        },
+        {
+          "id": "kind",
+          "label": "\"You're so kind\"",
+          "keywords": [
+            "kind",
+            "caring",
+            "helpful",
+            "nice"
+          ],
+          "weights": {
+            "social": 3
+          }
+        },
+        {
+          "id": "leader",
+          "label": "\"You're a natural leader\"",
+          "keywords": [
+            "leader",
+            "leadership",
+            "confident"
+          ],
+          "weights": {
+            "enterprising": 3
+          }
+        },
+        {
+          "id": "reliable",
+          "label": "\"You're so reliable\"",
+          "keywords": [
+            "reliable",
+            "responsible",
+            "dependable",
+            "trust"
+          ],
+          "weights": {
+            "conventional": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "section": "Personality",
+      "text": "Would you rather work with people all day, or mostly on your own?",
+      "speak": "Would you rather work with people all day, a mix of both, or mostly on your own?",
+      "options": [
+        {
+          "id": "people",
+          "label": "With people all day",
+          "keywords": [
+            "people",
+            "all day",
+            "team",
+            "others"
+          ],
+          "weights": {
+            "social": 2,
+            "communication": 3,
+            "enterprising": 1
+          }
+        },
+        {
+          "id": "mix",
+          "label": "A mix of both",
+          "keywords": [
+            "mix",
+            "both",
+            "balance",
+            "depends"
+          ],
+          "weights": {
+            "social": 1,
+            "communication": 1.5,
+            "investigative": 1
+          }
+        },
+        {
+          "id": "alone",
+          "label": "Mostly on my own",
+          "keywords": [
+            "own",
+            "alone",
+            "myself",
+            "independent",
+            "quiet"
+          ],
+          "weights": {
+            "investigative": 2,
+            "conventional": 1,
+            "communication": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "section": "Personality",
+      "text": "How do you feel about speaking in front of a class?",
+      "speak": "How do you feel about speaking in front of a class? You love it, it's fine, or it makes you nervous?",
+      "options": [
+        {
+          "id": "love",
+          "label": "I love it",
+          "keywords": [
+            "love",
+            "enjoy",
+            "great",
+            "confident"
+          ],
+          "weights": {
+            "communication": 3,
+            "enterprising": 2
+          }
+        },
+        {
+          "id": "fine",
+          "label": "It's fine",
+          "keywords": [
+            "fine",
+            "okay",
+            "ok",
+            "manageable"
+          ],
+          "weights": {
+            "communication": 1.5,
+            "enterprising": 1
+          }
+        },
+        {
+          "id": "nervous",
+          "label": "It makes me nervous",
+          "keywords": [
+            "nervous",
+            "scared",
+            "shy",
+            "hate",
+            "anxious"
+          ],
+          "weights": {
+            "communication": 0
+          }
+        }
+      ]
+    },
+    {
+      "id": "broken",
+      "section": "Personality",
+      "text": "When something breaks at home, what do you do?",
+      "speak": "When something breaks at home, what do you do? Try to fix it yourself, look up why it broke, or call someone who knows?",
+      "options": [
+        {
+          "id": "fix",
+          "label": "Try to fix it myself",
+          "keywords": [
+            "fix",
+            "myself",
+            "repair",
+            "try"
+          ],
+          "weights": {
+            "realistic": 3,
+            "tech": 1
+          }
+        },
+        {
+          "id": "why",
+          "label": "Look up why it broke",
+          "keywords": [
+            "look up",
+            "why",
+            "search",
+            "find out",
+            "google"
+          ],
+          "weights": {
+            "investigative": 3
+          }
+        },
+        {
+          "id": "call",
+          "label": "Call someone who knows",
+          "keywords": [
+            "call",
+            "someone",
+            "ask",
+            "parents",
+            "technician"
+          ],
+          "weights": {
+            "social": 1,
+            "communication": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "section": "Personality",
+      "text": "Do clear rules and steps help you, or do you prefer figuring things out your own way?",
+      "speak": "Do clear rules and steps help you, or do you prefer figuring things out your own way?",
+      "options": [
+        {
+          "id": "rules",
+          "label": "Clear rules and steps help me",
+          "keywords": [
+            "rules",
+            "steps",
+            "clear",
+            "structure",
+            "help me"
+          ],
+          "weights": {
+            "conventional": 3,
+            "stability": 1
+          }
+        },
+        {
+          "id": "own",
+          "label": "I prefer my own way",
+          "keywords": [
+            "own way",
+            "figure",
+            "myself",
+            "freedom",
+            "creative"
+          ],
+          "weights": {
+            "artistic": 2,
+            "investigative": 1,
+            "enterprising": 1
+          }
+        },
+        {
+          "id": "both",
+          "label": "Depends on the task",
+          "keywords": [
+            "depends",
+            "both",
+            "mix"
+          ],
+          "weights": {
+            "conventional": 1,
+            "artistic": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "workplace",
+      "section": "Work style",
+      "text": "Where would you most like to work?",
+      "speak": "Where would you most like to work? At a desk with a computer, in a lab or hospital, or outdoors and on site?",
+      "options": [
+        {
+          "id": "desk",
+          "label": "At a desk with a computer",
+          "keywords": [
+            "desk",
+            "computer",
+            "office",
+            "laptop"
+          ],
+          "weights": {
+            "tech": 1,
+            "conventional": 1,
+            "outdoor": 0
+          }
+        },
+        {
+          "id": "lab",
+          "label": "In a lab or hospital",
+          "keywords": [
+            "lab",
+            "hospital",
+            "clinic"
+          ],
+          "weights": {
+            "investigative": 1,
+            "blood_ok": 1,
+            "biology": 1
+          }
+        },
+        {
+          "id": "outdoors",
+          "label": "Outdoors or on site",
+          "keywords": [
+            "outdoor",
+            "outside",
+            "site",
+            "field",
+            "travel"
+          ],
+          "weights": {
+            "outdoor": 3,
+            "realistic": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "adventure",
+      "section": "Work style",
+      "text": "Would you enjoy a job with travel, adventure and physical activity?",
+      "speak": "Would you enjoy a job with travel, adventure and physical activity? Love it, sometimes, or you prefer a steady routine?",
+      "options": [
+        {
+          "id": "love",
+          "label": "Love it",
+          "keywords": [
+            "love",
+            "yes",
+            "adventure",
+            "definitely"
+          ],
+          "weights": {
+            "outdoor": 3,
+            "realistic": 1
+          }
+        },
+        {
+          "id": "sometimes",
+          "label": "Sometimes",
+          "keywords": [
+            "sometimes",
+            "maybe",
+            "a bit"
+          ],
+          "weights": {
+            "outdoor": 1.5
+          }
+        },
+        {
+          "id": "routine",
+          "label": "I prefer a steady routine",
+          "keywords": [
+            "routine",
+            "steady",
+            "no",
+            "prefer"
+          ],
+          "weights": {
+            "outdoor": 0,
+            "stability": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "matters",
+      "section": "What matters",
+      "text": "What matters most to you in a future job?",
+      "speak": "What matters most to you in a future job? Earning well, helping people, a secure job, being creative, or respect and leadership?",
+      "options": [
+        {
+          "id": "money",
+          "label": "Earning well",
+          "keywords": [
+            "money",
+            "earning",
+            "salary",
+            "rich",
+            "earn"
+          ],
+          "weights": {
+            "money": 3
+          }
+        },
+        {
+          "id": "helping",
+          "label": "Helping people",
+          "keywords": [
+            "help",
+            "helping",
+            "people",
+            "society",
+            "serve"
+          ],
+          "weights": {
+            "social": 3
+          }
+        },
+        {
+          "id": "secure",
+          "label": "A secure, steady job",
+          "keywords": [
+            "secure",
+            "stable",
+            "steady",
+            "safe",
+            "security"
+          ],
+          "weights": {
+            "stability": 3
+          }
+        },
+        {
+          "id": "creative",
+          "label": "Being creative",
+          "keywords": [
+            "creative",
+            "create",
+            "freedom",
+            "art"
+          ],
+          "weights": {
+            "artistic": 3
+          }
+        },
+        {
+          "id": "respect",
+          "label": "Respect and leadership",
+          "keywords": [
+            "respect",
+            "lead",
+            "power",
+            "leadership",
+            "name"
+          ],
+          "weights": {
+            "enterprising": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "sector",
+      "section": "What matters",
+      "text": "Government job, private company, or your own business?",
+      "speak": "Would you prefer a government job, a private company, your own business, or you don't mind?",
+      "options": [
+        {
+          "id": "govt",
+          "label": "Government job",
+          "keywords": [
+            "government",
+            "govt",
+            "sarkari",
+            "public"
+          ],
+          "weights": {
+            "stability": 3,
+            "society": 1
+          }
+        },
+        {
+          "id": "private",
+          "label": "Private company",
+          "keywords": [
+            "private",
+            "company",
+            "corporate",
+            "mnc"
+          ],
+          "weights": {
+            "money": 2,
+            "tech": 1
+          }
+        },
+        {
+          "id": "own",
+          "label": "My own business",
+          "keywords": [
+            "own",
+            "business",
+            "startup",
+            "entrepreneur"
+          ],
+          "weights": {
+            "enterprising": 3,
+            "money": 1
+          }
+        },
+        {
+          "id": "any",
+          "label": "I don't mind",
+          "keywords": [
+            "don't mind",
+            "any",
+            "whatever",
+            "not sure",
+            "either"
+          ],
+          "weights": {
+            "stability": 1,
+            "money": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "years",
+      "section": "What matters",
+      "text": "How long are you happy to study after class 12?",
+      "speak": "How long are you happy to study after class twelve? Three or four years, five or six years, or as long as it takes?",
+      "options": [
+        {
+          "id": "short",
+          "label": "3–4 years",
+          "keywords": [
+            "three",
+            "four",
+            "3",
+            "4",
+            "short",
+            "quick"
+          ],
+          "weights": {
+            "long_study": 0.5
+          }
+        },
+        {
+          "id": "medium",
+          "label": "5–6 years",
+          "keywords": [
+            "five",
+            "six",
+            "5",
+            "6"
+          ],
+          "weights": {
+            "long_study": 2
+          }
+        },
+        {
+          "id": "long",
+          "label": "As long as it takes",
+          "keywords": [
+            "long",
+            "takes",
+            "phd",
+            "as much",
+            "any"
+          ],
+          "weights": {
+            "long_study": 3,
+            "investigative": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "pressure",
+      "section": "What matters",
+      "text": "How do you handle competition and pressure, like big exams?",
+      "speak": "Last one. How do you handle competition and pressure, like big entrance exams? You thrive on it, it's fine, or it stresses you out?",
+      "options": [
+        {
+          "id": "thrive",
+          "label": "I thrive on it",
+          "keywords": [
+            "thrive",
+            "love",
+            "enjoy",
+            "motivates"
+          ],
+          "weights": {
+            "enterprising": 1,
+            "long_study": 1,
+            "stability": 0
+          }
+        },
+        {
+          "id": "fine",
+          "label": "It's fine",
+          "keywords": [
+            "fine",
+            "okay",
+            "ok",
+            "manage"
+          ],
+          "weights": {
+            "long_study": 0.5
+          }
+        },
+        {
+          "id": "stress",
+          "label": "It stresses me out",
+          "keywords": [
+            "stress",
+            "anxious",
+            "pressure",
+            "nervous",
+            "hate"
+          ],
+          "weights": {
+            "stability": 1
+          }
+        }
+      ]
+    }
+  ]
+}

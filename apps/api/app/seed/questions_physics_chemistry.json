@@ -1,0 +1,429 @@
+[
+  {
+    "subject": "Physics", "topic": "Units and dimensions", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED", "NEET_UG"],
+    "stem": "What is the dimensional formula of work?",
+    "options": ["[M L T⁻²]", "[M L² T⁻²]", "[M L² T⁻¹]", "[M L⁻¹ T⁻²]"],
+    "correct_index": 1,
+    "explanation": "Work = force × displacement = [M L T⁻²] × [L] = [M L² T⁻²], the same dimensions as energy."
+  },
+  {
+    "subject": "Physics", "topic": "Kinematics", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "A body starts from rest and moves with a uniform acceleration of 2 m/s². How far does it travel in 5 s?",
+    "options": ["10 m", "20 m", "25 m", "50 m"],
+    "correct_index": 2,
+    "explanation": "s = ut + ½at² with u = 0, so s = ½ × 2 × 5² = 25 m."
+  },
+  {
+    "subject": "Physics", "topic": "Kinematics", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED", "NEET_UG"],
+    "stem": "A ball is projected at 20 m/s at 45° to the horizontal. Taking g = 10 m/s², what is its horizontal range?",
+    "options": ["20 m", "28.3 m", "40 m", "80 m"],
+    "correct_index": 2,
+    "explanation": "R = u²sin2θ/g = (20² × sin90°)/10 = 400/10 = 40 m."
+  },
+  {
+    "subject": "Physics", "topic": "Laws of motion", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "A book lies at rest on a table. The Earth pulls the book down with its weight. By Newton's third law, the reaction to that force is:",
+    "options": [
+      "the normal force the table exerts on the book",
+      "the gravitational force the book exerts on the Earth",
+      "the weight of the table",
+      "the friction between the book and the table"
+    ],
+    "correct_index": 1,
+    "explanation": "Action and reaction act on different bodies. The partner of 'Earth pulls book' is 'book pulls Earth'. The normal force is a separate contact force that happens to balance the weight."
+  },
+  {
+    "subject": "Physics", "topic": "Work, energy and power", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the kinetic energy of a 2 kg body moving at 3 m/s?",
+    "options": ["3 J", "6 J", "9 J", "18 J"],
+    "correct_index": 2,
+    "explanation": "KE = ½mv² = ½ × 2 × 3² = 9 J."
+  },
+  {
+    "subject": "Physics", "topic": "Circular motion", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "How much work is done by the centripetal force on a particle in uniform circular motion during one full revolution?",
+    "options": ["Zero", "mv²/r", "2πmv²/r", "½mv²"],
+    "correct_index": 0,
+    "explanation": "The centripetal force is always perpendicular to the velocity, so it does no work — which is why the speed stays constant."
+  },
+  {
+    "subject": "Physics", "topic": "Momentum", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Two skaters stand at rest on frictionless ice. A 60 kg skater pushes a 40 kg skater, who moves off at 3 m/s. What is the speed of the 60 kg skater?",
+    "options": ["1.5 m/s", "2 m/s", "3 m/s", "4.5 m/s"],
+    "correct_index": 1,
+    "explanation": "Momentum is conserved: 60v = 40 × 3, so v = 2 m/s in the opposite direction."
+  },
+  {
+    "subject": "Physics", "topic": "Gravitation", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "At a height equal to the Earth's radius R above the surface, the acceleration due to gravity is:",
+    "options": ["g", "g/2", "g/4", "g/9"],
+    "correct_index": 2,
+    "explanation": "g' = GM/(R + h)². With h = R the distance doubles, so g' = g/4."
+  },
+  {
+    "subject": "Physics", "topic": "Oscillations", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "A simple pendulum is taken to the Moon, where gravity is about g/6. Its time period becomes:",
+    "options": ["6 times larger", "√6 times larger", "√6 times smaller", "unchanged"],
+    "correct_index": 1,
+    "explanation": "T = 2π√(L/g), so T ∝ 1/√g. Dividing g by 6 multiplies T by √6."
+  },
+  {
+    "subject": "Physics", "topic": "Waves", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "A sound wave of frequency 170 Hz travels at 340 m/s. What is its wavelength?",
+    "options": ["0.5 m", "2 m", "5 m", "20 m"],
+    "correct_index": 1,
+    "explanation": "v = fλ, so λ = 340/170 = 2 m."
+  },
+  {
+    "subject": "Physics", "topic": "Thermodynamics", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED", "NEET_UG"],
+    "stem": "For an ideal gas undergoing an isothermal process, which quantity is zero?",
+    "options": ["Heat exchanged", "Work done", "Change in internal energy", "Change in entropy"],
+    "correct_index": 2,
+    "explanation": "The internal energy of an ideal gas depends only on temperature, and temperature is constant in an isothermal process, so ΔU = 0 (and hence Q = W)."
+  },
+  {
+    "subject": "Physics", "topic": "Thermodynamics", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "The first law of thermodynamics states that the heat supplied to a system equals:",
+    "options": [
+      "the work done by the system",
+      "the change in internal energy plus the work done by the system",
+      "the change in internal energy minus the work done by the system",
+      "the change in entropy times the temperature"
+    ],
+    "correct_index": 1,
+    "explanation": "Q = ΔU + W — it is simply conservation of energy applied to heat and work."
+  },
+  {
+    "subject": "Physics", "topic": "Current electricity", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Two 6 Ω resistors are connected in parallel. What is their equivalent resistance?",
+    "options": ["3 Ω", "6 Ω", "12 Ω", "0.33 Ω"],
+    "correct_index": 0,
+    "explanation": "1/R = 1/6 + 1/6 = 1/3, so R = 3 Ω. Identical resistors in parallel give half the resistance."
+  },
+  {
+    "subject": "Physics", "topic": "Current electricity", "class_level": 12, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the resistance of a 100 W bulb designed to run at 220 V?",
+    "options": ["22 Ω", "100 Ω", "220 Ω", "484 Ω"],
+    "correct_index": 3,
+    "explanation": "P = V²/R, so R = V²/P = 220²/100 = 48400/100 = 484 Ω."
+  },
+  {
+    "subject": "Physics", "topic": "Magnetism", "class_level": 12, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "A charged particle moves parallel to a uniform magnetic field. The magnetic force on it is:",
+    "options": ["qvB", "qvB/2", "Zero", "qv/B"],
+    "correct_index": 2,
+    "explanation": "F = qvB sinθ, and θ = 0 for motion parallel to B, so the force vanishes."
+  },
+  {
+    "subject": "Physics", "topic": "Electromagnetic induction", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Lenz's law says the induced current flows in a direction that:",
+    "options": [
+      "opposes the change in magnetic flux that produced it",
+      "increases the magnetic flux through the circuit",
+      "is always clockwise when seen from the magnet",
+      "depends only on the resistance of the circuit"
+    ],
+    "correct_index": 0,
+    "explanation": "The induced effect opposes its own cause — this is energy conservation expressed for induction."
+  },
+  {
+    "subject": "Physics", "topic": "Alternating current", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "In an ideal step-up transformer, compared with the primary, the secondary has:",
+    "options": [
+      "higher voltage and higher current",
+      "higher voltage and lower current",
+      "lower voltage and higher current",
+      "the same voltage and the same current"
+    ],
+    "correct_index": 1,
+    "explanation": "An ideal transformer conserves power (VpIp = VsIs), so stepping the voltage up steps the current down."
+  },
+  {
+    "subject": "Physics", "topic": "Ray optics", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "A concave mirror has a radius of curvature of 40 cm. Its focal length is:",
+    "options": ["10 cm", "20 cm", "40 cm", "80 cm"],
+    "correct_index": 1,
+    "explanation": "f = R/2 = 40/2 = 20 cm."
+  },
+  {
+    "subject": "Physics", "topic": "Ray optics", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the power of a converging lens of focal length 50 cm?",
+    "options": ["+0.5 D", "+2 D", "+5 D", "+50 D"],
+    "correct_index": 1,
+    "explanation": "P = 1/f in metres = 1/0.5 = +2 dioptres; it is positive because the lens converges light."
+  },
+  {
+    "subject": "Physics", "topic": "Ray optics", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "When light passes from air into glass, it:",
+    "options": [
+      "bends towards the normal and slows down",
+      "bends away from the normal and slows down",
+      "bends towards the normal and speeds up",
+      "travels straight on without changing speed"
+    ],
+    "correct_index": 0,
+    "explanation": "Glass is optically denser, so the speed drops and the ray bends towards the normal."
+  },
+  {
+    "subject": "Physics", "topic": "Dual nature of matter", "class_level": 12, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "In the photoelectric effect, increasing the intensity of light (keeping its frequency fixed) increases:",
+    "options": [
+      "the maximum kinetic energy of the emitted electrons",
+      "the number of electrons emitted per second",
+      "the threshold frequency of the metal",
+      "the work function of the metal"
+    ],
+    "correct_index": 1,
+    "explanation": "Maximum kinetic energy depends on frequency (KEmax = hf − φ); intensity only controls how many photons arrive, so more electrons are emitted."
+  },
+  {
+    "subject": "Physics", "topic": "Nuclei", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "When a nucleus emits an alpha particle, its mass number and atomic number change by:",
+    "options": ["−4 and −2", "−4 and −4", "−2 and −2", "0 and +1"],
+    "correct_index": 0,
+    "explanation": "An alpha particle is a helium nucleus (₂He⁴), so the parent loses 4 mass units and 2 protons."
+  },
+  {
+    "subject": "Physics", "topic": "Semiconductors", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Doping silicon with a pentavalent impurity such as phosphorus produces:",
+    "options": [
+      "a p-type semiconductor with holes as majority carriers",
+      "an n-type semiconductor with electrons as majority carriers",
+      "an insulator",
+      "an intrinsic semiconductor"
+    ],
+    "correct_index": 1,
+    "explanation": "The fifth valence electron is not needed for bonding and is free to conduct, so electrons become the majority carriers — n-type."
+  },
+  {
+    "subject": "Physics", "topic": "Units and measurement", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Which of these is a derived SI unit?",
+    "options": ["Kelvin", "Mole", "Newton", "Candela"],
+    "correct_index": 2,
+    "explanation": "Kelvin, mole and candela are base units. The newton is derived: 1 N = 1 kg·m·s⁻²."
+  },
+
+  {
+    "subject": "Chemistry", "topic": "Mole concept", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "How many molecules are there in one mole of carbon dioxide?",
+    "options": ["6.022 × 10²³", "6.022 × 10²²", "3.011 × 10²³", "1.204 × 10²⁴"],
+    "correct_index": 0,
+    "explanation": "One mole of any substance contains Avogadro's number of particles, 6.022 × 10²³."
+  },
+  {
+    "subject": "Chemistry", "topic": "Mole concept", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "How many moles are there in 22 g of CO₂ (molar mass 44 g/mol)?",
+    "options": ["0.25 mol", "0.5 mol", "1 mol", "2 mol"],
+    "correct_index": 1,
+    "explanation": "n = mass/molar mass = 22/44 = 0.5 mol."
+  },
+  {
+    "subject": "Chemistry", "topic": "Atomic structure", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the maximum number of electrons that the n = 3 shell can hold?",
+    "options": ["8", "10", "18", "32"],
+    "correct_index": 2,
+    "explanation": "The shell holds 2n² electrons: 2 × 3² = 18."
+  },
+  {
+    "subject": "Chemistry", "topic": "Atomic structure", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Which set of quantum numbers describes an electron in a 2p orbital?",
+    "options": ["n = 2, l = 0", "n = 2, l = 1", "n = 1, l = 1", "n = 3, l = 2"],
+    "correct_index": 1,
+    "explanation": "The principal quantum number gives the shell (n = 2) and l = 1 denotes a p subshell."
+  },
+  {
+    "subject": "Chemistry", "topic": "Periodic table", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Moving left to right across a period, atomic radius generally:",
+    "options": [
+      "decreases, because nuclear charge increases while the shell stays the same",
+      "increases, because more electrons are added",
+      "stays the same",
+      "increases, because shielding increases sharply"
+    ],
+    "correct_index": 0,
+    "explanation": "Electrons enter the same shell while protons increase, so the stronger pull contracts the atom."
+  },
+  {
+    "subject": "Chemistry", "topic": "Periodic table", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Which element has the highest electronegativity?",
+    "options": ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"],
+    "correct_index": 2,
+    "explanation": "Fluorine is the most electronegative element on the Pauling scale (about 4.0)."
+  },
+  {
+    "subject": "Chemistry", "topic": "Chemical bonding", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the shape of the ammonia (NH₃) molecule?",
+    "options": ["Trigonal planar", "Trigonal pyramidal", "Tetrahedral", "Linear"],
+    "correct_index": 1,
+    "explanation": "Nitrogen is sp³ hybridised with one lone pair, which pushes the three N–H bonds into a pyramid."
+  },
+  {
+    "subject": "Chemistry", "topic": "Chemical bonding", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Carbon dioxide is a non-polar molecule even though each C=O bond is polar, because:",
+    "options": [
+      "oxygen and carbon have equal electronegativity",
+      "the molecule is linear, so the two bond dipoles cancel",
+      "it has no lone pairs",
+      "it is a gas at room temperature"
+    ],
+    "correct_index": 1,
+    "explanation": "In a linear O=C=O arrangement the two equal dipoles point in opposite directions and sum to zero."
+  },
+  {
+    "subject": "Chemistry", "topic": "States of matter", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "At constant temperature, doubling the pressure on a fixed mass of an ideal gas:",
+    "options": ["doubles its volume", "halves its volume", "leaves the volume unchanged", "quadruples its volume"],
+    "correct_index": 1,
+    "explanation": "Boyle's law: PV is constant at fixed temperature, so twice the pressure means half the volume."
+  },
+  {
+    "subject": "Chemistry", "topic": "States of matter", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What volume does one mole of an ideal gas occupy at STP (273.15 K, 1 bar)?",
+    "options": ["11.2 L", "22.7 L", "24.8 L", "44.8 L"],
+    "correct_index": 1,
+    "explanation": "At the current IUPAC STP (1 bar, 273.15 K) the molar volume is 22.7 L; the older 22.4 L figure refers to 1 atm."
+  },
+  {
+    "subject": "Chemistry", "topic": "Thermodynamics", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "A reaction with a negative enthalpy change (ΔH < 0) is:",
+    "options": ["endothermic", "exothermic", "always spontaneous", "always non-spontaneous"],
+    "correct_index": 1,
+    "explanation": "Negative ΔH means heat is released — exothermic. Spontaneity needs ΔG, which also depends on entropy and temperature."
+  },
+  {
+    "subject": "Chemistry", "topic": "Equilibrium", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "For N₂(g) + 3H₂(g) ⇌ 2NH₃(g), increasing the pressure at constant temperature shifts the equilibrium:",
+    "options": [
+      "towards the reactants, because there are fewer moles on the left",
+      "towards the products, because there are fewer moles of gas on the right",
+      "not at all",
+      "towards whichever side is exothermic"
+    ],
+    "correct_index": 1,
+    "explanation": "Le Chatelier's principle: raising the pressure favours the side with fewer gas molecules — here 2 moles of NH₃ versus 4 moles of reactants."
+  },
+  {
+    "subject": "Chemistry", "topic": "Ionic equilibrium", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the pH of a 0.01 M solution of HCl?",
+    "options": ["1", "2", "12", "14"],
+    "correct_index": 1,
+    "explanation": "HCl is a strong acid, so [H⁺] = 0.01 M and pH = −log(10⁻²) = 2."
+  },
+  {
+    "subject": "Chemistry", "topic": "Redox reactions", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the oxidation number of manganese in KMnO₄?",
+    "options": ["+2", "+4", "+6", "+7"],
+    "correct_index": 3,
+    "explanation": "K is +1 and each O is −2: +1 + x + 4(−2) = 0, so x = +7."
+  },
+  {
+    "subject": "Chemistry", "topic": "Electrochemistry", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "In a galvanic (voltaic) cell, oxidation takes place at the:",
+    "options": ["cathode, which is positive", "anode, which is negative", "cathode, which is negative", "salt bridge"],
+    "correct_index": 1,
+    "explanation": "Oxidation always happens at the anode; in a galvanic cell the anode is the negative terminal."
+  },
+  {
+    "subject": "Chemistry", "topic": "Chemical kinetics", "class_level": 12, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What are the units of the rate constant for a first-order reaction?",
+    "options": ["mol L⁻¹ s⁻¹", "s⁻¹", "L mol⁻¹ s⁻¹", "L² mol⁻² s⁻¹"],
+    "correct_index": 1,
+    "explanation": "Rate = k[A], so k = rate/[A] = (mol L⁻¹ s⁻¹)/(mol L⁻¹) = s⁻¹."
+  },
+  {
+    "subject": "Chemistry", "topic": "Solutions", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "0.5 mol of solute is dissolved to make 250 mL of solution. What is its molarity?",
+    "options": ["0.5 M", "1 M", "2 M", "5 M"],
+    "correct_index": 2,
+    "explanation": "M = moles/volume in litres = 0.5/0.25 = 2 M."
+  },
+  {
+    "subject": "Chemistry", "topic": "Organic nomenclature", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the IUPAC name of (CH₃)₂CHCH₂CH₃?",
+    "options": ["n-pentane", "2-methylbutane", "3-methylbutane", "2,2-dimethylpropane"],
+    "correct_index": 1,
+    "explanation": "The longest chain has four carbons (butane) with a methyl branch on C-2, numbered to give the lower locant."
+  },
+  {
+    "subject": "Chemistry", "topic": "Organic chemistry", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "The functional group –CHO belongs to which class of compounds?",
+    "options": ["Ketones", "Aldehydes", "Carboxylic acids", "Esters"],
+    "correct_index": 1,
+    "explanation": "–CHO is a carbonyl carrying a hydrogen — the aldehyde group. A ketone has the carbonyl between two carbons."
+  },
+  {
+    "subject": "Chemistry", "topic": "Isomerism", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "How many structural (chain) isomers does C₄H₁₀ have?",
+    "options": ["1", "2", "3", "4"],
+    "correct_index": 1,
+    "explanation": "Only n-butane and isobutane (2-methylpropane) are possible."
+  },
+  {
+    "subject": "Chemistry", "topic": "Biomolecules", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Starch and cellulose are both polymers of:",
+    "options": ["fructose", "glucose", "sucrose", "amino acids"],
+    "correct_index": 1,
+    "explanation": "Both are glucose polymers; they differ in the linkage (α in starch, β in cellulose), which is why humans can digest one and not the other."
+  },
+  {
+    "subject": "Chemistry", "topic": "s-block elements", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "Which of these is the chemical formula of quicklime?",
+    "options": ["CaCO₃", "CaO", "Ca(OH)₂", "CaSO₄"],
+    "correct_index": 1,
+    "explanation": "Quicklime is calcium oxide, CaO, made by heating limestone (CaCO₃). Slaking it with water gives Ca(OH)₂."
+  },
+  {
+    "subject": "Chemistry", "topic": "Coordination compounds", "class_level": 12, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "NEET_UG"],
+    "stem": "What is the oxidation state of iron in K₄[Fe(CN)₆]?",
+    "options": ["+2", "+3", "+4", "0"],
+    "correct_index": 0,
+    "explanation": "Four K⁺ give +4, and six CN⁻ give −6, so iron must be +2 for the compound to be neutral."
+  }
+]

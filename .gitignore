@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+apps/api/.venv/
+apps/api/data/*.db
+apps/api/data/*.db-journal
+*.egg-info/
+
+# Node
+node_modules/
+apps/web/.next/
+apps/web/out/
+npm-debug.log*
+
+# Env
+.env
+.env.local
+apps/api/.env
+apps/web/.env.local
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Runtime PID/log files from start.sh/stop.sh
+.run/
+
+# Offline speech model for the "Maya" wake word (downloaded, ~55MB)
+apps/desktop/models/
+
+# Derived mascot GIFs (scale_mascots.sh regenerates them)
+apps/desktop/assets/maya/scaled/
+
+# Original mascot art; the app uses the identical copies in apps/desktop/assets/maya/
+Animations/

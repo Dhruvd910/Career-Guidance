@@ -1,0 +1,3006 @@
+{
+  "_about": "MAYA's career library. 'profile' says how much each career draws on each assessment dimension (0-3); 'must' lists dimensions the career really can't do without, so a student who scores very low on one is told plainly. Earnings are indicative Indian ranges gathered in 2025-26 from the sources listed with each career — salaries vary widely by city, employer and skill, and change every year.",
+  "careers": [
+    {
+      "key": "cse",
+      "name": "Computer Science & Software Engineering",
+      "category": "Engineering & Technology",
+      "description": "Design and build the software behind apps, websites, banking, games and AI.",
+      "required_subjects": [
+        "maths",
+        "physics",
+        "computer"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "Class 11-12 with PCM → B.Tech/B.E. in Computer Science (4 years) via JEE Main/Advanced, state CETs or BITSAT → optional M.Tech/MS.",
+      "skills_required": [
+        "logical thinking",
+        "problem solving",
+        "coding"
+      ],
+      "timeline": "4 years after class 12; you can start coding today.",
+      "possible_challenges": [
+        "Very competitive at top colleges",
+        "Technology changes fast — you keep learning all your career"
+      ],
+      "explore_next": [
+        "Try CS50 or freeCodeCamp for a month",
+        "Build one small app or website"
+      ],
+      "profile": {
+        "maths": 3,
+        "computer": 3,
+        "physics": 1,
+        "investigative": 2,
+        "realistic": 1,
+        "tech": 3,
+        "money": 1
+      },
+      "must": [
+        "maths"
+      ],
+      "related": [
+        "ai_data",
+        "ece",
+        "design"
+      ],
+      "details": {
+        "overview": "Software engineers turn ideas into working programs. Every bank, hospital, shop and government office now runs on software, so CS graduates work almost everywhere — from startups to ISRO.",
+        "day_in_life": "Writing and reviewing code, fixing bugs, discussing designs with teammates, and testing features before they reach users. Most work is at a computer, often in teams.",
+        "how_to_prepare": [
+          "Class 11-12: take PCM. Maths matters most — it's what CS is built on.",
+          "Prepare for JEE Main (and JEE Advanced if you're aiming for IITs); also consider BITSAT and your state CET.",
+          "Learn one programming language (Python is a good first one) alongside school — it helps even in the first year of college.",
+          "In college: learn data structures and algorithms, do internships, and build projects you can show."
+        ],
+        "start_now": [
+          "Finish the first 3 weeks of CS50 (free)",
+          "Write a small program that solves a problem you have — a timetable, a quiz, a calculator"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "NITs, IIITs and many state colleges; qualifies you for JEE Advanced"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "IITs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "CS50 — Harvard's free intro to computer science",
+            "kind": "Course",
+            "url": "https://cs50.harvard.edu/x/"
+          },
+          {
+            "name": "freeCodeCamp — learn web development free",
+            "kind": "Course",
+            "url": "https://www.freecodecamp.org"
+          },
+          {
+            "name": "NPTEL — free IIT courses (Programming, DSA)",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          },
+          {
+            "name": "NCERT Maths textbooks (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "CS50 on YouTube",
+            "kind": "YouTube",
+            "url": "https://www.youtube.com/@cs50"
+          }
+        ],
+        "roles": [
+          "Software developer",
+          "Web/app developer",
+          "Backend engineer",
+          "Cybersecurity analyst",
+          "Cloud engineer",
+          "Game developer"
+        ],
+        "sectors": [
+          "IT services",
+          "Product companies",
+          "Startups",
+          "Banking & fintech",
+          "Government (NIC, ISRO, DRDO)"
+        ],
+        "future_scope": "Demand stays strong, but the easiest coding jobs are being automated by AI tools — graduates who understand fundamentals, AI and system design do best.",
+        "after_completion": [
+          "Software Engineer",
+          "SDE at a product company",
+          "Pursue M.Tech/MS abroad",
+          "Start your own startup"
+        ],
+        "earnings": {
+          "entry": "₹3.5–7 LPA at IT services firms; ₹12–30 LPA at top product companies",
+          "mid": "₹15–40 LPA after 5–8 years (much higher at top product firms)",
+          "senior": "₹40 LPA and above for senior engineers and architects",
+          "note": "IIT graduates' median package was about ₹19–20 LPA in NIRF 2025 data; most NITs about ₹11–13 LPA.",
+          "sources": [
+            {
+              "name": "AmbitionBox figures via UPES",
+              "url": "https://www.upes.ac.in/blog/computer-science/computer-science-engineering-salary-in-india"
+            },
+            {
+              "name": "NIRF 2025 placement data via Careers360",
+              "url": "https://www.careers360.com/university/motilal-nehru-national-institute-of-technology-allahabad-prayagraj/placement"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "ai_data",
+      "name": "Data Science & Artificial Intelligence",
+      "category": "Engineering & Technology",
+      "description": "Teach computers to find patterns in data — recommendations, medical scans, fraud detection, chatbots.",
+      "required_subjects": [
+        "maths",
+        "computer"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in CSE/AI & Data Science (4 years), or B.Sc Maths/Statistics → M.Sc/M.Tech in Data Science or AI.",
+      "skills_required": [
+        "statistics",
+        "programming",
+        "curiosity"
+      ],
+      "timeline": "4–6 years after class 12 (many roles prefer a master's).",
+      "possible_challenges": [
+        "Maths-heavy — statistics and linear algebra",
+        "Fast-moving field that needs constant learning"
+      ],
+      "explore_next": [
+        "Try Kaggle's free Python and Intro to ML courses",
+        "Analyse a small dataset — e.g. your own exam marks"
+      ],
+      "profile": {
+        "maths": 3,
+        "computer": 3,
+        "investigative": 3,
+        "tech": 3,
+        "money": 1,
+        "long_study": 1
+      },
+      "must": [
+        "maths"
+      ],
+      "related": [
+        "cse",
+        "pure_science",
+        "finance_econ"
+      ],
+      "details": {
+        "overview": "Data scientists and AI engineers build systems that learn from data. It sits between computer science and statistics, and is used in healthcare, banking, agriculture, e-commerce and research.",
+        "day_in_life": "Cleaning and exploring data, training and testing models, explaining results to teams, and making models work reliably in real products.",
+        "how_to_prepare": [
+          "Class 11-12: PCM, with strong maths (probability and statistics especially).",
+          "JEE Main/Advanced for B.Tech in CSE or AI & Data Science; or B.Sc in Maths/Statistics via CUET.",
+          "Learn Python early; then NumPy, pandas and basic machine learning.",
+          "In college: projects, Kaggle competitions and internships matter as much as marks."
+        ],
+        "start_now": [
+          "Kaggle Learn: Python, then Intro to Machine Learning",
+          "Watch 3Blue1Brown's neural network series"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "B.Tech CSE / AI & DS"
+          },
+          {
+            "name": "CUET-UG",
+            "url": "https://cuet.nta.nic.in",
+            "note": "B.Sc Maths/Statistics at central universities"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Kaggle Learn — free hands-on data science",
+            "kind": "Course",
+            "url": "https://www.kaggle.com/learn"
+          },
+          {
+            "name": "NPTEL — Machine Learning, Data Science courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          },
+          {
+            "name": "3Blue1Brown — maths and neural networks, visually",
+            "kind": "YouTube",
+            "url": "https://www.youtube.com/@3blue1brown"
+          },
+          {
+            "name": "Khan Academy — statistics and probability",
+            "kind": "Course",
+            "url": "https://www.khanacademy.org"
+          }
+        ],
+        "roles": [
+          "Data analyst",
+          "Data scientist",
+          "Machine learning engineer",
+          "AI researcher",
+          "Business intelligence analyst"
+        ],
+        "sectors": [
+          "Tech companies",
+          "Banks & insurance",
+          "Healthcare",
+          "E-commerce",
+          "Research labs"
+        ],
+        "future_scope": "One of the fastest-growing fields; roles are shifting from building basic models to building on large AI systems safely and usefully.",
+        "after_completion": [
+          "Data Analyst → Data Scientist",
+          "ML Engineer",
+          "Research (M.Tech/PhD)"
+        ],
+        "earnings": {
+          "entry": "₹6–9 LPA typical; ₹12–20 LPA for top-college graduates at product companies",
+          "mid": "₹15–35 LPA after 4–7 years",
+          "senior": "₹40 LPA+ for senior ML engineers and leads",
+          "note": "Freshers from tier-2/3 colleges at IT services firms often start at ₹4.5–8 LPA.",
+          "sources": [
+            {
+              "name": "Futurense — data scientist salaries in India",
+              "url": "https://futurense.com/blog/data-scientist-salary-in-india"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "ece",
+      "name": "Electronics & Communication Engineering",
+      "category": "Engineering & Technology",
+      "description": "Design chips, circuits, phones, communication networks and embedded devices.",
+      "required_subjects": [
+        "physics",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in ECE (4 years) → optional M.Tech (VLSI, communication) via GATE.",
+      "skills_required": [
+        "circuits",
+        "logical thinking",
+        "hands-on building"
+      ],
+      "timeline": "4 years after class 12.",
+      "possible_challenges": [
+        "Core electronics jobs are fewer than software jobs",
+        "Physics- and maths-heavy"
+      ],
+      "explore_next": [
+        "Build a simple circuit with an Arduino kit",
+        "Read about how a phone sends a signal"
+      ],
+      "profile": {
+        "physics": 3,
+        "maths": 2,
+        "computer": 2,
+        "realistic": 2,
+        "investigative": 2,
+        "tech": 3
+      },
+      "must": [
+        "physics"
+      ],
+      "related": [
+        "electrical",
+        "cse",
+        "aerospace"
+      ],
+      "details": {
+        "overview": "ECE engineers make the hardware of the modern world — from the chips inside phones to satellites and 5G networks. India is investing heavily in semiconductor manufacturing, which is creating new core jobs.",
+        "day_in_life": "Designing and simulating circuits, testing boards in the lab, writing code for embedded systems, and working with manufacturers.",
+        "how_to_prepare": [
+          "Class 11-12: PCM with a strong grip on electricity, magnetism and semiconductors in physics.",
+          "JEE Main/Advanced for NITs/IITs; state CETs for state colleges.",
+          "Play with Arduino or Raspberry Pi projects — they teach you how electronics really behave.",
+          "In college: aim for VLSI/embedded internships; GATE opens PSU jobs and M.Tech."
+        ],
+        "start_now": [
+          "Try a beginner Arduino project (LED, sensor)",
+          "Revise NCERT Physics chapters on current electricity and semiconductors"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "NITs, IIITs"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "IITs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Physics (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "NPTEL — Electronics & Communication courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          },
+          {
+            "name": "Khan Academy — electrical engineering basics",
+            "kind": "Course",
+            "url": "https://www.khanacademy.org"
+          }
+        ],
+        "roles": [
+          "VLSI/chip design engineer",
+          "Embedded systems engineer",
+          "Telecom engineer",
+          "Hardware engineer",
+          "IoT developer"
+        ],
+        "sectors": [
+          "Semiconductors",
+          "Telecom",
+          "Defence & space (ISRO, DRDO)",
+          "Consumer electronics",
+          "PSUs (BEL, BSNL)"
+        ],
+        "future_scope": "Rising: India's semiconductor mission, 5G/6G and electric vehicles all need ECE engineers.",
+        "after_completion": [
+          "Electronics Engineer",
+          "VLSI Design Engineer",
+          "PSU engineer via GATE",
+          "M.Tech/MS"
+        ],
+        "earnings": {
+          "entry": "₹3–5.5 LPA at many private firms; ₹6–10 LPA at PSUs via GATE; ₹18–30 LPA at top semiconductor/VLSI companies",
+          "mid": "₹10–25 LPA after 5–8 years",
+          "senior": "₹30 LPA+ in chip design and leadership",
+          "note": "Top VLSI roles need strong fundamentals and usually an M.Tech or excellent internships.",
+          "sources": [
+            {
+              "name": "EduRev — GATE ECE salaries (PSU vs private)",
+              "url": "https://edurev.in/t/513348/gate-ece-salary-psu-vs-mtech-vs-private-jobs"
+            },
+            {
+              "name": "KAHE — EEE/ECE salary guide",
+              "url": "https://kahedu.edu.in/eee-engineering-salary-india-fresher-to-experienced/"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "electrical",
+      "name": "Electrical Engineering",
+      "category": "Engineering & Technology",
+      "description": "Generate, move and control electricity — power plants, grids, EVs, solar and motors.",
+      "required_subjects": [
+        "physics",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in Electrical/EEE (4 years) → GATE for PSUs or M.Tech.",
+      "skills_required": [
+        "physics",
+        "circuits",
+        "safety-minded practical work"
+      ],
+      "timeline": "4 years after class 12.",
+      "possible_challenges": [
+        "Some site and plant work",
+        "Core jobs cluster in PSUs and big industry"
+      ],
+      "explore_next": [
+        "Look up how India's power grid reaches your home",
+        "Learn how a solar panel works"
+      ],
+      "profile": {
+        "physics": 3,
+        "maths": 2,
+        "realistic": 3,
+        "investigative": 1,
+        "outdoor": 1,
+        "stability": 1,
+        "tech": 2
+      },
+      "must": [
+        "physics"
+      ],
+      "related": [
+        "ece",
+        "mechanical",
+        "civil"
+      ],
+      "details": {
+        "overview": "Electrical engineers keep the lights on — and are central to India's shift to solar, wind and electric vehicles.",
+        "day_in_life": "Designing and maintaining power systems, testing motors and control systems, and working at plants, substations or design offices.",
+        "how_to_prepare": [
+          "Class 11-12: PCM; electricity and magnetism are the heart of this field.",
+          "JEE Main/Advanced or state CETs.",
+          "In college: GATE is the main route to PSUs such as NTPC, POWERGRID and BHEL."
+        ],
+        "start_now": [
+          "Revise NCERT chapters on current electricity and electromagnetic induction",
+          "Watch how a transformer works"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "NITs and many state colleges"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "IITs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Physics (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "NPTEL — Electrical Engineering courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          }
+        ],
+        "roles": [
+          "Power systems engineer",
+          "Electrical design engineer",
+          "EV engineer",
+          "Renewable energy engineer",
+          "Maintenance engineer"
+        ],
+        "sectors": [
+          "Power PSUs (NTPC, POWERGRID)",
+          "Renewables",
+          "Electric vehicles",
+          "Railways",
+          "Manufacturing"
+        ],
+        "future_scope": "Strong: renewable energy and EV targets need a lot of electrical engineers over the next decade.",
+        "after_completion": [
+          "Electrical Engineer",
+          "PSU engineer via GATE",
+          "Energy consultant",
+          "M.Tech"
+        ],
+        "earnings": {
+          "entry": "₹3–5 LPA in private firms; ₹6–10 LPA at PSUs via GATE",
+          "mid": "₹8–20 LPA after 5–8 years",
+          "senior": "₹25 LPA+ in senior and leadership roles",
+          "note": "PSU jobs come with strong job security and allowances.",
+          "sources": [
+            {
+              "name": "KAHE — EEE salary guide",
+              "url": "https://kahedu.edu.in/eee-engineering-salary-india-fresher-to-experienced/"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "mechanical",
+      "name": "Mechanical Engineering",
+      "category": "Engineering & Technology",
+      "description": "Design and build machines — engines, cars, robots, factories and turbines.",
+      "required_subjects": [
+        "physics",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in Mechanical (4 years) → GATE/M.Tech or industry.",
+      "skills_required": [
+        "mechanics",
+        "drawing/design",
+        "hands-on building"
+      ],
+      "timeline": "4 years after class 12.",
+      "possible_challenges": [
+        "Starting salaries in core jobs are modest",
+        "Factory/site postings are common"
+      ],
+      "explore_next": [
+        "Take apart (and rebuild) something mechanical",
+        "Try free CAD software like FreeCAD"
+      ],
+      "profile": {
+        "physics": 3,
+        "maths": 2,
+        "realistic": 3,
+        "investigative": 1,
+        "outdoor": 1,
+        "arts": 1,
+        "tech": 2
+      },
+      "must": [
+        "physics"
+      ],
+      "related": [
+        "aerospace",
+        "electrical",
+        "civil"
+      ],
+      "details": {
+        "overview": "The broadest engineering branch: mechanical engineers work on anything that moves or uses energy — cars, aircraft, robots, air-conditioners and power plants.",
+        "day_in_life": "Designing parts in CAD, testing prototypes, solving problems on factory floors, and improving how things are made.",
+        "how_to_prepare": [
+          "Class 11-12: PCM; mechanics and thermodynamics are the core.",
+          "JEE Main/Advanced or state CETs.",
+          "Join robotics or motorsport (SAE/BAJA) clubs in college — employers value them."
+        ],
+        "start_now": [
+          "Revise NCERT chapters on laws of motion and thermodynamics",
+          "Try FreeCAD or Tinkercad to design a simple part"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "NITs and state colleges"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "IITs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Physics (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "NPTEL — Mechanical Engineering courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          },
+          {
+            "name": "Tinkercad — free beginner 3D design",
+            "kind": "Tool",
+            "url": "https://www.tinkercad.com"
+          }
+        ],
+        "roles": [
+          "Design engineer",
+          "Production engineer",
+          "Automotive engineer",
+          "Robotics engineer",
+          "HVAC engineer"
+        ],
+        "sectors": [
+          "Automobile",
+          "Manufacturing",
+          "Aerospace & defence",
+          "Energy",
+          "PSUs"
+        ],
+        "future_scope": "Changing: electric vehicles, robotics and 3D printing are creating new roles; mechanical engineers who add software skills do especially well.",
+        "after_completion": [
+          "Mechanical Engineer",
+          "Design Engineer (CAD)",
+          "PSU engineer via GATE",
+          "M.Tech / MBA"
+        ],
+        "earnings": {
+          "entry": "₹3–6 LPA typical; ₹6–9 LPA at PSUs via GATE",
+          "mid": "₹8–18 LPA after 5–8 years",
+          "senior": "₹20 LPA+ in senior engineering and plant leadership",
+          "note": "Core manufacturing starts lower; IT-adjacent and design roles start higher.",
+          "sources": [
+            {
+              "name": "GUVI — mechanical engineer salary in India",
+              "url": "https://www.guvi.in/blog/mechanical-engineers-salary/"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "civil",
+      "name": "Civil Engineering",
+      "category": "Engineering & Technology",
+      "description": "Plan and build roads, bridges, metros, dams, buildings and water systems.",
+      "required_subjects": [
+        "physics",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in Civil (4 years) → GATE for PSUs/M.Tech or state engineering services.",
+      "skills_required": [
+        "mechanics",
+        "planning",
+        "working on site"
+      ],
+      "timeline": "4 years after class 12.",
+      "possible_challenges": [
+        "Lots of on-site and outdoor work",
+        "Private starting pay can be low"
+      ],
+      "explore_next": [
+        "Visit a construction site with an adult and watch the process",
+        "Read about how a metro line is built"
+      ],
+      "profile": {
+        "physics": 2,
+        "maths": 2,
+        "realistic": 3,
+        "outdoor": 3,
+        "conventional": 1,
+        "stability": 1,
+        "arts": 1
+      },
+      "must": [],
+      "related": [
+        "architecture",
+        "mechanical",
+        "electrical"
+      ],
+      "details": {
+        "overview": "Civil engineers build the country — India's huge spending on highways, railways, metros and housing keeps them in steady demand.",
+        "day_in_life": "Supervising construction sites, checking designs and materials, planning schedules and budgets, and solving problems as a project grows.",
+        "how_to_prepare": [
+          "Class 11-12: PCM.",
+          "JEE Main/Advanced or state CETs.",
+          "In college: learn AutoCAD and structural software; GATE leads to PSU and government engineering jobs."
+        ],
+        "start_now": [
+          "Notice how buildings and bridges near you are designed and ask why",
+          "Try a free AutoCAD tutorial"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "NITs and state colleges"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "IITs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NPTEL — Civil Engineering courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          },
+          {
+            "name": "NCERT Physics & Maths (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          }
+        ],
+        "roles": [
+          "Site engineer",
+          "Structural engineer",
+          "Transportation engineer",
+          "Water resources engineer",
+          "Project manager"
+        ],
+        "sectors": [
+          "Construction & infrastructure",
+          "Government PWD/railways",
+          "PSUs (NHAI, NHPC)",
+          "Real estate",
+          "Consultancies"
+        ],
+        "future_scope": "Steady: infrastructure building, smart cities and climate-resilient construction keep demand high.",
+        "after_completion": [
+          "Site / Structural Engineer",
+          "Government engineer via state exams",
+          "PSU via GATE",
+          "M.Tech"
+        ],
+        "earnings": {
+          "entry": "₹3.5–6 LPA typical; ₹6–10 LPA from IITs/NITs; ₹12–18 LPA CTC at PSUs via GATE",
+          "mid": "₹8–15 LPA after 5–8 years",
+          "senior": "₹20 LPA+ for senior project and structural roles",
+          "note": "Government engineering jobs add stability and allowances.",
+          "sources": [
+            {
+              "name": "Construction Placements — civil engineering salaries",
+              "url": "https://www.constructionplacements.com/civil-engineering-salary-in-india/"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "chemical",
+      "name": "Chemical Engineering",
+      "category": "Engineering & Technology",
+      "description": "Turn chemistry into products at scale — fuels, medicines, fertilisers, plastics, food.",
+      "required_subjects": [
+        "chemistry",
+        "maths",
+        "physics"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in Chemical Engineering (4 years) → industry, GATE/PSU or M.Tech.",
+      "skills_required": [
+        "chemistry",
+        "maths",
+        "process thinking"
+      ],
+      "timeline": "4 years after class 12.",
+      "possible_challenges": [
+        "Plant postings can be in industrial areas",
+        "Fewer colleges offer it"
+      ],
+      "explore_next": [
+        "Read how petrol is made from crude oil",
+        "Revise NCERT physical chemistry"
+      ],
+      "profile": {
+        "chemistry": 3,
+        "maths": 2,
+        "physics": 2,
+        "realistic": 2,
+        "investigative": 2,
+        "outdoor": 1
+      },
+      "must": [
+        "chemistry"
+      ],
+      "related": [
+        "pharmacy",
+        "biotech",
+        "mechanical"
+      ],
+      "details": {
+        "overview": "Chemical engineers design and run the plants that make everyday materials safely and efficiently — from medicines to green hydrogen.",
+        "day_in_life": "Monitoring and improving plant processes, running simulations, ensuring safety, and scaling lab reactions to factory size.",
+        "how_to_prepare": [
+          "Class 11-12: PCM with strong chemistry.",
+          "JEE Main/Advanced.",
+          "In college: internships at plants; GATE for PSUs like IOCL, ONGC, GAIL."
+        ],
+        "start_now": [
+          "Revise NCERT chemistry chapters on thermodynamics and equilibrium",
+          "Watch a documentary on how medicines are manufactured"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "NITs"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "IITs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Chemistry (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "NPTEL — Chemical Engineering courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          }
+        ],
+        "roles": [
+          "Process engineer",
+          "Plant engineer",
+          "Safety engineer",
+          "Research engineer"
+        ],
+        "sectors": [
+          "Oil & gas",
+          "Pharmaceuticals",
+          "Fertilisers",
+          "Food processing",
+          "Green energy"
+        ],
+        "future_scope": "Growing in green hydrogen, batteries, and sustainable materials.",
+        "after_completion": [
+          "Process Engineer",
+          "PSU engineer via GATE",
+          "Research / M.Tech"
+        ],
+        "earnings": {
+          "entry": "₹4–8 LPA typical; higher at top PSUs and oil majors",
+          "mid": "₹10–20 LPA after 5–8 years",
+          "senior": "₹25 LPA+ in plant leadership",
+          "note": "Indicative range; varies strongly by industry and plant.",
+          "sources": [
+            {
+              "name": "EduRev — PSU salaries through GATE",
+              "url": "https://edurev.in/t/513348/gate-ece-salary-psu-vs-mtech-vs-private-jobs"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "aerospace",
+      "name": "Aerospace Engineering",
+      "category": "Engineering & Technology",
+      "description": "Design aircraft, rockets, drones and satellites.",
+      "required_subjects": [
+        "physics",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → B.Tech in Aerospace/Aeronautical (IITs, IIST, some NITs/private) → M.Tech/research.",
+      "skills_required": [
+        "physics",
+        "maths",
+        "precision"
+      ],
+      "timeline": "4–6 years after class 12.",
+      "possible_challenges": [
+        "Few seats and few core employers",
+        "Very physics- and maths-heavy"
+      ],
+      "explore_next": [
+        "Build and fly a paper or balsa glider and change its wing shape",
+        "Read about ISRO's missions"
+      ],
+      "profile": {
+        "physics": 3,
+        "maths": 3,
+        "investigative": 2,
+        "realistic": 2,
+        "tech": 2,
+        "long_study": 1
+      },
+      "must": [
+        "physics",
+        "maths"
+      ],
+      "related": [
+        "mechanical",
+        "ece",
+        "defence"
+      ],
+      "details": {
+        "overview": "Aerospace engineers work on flight — India's space programme and growing drone and aircraft industry are creating opportunities.",
+        "day_in_life": "Aerodynamic simulations, structural analysis, testing components, and working in large, careful teams.",
+        "how_to_prepare": [
+          "Class 11-12: PCM, excellent in physics and maths.",
+          "JEE Advanced (IITs) or IIST's admission via JEE Advanced scores.",
+          "Aeromodelling and rocketry clubs help a lot."
+        ],
+        "start_now": [
+          "Learn the four forces of flight",
+          "Follow ISRO mission updates"
+        ],
+        "entrance_exams": [
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "IITs and IIST"
+          },
+          {
+            "name": "JEE Main",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "Some NITs and private colleges"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NPTEL — Aerospace Engineering courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          },
+          {
+            "name": "ISRO",
+            "kind": "Website",
+            "url": "https://www.isro.gov.in"
+          }
+        ],
+        "roles": [
+          "Aerospace engineer",
+          "Aerodynamics engineer",
+          "Satellite systems engineer",
+          "Drone engineer"
+        ],
+        "sectors": [
+          "ISRO, DRDO, HAL",
+          "Private space startups",
+          "Airlines & MRO",
+          "Drone industry"
+        ],
+        "future_scope": "Growing with India's private space sector and drone policy, but still a smaller job market than CS or mechanical.",
+        "after_completion": [
+          "Aerospace Engineer",
+          "Scientist at ISRO/DRDO",
+          "M.Tech/PhD"
+        ],
+        "earnings": {
+          "entry": "₹5–10 LPA typical; ISRO/DRDO scientists start at central pay Level 10 (₹56,100 basic)",
+          "mid": "₹12–25 LPA",
+          "senior": "₹30 LPA+ in senior roles",
+          "note": "Indicative; government scientist pay follows the 7th Pay Commission matrix.",
+          "sources": [
+            {
+              "name": "Level-10 pay (₹56,100–1,77,500) per Govt. of India notice",
+              "url": "https://dahd.gov.in/node/3042"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "architecture",
+      "name": "Architecture",
+      "category": "Design",
+      "description": "Design buildings and spaces that are beautiful, safe and useful.",
+      "required_subjects": [
+        "maths",
+        "arts"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN"
+      ],
+      "education_path": "PCM (maths compulsory) → B.Arch (5 years) via NATA or JEE Main Paper 2A → register with the Council of Architecture.",
+      "skills_required": [
+        "drawing",
+        "spatial thinking",
+        "creativity"
+      ],
+      "timeline": "5 years after class 12.",
+      "possible_challenges": [
+        "Long hours on design projects",
+        "Starting salaries are modest; grows with experience"
+      ],
+      "explore_next": [
+        "Sketch your room or school building from different angles",
+        "Look at famous Indian architects like B. V. Doshi"
+      ],
+      "profile": {
+        "arts": 3,
+        "maths": 2,
+        "artistic": 3,
+        "realistic": 2,
+        "long_study": 1
+      },
+      "must": [
+        "arts"
+      ],
+      "related": [
+        "civil",
+        "design"
+      ],
+      "details": {
+        "overview": "Architects combine art and engineering to design homes, offices, public spaces and cities.",
+        "day_in_life": "Sketching and modelling designs, meeting clients, working with engineers, and visiting sites.",
+        "how_to_prepare": [
+          "Class 11-12: PCM (maths is required).",
+          "Practise freehand drawing and perspective.",
+          "Take NATA and/or JEE Main Paper 2A (B.Arch)."
+        ],
+        "start_now": [
+          "Draw one building every day for a month",
+          "Try SketchUp's free web version"
+        ],
+        "entrance_exams": [
+          {
+            "name": "NATA",
+            "url": "https://www.nata.in",
+            "note": "Most B.Arch colleges"
+          },
+          {
+            "name": "JEE Main Paper 2A",
+            "url": "https://jeemain.nta.nic.in",
+            "note": "B.Arch at NITs, SPAs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NATA official site",
+            "kind": "Website",
+            "url": "https://www.nata.in"
+          },
+          {
+            "name": "Council of Architecture",
+            "kind": "Website",
+            "url": "https://www.coa.gov.in"
+          }
+        ],
+        "roles": [
+          "Architect",
+          "Urban designer",
+          "Interior architect",
+          "Landscape architect"
+        ],
+        "sectors": [
+          "Architecture firms",
+          "Real estate",
+          "Government planning",
+          "Own practice"
+        ],
+        "future_scope": "Steady; sustainable and green building design is a growing specialisation.",
+        "after_completion": [
+          "Registered Architect",
+          "Urban Planner (M.Plan)",
+          "Start your own studio"
+        ],
+        "earnings": {
+          "entry": "₹2–4 LPA typical for freshers",
+          "mid": "₹6–12 LPA after 5–8 years",
+          "senior": "Well-known architects and firm owners earn much more",
+          "note": "Pay grows mainly with portfolio and reputation.",
+          "sources": [
+            {
+              "name": "PW — architecture salary in India",
+              "url": "https://www.pw.live/design-architecture/exams/architecture-salary"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "design",
+      "name": "Design (UX, Product & Communication)",
+      "category": "Design",
+      "description": "Design apps, products, brands and experiences that people love to use.",
+      "required_subjects": [
+        "arts",
+        "computer"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any stream → B.Des (4 years) via UCEED, NID DAT, NIFT or others → portfolio-driven career.",
+      "skills_required": [
+        "creativity",
+        "empathy for users",
+        "visual skills"
+      ],
+      "timeline": "4 years after class 12.",
+      "possible_challenges": [
+        "Entrance exams test creativity, not marks",
+        "Career depends heavily on your portfolio"
+      ],
+      "explore_next": [
+        "Redesign a screen of an app you use and explain why",
+        "Keep a sketchbook of ideas"
+      ],
+      "profile": {
+        "arts": 3,
+        "artistic": 3,
+        "computer": 1,
+        "communication": 1,
+        "social": 1,
+        "tech": 1
+      },
+      "must": [
+        "arts"
+      ],
+      "related": [
+        "architecture",
+        "cse",
+        "journalism"
+      ],
+      "details": {
+        "overview": "Designers shape how products look and feel — the apps on your phone, packaging, logos and furniture all went through designers.",
+        "day_in_life": "Talking to users, sketching ideas, building prototypes in tools like Figma, testing them, and refining.",
+        "how_to_prepare": [
+          "Any stream works for design.",
+          "Practise sketching and observation.",
+          "Prepare for UCEED (IITs), NID DAT, NIFT."
+        ],
+        "start_now": [
+          "Learn Figma's free basics",
+          "Start a portfolio — even school projects count"
+        ],
+        "entrance_exams": [
+          {
+            "name": "UCEED",
+            "url": "https://www.uceed.iitb.ac.in",
+            "note": "B.Des at IITs"
+          },
+          {
+            "name": "NID DAT",
+            "url": "https://admissions.nid.edu",
+            "note": "National Institute of Design"
+          },
+          {
+            "name": "NIFT",
+            "url": "https://www.nift.ac.in",
+            "note": "Fashion and design"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Figma — free design tool",
+            "kind": "Tool",
+            "url": "https://www.figma.com"
+          },
+          {
+            "name": "UCEED official site",
+            "kind": "Website",
+            "url": "https://www.uceed.iitb.ac.in"
+          }
+        ],
+        "roles": [
+          "UX/UI designer",
+          "Product designer",
+          "Graphic designer",
+          "Brand designer",
+          "Industrial designer"
+        ],
+        "sectors": [
+          "Tech companies",
+          "Design studios",
+          "Advertising",
+          "Fashion",
+          "Freelancing"
+        ],
+        "future_scope": "Good: every digital product needs designers; UX designers with research skills are in demand.",
+        "after_completion": [
+          "UX Designer",
+          "Product Designer",
+          "Freelance designer"
+        ],
+        "earnings": {
+          "entry": "₹2.5–6 LPA typical for UX/UI freshers",
+          "mid": "₹8–20 LPA after 4–7 years",
+          "senior": "₹25 LPA+ for senior product designers",
+          "note": "A strong portfolio matters more than the college name.",
+          "sources": [
+            {
+              "name": "Futurense — UI/UX designer salaries",
+              "url": "https://futurense.com/blog/ui-ux-designer-salary"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "mbbs",
+      "name": "Doctor (MBBS)",
+      "category": "Medical & Health",
+      "description": "Diagnose and treat illness, care for patients, and save lives.",
+      "required_subjects": [
+        "biology",
+        "chemistry",
+        "physics"
+      ],
+      "typical_entrance_exam_codes": [
+        "NEET_UG"
+      ],
+      "education_path": "PCB → MBBS (5.5 years incl. internship) via NEET-UG → NEET-PG for MD/MS specialisation (3 years).",
+      "skills_required": [
+        "biology",
+        "empathy",
+        "patience under pressure"
+      ],
+      "timeline": "5.5 years for MBBS; 8.5–11 years to become a specialist.",
+      "possible_challenges": [
+        "NEET is extremely competitive",
+        "Long study, long hours and emotionally demanding work"
+      ],
+      "explore_next": [
+        "Talk to a doctor about their day",
+        "Volunteer or shadow at a clinic if possible"
+      ],
+      "profile": {
+        "biology": 3,
+        "chemistry": 2,
+        "physics": 1,
+        "social": 3,
+        "investigative": 1,
+        "blood_ok": 3,
+        "long_study": 3,
+        "clinical": 3
+      },
+      "must": [
+        "biology",
+        "blood_ok",
+        "long_study"
+      ],
+      "related": [
+        "bds",
+        "nursing",
+        "physiotherapy",
+        "pharmacy"
+      ],
+      "details": {
+        "overview": "Doctors are among the most trusted and needed professionals in India, which still has too few doctors for its population.",
+        "day_in_life": "Seeing patients, examining and diagnosing, ordering tests, prescribing treatment, ward rounds, and emergencies — often long shifts.",
+        "how_to_prepare": [
+          "Class 11-12: PCB. NEET is built directly on NCERT — know NCERT Biology line by line.",
+          "Take NEET-UG; government medical colleges via All-India (15%) and state quotas.",
+          "Practise full-length NEET mocks under time; Physics is often the deciding subject.",
+          "After MBBS: NEET-PG for specialisation."
+        ],
+        "start_now": [
+          "Read NCERT Biology Class 11 Chapter 1–2 carefully",
+          "Take a timed NEET practice paper in MAYA's Mock Tests"
+        ],
+        "entrance_exams": [
+          {
+            "name": "NEET-UG",
+            "url": "https://neet.nta.nic.in",
+            "note": "The only route to MBBS in India"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Biology, Chemistry, Physics (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "Physics Wallah — free NEET lectures",
+            "kind": "YouTube",
+            "url": "https://www.youtube.com/@PhysicsWallah"
+          },
+          {
+            "name": "Khan Academy — biology and health",
+            "kind": "Course",
+            "url": "https://www.khanacademy.org"
+          },
+          {
+            "name": "MCC — medical counselling",
+            "kind": "Website",
+            "url": "https://mcc.nic.in"
+          }
+        ],
+        "roles": [
+          "Medical officer",
+          "Specialist (MD/MS)",
+          "Surgeon",
+          "Public health doctor",
+          "Medical researcher"
+        ],
+        "sectors": [
+          "Government hospitals",
+          "Private hospitals",
+          "Own clinic",
+          "Research & public health",
+          "Armed forces medical services"
+        ],
+        "future_scope": "Always needed; specialists and doctors willing to serve smaller towns are in especially high demand.",
+        "after_completion": [
+          "Medical Officer",
+          "Specialist after MD/MS",
+          "Own clinic/practice"
+        ],
+        "earnings": {
+          "entry": "Government junior residents: ₹56,100 basic (Level 10) — about ₹60,000–85,000/month with allowances",
+          "mid": "Specialists: ₹1.5–3 lakh+/month depending on field and city",
+          "senior": "Senior specialists and surgeons earn much more, especially in private practice",
+          "note": "Pay rises sharply after specialisation (MD/MS).",
+          "sources": [
+            {
+              "name": "Moneyview — MBBS doctor salary (govt & private)",
+              "url": "https://moneyview.in/insights/mbbs-doctors-salary-in-india"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "bds",
+      "name": "Dentist (BDS)",
+      "category": "Medical & Health",
+      "description": "Care for teeth, gums and mouth health — from fillings to surgery.",
+      "required_subjects": [
+        "biology",
+        "chemistry"
+      ],
+      "typical_entrance_exam_codes": [
+        "NEET_UG"
+      ],
+      "education_path": "PCB → BDS (5 years incl. internship) via NEET-UG → optional MDS (3 years).",
+      "skills_required": [
+        "steady hands",
+        "biology",
+        "patient care"
+      ],
+      "timeline": "5 years; 8 with MDS.",
+      "possible_challenges": [
+        "Setting up a clinic needs investment",
+        "Crowded in big cities"
+      ],
+      "explore_next": [
+        "Visit a dentist and ask about their work",
+        "Read NCERT Biology on human physiology"
+      ],
+      "profile": {
+        "biology": 3,
+        "chemistry": 2,
+        "realistic": 2,
+        "social": 2,
+        "blood_ok": 2,
+        "long_study": 2,
+        "enterprising": 1,
+        "clinical": 3
+      },
+      "must": [
+        "biology",
+        "blood_ok"
+      ],
+      "related": [
+        "mbbs",
+        "pharmacy",
+        "physiotherapy"
+      ],
+      "details": {
+        "overview": "Dentists combine medicine with precise hands-on work. Many run their own clinics.",
+        "day_in_life": "Examining patients, cleanings, fillings, root canals, braces and minor surgery, plus running a practice.",
+        "how_to_prepare": [
+          "Class 11-12: PCB.",
+          "NEET-UG (same exam as MBBS).",
+          "Master NCERT Biology."
+        ],
+        "start_now": [
+          "Take a NEET Biology practice test in MAYA",
+          "Talk to a dentist about their career"
+        ],
+        "entrance_exams": [
+          {
+            "name": "NEET-UG",
+            "url": "https://neet.nta.nic.in",
+            "note": "BDS admissions"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Biology (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "Dental Council of India",
+            "kind": "Website",
+            "url": "https://dciindia.gov.in"
+          }
+        ],
+        "roles": [
+          "Dental surgeon",
+          "Orthodontist (after MDS)",
+          "Oral surgeon",
+          "Dental officer (govt/armed forces)"
+        ],
+        "sectors": [
+          "Private clinics",
+          "Hospitals",
+          "Armed forces",
+          "Teaching"
+        ],
+        "future_scope": "Steady demand; specialists (MDS) and those in smaller towns do best.",
+        "after_completion": [
+          "Dentist",
+          "Specialist after MDS",
+          "Own clinic"
+        ],
+        "earnings": {
+          "entry": "₹3–6 LPA as an associate dentist (indicative)",
+          "mid": "₹8–20 LPA with own practice or specialisation",
+          "senior": "Established clinic owners and specialists earn much more",
+          "note": "Indicative — income depends heavily on location and running a practice.",
+          "sources": []
+        }
+      }
+    },
+    {
+      "key": "pharmacy",
+      "name": "Pharmacy",
+      "category": "Medical & Health",
+      "description": "Understand, make, test and dispense medicines.",
+      "required_subjects": [
+        "chemistry",
+        "biology"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "PCB or PCM → B.Pharm (4 years) via state CETs/CUET, or D.Pharm (2 years) → M.Pharm / Pharm.D.",
+      "skills_required": [
+        "chemistry",
+        "carefulness",
+        "biology"
+      ],
+      "timeline": "4 years (B.Pharm).",
+      "possible_challenges": [
+        "Retail pharmacy pay is modest",
+        "Research roles usually need M.Pharm"
+      ],
+      "explore_next": [
+        "Read how a medicine is tested before approval",
+        "Revise NCERT organic chemistry"
+      ],
+      "profile": {
+        "chemistry": 3,
+        "biology": 2,
+        "investigative": 2,
+        "conventional": 2,
+        "social": 1,
+        "stability": 1,
+        "clinical": 1
+      },
+      "must": [
+        "chemistry"
+      ],
+      "related": [
+        "chemical",
+        "biotech",
+        "mbbs"
+      ],
+      "details": {
+        "overview": "India is a global pharmacy hub; pharmacists work in manufacturing, research, quality control, hospitals and drug regulation.",
+        "day_in_life": "Depending on the role: testing drug quality, running lab analyses, advising patients on medicines, or managing regulatory paperwork.",
+        "how_to_prepare": [
+          "Class 11-12: PCB or PCM.",
+          "State pharmacy CETs, CUET or college entrance tests.",
+          "Strong organic chemistry helps."
+        ],
+        "start_now": [
+          "Revise NCERT chemistry: biomolecules and chemistry in everyday life",
+          "Read about India's pharmaceutical industry"
+        ],
+        "entrance_exams": [
+          {
+            "name": "CUET-UG",
+            "url": "https://cuet.nta.nic.in",
+            "note": "Some central/state universities"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Pharmacy Council of India",
+            "kind": "Website",
+            "url": "https://www.pci.nic.in"
+          },
+          {
+            "name": "NCERT Chemistry (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          }
+        ],
+        "roles": [
+          "Pharmacist",
+          "Quality control analyst",
+          "Drug regulatory officer",
+          "Medical representative",
+          "Research associate"
+        ],
+        "sectors": [
+          "Pharma manufacturing",
+          "Hospitals",
+          "Retail",
+          "Government drug control"
+        ],
+        "future_scope": "Steady: India's pharma exports and generic drug industry keep growing.",
+        "after_completion": [
+          "Pharmacist",
+          "QC/QA Analyst",
+          "M.Pharm → Research"
+        ],
+        "earnings": {
+          "entry": "₹2.5–5 LPA for B.Pharm freshers",
+          "mid": "₹6–12 LPA in industry after experience",
+          "senior": "Higher in regulatory affairs and R&D leadership",
+          "note": "Government pharmacists earn ₹45,000–60,000+/month with allowances.",
+          "sources": [
+            {
+              "name": "PW — pharmacy salaries",
+              "url": "https://www.pw.live/pharma/exams/m-pharma-salary"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "nursing",
+      "name": "Nursing",
+      "category": "Medical & Health",
+      "description": "Care for patients around the clock in hospitals and communities.",
+      "required_subjects": [
+        "biology",
+        "chemistry"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "PCB → B.Sc Nursing (4 years) via entrance tests (AIIMS, state, CUET/NEET in some states) → M.Sc Nursing optional.",
+      "skills_required": [
+        "compassion",
+        "biology",
+        "calm under pressure"
+      ],
+      "timeline": "4 years after class 12.",
+      "possible_challenges": [
+        "Shift work, including nights",
+        "Physically and emotionally demanding"
+      ],
+      "explore_next": [
+        "Learn basic first aid",
+        "Talk to a nurse about their work"
+      ],
+      "profile": {
+        "biology": 2,
+        "chemistry": 1,
+        "social": 3,
+        "blood_ok": 3,
+        "stability": 1,
+        "communication": 1,
+        "caregiving": 3
+      },
+      "must": [
+        "blood_ok",
+        "social"
+      ],
+      "related": [
+        "mbbs",
+        "physiotherapy",
+        "psychology"
+      ],
+      "details": {
+        "overview": "Nurses are the backbone of healthcare. Indian nurses are also in demand abroad.",
+        "day_in_life": "Monitoring patients, giving medicines, assisting doctors, and supporting patients and families.",
+        "how_to_prepare": [
+          "Class 11-12: PCB.",
+          "Check your state's B.Sc Nursing entrance and AIIMS B.Sc Nursing.",
+          "Learn first aid and basic anatomy."
+        ],
+        "start_now": [
+          "Take a first-aid course",
+          "Revise NCERT human physiology"
+        ],
+        "entrance_exams": [
+          {
+            "name": "AIIMS B.Sc Nursing",
+            "url": "https://www.aiimsexams.ac.in",
+            "note": "AIIMS institutions"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Indian Nursing Council",
+            "kind": "Website",
+            "url": "https://www.indiannursingcouncil.org"
+          },
+          {
+            "name": "NCERT Biology (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          }
+        ],
+        "roles": [
+          "Staff nurse",
+          "Nursing officer",
+          "ICU nurse",
+          "Community health nurse",
+          "Nurse educator"
+        ],
+        "sectors": [
+          "Government hospitals",
+          "Private hospitals",
+          "Abroad (UK, Gulf, etc.)",
+          "Community health"
+        ],
+        "future_scope": "Strong demand in India and overseas.",
+        "after_completion": [
+          "Staff Nurse / Nursing Officer",
+          "M.Sc Nursing → teaching or specialist nursing"
+        ],
+        "earnings": {
+          "entry": "AIIMS nursing officers: Level 7 (₹44,900 basic), about ₹65,000–72,000/month in hand",
+          "mid": "Higher with promotions; private hospital pay varies widely",
+          "senior": "Nursing superintendents and nurses abroad earn much more",
+          "note": "Private hospitals often pay less than government posts at entry level.",
+          "sources": [
+            {
+              "name": "Testbook — AIIMS nursing officer salary",
+              "url": "https://testbook.com/aiims-nursing-officer/salary-job-profile"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "physiotherapy",
+      "name": "Physiotherapy",
+      "category": "Medical & Health",
+      "description": "Help people recover movement after injuries, surgery or illness.",
+      "required_subjects": [
+        "biology",
+        "physics"
+      ],
+      "typical_entrance_exam_codes": [
+        "NEET_UG"
+      ],
+      "education_path": "PCB → BPT (4.5 years incl. internship); several states use NEET or their own tests → MPT optional.",
+      "skills_required": [
+        "anatomy",
+        "patience",
+        "hands-on care"
+      ],
+      "timeline": "4.5 years after class 12.",
+      "possible_challenges": [
+        "Private starting pay is low",
+        "Physically active work"
+      ],
+      "explore_next": [
+        "Read about sports physiotherapy",
+        "Learn the major muscles and bones"
+      ],
+      "profile": {
+        "biology": 3,
+        "physics": 1,
+        "social": 3,
+        "realistic": 2,
+        "outdoor": 1,
+        "blood_ok": 1,
+        "clinical": 1,
+        "caregiving": 2
+      },
+      "must": [
+        "biology"
+      ],
+      "related": [
+        "mbbs",
+        "nursing",
+        "psychology"
+      ],
+      "details": {
+        "overview": "Physiotherapists treat through movement and exercise — working with athletes, elderly people and patients after surgery.",
+        "day_in_life": "Assessing patients, planning exercise programmes, hands-on therapy, and tracking recovery.",
+        "how_to_prepare": [
+          "Class 11-12: PCB.",
+          "Check your state's BPT admission route (NEET score or state test)."
+        ],
+        "start_now": [
+          "Learn basic human anatomy from NCERT",
+          "Watch how sports teams use physiotherapists"
+        ],
+        "entrance_exams": [
+          {
+            "name": "NEET-UG (in some states)",
+            "url": "https://neet.nta.nic.in",
+            "note": "Used for BPT admission in several states"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Biology (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          }
+        ],
+        "roles": [
+          "Physiotherapist",
+          "Sports physiotherapist",
+          "Rehabilitation specialist"
+        ],
+        "sectors": [
+          "Hospitals",
+          "Sports teams",
+          "Own clinic",
+          "Home care"
+        ],
+        "future_scope": "Growing with sports, ageing population and fitness awareness.",
+        "after_completion": [
+          "Physiotherapist",
+          "Sports Physio (MPT)",
+          "Own clinic"
+        ],
+        "earnings": {
+          "entry": "₹15,000–25,000/month in private sector; ₹45,000–70,000/month in government roles",
+          "mid": "₹5–10 LPA with experience or specialisation",
+          "senior": "Sports and private-practice physios can earn much more",
+          "note": "Building a client base matters for private practice.",
+          "sources": [
+            {
+              "name": "Emversity — physiotherapist salaries",
+              "url": "https://emversity.com/blog/allied-healthcare/physiotherapist-salary-in-india-government-private-experience-wise"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "veterinary",
+      "name": "Veterinary Doctor",
+      "category": "Medical & Health",
+      "description": "Care for animals — pets, livestock and wildlife.",
+      "required_subjects": [
+        "biology",
+        "chemistry"
+      ],
+      "typical_entrance_exam_codes": [
+        "NEET_UG"
+      ],
+      "education_path": "PCB → B.V.Sc & A.H. (5.5 years) via NEET (VCI 15% all-India quota) and state admissions.",
+      "skills_required": [
+        "biology",
+        "love for animals",
+        "hands-on care"
+      ],
+      "timeline": "5.5 years after class 12.",
+      "possible_challenges": [
+        "Rural and farm postings are common",
+        "Physically demanding work"
+      ],
+      "explore_next": [
+        "Visit a veterinary clinic or animal shelter",
+        "Read about animal husbandry in India"
+      ],
+      "profile": {
+        "biology": 3,
+        "chemistry": 1,
+        "social": 2,
+        "realistic": 2,
+        "blood_ok": 3,
+        "long_study": 2,
+        "stability": 1,
+        "clinical": 2,
+        "outdoor": 2
+      },
+      "must": [
+        "biology",
+        "blood_ok"
+      ],
+      "related": [
+        "mbbs",
+        "biotech"
+      ],
+      "details": {
+        "overview": "Vets protect animal health — which also protects food safety and human health.",
+        "day_in_life": "Treating animals, surgery, vaccinations, and advising farmers or pet owners; many government vets work in rural areas.",
+        "how_to_prepare": [
+          "Class 11-12: PCB.",
+          "NEET-UG for the VCI all-India quota; state veterinary admissions."
+        ],
+        "start_now": [
+          "Volunteer at an animal shelter",
+          "Revise NCERT Biology on animal kingdom"
+        ],
+        "entrance_exams": [
+          {
+            "name": "NEET-UG",
+            "url": "https://neet.nta.nic.in",
+            "note": "Used for VCI's 15% all-India quota"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Veterinary Council of India",
+            "kind": "Website",
+            "url": "https://vci.dahd.gov.in"
+          },
+          {
+            "name": "NCERT Biology (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          }
+        ],
+        "roles": [
+          "Veterinary officer",
+          "Pet clinic vet",
+          "Wildlife vet",
+          "Livestock specialist"
+        ],
+        "sectors": [
+          "State animal husbandry departments",
+          "Private clinics",
+          "Dairy & poultry industry",
+          "Wildlife conservation"
+        ],
+        "future_scope": "Steady; pet care and dairy industries are growing.",
+        "after_completion": [
+          "Veterinary Officer",
+          "Own clinic",
+          "M.V.Sc specialisation"
+        ],
+        "earnings": {
+          "entry": "Government veterinary officers: about ₹45,000–68,000/month depending on state; central posts at Level 10 (₹56,100 basic)",
+          "mid": "Rises with promotions and private practice",
+          "senior": "Specialists and established clinics earn more",
+          "note": "Private starting pay varies widely.",
+          "sources": [
+            {
+              "name": "Govt. of India — Veterinary Officer at Level-10",
+              "url": "https://dahd.gov.in/node/3042"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "biotech",
+      "name": "Biotechnology & Life Sciences Research",
+      "category": "Science & Research",
+      "description": "Use living cells and DNA to make medicines, vaccines, crops and new materials.",
+      "required_subjects": [
+        "biology",
+        "chemistry"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_MAIN",
+        "NEET_UG"
+      ],
+      "education_path": "PCB/PCMB → B.Tech Biotech (JEE) or B.Sc (CUET/IISER) → M.Sc/M.Tech → PhD for research.",
+      "skills_required": [
+        "curiosity",
+        "lab work",
+        "patience"
+      ],
+      "timeline": "5–10 years (research careers usually need a PhD).",
+      "possible_challenges": [
+        "Good research jobs need higher degrees",
+        "Industry jobs are concentrated in a few cities"
+      ],
+      "explore_next": [
+        "Read about how COVID vaccines were developed",
+        "Try a school science project with plants or microbes"
+      ],
+      "profile": {
+        "biology": 3,
+        "chemistry": 2,
+        "investigative": 3,
+        "maths": 1,
+        "long_study": 3,
+        "computer": 1
+      },
+      "must": [
+        "biology",
+        "long_study"
+      ],
+      "related": [
+        "pure_science",
+        "pharmacy",
+        "mbbs"
+      ],
+      "details": {
+        "overview": "Biotechnologists and life scientists work at the cutting edge — gene therapy, vaccines, better crops, biofuels.",
+        "day_in_life": "Designing experiments, lab work, analysing data, reading and writing research papers.",
+        "how_to_prepare": [
+          "Class 11-12: PCB (PCMB keeps more doors open).",
+          "IISER Aptitude Test and NEST for research-focused B.S./M.Sc.",
+          "JEE for B.Tech Biotechnology; CUET for B.Sc."
+        ],
+        "start_now": [
+          "Read NCERT Class 12 Biotechnology chapters",
+          "Follow science news (e.g. ICMR, DBT)"
+        ],
+        "entrance_exams": [
+          {
+            "name": "IISER Aptitude Test",
+            "url": "https://www.iiseradmission.in",
+            "note": "BS-MS at IISERs"
+          },
+          {
+            "name": "NEST",
+            "url": "https://www.nestexam.in",
+            "note": "NISER and UM-DAE CEBS"
+          },
+          {
+            "name": "CUET-UG",
+            "url": "https://cuet.nta.nic.in",
+            "note": "B.Sc programmes"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Biology (Class 11-12)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "NPTEL — Biotechnology courses",
+            "kind": "Course",
+            "url": "https://nptel.ac.in"
+          },
+          {
+            "name": "INSPIRE scholarship for science students",
+            "kind": "Scholarship",
+            "url": "https://online-inspire.gov.in"
+          }
+        ],
+        "roles": [
+          "Research scientist",
+          "Lab scientist",
+          "Clinical research associate",
+          "Bioinformatics analyst"
+        ],
+        "sectors": [
+          "Pharma & biotech companies",
+          "Research institutes (CSIR, ICMR)",
+          "Agri-biotech",
+          "Universities"
+        ],
+        "future_scope": "Growing — India's bioeconomy is expanding quickly.",
+        "after_completion": [
+          "Research Associate",
+          "PhD → Scientist",
+          "Industry R&D"
+        ],
+        "earnings": {
+          "entry": "PhD fellowships (JRF) ₹37,000/month; industry freshers roughly ₹3–6 LPA",
+          "mid": "₹8–18 LPA for scientists with a PhD",
+          "senior": "Senior scientists and R&D heads earn more",
+          "note": "Research careers pay off later but offer deep satisfaction; figures are indicative.",
+          "sources": []
+        }
+      }
+    },
+    {
+      "key": "psychology",
+      "name": "Psychology",
+      "category": "Social Sciences",
+      "description": "Understand how people think and feel, and help them with mental health.",
+      "required_subjects": [
+        "biology",
+        "language"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any stream → BA/B.Sc Psychology (3–4 years) via CUET → MA/M.Sc → M.Phil (clinical, RCI) for clinical practice.",
+      "skills_required": [
+        "empathy",
+        "listening",
+        "research"
+      ],
+      "timeline": "5–7 years to practise as a clinical psychologist.",
+      "possible_challenges": [
+        "Clinical practice needs long study and licensing",
+        "Early-career pay is low"
+      ],
+      "explore_next": [
+        "Read an introductory psychology book",
+        "Practise active listening with friends"
+      ],
+      "profile": {
+        "biology": 1,
+        "language": 2,
+        "social": 3,
+        "investigative": 2,
+        "communication": 2,
+        "long_study": 2,
+        "society": 1
+      },
+      "must": [
+        "social"
+      ],
+      "related": [
+        "teaching",
+        "nursing",
+        "journalism"
+      ],
+      "details": {
+        "overview": "Psychologists study behaviour and help people cope — in clinics, schools, companies and research.",
+        "day_in_life": "Counselling sessions, assessments, research or training, depending on the specialisation.",
+        "how_to_prepare": [
+          "Any stream (psychology as a Class 11-12 subject helps).",
+          "CUET for central universities."
+        ],
+        "start_now": [
+          "Read about emotions and the brain",
+          "Practise listening without interrupting"
+        ],
+        "entrance_exams": [
+          {
+            "name": "CUET-UG",
+            "url": "https://cuet.nta.nic.in",
+            "note": "BA/B.Sc Psychology"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Rehabilitation Council of India (clinical licensing)",
+            "kind": "Website",
+            "url": "https://rehabcouncil.nic.in"
+          },
+          {
+            "name": "CrashCourse Psychology",
+            "kind": "YouTube",
+            "url": "https://www.youtube.com/@crashcourse"
+          }
+        ],
+        "roles": [
+          "Counselling psychologist",
+          "Clinical psychologist",
+          "School counsellor",
+          "Organisational psychologist",
+          "Researcher"
+        ],
+        "sectors": [
+          "Hospitals & clinics",
+          "Schools",
+          "Companies (HR)",
+          "NGOs",
+          "Private practice"
+        ],
+        "future_scope": "Growing fast as mental-health awareness rises.",
+        "after_completion": [
+          "Counsellor",
+          "Clinical Psychologist (with RCI licence)",
+          "HR/organisational roles"
+        ],
+        "earnings": {
+          "entry": "₹1.95–2.8 LPA for freshers",
+          "mid": "₹5–10 LPA with experience; industrial psychologists ₹8–10 LPA",
+          "senior": "Established clinicians in private practice earn much more",
+          "note": "Pay rises with qualifications and a client base.",
+          "sources": [
+            {
+              "name": "Collegedunia — psychologist salaries",
+              "url": "https://collegedunia.com/courses/bachelor-of-science-bsc-psychology/salary-of-a-psychologist"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "pure_science",
+      "name": "Scientific Research (Physics, Maths, Chemistry)",
+      "category": "Science & Research",
+      "description": "Discover new knowledge — from particles and planets to new mathematics.",
+      "required_subjects": [
+        "physics",
+        "maths",
+        "chemistry"
+      ],
+      "typical_entrance_exam_codes": [
+        "JEE_ADVANCED"
+      ],
+      "education_path": "PCM → BS-MS (5 years) at IISERs/NISER/IISc, or B.Sc → M.Sc → PhD.",
+      "skills_required": [
+        "deep curiosity",
+        "maths",
+        "persistence"
+      ],
+      "timeline": "9–11 years to become an independent scientist (including PhD).",
+      "possible_challenges": [
+        "Long path with fellowships rather than high salaries early on",
+        "Few permanent research posts"
+      ],
+      "explore_next": [
+        "Read about Indian scientists like C. V. Raman or Srinivasa Ramanujan",
+        "Try olympiad-style problems"
+      ],
+      "profile": {
+        "physics": 3,
+        "maths": 3,
+        "chemistry": 1,
+        "investigative": 3,
+        "long_study": 3,
+        "stability": 1
+      },
+      "must": [
+        "investigative",
+        "long_study"
+      ],
+      "related": [
+        "ai_data",
+        "biotech",
+        "aerospace"
+      ],
+      "details": {
+        "overview": "Researchers ask questions no one has answered. India's IISERs, IISc and national labs offer excellent paths with scholarships.",
+        "day_in_life": "Reading papers, doing experiments or calculations, writing code, discussing ideas, teaching.",
+        "how_to_prepare": [
+          "Class 11-12: PCM (or PCMB).",
+          "IISER Aptitude Test, NEST, IISc admission via JEE/KVPY-successor routes.",
+          "Try science olympiads."
+        ],
+        "start_now": [
+          "Try an olympiad problem set",
+          "Apply for the INSPIRE scholarship when eligible"
+        ],
+        "entrance_exams": [
+          {
+            "name": "IISER Aptitude Test",
+            "url": "https://www.iiseradmission.in",
+            "note": "IISERs"
+          },
+          {
+            "name": "NEST",
+            "url": "https://www.nestexam.in",
+            "note": "NISER, UM-DAE CEBS"
+          },
+          {
+            "name": "JEE Advanced",
+            "url": "https://jeeadv.ac.in",
+            "note": "Science programmes at IITs, IISc"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCERT Physics, Maths, Chemistry",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          },
+          {
+            "name": "3Blue1Brown — maths intuition",
+            "kind": "YouTube",
+            "url": "https://www.youtube.com/@3blue1brown"
+          },
+          {
+            "name": "INSPIRE scholarship",
+            "kind": "Scholarship",
+            "url": "https://online-inspire.gov.in"
+          }
+        ],
+        "roles": [
+          "Research scientist",
+          "Professor",
+          "Data scientist (common switch)",
+          "Quantitative analyst"
+        ],
+        "sectors": [
+          "Universities",
+          "National labs (ISRO, BARC, CSIR)",
+          "Industry R&D",
+          "Finance (quant)"
+        ],
+        "future_scope": "Research funding in India is growing; scientific training also opens data and finance careers.",
+        "after_completion": [
+          "PhD Scholar",
+          "Scientist / Professor",
+          "Industry research"
+        ],
+        "earnings": {
+          "entry": "JRF fellowship ₹37,000/month during PhD",
+          "mid": "Assistant professors and scientists typically at Level 10+ (₹56,100 basic and up)",
+          "senior": "Senior professors and scientists earn well with stable benefits",
+          "note": "Quantitative finance or data roles pay more for scientists who switch.",
+          "sources": [
+            {
+              "name": "Level-10 central pay scale reference",
+              "url": "https://dahd.gov.in/node/3042"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "ca",
+      "name": "Chartered Accountancy (CA)",
+      "category": "Commerce & Finance",
+      "description": "Manage money for companies — accounts, audits, taxes and financial advice.",
+      "required_subjects": [
+        "commerce",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any stream (commerce helps) → CA Foundation → Intermediate → articleship (practical training) → CA Final, conducted by ICAI.",
+      "skills_required": [
+        "numbers",
+        "attention to detail",
+        "discipline"
+      ],
+      "timeline": "About 4.5–5 years after class 12; many take longer.",
+      "possible_challenges": [
+        "Low pass rates — it takes persistence",
+        "Busy periods around tax deadlines"
+      ],
+      "explore_next": [
+        "Look at ICAI's student section",
+        "Learn how a simple balance sheet works"
+      ],
+      "profile": {
+        "commerce": 3,
+        "maths": 2,
+        "conventional": 3,
+        "investigative": 1,
+        "money": 2,
+        "stability": 1
+      },
+      "must": [
+        "commerce"
+      ],
+      "related": [
+        "finance_econ",
+        "law"
+      ],
+      "details": {
+        "overview": "CAs are among the most respected finance professionals in India, trusted with audits, taxes and company finances.",
+        "day_in_life": "Auditing accounts, preparing tax filings, advising businesses and checking compliance.",
+        "how_to_prepare": [
+          "Commerce stream with accountancy helps (not compulsory).",
+          "Register for CA Foundation after class 12.",
+          "Practise accounts daily; the exams test consistency."
+        ],
+        "start_now": [
+          "Learn double-entry bookkeeping basics",
+          "Read ICAI's CA Foundation syllabus"
+        ],
+        "entrance_exams": [
+          {
+            "name": "CA Foundation (ICAI)",
+            "url": "https://www.icai.org",
+            "note": "First level of CA"
+          }
+        ],
+        "resources": [
+          {
+            "name": "ICAI — official student resources",
+            "kind": "Website",
+            "url": "https://www.icai.org"
+          },
+          {
+            "name": "Khan Academy — economics and finance",
+            "kind": "Course",
+            "url": "https://www.khanacademy.org"
+          }
+        ],
+        "roles": [
+          "Chartered accountant",
+          "Auditor",
+          "Tax consultant",
+          "Financial analyst",
+          "CFO (later)"
+        ],
+        "sectors": [
+          "Big 4 firms",
+          "Companies",
+          "Banks",
+          "Own practice",
+          "Government audit"
+        ],
+        "future_scope": "Stable and respected; routine bookkeeping is being automated, so advisory and analysis skills matter more.",
+        "after_completion": [
+          "Chartered Accountant",
+          "Own CA practice",
+          "CFO track"
+        ],
+        "earnings": {
+          "entry": "₹7.2–32 LPA through ICAI campus placements (average about ₹12.9 LPA, Aug–Sep 2025)",
+          "mid": "₹15–30 LPA after 5–8 years",
+          "senior": "CFOs and partners earn far more",
+          "note": "Small firms may start at ₹3–4 LPA.",
+          "sources": [
+            {
+              "name": "ICAI campus placement coverage — Taxscan",
+              "url": "https://www.taxscan.in/top-stories/26-lakh-salary-package-offered-for-ca-fresher-in-icai-campus-placement-programme-3000-receives-job-offers-1436156"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "finance_econ",
+      "name": "Economics & Finance",
+      "category": "Commerce & Finance",
+      "description": "Understand markets and money — banking, investing, policy and business strategy.",
+      "required_subjects": [
+        "commerce",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any stream (maths helps) → B.A./B.Sc Economics or BBA/B.Com via CUET → MBA/MA Economics/CFA.",
+      "skills_required": [
+        "analysis",
+        "maths",
+        "reading the news"
+      ],
+      "timeline": "3–5 years after class 12.",
+      "possible_challenges": [
+        "Top finance jobs are very competitive",
+        "Needs comfort with maths and data"
+      ],
+      "explore_next": [
+        "Follow the RBI's monetary policy decisions",
+        "Track a few company stocks on paper"
+      ],
+      "profile": {
+        "commerce": 3,
+        "maths": 2,
+        "investigative": 2,
+        "enterprising": 2,
+        "money": 3,
+        "communication": 1
+      },
+      "must": [
+        "commerce"
+      ],
+      "related": [
+        "ca",
+        "ai_data",
+        "civil_services"
+      ],
+      "details": {
+        "overview": "Economists and finance professionals decide where money goes — in banks, companies, markets and government.",
+        "day_in_life": "Analysing data and reports, building financial models, meeting clients or writing policy notes.",
+        "how_to_prepare": [
+          "Maths in Class 11-12 is very useful.",
+          "CUET for Delhi University and other central universities.",
+          "Read business news regularly."
+        ],
+        "start_now": [
+          "Read one business news story daily",
+          "Learn what inflation and interest rates do"
+        ],
+        "entrance_exams": [
+          {
+            "name": "CUET-UG",
+            "url": "https://cuet.nta.nic.in",
+            "note": "Economics/B.Com/BBA at central universities"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Khan Academy — economics and finance",
+            "kind": "Course",
+            "url": "https://www.khanacademy.org"
+          },
+          {
+            "name": "RBI — financial education",
+            "kind": "Website",
+            "url": "https://www.rbi.org.in"
+          }
+        ],
+        "roles": [
+          "Financial analyst",
+          "Investment banker",
+          "Economist",
+          "Banker",
+          "Consultant"
+        ],
+        "sectors": [
+          "Banks",
+          "Investment firms",
+          "Consulting",
+          "Government & RBI",
+          "Startups"
+        ],
+        "future_scope": "Strong; people who combine finance with data skills are especially valued.",
+        "after_completion": [
+          "Analyst",
+          "MBA → Management",
+          "Economist (MA/PhD)"
+        ],
+        "earnings": {
+          "entry": "₹4–8 LPA typical; top-college graduates in investment banking or consulting earn much more",
+          "mid": "₹10–30 LPA after an MBA or experience",
+          "senior": "Very high in investment banking and leadership",
+          "note": "Indicative; outcomes vary widely by college and role.",
+          "sources": []
+        }
+      }
+    },
+    {
+      "key": "law",
+      "name": "Law",
+      "category": "Law",
+      "description": "Argue cases, advise companies, protect rights and shape justice.",
+      "required_subjects": [
+        "language",
+        "society"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any stream → 5-year integrated BA/BBA LLB via CLAT (National Law Universities), AILET or state tests → enrol with the Bar Council.",
+      "skills_required": [
+        "reading",
+        "arguing",
+        "logical reasoning"
+      ],
+      "timeline": "5 years after class 12.",
+      "possible_challenges": [
+        "Courtroom practice pays little in the first few years",
+        "Heavy reading"
+      ],
+      "explore_next": [
+        "Watch a court proceeding or moot court online",
+        "Read one Supreme Court judgment summary"
+      ],
+      "profile": {
+        "language": 3,
+        "society": 2,
+        "communication": 3,
+        "enterprising": 2,
+        "investigative": 1,
+        "money": 1
+      },
+      "must": [
+        "language"
+      ],
+      "related": [
+        "civil_services",
+        "journalism",
+        "ca"
+      ],
+      "details": {
+        "overview": "Lawyers work in courts, companies, government and human-rights organisations. NLU graduates are recruited by top law firms.",
+        "day_in_life": "Reading cases and contracts, drafting documents, advising clients, and arguing in court.",
+        "how_to_prepare": [
+          "Any stream works.",
+          "CLAT tests English, reasoning, legal reasoning, current affairs and basic maths.",
+          "Read a newspaper editorial every day."
+        ],
+        "start_now": [
+          "Read and summarise one editorial daily",
+          "Try a past CLAT paper"
+        ],
+        "entrance_exams": [
+          {
+            "name": "CLAT",
+            "url": "https://consortiumofnlus.ac.in",
+            "note": "National Law Universities"
+          },
+          {
+            "name": "AILET",
+            "url": "https://nationallawuniversitydelhi.in",
+            "note": "NLU Delhi"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Consortium of NLUs (CLAT)",
+            "kind": "Website",
+            "url": "https://consortiumofnlus.ac.in"
+          },
+          {
+            "name": "Bar Council of India",
+            "kind": "Website",
+            "url": "https://www.barcouncilofindia.org"
+          }
+        ],
+        "roles": [
+          "Advocate",
+          "Corporate lawyer",
+          "Legal advisor",
+          "Judge (via judicial services)",
+          "Policy researcher"
+        ],
+        "sectors": [
+          "Law firms",
+          "Courts",
+          "Companies",
+          "Government",
+          "NGOs"
+        ],
+        "future_scope": "Strong for corporate, technology and IP law.",
+        "after_completion": [
+          "Advocate",
+          "Corporate Lawyer",
+          "Judicial Services"
+        ],
+        "earnings": {
+          "entry": "Top NLU graduates: ₹12–25 LPA at top law firms; NLU averages about ₹16–20 LPA",
+          "mid": "₹20–50 LPA in corporate law",
+          "senior": "Senior advocates and partners earn much more",
+          "note": "Litigation starts much lower and grows with reputation.",
+          "sources": [
+            {
+              "name": "LawPrep — NLU placements",
+              "url": "https://www.lawpreptutorial.com/blog/national-law-universities/placements/"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "civil_services",
+      "name": "Civil Services (IAS, IPS, IFS)",
+      "category": "Government & Public Service",
+      "description": "Run districts, police, and foreign policy — serve the country at the highest level.",
+      "required_subjects": [
+        "society",
+        "language"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any graduation degree → UPSC Civil Services Exam (prelims, mains, interview).",
+      "skills_required": [
+        "general knowledge",
+        "writing",
+        "leadership"
+      ],
+      "timeline": "Graduation (3–4 years) + 1–3 years of UPSC preparation.",
+      "possible_challenges": [
+        "One of the toughest exams in the world",
+        "Frequent transfers"
+      ],
+      "explore_next": [
+        "Read a newspaper daily",
+        "Read NCERT History and Polity books"
+      ],
+      "profile": {
+        "society": 3,
+        "language": 2,
+        "enterprising": 2,
+        "social": 2,
+        "communication": 2,
+        "stability": 3
+      },
+      "must": [
+        "society"
+      ],
+      "related": [
+        "law",
+        "finance_econ",
+        "defence"
+      ],
+      "details": {
+        "overview": "Civil servants implement government policy — from district collectors to diplomats.",
+        "day_in_life": "Meetings, field visits, solving public problems, managing crises and teams.",
+        "how_to_prepare": [
+          "Choose any degree you'll enjoy (many pick history, political science, economics or engineering).",
+          "Build a newspaper habit early.",
+          "NCERT books (Class 6–12) are the foundation for UPSC."
+        ],
+        "start_now": [
+          "Read one newspaper every day",
+          "Start NCERT Polity (Class 11)"
+        ],
+        "entrance_exams": [
+          {
+            "name": "UPSC Civil Services",
+            "url": "https://upsc.gov.in",
+            "note": "After graduation"
+          }
+        ],
+        "resources": [
+          {
+            "name": "UPSC",
+            "kind": "Website",
+            "url": "https://upsc.gov.in"
+          },
+          {
+            "name": "NCERT textbooks (History, Polity, Geography)",
+            "kind": "Book",
+            "url": "https://ncert.nic.in/textbook.php"
+          }
+        ],
+        "roles": [
+          "IAS officer",
+          "IPS officer",
+          "IFS (diplomat)",
+          "IRS officer"
+        ],
+        "sectors": [
+          "Central & state government"
+        ],
+        "future_scope": "Always relevant; very high responsibility and respect.",
+        "after_completion": [
+          "IAS / IPS / IFS officer"
+        ],
+        "earnings": {
+          "entry": "Pay Level 10: ₹56,100 basic + allowances, housing and other benefits",
+          "mid": "Rises through the pay matrix with promotions",
+          "senior": "Cabinet Secretary level is the top of the government pay scale",
+          "note": "Government pay per the 7th Pay Commission.",
+          "sources": [
+            {
+              "name": "Level-10 pay (₹56,100–1,77,500) per Govt. of India notice",
+              "url": "https://dahd.gov.in/node/3042"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "defence",
+      "name": "Defence Officer (Army, Navy, Air Force)",
+      "category": "Government & Public Service",
+      "description": "Lead soldiers, sailors or aircrew and protect the country.",
+      "required_subjects": [
+        "physics",
+        "maths"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "After class 12: NDA exam (UPSC) → 3 years at NDA + 1 year training. Or graduate entry via CDS, AFCAT, or technical entries.",
+      "skills_required": [
+        "fitness",
+        "leadership",
+        "discipline"
+      ],
+      "timeline": "4 years after class 12 via NDA.",
+      "possible_challenges": [
+        "Strict fitness and medical standards",
+        "Postings in remote and tough areas"
+      ],
+      "explore_next": [
+        "Join NCC",
+        "Start a running and fitness routine"
+      ],
+      "profile": {
+        "physics": 1,
+        "maths": 1,
+        "outdoor": 3,
+        "realistic": 2,
+        "enterprising": 2,
+        "stability": 3,
+        "social": 1
+      },
+      "must": [
+        "outdoor"
+      ],
+      "related": [
+        "civil_services",
+        "aerospace"
+      ],
+      "details": {
+        "overview": "Defence officers lead with courage and discipline, with excellent benefits and respect.",
+        "day_in_life": "Training, leading troops, operations, and continuous physical and professional preparation.",
+        "how_to_prepare": [
+          "PCM required for Navy/Air Force via NDA.",
+          "Take the NDA exam (UPSC) — then the SSB interview.",
+          "Build fitness and join NCC."
+        ],
+        "start_now": [
+          "Run and exercise regularly",
+          "Read about SSB interviews"
+        ],
+        "entrance_exams": [
+          {
+            "name": "NDA (UPSC)",
+            "url": "https://upsc.gov.in",
+            "note": "After class 12"
+          },
+          {
+            "name": "Join Indian Army",
+            "url": "https://joinindianarmy.nic.in",
+            "note": "All entry schemes"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Join Indian Army",
+            "kind": "Website",
+            "url": "https://joinindianarmy.nic.in"
+          },
+          {
+            "name": "UPSC — NDA exam",
+            "kind": "Website",
+            "url": "https://upsc.gov.in"
+          }
+        ],
+        "roles": [
+          "Army officer",
+          "Naval officer",
+          "Air Force pilot / officer"
+        ],
+        "sectors": [
+          "Indian Armed Forces"
+        ],
+        "future_scope": "Stable; technical branches increasingly value engineering skills.",
+        "after_completion": [
+          "Lieutenant / Sub-Lieutenant / Flying Officer"
+        ],
+        "earnings": {
+          "entry": "Lieutenant: Pay Level 10 (₹56,100 basic) plus military service pay and allowances",
+          "mid": "Rises with rank",
+          "senior": "Senior officers are at the top of the pay matrix, with pension and benefits",
+          "note": "Includes free medical care, housing and canteen facilities.",
+          "sources": [
+            {
+              "name": "Level-10 pay (₹56,100–1,77,500) per Govt. of India notice",
+              "url": "https://dahd.gov.in/node/3042"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "journalism",
+      "name": "Journalism & Media",
+      "category": "Media & Communication",
+      "description": "Find and tell true stories — in news, digital media, film and podcasts.",
+      "required_subjects": [
+        "language",
+        "society"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any stream → BJMC/BA Mass Communication (3 years) via CUET or college tests → IIMC PG diploma optional.",
+      "skills_required": [
+        "writing",
+        "curiosity",
+        "communication"
+      ],
+      "timeline": "3–4 years after class 12.",
+      "possible_challenges": [
+        "Low starting pay",
+        "Irregular hours"
+      ],
+      "explore_next": [
+        "Start a blog or school newsletter",
+        "Interview someone and write their story"
+      ],
+      "profile": {
+        "language": 3,
+        "society": 2,
+        "communication": 3,
+        "artistic": 2,
+        "outdoor": 1,
+        "investigative": 1
+      },
+      "must": [
+        "language"
+      ],
+      "related": [
+        "law",
+        "design",
+        "psychology"
+      ],
+      "details": {
+        "overview": "Journalists and media professionals inform the public — a job that's moving fast from print and TV to digital.",
+        "day_in_life": "Researching, interviewing, writing or filming, editing, and meeting deadlines.",
+        "how_to_prepare": [
+          "Any stream.",
+          "Write regularly and read widely.",
+          "CUET for central universities; IIMC for PG."
+        ],
+        "start_now": [
+          "Write one short article a week",
+          "Record and edit a short video story"
+        ],
+        "entrance_exams": [
+          {
+            "name": "CUET-UG",
+            "url": "https://cuet.nta.nic.in",
+            "note": "Journalism at central universities"
+          },
+          {
+            "name": "IIMC",
+            "url": "https://iimc.gov.in",
+            "note": "PG diplomas in journalism"
+          }
+        ],
+        "resources": [
+          {
+            "name": "Indian Institute of Mass Communication",
+            "kind": "Website",
+            "url": "https://iimc.gov.in"
+          }
+        ],
+        "roles": [
+          "Reporter",
+          "Content writer",
+          "Editor",
+          "Video producer",
+          "PR / communications"
+        ],
+        "sectors": [
+          "News media",
+          "Digital media",
+          "Advertising & PR",
+          "Film & OTT"
+        ],
+        "future_scope": "Digital storytelling, video and data journalism are growing.",
+        "after_completion": [
+          "Reporter / Writer",
+          "Editor",
+          "Media producer"
+        ],
+        "earnings": {
+          "entry": "₹2.5–5 LPA for freshers",
+          "mid": "₹6–15 LPA with experience",
+          "senior": "Senior editors, anchors and producers earn more",
+          "note": "Varies strongly by outlet.",
+          "sources": [
+            {
+              "name": "Manipal Online — journalist salary",
+              "url": "https://www.onlinemanipal.com/blogs/journalist-salary-in-india"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "teaching",
+      "name": "Teaching & Education",
+      "category": "Education",
+      "description": "Teach and inspire the next generation — in schools, colleges or online.",
+      "required_subjects": [
+        "language"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Graduation in your subject → B.Ed (2 years) → CTET/state TET for school teaching; or Master's → NET/PhD for college teaching.",
+      "skills_required": [
+        "explaining clearly",
+        "patience",
+        "subject knowledge"
+      ],
+      "timeline": "5 years after class 12 for school teaching.",
+      "possible_challenges": [
+        "Private school pay can be low",
+        "Large classes"
+      ],
+      "explore_next": [
+        "Tutor a younger student",
+        "Explain a topic to a friend and see if they get it"
+      ],
+      "profile": {
+        "language": 2,
+        "social": 3,
+        "communication": 3,
+        "stability": 2,
+        "conventional": 1
+      },
+      "must": [
+        "social"
+      ],
+      "related": [
+        "psychology",
+        "journalism",
+        "pure_science"
+      ],
+      "details": {
+        "overview": "Good teachers change lives. Government teaching posts are stable and respected; online education has opened new paths too.",
+        "day_in_life": "Planning and giving lessons, checking work, guiding students, and meeting parents.",
+        "how_to_prepare": [
+          "Pick the subject you love most for graduation.",
+          "B.Ed after graduation; clear CTET/state TET."
+        ],
+        "start_now": [
+          "Tutor a younger student",
+          "Make a short explainer video on a topic you know"
+        ],
+        "entrance_exams": [
+          {
+            "name": "CTET",
+            "url": "https://ctet.nic.in",
+            "note": "Central teacher eligibility"
+          }
+        ],
+        "resources": [
+          {
+            "name": "CTET official site",
+            "kind": "Website",
+            "url": "https://ctet.nic.in"
+          }
+        ],
+        "roles": [
+          "School teacher",
+          "Lecturer / professor",
+          "Online educator",
+          "Education counsellor"
+        ],
+        "sectors": [
+          "Government schools (KVS, NVS)",
+          "Private schools",
+          "Colleges",
+          "EdTech"
+        ],
+        "future_scope": "Steady; teachers with digital skills are in demand.",
+        "after_completion": [
+          "TGT/PGT Teacher",
+          "Professor (with NET/PhD)",
+          "Online educator"
+        ],
+        "earnings": {
+          "entry": "KVS PGTs start at Pay Level 8 (₹47,600 basic); private schools often pay much less",
+          "mid": "Rises with promotions and experience",
+          "senior": "Principals and professors earn more",
+          "note": "Government posts come with stable pay and pension benefits.",
+          "sources": []
+        }
+      }
+    },
+    {
+      "key": "hotel",
+      "name": "Hotel Management & Hospitality",
+      "category": "Hospitality",
+      "description": "Run hotels, restaurants, events and travel experiences.",
+      "required_subjects": [
+        "language",
+        "commerce"
+      ],
+      "typical_entrance_exam_codes": [],
+      "education_path": "Any stream → B.Sc Hospitality & Hotel Administration (3 years) via NCHM JEE (IHMs).",
+      "skills_required": [
+        "people skills",
+        "organisation",
+        "service mindset"
+      ],
+      "timeline": "3 years after class 12.",
+      "possible_challenges": [
+        "Long hours, weekends and festivals",
+        "Low starting pay"
+      ],
+      "explore_next": [
+        "Organise a family event end to end",
+        "Try cooking a full meal for guests"
+      ],
+      "profile": {
+        "communication": 3,
+        "social": 2,
+        "enterprising": 2,
+        "conventional": 1,
+        "commerce": 1,
+        "outdoor": 1,
+        "language": 1
+      },
+      "must": [],
+      "related": [
+        "journalism",
+        "finance_econ"
+      ],
+      "details": {
+        "overview": "Hospitality professionals run hotels, airlines' cabin services, cruises, restaurants and events — and can work across the world.",
+        "day_in_life": "Managing guests and staff, operations, kitchens, and events.",
+        "how_to_prepare": [
+          "Any stream.",
+          "NCHM JEE for the Institutes of Hotel Management.",
+          "Work on communication and grooming."
+        ],
+        "start_now": [
+          "Help organise a school or family event",
+          "Learn basic cooking"
+        ],
+        "entrance_exams": [
+          {
+            "name": "NCHM JEE",
+            "url": "https://exams.nta.nic.in/nchm-jee/",
+            "note": "IHMs"
+          }
+        ],
+        "resources": [
+          {
+            "name": "NCHM JEE",
+            "kind": "Website",
+            "url": "https://exams.nta.nic.in/nchm-jee/"
+          }
+        ],
+        "roles": [
+          "Hotel manager",
+          "Chef",
+          "Event manager",
+          "Cruise/airline hospitality",
+          "Restaurant owner"
+        ],
+        "sectors": [
+          "Hotels",
+          "Airlines & cruises",
+          "Events",
+          "Food & beverage"
+        ],
+        "future_scope": "Growing with tourism; international opportunities are common.",
+        "after_completion": [
+          "Management Trainee",
+          "Chef",
+          "Own restaurant or events business"
+        ],
+        "earnings": {
+          "entry": "₹1.8–3 LPA for freshers",
+          "mid": "₹5–12 LPA as managers",
+          "senior": "General managers, top chefs and overseas roles earn much more",
+          "note": "Tips and international postings can raise income.",
+          "sources": [
+            {
+              "name": "Shiksha — hotel management salaries",
+              "url": "https://www.shiksha.com/hospitality-travel/articles/hotel-management-salary-in-india-blogId-188834"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

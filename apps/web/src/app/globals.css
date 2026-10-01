@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-border: #e2e8f0;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --muted: #64748b;
+  --chance-high-bg: #dcfce7;
+  --chance-high-fg: #15803d;
+  --chance-possible-bg: #fef9c3;
+  --chance-possible-fg: #a16207;
+  --chance-ambitious-bg: #fee2e2;
+  --chance-ambitious-fg: #b91c1c;
+  --demo-badge-bg: #fef3c7;
+  --demo-badge-fg: #92400e;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-chance-high-bg: var(--chance-high-bg);
+  --color-chance-high-fg: var(--chance-high-fg);
+  --color-chance-possible-bg: var(--chance-possible-bg);
+  --color-chance-possible-fg: var(--chance-possible-fg);
+  --color-chance-ambitious-bg: var(--chance-ambitious-bg);
+  --color-chance-ambitious-fg: var(--chance-ambitious-fg);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b1120;
+    --foreground: #e2e8f0;
+    --card: #111827;
+    --card-border: #1f2937;
+    --muted: #94a3b8;
+    --chance-high-bg: #14532d;
+    --chance-high-fg: #86efac;
+    --chance-possible-bg: #713f12;
+    --chance-possible-fg: #fde047;
+    --chance-ambitious-bg: #7f1d1d;
+    --chance-ambitious-fg: #fca5a5;
+    --demo-badge-bg: #78350f;
+    --demo-badge-fg: #fde68a;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.chance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.chance-high {
+  background: var(--chance-high-bg);
+  color: var(--chance-high-fg);
+}
+.chance-possible {
+  background: var(--chance-possible-bg);
+  color: var(--chance-possible-fg);
+}
+.chance-ambitious {
+  background: var(--chance-ambitious-bg);
+  color: var(--chance-ambitious-fg);
+}
+
+.error-banner {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  margin: 0.75rem 0;
+  background: var(--chance-ambitious-bg);
+  color: var(--chance-ambitious-fg);
+}
+
+.demo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: var(--demo-badge-bg);
+  color: var(--demo-badge-fg);
+}

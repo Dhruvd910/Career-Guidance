@@ -1,0 +1,477 @@
+[
+  {
+    "subject": "Maths", "topic": "Quadratic equations", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED"],
+    "stem": "What are the roots of x² − 5x + 6 = 0?",
+    "options": ["1 and 6", "2 and 3", "−2 and −3", "1 and 5"],
+    "correct_index": 1,
+    "explanation": "x² − 5x + 6 = (x − 2)(x − 3), so x = 2 or x = 3. Their sum is 5 and product 6, as the coefficients require."
+  },
+  {
+    "subject": "Maths", "topic": "Quadratic equations", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED"],
+    "stem": "For what value of k does x² + kx + 9 = 0 have equal roots?",
+    "options": ["k = ±3", "k = ±6", "k = ±9", "k = 0"],
+    "correct_index": 1,
+    "explanation": "Equal roots need the discriminant to vanish: k² − 4(1)(9) = 0, so k² = 36 and k = ±6."
+  },
+  {
+    "subject": "Maths", "topic": "Sequences and series", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is the 10th term of the arithmetic progression 3, 7, 11, …?",
+    "options": ["36", "39", "40", "43"],
+    "correct_index": 1,
+    "explanation": "aₙ = a + (n − 1)d = 3 + 9 × 4 = 39."
+  },
+  {
+    "subject": "Maths", "topic": "Sequences and series", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED"],
+    "stem": "What is the sum of the infinite geometric series 1 + ½ + ¼ + ⅛ + …?",
+    "options": ["1.5", "2", "2.5", "It diverges"],
+    "correct_index": 1,
+    "explanation": "S = a/(1 − r) = 1/(1 − ½) = 2, valid because |r| < 1."
+  },
+  {
+    "subject": "Maths", "topic": "Trigonometry", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "If sin θ = 3/5 and θ is acute, what is cos θ?",
+    "options": ["3/5", "4/5", "5/4", "5/3"],
+    "correct_index": 1,
+    "explanation": "cos θ = √(1 − sin²θ) = √(1 − 9/25) = 4/5, positive because θ is in the first quadrant."
+  },
+  {
+    "subject": "Maths", "topic": "Trigonometry", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is the value of sin 75°?",
+    "options": ["(√6 − √2)/4", "(√6 + √2)/4", "√3/2", "(√3 + 1)/2"],
+    "correct_index": 1,
+    "explanation": "sin 75° = sin(45° + 30°) = sin45°cos30° + cos45°sin30° = (√6 + √2)/4."
+  },
+  {
+    "subject": "Maths", "topic": "Coordinate geometry", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is the distance between the points (1, 2) and (4, 6)?",
+    "options": ["3", "4", "5", "7"],
+    "correct_index": 2,
+    "explanation": "d = √((4−1)² + (6−2)²) = √(9 + 16) = 5."
+  },
+  {
+    "subject": "Maths", "topic": "Coordinate geometry", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN"],
+    "stem": "A line has slope 2. What is the slope of any line perpendicular to it?",
+    "options": ["2", "−2", "1/2", "−1/2"],
+    "correct_index": 3,
+    "explanation": "Perpendicular slopes multiply to −1, so m = −1/2."
+  },
+  {
+    "subject": "Maths", "topic": "Circles", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is the equation of a circle centred at the origin with radius 5?",
+    "options": ["x² + y² = 5", "x² + y² = 25", "x² − y² = 25", "(x − 5)² + (y − 5)² = 25"],
+    "correct_index": 1,
+    "explanation": "x² + y² = r² with r = 5 gives x² + y² = 25."
+  },
+  {
+    "subject": "Maths", "topic": "Limits", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED"],
+    "stem": "What is lim(x→0) (sin x)/x?",
+    "options": ["0", "1", "∞", "Does not exist"],
+    "correct_index": 1,
+    "explanation": "A standard limit: for x in radians, (sin x)/x → 1 as x → 0."
+  },
+  {
+    "subject": "Maths", "topic": "Differentiation", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is d/dx (x³ + 2x)?",
+    "options": ["3x² + 2", "3x²", "x⁴/4 + x²", "3x + 2"],
+    "correct_index": 0,
+    "explanation": "Differentiate term by term: 3x² from x³ and 2 from 2x."
+  },
+  {
+    "subject": "Maths", "topic": "Differentiation", "class_level": 12, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED"],
+    "stem": "What is the derivative of sin(2x)?",
+    "options": ["cos(2x)", "2cos(2x)", "−2cos(2x)", "2sin(2x)"],
+    "correct_index": 1,
+    "explanation": "By the chain rule, d/dx sin(2x) = cos(2x) × 2 = 2cos(2x)."
+  },
+  {
+    "subject": "Maths", "topic": "Integration", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is ∫x² dx?",
+    "options": ["2x + C", "x³ + C", "x³/3 + C", "3x³ + C"],
+    "correct_index": 2,
+    "explanation": "∫xⁿ dx = xⁿ⁺¹/(n + 1) + C, so ∫x² dx = x³/3 + C."
+  },
+  {
+    "subject": "Maths", "topic": "Definite integrals", "class_level": 12, "difficulty": "medium",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is the value of ∫₀¹ 2x dx?",
+    "options": ["0", "1", "2", "1/2"],
+    "correct_index": 1,
+    "explanation": "∫2x dx = x², evaluated from 0 to 1 gives 1 − 0 = 1."
+  },
+  {
+    "subject": "Maths", "topic": "Probability", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "A fair coin is tossed twice. What is the probability of getting heads both times?",
+    "options": ["1/2", "1/3", "1/4", "3/4"],
+    "correct_index": 2,
+    "explanation": "The tosses are independent: ½ × ½ = ¼."
+  },
+  {
+    "subject": "Maths", "topic": "Probability", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "A fair die is rolled once. What is the probability of getting a prime number?",
+    "options": ["1/6", "1/3", "1/2", "2/3"],
+    "correct_index": 2,
+    "explanation": "The primes on a die are 2, 3 and 5 — three outcomes out of six, so ½."
+  },
+  {
+    "subject": "Maths", "topic": "Permutations and combinations", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN"],
+    "stem": "In how many distinct ways can the letters of the word APPLE be arranged?",
+    "options": ["24", "60", "120", "240"],
+    "correct_index": 1,
+    "explanation": "5 letters with P repeated twice: 5!/2! = 120/2 = 60."
+  },
+  {
+    "subject": "Maths", "topic": "Permutations and combinations", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "How many ways are there to choose 2 students from a group of 5?",
+    "options": ["10", "20", "25", "120"],
+    "correct_index": 0,
+    "explanation": "⁵C₂ = 5!/(2!3!) = 10, since order doesn't matter."
+  },
+  {
+    "subject": "Maths", "topic": "Determinants", "class_level": 12, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is the determinant of the matrix [[2, 3], [1, 4]]?",
+    "options": ["5", "8", "10", "11"],
+    "correct_index": 0,
+    "explanation": "For a 2×2 matrix, det = ad − bc = (2)(4) − (3)(1) = 5."
+  },
+  {
+    "subject": "Maths", "topic": "Complex numbers", "class_level": 11, "difficulty": "easy",
+    "exams": ["JEE_MAIN"],
+    "stem": "What is the modulus of the complex number 3 + 4i?",
+    "options": ["3", "4", "5", "7"],
+    "correct_index": 2,
+    "explanation": "|z| = √(3² + 4²) = √25 = 5."
+  },
+  {
+    "subject": "Maths", "topic": "Binomial theorem", "class_level": 11, "difficulty": "medium",
+    "exams": ["JEE_MAIN", "JEE_ADVANCED"],
+    "stem": "What is the coefficient of x² in the expansion of (1 + x)⁵?",
+    "options": ["5", "10", "15", "20"],
+    "correct_index": 1,
+    "explanation": "The coefficient is ⁵C₂ = 10."
+  },
+
+  {
+    "subject": "Biology", "topic": "Cell biology", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Which organelle is known as the powerhouse of the cell?",
+    "options": ["Ribosome", "Mitochondrion", "Golgi apparatus", "Lysosome"],
+    "correct_index": 1,
+    "explanation": "Mitochondria carry out aerobic respiration and produce most of the cell's ATP."
+  },
+  {
+    "subject": "Biology", "topic": "Cell biology", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "The plant cell wall is made mainly of:",
+    "options": ["Chitin", "Cellulose", "Peptidoglycan", "Lignin only"],
+    "correct_index": 1,
+    "explanation": "Plant cell walls are primarily cellulose; fungi use chitin and bacteria use peptidoglycan."
+  },
+  {
+    "subject": "Biology", "topic": "Cell biology", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Which organelle contains hydrolytic enzymes and is called the cell's 'suicide bag'?",
+    "options": ["Lysosome", "Peroxisome", "Vacuole", "Smooth endoplasmic reticulum"],
+    "correct_index": 0,
+    "explanation": "Lysosomes hold digestive enzymes; if they rupture, those enzymes can digest the cell itself."
+  },
+  {
+    "subject": "Biology", "topic": "Cell division", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Meiosis in a diploid cell produces:",
+    "options": [
+      "two diploid cells", "four haploid cells", "two haploid cells", "four diploid cells"
+    ],
+    "correct_index": 1,
+    "explanation": "Two successive divisions after one round of DNA replication give four cells with half the chromosome number."
+  },
+  {
+    "subject": "Biology", "topic": "Cell division", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Crossing over between homologous chromosomes happens during:",
+    "options": ["Prophase I of meiosis", "Metaphase II of meiosis", "Prophase of mitosis", "Interphase"],
+    "correct_index": 0,
+    "explanation": "It occurs at the pachytene stage of prophase I, when homologues are paired as bivalents."
+  },
+  {
+    "subject": "Biology", "topic": "Photosynthesis", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "In photosynthesis, the oxygen released comes from:",
+    "options": ["carbon dioxide", "water", "glucose", "the atmosphere"],
+    "correct_index": 1,
+    "explanation": "Photolysis splits water in the light reaction, releasing O₂ — shown by isotope-labelling experiments."
+  },
+  {
+    "subject": "Biology", "topic": "Photosynthesis", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "The light-dependent reactions of photosynthesis take place in the:",
+    "options": ["stroma", "thylakoid membranes", "cytoplasm", "mitochondrial matrix"],
+    "correct_index": 1,
+    "explanation": "Photosystems sit in the thylakoid membranes; the Calvin cycle then runs in the stroma."
+  },
+  {
+    "subject": "Biology", "topic": "Plant physiology", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Which tissue transports water from the roots to the leaves?",
+    "options": ["Phloem", "Xylem", "Cambium", "Epidermis"],
+    "correct_index": 1,
+    "explanation": "Xylem carries water and minerals upwards; phloem translocates sugars."
+  },
+  {
+    "subject": "Biology", "topic": "Plant physiology", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Opening and closing of stomata is controlled by:",
+    "options": ["guard cells", "companion cells", "root hairs", "sieve tubes"],
+    "correct_index": 0,
+    "explanation": "Guard cells change shape with their turgor, opening the stomatal pore when they swell."
+  },
+  {
+    "subject": "Biology", "topic": "Human digestion", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Digestion of starch begins in the:",
+    "options": ["stomach", "mouth", "small intestine", "large intestine"],
+    "correct_index": 1,
+    "explanation": "Salivary amylase (ptyalin) starts breaking starch into maltose in the mouth."
+  },
+  {
+    "subject": "Biology", "topic": "Human digestion", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Bile helps in digestion by:",
+    "options": [
+      "digesting proteins into peptides",
+      "emulsifying fats into small droplets",
+      "breaking starch into glucose",
+      "absorbing water from undigested food"
+    ],
+    "correct_index": 1,
+    "explanation": "Bile salts contain no enzymes; they emulsify fat so lipase can act on a much larger surface area."
+  },
+  {
+    "subject": "Biology", "topic": "Human digestion", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Most absorption of digested food happens in the:",
+    "options": ["stomach", "small intestine", "large intestine", "oesophagus"],
+    "correct_index": 1,
+    "explanation": "The villi and microvilli of the small intestine give an enormous absorptive surface."
+  },
+  {
+    "subject": "Biology", "topic": "Breathing and respiration", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Most carbon dioxide is transported in human blood as:",
+    "options": ["dissolved CO₂ in plasma", "bicarbonate ions", "carbaminohaemoglobin", "carbon monoxide"],
+    "correct_index": 1,
+    "explanation": "About 70% travels as HCO₃⁻, formed in red blood cells by carbonic anhydrase."
+  },
+  {
+    "subject": "Biology", "topic": "Circulation", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Which chamber of the human heart has the thickest muscular wall?",
+    "options": ["Right atrium", "Left atrium", "Right ventricle", "Left ventricle"],
+    "correct_index": 3,
+    "explanation": "The left ventricle pumps blood into the systemic circulation against the highest pressure."
+  },
+  {
+    "subject": "Biology", "topic": "Circulation", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Which blood vessel carries deoxygenated blood?",
+    "options": ["Pulmonary vein", "Pulmonary artery", "Aorta", "Carotid artery"],
+    "correct_index": 1,
+    "explanation": "The pulmonary artery takes deoxygenated blood from the right ventricle to the lungs — the exception to 'arteries carry oxygenated blood'."
+  },
+  {
+    "subject": "Biology", "topic": "Excretion", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "What is the structural and functional unit of the kidney?",
+    "options": ["Neuron", "Nephron", "Alveolus", "Glomerulus"],
+    "correct_index": 1,
+    "explanation": "Each kidney has about a million nephrons, each filtering blood and forming urine."
+  },
+  {
+    "subject": "Biology", "topic": "Excretion", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Ultrafiltration of blood in the nephron occurs at the:",
+    "options": ["proximal convoluted tubule", "glomerulus", "loop of Henle", "collecting duct"],
+    "correct_index": 1,
+    "explanation": "High pressure in the glomerular capillaries forces water and small solutes into Bowman's capsule."
+  },
+  {
+    "subject": "Biology", "topic": "Nervous system", "class_level": 11, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "The myelin sheath around an axon:",
+    "options": [
+      "slows down the nerve impulse",
+      "speeds up conduction by saltatory transmission",
+      "produces neurotransmitters",
+      "absorbs nutrients for the neuron"
+    ],
+    "correct_index": 1,
+    "explanation": "Impulses jump between the nodes of Ranvier, which is much faster than continuous conduction."
+  },
+  {
+    "subject": "Biology", "topic": "Endocrine system", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Insulin is secreted by which cells?",
+    "options": [
+      "Alpha cells of the islets of Langerhans",
+      "Beta cells of the islets of Langerhans",
+      "Cells of the adrenal cortex",
+      "Follicular cells of the thyroid"
+    ],
+    "correct_index": 1,
+    "explanation": "Beta cells secrete insulin, which lowers blood glucose; alpha cells secrete glucagon, which raises it."
+  },
+  {
+    "subject": "Biology", "topic": "Endocrine system", "class_level": 11, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Which element is essential for the synthesis of thyroxine?",
+    "options": ["Iron", "Iodine", "Calcium", "Zinc"],
+    "correct_index": 1,
+    "explanation": "Thyroxine (T4) contains iodine; dietary deficiency causes goitre."
+  },
+  {
+    "subject": "Biology", "topic": "Genetics", "class_level": 12, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "In a monohybrid cross between two heterozygotes (Tt × Tt), what is the phenotypic ratio in the F₂ generation?",
+    "options": ["1:1", "3:1", "9:3:3:1", "1:2:1"],
+    "correct_index": 1,
+    "explanation": "Three offspring show the dominant phenotype for every one that shows the recessive; 1:2:1 is the genotypic ratio."
+  },
+  {
+    "subject": "Biology", "topic": "Genetics", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "A test cross is performed by crossing an individual of unknown genotype with one that is:",
+    "options": ["homozygous dominant", "homozygous recessive", "heterozygous", "of the F₂ generation"],
+    "correct_index": 1,
+    "explanation": "Crossing with a homozygous recessive reveals the unknown genotype directly in the offspring's phenotypes."
+  },
+  {
+    "subject": "Biology", "topic": "Genetics", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "In humans, the sex of a child is determined by:",
+    "options": [
+      "the mother's egg",
+      "the father's sperm",
+      "the number of chromosomes in the zygote",
+      "hormones during pregnancy"
+    ],
+    "correct_index": 1,
+    "explanation": "Eggs always carry X; sperm carry either X or Y, so the sperm decides whether the zygote is XX or XY."
+  },
+  {
+    "subject": "Biology", "topic": "Molecular biology", "class_level": 12, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "In DNA, adenine pairs with thymine through how many hydrogen bonds?",
+    "options": ["One", "Two", "Three", "Four"],
+    "correct_index": 1,
+    "explanation": "A–T pairs share two hydrogen bonds, while G–C pairs share three, making GC-rich DNA more stable."
+  },
+  {
+    "subject": "Biology", "topic": "Molecular biology", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Translation — the synthesis of protein from mRNA — takes place on the:",
+    "options": ["nucleolus", "ribosome", "Golgi apparatus", "centriole"],
+    "correct_index": 1,
+    "explanation": "Ribosomes read codons on mRNA and join the amino acids brought by tRNA."
+  },
+  {
+    "subject": "Biology", "topic": "Evolution", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "The forelimbs of a whale, a bat and a human are examples of:",
+    "options": [
+      "analogous organs showing convergent evolution",
+      "homologous organs showing divergent evolution",
+      "vestigial organs",
+      "adaptive radiation within one species"
+    ],
+    "correct_index": 1,
+    "explanation": "They share the same underlying bone plan inherited from a common ancestor but perform different functions."
+  },
+  {
+    "subject": "Biology", "topic": "Ecology", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "According to the ten per cent law, the energy transferred from one trophic level to the next is about:",
+    "options": ["1%", "10%", "50%", "90%"],
+    "correct_index": 1,
+    "explanation": "Lindeman's rule: roughly 10% of the energy at one level is stored as biomass at the next, which limits food-chain length."
+  },
+  {
+    "subject": "Biology", "topic": "Biotechnology", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Restriction endonucleases are used in genetic engineering to:",
+    "options": [
+      "join DNA fragments together",
+      "cut DNA at specific recognition sequences",
+      "amplify DNA millions of times",
+      "separate DNA fragments by size"
+    ],
+    "correct_index": 1,
+    "explanation": "They cut at specific palindromic sites; ligase joins fragments, PCR amplifies them and electrophoresis separates them."
+  },
+  {
+    "subject": "Biology", "topic": "Human health and disease", "class_level": 12, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "Malaria is caused by Plasmodium, which is transmitted by:",
+    "options": [
+      "the female Anopheles mosquito",
+      "the male Anopheles mosquito",
+      "the Aedes mosquito",
+      "contaminated drinking water"
+    ],
+    "correct_index": 0,
+    "explanation": "Only the female Anopheles takes blood meals and so transmits the parasite; Aedes transmits dengue."
+  },
+  {
+    "subject": "Biology", "topic": "Human health and disease", "class_level": 12, "difficulty": "easy",
+    "exams": ["NEET_UG"],
+    "stem": "AIDS is caused by a virus that belongs to which group?",
+    "options": ["DNA virus", "Retrovirus", "Bacteriophage", "Prion"],
+    "correct_index": 1,
+    "explanation": "HIV is a retrovirus: it carries RNA and uses reverse transcriptase to make DNA inside the host cell."
+  },
+  {
+    "subject": "Biology", "topic": "Human reproduction", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "In humans, fertilisation normally takes place in the:",
+    "options": ["uterus", "ampulla of the fallopian tube", "cervix", "ovary"],
+    "correct_index": 1,
+    "explanation": "Sperm meets the ovum at the ampullary-isthmic junction of the oviduct; the embryo then implants in the uterus."
+  },
+  {
+    "subject": "Biology", "topic": "Human reproduction", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "In a typical 28-day menstrual cycle, ovulation occurs around day:",
+    "options": ["5", "14", "21", "28"],
+    "correct_index": 1,
+    "explanation": "A surge of luteinising hormone around day 14 releases the ovum from the mature Graafian follicle."
+  },
+  {
+    "subject": "Biology", "topic": "Plant reproduction", "class_level": 12, "difficulty": "medium",
+    "exams": ["NEET_UG"],
+    "stem": "Double fertilisation in flowering plants produces:",
+    "options": [
+      "two zygotes",
+      "a zygote and the primary endosperm nucleus",
+      "two endosperm nuclei",
+      "a zygote and a pollen tube"
+    ],
+    "correct_index": 1,
+    "explanation": "One male gamete fuses with the egg to form the zygote; the other fuses with the two polar nuclei to form the triploid endosperm."
+  }
+]
