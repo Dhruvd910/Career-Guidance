@@ -1,7 +1,7 @@
 # Design: AI Career Counsellor & Personal Career Mentor
 
 Status (2026-10-01): **Phases 1 and 2 built** (voice mentor; memory) and awaiting their hands-on
-tests; Phases 3-7 designed, not built. Written against the code in `apps/` (MAYA).
+tests; **Phase 3 (assessment) in progress**; Phases 4-7 designed, not built. Written against the code in `apps/` (MAYA).
 
 | # | Document | Answers |
 |---|---|---|
@@ -16,6 +16,7 @@ tests; Phases 3-7 designed, not built. Written against the code in `apps/` (MAYA
 | 09 | [Roadmap data model](09-roadmap-model.md) | Class-aware templates, versioning, adaptation rules, progress |
 | 10 | [Phase 1 plan](10-phase1-plan.md) | Concrete steps, files, tests, exit criteria |
 | 11 | [Phase 2 plan](11-phase2-plan.md) | Memory: PostgreSQL, on-device embeddings, consent, writing and reading memory |
+| 12 | [Phase 3 plan](12-phase3-plan.md) | Assessment: interest, aptitude, skills, academic profile, career directions, reassessment |
 | — | [Phase 1 test](phase1-test-script.md) · [Phase 2 test](phase2-test-script.md) | Hands-on checks with a person |
 
 ---
