@@ -11,8 +11,9 @@ from sqlalchemy.orm import Session
 
 from app.ai.language import detect, reply_instruction, updated_stats, usual_language
 from app.ai.tools import TOOL_SPECS, execute_tool
+from app.memory.retrieval import build_memory_context
 from app.providers.llm import LLMProvider, TextDelta, ToolCall
-from app.providers.registry import get_llm_provider
+from app.providers.registry import get_embedding_provider, get_llm_provider
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile
 from app.services.student_service import student_track
@@ -159,6 +160,9 @@ class Reply:
         self.tag = detect(message, heard=heard_language, previous=usual_language(profile.language_stats))
         profile.language_stats = updated_stats(profile.language_stats, self.tag)
         self.messages = _history_as_messages(conversation, profile)
+        remembered = build_memory_context(db, profile, message, get_embedding_provider())
+        if remembered:
+            self.messages.insert(1, {"role": "system", "content": remembered})
         self.messages.append({"role": "system", "content": reply_instruction(self.tag)})
         self.messages.append({"role": "user", "content": message})
         self.text = ""
