@@ -21,6 +21,9 @@ from app.models.nearby import NearbyPlace
 from app.models.placement import Placement
 from app.models.practice import AttemptAnswer, Question, QuestionExam, TestAttempt
 from app.models.review import CollegeReview
+from app.models.roadmap import (
+    Roadmap, RoadmapChange, RoadmapNode, RoadmapProgress, RoadmapVersion, SkillMeasurement,
+)
 from app.models.saved_item import SavedItem
 from app.models.student import AcademicRecord, StudentProfile
 from app.models.user import User
@@ -72,4 +75,10 @@ __all__ = [
     "KgNode",
     "KgEdge",
     "KgVersion",
+    "Roadmap",
+    "RoadmapVersion",
+    "RoadmapNode",
+    "RoadmapProgress",
+    "RoadmapChange",
+    "SkillMeasurement",
 ]

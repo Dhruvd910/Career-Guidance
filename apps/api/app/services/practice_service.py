@@ -258,6 +258,9 @@ def submit_attempt(
         max_score=attempt.max_score,
         subject_scores={subject: stats["score"] for subject, stats in subject_scores.items()},
     ))
+    from app.roadmap.progress import record_practice  # skill progress over time (Phase 5)
+
+    record_practice(db, attempt)
     db.commit()
     db.refresh(attempt)
     return to_summary(attempt, include_review=True)

@@ -2,6 +2,8 @@
 # assessment dimensions from Phase 3 — a gap is only ever claimed where one of these was
 # measured), and what develops it. Curated by MAYA's editor (Claude), not yet reviewed by a person.
 # kind: foundation | technical | clinical | creative | people
+# from_class: the class it's usually met in (13 = after school); the roadmap doesn't put a skill
+# earlier than this. Unset = any age.
 source: {kind: curated, ref: maya_editorial_v1}
 nodes:
   # ---------------- foundations ----------------
@@ -18,20 +20,20 @@ nodes:
       developed_by: [course:ncert, course:khan_academy, project:olympiad_practice]
   - key: skill:calculus
     name: {en: Calculus, hi: कैलकुलस}
-    attrs: {kind: foundation}
+    attrs: {kind: foundation, from_class: 11}
     edges:
       skill_prerequisite: [skill:school_mathematics]
       developed_by: [course:ncert, course:khan_academy]
   - key: skill:linear_algebra
     name: {en: Linear algebra, hi: लीनियर अलजेब्रा}
-    attrs: {kind: foundation}
+    attrs: {kind: foundation, from_class: 13}
     edges:
       skill_prerequisite: [skill:school_mathematics]
       developed_by: [course:khan_academy, course:nptel]
   - key: skill:probability_statistics
     name: {en: Probability and statistics, hi: प्रायिकता और सांख्यिकी}
     aliases: [statistics, probability]
-    attrs: {kind: foundation}
+    attrs: {kind: foundation, from_class: 9}
     edges:
       skill_prerequisite: [skill:school_mathematics]
       developed_by: [course:khan_academy, project:marks_analysis]
@@ -47,7 +49,7 @@ nodes:
       developed_by: [project:olympiad_practice]
   - key: skill:physics_fundamentals
     name: {en: Physics fundamentals, hi: भौतिकी की बुनियाद}
-    attrs: {kind: foundation, measured_by: [academic:physics]}
+    attrs: {kind: foundation, measured_by: [academic:physics], from_class: 9}
     edges:
       skill_prerequisite: [skill:school_mathematics]
       developed_by: [course:ncert, course:khan_academy]
@@ -169,7 +171,7 @@ nodes:
   - key: skill:machine_learning
     name: {en: Machine learning, hi: मशीन लर्निंग}
     aliases: [AI, artificial intelligence, ML]
-    attrs: {kind: technical}
+    attrs: {kind: technical, from_class: 13}
     edges:
       skill_prerequisite: [skill:data_analysis, skill:linear_algebra, skill:calculus]
       developed_by: [project:first_ml_model, course:kaggle_learn, course:nptel]
@@ -213,7 +215,7 @@ nodes:
       developed_by: [course:nptel]
   - key: skill:mechanics
     name: {en: Engineering mechanics, hi: इंजीनियरिंग मैकेनिक्स}
-    attrs: {kind: technical}
+    attrs: {kind: technical, from_class: 13}
     edges:
       skill_prerequisite: [skill:physics_fundamentals, skill:calculus]
       developed_by: [course:nptel, project:take_apart_rebuild]
@@ -225,7 +227,7 @@ nodes:
       developed_by: [project:cad_model]
   - key: skill:thermodynamics
     name: {en: Thermodynamics, hi: ऊष्मागतिकी}
-    attrs: {kind: technical}
+    attrs: {kind: technical, from_class: 13}
     edges:
       skill_prerequisite: [skill:physics_fundamentals, skill:chemistry_fundamentals, skill:calculus]
       developed_by: [course:nptel]
@@ -263,7 +265,7 @@ nodes:
   # ---------------- health and life sciences ----------------
   - key: skill:anatomy_physiology
     name: {en: Anatomy and physiology, hi: शरीर रचना और क्रिया विज्ञान}
-    attrs: {kind: clinical}
+    attrs: {kind: clinical, from_class: 11}
     edges:
       skill_prerequisite: [skill:biology_fundamentals]
       developed_by: [project:body_systems_notes, course:ncert]
@@ -333,7 +335,7 @@ nodes:
       developed_by: [project:family_budget, course:khan_academy]
   - key: skill:taxation_audit
     name: {en: Tax and audit, hi: कर और ऑडिट}
-    attrs: {kind: technical}
+    attrs: {kind: technical, from_class: 13}
     edges:
       skill_prerequisite: [skill:accounting]
       developed_by: [course:swayam]
@@ -351,7 +353,7 @@ nodes:
       developed_by: [course:khan_academy, project:daily_news]
   - key: skill:legal_reasoning
     name: {en: Legal reasoning, hi: क़ानूनी तर्क}
-    attrs: {kind: technical}
+    attrs: {kind: technical, from_class: 11}
     edges:
       skill_prerequisite: [skill:logical_reasoning, skill:reading_comprehension]
       developed_by: [project:moot_court]

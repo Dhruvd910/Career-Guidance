@@ -208,6 +208,11 @@ def _describe(event: StudentEvent) -> str:
         "DECISION_REOPENED": f"Thinking again about: {p.get('title')}",
         "COUNSELLING_SESSION": f"Talked with MAYA: {p.get('summary', '')}",
         "PROFILE_UPDATED": "Profile updated: " + ", ".join(f"{k.replace('_', ' ')} {v}" for k, v in p.items()),
+        "ASSESSMENT_COMPLETED": f"Assessment done: {p.get('title')}",
+        "ROADMAP_CREATED": "Roadmap started",
+        "ROADMAP_UPDATED": f"Roadmap updated (version {p.get('version')})",
+        "MILESTONE_COMPLETED": f"Milestone done: {p.get('title')}",
+        "FOCUS_CHOSEN": f"Focus chosen: {p.get('career', '').replace('_', ' ')}",
     }
     return what.get(event.event_type, event.event_type.replace("_", " ").capitalize())
 

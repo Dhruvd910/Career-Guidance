@@ -297,7 +297,12 @@ def complete(db: Session, attempt: AssessmentAttempt, profile: StudentProfile,
 
     alignment.snapshot(db, profile)
     _note_on_timeline(db, attempt, profile)
+    # Skill progress over time (Phase 5), and a roadmap that follows the new results.
+    from app.roadmap import progress, service as roadmaps
+
+    progress.record_attempt(db, attempt)
     db.commit()
+    roadmaps.after_assessment(db, profile, attempt.instrument.title["en"])
 
 
 def _record_marks(db: Session, attempt: AssessmentAttempt, profile: StudentProfile) -> None:

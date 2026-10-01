@@ -1,0 +1,200 @@
+# The shape of a roadmap for each stage of school or college (spec §18, docs/design/14-phase5-plan.md).
+#
+# A band's `spine` is the current stage's milestones, in order. A milestone with a `slot` gets
+# modules filled in by the generator from the student's assessments, their focus career and the
+# career graph; one without is a plain milestone. `later` lists the stages that follow; each later
+# stage has its own small spine. Every word is in English and Hindi.
+#
+# Curated by MAYA's editor (Claude), not yet reviewed by a person.
+version: 1
+
+stages:
+  class_6: {en: Class 6, hi: कक्षा 6}
+  class_7: {en: Class 7, hi: कक्षा 7}
+  class_8: {en: Class 8, hi: कक्षा 8}
+  class_9: {en: Class 9, hi: कक्षा 9}
+  class_10: {en: Class 10, hi: कक्षा 10}
+  class_11: {en: Class 11, hi: कक्षा 11}
+  class_12: {en: Class 12, hi: कक्षा 12}
+  dropper: {en: Preparing again, hi: दोबारा तैयारी}
+  degree: {en: Degree, hi: डिग्री}
+  specialisation: {en: Specialisation, hi: विशेषज्ञता}
+  internship: {en: Internship, hi: इंटर्नशिप}
+  career: {en: Career, hi: करियर}
+
+bands:
+  class_6_8:
+    classes: [6, 7, 8]
+    later: [class_9, class_10, class_11, class_12, degree, career]
+    spine:
+      - key: explore_interests
+        slot: assessments
+        title: {en: Explore your interests, hi: अपनी रुचियाँ पहचानिए}
+        why: {en: "Knowing what you enjoy is the best first step — there's no rush to decide anything.", hi: "आपको क्या पसंद है, यह जानना सबसे अच्छा पहला कदम है — अभी कुछ तय करने की जल्दी नहीं है।"}
+      - key: basic_maths
+        slot: subject_foundation
+        subject_skill: skill:school_mathematics
+        title: {en: Basic mathematics, hi: बुनियादी गणित}
+        why: {en: "Maths keeps the most doors open later — science, engineering, commerce and more.", hi: "गणित आगे सबसे ज़्यादा रास्ते खुले रखता है — विज्ञान, इंजीनियरिंग, कॉमर्स और भी।"}
+      - key: science_exploration
+        slot: subject_foundation
+        subject_skill: skill:scientific_method
+        title: {en: Science exploration, hi: विज्ञान की खोज}
+        why: {en: Small experiments teach you to ask questions and test ideas., hi: छोटे प्रयोग सवाल पूछना और विचारों को परखना सिखाते हैं।}
+      - key: programming_curiosity
+        slot: subject_foundation
+        subject_skill: skill:programming_fundamentals
+        optional: true
+        title: {en: Programming curiosity, hi: प्रोग्रामिंग में जिज्ञासा}
+        why: {en: "A first taste of coding — useful in almost every career now, and fun.", hi: "कोडिंग का पहला स्वाद — आजकल लगभग हर करियर में काम आता है, और मज़ेदार भी है।"}
+      - key: small_projects
+        slot: projects
+        title: {en: Small projects, hi: छोटे प्रोजेक्ट}
+        why: {en: Making something teaches more than reading about it., hi: "कुछ बनाकर जितना सीखते हैं, उतना सिर्फ़ पढ़कर नहीं।"}
+      - key: career_exploration
+        slot: career_exploration
+        title: {en: Career exploration, hi: करियर की खोज}
+        why: {en: "Look at a few directions with an open mind — talk to people, try things.", hi: "खुले मन से कुछ दिशाएँ देखिए — लोगों से बात कीजिए, चीज़ें आज़माइए।"}
+
+  class_9_10:
+    classes: [9, 10]
+    later: [class_11, class_12, degree, specialisation, internship, career]
+    spine:
+      - key: assessment
+        slot: assessments
+        title: {en: Assessment, hi: आकलन}
+        why: {en: Your answers turn into career directions with reasons — the base for everything else here., hi: आपके जवाबों से कारणों के साथ करियर दिशाएँ बनती हैं — बाक़ी सब इसी पर टिका है।}
+      - key: career_exploration
+        slot: career_exploration
+        title: {en: Career exploration, hi: करियर की खोज}
+        why: {en: Try a little of each direction before the stream decision., hi: स्ट्रीम चुनने से पहले हर दिशा को थोड़ा आज़माइए।}
+      - key: stream_choice
+        slot: stream_choice
+        title: {en: Subject / stream choice, hi: विषय / स्ट्रीम का चुनाव}
+        why: {en: The class 11 stream decides which degrees stay open. Choose with your direction in mind., hi: 11वीं की स्ट्रीम तय करती है कि कौन सी डिग्रियाँ खुली रहेंगी। अपनी दिशा को ध्यान में रखकर चुनिए।}
+      - key: foundation_skills
+        slot: foundation_skills
+        title: {en: Foundation skills, hi: बुनियादी हुनर}
+        why: {en: The basics your direction builds on — strong foundations make everything later easier., hi: आपकी दिशा जिन बुनियादों पर टिकी है — मज़बूत नींव से आगे सब आसान होता है।}
+      - key: curiosity
+        slot: curiosity
+        optional: true
+        title: {en: A first taste of the field, hi: इस क्षेत्र का पहला स्वाद}
+        why: {en: Try one real skill from your direction early — see if you enjoy it., hi: अपनी दिशा का एक असली हुनर जल्दी आज़माइए — देखिए कि मज़ा आता है या नहीं।}
+      - key: projects
+        slot: projects
+        title: {en: Projects, hi: प्रोजेक्ट}
+        why: {en: Projects show you (and others) what you can actually do., hi: प्रोजेक्ट दिखाते हैं कि आप असल में क्या कर सकते हैं।}
+      - key: planning_11_12
+        slot: planning
+        title: {en: Class 11–12 planning, hi: 11वीं–12वीं की योजना}
+        why: {en: "Know your subjects, the exams ahead and when they happen, before class 11 starts.", hi: "11वीं शुरू होने से पहले अपने विषय, आगे की परीक्षाएँ और उनका समय जान लीजिए।"}
+
+  class_11_12:
+    classes: [11, 12]
+    later: [degree, specialisation, internship, career]
+    spine:
+      - key: career_decision
+        slot: career_decision
+        title: {en: Career decision, hi: करियर का फ़ैसला}
+        why: {en: "Pick a direction to work towards — you can still change it, and MAYA keeps the history.", hi: "एक दिशा चुनिए जिसकी ओर बढ़ना है — बाद में बदल भी सकते हैं, और MAYA पूरा इतिहास रखती है।"}
+      - key: entrance_exams
+        slot: entrance_exams
+        title: {en: Entrance exams, hi: प्रवेश परीक्षाएँ}
+        why: {en: The exams that lead to your direction's degree., hi: वे परीक्षाएँ जो आपकी दिशा की डिग्री तक ले जाती हैं।}
+      - key: degree_selection
+        slot: degree_selection
+        title: {en: Degree selection, hi: डिग्री का चुनाव}
+        why: {en: The usual degree — and other routes in if things go differently., hi: आम डिग्री — और अगर चीज़ें अलग हों तो दूसरे रास्ते भी।}
+      - key: college_exploration
+        slot: college_exploration
+        title: {en: College exploration, hi: कॉलेजों की खोज}
+        why: {en: Colleges that offer your route — start with the official lists., hi: वे कॉलेज जो आपका रास्ता पढ़ाते हैं — आधिकारिक सूचियों से शुरू कीजिए।}
+      - key: skill_development
+        slot: skill_development
+        title: {en: Skill development, hi: हुनर का विकास}
+        why: {en: The skills your direction needs that you can start on now., hi: आपकी दिशा के वे हुनर जिन पर आप अभी से काम शुरू कर सकते हैं।}
+      - key: projects
+        slot: projects
+        title: {en: Projects, hi: प्रोजेक्ट}
+        why: {en: One or two real projects — for learning and for college applications., hi: एक-दो असली प्रोजेक्ट — सीखने के लिए भी और कॉलेज के आवेदनों के लिए भी।}
+
+  dropper:
+    stages: [dropper]
+    later: [degree, specialisation, internship, career]
+    spine:
+      - key: exam_strategy
+        slot: entrance_exams
+        title: {en: Exam strategy review, hi: परीक्षा रणनीति की समीक्षा}
+        why: {en: Look honestly at last time — what cost marks — and plan around it., hi: पिछली बार को ईमानदारी से देखिए — कहाँ अंक कटे — और उसी हिसाब से योजना बनाइए।}
+      - key: weak_areas
+        slot: weak_areas
+        title: {en: Weak-area plan, hi: कमज़ोर हिस्सों की योजना}
+        why: {en: Your measured weak spots first., hi: पहले वे हिस्से जो मापने पर कमज़ोर निकले।}
+      - key: mock_tests
+        title: {en: Mock tests, hi: मॉक टेस्ट}
+        why: {en: "Full papers under exam conditions, every two weeks, with a review after each.", hi: "परीक्षा जैसे माहौल में पूरे पेपर, हर दो हफ़्ते, और हर एक के बाद समीक्षा।"}
+        done_when: {en: You've taken and reviewed at least six full mock papers., hi: आपने कम से कम छह पूरे मॉक पेपर देकर उनकी समीक्षा की है।}
+        hours: 30
+        exam_critical: true
+      - key: backup_pathways
+        slot: degree_selection
+        title: {en: Backup pathways, hi: दूसरे रास्ते}
+        why: {en: Other routes to the same kind of work — so one exam doesn't decide everything., hi: उसी तरह के काम तक पहुँचने के दूसरे रास्ते — ताकि एक परीक्षा सब कुछ तय न करे।}
+
+  college:
+    stages: [degree]
+    later: [specialisation, internship, career]
+    spine:
+      - key: skill_gap_analysis
+        slot: skill_gap_analysis
+        title: {en: Skill-gap analysis, hi: हुनर की कमियों का विश्लेषण}
+        why: {en: What your direction needs that you don't have yet — measured where possible., hi: "आपकी दिशा को क्या चाहिए जो अभी आपके पास नहीं — जहाँ हो सके, मापकर।"}
+      - key: specialisation
+        slot: skill_development
+        title: {en: Specialisation, hi: विशेषज्ञता}
+        why: {en: Go deep in the skills your direction relies on most., hi: "आपकी दिशा जिन हुनरों पर सबसे ज़्यादा टिकी है, उनमें गहराई लाइए।"}
+      - key: projects
+        slot: projects
+        title: {en: Projects, hi: प्रोजेक्ट}
+        why: {en: Real projects are what employers look at first., hi: नौकरी देने वाले सबसे पहले असली प्रोजेक्ट देखते हैं।}
+      - key: internship
+        title: {en: Internship, hi: इंटर्नशिप}
+        why: {en: Work experience — even a short internship — teaches what college can't., hi: "काम का अनुभव — छोटी इंटर्नशिप भी — वह सिखाता है जो कॉलेज नहीं सिखा पाता।"}
+        done_when: {en: You've completed at least one internship or real project with an organisation., hi: आपने कम से कम एक इंटर्नशिप या किसी संस्था के साथ असली प्रोजेक्ट पूरा किया है।}
+        hours: 120
+      - key: portfolio
+        title: {en: Portfolio, hi: पोर्टफ़ोलियो}
+        why: {en: One place that shows your best work., hi: एक जगह जो आपका सबसे अच्छा काम दिखाए।}
+        done_when: {en: Your best 3 projects are written up with what you did and learned., hi: आपके 3 सबसे अच्छे प्रोजेक्ट लिखे हुए हैं — आपने क्या किया और क्या सीखा।}
+        hours: 15
+      - key: job_preparation
+        slot: roles
+        title: {en: Job preparation, hi: नौकरी की तैयारी}
+        why: {en: "The roles your direction leads to, and how to apply for them.", hi: "आपकी दिशा जिन भूमिकाओं तक ले जाती है, और उनके लिए आवेदन कैसे करें।"}
+
+# What the stages after the current one hold.
+later:
+  class_9:
+    - {key: keep_exploring, slot: career_exploration, title: {en: Keep exploring, hi: खोज जारी रखिए}}
+  class_10:
+    - {key: stream_choice, slot: stream_choice, title: {en: Choose your stream, hi: अपनी स्ट्रीम चुनिए}}
+  class_11:
+    - {key: subjects, slot: stream_choice, title: {en: Your class 11 subjects, hi: आपके 11वीं के विषय}}
+    - {key: skill_development, slot: skill_development, title: {en: Skill development, hi: हुनर का विकास}}
+  class_12:
+    - {key: entrance_exams, slot: entrance_exams, title: {en: Entrance exams, hi: प्रवेश परीक्षाएँ}}
+    - {key: college_exploration, slot: college_exploration, title: {en: College exploration, hi: कॉलेजों की खोज}}
+  degree:
+    - {key: degree, slot: degree_selection, title: {en: Your degree, hi: आपकी डिग्री}}
+    - {key: advanced_skills, slot: advanced_skills, title: {en: Deeper skills, hi: गहरे हुनर}}
+  specialisation:
+    - {key: specialise, slot: specialise, title: {en: Specialise, hi: विशेषज्ञता चुनिए}}
+  internship:
+    - key: internship
+      title: {en: An internship, hi: एक इंटर्नशिप}
+      why: {en: "Work experience — even a short internship — teaches what college can't.", hi: "काम का अनुभव — छोटी इंटर्नशिप भी — वह सिखाता है जो कॉलेज नहीं सिखा पाता।"}
+      done_when: {en: You've completed at least one internship., hi: आपने कम से कम एक इंटर्नशिप पूरी की है।}
+      hours: 120
+  career:
+    - {key: first_role, slot: roles, title: {en: Your first role, hi: आपकी पहली भूमिका}}
