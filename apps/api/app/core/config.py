@@ -53,6 +53,11 @@ class Settings(BaseSettings):
     # so it can be stronger than the live one: on a test session, claude-haiku-4.5 caught the
     # stated constraints and worries that gpt-4o-mini missed, for under a cent. Empty = the live model.
     memory_model: str = "anthropic/claude-haiku-4.5"
+    # Phase 6: the model that reads official documents, and where college knowledge lives — the
+    # OKF bundle (canonical, its own git repo) and the raw documents it was read from.
+    extraction_model: str = "google/gemini-2.5-flash"
+    okf_bundle_path: str = "./data/okf"
+    source_store_path: str = "./data/sources"
     # A conversation with no new turn for this long is over: its memory is written.
     session_idle_minutes: int = 10
     memory_sweeper: bool = True  # off in tests, which must never touch the real database

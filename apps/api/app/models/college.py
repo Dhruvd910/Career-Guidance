@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Integer, String
+from sqlalchemy import Float, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.db import Base
@@ -27,6 +27,9 @@ class College(Base, TimestampMixin):
     logo_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
     is_demo_data: Mapped[bool] = mapped_column(default=True)
+    # Where it is — kept in step with its current location.coordinates fact (Phase 6), for distance filters.
+    latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    longitude: Mapped[float | None] = mapped_column(Float, nullable=True)
 
 
 class Course(Base):

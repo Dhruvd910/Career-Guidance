@@ -9,6 +9,7 @@ from app.models.college import Branch, College, CollegeCourse, Course
 from app.models.cutoff import Cutoff
 from app.models.exam import Exam, ExamProfile
 from app.models.facility import Facility
+from app.models.facts import DocChunk, Fact, FactConflict, OkfLoad, Source, SourceDocument
 from app.models.fee import Fee
 from app.models.hostel import Hostel
 from app.models.knowledge import KgEdge, KgNode, KgVersion
@@ -81,4 +82,10 @@ __all__ = [
     "RoadmapProgress",
     "RoadmapChange",
     "SkillMeasurement",
+    "Source",
+    "SourceDocument",
+    "Fact",
+    "FactConflict",
+    "OkfLoad",
+    "DocChunk",
 ]

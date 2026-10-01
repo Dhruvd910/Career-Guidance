@@ -46,6 +46,7 @@ Design: doc 06 (facts and provenance), doc 05 (RAG); schema: doc 02 §9; API: do
 | P6-10 | **RAG answers "what does this say", facts answer numbers.** A fee or date found in a document chunk is quoted with the document and its date, never restated as the current value. Current values come only from facts | Doc 05's hard rule |
 | P6-11 | **A guard on money figures.** Before a sentence of MAYA's is spoken or shown, any ₹ amount in it (in digits or words, lakh or crore) must appear in that turn's tool results or in the student's own words. If it doesn't, the sentence is replaced with "I don't have a verified figure for that." | Spec §23: never fabricate fees. Prompting alone failed in Phase 5's rehearsal |
 | P6-12 | Out of scope: state counselling colleges (not in the official data we have); live seat availability; reviews by students; road routing | Noted as limitations, not faked |
+| P6-13 | **Google's Open Knowledge Format (OKF v0.2) is the canonical layer** (decided by the user, 2026-10-02). The pipeline writes an OKF bundle in its own git repo (`apps/api/data/okf`), and a loader fills the facts table and the search index from it, as Phase 4's knowledge files fill the graph. Raw documents stay the source of truth. A reviewer's decision is an edit to the bundle: a `human:<id>` entry in `verified`, or the value removed. The database is never edited by hand | Spec §14's pipeline (official sources → … → OKF → graph + database + search). Every change to a fee or a hostel is a reviewable diff, and the bundle is portable |
 
 ## Canonical attributes
 
@@ -68,17 +69,51 @@ short text for facilities. Money is stored as INR integers.
 source registry ─► fetch (robots, rate limit, raw + sha256) ─► text (pdftotext | HTML→text | scanned → images + OCR)
    ─► find relevant pages (keywords: fee, hostel, mess, admission, prospectus, medical, health centre…)
    ─► read (Gemini 2.5 Flash: attribute, value, academic year, verbatim quote, page)
-   ─► check quote ─► validate (type, unit, range, year) ─► normalise ─► load
-         load: same entity+attribute+year → supersede (old kept); different value, same tier → conflict
-         flagged (P6-2) → review list, not shown
+   ─► check quote ─► validate (type, unit, range, year) ─► normalise
+   ─► write the OKF bundle (canonical; its own git repo, one commit per run)
+   ─► load: bundle → facts (same entity+attribute+year+source → supersede, old kept;
+            official sources disagreeing → conflict; flagged (P6-2) → review list, not shown)
    ─► chunk + embed for RAG (official documents)
 ```
+
+## The OKF bundle
+
+One concept file per college per topic, so each file's freshness (`stale_after`) means one thing:
+
+```
+data/okf/
+  index.md                      okf_version: "0.2"
+  log.md                        what changed, newest first
+  colleges/<official-name-slug>/
+    college.md                  type: College — name, state, city, aliases, official website
+    fees-2026-27.md             type: Fee Structure
+    campus.md                   type: Campus — hostel, medical facility, library, labs…
+    location.md                 type: Location — address, coordinates, nearby places
+    admissions-2026-27.md       type: Admissions
+    rankings.md, placements.md  type: Ranking, Placement Record
+  exams/<slug>/admissions-2027.md
+```
+
+Folders are named after the official name (all 739 are unique), not database ids, which can
+change when data is reloaded. Each concept carries the OKF v0.2 families:
+- `sources`: the documents, with id, resource (URL), title and author (`org:<publisher>`). OKF
+  allows extra keys, so each also carries `tier`, `retrieved_at` and `sha256`.
+- `generated: {by: maya-extractor/gemini-2.5-flash, at}`.
+- `verified`: `process:maya-quote-check` is OKF's *machine-confirmed*; `human:<id>` is
+  *human-reviewed*.
+- `status`: `draft` while everything in it waits for review; `stable` otherwise.
+- `stale_after`: from the freshness rules.
+
+OKF's trust fields are per file, so each value's own details go in an extension key, `maya.facts`:
+attribute, value, academic year, source id, page, quote, status and flags. The body is a readable
+table, with each value footnoted to its source (`[^s1]`), and any conflict is listed under
+`# Conflicts`.
 
 - **Discovery of pages:** start from the official website and admission page. Crawl at most 40
   pages per college, two links deep, following links whose text or URL matches the keywords.
   PDFs at most 25 MB.
 - **Review:** `python -m app.ingest.review` lists flagged facts. Approve, reject or edit; each
-  decision is recorded with who made it and why.
+  decision edits the bundle (with who made it and why), and is then loaded.
 - **Refresh:** a nightly timer runs `python -m app.ingest.refresh`. It fetches only what's due
   under each freshness policy, marks overdue facts stale, and re-reads only changed documents.
 
@@ -88,8 +123,14 @@ source registry ─► fetch (robots, rate limit, raw + sha256) ─► text (pdf
 
 The decisions above; doc 00's status.
 
-### Step 1 — The facts store
+### Step 1 — The facts store and the OKF bundle
 
+- **OKF (`app/okf/`):**
+  - a writer that merges values into concept files, renders the body, sources, `stale_after`
+    and the indexes, and appends to `log.md`
+  - a loader (bundle → facts, idempotent; a value removed from the bundle is withdrawn)
+  - a conformance check (OKF §11)
+  - git for the bundle repo
 - **Models and migration:** `sources`, `source_documents`, `facts`, `fact_conflicts`,
   `freshness_policies`, `admission_events`, `doc_chunks`, review decisions. `colleges` gains
   `data_origin`, `address`, `lat`, `lng` and aliases.
