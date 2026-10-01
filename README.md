@@ -294,7 +294,13 @@ everything stays on show.
   text-to-speech key here to generate a sample, so it's verified the other way round — real
   speech *without* her name never wakes her (a regression test feeds a clip that used to).
   Use `python -m app.wake_word` to check it hears you.
-- **Audio**: a USB sound card provides the microphone; playback is the Pi's 3.5mm jack.
+- **Audio (this Pi 5)**: the speaker is on a USB sound card and the microphone is a separate USB
+  mic. A Pi 5 has no 3.5mm jack, and with no PipeWire ALSA bridge ALSA's default output is the
+  HDMI screen — so MAYA was silent until `pipewire-alsa` was installed. For interrupting MAYA by
+  talking, run `python3 apps/desktop/setup_audio.py` once: it installs a WebRTC echo canceller into
+  PipeWire so her mic doesn't hear her own voice. Without it she can still be interrupted with
+  "Stop Maya".
+- **Audio (original kiosk Pi)**: a USB sound card provides the microphone; playback is the Pi's 3.5mm jack.
   Both go straight through ALSA (no PulseAudio/PipeWire is installed, so Qt Multimedia's
   output had nowhere to go). The mic only supports 44.1/48kHz, so it records natively and
   resamples to 16kHz for Whisper. Speech detection was tested with synthetic audio and a

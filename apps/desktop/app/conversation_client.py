@@ -88,8 +88,12 @@ class ConversationClient(QObject):
     def send_text_turn(self, turn_id: str, text: str) -> bool:
         return self.send({"type": "turn.text", "turn_id": turn_id, "text": text})
 
-    def send_audio_turn(self, turn_id: str, wav: bytes) -> bool:
-        if not self.send({"type": "turn.audio", "turn_id": turn_id, "encoding": "wav"}):
+    def send_audio_turn(self, turn_id: str, wav: bytes, over: str | None = None) -> bool:
+        """over: what MAYA was saying when this cut in, for a barge-in."""
+        header = {"type": "turn.audio", "turn_id": turn_id, "encoding": "wav"}
+        if over is not None:
+            header.update(barge_in=True, over=over)
+        if not self.send(header):
             return False
         self._ws.sendBinaryMessage(wav)  # always straight after its header
         return True

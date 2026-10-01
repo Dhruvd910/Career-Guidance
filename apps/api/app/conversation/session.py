@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import contextlib
 import logging
+import re
 import time
 import uuid
 from collections.abc import Awaitable, Callable
@@ -67,6 +68,20 @@ def _no_speech(text: str, no_speech_prob: float | None) -> bool:
         return True
     doubt = no_speech_prob or 0.0
     return doubt >= 0.8 or (words in HALLUCINATIONS and doubt >= 0.3)
+
+
+_WORD = re.compile(r"\w+")
+
+
+def is_echo(heard: str, maya_said: str) -> bool:
+    """Was this "interruption" really MAYA's own voice? It is if nearly every word of it is a
+    word she was saying. (Only within one script: Whisper may write her Roman Hinglish in
+    Devanagari — the echo canceller is the first line of defence; this is the second.)"""
+    words = [w.lower() for w in _WORD.findall(heard)]
+    if len(words) < 2:
+        return False
+    said = {w.lower() for w in _WORD.findall(maya_said)}
+    return sum(w in said for w in words) / len(words) >= 0.7
 
 
 def heard_text(turn: Turn, seq: int, played_ms: float) -> str:
@@ -147,17 +162,20 @@ class ConversationSession:
             await self.send({"type": "error", "turn_id": header.get("turn_id"), "code": "audio_too_long",
                              "message": "That was too long to process in one go.", "retryable": False})
             return
-        await self.start_turn(header.get("turn_id"), audio=payload)
+        await self.start_turn(header.get("turn_id"), audio=payload, over=header.get("over") if header.get("barge_in") else None)
 
     # ---------------- turns ----------------
 
-    async def start_turn(self, turn_id: str | None, *, text: str | None = None, audio: bytes | None = None) -> None:
-        """A new turn implicitly ends the previous one."""
+    async def start_turn(self, turn_id: str | None, *, text: str | None = None, audio: bytes | None = None,
+                         over: str | None = None) -> None:
+        """A new turn implicitly ends the previous one. `over`: what MAYA was saying when this
+        utterance cut in (a barge-in), so her own voice leaking past the echo canceller can be
+        told apart from the student's."""
         if self.turn is not None:
             await self._end_previous(self.turn)
         turn = Turn(id=turn_id or str(uuid.uuid4()))
         self.turn = turn
-        turn.task = asyncio.create_task(self._run(turn, text=text, audio=audio))
+        turn.task = asyncio.create_task(self._run(turn, text=text, audio=audio, over=over))
 
     async def interrupt(self, turn_id: str | None, seq: int, played_ms: float) -> None:
         turn = self.turn
@@ -186,7 +204,7 @@ class ConversationSession:
             with contextlib.suppress(asyncio.CancelledError):
                 await turn.task
 
-    async def _run(self, turn: Turn, *, text: str | None, audio: bytes | None) -> None:
+    async def _run(self, turn: Turn, *, text: str | None, audio: bytes | None, over: str | None = None) -> None:
         started = time.monotonic()
 
         def ms() -> int:
@@ -204,6 +222,10 @@ class ConversationSession:
                 turn.latency["stt"] = ms()
                 if _no_speech(heard.text, heard.no_speech_prob):
                     await self.send({"type": "turn.no_speech", "turn_id": turn.id})
+                    return
+                if over and is_echo(heard.text, over):
+                    logger.info("turn %s: barge-in was MAYA's own voice: %r", turn.id, heard.text)
+                    await self.send({"type": "turn.echo", "turn_id": turn.id})
                     return
                 text, heard_language, stt_confidence = heard.text.strip(), heard.language, heard.confidence
 

@@ -16,6 +16,7 @@ import io
 import os
 import subprocess
 import threading
+import time
 import wave
 
 import numpy as np
@@ -48,17 +49,54 @@ def set_background_mic_user(user) -> None:
     _background_mic_user = user
 
 
+# MAYA's own ALSA devices through PipeWire's echo canceller (apps/desktop/audio/): her speech
+# goes out through maya_speaker, and maya_mic is the microphone with that speech taken back out
+# — which is what lets her hear someone talking over her without hearing herself.
+EC_SPEAKER, EC_MIC = "maya_speaker", "maya_mic"
+EC_SOURCE_NODE = "maya_ec_source"
+_EC_CHECK_SECONDS = 30.0
+_ec_checked: tuple[float, bool] = (-_EC_CHECK_SECONDS, False)
+
+
+def echo_cancelled() -> bool:
+    """Are the echo-cancelled devices usable right now? Both ALSA names must exist *and* the
+    canceller must be running: without it PipeWire quietly connects maya_mic to the default
+    source instead — on this Pi, an empty mic socket."""
+    global _ec_checked
+    checked_at, ok = _ec_checked
+    if time.monotonic() - checked_at < _EC_CHECK_SECONDS:
+        return ok
+    ok = False
+    try:
+        names = {d["name"] for d in sd.query_devices()}
+        if {EC_SPEAKER, EC_MIC} <= names:
+            nodes = subprocess.run(["pw-cli", "ls", "Node"], capture_output=True, text=True, timeout=3).stdout
+            ok = f'node.name = "{EC_SOURCE_NODE}"' in nodes
+    except Exception:  # noqa: BLE001 — no PipeWire tools, no PortAudio: plain devices then
+        ok = False
+    _ec_checked = (time.monotonic(), ok)
+    return ok
+
+
+def output_device() -> str | None:
+    """Where MAYA speaks: through the echo canceller when it's running, else the default output."""
+    return EC_SPEAKER if echo_cancelled() else None
+
+
 def input_device() -> int | str | None:
     """The microphone to record from.
 
-    PortAudio's default input is the first USB sound card, which is the one driving the
-    speaker — and with nothing plugged into its mic jack it records near-silence, so MAYA
-    never "hears" anything. A dedicated USB microphone shows up as an input-only device, so
-    prefer that. MAYA_MIC (a device index or part of its name) overrides the choice.
+    The echo-cancelled mic when the canceller is running. Otherwise: PortAudio's default input
+    is the first USB sound card, which is the one driving the speaker — and with nothing plugged
+    into its mic jack it records near-silence, so MAYA never "hears" anything. A dedicated USB
+    microphone shows up as an input-only device, so prefer that. MAYA_MIC (a device index or
+    part of its name) overrides the choice.
     """
     override = os.environ.get("MAYA_MIC", "").strip()
     if override:
         return int(override) if override.isdigit() else override
+    if echo_cancelled():
+        return EC_MIC
     try:
         for index, dev in enumerate(sd.query_devices()):
             if dev["max_input_channels"] > 0 and dev["max_output_channels"] == 0 and "(hw:" in dev["name"]:
@@ -92,14 +130,17 @@ class VoiceRecorder(QObject):
     def is_listening(self) -> bool:
         return self._stream is not None
 
-    def listen(self, max_seconds: float = 15.0, no_speech_timeout: float = 7.0,
-               end_silence: float | None = None) -> None:
+    def listen(self, max_seconds: float = 15.0, no_speech_timeout: float | None = 7.0,
+               end_silence: float | None = None, onset_blocks: int = SPEECH_ONSET_BLOCKS,
+               pause_background: bool = True) -> None:
         """end_silence: how long a pause ends the utterance — by default the speech gate's own
-        (shorter for the Silero model, which isn't fooled by a quieter syllable)."""
+        (shorter for the Silero model, which isn't fooled by a quieter syllable).
+        no_speech_timeout None: wait for speech as long as it takes (until cancel()).
+        onset_blocks: how many 30 ms blocks of speech in a row start an utterance."""
         self.cancel()
         self._gen += 1
         gen = self._gen
-        if _background_mic_user is not None:
+        if pause_background and _background_mic_user is not None:
             _background_mic_user.pause()
 
         try:
@@ -117,7 +158,7 @@ class VoiceRecorder(QObject):
         self._outcome: str | None = None
 
         max_blocks = int(max_seconds / BLOCK_SECONDS)
-        no_speech_blocks = int(no_speech_timeout / BLOCK_SECONDS)
+        no_speech_blocks = int(no_speech_timeout / BLOCK_SECONDS) if no_speech_timeout is not None else max_blocks
         end_blocks = int((end_silence if end_silence is not None else gate.end_silence) / BLOCK_SECONDS)
 
         def callback(indata, frames, time_info, status):
@@ -130,8 +171,8 @@ class VoiceRecorder(QObject):
 
             if self._speech_start is None:
                 self._onset_run = self._onset_run + 1 if speech else 0
-                if self._onset_run >= SPEECH_ONSET_BLOCKS:
-                    self._speech_start = i - SPEECH_ONSET_BLOCKS + 1
+                if self._onset_run >= onset_blocks:
+                    self._speech_start = i - onset_blocks + 1
                     self._last_voice = i
                     self.speech_started.emit()
                 elif i >= no_speech_blocks:
@@ -244,7 +285,7 @@ class SpeechPlayer(QObject):
             # first syllable gets swallowed.
             pcm = np.concatenate([np.zeros(PLAYBACK_RATE // 20, dtype=np.int16), pcm]).reshape(-1, 1)
             chunk = PLAYBACK_RATE // 10
-            with sd.OutputStream(samplerate=PLAYBACK_RATE, channels=1, dtype="int16") as stream:
+            with sd.OutputStream(device=output_device(), samplerate=PLAYBACK_RATE, channels=1, dtype="int16") as stream:
                 for i in range(0, len(pcm), chunk):
                     if stop_event.is_set():
                         stream.abort()
@@ -310,8 +351,8 @@ class StreamPlayer(QObject):
             self._finished.emit(gen)
 
         try:
-            stream = sd.OutputStream(samplerate=rate, channels=1, dtype="int16", callback=self._fill,
-                                     finished_callback=finished)
+            stream = sd.OutputStream(device=output_device(), samplerate=rate, channels=1, dtype="int16",
+                                     callback=self._fill, finished_callback=finished)
             stream.start()
         except Exception:  # noqa: BLE001 — no speaker: the words are on screen anyway
             self._stream = None

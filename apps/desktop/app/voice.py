@@ -10,16 +10,33 @@ left the page) is dropped instead of hijacking whatever is on screen now.
 from __future__ import annotations
 
 import base64
+import logging
+import os
 from collections.abc import Callable
 
 from PySide6.QtCore import QObject, QTimer, Signal
 
 from app.api_client import api_client
+from app import audio_io, vad
 from app.audio_io import MicUnavailableError, SpeechPlayer, StreamPlayer, VoiceRecorder
 from app.voice_parsing import is_meaningful
 from app.workers import run_async
 
 IDLE, SPEAKING, LISTENING, THINKING = "idle", "speaking", "listening", "thinking"
+
+logger = logging.getLogger(__name__)
+
+# How the student can interrupt a streamed reply:
+#   "speech"       just start talking — needs the echo canceller (so the mic doesn't hear MAYA)
+#                  and the Silero model (so a cough or a chair doesn't count)
+#   "wake_phrase"  "Stop Maya" / "Hey Maya" (the wake-word listener), available everywhere
+BARGE_IN_SPEECH, BARGE_IN_WAKE_PHRASE = "speech", "wake_phrase"
+# Talking over her for this long interrupts her: ~3x the longest leak of her own voice measured
+# past the echo canceller on this Pi (90 ms), and shorter than anyone's "wait—".
+BARGE_IN_ONSET_BLOCKS = 10  # x 30 ms
+# Her own voice mistaken for an interruption this many times in a session: stop listening for
+# speech over her, and fall back to the wake phrase.
+MAX_ECHOES = 3
 
 # After MAYA stops talking, give the speaker's tail and the room a moment to go quiet
 # before opening the mic, so she doesn't transcribe the end of her own sentence.
@@ -36,6 +53,9 @@ class Voice(QObject):
     stream_stopped = Signal(str, int, float)
     # A sentence of the streamed reply finished playing: (turn_id, seq).
     stream_sentence_played = Signal(str, int)
+    # The student talked over a streamed reply and has finished: (their WAV, what MAYA was
+    # saying when they cut in — for the server to tell her own echo apart).
+    barge_in = Signal(bytes, str)
 
     def __init__(self):
         super().__init__()
@@ -60,6 +80,14 @@ class Voice(QObject):
         self.stream_player = StreamPlayer()
         self.stream_player.drained.connect(self._on_stream_drained)
         self.stream_player.sentence_played.connect(self._on_stream_sentence_played)
+
+        # Listens while a streamed reply plays, for someone talking over it.
+        self.barge_in_mode: str | None = None  # decided when the first reply starts playing
+        self._echoes = 0
+        self._barge_over: str | None = None  # what she was saying when someone cut in
+        self.barge_recorder = VoiceRecorder()
+        self.barge_recorder.speech_started.connect(self._on_barge_in_started)
+        self.barge_recorder.finished.connect(self._on_barge_in_finished)
         self.recorder.finished.connect(self._on_recording_finished)
         self.recorder.no_speech.connect(lambda: self._on_listen_failed("silence"))
         self.recorder.failed.connect(lambda _message: self._on_listen_failed("error"))
@@ -83,11 +111,16 @@ class Voice(QObject):
         self._after_speech = None
         self._awaiting_answer = None
         self._asking = None
+        self.barge_recorder.cancel()
+        self._barge_over = None
+        self._stop_stream()
+        self._set_state(IDLE)
+
+    def _stop_stream(self) -> None:
         if self._stream_turn is not None:
             turn_id, self._stream_turn, self._stream_done = self._stream_turn, None, None
             seq, played_ms = self.stream_player.stop() or (0, 0.0)
             self.stream_stopped.emit(turn_id, seq, played_ms)
-        self._set_state(IDLE)
 
     # ---------------- a streamed reply (the live conversation) ----------------
 
@@ -109,6 +142,7 @@ class Voice(QObject):
             return
         if not self.stream_player.active:
             self.stream_player.start(sample_rate)
+            self._listen_over_speech()
         self.stream_player.feed(seq, pcm)
         self._set_state(SPEAKING)
 
@@ -133,6 +167,7 @@ class Voice(QObject):
     def _on_stream_drained(self) -> None:
         if self._stream_turn is None:
             return
+        self.barge_recorder.cancel()
         on_done, self._stream_turn, self._stream_done = self._stream_done, None, None
         self._set_state(IDLE)
         if on_done:
@@ -181,6 +216,54 @@ class Voice(QObject):
         'silence', 'unclear', 'no_mic', or 'error'."""
         self.say(text, on_done=lambda: self.listen(on_answer, on_no_answer))
         self._asking = (self._token, on_answer, on_no_answer)
+
+    # ---------------- being interrupted by speech ----------------
+
+    @property
+    def listens_while_speaking(self) -> bool:
+        """She hears someone talking over her, so the wake phrase isn't needed for that."""
+        return self.barge_in_mode == BARGE_IN_SPEECH
+
+    def _decide_barge_in_mode(self) -> str:
+        wanted = os.environ.get("MAYA_BARGE_IN", "").strip().lower()
+        if wanted in (BARGE_IN_SPEECH, BARGE_IN_WAKE_PHRASE):
+            return wanted
+        return BARGE_IN_SPEECH if audio_io.echo_cancelled() and vad.silero_available() else BARGE_IN_WAKE_PHRASE
+
+    def _listen_over_speech(self) -> None:
+        if self.barge_in_mode is None:
+            self.barge_in_mode = self._decide_barge_in_mode()
+            logger.info("interrupting MAYA: %s", self.barge_in_mode)
+        if self.barge_in_mode != BARGE_IN_SPEECH:
+            return
+        try:
+            self.barge_recorder.listen(max_seconds=180.0, no_speech_timeout=None,
+                                       onset_blocks=BARGE_IN_ONSET_BLOCKS, pause_background=False)
+        except MicUnavailableError:
+            pass  # she just can't be interrupted by voice this time
+
+    def _on_barge_in_started(self) -> None:
+        """Someone is talking over her: stop at once, and keep listening to them."""
+        if self._stream_turn is None:
+            return
+        self._barge_over = self.current_text
+        self._stop_stream()  # tells the server what was heard
+        self._set_state(LISTENING)
+
+    def _on_barge_in_finished(self, wav: bytes) -> None:
+        over, self._barge_over = self._barge_over, None
+        if over is None:
+            return
+        self._set_state(IDLE)
+        self.barge_in.emit(wav, over)
+
+    def note_echo(self) -> None:
+        """The server heard her own voice in an interruption. A few of those and she stops
+        listening for speech over her (the wake phrase still works)."""
+        self._echoes += 1
+        if self._echoes >= MAX_ECHOES and self.barge_in_mode == BARGE_IN_SPEECH:
+            self.barge_in_mode = BARGE_IN_WAKE_PHRASE
+            logger.warning("MAYA heard herself %d times; interrupting her now takes \"Stop Maya\"", self._echoes)
 
     @property
     def speaking(self) -> bool:

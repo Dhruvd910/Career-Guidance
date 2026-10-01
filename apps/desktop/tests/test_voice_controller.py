@@ -36,6 +36,7 @@ class FakePlayer(QObject):
 
 
 class FakeRecorder(QObject):
+    speech_started = Signal()
     finished = Signal(bytes)
     no_speech = Signal()
     failed = Signal(str)

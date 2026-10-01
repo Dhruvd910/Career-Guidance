@@ -1,0 +1,14 @@
+# >>> MAYA (apps/desktop/setup_audio.py) >>>
+# MAYA's speaker and microphone through her echo canceller (PipeWire), so she can be
+# interrupted by voice without hearing herself. See apps/desktop/app/audio_io.py.
+pcm.maya_speaker {
+    type pipewire
+    playback_node "maya_ec_sink"
+    hint { show on description "MAYA speaker (echo reference)" }
+}
+pcm.maya_mic {
+    type pipewire
+    capture_node "maya_ec_source"
+    hint { show on description "MAYA microphone (echo cancelled)" }
+}
+# <<< MAYA <<<

@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.session import session
-from app.voice import IDLE, Voice
+from app.voice import IDLE, SPEAKING, Voice
 from app.theme import FOREGROUND
 from app.widgets.brand import Clock, Logo, StepProgress
 from app.widgets.icons import maya_face_icon
@@ -465,8 +465,10 @@ class MainWindow(QMainWindow):
             return False
         if self.voice.speaking:
             # While she talks, "Hey Maya" / "Stop Maya" interrupts her — on any screen,
-            # first-run setup included, where it means "stop reading, I'll answer now".
-            return True
+            # first-run setup included, where it means "stop reading, I'll answer now". In a
+            # streamed reply she already hears anyone talking over her, name or not.
+            return not (self.voice.listens_while_speaking and self.voice.state == SPEAKING
+                        and self._current_page == "maya")
         return self.voice.state == IDLE and self._current_page != "setup"
 
     def _interruptible_now(self) -> bool:

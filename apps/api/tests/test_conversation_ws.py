@@ -293,3 +293,37 @@ def test_sessions_start_take_messages_and_end(client, services, monkeypatch):
     assert client.post("/api/conversation/message", json={"session_id": session_id, "text": "Hi"},
                        headers=other).status_code == 404
     assert client.post("/api/conversation/end", json={"session_id": session_id}, headers=other).status_code == 404
+
+
+# ---------------- barge-in echo guard ----------------
+
+def test_a_barge_in_that_was_mayas_own_voice_is_dropped(client, services, db_session):
+    services["stt"] = FakeSTT("medicine is another path", "en", no_speech_prob=0.05)
+    with connect(client, register(client)) as ws:
+        ws.receive_json()
+        ws.send_json({"type": "turn.audio", "turn_id": "b1", "encoding": "wav", "barge_in": True,
+                      "over": "Engineering is one good path. Medicine is another path."})
+        ws.send_bytes(b"RIFF")
+        assert ws.receive_json() == {"type": "turn.echo", "turn_id": "b1"}
+    assert services["llm"].seen == [] and db_session.query(Message).count() == 0
+
+
+def test_a_real_barge_in_goes_ahead(client, services):
+    services["stt"] = FakeSTT("wait, what about law?", "en", no_speech_prob=0.05)
+    with connect(client, register(client)) as ws:
+        ws.receive_json()
+        ws.send_json({"type": "turn.audio", "turn_id": "b1", "encoding": "wav", "barge_in": True,
+                      "over": "Engineering is one good path. Medicine is another path."})
+        ws.send_bytes(b"RIFF")
+        assert until(ws, "reply.done")[0]["text"] == "wait, what about law?"
+
+
+@pytest.mark.parametrize("heard, said, echo", [
+    ("medicine is another path", "Engineering is one path. Medicine is another path.", True),
+    ("Medicine is another", "Medicine is another path.", True),
+    ("wait what about law", "Engineering is one path. Medicine is another path.", False),
+    ("is", "Medicine is another path.", False),  # a word or two proves nothing
+    ("no wait engineering is boring", "Engineering is one path.", False),
+])
+def test_echo_means_nearly_every_word_was_hers(heard, said, echo):
+    assert conversation_session.is_echo(heard, said) is echo

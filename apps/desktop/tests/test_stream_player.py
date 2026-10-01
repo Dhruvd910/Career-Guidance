@@ -16,7 +16,7 @@ class FakeOutput:
 
     last = None
 
-    def __init__(self, samplerate, channels, dtype, callback, finished_callback):
+    def __init__(self, samplerate, channels, dtype, callback, finished_callback, device=None):
         self.callback, self.finished_callback = callback, finished_callback
         self.heard: list[int] = []
         self.stopped = self.aborted = False

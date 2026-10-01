@@ -1,0 +1,39 @@
+# MAYA's echo canceller — installed by apps/desktop/setup_audio.py into
+# ~/.config/pipewire/pipewire.conf.d/. WebRTC echo cancellation between MAYA's speaker and her
+# microphone: she plays through "maya_ec_sink" (the echo reference) and listens on
+# "maya_ec_source" (the mic with her own voice removed), so someone can interrupt her by just
+# talking. Measured on the Pi (spike S2): her own voice detected as speech in 71% of 30 ms
+# blocks without it, 0% with it once it has adapted (a few seconds).
+context.modules = [
+    { name = libpipewire-module-echo-cancel
+        args = {
+            library.name = aec/libspa-aec-webrtc
+            aec.args = {
+                webrtc.extended_filter = true
+                webrtc.noise_suppression = true
+                webrtc.gain_control = false
+                webrtc.high_pass_filter = true
+            }
+            audio.channels = 1
+            audio.position = [ MONO ]
+            capture.props = {
+                node.name = "maya_ec_capture"
+                target.object = "@MIC_NODE@"
+                node.passive = true
+            }
+            source.props = {
+                node.name = "maya_ec_source"
+                node.description = "MAYA microphone (echo cancelled)"
+            }
+            sink.props = {
+                node.name = "maya_ec_sink"
+                node.description = "MAYA speaker (echo reference)"
+            }
+            playback.props = {
+                node.name = "maya_ec_playback"
+                target.object = "@SPEAKER_NODE@"
+                node.passive = true
+            }
+        }
+    }
+]

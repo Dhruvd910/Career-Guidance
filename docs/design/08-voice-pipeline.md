@@ -109,6 +109,25 @@ a session → automatically drop to `wake_phrase` mode and log it.
 **Stop latency**: playback is stopped **locally** the moment the trigger fires (no round
 trip); the server is informed afterwards.
 
+**Spike S2 result (2026-10-01, this Pi: USB speaker + separate USB mic, ~close together).**
+MAYA's real voice (32 s, English and Hinglish) played while the mic ran through the Silero gate:
+
+| | Her voice taken for speech | Longest run | Self-interrupt at 300 ms? |
+|---|---|---|---|
+| No echo cancellation | 71% of 30 ms blocks | 3060 ms | yes |
+| PipeWire WebRTC AEC, first seconds | 8% | 750 ms | yes |
+| PipeWire WebRTC AEC, adapted | 0–1% | 90–120 ms | **no** |
+
+Decision: **software AEC is enough — mode `speech` (called `aec_vad` above)**, no hardware
+speakerphone needed. The canceller is PipeWire's `libpipewire-module-echo-cancel` with the WebRTC
+backend, installed into the desktop's PipeWire by `apps/desktop/setup_audio.py`; MAYA plays to
+ALSA `maya_speaker` and listens on `maya_mic` (`~/.asoundrc`), and uses them only when the
+canceller is verifiably running (else PipeWire would silently connect `maya_mic` to the default
+source). Trigger = Silero speech for 300 ms (`BARGE_IN_ONSET_BLOCKS`). Because the canceller
+adapts over its first seconds, the self-trigger guard runs server-side: a barge-in whose
+transcript is ≥ 70% MAYA's own words gets `turn.echo` and is dropped; three per session switch
+that session to the wake phrase. Still to measure with a person: the true-trigger rate.
+
 ## 6. Latency budget (targets to measure, not promises)
 
 From the student's last word to MAYA's first audio:

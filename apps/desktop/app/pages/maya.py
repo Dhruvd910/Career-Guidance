@@ -55,6 +55,7 @@ class MayaPage(BasePage):
         self.client.audio.connect(self._on_live_audio)
         self.voice.stream_stopped.connect(self._on_stream_stopped)
         self.voice.stream_sentence_played.connect(self._on_sentence_played)
+        self.voice.barge_in.connect(self._on_barge_in)
         self._turn: str | None = None  # the live turn being answered
         self._turn_by_voice = False
         self._turn_bubble: ChatBubble | None = None
@@ -253,10 +254,11 @@ class MayaPage(BasePage):
         self._mic_session = self.voice.state == LISTENING
         self._refresh_mic_button()
 
-    def _send_voice(self, wav_bytes: bytes) -> None:
+    def _send_voice(self, wav_bytes: bytes, over: str | None = None) -> None:
         self._mic_session = False
         self._follow_up = False
-        if self._start_live_turn(by_voice=True, send=lambda turn_id: self.client.send_audio_turn(turn_id, wav_bytes)):
+        if self._start_live_turn(by_voice=True,
+                                 send=lambda turn_id: self.client.send_audio_turn(turn_id, wav_bytes, over)):
             return
         request_id = self._begin_request()
         run_async(
@@ -344,6 +346,11 @@ class MayaPage(BasePage):
             turn, self._turn = self._turn, None
             self.voice.end_stream(turn)
             self._on_no_voice("unclear")
+        elif kind == "turn.echo":
+            # The "interruption" was her own voice getting past the echo canceller.
+            turn, self._turn = self._turn, None
+            self.voice.end_stream(turn)
+            self.voice.note_echo()
         elif kind == "error":
             if message.get("code") == "tts_unavailable":
                 set_error(self.not_configured_label, message.get("message"))  # the words still come
@@ -365,6 +372,11 @@ class MayaPage(BasePage):
         self.client.send({"type": "turn.interrupt", "turn_id": turn_id, "seq": seq, "played_ms": played_ms})
         if turn_id == self._turn:
             self._turn = None
+
+    def _on_barge_in(self, wav: bytes, over: str) -> None:
+        """The student talked over MAYA: what they said is the next question."""
+        if self.isVisible():
+            self._send_voice(wav, over=over)
 
     def _listen_for_answer(self) -> None:
         if self.isVisible() and not self.ctx.keyboard.isVisible():
