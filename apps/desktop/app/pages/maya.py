@@ -41,8 +41,8 @@ class MayaPage(BasePage):
         self.conversation_id: int | None = None
         self._request_id = 0  # newest chat request; older replies are shown but never spoken
         self._mic_session = False  # the current listen was started from this page's mic button
-        # The language the student last spoke or typed ("en"/"hi"), so MAYA's own short
-        # prompts ("Yes? How can I help?") follow it too. Her replies already do.
+        # The language the student last spoke or typed ("en"/"hi"/"hinglish"), as the server
+        # judged it, so MAYA's own short prompts ("Yes? How can I help?") follow it too.
         self.language = "en"
 
         compact = QApplication.primaryScreen().availableGeometry().width() < COMPACT_SCREEN_WIDTH
@@ -153,7 +153,7 @@ class MayaPage(BasePage):
         set_error(self.not_configured_label, None)
         self._mic_session = False
         if greet:
-            prompt = "हाँ? बताइए, मैं कैसे मदद करूँ?" if self.language == "hi" else "Yes? How can I help?"
+            prompt = "Yes? How can I help?" if self.language == "en" else "हाँ? बताइए, मैं कैसे मदद करूँ?"
             self.voice.say(prompt, on_done=self._listen_after_wake)
         else:
             self.voice.cancel()
@@ -203,7 +203,6 @@ class MayaPage(BasePage):
         if not text:
             return
         self.text_input.clear()
-        self.language = "hi" if any("\u0900" <= ch <= "\u097f" for ch in text) else "en"
         self._add_bubble("user", text)
         request_id = self._begin_request()
         run_async(
@@ -218,9 +217,10 @@ class MayaPage(BasePage):
         if not response.get("ai_configured", True):
             set_error(self.not_configured_label, response["reply"])
             return
+        self.language = response.get("language") or "en"
         self._add_bubble("assistant", response["reply"])
         if current and self._should_speak(request_id):
-            self.voice.say(response["reply"])
+            self.voice.say(response["reply"], language=self.language)
 
     # ---------------- spoken questions ----------------
 

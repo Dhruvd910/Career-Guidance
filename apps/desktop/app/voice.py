@@ -75,13 +75,14 @@ class Voice(QObject):
 
     # ---------------- speaking ----------------
 
-    def say(self, text: str, on_done: Callable[[], None] | None = None) -> None:
+    def say(self, text: str, on_done: Callable[[], None] | None = None, language: str | None = None) -> None:
+        """language: the reply's, when known ("en"/"hi"/"hinglish") — see api_client.speak."""
         self.cancel()
         self.current_text = text
         token = self._token
         self._set_state(THINKING)
         run_async(
-            api_client.speak, text,
+            api_client.speak, text, **({"language": language} if language else {}),
             on_success=lambda result: self._on_speech_ready(token, result, on_done),
             on_error=lambda _err: self._on_speech_ready(token, None, on_done),
         )

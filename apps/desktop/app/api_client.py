@@ -195,8 +195,13 @@ class ApiClient:
     def chat(self, message: str, conversation_id: int | None = None) -> dict:
         return self.post("/api/ai/chat", {"message": message, "conversation_id": conversation_id})
 
-    def speak(self, text: str) -> dict:
-        return self.post("/api/ai/speak", {"text": text})
+    def speak(self, text: str, language: str | None = None) -> dict:
+        """language: a chat reply's ("en"/"hi"/"hinglish"), so Hinglish written in English
+        letters is still read with the Hindi voice."""
+        body = {"text": text}
+        if language:
+            body["language"] = language
+        return self.post("/api/ai/speak", body)
 
     def transcribe(self, audio_bytes: bytes) -> dict:
         return self._request("POST", "/api/ai/transcribe", files={"audio": ("speech.wav", audio_bytes, "audio/wav")})

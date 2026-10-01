@@ -49,11 +49,19 @@ The mascot (Idle/Listen/Think/Talk GIFs) is driven only by this state.
 college and technical terms in English as students say them. The student's profile stores
 the running mix, never a hard setting, so switching mid-conversation just works.
 
-**Script for speech** — open question, settled by spike S1 in Phase 1: Cartesia's Hindi
-voice is known to read Devanagari; how it reads Roman-script Hinglish is unverified. Options:
-(a) LLM writes Hinglish replies in Devanagari with English terms in Latin (likely best for
-TTS; screen shows the same text); (b) Roman for screen + transliterated Devanagari for TTS
-(extra step). Default to (a) unless S1 shows Roman reads well.
+**Script for speech — settled by spike S1 (2026-10-01).** Three Hinglish sentences were
+synthesised three ways and transcribed back with Whisper: (A) Devanagari with English terms in
+Latin, Hindi voice; (B) all Roman, Hindi voice; (C) all Roman, English voice. A and B were both
+understood essentially word for word (B scored 1.00 on the first sentence); C mispronounced
+Hindi words ("pasand" → "पसांड", "option" → "उप्षिन"). Decision:
+- Every `hi`/`hinglish` reply is spoken with **Cartesia's Hindi voice, whatever its script** —
+  so the TTS language comes from the turn's LanguageTag, never from the reply's script
+  (`language_of_text` would send Roman Hinglish to the English voice).
+- The reply's script follows the student's: typed Roman Hinglish gets Roman Hinglish back (it's
+  what they can read), Devanagari or spoken input gets Devanagari with English terms in Latin.
+- Spoken Hinglish arrives from Whisper as Devanagari, often with the English words transliterated
+  ("स्पीड", "प्रेपरेशन"), so a spoken-Hindi reply must itself be conversational, code-mixed Hindi —
+  not formal Hindi.
 
 ## 4. Server streaming turn
 

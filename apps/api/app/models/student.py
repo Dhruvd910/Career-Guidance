@@ -22,6 +22,9 @@ class StudentProfile(Base, TimestampMixin):
     category: Mapped[str | None] = mapped_column(String(20), nullable=True)
 
     preferred_language: Mapped[str] = mapped_column(String(50), default="English")
+    # Running mix of the languages the student actually uses, e.g. {"en": 0.2, "hinglish": 0.8}
+    # (app/ai/language.py) — a habit, not a setting: each turn is still answered in its own language.
+    language_stats: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     preferred_study_locations: Mapped[list] = mapped_column(JSON, default=list)
 
     knows_career_goal: Mapped[bool | None] = mapped_column(Boolean, nullable=True)

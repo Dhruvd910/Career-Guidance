@@ -7,7 +7,7 @@ import json
 
 from sqlalchemy.orm import Session
 
-from app.ai.language import REPLY_INSTRUCTIONS, language_of_text
+from app.ai.language import detect, reply_instruction, updated_stats, usual_language
 from app.providers.registry import get_llm_provider
 from app.ai.tools import TOOL_SPECS, execute_tool
 from app.models.chat import Conversation, Message
@@ -46,8 +46,11 @@ possible) with reasoning, mention alternatives, and let the student (and their p
 assuming defaults, but don't re-ask for anything you can already see in get_student_profile / \
 get_exam_profile.
 - Keep answers concise, warm, and free of unexplained jargon.
-- You speak English and Hindi. Always answer in the language the student is using right now \
-(each message carries a note saying which).
+- Everything you say is read aloud by MAYA's voice. Talk like a person, not a document: usually two to \
+four short sentences, no markdown, no bullet or numbered lists, no tables. If there is more to cover, give \
+the most useful part, then offer to go on or ask a question that narrows it down.
+- You speak English, Hindi and Hinglish. Always answer in the language the student is using right now \
+(each message carries a note saying which), and switch whenever they do.
 """
 
 MAX_TOOL_ITERATIONS = 5
@@ -122,9 +125,11 @@ async def handle_chat(
     db: Session, profile: StudentProfile, message: str, conversation_id: int | None,
     language: str | None = None,
 ) -> ChatResponse:
-    """language: what the student spoke in, when known from speech ("en"/"hi"); typed
-    messages are judged by their script."""
+    """language: what Whisper heard, for speech ("en"/"hi"). The reply's language is decided
+    from the words themselves, then that and the student's usual language."""
     conversation = _get_or_create_conversation(db, profile, conversation_id)
+    tag = detect(message, heard=language, previous=usual_language(profile.language_stats))
+    profile.language_stats = updated_stats(profile.language_stats, tag)
 
     llm = get_llm_provider()
     if llm is None:
@@ -138,10 +143,11 @@ async def handle_chat(
             ),
             tool_calls_used=[],
             ai_configured=False,
+            language=tag.lang,
         )
 
     messages = _history_as_messages(conversation, profile)
-    messages.append({"role": "system", "content": REPLY_INSTRUCTIONS[language or language_of_text(message)]})
+    messages.append({"role": "system", "content": reply_instruction(tag)})
     messages.append({"role": "user", "content": message})
     db.add(Message(conversation_id=conversation.id, role="user", content=message))
     db.commit()
@@ -190,4 +196,5 @@ async def handle_chat(
         reply=final_content,
         tool_calls_used=tool_calls_used,
         ai_configured=True,
+        language=tag.lang,
     )

@@ -24,17 +24,20 @@ class FakeTTS(TTSProvider):
     def __init__(self, fail: Exception | None = None):
         self.fail = fail
         self.spoken: list[str] = []
+        self.languages: list[str | None] = []
 
     async def synthesize(self, text, language=None):
         if self.fail:
             raise self.fail
         self.spoken.append(text)
+        self.languages.append(language)
         return b"RIFFfake", "audio/wav"
 
     async def stream(self, text, language=None):
         if self.fail:
             raise self.fail
         self.spoken.append(text)
+        self.languages.append(language)
         pcm = b"\x01\x00" * 100 * len(text)
         for i in range(0, len(pcm), 4000):
             yield pcm[i:i + 4000]

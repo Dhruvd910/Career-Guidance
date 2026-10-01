@@ -23,17 +23,22 @@ class ChatResponse(BaseModel):
     reply: str
     tool_calls_used: list[str] = []
     ai_configured: bool = True
+    # The language the student used and the reply is in: "en", "hi" or "hinglish". Pass it on
+    # to /speak so the reply is read with the right voice.
+    language: str = "en"
 
 
 class VoiceChatResponse(ChatResponse):
     transcript: str
-    language: str = "en"  # what the student spoke: "en" or "hi"
     audio_base64: str | None = None
     audio_content_type: str | None = None
 
 
 class SpeakRequest(BaseModel):
     text: str
+    # "en", "hi" or "hinglish" when known (e.g. a chat reply's `language`). Without it the
+    # script decides — which reads Hinglish written in English letters with the English voice.
+    language: str | None = None
 
 
 class SpeakResponse(BaseModel):
