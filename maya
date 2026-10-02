@@ -1,0 +1,61 @@
+#!/bin/bash
+# maya start | stop | restart | status   (also "start maya", "stop maya", "restart maya" from ~/.bashrc)
+#
+#   start [--window]    the server, then the app full screen (like the desktop icon); --window for a window
+#   stop                both, waiting until they've really gone
+#   restart [--window]  stop, then start
+#   status              what's running
+#
+# Over SSH there's no screen of its own: the app opens on the Pi's desktop, if it's logged in.
+ROOT="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
+RUN_DIR="$ROOT/.run"
+
+if [ -z "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ] && [ -S "/run/user/$(id -u)/wayland-0" ]; then
+    export WAYLAND_DISPLAY=wayland-0
+    export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+fi
+
+pid_of() {  # the PID in a pidfile, if that process is alive
+    [ -f "$RUN_DIR/$1.pid" ] && kill -0 "$(cat "$RUN_DIR/$1.pid")" 2>/dev/null && cat "$RUN_DIR/$1.pid"
+}
+
+do_start() {
+    if [ "$1" = "--window" ]; then "$ROOT/start.sh"; else "$ROOT/start.sh" --fullscreen; fi
+}
+
+do_stop() {
+    local pids
+    pids="$(pid_of desktop) $(pid_of api)"
+    "$ROOT/stop.sh"
+    for _ in $(seq 1 20); do  # up to 10 s for them to finish closing (and free port 8000)
+        local alive=""
+        for p in $pids; do kill -0 "$p" 2>/dev/null && alive="$alive $p"; done
+        [ -z "$alive" ] && return 0
+        sleep 0.5
+    done
+    echo "Still running after 10 s; forcing:$alive"
+    kill -9 $alive 2>/dev/null
+}
+
+do_status() {
+    local api app
+    api="$(pid_of api)"; app="$(pid_of desktop)"
+    if [ -n "$api" ]; then
+        if curl -s -o /dev/null "http://127.0.0.1:8000/api/health"; then
+            echo "Server: running (PID $api), healthy"
+        else
+            echo "Server: running (PID $api), not answering yet — see $RUN_DIR/api.log"
+        fi
+    else
+        echo "Server: stopped"
+    fi
+    [ -n "$app" ] && echo "App:    running (PID $app)" || echo "App:    stopped"
+}
+
+case "$1" in
+    start) do_start "$2" ;;
+    stop) do_stop ;;
+    restart) do_stop; do_start "$2" ;;
+    status) do_status ;;
+    *) echo "Usage: maya start [--window] | stop | restart [--window] | status"; exit 1 ;;
+esac

@@ -50,6 +50,18 @@ backend and opens MAYA full-screen. Close her with the ✕ in her header (tap tw
 stops the backend too — or use the **Stop MAYA** icon if she ever hangs. The launchers are
 `~/Desktop/maya.desktop` and `maya-stop.desktop` (copies in `~/.local/share/applications/`).
 
+From a terminal (on the Pi, or over SSH, when the app opens on the Pi's screen):
+
+```
+start maya              # the backend, then MAYA full screen (start maya --window: in a window)
+stop maya               # both, waiting until they've really closed
+restart maya            # stop, then start
+maya status             # what's running
+```
+
+These are shell functions in `~/.bashrc` that call `./maya` here (`./maya start|stop|restart|status`
+works without them). Logs: `.run/api.log` and `.run/desktop.log`.
+
 The touchscreen needs the XPT2046/ADS7846 driver enabled in `/boot/firmware/config.txt`:
 
 ```
