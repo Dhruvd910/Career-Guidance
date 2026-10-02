@@ -29,6 +29,7 @@ from app.models.college import College
 from app.okf.facts import QUOTE_CHECK, Document, Value, slug
 
 MUST_SAY = ("fee.tuition.annual", "fee.hostel.annual", "facility.medical")
+READS = ("fee.", "facility.", "location.address", "placement.")  # what a site read produces (and replaces)
 ACADEMIC_YEAR = "2026-27"
 
 
@@ -91,7 +92,7 @@ def run(db: Session, fetcher: Fetcher, root=None, only_national: bool = True, li
     colleges = colleges[:limit] if limit else colleges
     usage = reading.Usage()
     report = {"colleges": len(colleges), "with_values": 0, "values": 0, "held": 0, "problems": {}, "usage": usage}
-    pending = {}
+    pending, retractions = {}, {}
     for n, college in enumerate(colleges, start=1):
         values, problems = values_for(db, fetcher, college, usage, reader=reader)
         if problems:
@@ -102,10 +103,14 @@ def run(db: Session, fetcher: Fetcher, root=None, only_national: bool = True, li
         report["values"] += len(real)
         report["held"] += sum(1 for v in real if v.flags)
         if values:
-            pending[college_entity(college)] = values
+            entity = college_entity(college)
+            pending[entity] = values
+            # this read replaces the site's last one (only when the site was actually read)
+            retractions[entity] = (f"site-{slug(college.canonical_name)}", READS, "not found when the site was read again")
         if len(pending) >= batch or (n == len(colleges) and pending):
             result = publish(db, pending, f"Facts read from {len(pending)} official websites "
-                                          f"({datetime.now(timezone.utc):%Y-%m-%d})", root)
+                                          f"({datetime.now(timezone.utc):%Y-%m-%d})", root, retractions=retractions)
+            retractions = {}
             report.setdefault("bundle_problems", []).extend(result["problems"])
             pending = {}
             progress(f"{n}/{len(colleges)}: {report['values']} values ({report['held']} held for review), "

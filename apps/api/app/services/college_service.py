@@ -236,8 +236,7 @@ def compare_colleges(db: Session, college_ids: list[int]) -> CollegeCompareRespo
         known = topics.facts(db, college_id)
 
         lowest_closing = min((c.closing_rank for c in cutoffs), default=None)
-        tuition = (known.get("fee.tuition.annual") or {}).get("value") or {}
-        avg_cost = tuition.get("amount")
+        avg_cost = discover.yearly_fee(known.get("fee.tuition.annual"))  # ₹62,500 a semester is ₹1,25,000 a year
         hostel_available = discover.has_facility(known.get("facility.hostel"))
         avg_rating, _ = _rating_stats(db, college_id)
         profile = college_profiles.profile_for(college.canonical_name)

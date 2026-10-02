@@ -29,26 +29,32 @@ def admission(exam, hardest, easiest, quota="AI"):
             "programs": []}
 
 
-def row(name, nirf=None, cost=None, median=None, adm=None, surroundings=None):
-    profile = None
-    if nirf or median or surroundings:
-        profile = {"nirf": {"year": 2025, "category": "Engineering", "rank": nirf} if nirf else None,
-                   "fees": {"summary": f"₹{cost:,} a year tuition", "tuition_per_year": cost} if cost else None,
-                   "placements": {"median_lpa": median, "period": "2023-24"} if median else None,
-                   "surroundings": surroundings, "sources": [{"name": "NIRF", "url": "https://www.nirfindia.org"}]}
+def cell(what, value, source="IIT (official website)", year=None, state="fresh", conflict=None):
+    return {"what": what, "value": value, "status": "verified", "academic_year": year, "source": source,
+            "official": True, "url": "https://example.ac.in/fees.pdf", "conflict": conflict,
+            "label": {"en": "Verified 3 days ago", "hi": "3 दिन पहले जाँचा गया", "state": state}}
+
+
+def row(name, nirf=None, cost=None, adm=None, station=None):
+    cells = {}
+    if nirf:
+        cells["ranking.nirf.engineering"] = cell("NIRF rank (engineering)", f"{nirf} (Engineering 2025)", "NIRF, Ministry of Education")
+    if cost:
+        cells["fee.tuition.annual"] = cell("Tuition fee", {200000: "₹2,00,000 a year", 125000: "₹1,25,000 a year"}[cost],
+                                           year="2026-27")
+    if station:
+        cells["near.railway_station"] = cell("Nearest railway station", station, "OpenStreetMap contributors (ODbL)")
     return {"college": {"id": hash(name) % 1000, "canonical_name": name, "city": "City", "state": "State",
                         "college_type": "IIT", "ownership": "government", "is_demo_data": False},
-            "approximate_annual_cost": cost, "admission": adm, "profile": profile,
-            "lowest_closing_rank_seen": None, "hostel_available": False, "placement_percentage": None,
+            "approximate_annual_cost": cost, "admission": adm, "profile": None, "facts": cells,
+            "lowest_closing_rank_seen": None, "hostel_available": None, "placement_percentage": None,
             "average_package": None, "average_rating": None}
 
 
-BOMBAY = row("Indian Institute of Technology Bombay", nirf=3, cost=200000, median=19.61,
-             adm=admission("JEE_ADVANCED", 67, 7838), surroundings={"airport": "Mumbai airport, about 10 km"})
-MADRAS = row("Indian Institute of Technology Madras", nirf=1, cost=200000, median=17.78,
-             adm=admission("JEE_ADVANCED", 150, 9000))
-TRICHY = row("National Institute of Technology, Tiruchirappalli", nirf=9, cost=125000, median=14.35,
-             adm=admission("JEE_MAIN", 2000, 40000, quota="OS"))
+BOMBAY = row("Indian Institute of Technology Bombay", nirf=3, cost=200000, adm=admission("JEE_ADVANCED", 67, 7838),
+             station="Kanjurmarg, 3.1 km (straight line)")
+MADRAS = row("Indian Institute of Technology Madras", nirf=1, cost=200000, adm=admission("JEE_ADVANCED", 150, 9000))
+TRICHY = row("National Institute of Technology, Tiruchirappalli", cost=125000, adm=admission("JEE_MAIN", 2000, 40000, quota="OS"))
 
 
 def test_short_names_are_what_students_say():
@@ -59,8 +65,7 @@ def test_short_names_are_what_students_say():
 
 def test_verdicts_pick_the_best_of_each():
     lines = verdicts([BOMBAY, MADRAS])
-    assert "Best ranked: IIT Madras (NIRF #1)" in lines
-    assert "Best median package: IIT Bombay (₹19.61 lakh a year)" in lines
+    assert "Best ranked: IIT Madras (NIRF #1)" in lines, "within one ranking list"
     assert "Hardest to get into: IIT Bombay (closed at 67)" in lines
     assert any(line.startswith("Easiest way in: IIT Madras") for line in lines)
 
@@ -69,7 +74,7 @@ def test_closing_ranks_from_different_exams_are_not_compared():
     lines = verdicts([BOMBAY, TRICHY])
     assert not any(line.startswith("Hardest") for line in lines)
     assert any("different exams" in line for line in lines)
-    assert "Lowest fees: NIT Tiruchirappalli (₹1.25 lakh a year tuition)" in lines
+    assert "Lowest tuition: NIT Tiruchirappalli (₹1.25 lakh a year)" in lines
 
 
 def test_admission_lines_name_the_rank_that_counts():
@@ -91,15 +96,17 @@ def test_compare_page_shows_every_section(qapp):
     page = ComparePage(FakeWindow())
     page._render({"rows": [BOMBAY, MADRAS], "ai_summary": None})
     text = _texts(page)
-    for section in ("At a glance", "Ranking", "Getting in", "Cost per year", "Placements", "Around the campus", "Sources"):
+    for section in ("At a glance", "Ranking", "Getting in", "What it costs", "Campus", "Around the campus", "Sources"):
         assert section in text, section
-    assert "Mumbai airport, about 10 km" in text
+    assert "Kanjurmarg, 3.1 km (straight line)" in text and "OpenStreetMap contributors (ODbL) · Verified 3 days ago" in text
+    assert "₹2,00,000 a year" in text and "Places © OpenStreetMap contributors" in text
 
 
-def test_compare_says_when_a_college_is_not_researched(qapp):
+def test_compare_says_what_isnt_known(qapp):
     page = ComparePage(FakeWindow())
     page._render({"rows": [BOMBAY, row("Some Engineering College")], "ai_summary": None})
-    assert "hasn't researched" in _texts(page)
+    text = _texts(page)
+    assert "Not known" in text and "Not in NIRF's ranked list" in text, "unknown is said, never filled in"
 
 
 def test_college_page_lists_closing_ranks_for_the_chosen_category(qapp):

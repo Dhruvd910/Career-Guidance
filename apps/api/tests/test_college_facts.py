@@ -14,7 +14,8 @@ from tests.pdfs import text_pdf
 from tests.test_ingest_fetch import Clock
 
 FEES = text_pdf(["FEE STRUCTURE FOR 2026 ADMISSION BATCH (B.Tech)", "Tuition Fee (per semester) 62,500",
-                 "Hostel Seat Rent (per semester) 21,000", "Mess advance (per semester) 18,000"])
+                 "Hostel Seat Rent (per semester) 21,000", "Mess advance (per semester) 18,000",
+                 "Caution money (refundable, once) 10,000"])
 HOME = b"""<html><head><title>Maulana Azad National Institute of Technology Bhopal</title></head><body>
 <nav><a href="/tenders/hostel-mess-tender.pdf">Hostel mess tender</a> <a href="/recruitment">Recruitment</a></nav>
 <a href="/academics/fee-structure">Fee structure</a> <a href="/campus/health-centre">Health Centre</a>
@@ -100,7 +101,9 @@ def fake_model(college, place, title, url, doc, usage, images=None, client=None)
             {"attribute": "fee.hostel.annual", "amount": 21000, "per": "semester", "academic_year": "2026-27",
              "quote": "Hostel Seat Rent (per semester) 21,000", "page": 1},
             {"attribute": "fee.mess.annual", "amount": 99000, "per": "semester", "academic_year": "2026-27",
-             "quote": "Mess charges 99,000", "page": 1}]
+             "quote": "Mess charges 99,000", "page": 1},
+            {"attribute": "fee.one_time", "amount": 10000, "per": "once", "academic_year": "2026-27",
+             "quote": "Caution money (refundable, once) 10,000", "page": 1}]
     if "health centre" in doc.text.lower():
         offered = [{"attribute": "facility.medical", "text": "Health centre open 24 hours, two resident doctors, an ambulance",
                     "quote": "The institute health centre is open 24 hours with two resident doctors and an ambulance."}]
@@ -118,7 +121,7 @@ def test_a_colleges_own_site_becomes_facts(tmp_path, db_session, monkeypatch):
         assert site["value"] == {"url": "https://www.manit.ac.in/"} and site["source"]["tier"] == 2
         assert site["quote"] == "Maulana Azad National Institute of Technology Bhopal", "the site says whose it is"
         report = college_facts.run(db_session, f, root=tmp_path / "okf", reader=fake_model, progress=lambda m: None)
-    assert report["with_values"] == 1 and report["values"] == 3 and report["held"] == 0
+    assert report["with_values"] == 1 and report["values"] == 4 and report["held"] == 0
     shown = store.current(db_session, "college", college.id)
     tuition = shown["fee.tuition.annual"]
     assert tuition["value"] == {"amount": 62500, "per": "semester", "applies_to": "general"}
@@ -142,3 +145,24 @@ def test_saying_nothing_is_recorded_as_nothing(tmp_path, db_session, monkeypatch
     assert shown["fee.tuition.annual"]["status"] == "not_available"
     assert shown["fee.tuition.annual"]["source"]["locator"].startswith("not found on the official website (looked at")
     assert shown["facility.medical"]["status"] == "not_available"
+
+
+def test_reading_a_site_again_replaces_what_it_said_before(tmp_path, db_session, monkeypatch):
+    college = manit(db_session)
+    monkeypatch.setattr(websites, "DOMAINS", {"MANIT": "manit.ac.in"})
+
+    def tuition_only(college_name, place, title, url, doc, usage, images=None, client=None):
+        checked, offered = fake_model(college_name, place, title, url, doc, usage, images, client)
+        return [r for r in checked if r.attribute == "fee.tuition.annual"], offered
+
+    with fetcher(tmp_path) as f:
+        websites.run(db_session, f, root=tmp_path / "okf")
+        college_facts.run(db_session, f, root=tmp_path / "okf", reader=fake_model, progress=lambda m: None)
+        assert "fee.hostel.annual" in store.current(db_session, "college", college.id)
+        college_facts.run(db_session, f, root=tmp_path / "okf", reader=tuition_only, progress=lambda m: None)
+    shown = store.current(db_session, "college", college.id)
+    assert shown["fee.tuition.annual"]["value"]["amount"] == 62500
+    assert shown["fee.hostel.annual"]["status"] == "not_available", "the hostel fee the site no longer gives is withdrawn"
+    assert "fee.one_time" not in shown, "a value the site no longer gives is withdrawn"
+    assert "location.website" in shown, "only what a site read produces is replaced"
+    assert "**Withdrawn**: One-time fees" in (tmp_path / "okf" / "log.md").read_text()

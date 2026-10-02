@@ -25,6 +25,7 @@ from app.pages.mock_tests import MockTestsPage
 from app.pages.careers import CareersPage
 from app.pages.colleges import CollegesPage
 from app.pages.college_detail import CollegeDetailPage
+from app.pages.college_find import CollegeFindPage, CollegeSourcesPage
 from app.pages.compare import ComparePage
 from app.pages.progress import ProgressPage
 from app.pages.roadmap import RoadmapChangesPage, RoadmapNodePage, RoadmapPage
@@ -44,7 +45,8 @@ from app import touch_calibration
 PAGE_TITLES = {
     "setup": "Your details", "onboarding": "Getting started", "dashboard": "Dashboard",
     "maya": "MAYA Assistant", "jee": "JEE", "neet": "NEET", "mock_tests": "Mock Tests", "practice_test": "Practice test",
-    "careers": "Careers", "colleges": "Colleges", "college_detail": "College",
+    "careers": "Careers", "colleges": "Colleges", "college_detail": "College", "college_find": "Find colleges",
+    "college_sources": "Sources",
     "compare": "Compare colleges", "roadmap": "My roadmap", "calibrate": "Touch calibration",
     "roadmap_node": "Roadmap step", "roadmap_changes": "What changed", "progress": "My progress",
     "study_plan": "Study plan",
@@ -311,6 +313,8 @@ class MainWindow(QMainWindow):
         self.pages["careers"] = CareersPage(self)
         self.pages["colleges"] = CollegesPage(self)
         self.pages["college_detail"] = CollegeDetailPage(self)
+        self.pages["college_find"] = CollegeFindPage(self)
+        self.pages["college_sources"] = CollegeSourcesPage(self)
         self.pages["compare"] = ComparePage(self)
         self.pages["roadmap"] = RoadmapPage(self)
         self.pages["roadmap_node"] = RoadmapNodePage(self)

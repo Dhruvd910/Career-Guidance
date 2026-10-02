@@ -114,3 +114,14 @@ def test_the_same_document_is_kept_once(db_session):
     assert doc(db_session).id == a.id
     cited = doc(db_session, key="nirf", tier=1, url="https://www.nirfindia.org/r.html", sha=None, title="NIRF 2025")
     assert doc(db_session, key="nirf", tier=1, url="https://www.nirfindia.org/r.html", sha=None, title="NIRF 2025").id == cited.id
+
+
+def test_a_real_value_from_any_year_beats_not_available(db_session):
+    manit = college(db_session)
+    template = doc(db_session, key="iit-roorkee", url="https://iitr.ac.in/fees.html", sha=None, title="IIT fees")
+    store.record(db_session, "college", manit.id, "fee.tuition.annual", money(200000), document=template,
+                 status="unverified", now=T0)
+    store.not_available(db_session, "college", manit.id, "fee.tuition.annual", document=doc(db_session),
+                        academic_year="2026-27", now=T0)
+    shown = store.current(db_session, "college", manit.id, today=TODAY)["fee.tuition.annual"]
+    assert shown["value"]["amount"] == 200000 and shown["label"]["en"] == "Needs verification"

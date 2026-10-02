@@ -69,6 +69,8 @@ class CollegesPage(BasePage):
         compare_row = QHBoxLayout()
         self.compare_label = muted("")
         compare_row.addWidget(self.compare_label)
+        self.find_btn = secondary_button("Find by distance, fees, hostel…")
+        self.find_btn.clicked.connect(lambda: self.ctx.navigate("college_find"))
         self.compare_btn = primary_button("Compare selected")
         self.compare_btn.setVisible(False)
         self.compare_btn.clicked.connect(self._go_compare)
@@ -77,6 +79,7 @@ class CollegesPage(BasePage):
         compare_widget = QWidget()
         compare_widget.setLayout(compare_row)
         outer.addWidget(compare_widget)
+        outer.addWidget(self.find_btn)
 
         self._result_columns = columns(3)
         self.results_content = QWidget()

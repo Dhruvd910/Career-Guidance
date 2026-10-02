@@ -146,6 +146,16 @@ class ApiClient:
     def get_cutoffs(self, college_id: int) -> list:
         return self.get(f"/api/colleges/{college_id}/cutoffs")
 
+    def discover_colleges(self, **filters) -> dict:
+        """Colleges for a career or degree, filtered and sorted as the student chose; no overall score."""
+        return self.get("/api/colleges/discover", params={k: v for k, v in filters.items() if v not in (None, "", False)})
+
+    def college_sources(self, college_id: int) -> list:
+        return self.get(f"/api/colleges/{college_id}/sources")
+
+    def college_refresh(self, college_id: int) -> dict:
+        return self.post(f"/api/colleges/{college_id}/refresh")
+
     def college_facts(self, college_id: int, topic: str | None = None) -> dict:
         """Everything known about a college from outside, each value with its source and freshness."""
         return self.get(f"/api/colleges/{college_id}/facts", params={"topic": topic} if topic else None)

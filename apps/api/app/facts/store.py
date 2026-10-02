@@ -181,8 +181,13 @@ def view(fact: Fact, today: date, conflict: list[Fact] | None = None) -> dict:
     src, doc = fact.document.source, fact.document
     label = freshness.label(fact.status, fact.attribute, fact.verified_at, fact.academic_year, today)
     status = "conflicted" if conflict else ("stale" if label["state"] == "stale" else fact.status)
+    from app.facts import describe
+
     return {
         "fact_id": fact.id, "attribute": fact.attribute, "value": fact.value, "unit": fact.unit,
+        "what": {"en": describe.name(fact.attribute), "hi": describe.name(fact.attribute, "hi")},
+        "text": {"en": describe.value_text(fact.attribute, fact.value),
+                 "hi": describe.value_text(fact.attribute, fact.value, "hi")},
         "academic_year": fact.academic_year, "status": status, "label": label,
         "verified_at": _iso(fact.verified_at), "retrieved_at": _iso(fact.retrieved_at), "verified_by": fact.verified_by,
         "source": {"name": src.name, "tier": src.tier, "kind": TIERS[src.tier], "official": src.tier in OFFICIAL_TIERS,
@@ -206,11 +211,13 @@ def _choose(facts: list[Fact], conflicts: list[FactConflict], today: date) -> di
         by_attribute[fact.attribute].append(fact)
     out = {}
     for attribute, group in by_attribute.items():
-        years = sorted({f.academic_year for f in group if f.academic_year})
+        # A real value from any year beats "not available": a 2025-26 fee (shown as stale) says more
+        # than "no 2026-27 fee on the site yet". Only when nothing real is known is that shown.
+        real = [f for f in group if f.value is not None]
+        pool = real or group
+        years = sorted({f.academic_year for f in pool if f.academic_year})
         year = years[-1] if years else None
-        candidates = [f for f in group if f.academic_year == year] or group
-        if any(f.value is not None for f in candidates):
-            candidates = [f for f in candidates if f.value is not None]
+        candidates = [f for f in pool if f.academic_year == year] or pool
         best = min(candidates, key=_rank)
         clash = next((c for c in conflicts if c.attribute == attribute and c.academic_year == year
                       and best.id in c.fact_ids), None)

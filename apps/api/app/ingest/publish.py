@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 from app.models.college import College
 from app.okf import bundle, loader
 from app.okf.aliases import aliases_for
-from app.okf.facts import Entity, Value, upsert
+from app.okf.facts import Entity, Value, retract, upsert
 
 SECTIONS = {"colleges": "Colleges, one folder each", "exams": "Entrance exams", "documents": "Official documents"}
 
@@ -22,12 +22,17 @@ def college_entity(college: College) -> Entity:
 
 
 def publish(db: Session, values: dict[Entity, list[Value]], message: str, root: Path | None = None,
-            now: datetime | None = None) -> dict:
+            now: datetime | None = None, retractions: dict[Entity, tuple] | None = None) -> dict:
+    """retractions: {entity: (publisher key, attribute prefixes, reason)} — that publisher's earlier
+    values under those prefixes that this read didn't find again are withdrawn."""
     root = root or loader.bundle_root()
     now = now or datetime.now(timezone.utc)
     with bundle.locked(root):
         bundle.ensure_repo(root)
         log: list[str] = []
+        for entity, (publisher_key, prefixes, reason) in (retractions or {}).items():
+            keep = {(v.attribute, v.academic_year) for v in values.get(entity, [])}
+            log += retract(root, entity, publisher_key, prefixes, keep, reason, now)
         for entity, vals in values.items():
             log += upsert(root, entity, vals, now=now)
         bundle.write_indexes(root, SECTIONS)

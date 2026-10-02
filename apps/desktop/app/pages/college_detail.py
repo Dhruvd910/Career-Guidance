@@ -1,5 +1,6 @@
-"""One college, on one scrolling page: ranking, how hard it is to get in (official cutoffs by
-category), what it costs, placements, what's around the campus, sources and reviews.
+"""One college, on one scrolling page: its NIRF rank, how hard it is to get in (official cutoffs by
+category), what it costs, its campus, where it is and what's near, admissions, and reviews. Every
+value comes from a fact with its source and freshness (Phase 6); tap one for the document.
 
 The old tabbed layout put a scroller inside each tab inside the page scroller, which was hard
 to drag on the resistive panel, and its fee/hostel tabs only ever had demo data.
@@ -12,12 +13,15 @@ from PySide6.QtWidgets import QComboBox, QGridLayout, QHBoxLayout, QLabel, QText
 from app import college_facts as facts
 from app.api_client import ApiError, api_client
 from app.layout import page_margins
+from app.pages.assessments import preferred_language
 from app.pages.base import BasePage
+from app.pages.directions import words
 from app.session import session
 from app.widgets.common import (
     Card, clear_layout, demo_badge, error_label, ghost_button, heading, muted, primary_button,
     secondary_button, set_error, subtitle,
 )
+from app.widgets.facts import facts_card, osm_note
 from app.widgets.links import link_row
 from app.workers import run_async
 
@@ -79,7 +83,6 @@ class CollegeDetailPage(BasePage):
     def _render(self, college: dict) -> None:
         self.college = college
         clear_layout(self.body_layout)
-        profile = college.get("profile")
 
         title = QHBoxLayout()
         title.addWidget(heading(college["canonical_name"]), 1)
@@ -92,15 +95,18 @@ class CollegeDetailPage(BasePage):
         if college.get("established_year"):
             about += f" · since {college['established_year']}"
         self.body_layout.addWidget(subtitle(about))
-        ranking = facts.ranking_line(profile)
-        if ranking:
-            self.body_layout.addWidget(_text(f"<b>{ranking}</b>"))
+        lang = preferred_language(self.ctx)
+        groups = college.get("facts") or {}
+        ranks = [v for a, v in (groups.get("Academic") or {}).items() if a.startswith("ranking.nirf")]
+        for view in ranks:
+            value = view["value"]
+            self.body_layout.addWidget(_text(f"<b>NIRF {value['year']}: #{value['rank']} in {value['category']}</b>"))
 
         actions = QHBoxLayout()
-        read = secondary_button("Read it to me")
+        read = secondary_button(words(lang, "Read it to me", "पढ़कर सुनाओ"))
         read.clicked.connect(self._read_aloud)
         actions.addWidget(read)
-        ask = primary_button("Ask MAYA about it")
+        ask = primary_button(words(lang, "Ask MAYA about it", "MAYA से पूछें"))
         ask.clicked.connect(lambda: self.ctx.navigate(
             "maya", ask=f"Tell me about {college['canonical_name']}. Could I get in, and is it a good fit for me?"))
         actions.addWidget(ask)
@@ -111,44 +117,41 @@ class CollegeDetailPage(BasePage):
 
         self._render_admission(college.get("admission"))
 
-        if profile:
-            fees = facts.fee_lines(profile)
-            if fees:
-                card = self._section("What it costs")
-                card.addWidget(_text(f"<b>{fees[0]}</b>"))
-                for line in fees[1:]:
-                    card.addWidget(muted(line))
-            placements = facts.placement_lines(profile)
-            if placements:
-                card = self._section("Placements & what graduates do")
-                for line in placements:
-                    card.addWidget(_text(line))
-                note = (profile.get("placements") or {}).get("source_note")
-                if note:
-                    card.addWidget(muted(note))
-            if profile.get("hospital"):
-                card = self._section("Teaching hospital")
-                card.addWidget(_text(profile["hospital"]))
-            around = facts.surroundings_lines(profile)
-            if around:
-                card = self._section("Around the campus", "Approximate distances — check a map before you travel.")
-                for label, value in around:
-                    card.addWidget(_text(f"<b>{label}:</b> {value}"))
-        else:
-            card = self._section("Fees, placements and surroundings")
-            card.addWidget(_text(facts.not_researched(college["canonical_name"])))
+        nothing = words(lang, "Not found on official sources yet. Tap “Check for updates” and MAYA will look tonight.",
+                        "आधिकारिक स्रोतों पर अभी नहीं मिला। “अपडेट देखें” दबाइए — MAYA आज रात देखेगी।")
+        self.body_layout.addWidget(facts_card(words(lang, "What it costs", "खर्च"), groups.get("Financial") or {}, lang,
+                                              self, nothing))
+        self.body_layout.addWidget(facts_card(words(lang, "Campus", "कैंपस"), groups.get("Campus") or {}, lang, self, nothing))
+        self.body_layout.addWidget(facts_card(words(lang, "Where it is and what's near", "कहाँ है और आसपास क्या है"),
+                                              groups.get("Location") or {}, lang, self, nothing,
+                                              skip=("location.website", "location.coordinates"), note=osm_note(lang)))
+        admissions = {a: v for a, v in (groups.get("Admissions") or {}).items()}
+        if admissions:
+            self.body_layout.addWidget(facts_card(words(lang, "Admissions", "प्रवेश"), admissions, lang, self, nothing))
+        academic = {a: v for a, v in (groups.get("Academic") or {}).items() if not a.startswith("ranking.")}
+        if academic:
+            self.body_layout.addWidget(facts_card(words(lang, "About", "परिचय"), academic, lang, self, nothing))
 
-        sources = list((profile or {}).get("sources", []))
-        admission = college.get("admission")
-        if admission and admission.get("source_url"):
-            sources.append({"name": admission["source"], "url": admission["source_url"]})
-        website = college.get("official_website")
-        if website or sources:
-            card = self._section("Links", "Tap one to open it on your phone.")
-            if website:
-                card.addWidget(link_row("Official website", website, website, self, compact=True))
-            for s in sources:
-                card.addWidget(link_row(s["name"], "", s["url"], self, compact=True))
+        more = QHBoxLayout()
+        check = secondary_button(words(lang, "Check for updates", "अपडेट देखें"))
+        check.clicked.connect(self._refresh)
+        more.addWidget(check)
+        sources = ghost_button(words(lang, "Where this comes from", "यह जानकारी कहाँ से"))
+        sources.clicked.connect(lambda: self.ctx.navigate("college_sources", college=college))
+        more.addWidget(sources)
+        more.addStretch(1)
+        holder = QWidget()
+        holder.setLayout(more)
+        self.body_layout.addWidget(holder)
+        self.refresh_note = muted("")
+        self.body_layout.addWidget(self.refresh_note)
+
+        website = ((groups.get("Location") or {}).get("location.website") or {}).get("value", {}) or {}
+        website = website.get("url") or college.get("official_website")
+        if website:
+            card = self._section(words(lang, "Official website", "आधिकारिक वेबसाइट"),
+                                 words(lang, "Tap to open it on your phone.", "फ़ोन पर खोलने के लिए दबाइए।"))
+            card.addWidget(link_row(website, "", website, self, compact=True))
 
         self._render_reviews_section()
 
@@ -160,6 +163,13 @@ class CollegeDetailPage(BasePage):
         run_async(api_client.get_cutoffs, cid, on_success=lambda rows: self._got_cutoffs(cid, rows),
                   on_error=lambda _e: None)
         run_async(api_client.get_reviews, cid, on_success=self._render_reviews, on_error=lambda _e: None)
+
+    def _refresh(self) -> None:
+        if not self.college_id:
+            return
+        run_async(api_client.college_refresh, self.college_id,
+                  on_success=lambda r: self.refresh_note.setText(r.get("message", "")),
+                  on_error=lambda _e: self.refresh_note.setText("Couldn't reach MAYA's server just now."))
 
     def _render_admission(self, admission: dict | None) -> None:
         card = self._section("Getting in")
@@ -288,22 +298,21 @@ class CollegeDetailPage(BasePage):
     def _read_aloud(self) -> None:
         if not self.college:
             return
-        c, profile = self.college, self.college.get("profile")
+        c = self.college
+        groups = c.get("facts") or {}
         parts = [f"{c['canonical_name']}, in {c['city']}, {c['state']}."]
-        if facts.ranking_line(profile):
-            parts.append(facts.ranking_line(profile) + ".")
+        for attribute, view in (groups.get("Academic") or {}).items():
+            if attribute.startswith("ranking.nirf"):
+                v = view["value"]
+                parts.append(f"NIRF {v['year']}: number {v['rank']} in {v['category']}.")
         admission = c.get("admission")
         if admission:
             parts.extend(line + "." for line in facts.admission_lines(admission)[1:3])
-        fees = facts.fee_lines(profile)
-        if fees:
-            parts.append(fees[0] + ".")
-        placements = facts.placement_lines(profile)
-        if placements:
-            parts.append(placements[0] + ".")
-        s = (profile or {}).get("surroundings") or {}
-        if s.get("railway"):
-            parts.append("Nearest station: " + s["railway"] + ".")
+        for group, attribute in (("Financial", "fee.tuition.annual"), ("Location", "near.railway_station")):
+            view = (groups.get(group) or {}).get(attribute)
+            if view and view["status"] != "not_available":
+                parts.append(f"{view['what']['en']}: {view['text']['en']}, according to {view['source']['name']}"
+                             + (f", {view['academic_year']}" if view.get("academic_year") else "") + ".")
         self.ctx.voice.say(facts.spoken(" ".join(parts)))
 
     def _failed(self, err: Exception) -> None:

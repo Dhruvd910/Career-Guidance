@@ -35,6 +35,8 @@ def test_names_are_matched_strictly():
     assert m("Dr. Rajendar Prasad Government Medical College, Tanda, H.P", "Dr. Rajendra Prasad Government Medical College")
     assert m("AIIMS Guwahati", "All India Institute of Medical Sciences, Guwahati")
     assert not m("AIIMS Guwahati", "Guwahati Medical College"), "an AIIMS is only ever an AIIMS"
+    assert m("Maulana Azad National Institute of Technology Bhopal", "Maulana Azad National Insititute of Technology"), \
+        "OpenStreetMap's own misspelling"
 
 
 BHOPAL = geo.find("Bhopal", "Madhya Pradesh")

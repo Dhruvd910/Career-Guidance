@@ -444,8 +444,15 @@ class DirectionPage(BasePage):
             if college.get("college_id"):
                 button.clicked.connect(lambda _c=False, cid=college["college_id"]: self.ctx.navigate("college_detail", college_id=cid))
             card.addWidget(button)
-        card.addWidget(muted(words(lang, "From the JoSAA and MCC 2026 lists. Fees, hostels and facilities aren't collected yet.",
-                                   "JoSAA और MCC 2026 की सूचियों से। फ़ीस, हॉस्टल और सुविधाओं की जानकारी अभी इकट्ठी नहीं हुई है।")))
+        find = secondary_button(words(lang, "Find colleges for this: distance, fees, hostel…", "इसके कॉलेज खोजें: दूरी, फ़ीस, हॉस्टल…"))
+        find.clicked.connect(lambda: self.ctx.navigate("college_find", career=self.key,
+                                                       career_name=career["name"] if isinstance(career["name"], str)
+                                                       else career["name"].get(lang)))
+        card.addWidget(find)
+        card.addWidget(muted(words(lang, "From the JoSAA and MCC 2026 lists; fees and facilities from each college's official "
+                                         "sources where MAYA has found them.",
+                                   "JoSAA और MCC 2026 की सूचियों से; फ़ीस और सुविधाएँ हर कॉलेज के आधिकारिक स्रोतों से, "
+                                   "जहाँ MAYA को मिलीं।")))
 
     def _talk(self) -> None:
         if self.career is None:

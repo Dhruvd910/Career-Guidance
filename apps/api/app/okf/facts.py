@@ -398,3 +398,33 @@ def decide(root: Path, cid: str, attribute: str, academic_year: str | None, sour
     _refresh(concept, Entity(**{k: (tuple(v) if k == "aliases" else v) for k, v in entity.items()}))
     bundle.write(root, concept)
     return log
+
+
+def retract(root: Path, entity: Entity, publisher_key: str, prefixes: tuple[str, ...], keep: set[tuple],
+            reason: str, now: datetime | None = None) -> list[str]:
+    """A fresh read of one publisher replaces its last: its values under `prefixes` that aren't in
+    `keep` (attribute, academic year) are taken out of the bundle — the loader then withdraws them.
+    A concept left with nothing is removed."""
+    log = []
+    folder = root / entity.folder
+    if not folder.exists():
+        return log
+    author = f"org:{publisher_key}"
+    for concept in list(bundle.concepts(root, entity.folder)):
+        facts = (concept.meta.get("maya") or {}).get("facts") or []
+        sources = {s["id"]: s for s in concept.meta.get("sources") or []}
+        gone = [f for f in facts if f["attribute"].startswith(prefixes)
+                and sources.get(f["source"], {}).get("author") == author
+                and (f["attribute"], f.get("academic_year")) not in keep]
+        if not gone:
+            continue
+        for f in gone:
+            facts.remove(f)
+            log.append(f"**Withdrawn**: {describe.name(f['attribute'])} for [{entity.name}](/{concept.id}.md) "
+                       f"({describe.value_text(f['attribute'], f.get('value'))}) — {reason}")
+        if not facts and concept.type != "College":
+            bundle.path_of(root, concept.id).unlink()
+        else:
+            _refresh(concept, entity)
+            bundle.write(root, concept)
+    return log

@@ -17,6 +17,7 @@ from app.widgets.common import (
     Card, clear_layout, demo_badge, error_label, heading, muted, primary_button, secondary_button,
     set_error,
 )
+from app.widgets.facts import cell_text, osm_note
 from app.widgets.links import link_row
 from app.workers import run_async
 
@@ -31,24 +32,19 @@ def verdicts(rows: list[dict]) -> list[str]:
     """One line each for the questions students ask first. Only compares like with like: NIRF
     ranks within one ranking list, closing ranks within one exam."""
     out = []
-    profiles = [(r, r.get("profile") or {}) for r in rows]
     name = lambda r: facts.short_name(r["college"]["canonical_name"])  # noqa: E731
 
-    ranked = [(r, p["nirf"]) for r, p in profiles if p.get("nirf")]
-    if len(ranked) >= 2 and len({n["category"] for _, n in ranked}) == 1:
-        r, n = min(ranked, key=lambda x: x[1]["rank"])
-        out.append(f"Best ranked: {name(r)} (NIRF #{n['rank']})")
+    for attribute in ("ranking.nirf.engineering", "ranking.nirf.medical"):  # one ranking list at a time
+        ranked = [(r, int(str(r["facts"][attribute]["value"]).split()[0])) for r in rows
+                  if (r.get("facts") or {}).get(attribute) and str(r["facts"][attribute]["value"]).split()[0].isdigit()]
+        if len(ranked) >= 2:
+            r, rank = min(ranked, key=lambda x: x[1])
+            out.append(f"Best ranked: {name(r)} (NIRF #{rank})")
 
     costs = [(r, r["approximate_annual_cost"]) for r in rows if r.get("approximate_annual_cost")]
     if len(costs) >= 2:
         r, c = min(costs, key=lambda x: x[1])
-        out.append(f"Lowest fees: {name(r)} ({facts.lakh(c)} a year tuition)")
-
-    medians = [(r, p["placements"]["median_lpa"]) for r, p in profiles
-               if (p.get("placements") or {}).get("median_lpa") is not None]
-    if len(medians) >= 2:
-        r, m = max(medians, key=lambda x: x[1])
-        out.append(f"Best median package: {name(r)} (₹{m:g} lakh a year)")
+        out.append(f"Lowest tuition: {name(r)} ({facts.lakh(c)} a year)")
 
     admissions = [(r, r["admission"]) for r in rows if r.get("admission")]
     if len(admissions) >= 2 and len({a["exam_code"] for _, a in admissions}) == 1:
@@ -159,30 +155,21 @@ class ComparePage(BasePage):
             for line in quick:
                 card.addWidget(_text("•  " + line))
 
-        card = self._section("Ranking")
-        self._per_college(card, rows, lambda r: [muted(facts.ranking_line(r.get("profile"))
-                                                        or "Not in the NIRF top list MAYA has")])
+        card = self._section("Ranking", "NIRF, from the Ministry of Education's own ranking pages.")
+        self._per_college(card, rows, lambda r: self._cells(r, ("ranking.nirf.engineering", "ranking.nirf.medical"),
+                                                            "Not in NIRF's ranked list"))
 
         card = self._section("Getting in", "Official closing ranks from JoSAA (engineering) and MCC (medical).")
         self._per_college(card, rows, lambda r: [_text(line) for line in facts.admission_lines(r.get("admission"))])
 
-        card = self._section("Cost per year (affordability)")
-        self._per_college(card, rows, self._cost_widgets)
+        card = self._section("What it costs", "From each college's own fee notice where MAYA found one.")
+        self._per_college(card, rows, lambda r: self._cells(r, ("fee.tuition.annual", "fee.hostel.annual", "fee.mess.annual")))
 
-        card = self._section("Placements & what graduates do")
-        self._per_college(card, rows, lambda r: [_text(t) for t in facts.placement_lines(r.get("profile"))]
-                          or [muted("Not researched yet")])
+        card = self._section("Campus")
+        self._per_college(card, rows, lambda r: self._cells(r, ("facility.hostel", "facility.medical")))
 
-        card = self._section("Around the campus", "Approximate distances — check a map before you travel.")
-        self._per_college(card, rows, self._surroundings_widgets)
-
-        if any((r.get("profile") or {}).get("hospital") for r in rows):
-            card = self._section("Teaching hospital")
-            self._per_college(card, rows, lambda r: [_text((r.get("profile") or {}).get("hospital") or "—")])
-
-        missing = [r for r in rows if not r.get("profile")]
-        for r in missing:
-            self.body_layout.addWidget(muted(facts.not_researched(r["college"]["canonical_name"])))
+        card = self._section("Around the campus", osm_note("en"))
+        self._per_college(card, rows, lambda r: self._cells(r, ("near.railway_station", "near.airport", "near.hospital")))
 
         if result.get("ai_summary"):
             card = self._section("MAYA's take")
@@ -191,9 +178,9 @@ class ComparePage(BasePage):
 
         sources = []
         for r in rows:
-            for s in (r.get("profile") or {}).get("sources", []):
-                if s not in sources:
-                    sources.append(s)
+            for cell in (r.get("facts") or {}).values():
+                if cell and cell.get("url") and not any(s["url"] == cell["url"] for s in sources):
+                    sources.append({"name": cell["source"], "url": cell["url"]})
             a = r.get("admission")
             if a and a.get("source_url") and not any(s["url"] == a["source_url"] for s in sources):
                 sources.append({"name": a["source"], "url": a["source_url"]})
@@ -206,19 +193,16 @@ class ComparePage(BasePage):
         back.clicked.connect(self.ctx.go_back)
         self.body_layout.addWidget(back)
 
-    def _cost_widgets(self, row: dict) -> list[QWidget]:
-        lines = facts.fee_lines(row.get("profile"))
-        if lines:
-            return [_text(lines[0])] + [muted(t) for t in lines[1:]]
-        if row.get("approximate_annual_cost"):
-            return [_text(f"About {facts.lakh(row['approximate_annual_cost'])} a year")]
-        return [muted("Not researched yet")]
-
-    def _surroundings_widgets(self, row: dict) -> list[QWidget]:
-        lines = facts.surroundings_lines(row.get("profile"))
-        if not lines:
-            return [muted("Not researched yet")]
-        return [_text(f"<b>{label}:</b> {value}") for label, value in lines]
+    def _cells(self, row: dict, attributes: tuple[str, ...], empty: str = "Not known") -> list[QWidget]:
+        out = []
+        for attribute in attributes:
+            cell = (row.get("facts") or {}).get(attribute)
+            if not cell or cell.get("status") == "not_available":
+                continue
+            value, note = cell_text(cell)
+            out.append(_text(f"<b>{cell['what']}:</b> {value}"))
+            out.append(muted(note))
+        return out or [muted(empty)]
 
     def _read_aloud(self) -> None:
         if not self.result:
@@ -226,9 +210,10 @@ class ComparePage(BasePage):
         rows = self.result["rows"]
         parts = verdicts(rows) or ["Here's how they compare."]
         for r in rows:
-            fees = facts.fee_lines(r.get("profile"))
-            if fees:
-                parts.append(f"{facts.short_name(r['college']['canonical_name'])}: {fees[0]}.")
+            cell = (r.get("facts") or {}).get("fee.tuition.annual")
+            if cell and cell.get("status") != "not_available":
+                parts.append(f"{facts.short_name(r['college']['canonical_name'])}: tuition {cell['value']}, "
+                             f"according to {cell['source']}")
         self.ctx.voice.say(facts.spoken(". ".join(parts)))
 
     def _failed(self, err: Exception) -> None:
