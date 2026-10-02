@@ -35,7 +35,7 @@ from app.providers.llm import LLMProvider
 
 logger = logging.getLogger(__name__)
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2  # 2: what happened, and roadmap_changes, from the modules (Phase 7)
 MAX_TRANSCRIPT_CHARS = 14_000
 DUPLICATE_SIMILARITY = 0.92  # a new memory this close to an old one is the same memory
 SIGNAL_THRESHOLD = 0.5  # weaker readings of how the student seemed are not kept
@@ -332,7 +332,11 @@ async def write_session_memory(db: Session, conversation_id: int, llm: LLMProvid
         if changed:
             event("PROFILE_UPDATED", "profile", profile.id, extraction.profile.evidence.quote, **changed)
 
+    from app.mentor.session_facts import happened
+
+    record = happened(db, conversation, now)
     summary = SessionSummary(
+        happened=record["happened"], roadmap_changes=record["roadmap_changes"],
         conversation_id=conversation_id, student_profile_id=profile.id, schema_version=SCHEMA_VERSION,
         summary=extraction.summary, important_context=extraction.important_context, decisions=extraction.decisions,
         unresolved_questions=extraction.unresolved_questions, new_interests=[

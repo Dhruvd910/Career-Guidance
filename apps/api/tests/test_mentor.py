@@ -181,3 +181,31 @@ def _walk(nodes):
     for n in nodes:
         yield n
         yield from _walk(n["children"])
+
+
+def test_a_session_summary_records_what_happened(db_session):
+    from app.mentor import shortlist
+    from app.roadmap import service
+    from tests.fakes import FakeLLM
+    from tests.test_memory_writer import TRANSCRIPT, notes, session, write
+    from tests.test_memory_writer import student as memory_student
+
+    seed_careers(db_session)
+    asha = memory_student(db_session)
+    conversation, ids = session(db_session, asha, *TRANSCRIPT)
+    service.adapt(db_session, asha, "focus", career="cse")
+    take(db_session, asha, "aptitude", choose=right)
+    manit = College(canonical_name="MANIT Bhopal", college_type="NIT", ownership="government", state="MP", city="Bhopal",
+                    is_demo_data=False)
+    db_session.add(manit)
+    db_session.commit()
+    shortlist.add(db_session, asha, manit.id)
+    summary = write(db_session, conversation, FakeLLM(notes(ids)))
+    kinds = {h["kind"] for h in summary.happened}
+    assert {"roadmap", "assessment", "shortlist"} <= kinds
+    [took] = [h["what"] for h in summary.happened if h["kind"] == "assessment"]
+    assert took.startswith("Took “") and took.endswith("”")
+    assert "Shortlisted MANIT Bhopal" in [h["what"] for h in summary.happened]
+    assert summary.roadmap_changes and summary.roadmap_changes[0]["trigger"] in ("initial", "focus"), \
+        "roadmap changes come from the roadmap, not the model"
+    assert summary.schema_version == 2

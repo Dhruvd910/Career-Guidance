@@ -126,6 +126,8 @@ class SessionSummary(Base, TimestampMixin):
     roadmap_changes: Mapped[list] = mapped_column(Json, default=list)
     # Aggregated and hedged — e.g. [{"signal": "confusion", "confidence": 0.7}] — never a diagnosis.
     student_state: Mapped[list] = mapped_column(Json, default=list)
+    # Phase 7: what actually happened, from the modules (roadmap versions, steps, assessments, shortlist).
+    happened: Mapped[list] = mapped_column(Json, default=list)
     threads_touched: Mapped[list] = mapped_column(Json, default=list)
     model: Mapped[str | None] = mapped_column(String(100), nullable=True)
 
