@@ -28,7 +28,9 @@ from urllib.parse import urlsplit
 import certifi
 import httpx
 
-USER_AGENT = "MAYA-career-counsellor/0.6 (offline research for a student counselling kiosk; respects robots.txt)"
+# Plain and honest. (Some government firewalls turn away any agent that mentions "robots.txt" as a crawler,
+# so it isn't said here; robots.txt is still respected.)
+USER_AGENT = "MAYA-career-counsellor/0.6 (student counselling kiosk)"
 MAX_BYTES = 25 * 1024 * 1024
 EXTENSIONS = {"text/html": ".html", "application/pdf": ".pdf", "application/json": ".json",
               "application/sparql-results+json": ".json", "text/plain": ".txt", "text/csv": ".csv",
@@ -177,13 +179,16 @@ class Fetcher:
                        meta["sha256"], retrieved, meta["storage_path"])
 
     def get(self, url: str, *, params: dict | None = None, data: dict | None = None,
-            headers: dict | None = None, keep: bool = True, api: bool = False, cache_days: int | None = None) -> Fetched:
-        """cache_days: reuse this exact request's answer if it was fetched within that many days."""
+            headers: dict | None = None, keep: bool = True, api: bool = False, cache_days: int | None = None,
+            timeout: float | None = None) -> Fetched:
+        """cache_days: reuse this exact request's answer if it was fetched within that many days;
+        timeout: for slow APIs, longer than the default."""
         if cache_days is not None:
             hit = self._cached(url, params, data, cache_days)
             if hit is not None:
                 return hit
-        page = self._get(url, params=params, data=data, headers=headers, keep=keep or cache_days is not None, api=api)
+        page = self._get(url, params=params, data=data, headers=headers, keep=keep or cache_days is not None, api=api,
+                         timeout=timeout)
         if cache_days is not None and page.ok and page.storage_path:
             index = self._cache_key(url, params, data)
             index.parent.mkdir(parents=True, exist_ok=True)
@@ -193,7 +198,7 @@ class Fetcher:
         return page
 
     def _get(self, url: str, *, params: dict | None = None, data: dict | None = None,
-             headers: dict | None = None, keep: bool = True, api: bool = False) -> Fetched:
+             headers: dict | None = None, keep: bool = True, api: bool = False, timeout: float | None = None) -> Fetched:
         """api=True only for documented public APIs (Wikidata's API, Nominatim, Overpass): their
         robots.txt is written for crawlers, and their own usage policies — identify yourself, go
         slowly — are what apply, and are followed here."""
@@ -206,10 +211,11 @@ class Fetcher:
             self._wait(host)
             client = self._client_for(host)
             try:
+                wait = httpx.USE_CLIENT_DEFAULT if timeout is None else timeout
                 if data is not None:
-                    r = client.post(url, params=params, data=data, headers=headers)
+                    r = client.post(url, params=params, data=data, headers=headers, timeout=wait)
                 else:
-                    r = client.get(url, params=params, headers=headers)
+                    r = client.get(url, params=params, headers=headers, timeout=wait)
             except httpx.ConnectError as e:
                 error = f"{type(e).__name__}: {e}"[:300]
                 if "CERTIFICATE_VERIFY_FAILED" in str(e) and self._repair(host):

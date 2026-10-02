@@ -55,9 +55,31 @@ def _withdraw(db: Session, entity_type: str, entity_id: int, cid: str, keep: set
     return gone
 
 
+def document_row(db: Session, concept: bundle.Concept):
+    """An Official Document concept's database row (its passages are indexed by app.rag)."""
+    s = (concept.meta.get("sources") or [{}])[0]
+    info = (concept.meta.get("maya") or {}).get("document") or {}
+    publisher = str(s.get("author", "")).removeprefix("org:") or s.get("resource")
+    src = store.source(db, publisher, s.get("publisher") or publisher, int(s.get("tier") or 6))
+    doc = store.document(db, src, s["resource"], concept.meta.get("title") or s["resource"], when(s.get("retrieved_at")),
+                         sha256=s.get("sha256"), parse_status="text", academic_year=info.get("academic_year"),
+                         entity_refs=info.get("about") or [])
+    if doc.academic_year != info.get("academic_year"):  # corrected in the bundle: follow it, passages too
+        from sqlalchemy import update
+
+        from app.models.facts import DocChunk
+
+        doc.academic_year = info.get("academic_year")
+        db.execute(update(DocChunk).where(DocChunk.source_document_id == doc.id).values(academic_year=doc.academic_year))
+    return doc
+
+
 def load_concept(db: Session, concept: bundle.Concept, problems: list[str]) -> tuple[int, tuple[str, int] | None]:
     """Loads one concept file; returns (values loaded, the entity it was about)."""
     maya = concept.meta.get("maya") or {}
+    if concept.type == "Official Document":
+        document_row(db, concept)
+        return 0, None
     entity = maya.get("entity")
     if not entity:
         return 0, None  # a concept MAYA didn't write: tolerated, as OKF requires

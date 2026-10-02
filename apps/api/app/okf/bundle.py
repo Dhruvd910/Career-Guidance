@@ -181,6 +181,30 @@ def append_log(root: Path, entries: list[str], day: date, directory: str = "") -
     path.write_text("\n".join(lines).rstrip("\n") + "\n", encoding="utf-8")
 
 
+# ---------------- one writer at a time ----------------
+
+class locked:
+    """Held around every write to the bundle (write, commit, load), so jobs running side by side
+    never interleave their changes or trip over git's own lock."""
+
+    def __init__(self, root: Path):
+        self.path = Path(root).parent / f".{Path(root).name}.lock"
+
+    def __enter__(self):
+        import fcntl
+
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.handle = open(self.path, "w")
+        fcntl.flock(self.handle, fcntl.LOCK_EX)
+        return self
+
+    def __exit__(self, *exc):
+        import fcntl
+
+        fcntl.flock(self.handle, fcntl.LOCK_UN)
+        self.handle.close()
+
+
 # ---------------- git ----------------
 
 GIT_IDENTITY = ("-c", "user.name=MAYA knowledge pipeline", "-c", "user.email=maya-pipeline@localhost")

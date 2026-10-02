@@ -36,18 +36,13 @@ from app.models.college import College
 from app.okf.facts import Document, Value
 
 NOMINATIM = "https://nominatim.openstreetmap.org/search"
-OVERPASSES = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
-OVERPASS = OVERPASSES[0]
+OVERPASS = "https://overpass-api.de/api/interpreter"
 CACHE_DAYS = 30  # an answer from the last month is reused rather than asked for again
 
 
 def overpass(fetcher: Fetcher, query: str) -> Fetched:
-    """Two public Overpass servers, taking turns (each paced on its own); if one fails, the other."""
-    OVERPASSES.append(OVERPASSES.pop(0))
-    page = fetcher.get(OVERPASSES[0], data={"data": query}, api=True, cache_days=CACHE_DAYS)
-    if not page.ok:
-        page = fetcher.get(OVERPASSES[1], data={"data": query}, api=True, cache_days=CACHE_DAYS)
-    return page
+    """The main public Overpass server, given as long as its own query limit allows."""
+    return fetcher.get(OVERPASS, data={"data": query}, api=True, cache_days=CACHE_DAYS, timeout=120)
 MAX_KM = 40
 NATIONAL = ("IIT", "NIT", "IIIT", "AIIMS", "JIPMER", "IISc", "IIEST")  # the pilot institutes go first
 NEAR = {  # attribute: (radius in metres, Overpass filters)
@@ -110,11 +105,22 @@ def _family(text: str) -> set[str]:
     return set()
 
 
+def _spelling(token: str) -> str:
+    """OpenStreetMap and official lists both misspell ("Insititute", "Medicial"): a long word very
+    close to a generic or kind word is that word."""
+    if len(token) < 6 or token in GENERIC or token in KINDS:
+        return token
+    from difflib import SequenceMatcher
+
+    best = max(GENERIC | KINDS, key=lambda w: SequenceMatcher(None, token, w).ratio())
+    return best if SequenceMatcher(None, token, best).ratio() >= 0.85 else token
+
+
 def _kind_and_names(text: str) -> tuple[set[str], set[str]]:
-    family = _family(text)
+    family = _family(text) or _family(" ".join(_spelling(t) for t in geo.norm(text).split()))
     text = expand(text)
     text = re.sub(r"\b([A-Za-z])\.\s?([A-Za-z])\b\.?", r"\1\2", text)  # "H.P" → "HP"
-    tokens = {t for t in _tokens(text) if len(t) > 1}
+    tokens = {_spelling(t) for t in _tokens(text) if len(t) > 1}
     _, index = geo._index()
     places = {t for t in tokens if t in index}
     return (tokens & KINDS) | family, tokens - KINDS - GENERIC - STATE_SHORT - places
@@ -182,13 +188,13 @@ TOWN_PAGES: dict[tuple, Fetched] = {}  # one Overpass look per town per run: man
 
 
 def around_town(fetcher: Fetcher, college: College, town: geo.Place) -> tuple[Found | None, str]:
-    """Every named college, university and hospital within 20 km of the town, best name match first."""
+    """Every named college, university and hospital in a 20 km box around the town, best name match first."""
     key = (town.name, town.lat, town.lng)
     page = TOWN_PAGES.get(key)
     if page is None:
-        named = '["name"~"college|institute|university|aiims|jipmer|vidyap|academy|medical|campus",i]'
-        query = (f'[out:json][timeout:60];(nwr(around:20000,{town.lat},{town.lng})["amenity"~"^(college|university|hospital)$"]{named};'
-                 f'nwr(around:20000,{town.lat},{town.lng})["building"~"^(college|university)$"]{named};);out center tags qt;')
+        box = _box(town.lat, town.lng, 20)
+        query = (f'[out:json][timeout:60];(nwr["amenity"~"^(college|university|hospital)$"]["name"]({box});'
+                 f'nwr["building"~"^(college|university)$"]["name"]({box}););out center tags qt;')
         page = overpass(fetcher, query)
         if page.ok:
             TOWN_PAGES[key] = page
@@ -234,8 +240,17 @@ def nominatim(fetcher: Fetcher, college: College, town: geo.Place | None) -> tup
 
 # ---------------- Overpass ----------------
 
+def _box(lat: float, lng: float, km: float) -> str:
+    """A bounding box around a point (south, west, north, east) — far cheaper for Overpass than "around"."""
+    import math
+
+    dlat = km / 111.0
+    dlng = km / (111.0 * max(0.2, math.cos(math.radians(lat))))
+    return f"{lat - dlat:.5f},{lng - dlng:.5f},{lat + dlat:.5f},{lng + dlng:.5f}"
+
+
 def overpass_query(lat: float, lng: float) -> str:
-    parts = [f'nwr(around:{radius},{lat},{lng}){f};' for radius, filters in NEAR.values() for f in filters]
+    parts = [f'nwr{f}({_box(lat, lng, radius / 1000)});' for radius, filters in NEAR.values() for f in filters]
     return f"[out:json][timeout:60];({''.join(parts)});out center tags qt;"
 
 

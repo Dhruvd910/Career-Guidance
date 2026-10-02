@@ -13,7 +13,7 @@ from app.okf import bundle, loader
 from app.okf.aliases import aliases_for
 from app.okf.facts import Entity, Value, upsert
 
-SECTIONS = {"colleges": "Colleges, one folder each", "exams": "Entrance exams"}
+SECTIONS = {"colleges": "Colleges, one folder each", "exams": "Entrance exams", "documents": "Official documents"}
 
 
 def college_entity(college: College) -> Entity:
@@ -25,13 +25,14 @@ def publish(db: Session, values: dict[Entity, list[Value]], message: str, root: 
             now: datetime | None = None) -> dict:
     root = root or loader.bundle_root()
     now = now or datetime.now(timezone.utc)
-    bundle.ensure_repo(root)
-    log: list[str] = []
-    for entity, vals in values.items():
-        log += upsert(root, entity, vals, now=now)
-    bundle.write_indexes(root, SECTIONS)
-    bundle.append_log(root, log, now.date())
-    problems = bundle.check(root)
-    commit = bundle.commit(root, message)
-    run = loader.load(db, root)
+    with bundle.locked(root):
+        bundle.ensure_repo(root)
+        log: list[str] = []
+        for entity, vals in values.items():
+            log += upsert(root, entity, vals, now=now)
+        bundle.write_indexes(root, SECTIONS)
+        bundle.append_log(root, log, now.date())
+        problems = bundle.check(root)
+        commit = bundle.commit(root, message)
+        run = loader.load(db, root)
     return {"changes": len(log), "commit": commit, "loaded": run.facts, "problems": problems + list(run.problems)}

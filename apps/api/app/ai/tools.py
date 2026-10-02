@@ -108,6 +108,22 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "search_documents",
+            "description": "Search official admission documents (JoSAA business rules, MCC counselling scheme, NTA "
+                           "information bulletins, JEE Advanced brochure, colleges' own notices) for what they say: "
+                           "eligibility, how counselling rounds work, documents needed, rules. query: in English, "
+                           "a few key words. Quote the document and its date; a fee or date inside a passage is "
+                           "what that document said, not necessarily current — current values come from college_facts.",
+            "parameters": {"type": "object", "properties": {
+                "query": {"type": "string"},
+                "exam": {"type": "string", "enum": ["JEE_MAIN", "JEE_ADVANCED", "NEET_UG"],
+                         "description": "only documents about this exam"}},
+                "required": ["query"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "compare_colleges",
             "description": "Compare 2-4 colleges side by side on cutoffs, fees, hostel, placement, rating.",
             "parameters": {
@@ -429,6 +445,18 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                 "Say where each value comes from and how recently it was checked; for 'Needs verification' or "
                 "'Stale', say so. Anything not listed here is unknown: say you couldn't verify it."
                 if found else f"Nothing verified about this college's {args.get('topic')} yet — say so plainly.")}
+        if name == "search_documents":
+            from app import rag
+            from app.providers.registry import get_embedding_provider
+
+            hits = rag.search(db, str(args.get("query") or ""), get_embedding_provider(),
+                              entity=f"exam:{args['exam']}" if args.get("exam") else None)
+            return {"passages": [{k: h[k] for k in ("text", "document", "academic_year", "publisher", "page", "retrieved",
+                                                     "url", "official")} for h in hits],
+                    "note": ("Answer from these passages only, naming the document and its year. Prefer the newest "
+                             "year's document; if only an older one says it, say so (rules can change). Nothing relevant "
+                             "here means the documents don't say: tell them so." if hits else
+                             "No official document on this yet — say you couldn't find it in the official documents.")}
         if name == "compare_colleges":
             return _dump(college_service.compare_colleges(db, args["college_ids"]))
         if name in ("predict_jee", "predict_neet"):
