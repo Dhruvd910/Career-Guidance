@@ -247,3 +247,77 @@ The decisions above; doc 00's status.
   `applies_to`, and waivers are kept as text. MAYA never computes "your fee".
 - **OpenStreetMap coverage varies by city.** A missing station is `not_available`, not the
   nearest one guessed.
+
+## As built (2026-10-02)
+
+Steps 0–11 are built. 481 server tests pass on SQLite and on PostgreSQL, and 385 Pi-app tests pass.
+The knowledge bundle at `apps/api/data/okf` is conformant OKF v0.2, with 40-odd commits so far.
+
+**Data, as of 15:10 on 2 October; the runs were still going:**
+
+| What | How much |
+|---|---|
+| Identities, short names, admission routes (JoSAA/MCC, tier 3) | all 739 colleges |
+| NIRF 2025 ranks (tier 1) | 67 colleges (50 engineering, 17 medical); the rest of NIRF's lists aren't JoSAA/MCC colleges |
+| Official websites, confirmed by the sites themselves | 87 of the 105 national institutes |
+| Fees, hostel, medical facility from the colleges' own sites | 40 of 105 so far (official value or "not found"); the pilot over all 87 continues |
+| Locations and nearby places (OpenStreetMap) | 180 of 739 so far (75 of the 105); two workers continue |
+| National documents, searchable | 6 bulletins (JoSAA, MCC, NTA NEET-UG and JEE Main), about 1,300 passages |
+| Admission dates | 22, from those bulletins; 2027 recorded as not announced |
+| Facts | 1,791 checked, 195 "not found", 30 needing verification, 99 held for review, 0 open conflicts |
+
+**Cost:** about $0.006 a document with Gemini 2.5 Flash, thinking off. The 2-college trial cost
+$0.18, because one runaway reply ran to 70,000 tokens; replies are now capped at 3,000.
+
+**Changes from the plan:**
+
+- **OKF as the canonical layer** (P6-13), decided during the phase. Reviews are edits to the
+  bundle, and the database is never edited by hand.
+- **No Wikidata.** Its API now requires a contact address in every request, and the user chose
+  not to share one. Locations and websites come from OpenStreetMap, plus a list of the national
+  institutes' domains, each confirmed by its own home page (tier 2, quoting its title).
+- **Freshness policies are code, and admission dates are facts.** There's no `freshness_policies`
+  table and no `admission_events` table.
+- **The fetcher:**
+  - It repairs servers that leave out their intermediate certificate (as browsers do, including
+    PKCS#7 bundles), still verifying the whole chain.
+  - It caches API answers for 30 days.
+  - Its user agent doesn't mention robots.txt: Akamai-fronted government portals turn such agents
+    away. robots.txt is still respected.
+- **OpenStreetMap queries:**
+  - They use bounding boxes, not "around" or regex filters, which timed out at 100+ seconds.
+  - The second public Overpass server (kumi) wasn't answering, so only overpass-api.de is used.
+- **Matching names to OpenStreetMap is strict.**
+  - The kind of institution must agree (dental is never medical), and so must the institute
+    family (an AIIMS is only ever an AIIMS).
+  - Every proper name must match, with misspellings like "Insititute" tolerated.
+  - The first, looser matcher put Patna Dental College at Patna Medical College; the strict one
+    refuses that.
+- **What the model may claim:**
+  - A yearly figure it added up from semester columns is stored as the document states it.
+  - A facility needs a real quote, not a menu word.
+  - Re-reading a site replaces what it said before.
+  - A real value from any year beats "not found" (it shows as stale or needing verification).
+- **Long jobs run as systemd user units,** outside any session. The nightly `maya-refresh.timer`
+  runs at 02:30 within $0.10 a night.
+
+**Rehearsal with the real model** (test database; public data copied in; an invented student in
+Indore):
+
+| Asked | What happened |
+|---|---|
+| "MANIT Bhopal ka hostel fee kitna hai?" | ₹18,000 a semester from MANIT's own site, 2024-25, said to be old |
+| "AIIMS Bhopal mein medical facility kaisi hai?" | Not read yet; "couldn't find verified information" |
+| "Mere ghar se 300 km ke andar kaunse NIT hain?" | First: MAYA called a "not found" medical facility "not available", as if there were none, and added a state unasked (fixed). Then: MANIT, 170 km, NIRF 81, "official sources mein medical facility ke baare mein kuch nahi mila" |
+| "JEE Main 2027 ka form kab aayega?" | Not announced yet; last cycle's forms were Oct–Nov 2025, called last year's |
+| "JoSAA mein 75% wala rule kya hai?" | From the 2026 Business Rules, named |
+| "IIT Bombay ki mess fee kitni hai?" | Not available; offered the shared IIT tuition as "needs verification" |
+| "Sabse best NIT kaunsa hai?" | No best; asked what matters to the student |
+
+The money guard had nothing to replace in the rehearsal; its tests cover the invented-fee case.
+
+**Left as the runs finish:**
+- Re-measure exit criteria 1 and 2 when the pilot and location runs end.
+- Review the values held back (`python -m app.ingest.review`).
+- Get JEE (Advanced)'s brochure, which wasn't found on its portal.
+- Cover the 18 institutes without a confirmed website.
