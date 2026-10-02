@@ -87,6 +87,10 @@ def _comparable(value):
 
 
 def same_value(a, b) -> bool:
+    if isinstance(a, dict) and isinstance(b, dict) and {"lat", "lng"} <= a.keys() & b.keys():
+        from app.geo import km
+
+        return km(a["lat"], a["lng"], b["lat"], b["lng"]) < 1.0  # two sources' points for one campus
     return _comparable(a) == _comparable(b)
 
 

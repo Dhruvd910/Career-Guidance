@@ -110,9 +110,12 @@ class Fetcher:
         return sha, str(path)
 
     def get(self, url: str, *, params: dict | None = None, data: dict | None = None,
-            headers: dict | None = None, keep: bool = True) -> Fetched:
+            headers: dict | None = None, keep: bool = True, api: bool = False) -> Fetched:
+        """api=True only for documented public APIs (Wikidata's API, Nominatim, Overpass): their
+        robots.txt is written for crawlers, and their own usage policies — identify yourself, go
+        slowly — are what apply, and are followed here."""
         now = datetime.now(timezone.utc)
-        if not self.allowed(url):
+        if not api and not self.allowed(url):
             return Fetched(url, url, None, None, b"", None, now, None, error="disallowed by robots.txt")
         host = urlsplit(url).netloc
         error = None
@@ -125,6 +128,12 @@ class Fetcher:
                     r = self.client.get(url, params=params, headers=headers)
             except httpx.HTTPError as e:
                 error = f"{type(e).__name__}: {e}"[:300]
+                continue
+            if r.status_code == 429 and attempt < self.retries:
+                # Too many requests: wait as long as the server asks (or a minute), then try again.
+                wait = r.headers.get("retry-after", "")
+                self._sleep(float(wait) if wait.isdigit() else 60.0)
+                error = "HTTP 429"
                 continue
             if r.status_code >= 500 and attempt < self.retries:
                 error = f"HTTP {r.status_code}"
