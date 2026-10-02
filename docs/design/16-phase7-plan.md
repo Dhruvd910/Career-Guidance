@@ -104,3 +104,90 @@ Spec §37 lists what the student should be able to ask, and MAYA must always be 
    it, the roadmap and progress update, and MAYA explains what changed.
 6. The shortlist appears on screen and in MAYA's answers, with its facts' freshness.
 7. All Phase 1–6 tests still pass.
+
+## As built (2026-10-02)
+
+Steps 0–6 are built. 495 server tests pass on SQLite and on PostgreSQL, and 388 Pi-app tests pass.
+MAYA has four new tools: `what_next`, `update_agenda`, `my_shortlist`, `shortlist_college`.
+`set_my_stream` was added after the rehearsal (see below).
+
+**What's where:**
+- `app/mentor/`:
+  - `agenda.py`: seven collectors, ranking, never-nag
+  - `brief.py`: the eight answers
+  - `shortlist.py`
+  - `session_facts.py`: what happened in a session
+  - `context.py`: MAYA's part
+  - `details.py`: setting the stream on a yes
+- Two migrations: `agenda_marks`, and `session_summaries.happened`.
+- API:
+  - `GET /api/mentor/brief` and `GET /api/mentor/agenda`
+  - `POST /api/mentor/agenda/mark`
+  - `GET/POST/DELETE /api/mentor/shortlist`
+- On the Pi:
+  - **Where we are**, with the home screen's top line leading to it
+  - **Save to my shortlist** on every college page
+  - **My shortlist**
+  - **Recent conversations** (in What MAYA remembers) now shows **What happened**
+
+**Rehearsal.** The real model ran on the test database, using public data and an invented student
+(Riya, class 10, Indore). The clock was moved forward between sessions: every stored date and time
+was moved back together.
+
+1. **Session 1 (PCM vs PCB, left open).** She took the aptitude check during the session. The
+   summary recorded two unresolved questions, no decisions, and, from the modules, "Took 'Thinking
+   skills'" and the roadmap step it completed.
+2. **Ten days later.** She had shortlisted IIITM Gwalior, and a new tuition fee was recorded for it.
+   - The agenda: the open topic; "IIITM Gwalior: its official sources updated this since your last session: tuition fee"; the
+     roadmap's next step.
+   - The opening recalled the open topic and her father.
+   - "Aaj kya baat karein?" called `what_next` and offered the topic and the fee news.
+   - She decided PCM and computer science. MAYA offered to update the roadmap and didn't change
+     anything.
+3. **Seven months later, in class 11.** The agenda: "Make Computer Science & Software Engineering
+   your roadmap's focus?", "Set your stream to PCM?" (both proposals, 58) and "Retake 'Thinking
+   skills' — you took it in class 10; you're in class 11 now" (55).
+   - The opening raised the two proposals.
+   - "Haan, focus bana do" called `set_roadmap_focus` (roadmap version 3). "Stream bhi PCM kar do"
+     called `set_my_stream`.
+   - After the retake, "Kya badla?" called `compare_assessments`.
+   - The summary recorded the roadmap version, the steps completed and the assessment taken, all
+     from the modules. Then the proposals and the retake left the agenda.
+
+**Found by the rehearsal and fixed:**
+- "computer science" didn't match the CSE career, so a decided career was never proposed. Fixed
+  with aliases in `careers.yaml`.
+- MAYA said "maine tumhara stream PCM kar diya" with no tool that could. Fixed with the
+  `set_my_stream` tool (on a yes; the roadmap is rebuilt for it). Its note says not to claim a
+  roadmap change that didn't happen.
+- "Aaj kya baat karein?" didn't always call `what_next`, because everything had already been
+  raised in the opening. MAYA's context now always says to call it, even for items already
+  mentioned.
+- The opening line used "tu", which is too familiar. Its instructions now ask for "aap" or "tum",
+  and for MAYA's own feminine forms, as the main prompt already did.
+- A reassessment marked done hid every later one for the same instrument. The key is now per
+  attempt (`reassess:aptitude:41`).
+- The stream proposal read "your details still say nothing". It now reads "it isn't in your
+  details yet".
+- In one run, the notes model returned malformed JSON twice, and the session was written with
+  nothing at all. That lost what happened too. Now what happened is kept, under "MAYA couldn't
+  write notes for this session", with no topics or memories (`writer._what_happened_only`).
+- "New since your last session: Tuition fee" came out as "its fee you should find out today". It
+  now reads "Its official sources updated this since your last session: …".
+
+**Changes from the plan:**
+- Stream decisions can be applied by MAYA on a yes. The plan only had them proposed; the screen
+  route (Edit my details) also works.
+- **Where we are** is its own screen, reached from a line at the top of Home, rather than replacing
+  Home. Home's other tiles stay where students already know them.
+
+**Known limits:**
+- A goal set in conversation stays "quiet" until the notes model links a later session to it. In
+  the final rehearsal, "Build roadmap around computer science" was still active after the roadmap
+  was built. So only one quiet goal is raised at a time (the quietest), at the lowest priority, as
+  "still working toward it?". "Done" lets the next one through.
+- MAYA's Hindi still slips into masculine forms now and then: for herself ("samajh gaya", once in
+  three rehearsal runs) and for a student who has used feminine forms. That's the chat model,
+  despite the rule.
+- Agenda marks are kept per student and deleted with the account. There are no reminders off the
+  Pi (P7-9).

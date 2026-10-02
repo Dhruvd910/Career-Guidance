@@ -434,6 +434,41 @@ exam step) still has every subject's chapters with the NCERT book and chapter to
 (high-weight chapters starred). It also has free resources as QR codes, and "Practise now" opens a
 practice paper in that subject.
 
+## Where we are: MAYA as a continuing mentor
+
+MAYA doesn't start from zero. **Where we are** (the line at the top of Home, or the menu) has:
+- where you left off: the open topic and its open questions
+- what's next, each item with its reason
+- what you're working toward
+- how you've progressed
+- what you've decided
+
+What's next is worked out without a model, from your account:
+- an undecided topic
+- an overdue or upcoming roadmap step
+- admission dates for your exam
+- a reassessment that's due: 6 months after an assessment, or when you move up a class
+- news about a college on your shortlist
+- a goal gone quiet
+- a decision not yet in your roadmap ("Make Computer Science your focus?")
+
+Tap **Not now** and an item stays quiet for 14 days. MAYA raises at most two of these when you
+come back (after 6 hours or more), never the same one twice in a session. "Aaj kya baat karein?"
+gets you the list. A decision ("PCM final hai") is only **proposed**: MAYA changes your roadmap's
+focus or your stream only when you say yes.
+
+**Save to my shortlist** is on every college's page, or tell MAYA ("IIITM Gwalior ko shortlist
+mein daal do"). **My shortlist** shows each college's key facts with their source and freshness.
+The shortlist counts toward the roadmap's college step.
+
+When a session ends, its record has two parts. The summary is MAYA's notes on the conversation.
+**What happened** comes from the modules themselves: roadmap versions, steps ticked, assessments
+taken, colleges shortlisted. You can see both in **What MAYA remembers → Recent conversations**.
+If MAYA's notes can't be written, what happened is still kept.
+
+Conversation-based items (topics, decisions, goals) need the memory permission. The roadmap,
+assessments and shortlist are your account's own data.
+
 ## One goal at a time
 
 Pick JEE or NEET (in onboarding, or **Change goal** on the dashboard) and the app follows it:

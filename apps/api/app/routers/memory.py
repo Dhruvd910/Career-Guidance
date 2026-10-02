@@ -119,6 +119,8 @@ class SummaryOut(BaseModel):
     summary: str
     decisions: list[str]
     next_steps: list[str]
+    # What the modules recorded during the session (roadmap versions, steps, assessments, shortlist) — not the model's account.
+    happened: list[dict] = []
     created_at: datetime
 
 
@@ -169,7 +171,8 @@ def my_memory(profile: StudentProfile = Depends(get_current_student_profile),
         memories=[ItemOut(id=m.id, text=m.text, kind=m.kind, sensitive=m.sensitivity != "normal",
                           created_at=m.created_at) for m in memories],
         recent_sessions=[SummaryOut(session_id=s.conversation_id, summary=s.summary, decisions=s.decisions,
-                                    next_steps=s.next_steps, created_at=s.created_at) for s in sessions],
+                                    next_steps=s.next_steps, happened=s.happened or [], created_at=s.created_at)
+                         for s in sessions],
     )
 
 
@@ -246,7 +249,7 @@ def history(profile: StudentProfile = Depends(get_current_student_profile),
             db: Session = Depends(get_db)) -> list[SummaryOut]:
     sessions = db.execute(_own(db, SessionSummary, profile).order_by(SessionSummary.created_at.desc())).scalars()
     return [SummaryOut(session_id=s.conversation_id, summary=s.summary, decisions=s.decisions, next_steps=s.next_steps,
-                       created_at=s.created_at) for s in sessions]
+                       happened=s.happened or [], created_at=s.created_at) for s in sessions]
 
 
 @counselling_router.get("/threads", response_model=list[ThreadOut])

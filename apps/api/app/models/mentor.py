@@ -14,7 +14,7 @@ class AgendaMark(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     student_profile_id: Mapped[int] = mapped_column(ForeignKey("student_profiles.id", ondelete="CASCADE"), index=True)
-    key: Mapped[str] = mapped_column(String(200))  # "thread:12", "reassess:aptitude", "dates:JEE_MAIN:2027-28"…
+    key: Mapped[str] = mapped_column(String(200))  # "thread:12", "reassess:aptitude:41" (one per attempt), "dates:JEE_MAIN:2027-28"…
     first_raised_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     last_raised_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     times_raised: Mapped[int] = mapped_column(Integer, default=0)

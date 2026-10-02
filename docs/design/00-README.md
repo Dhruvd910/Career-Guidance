@@ -1,8 +1,8 @@
 # Design: AI Career Counsellor & Personal Career Mentor
 
-Status (2026-10-02): **Phases 1-6 built** (voice mentor; memory; assessment; career engine; roadmap;
-college intelligence — its data runs still filling in) and awaiting their hands-on tests; **Phase 7
-(continuous mentor) in progress**. Written against the code in `apps/` (MAYA).
+Status (2026-10-02): **Phases 1-7 built** (voice mentor; memory; assessment; career engine; roadmap;
+college intelligence, whose data runs are still filling in; the continuous mentor). All seven are
+awaiting their hands-on tests. Written against the code in `apps/` (MAYA).
 
 | # | Document | Answers |
 |---|---|---|

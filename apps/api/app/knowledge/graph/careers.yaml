@@ -8,7 +8,7 @@ nodes:
   # ---------------- technology ----------------
   - key: career:cse
     name: {en: Computer Science & Software Engineering, hi: कंप्यूटर साइंस और सॉफ़्टवेयर इंजीनियरिंग}
-    aliases: [software engineer, software developer, programmer, coder, coding, programming, apps, IT]
+    aliases: [computer science, computer science engineering, कंप्यूटर साइंस, software engineer, software developer, programmer, coder, coding, programming, apps, IT]
     edges:
       part_of: [domain:technology]
       requires_skill:

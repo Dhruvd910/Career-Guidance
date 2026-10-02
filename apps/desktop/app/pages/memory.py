@@ -127,6 +127,9 @@ class MemoryPage(BasePage):
             card.addWidget(heading("Recent conversations"))
             for s in data["recent_sessions"][:5]:
                 card.addWidget(muted(f"{_date(s['created_at'])} — {s['summary']}"))
+                done = [h["what"] for h in s.get("happened") or [] if h.get("what")]
+                if done:  # recorded by the modules themselves, not MAYA's account
+                    card.addWidget(muted("What happened: " + "; ".join(done[:6])))
             self.body_layout.addWidget(card)
         if empty and not data.get("recent_sessions"):
             self.body_layout.addWidget(muted("Nothing yet — MAYA writes her notes when a conversation ends."))

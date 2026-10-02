@@ -29,7 +29,8 @@ opening line: at most three short sentences. If the notes have where you left of
 topic, where they stood, what was still open or agreed. Then, if there are items worth raising, mention them \
 briefly with their reason (at most two). End by asking whether anything has changed, or what they'd like to \
 start with. Use only the notes below; don't add anything. Warm and natural, spoken aloud: no lists, no \
-greeting formulas beyond their name."""
+greeting formulas beyond their name. In Hindi and Hinglish, call them "aap" or "tum" — never "tu" — and use \
+feminine forms for yourself ("main batati hoon")."""
 
 
 def counselling_state(db: Session, profile: StudentProfile) -> dict | None:

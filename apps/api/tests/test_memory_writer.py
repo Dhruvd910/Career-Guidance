@@ -225,12 +225,15 @@ def test_saying_the_same_thing_again_strengthens_the_memory_instead_of_copying_i
     assert memory.salience > 0.5 and len(memory.evidence_message_ids) == 2
 
 
-def test_notes_that_never_fit_the_shape_write_nothing(db_session):
+def test_notes_that_never_fit_the_shape_keep_only_what_happened(db_session):
     asha = student(db_session)
     conversation, _ids = session(db_session, asha, *TRANSCRIPT)
     llm = FakeLLM("Sure! Here are the notes: ...", '{"summary": "x", "threads": {"thread_id": null}}')
-    assert write(db_session, conversation, llm) is None
-    assert db_session.query(SessionSummary).count() == 0
+    written = write(db_session, conversation, llm)
+    assert written.summary == "MAYA couldn't write notes for this session." and written.model is None, \
+        "no account of the conversation — only what the modules recorded (P7-4)"
+    assert written.decisions == [] and db_session.query(MemoryItem).count() == 0
+    assert db_session.query(CounsellingThread).count() == 0
     assert len(llm.seen) == 2, "one chance to correct itself, no more"
     assert "doesn't match the required shape" in llm.seen[1][-1]["content"]
 

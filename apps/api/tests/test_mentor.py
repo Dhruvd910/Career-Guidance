@@ -48,7 +48,7 @@ def test_a_reassessment_is_due_after_six_months_or_a_new_class(db_session):
     asha.class_level = 11
     db_session.commit()
     [moved] = agenda.reassessments(db_session, asha, datetime.now(timezone.utc))
-    assert moved.key == "reassess:aptitude" and moved.priority == 55 and "class 10" in moved.why["en"]
+    assert moved.key.startswith("reassess:aptitude:") and moved.priority == 55 and "class 10" in moved.why["en"]
     asha.class_level = 10
     db_session.commit()
     [aged] = agenda.reassessments(db_session, asha, datetime.now(timezone.utc) + timedelta(days=200))
@@ -101,6 +101,40 @@ def test_decisions_become_proposals(db_session):
     assert "decision:focus:career:mbbs" in keys, "a career named in a decision is proposed as the focus"
     thread(db_session, asha, "Career", decision="decided", position="Doctor rather than engineer, and PCM or PCB later")
     assert {i.key for i in agenda.decisions(db_session, asha, NOW)} == keys, "two careers or two streams named: no guess"
+
+
+
+def test_a_stream_changes_only_when_the_student_asks(db_session):
+    from app.ai.tools import execute_tool
+    from app.models.memory import StudentEvent
+    from app.roadmap import service
+
+    asha = student(db_session, memory=True)
+    seed_careers(db_session)
+    thread(db_session, asha, "Stream", decision="decided", position="PCM final; computer science is the goal")
+    keys = {i.key for i in agenda.decisions(db_session, asha, NOW)}
+    assert {"decision:stream:PCM", "decision:focus:career:cse"} <= keys, "'computer science' is the CSE career"
+    assert asha.stream != "PCM", "proposed, not applied"
+
+    service.current(db_session, asha)
+    done = execute_tool(db_session, asha, "set_my_stream", {"stream": "pcm"})
+    assert done["changed"] and asha.stream == "PCM" and "Saved" in done["note"]
+    assert "decision:stream:PCM" not in {i.key for i in agenda.decisions(db_session, asha, NOW)}
+    assert db_session.query(StudentEvent).filter_by(student_profile_id=asha.id, event_type="PROFILE_UPDATED").count() == 1
+    assert execute_tool(db_session, asha, "set_my_stream", {"stream": "PCM"})["changed"] is False
+    assert "error" in execute_tool(db_session, asha, "set_my_stream", {"stream": "science"})
+
+
+def test_one_quiet_goal_at_a_time(db_session):
+    asha = student(db_session, memory=True)
+    for title, days in (("Learn Python", 60), ("Decide a stream", 90), ("Build a project", 50)):
+        db_session.add(StudentGoal(student_profile_id=asha.id, title=title, kind="skill", status="active",
+                                   created_at=NOW - timedelta(days=days), updated_at=NOW - timedelta(days=days)))
+    db_session.flush()
+    quiet = agenda.goals(db_session, asha, NOW)
+    assert [i.title["en"] for i in quiet] == ["Decide a stream"], "the quietest, not a list"
+    agenda.mark(db_session, asha, quiet[0].key, "done", now=NOW)
+    assert [i.title["en"] for i in agenda.goals(db_session, asha, NOW)] == ["Learn Python"], "the next makes way"
 
 
 def test_never_nag(db_session):
@@ -235,8 +269,8 @@ def test_maya_raises_things_once_and_honours_not_now(db_session):
     llm = FakeLLM("Welcome back, Asha — JEE Main 2027 applications open on 31 October. Where shall we start?")
     text, _ = asyncio.run(opening_line(db_session, asha, llm, now=NOW))
     assert "31 October" in text and "worth_raising" in llm.seen[0][1]["content"], "a return without an open topic still opens"
-    assert mentor_context(db_session, asha, session_started=NOW, now=NOW + timedelta(minutes=1)) is None, \
-        "already raised in the opening: not again this session"
+    later = mentor_context(db_session, asha, session_started=NOW, now=NOW + timedelta(minutes=1))
+    assert "Worth raising" not in later and "what_next" in later, "already raised in the opening: not again this session"
 
     nxt = execute_tool(db_session, asha, "what_next", {})
     keys = [i["key"] for i in nxt["items"]]

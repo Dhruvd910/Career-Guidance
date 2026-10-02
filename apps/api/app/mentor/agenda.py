@@ -143,13 +143,13 @@ def reassessments(db: Session, profile: StudentProfile, now: datetime) -> list[I
         then = (before[-1].inputs_snapshot or {}).get("class_level") if before else None
         title = t(f"Retake “{attempt.instrument.title['en']}”", f"“{attempt.instrument.title.get('hi', attempt.instrument.title['en'])}” फिर से दें")
         if then is not None and profile.class_level and then != profile.class_level:
-            out.append(Item(f"reassess:{key}", "reassessment", title,
+            out.append(Item(f"reassess:{key}:{attempt.id}", "reassessment", title,
                             t(f"You took it in class {then}; you're in class {profile.class_level} now",
                               f"आपने यह कक्षा {then} में दिया था; अब आप कक्षा {profile.class_level} में हैं"),
                             f"your assessment on {_day(done)}", 55, {"page": "assessment_run", "args": {"key": key}}))
         elif now - done >= REASSESS_AFTER:
             months = (now - done).days // 30
-            out.append(Item(f"reassess:{key}", "reassessment", title,
+            out.append(Item(f"reassess:{key}:{attempt.id}", "reassessment", title,
                             t(f"It's {months} months since you took it — see how you've grown",
                               f"इसे दिए {months} महीने हो गए — देखिए आप कितना आगे बढ़े"),
                             f"your assessment on {_day(done)}", 50, {"page": "assessment_run", "args": {"key": key}}))
@@ -210,7 +210,8 @@ def colleges(db: Session, profile: StudentProfile, now: datetime) -> list[Item]:
         if changed:
             what = ", ".join(sorted({describe.name(a) for a in changed})[:3])
             out.append(Item(f"college:{college_id}:{_day(now)}", "college", t(college.canonical_name, college.canonical_name),
-                            t(f"New since your last session: {what}", f"पिछले सत्र के बाद नया: {what}"),
+                            t(f"Its official sources updated this since your last session: {what}",
+                              f"पिछले सत्र के बाद इसके आधिकारिक स्रोतों में बदला: {what}"),
                             "its official sources", 55, {"page": "college_detail", "args": {"college_id": college_id}}))
     return out
 
@@ -242,8 +243,10 @@ def decisions(db: Session, profile: StudentProfile, now: datetime) -> list[Item]
             stream = streams.pop()
             if (profile.stream or "").lower() != stream.lower():
                 out.append(Item(f"decision:stream:{stream}", "decision", t(f"Set your stream to {stream}?", f"अपनी स्ट्रीम {stream} रखें?"),
-                                t(f"You decided on {stream}; your details still say {profile.stream or 'nothing'}",
-                                  f"आपने {stream} तय किया; आपकी जानकारी में अभी {profile.stream or 'कुछ नहीं'} है"),
+                                t(f"You decided on {stream}; your details still say {profile.stream}" if profile.stream else
+                                  f"You decided on {stream}; it isn't in your details yet",
+                                  f"आपने {stream} तय किया; आपकी जानकारी में अभी {profile.stream} है" if profile.stream else
+                                  f"आपने {stream} तय किया; यह अभी आपकी जानकारी में नहीं है"),
                                 "your decision", 58, {"page": "profile", "args": {}}))
         found = _lexical(text, candidates)
         if len(found) == 1 and found[0].removeprefix("career:") != focus:
@@ -259,18 +262,30 @@ def decisions(db: Session, profile: StudentProfile, now: datetime) -> list[Item]
 
 
 def goals(db: Session, profile: StudentProfile, now: datetime) -> list[Item]:
+    """One goal gone quiet at a time, the quietest — not a list of them (P7-3). One that's done or
+    snoozed makes way for the next."""
     if not consent.allowed(db, profile, consent.LONG_TERM_MEMORY):
         return []
-    out = []
+    marks = _marks(db, profile)
+
+    def resting(key: str) -> bool:
+        mark = marks.get(key)
+        snoozed = _aware(mark.snoozed_until) if mark else None
+        return mark is not None and (mark.status == "done" or (snoozed is not None and snoozed > now))
+
+    quiet = []
     for g in db.execute(select(StudentGoal).where(StudentGoal.student_profile_id == profile.id,
                                                   StudentGoal.status == "active")).scalars():
         touched = _aware(g.updated_at or g.created_at)
-        if touched and now - touched >= QUIET_GOAL:
-            out.append(Item(f"goal:{g.id}", "goal", t(g.title, g.title),
-                            t(f"Not talked about since {_day(touched)} — still working toward it?",
-                              f"{_day(touched)} के बाद बात नहीं हुई — अब भी इस पर काम कर रहे हैं?"),
-                            "your goals", 25, {"page": "memory", "args": {}}))
-    return out
+        if touched and now - touched >= QUIET_GOAL and not resting(f"goal:{g.id}"):
+            quiet.append((touched, g))
+    if not quiet:
+        return []
+    touched, g = min(quiet, key=lambda pair: (pair[0], pair[1].id))
+    return [Item(f"goal:{g.id}", "goal", t(g.title, g.title),
+                 t(f"Not talked about since {_day(touched)} — still working toward it?",
+                   f"{_day(touched)} के बाद बात नहीं हुई — अब भी इस पर काम कर रहे हैं?"),
+                 "your goals", 25, {"page": "memory", "args": {}})]
 
 
 COLLECTORS = (topics, roadmap, reassessments, dates, colleges, decisions, goals)

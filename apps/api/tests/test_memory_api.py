@@ -52,6 +52,7 @@ def test_a_student_sees_everything_maya_remembers_private_items_included(client,
     assert body["constraints"] == [{**body["constraints"][0], "text": "Father wants medicine", "sensitive": True}]
     assert [m["text"] for m in body["memories"]] == ["Built a robot"]
     assert body["recent_sessions"][0]["summary"] == "Discussed streams."
+    assert body["recent_sessions"][0]["happened"] == [], "what the modules recorded, beside the summary"
 
 
 def test_one_item_can_be_deleted_but_not_someone_elses(client, db_session):

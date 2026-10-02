@@ -17,6 +17,7 @@ MEMORY = {
                      "created_at": None}],
     "memories": [{"id": 4, "text": "Built a robot", "kind": "fact", "sensitive": False, "created_at": None}],
     "recent_sessions": [{"session_id": 9, "summary": "Discussed streams.", "decisions": [], "next_steps": [],
+                         "happened": [{"kind": "roadmap", "what": "Roadmap version 2: You chose a new focus."}],
                          "created_at": "2026-10-01T10:00:00+00:00"}],
 }
 CONSENT = {"is_minor": True, "notice_version": "2026-10-01", "notice": {"en": "MAYA can remember…", "hi": "MAYA याद…"},
@@ -84,6 +85,7 @@ def test_everything_she_remembers_is_shown_private_items_marked(page):
     assert "Robotics" in shown and "Built a robot" in shown
     assert "<i>Private</i> · Father wants medicine" in shown
     assert any("Discussed streams." in t for t in shown)
+    assert any(t == "What happened: Roadmap version 2: You chose a new focus." for t in shown), "the modules' record"
 
 
 def test_deleting_takes_two_taps(page):

@@ -152,6 +152,16 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "set_my_stream",
+            "description": "Change the stream in the student's details (PCM, PCB, PCMB, commerce, humanities) — only "
+                           "after they've asked for it or said yes when you offered. Their roadmap is rebuilt for it. "
+                           "This is the only way to change it: never say it's changed without calling this.",
+            "parameters": {"type": "object", "properties": {"stream": {"type": "string"}}, "required": ["stream"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "my_shortlist",
             "description": "The colleges the student has shortlisted, with their key facts (fees, hostel, medical "
                            "facility, nearest station, NIRF), each with its source and freshness.",
@@ -558,6 +568,17 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
             db.commit()
             return {"key": row.key, "status": row.status,
                     "note": "It'll stay quiet for two weeks." if args["what"] == "not_now" else "Marked done."}
+        if name == "set_my_stream":
+            from app.mentor import details
+
+            try:
+                done = details.set_stream(db, profile, str(args.get("stream") or ""))
+            except details.DetailsError as e:
+                return {"error": str(e)}
+            return {**done, "note": ("Already their stream — say so." if not done["changed"] else
+                                     "Saved in their details. Say so, and what changed in their roadmap, briefly."
+                                     if done["roadmap_changes"] else
+                                     "Saved in their details. Their roadmap didn't need to change — don't say it did.")}
         if name == "my_shortlist":
             from app.mentor import shortlist
 

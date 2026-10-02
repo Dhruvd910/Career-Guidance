@@ -242,7 +242,7 @@ async def write_session_memory(db: Session, conversation_id: int, llm: LLMProvid
                                  {"role": "user", "content": f"That JSON doesn't match the required shape:\n{e}\n"
                                                              "Return the corrected JSON object only."}]
     if extraction is None:
-        return None
+        return _what_happened_only(db, profile, conversation)
 
     by_id = {m.id: m for m in messages}
     now = datetime.now(timezone.utc)
@@ -351,6 +351,26 @@ async def write_session_memory(db: Session, conversation_id: int, llm: LLMProvid
     db.commit()
     logger.info("session %s written to memory: %d threads, %d memories, %d items dropped as unsupported",
                 conversation_id, len(touched), len(extraction.memories), dropped)
+    return summary
+
+
+def _what_happened_only(db: Session, profile: StudentProfile, conversation: Conversation) -> SessionSummary:
+    """The notes model missed twice: there's no account of the conversation, but what the modules
+    recorded during it still goes in the record (docs/design/16-phase7-plan.md, P7-4)."""
+    from app.mentor.session_facts import happened
+
+    now = datetime.now(timezone.utc)
+    record = happened(db, conversation, now)
+    done = [h["what"] for h in record["happened"] if h.get("what")]
+    summary = SessionSummary(
+        conversation_id=conversation.id, student_profile_id=profile.id, schema_version=SCHEMA_VERSION,
+        summary="MAYA couldn't write notes for this session." + (" Recorded: " + "; ".join(done) + "." if done else ""),
+        happened=record["happened"], roadmap_changes=record["roadmap_changes"],
+        student_state=_student_state(db, profile, conversation.id), model=None)
+    db.add(summary)
+    conversation.status, conversation.ended_at = "closed", conversation.ended_at or now
+    db.commit()
+    logger.info("session %s: no notes, only what happened (%d items)", conversation.id, len(done))
     return summary
 
 

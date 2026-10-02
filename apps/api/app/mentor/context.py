@@ -13,9 +13,10 @@ from app.models.student import StudentProfile
 
 
 def mentor_context(db: Session, profile: StudentProfile, session_started: datetime | None = None,
-                   now: datetime | None = None) -> str | None:
+                   now: datetime | None = None) -> str:
     now = now or datetime.now(timezone.utc)
-    lines = []
+    lines = ["If they ask what to talk about (\"Aaj kya baat karein?\", \"what's next?\"), call what_next first and "
+             "offer its first one or two items with their reasons — even ones you've mentioned already."]
     items = agenda.to_raise(db, profile, now, session_started)
     if items:
         lines.append("Worth raising if it fits — briefly, with its reason, once this session (if they say not now, or "
@@ -27,4 +28,4 @@ def mentor_context(db: Session, profile: StudentProfile, session_started: dateti
     if saved:
         lines.append("Their college shortlist: " + "; ".join(f"{c['name']} ({c['city']})" for c in saved[:6])
                      + ". Facts about them come from my_shortlist / college_facts.")
-    return "\n".join(lines) or None
+    return "\n".join(lines)
