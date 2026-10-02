@@ -67,6 +67,17 @@ class FakeApi:
     def get_reviews(self, college_id):
         return []
 
+    def shortlist(self):
+        return [{"id": 7}] if ("add", 7) in self.calls and ("remove", 7) not in self.calls[self.calls.index(("add", 7)):] else []
+
+    def shortlist_add(self, college_id):
+        self.calls.append(("add", college_id))
+        return {"added": "x", "shortlist": 1}
+
+    def shortlist_remove(self, college_id):
+        self.calls.append(("remove", college_id))
+        return {"removed": "x", "shortlist": 0}
+
     def college_refresh(self, college_id):
         self.calls.append(("refresh", college_id))
         return {"queued": True, "message": "MAYA will check this college's official sources again tonight."}
@@ -109,6 +120,8 @@ def test_a_college_page_shows_where_each_value_comes_from(qapp, api):
     assert "Another source says: ₹60,000 a semester (JoSAA)" in shown and "couldn't be reconciled" in shown
     assert "<b>Medical facility:</b> Not found in official sources" in shown, "not found is said, never filled in"
     assert "Places © OpenStreetMap contributors (ODbL)" in shown
+    button(page, "Save to my shortlist").click()
+    assert ("add", 7) in api.calls and page.save_btn.text() == "✓ On your shortlist (remove)"
     button(page, "Check for updates").click()
     assert api.calls[-1] == ("refresh", 7) and "again tonight" in page.refresh_note.text()
     button(page, "Where this comes from").click()

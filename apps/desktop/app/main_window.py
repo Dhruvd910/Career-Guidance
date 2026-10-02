@@ -26,6 +26,8 @@ from app.pages.careers import CareersPage
 from app.pages.colleges import CollegesPage
 from app.pages.college_detail import CollegeDetailPage
 from app.pages.college_find import CollegeFindPage, CollegeSourcesPage
+from app.pages.shortlist import ShortlistPage
+from app.pages.where_we_are import WhereWeArePage
 from app.pages.compare import ComparePage
 from app.pages.progress import ProgressPage
 from app.pages.roadmap import RoadmapChangesPage, RoadmapNodePage, RoadmapPage
@@ -46,7 +48,7 @@ PAGE_TITLES = {
     "setup": "Your details", "onboarding": "Getting started", "dashboard": "Dashboard",
     "maya": "MAYA Assistant", "jee": "JEE", "neet": "NEET", "mock_tests": "Mock Tests", "practice_test": "Practice test",
     "careers": "Careers", "colleges": "Colleges", "college_detail": "College", "college_find": "Find colleges",
-    "college_sources": "Sources",
+    "college_sources": "Sources", "where_we_are": "Where we are", "shortlist": "My shortlist",
     "compare": "Compare colleges", "roadmap": "My roadmap", "calibrate": "Touch calibration",
     "roadmap_node": "Roadmap step", "roadmap_changes": "What changed", "progress": "My progress",
     "study_plan": "Study plan",
@@ -258,8 +260,10 @@ class MainWindow(QMainWindow):
         menu.addAction("Edit my details", lambda: self.navigate("setup", edit=True))
         menu.addAction("Change goal", self.pages["dashboard"].change_goal)
         menu.addAction("Talk to MAYA", lambda: self.navigate("maya"))
+        menu.addAction("Where we are", lambda: self.navigate("where_we_are"))
         menu.addAction("My roadmap", lambda: self.navigate("roadmap"))
         menu.addAction("My progress", lambda: self.navigate("progress"))
+        menu.addAction("My shortlist", lambda: self.navigate("shortlist"))
         menu.addAction("My assessment", lambda: self.navigate("assessment"))
         menu.addAction("Career directions", lambda: self.navigate("directions"))
         menu.addAction("Stream explorer", lambda: self.navigate("streams"))
@@ -314,6 +318,8 @@ class MainWindow(QMainWindow):
         self.pages["colleges"] = CollegesPage(self)
         self.pages["college_detail"] = CollegeDetailPage(self)
         self.pages["college_find"] = CollegeFindPage(self)
+        self.pages["where_we_are"] = WhereWeArePage(self)
+        self.pages["shortlist"] = ShortlistPage(self)
         self.pages["college_sources"] = CollegeSourcesPage(self)
         self.pages["compare"] = ComparePage(self)
         self.pages["roadmap"] = RoadmapPage(self)

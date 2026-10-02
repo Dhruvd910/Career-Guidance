@@ -369,7 +369,8 @@ class RoadmapNodePage(BasePage):
             e = node["evidence"][-1]
             says = (e.get("says") or {}).get(lang) or e.get("note") or ""
             source = {"self": ("you marked it", "आपने मार्क किया"), "assessment": ("from an assessment", "आकलन से"),
-                      "focus": ("you chose your focus", "आपने लक्ष्य चुना")}.get(e.get("kind"), (e.get("kind", ""), e.get("kind", "")))
+                      "focus": ("you chose your focus", "आपने लक्ष्य चुना"),
+                      "shortlist": ("from your shortlist", "आपकी कॉलेज सूची से")}.get(e.get("kind"), (e.get("kind", ""), e.get("kind", "")))
             self.body_layout.addWidget(muted(words(lang, *source) + (f": {says}" if says else "")))
         self._actions(node, lang)
 

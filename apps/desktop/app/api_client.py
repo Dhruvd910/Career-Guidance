@@ -146,6 +146,24 @@ class ApiClient:
     def get_cutoffs(self, college_id: int) -> list:
         return self.get(f"/api/colleges/{college_id}/cutoffs")
 
+    def mentor_brief(self) -> dict:
+        return self.get("/api/mentor/brief")
+
+    def mentor_agenda(self) -> list:
+        return self.get("/api/mentor/agenda")
+
+    def mentor_mark(self, key: str, what: str) -> dict:
+        return self.post("/api/mentor/agenda/mark", json={"key": key, "what": what})
+
+    def shortlist(self) -> list:
+        return self.get("/api/mentor/shortlist")
+
+    def shortlist_add(self, college_id: int) -> dict:
+        return self.post("/api/mentor/shortlist", json={"college_id": college_id})
+
+    def shortlist_remove(self, college_id: int) -> dict:
+        return self._request("DELETE", f"/api/mentor/shortlist/{college_id}")
+
     def discover_colleges(self, **filters) -> dict:
         """Colleges for a career or degree, filtered and sorted as the student chose; no overall score."""
         return self.get("/api/colleges/discover", params={k: v for k, v in filters.items() if v not in (None, "", False)})

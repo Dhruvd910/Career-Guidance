@@ -133,6 +133,11 @@ class CollegeDetailPage(BasePage):
             self.body_layout.addWidget(facts_card(words(lang, "About", "परिचय"), academic, lang, self, nothing))
 
         more = QHBoxLayout()
+        self.save_btn = primary_button(words(lang, "Save to my shortlist", "मेरी सूची में जोड़ें"))
+        self.save_btn.clicked.connect(self._toggle_shortlist)
+        more.addWidget(self.save_btn)
+        self.saved = False
+        run_async(api_client.shortlist, on_success=self._got_shortlist, on_error=lambda _e: None)
         check = secondary_button(words(lang, "Check for updates", "अपडेट देखें"))
         check.clicked.connect(self._refresh)
         more.addWidget(check)
@@ -163,6 +168,18 @@ class CollegeDetailPage(BasePage):
         run_async(api_client.get_cutoffs, cid, on_success=lambda rows: self._got_cutoffs(cid, rows),
                   on_error=lambda _e: None)
         run_async(api_client.get_reviews, cid, on_success=self._render_reviews, on_error=lambda _e: None)
+
+    def _got_shortlist(self, items: list) -> None:
+        self.saved = any(c["id"] == self.college_id for c in items)
+        lang = preferred_language(self.ctx)
+        self.save_btn.setText(words(lang, "✓ On your shortlist (remove)", "✓ आपकी सूची में (हटाएँ)") if self.saved
+                              else words(lang, "Save to my shortlist", "मेरी सूची में जोड़ें"))
+
+    def _toggle_shortlist(self) -> None:
+        call = api_client.shortlist_remove if self.saved else api_client.shortlist_add
+        run_async(call, self.college_id, on_success=lambda _r: run_async(api_client.shortlist, on_success=self._got_shortlist,
+                                                                         on_error=lambda _e: None),
+                  on_error=lambda _e: self.refresh_note.setText("Couldn't reach MAYA's server just now."))
 
     def _refresh(self) -> None:
         if not self.college_id:

@@ -74,6 +74,14 @@ class DashboardPage(BasePage):
         layout.setContentsMargins(14, 8, 14, 12)
         layout.setSpacing(14)
 
+        # Where we are: the most pressing thing, one tap from the full page (Phase 7).
+        self.next_strip = QPushButton("Where we are  ›")
+        self.next_strip.setObjectName("NextStrip")
+        self.next_strip.setFlat(True)
+        self.next_strip.setStyleSheet("text-align: left; padding: 6px 10px; color: #1e3a8a; font-weight: 600;")
+        self.next_strip.clicked.connect(lambda: self.ctx.navigate("where_we_are"))
+        layout.addWidget(self.next_strip)
+
         tiles = QHBoxLayout()
         tiles.setSpacing(10)
         for title, blurb, glyph, colour, target in self.TILES:
@@ -147,6 +155,18 @@ class DashboardPage(BasePage):
         if not profile.get("onboarding_completed"):
             self.ctx.navigate("onboarding")
             return
+        run_async(api_client.mentor_agenda, on_success=self._show_next, on_error=lambda _e: None)
+
+    def _show_next(self, items: list) -> None:
+        from app.pages.assessments import preferred_language
+
+        lang = preferred_language(self.ctx)
+        if items:
+            first = items[0]
+            label = "आगे" if lang == "hi" else "Next"
+            self.next_strip.setText(f"{label}: {first['title'][lang]} — {first['why'][lang]}  ›")
+        else:
+            self.next_strip.setText("हम कहाँ हैं  ›" if lang == "hi" else "Where we are  ›")
 
     def change_goal(self) -> None:
         """Back to the question that decides everything else — MAYA asks it again."""
