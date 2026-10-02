@@ -21,6 +21,7 @@ college intelligence — its data runs still filling in) and awaiting their hand
 | 13 | [Phase 4 plan](13-phase4-plan.md) | Career engine: knowledge graph, pathways, skill paths, stream choices, colleges from official data |
 | 14 | [Phase 5 plan](14-phase5-plan.md) | Roadmap: class-aware and personal, versioned, adapting to time / difficulty / interest changes; progress |
 | 15 | [Phase 6 plan](15-phase6-plan.md) | College intelligence: facts with provenance and freshness, official documents, fees, hostels, admissions, location, discovery |
+| 16 | [Phase 7 plan](16-phase7-plan.md) | The continuous mentor: the brief (§37's eight questions), the agenda, session ends that record what happened, shortlist, reassessment |
 | — | [Phase 1 test](phase1-test-script.md) · [Phase 2 test](phase2-test-script.md) · [Phase 3 test](phase3-test-script.md) · [Phase 4 test](phase4-test-script.md) · [Phase 5 test](phase5-test-script.md) · [Phase 6 test](phase6-test-script.md) | Hands-on checks with a person |
 
 ---
