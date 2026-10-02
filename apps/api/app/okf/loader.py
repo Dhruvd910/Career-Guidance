@@ -94,6 +94,8 @@ def load_concept(db: Session, concept: bundle.Concept, problems: list[str]) -> t
         except (KeyError, ValueError, TypeError) as e:
             problems.append(f"{concept.id}: {f.get('attribute')}: {e}")
     _withdraw(db, entity["type"], entity_id, concept.id, keep)
+    if entity["type"] == "college" and concept.type == "College":
+        db.get(College, entity_id).aliases = list(entity.get("aliases") or [])
     return loaded, (entity["type"], entity_id)
 
 

@@ -144,56 +144,6 @@ class CutoffOut(BaseModel):
     provenance: ProvenanceOut
 
 
-class FeeOut(BaseModel):
-    id: int
-    academic_year: str | None
-    tuition_fee: float | None
-    admission_fee: float | None
-    exam_fee: float | None
-    hostel_fee: float | None
-    mess_fee: float | None
-    security_deposit: float | None
-    other_charges: float | None
-    approximate_annual_cost: float
-    provenance: ProvenanceOut
-
-
-class HostelOut(BaseModel):
-    id: int
-    hostel_type: str
-    capacity: int | None
-    room_types: list[str]
-    fee_annual: float | None
-    facilities: list[str]
-    rules: str | None
-    distance_from_academic_block_km: float | None
-    provenance: ProvenanceOut
-
-
-class PlacementOut(BaseModel):
-    id: int
-    academic_year: str | None
-    placement_percentage: float | None
-    average_package: float | None
-    median_package: float | None
-    highest_package: float | None
-    major_recruiters: list[str]
-    extra: dict  # medical/other-category metrics (internship_stipend, pg_pathways, ...)
-    provenance: ProvenanceOut
-
-
-class NearbyPlaceOut(BaseModel):
-    id: int
-    place_type: str
-    name: str
-    distance_km: float | None
-    approx_monthly_rent: float | None
-    source: str
-    last_updated: datetime | None
-
-    model_config = {"from_attributes": True}
-
-
 class CollegeReviewCreate(BaseModel):
     rating: int = Field(ge=1, le=5)
     text: str = Field(default="", max_length=2000)
@@ -216,7 +166,7 @@ class CollegeCompareRow(BaseModel):
     college: CollegeSummary
     lowest_closing_rank_seen: int | None
     approximate_annual_cost: float | None
-    hostel_available: bool
+    hostel_available: bool | None  # None: not known — never guessed
     placement_percentage: float | None
     average_package: float | None
     average_rating: float | None

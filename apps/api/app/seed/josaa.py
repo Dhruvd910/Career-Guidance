@@ -29,11 +29,6 @@ from app.core.db import Base, SessionLocal, engine
 from app.models.college import Branch, College, CollegeCourse, Course
 from app.models.cutoff import Cutoff
 from app.models.exam import Exam
-from app.models.facility import Facility
-from app.models.fee import Fee
-from app.models.hostel import Hostel
-from app.models.nearby import NearbyPlace
-from app.models.placement import Placement
 from app.models.review import CollegeReview
 
 DATA = Path(__file__).parent / "data"
@@ -98,10 +93,8 @@ def _remove_demo_colleges(db: Session, exam_ids: list[int]) -> int:
     cc_ids = [cc.id for cc in db.query(CollegeCourse).filter(CollegeCourse.college_id.in_(demo_ids)).all()]
     if cc_ids:
         db.query(Cutoff).filter(Cutoff.college_course_id.in_(cc_ids)).delete(synchronize_session=False)
-        db.query(Fee).filter(Fee.college_course_id.in_(cc_ids)).delete(synchronize_session=False)
         db.query(CollegeCourse).filter(CollegeCourse.id.in_(cc_ids)).delete(synchronize_session=False)
-    for model in (Hostel, Facility, Placement, NearbyPlace, CollegeReview):
-        db.query(model).filter(model.college_id.in_(demo_ids)).delete(synchronize_session=False)
+    db.query(CollegeReview).filter(CollegeReview.college_id.in_(demo_ids)).delete(synchronize_session=False)
     db.query(College).filter(College.id.in_(demo_ids)).delete(synchronize_session=False)
     return len(demo_ids)
 

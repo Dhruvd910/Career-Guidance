@@ -146,17 +146,9 @@ class ApiClient:
     def get_cutoffs(self, college_id: int) -> list:
         return self.get(f"/api/colleges/{college_id}/cutoffs")
 
-    def get_fees(self, college_id: int) -> list:
-        return self.get(f"/api/colleges/{college_id}/fees")
-
-    def get_hostel(self, college_id: int) -> list:
-        return self.get(f"/api/colleges/{college_id}/hostel")
-
-    def get_placements(self, college_id: int) -> list:
-        return self.get(f"/api/colleges/{college_id}/placements")
-
-    def get_nearby(self, college_id: int) -> list:
-        return self.get(f"/api/colleges/{college_id}/nearby")
+    def college_facts(self, college_id: int, topic: str | None = None) -> dict:
+        """Everything known about a college from outside, each value with its source and freshness."""
+        return self.get(f"/api/colleges/{college_id}/facts", params={"topic": topic} if topic else None)
 
     def get_reviews(self, college_id: int) -> list:
         return self.get(f"/api/colleges/{college_id}/reviews")

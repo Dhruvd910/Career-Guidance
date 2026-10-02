@@ -290,7 +290,7 @@ def _clashes(facts: list[dict], sources: dict) -> list[tuple]:
 
     groups: dict[tuple, list[dict]] = {}
     for f in facts:
-        if f["status"] in ("verified", "unverified") and f.get("value") is not None:
+        if f["status"] == "verified" and f.get("value") is not None:
             groups.setdefault((f["attribute"], f.get("academic_year")), []).append(f)
     out = []
     for (attribute, year), group in groups.items():
@@ -311,6 +311,9 @@ def upsert(root: Path, entity: Entity, values: list[Value], now: datetime | None
         _refresh(identity, entity)
         bundle.write(root, identity)
         log.append(f"**Creation**: [{entity.name}](/{identity.id}.md)")
+    elif identity is not None and identity.meta.get("maya", {}).get("entity") != entity.meta():
+        _refresh(identity, entity)
+        bundle.write(root, identity)
     by_concept: dict[str, list[Value]] = {}
     for v in values:
         by_concept.setdefault(concept_id(entity, v.attribute, v.academic_year), []).append(v)

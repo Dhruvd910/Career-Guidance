@@ -7,10 +7,6 @@ from sqlalchemy.orm import Session
 from app.models.college import Branch, College, CollegeCourse, Course
 from app.models.cutoff import Cutoff
 from app.models.exam import Exam
-from app.models.fee import Fee
-from app.models.hostel import Hostel
-from app.models.nearby import NearbyPlace
-from app.models.placement import Placement
 from app.models.review import CollegeReview
 from app.models.student import StudentProfile
 from app.schemas.college import (
@@ -23,12 +19,9 @@ from app.schemas.college import (
     CollegeReviewOut,
     CollegeSummary,
     CutoffOut,
-    FeeOut,
-    HostelOut,
-    NearbyPlaceOut,
-    PlacementOut,
     ProvenanceOut,
 )
+from app.facts import topics
 from app.services import college_profiles
 
 
@@ -142,9 +135,13 @@ def search_colleges(
             )
         ]
 
+    exact = set()
+    if q:
+        wanted = " ".join(q.lower().split())
+        exact = {c.id for c in colleges if wanted == c.canonical_name.lower() or any(wanted == a.lower() for a in c.aliases)}
     summaries = [to_summary(db, c) for c in colleges]
-    # Researched colleges first (best NIRF rank first), then the rest by name.
-    summaries.sort(key=lambda s: (not s.researched, s.nirf_rank or 10_000, s.canonical_name.lower()))
+    # What they typed exactly ("IIT BHU") first; then researched colleges (best NIRF rank first), then by name.
+    summaries.sort(key=lambda s: (s.id not in exact, not s.researched, s.nirf_rank or 10_000, s.canonical_name.lower()))
     return summaries
 
 
@@ -180,72 +177,6 @@ def get_cutoffs(
     ]
 
 
-def get_fees(db: Session, college_id: int) -> list[FeeOut]:
-    fees = (
-        db.query(Fee)
-        .join(CollegeCourse, CollegeCourse.id == Fee.college_course_id)
-        .filter(CollegeCourse.college_id == college_id)
-        .all()
-    )
-    return [
-        FeeOut(
-            id=f.id,
-            academic_year=f.academic_year,
-            tuition_fee=f.tuition_fee,
-            admission_fee=f.admission_fee,
-            exam_fee=f.exam_fee,
-            hostel_fee=f.hostel_fee,
-            mess_fee=f.mess_fee,
-            security_deposit=f.security_deposit,
-            other_charges=f.other_charges,
-            approximate_annual_cost=f.approximate_annual_cost,
-            provenance=ProvenanceOut.model_validate(f),
-        )
-        for f in fees
-    ]
-
-
-def get_hostels(db: Session, college_id: int) -> list[HostelOut]:
-    hostels = db.query(Hostel).filter(Hostel.college_id == college_id).all()
-    return [
-        HostelOut(
-            id=h.id,
-            hostel_type=h.hostel_type,
-            capacity=h.capacity,
-            room_types=h.room_types,
-            fee_annual=h.fee_annual,
-            facilities=h.facilities,
-            rules=h.rules,
-            distance_from_academic_block_km=h.distance_from_academic_block_km,
-            provenance=ProvenanceOut.model_validate(h),
-        )
-        for h in hostels
-    ]
-
-
-def get_placements(db: Session, college_id: int) -> list[PlacementOut]:
-    placements = db.query(Placement).filter(Placement.college_id == college_id).all()
-    return [
-        PlacementOut(
-            id=p.id,
-            academic_year=p.academic_year,
-            placement_percentage=p.placement_percentage,
-            average_package=p.average_package,
-            median_package=p.median_package,
-            highest_package=p.highest_package,
-            major_recruiters=p.major_recruiters,
-            extra=p.extra,
-            provenance=ProvenanceOut.model_validate(p),
-        )
-        for p in placements
-    ]
-
-
-def get_nearby(db: Session, college_id: int) -> list[NearbyPlaceOut]:
-    places = db.query(NearbyPlace).filter(NearbyPlace.college_id == college_id).all()
-    return [NearbyPlaceOut.model_validate(p) for p in places]
-
-
 def add_review(
     db: Session, college_id: int, profile: StudentProfile, payload: CollegeReviewCreate
 ) -> CollegeReviewOut:
@@ -269,14 +200,14 @@ def compare_colleges(db: Session, college_ids: list[int]) -> CollegeCompareRespo
     for college_id in college_ids:
         college = get_college_or_404(db, college_id)
         cutoffs = get_cutoffs(db, college_id)
-        fees = get_fees(db, college_id)
-        hostels = get_hostels(db, college_id)
-        placements = get_placements(db, college_id)
+        known = topics.facts(db, college_id)
 
         lowest_closing = min((c.closing_rank for c in cutoffs), default=None)
-        avg_cost = mean([f.approximate_annual_cost for f in fees]) if fees else None
-        placement_pct = next((p.placement_percentage for p in placements if p.placement_percentage), None)
-        avg_package = next((p.average_package for p in placements if p.average_package), None)
+        tuition = (known.get("fee.tuition.annual") or {}).get("value") or {}
+        avg_cost = tuition.get("amount")
+        hostel = (known.get("facility.hostel") or {}).get("value")
+        hostel_available = hostel if isinstance(hostel, bool) else (
+            bool(hostel["available"]) if isinstance(hostel, dict) and "available" in hostel else None)
         avg_rating, _ = _rating_stats(db, college_id)
         profile = college_profiles.profile_for(college.canonical_name)
         if avg_cost is None and profile and profile.get("fees"):
@@ -287,9 +218,9 @@ def compare_colleges(db: Session, college_ids: list[int]) -> CollegeCompareRespo
                 college=to_summary(db, college),
                 lowest_closing_rank_seen=lowest_closing,
                 approximate_annual_cost=avg_cost,
-                hostel_available=len(hostels) > 0,
-                placement_percentage=placement_pct,
-                average_package=avg_package,
+                hostel_available=hostel_available,
+                placement_percentage=None,
+                average_package=None,
                 average_rating=avg_rating,
                 profile=profile,
                 admission=college_profiles.admission_summary(db, college_id),

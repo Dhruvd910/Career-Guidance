@@ -14,6 +14,7 @@ from app.knowledge.tools import GRAPH_TOOLS
 from app.roadmap.tools import ROADMAP_TOOLS
 from app.models.student import StudentProfile
 from app.schemas.prediction import PredictionRequest, PreferenceListRequest
+from app.facts import topics
 from app.services import college_profiles, college_service
 from app.services.exam_service import get_exam_profile, list_exams, to_out
 from app.services.prediction_service import generate_preference_list, predict
@@ -89,48 +90,18 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
-            "name": "get_fees",
-            "description": "What a college costs: tuition, hostel/mess and fee waivers, with sources.",
+            "name": "college_facts",
+            "description": "What MAYA knows about one college, by topic: fees (tuition, hostel, mess, waivers), "
+                           "campus (hostel, medical facility…), location (address, nearest station, airport, "
+                           "hospital), admissions (route, exam, dates), rankings (NIRF), placements. Every value "
+                           "comes with its source, academic year and how recently it was checked; an attribute "
+                           "that isn't listed is unknown — say so, never estimate it.",
             "parameters": {
                 "type": "object",
-                "properties": {"college_id": {"type": "integer"}},
-                "required": ["college_id"],
-            },
-        },
-    },
-    {
-        "type": "function",
-        "function": {
-            "name": "get_hostel",
-            "description": "Get hostel information for a college.",
-            "parameters": {
-                "type": "object",
-                "properties": {"college_id": {"type": "integer"}},
-                "required": ["college_id"],
-            },
-        },
-    },
-    {
-        "type": "function",
-        "function": {
-            "name": "get_placements",
-            "description": "Placements for a college: median/highest package with the year and source (engineering), or what graduates do next (medical).",
-            "parameters": {
-                "type": "object",
-                "properties": {"college_id": {"type": "integer"}},
-                "required": ["college_id"],
-            },
-        },
-    },
-    {
-        "type": "function",
-        "function": {
-            "name": "get_nearby_places",
-            "description": "What's around a college: nearest airport and railway station, local transport and daily needs (approximate distances, researched).",
-            "parameters": {
-                "type": "object",
-                "properties": {"college_id": {"type": "integer"}},
-                "required": ["college_id"],
+                "properties": {"college_id": {"type": "integer"},
+                               "topic": {"type": "string", "enum": ["fees", "campus", "location", "admissions",
+                                                                    "rankings", "placements"]}},
+                "required": ["college_id", "topic"],
             },
         },
     },
@@ -429,18 +400,6 @@ def _dump(obj: Any) -> Any:
 MAX_CUTOFF_ROWS = 60
 
 
-def _with_profile(db: Session, college_id: int, records: list, section: str) -> Any:
-    """Real colleges have no per-record fee/placement/nearby rows; their researched profile
-    (with sources) answers those questions instead."""
-    if records:
-        return _dump(records)
-    college = college_service.get_college_or_404(db, college_id)
-    profile = college_profiles.profile_for(college.canonical_name)
-    if not profile or not profile.get(section):
-        return {"records": [], "note": "Not researched for this college yet — reliable data is unavailable."}
-    return {"researched_profile": profile[section], "sources": profile["sources"]}
-
-
 def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str, Any]) -> Any:
     try:
         if name == "get_student_profile":
@@ -463,16 +422,13 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                         "rows": _dump([c for c in cutoffs if c.seat_type == "Gender-Neutral"][:MAX_CUTOFF_ROWS]),
                         "note": f"{len(cutoffs)} seat groups in all; pass category and/or branch_name to narrow."}
             return _dump(cutoffs)
-        if name == "get_fees":
-            return _with_profile(db, args["college_id"], college_service.get_fees(db, args["college_id"]), "fees")
-        if name == "get_hostel":
-            return _dump(college_service.get_hostels(db, args["college_id"]))
-        if name == "get_placements":
-            return _with_profile(db, args["college_id"],
-                                 college_service.get_placements(db, args["college_id"]), "placements")
-        if name == "get_nearby_places":
-            return _with_profile(db, args["college_id"],
-                                 college_service.get_nearby(db, args["college_id"]), "surroundings")
+        if name == "college_facts":
+            college_service.get_college_or_404(db, args["college_id"])
+            found = topics.for_model(topics.facts(db, args["college_id"], args.get("topic")))
+            return {"facts": found, "note": (
+                "Say where each value comes from and how recently it was checked; for 'Needs verification' or "
+                "'Stale', say so. Anything not listed here is unknown: say you couldn't verify it."
+                if found else f"Nothing verified about this college's {args.get('topic')} yet — say so plainly.")}
         if name == "compare_colleges":
             return _dump(college_service.compare_colleges(db, args["college_ids"]))
         if name in ("predict_jee", "predict_neet"):

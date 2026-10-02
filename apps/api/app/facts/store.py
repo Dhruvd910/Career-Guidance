@@ -3,8 +3,8 @@
 Recording:
 - A new value from the same source for the same attribute and academic year **supersedes** the
   old one (kept, linked). The same value again just re-confirms it: its checked time moves on.
-- Values from different sources stand side by side. If official sources (tiers 1–4), or two
-  non-official ones of the same tier, disagree, the disagreement is a **conflict**, shown to the
+- Values from different sources stand side by side. If checked values from official sources
+  (tiers 1–4), or from two non-official ones of the same tier, disagree, that's a **conflict**, shown to the
   student as both values with their sources (spec §33) until a reviewer picks one.
 - A fact with flags waits for review and isn't shown.
 
@@ -138,8 +138,10 @@ def _disagree(a: Fact, b: Fact) -> bool:
 
 def reconcile(db: Session, entity_type: str, entity_id: int, attribute: str, academic_year: str | None) -> None:
     """Keeps one unresolved conflict per attribute and year, over the current facts that disagree."""
+    # Only checked values can disagree: an unchecked one (a shared template, an unfetched citation)
+    # just ranks below whatever has been checked.
     live = [f for f in db.execute(select(Fact).where(*_key_filter(entity_type, entity_id, attribute, academic_year),
-                                                     Fact.status.in_(("verified", "unverified")))).scalars()]
+                                                     Fact.status == "verified")).scalars()]
     involved = sorted({f.id for a in live for b in live if a.id < b.id and _disagree(a, b) for f in (a, b)})
     year = FactConflict.academic_year.is_(None) if academic_year is None else FactConflict.academic_year == academic_year
     open_ = db.execute(select(FactConflict).where(

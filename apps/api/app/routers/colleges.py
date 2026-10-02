@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.ai.summarize import generate_college_comparison_summary
@@ -13,11 +13,8 @@ from app.schemas.college import (
     CollegeReviewOut,
     CollegeSummary,
     CutoffOut,
-    FeeOut,
-    HostelOut,
-    NearbyPlaceOut,
-    PlacementOut,
 )
+from app.facts import topics
 from app.services import college_service
 
 router = APIRouter(prefix="/api/colleges", tags=["colleges"])
@@ -60,24 +57,15 @@ def get_cutoffs(
     return college_service.get_cutoffs(db, college_id, category, branch_name)
 
 
-@router.get("/{college_id}/fees", response_model=list[FeeOut])
-def get_fees(college_id: int, db: Session = Depends(get_db)) -> list[FeeOut]:
-    return college_service.get_fees(db, college_id)
-
-
-@router.get("/{college_id}/hostel", response_model=list[HostelOut])
-def get_hostel(college_id: int, db: Session = Depends(get_db)) -> list[HostelOut]:
-    return college_service.get_hostels(db, college_id)
-
-
-@router.get("/{college_id}/placements", response_model=list[PlacementOut])
-def get_placements(college_id: int, db: Session = Depends(get_db)) -> list[PlacementOut]:
-    return college_service.get_placements(db, college_id)
-
-
-@router.get("/{college_id}/nearby", response_model=list[NearbyPlaceOut])
-def get_nearby(college_id: int, db: Session = Depends(get_db)) -> list[NearbyPlaceOut]:
-    return college_service.get_nearby(db, college_id)
+@router.get("/{college_id}/facts")
+def get_facts(college_id: int, topic: str | None = None, db: Session = Depends(get_db)) -> dict:
+    """Everything MAYA knows about the college from outside, each value with its source, academic
+    year and freshness (a FactView); `topic` narrows it to fees, campus, location, admissions,
+    rankings or placements."""
+    college_service.get_college_or_404(db, college_id)
+    if topic is not None and topic not in topics.TOPICS:
+        raise HTTPException(status_code=400, detail=f"topic must be one of {sorted(topics.TOPICS)}")
+    return {"college_id": college_id, "facts": topics.facts(db, college_id, topic)}
 
 
 @router.get("/{college_id}/reviews", response_model=list[CollegeReviewOut])

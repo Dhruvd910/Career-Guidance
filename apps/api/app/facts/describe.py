@@ -34,7 +34,8 @@ NAMES = {
     "admission.counselling": ("Counselling", "काउंसलिंग"),
     "academic.university": ("University", "विश्वविद्यालय"),
     "academic.established": ("Established", "स्थापना"),
-    "ranking.nirf": ("NIRF rank", "NIRF रैंक"),
+    "ranking.nirf.engineering": ("NIRF rank (engineering)", "NIRF रैंक (इंजीनियरिंग)"),
+    "ranking.nirf.medical": ("NIRF rank (medical)", "NIRF रैंक (मेडिकल)"),
     "placement.median_salary": ("Median salary", "औसत (मीडियन) वेतन"),
     "placement.students_placed": ("Students placed", "प्लेसमेंट पाए छात्र"),
 }
@@ -80,6 +81,11 @@ def value_text(attribute: str, value, lang: str = "en") -> str:
             return f"{value['lat']:.4f}, {value['lng']:.4f}"
         if "from" in value:
             return f"{value['from']} – {value['to']}" if value.get("to") else str(value["from"])
+        if "route" in value:
+            via = "से" if lang == "hi" else "via"
+            n = value.get("programmes")
+            count = (f" ({n} प्रोग्राम)" if lang == "hi" else f" ({n} programme{'s' if n != 1 else ''})") if n else ""
+            return f"{value['route']} {via} {value.get('exam', '')}{count}".strip()
         if "rank" in value:
             return f"{value['rank']} ({value.get('category', '')} {value.get('year', '')})".replace("( ", "(").strip()
         if "text" in value:
