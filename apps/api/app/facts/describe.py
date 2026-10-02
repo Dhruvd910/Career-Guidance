@@ -66,8 +66,8 @@ def inr(amount: float | int) -> str:
 
 
 def value_text(attribute: str, value, lang: str = "en") -> str:
-    if value is None:
-        return "उपलब्ध नहीं" if lang == "hi" else "Not available"
+    if value is None:  # looked, not found — not "doesn't exist"
+        return "आधिकारिक स्रोतों में नहीं मिला" if lang == "hi" else "Not found in official sources"
     if isinstance(value, bool):
         return ("हाँ" if value else "नहीं") if lang == "hi" else ("Yes" if value else "No")
     if isinstance(value, dict):

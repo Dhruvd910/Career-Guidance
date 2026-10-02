@@ -80,8 +80,8 @@ def label(status: str, attribute: str, verified_at: datetime | date | None, acad
     checked = _as_date(verified_at)
     when = checked.strftime("%-d %b %Y") if checked else None
     if status == "not_available":
-        return {"en": f"Not available (looked {when})" if when else "Not available",
-                "hi": f"उपलब्ध नहीं ({when} को देखा)" if when else "उपलब्ध नहीं", "state": "not_available"}
+        return {"en": f"Not found (looked {when})" if when else "Not found",
+                "hi": f"नहीं मिला ({when} को देखा)" if when else "नहीं मिला", "state": "not_available"}
     if status in ("unverified",) or checked is None:
         return {"en": "Needs verification", "hi": "जाँच बाक़ी", "state": "unverified"}
     if is_stale(attribute, verified_at, academic_year, today):

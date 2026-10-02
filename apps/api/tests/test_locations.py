@@ -80,6 +80,9 @@ def test_a_college_is_placed_and_its_neighbours_found(tmp_path, db_session):
     assert point["value"] == {"lat": round(CAMPUS["center"]["lat"], 6), "lng": round(CAMPUS["center"]["lon"], 6)}
     assert point["source"]["name"] == "OpenStreetMap contributors (ODbL)" and point["source"]["tier"] == 5
     assert "km from Bhopal" in point["source"]["locator"]
+    assert point["source"]["url"] == "https://www.openstreetmap.org/way/11", "the campus's own map page"
+    assert shown["near.airport"]["source"]["url"].startswith("https://www.openstreetmap.org/?mlat="), \
+        "each answer is its own document, not 'the Overpass address'"
     assert shown["location.website"]["value"] == {"url": "https://www.manit.ac.in"}
     station = shown["near.railway_station"]["value"]
     assert station["name"] == "Rani Kamlapati" and station["kind"] == "straight_line", "never the metro stop"

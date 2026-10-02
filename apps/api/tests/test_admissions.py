@@ -72,7 +72,7 @@ def test_dates_reach_the_exam_and_maya(tmp_path, db_session, monkeypatch):
     from tests.test_assessment_service import student
 
     said = execute_tool(db_session, student(db_session), "admission_dates", {"exam": "NEET_UG"})
-    assert said["cycles"]["2027-28"][0]["when"] == "Not available"
+    assert said["cycles"]["2027-28"][0]["when"] == "Not found in official sources"
     assert {"Applications", "Exam date"} <= {c["what"] for c in said["cycles"]["2026-27"]}
     assert "Online application: 7 Feb 2026 – 7 Mar 2026" in {c["when"] for c in said["cycles"]["2026-27"]}
     assert "never as this year's" in said["note"]

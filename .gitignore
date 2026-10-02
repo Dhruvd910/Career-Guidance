@@ -9,6 +9,7 @@ apps/api/data/*.db-journal
 apps/api/data/okf/
 apps/api/data/sources/
 apps/api/data/.okf.lock
+apps/api/data/logs/
 *.egg-info/
 
 # Node

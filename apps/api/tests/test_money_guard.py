@@ -59,5 +59,5 @@ def test_find_colleges(db_session):
     found = execute_tool(db_session, asha, "find_colleges", {"radius_km": 100})
     assert found["home"] == {"town": "Indore", "state": "Madhya Pradesh"} and found["sorted_by"] == "distance"
     assert found["colleges"][0]["name"] == "Indian Institute of Technology Indore" and found["colleges"][0]["distance_km"] < 30
-    assert "left out" in found["note"]
+    assert found["say_first"] is None and "not that it's missing" in found["note"], "nothing was left out here"
     assert "error" in execute_tool(db_session, asha, "find_colleges", {"career": "astronaut"})

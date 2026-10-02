@@ -39,7 +39,7 @@ def list_colleges(
 
 @router.get("/discover")
 def discover_colleges(career: str | None = None, degree: str | None = None, state: str | None = None,
-                      exam: str | None = None, home: str | None = None, home_state: str | None = None,
+                      kind: str | None = None, exam: str | None = None, home: str | None = None, home_state: str | None = None,
                       radius_km: float | None = None, budget_max: int | None = None, hostel: bool = False,
                       medical: bool = False, sort: str = "name", limit: int = 50, db: Session = Depends(get_db)) -> dict:
     """Career or degree → colleges offering it → the student's filters → plain attributes, sorted by
@@ -47,7 +47,7 @@ def discover_colleges(career: str | None = None, degree: str | None = None, stat
     something isn't known are counted in `left_out`."""
     if sort not in discover.SORTS:
         raise HTTPException(status_code=400, detail=f"sort must be one of {list(discover.SORTS)}")
-    return discover.discover(db, career=career, degree=degree, state=state, exam=exam, home=home, home_state=home_state,
+    return discover.discover(db, career=career, degree=degree, state=state, kind=kind, exam=exam, home=home, home_state=home_state,
                              radius_km=radius_km, budget_max=budget_max, hostel=hostel, medical=medical, sort=sort,
                              limit=min(limit, 200))
 

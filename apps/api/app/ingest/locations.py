@@ -286,9 +286,19 @@ def nearest(elements: list[dict], lat: float, lng: float) -> dict[str, tuple[str
 OSM = ("openstreetmap", "OpenStreetMap contributors (ODbL)", 5)
 
 
-def _doc(publisher: tuple, page: Fetched, title: str) -> Document:
-    return Document(publisher[0], publisher[1], publisher[2], page.final_url, title, page.retrieved_at,
+def _doc(publisher: tuple, page: Fetched, title: str, url: str | None = None) -> Document:
+    """url: what a student can open. API answers all come from one address, so each cites the map
+    page it describes instead; the raw answer is still kept by its sha256."""
+    return Document(publisher[0], publisher[1], publisher[2], url or page.final_url, title, page.retrieved_at,
                     sha256=page.sha256, parse="text")
+
+
+def osm_object(ref: str) -> str:
+    return f"https://www.openstreetmap.org/{ref}"
+
+
+def osm_map(lat: float, lng: float) -> str:
+    return f"https://www.openstreetmap.org/?mlat={lat:.5f}&mlon={lng:.5f}#map=14/{lat:.5f}/{lng:.5f}"
 
 
 def values_for(fetcher: Fetcher, college: College) -> tuple[list[Value], str]:
@@ -300,7 +310,7 @@ def values_for(fetcher: Fetcher, college: College) -> tuple[list[Value], str]:
     if found is None:
         return [], why
     at = found.page.retrieved_at
-    doc = _doc(OSM, found.page, f"OpenStreetMap: {found.label} ({found.ref})")
+    doc = _doc(OSM, found.page, f"OpenStreetMap: {found.label} ({found.ref})", osm_object(found.ref))
     gen = "maya-locations/1"
     vals = [Value("location.coordinates", {"lat": round(found.lat, 6), "lng": round(found.lng, 6)}, doc,
                   locator=f"{found.ref}; {found.why}", quote=f"{found.label}: {found.lat:.6f}, {found.lng:.6f}",
@@ -310,7 +320,7 @@ def values_for(fetcher: Fetcher, college: College) -> tuple[list[Value], str]:
                           quote=f"website={found.website}", generated_by=gen, at=at))
     page = overpass(fetcher, overpass_query(found.lat, found.lng))
     if page.ok:
-        doc = _doc(OSM, page, f"OpenStreetMap places near {college.canonical_name}")
+        doc = _doc(OSM, page, f"OpenStreetMap places near {college.canonical_name}", osm_map(found.lat, found.lng))
         for attribute, hit in nearest(json.loads(page.body).get("elements", []), found.lat, found.lng).items():
             radius = NEAR[attribute][0] // 1000
             if hit is None:

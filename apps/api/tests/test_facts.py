@@ -36,7 +36,7 @@ def test_freshness_labels():
     assert fee["en"] == "Stale — as of 2 Oct 2026", "a fee goes stale when the next admission cycle starts"
     assert freshness.label("verified", "fee.tuition.annual", T0, "2026-27", date(2027, 7, 31))["state"] == "fresh"
     assert freshness.label("unverified", "fee.tuition.annual", None, "2026-27", TODAY)["en"] == "Needs verification"
-    assert freshness.label("not_available", "facility.medical", T0, None, TODAY)["en"] == "Not available (looked 2 Oct 2026)"
+    assert freshness.label("not_available", "facility.medical", T0, None, TODAY)["en"] == "Not found (looked 2 Oct 2026)"
     assert freshness.stale_at("fee.hostel.annual", T0, "2026-27") == datetime(2027, 8, 1, tzinfo=timezone.utc)
 
 

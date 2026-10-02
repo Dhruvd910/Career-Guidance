@@ -82,3 +82,10 @@ def test_a_colleges_facts_sources_and_comparison(client, db_session):
     assert cell["value"] == "₹62,500 a semester" and cell["conflict"] == ["₹60,000 a semester (JoSAA)"]
     assert rows[1]["facts"]["facility.hostel"] is None, "unknown stays unknown"
     assert rows[0]["hostel_available"] is True and rows[1]["hostel_available"] is None
+
+
+def test_by_kind_and_what_was_left_out(client, db_session):
+    bhopal, indore, trichy, nowhere = setup(db_session)
+    nits = client.get("/api/colleges/discover", params={"kind": "NIT", "home": "Indore", "radius_km": 300}).json()
+    assert {c["name"] for c in nits["colleges"]} == {bhopal.canonical_name, indore.canonical_name}, "the test colleges are all typed NIT"
+    assert nits["left_out_say"] == "1 left out: no known location — they may also fit, but MAYA can't tell yet."

@@ -72,7 +72,7 @@ def has_facility(view: dict | None) -> bool | None:
 
 
 def discover(db: Session, *, career: str | None = None, degree: str | None = None, state: str | None = None,
-             exam: str | None = None, home: str | None = None, home_state: str | None = None,
+             kind: str | None = None, exam: str | None = None, home: str | None = None, home_state: str | None = None,
              radius_km: float | None = None, budget_max: int | None = None, hostel: bool = False,
              medical: bool = False, sort: str = "name", limit: int = 50) -> dict:
     left_out: dict[str, int] = {}
@@ -89,6 +89,8 @@ def discover(db: Session, *, career: str | None = None, degree: str | None = Non
         if state:
             query = query.where(College.state == state)
         colleges = list(db.execute(query).scalars())
+    if kind:  # IIT, NIT, IIIT, AIIMS… ("Medical" matches every government and private medical college)
+        colleges = [c for c in colleges if kind.lower() in (c.college_type or "").lower()]
     if exam:
         with_exam = {cid for (cid,) in db.execute(select(CollegeCourse.college_id).join(Exam, Exam.id == CollegeCourse.exam_id)
                                                   .where(Exam.code == exam.upper()).distinct())}
@@ -139,7 +141,9 @@ def discover(db: Session, *, career: str | None = None, degree: str | None = Non
             "fee": lambda r: (r["tuition_per_year"] if r["tuition_per_year"] is not None else missing_last, r["name"]),
             "nirf": lambda r: (r["nirf_rank"] or missing_last, r["name"])}
     rows.sort(key=keys[sort])
+    left = "; ".join(f"{n} left out: {why}" for why, n in left_out.items())
     return {"total": len(rows), "colleges": rows[:limit], "sorted_by": sort, "left_out": left_out,
+            "left_out_say": (f"{left} — they may also fit, but MAYA can't tell yet." if left else None),
             "home": {"town": origin.name, "state": origin.state} if origin else None,
             "note": ("No overall score: compare the attributes that matter to you. Distances are straight-line, "
                      "from OpenStreetMap; every value shows its source and when it was checked.")}

@@ -116,7 +116,9 @@ TOOL_SPECS: list[dict[str, Any]] = [
                            "isn't known are counted in left_out: mention it.",
             "parameters": {"type": "object", "properties": {
                 "career": {"type": "string", "description": "a career key or name, e.g. cse, doctor"},
-                "degree": {"type": "string"}, "state": {"type": "string"},
+                "degree": {"type": "string"},
+                "state": {"type": "string", "description": "only if the student names a state"},
+                "kind": {"type": "string", "description": "a type of institute: IIT, NIT, IIIT, AIIMS, GFTI"},
                 "exam": {"type": "string", "enum": ["JEE_MAIN", "JEE_ADVANCED", "NEET_UG"]},
                 "home": {"type": "string", "description": "their home town; leave out to use the one on their profile"},
                 "radius_km": {"type": "number"}, "budget_max": {"type": "integer", "description": "rupees a year"},
@@ -487,15 +489,17 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                     return {"error": f"I don't know a career called {career!r}."}
                 career = key.removeprefix("career:")
             home = args.get("home") or (profile.city if profile is not None else None)
-            found = discover(db, career=career, degree=args.get("degree"), state=args.get("state"), exam=args.get("exam"),
+            found = discover(db, career=career, degree=args.get("degree"), state=args.get("state"), kind=args.get("kind"),
+                             exam=args.get("exam"),
                              home=home, home_state=None if args.get("home") else getattr(profile, "state", None),
                              radius_km=args.get("radius_km"), budget_max=args.get("budget_max"),
                              hostel=bool(args.get("hostel")), medical=bool(args.get("medical")),
                              sort=args.get("sort") or ("distance" if home else "name"), limit=8)
             keep = ("id", "name", "city", "state", "distance_km", "nirf_rank", "tuition", "hostel", "medical", "station")
-            return {"total": found["total"], "sorted_by": found["sorted_by"], "home": found["home"],
-                    "left_out": found["left_out"], "colleges": [{k: c[k] for k in keep} for c in found["colleges"]],
-                    "note": found["note"] + " Mention what was left out because it isn't known."}
+            return {"say_first": found["left_out_say"], "total": found["total"], "sorted_by": found["sorted_by"],
+                    "home": found["home"], "colleges": [{k: c[k] for k in keep} for c in found["colleges"]],
+                    "note": found["note"] + (" Say the say_first sentence too." if found["left_out_say"] else "")
+                    + " A facility 'Not found in official sources' means MAYA couldn't confirm it — not that it's missing."}
         if name == "admission_dates":
             from app.facts import describe, store
             from app.models.exam import Exam
@@ -510,7 +514,7 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                     {"what": describe.name(attribute), "when": describe.value_text(attribute, v["value"]),
                      "source": v["source"]["document"], "where": v["source"]["locator"], "checked": v["label"]["en"]})
             return {"exam": exam.name, "cycles": by_year, "note": (
-                "Give the newest cycle's dates; if its dates say 'Not available', the next cycle isn't announced yet — "
+                "Give the newest cycle's dates; if its dates say 'Not found in official sources', the next cycle isn't announced yet — "
                 "say so, and give last cycle's dates only as last year's, never as this year's.")}
         if name == "search_documents":
             from app import rag

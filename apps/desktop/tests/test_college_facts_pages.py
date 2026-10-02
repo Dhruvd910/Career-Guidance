@@ -41,7 +41,7 @@ COLLEGE = {
                                                           source="NIRF, Ministry of Education", tier=1),
                                                   "value": {"rank": 72, "category": "Engineering", "year": 2025}}},
         "Financial": {"fee.tuition.annual": TUITION},
-        "Campus": {"facility.medical": view("facility.medical", "Medical facility", "Not available", status="not_available",
+        "Campus": {"facility.medical": view("facility.medical", "Medical facility", "Not found in official sources", status="not_available",
                                             state="not_available")},
         "Location": {"near.railway_station": view("near.railway_station", "Nearest railway station",
                                                   "Bhopal Junction, 6.2 km (straight line)", "OpenStreetMap contributors (ODbL)", 5),
@@ -107,7 +107,7 @@ def test_a_college_page_shows_where_each_value_comes_from(qapp, api):
     assert "<b>Tuition fee:</b> ₹62,500 a semester" in shown
     assert "MANIT Bhopal (official website) · 2026-27 · Verified today" in shown
     assert "Another source says: ₹60,000 a semester (JoSAA)" in shown and "couldn't be reconciled" in shown
-    assert "<b>Medical facility:</b> Not available" in shown, "not found is said, never filled in"
+    assert "<b>Medical facility:</b> Not found in official sources" in shown, "not found is said, never filled in"
     assert "Places © OpenStreetMap contributors (ODbL)" in shown
     button(page, "Check for updates").click()
     assert api.calls[-1] == ("refresh", 7) and "again tonight" in page.refresh_note.text()
