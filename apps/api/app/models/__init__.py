@@ -10,6 +10,7 @@ from app.models.cutoff import Cutoff
 from app.models.exam import Exam, ExamProfile
 from app.models.facts import DocChunk, Fact, FactConflict, OkfLoad, RefreshRequest, Source, SourceDocument
 from app.models.knowledge import KgEdge, KgNode, KgVersion
+from app.models.mentor import AgendaMark
 from app.models.memory import (
     Consent, CounsellingThread, DataRequest, MemoryItem, SessionSummary, StudentConstraint, StudentEvent,
     StudentGoal, StudentInterest, TurnAnalysis,
@@ -78,5 +79,6 @@ __all__ = [
     "FactConflict",
     "OkfLoad",
     "RefreshRequest",
+    "AgendaMark",
     "DocChunk",
 ]
