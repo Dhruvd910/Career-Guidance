@@ -73,6 +73,7 @@ class Inputs:
     directions: list[str] = field(default_factory=list)  # top careers from the assessments, best first
     assessments_done: list[str] = field(default_factory=list)
     goals: list[str] = field(default_factory=list)
+    shortlisted: int = 0  # colleges the student has shortlisted (Phase 7)
     month: str = ""  # "2026-10" — when it was built
 
     def snapshot(self) -> dict:
@@ -420,7 +421,8 @@ class Builder:
                  detail={"why": m.why.model_dump() if m.why else {}, "how": [t(n, n) for n in names],
                          "done_when": t("You've shortlisted colleges and checked their official sites.",
                                         "आपने कॉलेजों की सूची बनाकर उनकी आधिकारिक वेबसाइट देखी है।")},
-                 hours=4, attrs={"link": "colleges", "total": counts["total"], "in_state": counts["in_state"]})
+                 hours=4, attrs={"link": "colleges", "total": counts["total"], "in_state": counts["in_state"],
+                                 "auto": "shortlist"})
 
     def _slot_weak_areas(self, m: Milestone, parent: str, stage: str) -> None:
         hard = self.difficulties()

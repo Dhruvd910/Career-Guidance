@@ -213,6 +213,8 @@ def _describe(event: StudentEvent) -> str:
         "ROADMAP_UPDATED": f"Roadmap updated (version {p.get('version')})",
         "MILESTONE_COMPLETED": f"Milestone done: {p.get('title')}",
         "FOCUS_CHOSEN": f"Focus chosen: {p.get('career', '').replace('_', ' ')}",
+        "COLLEGE_SHORTLISTED": f"Shortlisted {p.get('college', 'a college')}",
+        "COLLEGE_UNSHORTLISTED": f"Took {p.get('college', 'a college')} off the shortlist",
     }
     return what.get(event.event_type, event.event_type.replace("_", " ").capitalize())
 

@@ -15,6 +15,7 @@ from app.roadmap.tools import ROADMAP_TOOLS
 from app.models.student import StudentProfile
 from app.schemas.prediction import PredictionRequest, PreferenceListRequest
 from app.facts import topics
+from app.models.college import College
 from app.services import college_profiles, college_service
 from app.services.exam_service import get_exam_profile, list_exams, to_out
 from app.services.prediction_service import generate_preference_list, predict
@@ -124,6 +125,25 @@ TOOL_SPECS: list[dict[str, Any]] = [
                 "radius_km": {"type": "number"}, "budget_max": {"type": "integer", "description": "rupees a year"},
                 "hostel": {"type": "boolean"}, "medical": {"type": "boolean"},
                 "sort": {"type": "string", "enum": ["distance", "fee", "nirf", "name"]}}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "my_shortlist",
+            "description": "The colleges the student has shortlisted, with their key facts (fees, hostel, medical "
+                           "facility, nearest station, NIRF), each with its source and freshness.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "shortlist_college",
+            "description": "Add a college to the student's shortlist, or take it off (remove: true), when they ask. "
+                           "college: its name or short name (MANIT, IIT Bombay) or id.",
+            "parameters": {"type": "object", "properties": {"college": {"type": "string"}, "remove": {"type": "boolean"}},
+                           "required": ["college"]},
         },
     },
     {
@@ -500,6 +520,32 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                     "home": found["home"], "colleges": [{k: c[k] for k in keep} for c in found["colleges"]],
                     "note": found["note"] + (" Say the say_first sentence too." if found["left_out_say"] else "")
                     + " A facility 'Not found in official sources' means MAYA couldn't confirm it — not that it's missing."}
+        if name == "my_shortlist":
+            from app.mentor import shortlist
+
+            found = shortlist.items(db, profile)
+            return {"colleges": [{"name": c["name"], "city": c["city"],
+                                  "facts": [f"{f['what']}: {f['value']} ({f['source']}, {f['label']['en']})"
+                                            for f in c["facts"].values() if f]} for c in found],
+                    "note": "Nothing shortlisted yet — offer to help find colleges." if not found else
+                            "Say where each value comes from and how fresh it is."}
+        if name == "shortlist_college":
+            from app.mentor import shortlist
+
+            said = str(args.get("college") or "").strip()
+            matches = college_service.search_colleges(db, q=said) if not said.isdigit() else []
+            college_id = int(said) if said.isdigit() else (matches[0].id if matches else None)
+            exact = said.isdigit() or (matches and (matches[0].canonical_name.lower() == said.lower()
+                                                    or len(matches) == 1 or said.lower() in
+                                                    [a.lower() for a in (db.get(College, matches[0].id).aliases or [])]))
+            if college_id is None:
+                return {"error": f"No college called {said!r}."}
+            if not exact:
+                return {"error": "Which one? " + "; ".join(f"{m.canonical_name} ({m.id})" for m in matches[:6])}
+            try:
+                return shortlist.remove(db, profile, college_id) if args.get("remove") else shortlist.add(db, profile, college_id)
+            except shortlist.ShortlistError as e:
+                return {"error": str(e)}
         if name == "admission_dates":
             from app.facts import describe, store
             from app.models.exam import Exam

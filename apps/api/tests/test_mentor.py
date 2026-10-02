@@ -147,3 +147,37 @@ def test_the_mentor_api(client):
     assert marked["status"] == "dismissed" and marked["snoozed_until"]
     assert client.post("/api/mentor/agenda/mark", json={"key": "x", "what": "forget"}, headers=auth(token)).status_code == 400
     assert client.get("/api/mentor/brief").status_code == 401
+
+
+def test_the_shortlist(client, db_session):
+    from app.ai.tools import execute_tool
+    from app.mentor import shortlist
+    from app.models.memory import StudentEvent
+    from app.roadmap import service
+
+    seed_careers(db_session)
+    asha = student(db_session, class_level=12, memory=True)
+    asha.state = "Madhya Pradesh"
+    manit = College(canonical_name="Maulana Azad National Institute of Technology Bhopal", college_type="NIT",
+                    ownership="government", state="Madhya Pradesh", city="Bhopal", is_demo_data=False,
+                    aliases=["MANIT", "NIT Bhopal"])
+    other = College(canonical_name="National Institute of Technology Raipur", college_type="NIT", ownership="government",
+                    state="Chhattisgarh", city="Raipur", is_demo_data=False, aliases=["NIT Raipur"])
+    db_session.add_all([manit, other])
+    db_session.commit()
+    service.adapt(db_session, asha, "focus", career="cse")
+    added = execute_tool(db_session, asha, "shortlist_college", {"college": "MANIT"})
+    assert added == {"added": manit.canonical_name, "shortlist": 1}
+    step = next(n for n in _walk(service.view(db_session, asha)["stages"]) if n["node_key"] == "module:colleges")
+    assert step["status"] == "in_progress" and step["evidence"][-1]["note"] == "1 colleges shortlisted"
+    assert db_session.query(StudentEvent).filter_by(event_type="COLLEGE_SHORTLISTED").count() == 1
+    assert "Which one?" in execute_tool(db_session, asha, "shortlist_college", {"college": "National Institute"})["error"]
+    assert execute_tool(db_session, asha, "my_shortlist", {})["colleges"][0]["name"] == manit.canonical_name
+    assert shortlist.remove(db_session, asha, manit.id)["shortlist"] == 0
+    assert execute_tool(db_session, asha, "my_shortlist", {})["colleges"] == []
+
+
+def _walk(nodes):
+    for n in nodes:
+        yield n
+        yield from _walk(n["children"])

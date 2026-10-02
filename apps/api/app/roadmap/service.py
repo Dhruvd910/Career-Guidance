@@ -71,7 +71,11 @@ def inputs_for(db: Session, profile: StudentProfile, roadmap: Roadmap, today: da
         goals = [g.title for g in db.execute(select(StudentGoal).where(
             StudentGoal.student_profile_id == profile.id, StudentGoal.status == "active")).scalars()]
     today = today or date.today()
-    return Inputs(class_level=profile.class_level, education_stage=profile.education_stage, stream=profile.stream,
+    from app.models.saved_item import SavedItem
+
+    shortlisted = len(db.execute(select(SavedItem.id).where(SavedItem.student_profile_id == profile.id,
+                                                            SavedItem.item_type == "college")).all())
+    return Inputs(class_level=profile.class_level, shortlisted=shortlisted, education_stage=profile.education_stage, stream=profile.stream,
                   board=profile.school_board, state=profile.state, hours_per_week=own["hours_per_week"],
                   focus=own["focus_career"], branches=list(own["branches"] or []),
                   dropped=list(own["dropped"] or []), difficulties=list(own["difficulties"] or []),
@@ -221,6 +225,10 @@ def _auto_progress(db: Session, roadmap: Roadmap, nodes: list[dict], inputs: Inp
             _set(db, roadmap, key, "done", {"kind": "assessment", "note": f"took {attrs['instrument']}"}, existing=rows)
         elif attrs.get("auto") == "focus" and inputs.focus:
             _set(db, roadmap, key, "done", {"kind": "focus", "note": inputs.focus}, existing=rows)
+        elif attrs.get("auto") == "shortlist" and inputs.shortlisted and not rows.get(key):
+            # Started, not done: the step also asks them to check the colleges' official sites.
+            _set(db, roadmap, key, "in_progress", {"kind": "shortlist", "note": f"{inputs.shortlisted} colleges shortlisted"},
+                 existing=rows)
         elif attrs.get("skill") and not attrs.get("inserted_for"):
             measured = inputs.measured.get(attrs["skill"])
             if measured and measured["value"] >= STRONG:
