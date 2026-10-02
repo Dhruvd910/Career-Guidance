@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from sqlalchemy.orm import Session
 
 from app.ai.language import detect, reply_instruction, updated_stats, usual_language
+from app.ai.money_guard import Guard
 from app.ai import safety
 from app.ai.tools import TOOL_SPECS, execute_tool
 from app.assessment.context import assessment_context
@@ -59,8 +60,13 @@ change an improvement only when it says so.
 - How to get into a career (streams, subjects, exams, degrees), what to learn for it, which careers a stream \
 keeps open, and which colleges offer it come only from career_pathways, career_skills, what_stays_open and \
 colleges_offering — never from your own memory, however well you think you know it (call the tool even for \
-doctor, lawyer or IAS). For colleges, give names and places only and say plainly that \
-fees, hostels and facilities aren't available yet.
+doctor, lawyer or IAS).
+- What a college costs, its hostel and medical facility, where it is and what's near it, its NIRF rank and \
+admission dates come only from college_facts, find_colleges and admission_dates; what official documents say \
+about rules and eligibility, from search_documents. Say where each value comes from and how fresh it is ("per \
+NIT Trichy's 2026-27 fee notice, checked 3 days ago"); for a stale one say "as of <date>"; for anything not \
+there, say you couldn't verify it — never estimate a fee, a distance or a date. Never call a college the best: \
+offer to compare the attributes that matter to the student (distance, fees, hostel, NIRF rank).
 - The student's plan, its next step and their progress come only from the roadmap tools. When their situation \
 changes ("I only have two hours a day", "maths is hard", "I like cybersecurity now"), call adjust_roadmap with \
 save false to see what would change, tell them briefly and ask whether to do it. After they agree, call it with \
@@ -208,6 +214,9 @@ class Reply:
         if self.safety:
             self.messages.append({"role": "system", "content": safety.INSTRUCTION[self.safety]})
         self.messages.append({"role": "user", "content": message})
+        # Amounts MAYA may say: ones in this conversation's tool results and the student's own words.
+        self.guard = Guard([m["content"] for m in self.messages if m["role"] in ("user", "assistant", "tool")
+                            and isinstance(m.get("content"), str)], self.tag.lang)
         self.text = ""
         self.tool_calls_used: list[str] = []
         self.suggestions: list[dict] = []
@@ -222,17 +231,26 @@ class Reply:
         self.text += piece
         return piece
 
+    def _say(self, sentence: str, written: str) -> str:
+        # Only the first piece of each round may need a space before it.
+        return self._append(sentence) if written else self._add(sentence)
+
     async def events(self, llm: LLMProvider) -> AsyncIterator[str | ToolActivity | UiSuggestion]:
         for _ in range(MAX_TOOL_ITERATIONS):
             written, calls = "", []
             async for event in llm.stream(self.messages, tools=TOOL_SPECS):
                 if isinstance(event, TextDelta) and event.text:
-                    # Only the first piece of each round may need a space before it.
-                    piece = self._append(event.text) if written else self._add(event.text)
-                    written += event.text
-                    yield piece
+                    for sentence in self.guard.feed(event.text):  # every ₹ amount checked first (P6-11)
+                        piece = self._say(sentence, written)
+                        written += sentence
+                        yield piece
                 elif isinstance(event, ToolCall):
                     calls.append(event)
+            rest = self.guard.flush()
+            if rest:
+                piece = self._say(rest, written)
+                written += rest
+                yield piece
             if not calls:
                 return
             self.messages.append({"role": "assistant", "content": written, "tool_calls": [
@@ -251,8 +269,9 @@ class Reply:
                     ui = result.pop("ui")  # for the screen, not the model
                     self.suggestions.append(ui)
                     yield UiSuggestion(ui)
-                self.messages.append({"role": "tool", "tool_call_id": call.id,
-                                      "content": json.dumps(result, default=str)})
+                content = json.dumps(result, default=str, ensure_ascii=False)
+                self.guard.allow(content)  # amounts a tool returned may be said
+                self.messages.append({"role": "tool", "tool_call_id": call.id, "content": content})
         yield self._add(GAVE_UP)
 
 

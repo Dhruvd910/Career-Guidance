@@ -81,6 +81,9 @@ def test_every_value_is_checked_against_the_document():
     odd = reading.check({"attribute": "fee.mess.annual", "amount": 21000, "per": "month", "academic_year": None,
                          "quote": "Hostel Seat Rent (per semester) 21,000"}, doc)
     assert odd.flags == ["₹21,000 month is outside the expected range for fee.mess.annual", "no academic year given"]
+    menu = Extracted("html", ["Home | Academics | Hospital | Sports | Contact"])
+    assert reading.check({"attribute": "facility.medical", "text": "There is a hospital.", "quote": "Hospital"}, menu) is None, \
+        "a menu word isn't evidence"
     scan = Extracted("pdf", ["T u i t i o n  F e e  6 2 5 0 0"], scanned=True)
     held = reading.check({"attribute": "fee.tuition.annual", "amount": 62500, "per": "semester", "academic_year": "2026-27",
                           "quote": "Tuition Fee 62500"}, scan)

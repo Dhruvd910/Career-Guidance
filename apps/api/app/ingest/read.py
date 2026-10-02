@@ -88,7 +88,8 @@ def ask(messages: list[dict], usage: Usage, client: httpx.Client | None = None) 
     if not s.openrouter_api_key:
         raise RuntimeError("OPENROUTER_API_KEY isn't set")
     body = {"model": s.extraction_model, "messages": messages, "temperature": 0,
-            "response_format": {"type": "json_object"}, "usage": {"include": True}, "reasoning": {"enabled": False}}
+            "response_format": {"type": "json_object"}, "usage": {"include": True}, "reasoning": {"enabled": False},
+            "max_tokens": 3000}  # a page's facts fit easily; a runaway reply is cut off, not paid for
     http = client or httpx.Client(timeout=180)
     try:
         r = http.post(f"{s.openrouter_base_url}/chat/completions", json=body,
@@ -156,8 +157,8 @@ def check(raw: dict, doc: Extracted) -> Read | None:
         return Read(attribute, {"amount": amount, "per": per, "applies_to": applies.lower() if applies.lower() in GENERAL else applies},
                     year, quote, page, flags)
     text = " ".join(str(raw.get("text") or "").split())
-    if len(text) < 3:
-        return None
+    if len(text) < 3 or len(quote) < 12 or len(quote.split()) < 2:
+        return None  # a bare menu word ("Hospital") isn't evidence of what's there
     return Read(attribute, {"text": text[:400]}, year, quote, page, flags)
 
 

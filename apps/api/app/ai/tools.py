@@ -108,6 +108,25 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "find_colleges",
+            "description": "Colleges for a career or degree, with the student's filters: state, exam, distance from "
+                           "their home town, yearly tuition budget, hostel, medical facility. Each comes with plain "
+                           "attributes (distance, tuition, hostel, nearest station, NIRF) and their sources. Sorted "
+                           "by what the student chose — never by an overall score. Colleges left out because something "
+                           "isn't known are counted in left_out: mention it.",
+            "parameters": {"type": "object", "properties": {
+                "career": {"type": "string", "description": "a career key or name, e.g. cse, doctor"},
+                "degree": {"type": "string"}, "state": {"type": "string"},
+                "exam": {"type": "string", "enum": ["JEE_MAIN", "JEE_ADVANCED", "NEET_UG"]},
+                "home": {"type": "string", "description": "their home town; leave out to use the one on their profile"},
+                "radius_km": {"type": "number"}, "budget_max": {"type": "integer", "description": "rupees a year"},
+                "hostel": {"type": "boolean"}, "medical": {"type": "boolean"},
+                "sort": {"type": "string", "enum": ["distance", "fee", "nirf", "name"]}}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "admission_dates",
             "description": "Key dates for an entrance exam's admissions — applications, the exam, the result, "
                            "counselling — from the official bulletins, by cycle, each with its source; and whether "
@@ -456,6 +475,27 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                 "Say where each value comes from and how recently it was checked; for 'Needs verification' or "
                 "'Stale', say so. Anything not listed here is unknown: say you couldn't verify it."
                 if found else f"Nothing verified about this college's {args.get('topic')} yet — say so plainly.")}
+        if name == "find_colleges":
+            from app.facts.discover import discover
+            from app.knowledge.graph_store import graph
+            from app.knowledge.tools import resolve_career
+
+            career = args.get("career")
+            if career:
+                key = resolve_career(graph(db), career)
+                if key is None:
+                    return {"error": f"I don't know a career called {career!r}."}
+                career = key.removeprefix("career:")
+            home = args.get("home") or (profile.city if profile is not None else None)
+            found = discover(db, career=career, degree=args.get("degree"), state=args.get("state"), exam=args.get("exam"),
+                             home=home, home_state=None if args.get("home") else getattr(profile, "state", None),
+                             radius_km=args.get("radius_km"), budget_max=args.get("budget_max"),
+                             hostel=bool(args.get("hostel")), medical=bool(args.get("medical")),
+                             sort=args.get("sort") or ("distance" if home else "name"), limit=8)
+            keep = ("id", "name", "city", "state", "distance_km", "nirf_rank", "tuition", "hostel", "medical", "station")
+            return {"total": found["total"], "sorted_by": found["sorted_by"], "home": found["home"],
+                    "left_out": found["left_out"], "colleges": [{k: c[k] for k in keep} for c in found["colleges"]],
+                    "note": found["note"] + " Mention what was left out because it isn't known."}
         if name == "admission_dates":
             from app.facts import describe, store
             from app.models.exam import Exam
