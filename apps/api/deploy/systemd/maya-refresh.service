@@ -1,0 +1,12 @@
+[Unit]
+Description=MAYA: refresh college facts from official sources (Phase 6)
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/pi2/career/apps/api
+ExecStart=/home/pi2/career/apps/api/.venv/bin/python -m app.ingest.refresh
+Environment=REFRESH_BUDGET_USD=0.10
+Nice=10
+IOSchedulingClass=idle
+TimeoutStartSec=4h

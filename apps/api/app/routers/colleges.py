@@ -68,6 +68,20 @@ def get_facts(college_id: int, topic: str | None = None, db: Session = Depends(g
     return {"college_id": college_id, "facts": topics.facts(db, college_id, topic)}
 
 
+@router.post("/{college_id}/refresh")
+def request_refresh(college_id: int, db: Session = Depends(get_db)) -> dict:
+    """'Check for updates': the college is looked at first in tonight's refresh. Asking twice
+    before then doesn't queue it twice."""
+    from app.models.facts import RefreshRequest
+
+    college_service.get_college_or_404(db, college_id)
+    waiting = db.query(RefreshRequest).filter(RefreshRequest.college_id == college_id, RefreshRequest.done_at.is_(None)).first()
+    if waiting is None:
+        db.add(RefreshRequest(college_id=college_id))
+        db.commit()
+    return {"queued": True, "message": "MAYA will check this college's official sources again tonight."}
+
+
 @router.get("/{college_id}/reviews", response_model=list[CollegeReviewOut])
 def get_reviews(college_id: int, db: Session = Depends(get_db)) -> list[CollegeReviewOut]:
     return college_service.get_reviews(db, college_id)

@@ -8,7 +8,7 @@ from app.models.chat import Conversation, Message
 from app.models.college import Branch, College, CollegeCourse, Course
 from app.models.cutoff import Cutoff
 from app.models.exam import Exam, ExamProfile
-from app.models.facts import DocChunk, Fact, FactConflict, OkfLoad, Source, SourceDocument
+from app.models.facts import DocChunk, Fact, FactConflict, OkfLoad, RefreshRequest, Source, SourceDocument
 from app.models.knowledge import KgEdge, KgNode, KgVersion
 from app.models.memory import (
     Consent, CounsellingThread, DataRequest, MemoryItem, SessionSummary, StudentConstraint, StudentEvent,
@@ -77,5 +77,6 @@ __all__ = [
     "Fact",
     "FactConflict",
     "OkfLoad",
+    "RefreshRequest",
     "DocChunk",
 ]

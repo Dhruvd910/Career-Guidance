@@ -140,3 +140,15 @@ class DocChunk(Base):
     embed_model: Mapped[str | None] = mapped_column(String(100), nullable=True)
 
     document: Mapped[SourceDocument] = relationship()
+
+
+class RefreshRequest(Base):
+    """'Check for updates' on a college: looked at first in the next nightly refresh."""
+
+    __tablename__ = "refresh_requests"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    college_id: Mapped[int] = mapped_column(ForeignKey("colleges.id", ondelete="CASCADE"), index=True)
+    requested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    done_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    outcome: Mapped[str | None] = mapped_column(String(300), nullable=True)
