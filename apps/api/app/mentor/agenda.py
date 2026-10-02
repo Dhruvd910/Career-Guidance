@@ -77,10 +77,14 @@ def _day(moment: datetime | date | None) -> str:
 
 
 def last_session_end(db: Session, profile: StudentProfile) -> datetime | None:
+    """When their last session ended: its recorded end, or when its summary was written."""
     ended = db.execute(select(Conversation.ended_at).where(Conversation.student_profile_id == profile.id,
                                                            Conversation.ended_at.isnot(None))
                        .order_by(Conversation.ended_at.desc()).limit(1)).scalar()
-    return _aware(ended)
+    summarised = db.execute(select(SessionSummary.created_at).where(SessionSummary.student_profile_id == profile.id)
+                            .order_by(SessionSummary.created_at.desc()).limit(1)).scalar()
+    known = [m for m in (_aware(ended), _aware(summarised)) if m is not None]
+    return max(known) if known else None
 
 
 # ---------------- collectors ----------------

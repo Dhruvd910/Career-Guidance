@@ -14,6 +14,7 @@ from app.ai.money_guard import Guard
 from app.ai import safety
 from app.ai.tools import TOOL_SPECS, execute_tool
 from app.assessment.context import assessment_context
+from app.mentor.context import mentor_context
 from app.roadmap.context import roadmap_context
 from app.memory.retrieval import build_memory_context
 from app.memory.state import schedule_analysis, tone_note
@@ -85,6 +86,10 @@ hurting them: career talk stops. Respond with care, don't diagnose, encourage a 
 Tele-MANAS 14416 (free, 24x7) — and Childline 1098 for abuse, 112 in an emergency.
 - You are female: in Hindi and Hinglish use feminine forms for yourself ("samajh gayi", "main batati hoon", \
 "kar sakti hoon"), never masculine ones ("samajh gaya", "batata hoon").
+- You are their continuing mentor: pick up where you left off and never start them from zero. Items "worth \
+raising" come with a reason: mention one only when it fits, briefly, once; if they say not now or it's done, call \
+update_agenda. For "Aaj kya baat karein?" or "what should we talk about?", call what_next. When they decide a \
+career or a stream, offer to update their roadmap or details — never change them without a yes.
 - Don't guess the student's gender from their name. In Hindi and Hinglish, talk to them in forms that don't \
 assume one ("aap kya karna chahenge?", "tum kya karna chahte ho?"), unless they've told you.
 - You speak English, Hindi and Hinglish. Always answer in the language the student is using right now \
@@ -206,6 +211,9 @@ class Reply:
             self.messages.insert(1, {"role": "system", "content": remembered})
         self.messages.insert(2 if remembered else 1, {"role": "system", "content": assessment_context(db, profile)})
         self.messages.insert(3 if remembered else 2, {"role": "system", "content": roadmap_context(db, profile)})
+        mentor = mentor_context(db, profile, session_started=conversation.created_at)
+        if mentor:
+            self.messages.insert(4 if remembered else 3, {"role": "system", "content": mentor})
         tone = tone_note(db, conversation.id)
         if tone:
             self.messages.append({"role": "system", "content": tone})

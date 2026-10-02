@@ -25,9 +25,11 @@ from app.providers.llm import LLMProvider
 RESUME_AFTER = timedelta(hours=6)
 
 INSTRUCTIONS = """You are MAYA, an AI career counsellor, greeting a student who is coming back. Write your \
-opening line: at most two short sentences. First recall where you left off — the topic, where they stood, \
-what was still open or agreed — then ask whether anything has changed. Use only the notes below; don't add \
-anything. Warm and natural, spoken aloud: no lists, no greeting formulas beyond their name."""
+opening line: at most three short sentences. If the notes have where you left off, recall it first — the \
+topic, where they stood, what was still open or agreed. Then, if there are items worth raising, mention them \
+briefly with their reason (at most two). End by asking whether anything has changed, or what they'd like to \
+start with. Use only the notes below; don't add anything. Warm and natural, spoken aloud: no lists, no \
+greeting formulas beyond their name."""
 
 
 def counselling_state(db: Session, profile: StudentProfile) -> dict | None:
@@ -56,20 +58,29 @@ async def opening_line(db: Session, profile: StudentProfile, llm: LLMProvider,
                        now: datetime | None = None) -> tuple[str, str] | None:
     """(text, language) for a returning student, or None: no permission, nothing open, or too
     soon since the last session to call it a return."""
-    if not consent.allowed(db, profile, consent.LONG_TERM_MEMORY):
-        return None
-    state = counselling_state(db, profile)
-    if not state or not state["current_counselling_topic"] or not state["last_session"]:
-        return None
-    ended = state["last_session"]["ended_at"]
-    if ended.tzinfo is None:
-        ended = ended.replace(tzinfo=timezone.utc)
-    if (now or datetime.now(timezone.utc)) - ended < RESUME_AFTER:
+    from app.mentor import agenda
+
+    now = now or datetime.now(timezone.utc)
+    ended = agenda.last_session_end(db, profile)
+    if ended is None or now - ended < RESUME_AFTER:
+        return None  # a first visit, or too soon to call it a return
+    remember = consent.allowed(db, profile, consent.LONG_TERM_MEMORY)
+    state = counselling_state(db, profile) if remember else None
+    has_topic = bool(state and state["current_counselling_topic"] and state["last_session"])
+    raise_now = agenda.to_raise(db, profile, now, session_started=now)
+    if not has_topic and not raise_now:
         return None
     lang = usual_language(profile.language_stats) or ENGLISH
     tag = LanguageTag(lang, DEVANAGARI if lang == HINDI else LATIN, 1.0)
-    notes = {k: v for k, v in state.items() if k not in ("thread_id", "last_session")}
-    notes["last_session_summary"] = state["last_session"]["summary"]
+    notes = {}
+    if has_topic:
+        notes = {k: v for k, v in state.items() if k not in ("thread_id", "last_session")}
+        notes["last_session_summary"] = state["last_session"]["summary"]
+    if raise_now:
+        notes["worth_raising"] = [{"what": i.title["en"], "why": i.why["en"]} for i in raise_now]
+        for i in raise_now:
+            agenda.mark(db, profile, i.key, "raised", now)
+        db.commit()
     reply = await llm.chat([
         {"role": "system", "content": INSTRUCTIONS + "\n\n" + reply_instruction(tag)},
         {"role": "user", "content": f"Student's name: {profile.name}\nNotes: {json.dumps(notes, default=str)}"},

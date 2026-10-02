@@ -209,3 +209,56 @@ def test_a_session_summary_records_what_happened(db_session):
     assert summary.roadmap_changes and summary.roadmap_changes[0]["trigger"] in ("initial", "focus"), \
         "roadmap changes come from the roadmap, not the model"
     assert summary.schema_version == 2
+
+
+def test_maya_raises_things_once_and_honours_not_now(db_session):
+    import asyncio
+
+    from app.ai.tools import execute_tool
+    from app.memory.opening import opening_line
+    from app.mentor.context import mentor_context
+    from tests.fakes import FakeLLM
+
+    asha = student(db_session)  # no memory permission: only account data is raised
+    asha.target_exam_code = "JEE_MAIN"
+    exam = Exam(code="JEE_MAIN", name="JEE Main", category="engineering")
+    db_session.add(exam)
+    db_session.add(Conversation(student_profile_id=asha.id, ended_at=NOW - timedelta(days=5)))
+    db_session.flush()
+    src = store.source(db_session, "nta", "NTA", 3)
+    doc = store.document(db_session, src, "https://nta.ac.in/b.pdf", "JEE Main 2027 bulletin", NOW, sha256="c" * 64)
+    store.record(db_session, "exam", exam.id, "admission.application_window.session_1",
+                 {"from": "2026-10-31", "to": "2026-11-27", "label": "Applications, session 1"}, document=doc,
+                 academic_year="2027-28", quote="…", now=NOW)
+    db_session.commit()
+
+    llm = FakeLLM("Welcome back, Asha — JEE Main 2027 applications open on 31 October. Where shall we start?")
+    text, _ = asyncio.run(opening_line(db_session, asha, llm, now=NOW))
+    assert "31 October" in text and "worth_raising" in llm.seen[0][1]["content"], "a return without an open topic still opens"
+    assert mentor_context(db_session, asha, session_started=NOW, now=NOW + timedelta(minutes=1)) is None, \
+        "already raised in the opening: not again this session"
+
+    nxt = execute_tool(db_session, asha, "what_next", {})
+    keys = [i["key"] for i in nxt["items"]]
+    assert "dates:JEE_MAIN:announced:2027-28" in keys
+    assert execute_tool(db_session, asha, "update_agenda", {"key": keys[0], "what": "not_now"})["status"] == "dismissed"
+    assert keys[0] not in [i["key"] for i in execute_tool(db_session, asha, "what_next", {})["items"]]
+
+
+def test_every_reply_carries_the_mentor(client, monkeypatch):
+    from app.ai import orchestrator
+    from tests.fakes import FakeLLM
+    from tests.test_assessment_api import auth
+    from tests.test_conversation_ws import register
+
+    token = register(client)
+    client.get("/api/roadmap", headers=auth(token))  # their first roadmap
+    llm = FakeLLM("Okay.", "Okay.")
+    monkeypatch.setattr(orchestrator, "get_llm_provider", lambda: llm)
+    first = client.post("/api/ai/chat", json={"message": "Aaj kya baat karein?"}, headers=auth(token)).json()
+    client.post("/api/ai/chat", json={"message": "Aur?", "conversation_id": first["conversation_id"]}, headers=auth(token))
+    later = "\n".join(m["content"] for m in llm.seen[1] if m["role"] == "system")
+    assert "Worth raising" not in later, "raised once a session"
+    system = "\n".join(m["content"] for m in llm.seen[0] if m["role"] == "system")
+    assert "never start them from zero" in system and "call what_next" in system
+    assert "Worth raising if it fits" in system and "roadmap:next:" in system, "their first roadmap step"

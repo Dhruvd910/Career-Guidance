@@ -130,6 +130,28 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "what_next",
+            "description": "What's worth talking about now, best first, each with its reason and where it comes from: "
+                           "an undecided topic, an overdue roadmap step, upcoming admission dates, a reassessment due, "
+                           "news about a shortlisted college, a decision not yet in their roadmap. Use for 'Aaj kya baat "
+                           "karein?', 'what should we discuss?', 'what's next for me?'.",
+            "parameters": {"type": "object", "properties": {}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "update_agenda",
+            "description": "When the student says an item is done, or 'not now' (it stays quiet for two weeks). key: the "
+                           "item's key from what_next or your context.",
+            "parameters": {"type": "object", "properties": {"key": {"type": "string"},
+                                                            "what": {"type": "string", "enum": ["done", "not_now"]}},
+                           "required": ["key", "what"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "my_shortlist",
             "description": "The colleges the student has shortlisted, with their key facts (fees, hostel, medical "
                            "facility, nearest station, NIRF), each with its source and freshness.",
@@ -520,6 +542,22 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                     "home": found["home"], "colleges": [{k: c[k] for k in keep} for c in found["colleges"]],
                     "note": found["note"] + (" Say the say_first sentence too." if found["left_out_say"] else "")
                     + " A facility 'Not found in official sources' means MAYA couldn't confirm it — not that it's missing."}
+        if name == "what_next":
+            from app.mentor import agenda
+
+            items = agenda.agenda(db, profile)[:5]
+            return {"items": [{"key": i.key, "what": i.title["en"], "why": i.why["en"], "from": i.source} for i in items],
+                    "note": ("Offer the first one or two with their reasons and let the student choose." if items else
+                             "Nothing is pressing — ask what's on their mind, or suggest looking at their roadmap.")}
+        if name == "update_agenda":
+            from app.mentor import agenda
+
+            if args.get("what") not in ("done", "not_now"):
+                return {"error": "what must be done or not_now"}
+            row = agenda.mark(db, profile, str(args.get("key") or ""), args["what"])
+            db.commit()
+            return {"key": row.key, "status": row.status,
+                    "note": "It'll stay quiet for two weeks." if args["what"] == "not_now" else "Marked done."}
         if name == "my_shortlist":
             from app.mentor import shortlist
 
