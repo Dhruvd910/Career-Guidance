@@ -13,7 +13,11 @@ they never touch the web.
 from __future__ import annotations
 
 import hashlib
+import json
 import mimetypes
+import re
+import ssl
+import subprocess
 import time
 import urllib.robotparser
 from dataclasses import dataclass
@@ -21,6 +25,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
+import certifi
 import httpx
 
 USER_AGENT = "MAYA-career-counsellor/0.6 (offline research for a student counselling kiosk; respects robots.txt)"
@@ -50,6 +55,36 @@ class Fetched:
         return self.body.decode("utf-8", errors="replace")
 
 
+def _openssl(args: list[str], data: bytes) -> bytes:
+    return subprocess.run(["openssl", *args], input=data, capture_output=True, timeout=30, check=False).stdout
+
+
+def missing_intermediate(host: str, port: int = 443) -> ssl.SSLContext | None:
+    """Many institutional sites send their own certificate but not the intermediate that links
+    it to a trusted root. Like a browser, fetch that intermediate from the address in the
+    certificate (AIA) and verify the whole chain against the usual roots. None if that fails."""
+    try:
+        leaf = ssl.get_server_certificate((host, port), timeout=20).encode()
+    except (OSError, ssl.SSLError):
+        return None
+    aia = _openssl(["x509", "-noout", "-ext", "authorityInfoAccess"], leaf).decode()
+    url = next(iter(re.findall(r"CA Issuers - URI:(\S+)", aia)), None)
+    if not url:
+        return None
+    try:
+        der = httpx.get(url, timeout=20, follow_redirects=True).content
+    except httpx.HTTPError:
+        return None
+    pem = _openssl(["x509", "-inform", "DER" if not der.startswith(b"-----") else "PEM"], der).decode()
+    if "BEGIN CERTIFICATE" not in pem:  # some point at a PKCS#7 bundle (.p7c) instead
+        pem = _openssl(["pkcs7", "-inform", "DER" if not der.startswith(b"-----") else "PEM", "-print_certs"], der).decode()
+    if "BEGIN CERTIFICATE" not in pem:
+        return None
+    context = ssl.create_default_context(cafile=certifi.where())
+    context.load_verify_locations(cadata=pem)
+    return context
+
+
 class Fetcher:
     def __init__(self, store_dir: str | Path, *, min_interval: float = 2.0, timeout: float = 30.0, retries: int = 2,
                  respect_robots: bool = True, transport: httpx.BaseTransport | None = None,
@@ -59,11 +94,28 @@ class Fetcher:
         self.client = httpx.Client(headers={"User-Agent": USER_AGENT}, timeout=timeout, follow_redirects=True,
                                    transport=transport)
         self._last: dict[str, float] = {}
+        self._repaired: dict[str, httpx.Client] = {}  # hosts that needed their intermediate certificate
+        self._timeout, self._transport = timeout, transport
         self._robots: dict[str, urllib.robotparser.RobotFileParser | None] = {}
         self._sleep, self._clock = sleep, clock
 
     def close(self) -> None:
         self.client.close()
+        for client in self._repaired.values():
+            client.close()
+
+    def _client_for(self, host: str) -> httpx.Client:
+        return self._repaired.get(host, self.client)
+
+    def _repair(self, host: str) -> bool:
+        if self._transport is not None or host in self._repaired:
+            return False
+        context = missing_intermediate(host)
+        if context is None:
+            return False
+        self._repaired[host] = httpx.Client(headers={"User-Agent": USER_AGENT}, timeout=self._timeout,
+                                            follow_redirects=True, verify=context)
+        return True
 
     def __enter__(self):
         return self
@@ -109,8 +161,39 @@ class Fetcher:
             path.write_bytes(body)
         return sha, str(path)
 
+    def _cache_key(self, url: str, params: dict | None, data: dict | None) -> Path:
+        key = hashlib.sha256(json.dumps([url, sorted((params or {}).items()), sorted((data or {}).items())]).encode()).hexdigest()
+        return self.store / "cache" / key[:2] / f"{key}.json"
+
+    def _cached(self, url: str, params: dict | None, data: dict | None, days: int) -> Fetched | None:
+        index = self._cache_key(url, params, data)
+        if not index.exists():
+            return None
+        meta = json.loads(index.read_text())
+        retrieved = datetime.fromisoformat(meta["retrieved_at"])
+        if (datetime.now(timezone.utc) - retrieved).days > days or not Path(meta["storage_path"]).exists():
+            return None
+        return Fetched(url, meta["final_url"], meta["status"], meta["mime"], Path(meta["storage_path"]).read_bytes(),
+                       meta["sha256"], retrieved, meta["storage_path"])
+
     def get(self, url: str, *, params: dict | None = None, data: dict | None = None,
-            headers: dict | None = None, keep: bool = True, api: bool = False) -> Fetched:
+            headers: dict | None = None, keep: bool = True, api: bool = False, cache_days: int | None = None) -> Fetched:
+        """cache_days: reuse this exact request's answer if it was fetched within that many days."""
+        if cache_days is not None:
+            hit = self._cached(url, params, data, cache_days)
+            if hit is not None:
+                return hit
+        page = self._get(url, params=params, data=data, headers=headers, keep=keep or cache_days is not None, api=api)
+        if cache_days is not None and page.ok and page.storage_path:
+            index = self._cache_key(url, params, data)
+            index.parent.mkdir(parents=True, exist_ok=True)
+            index.write_text(json.dumps({"final_url": page.final_url, "status": page.status, "mime": page.mime,
+                                         "sha256": page.sha256, "storage_path": page.storage_path,
+                                         "retrieved_at": page.retrieved_at.isoformat()}))
+        return page
+
+    def _get(self, url: str, *, params: dict | None = None, data: dict | None = None,
+             headers: dict | None = None, keep: bool = True, api: bool = False) -> Fetched:
         """api=True only for documented public APIs (Wikidata's API, Nominatim, Overpass): their
         robots.txt is written for crawlers, and their own usage policies — identify yourself, go
         slowly — are what apply, and are followed here."""
@@ -121,11 +204,20 @@ class Fetcher:
         error = None
         for attempt in range(self.retries + 1):
             self._wait(host)
+            client = self._client_for(host)
             try:
                 if data is not None:
-                    r = self.client.post(url, params=params, data=data, headers=headers)
+                    r = client.post(url, params=params, data=data, headers=headers)
                 else:
-                    r = self.client.get(url, params=params, headers=headers)
+                    r = client.get(url, params=params, headers=headers)
+            except httpx.ConnectError as e:
+                error = f"{type(e).__name__}: {e}"[:300]
+                if "CERTIFICATE_VERIFY_FAILED" in str(e) and self._repair(host):
+                    continue
+                if "CERTIFICATE_VERIFY_FAILED" in str(e):
+                    error = "the site's security certificate couldn't be verified"
+                    break
+                continue
             except httpx.HTTPError as e:
                 error = f"{type(e).__name__}: {e}"[:300]
                 continue

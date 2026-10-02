@@ -3,7 +3,7 @@ OpenStreetMap (tier 5). Wikidata isn't used: its API now requires a contact addr
 request, and the user chose not to share one (2026-10-02).
 
 - **Overpass** first, when the college's town is known: every named college, university and
-  hospital within 30 km of it, the best name match (abbreviations expanded) taken if it's close
+  hospital within 20 km of it, the best name match (abbreviations expanded) taken if it's close
   enough. **Nominatim** otherwise: a few phrasings of the name, a hit counting only if its name
   resembles the college's and it lies within 40 km of the town (or, with no known town, nearest
   a town in the right state). A website tag, if any, is kept too.
@@ -36,8 +36,20 @@ from app.models.college import College
 from app.okf.facts import Document, Value
 
 NOMINATIM = "https://nominatim.openstreetmap.org/search"
-OVERPASS = "https://overpass-api.de/api/interpreter"
+OVERPASSES = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+OVERPASS = OVERPASSES[0]
+CACHE_DAYS = 30  # an answer from the last month is reused rather than asked for again
+
+
+def overpass(fetcher: Fetcher, query: str) -> Fetched:
+    """Two public Overpass servers, taking turns (each paced on its own); if one fails, the other."""
+    OVERPASSES.append(OVERPASSES.pop(0))
+    page = fetcher.get(OVERPASSES[0], data={"data": query}, api=True, cache_days=CACHE_DAYS)
+    if not page.ok:
+        page = fetcher.get(OVERPASSES[1], data={"data": query}, api=True, cache_days=CACHE_DAYS)
+    return page
 MAX_KM = 40
+NATIONAL = ("IIT", "NIT", "IIIT", "AIIMS", "JIPMER", "IISc", "IIEST")  # the pilot institutes go first
 NEAR = {  # attribute: (radius in metres, Overpass filters)
     "near.railway_station": (25000, ['["railway"="station"]["station"!~"subway|light_rail|monorail"]']),
     "near.airport": (100000, ['["aeroway"="aerodrome"]["iata"]']),
@@ -74,17 +86,38 @@ KINDS = {"medical", "dental", "nursing", "engineering", "technology", "pharmacy"
 GENERIC = {"government", "rajkiya", "college", "colleges", "hospital", "institute", "university", "school", "centre",
            "center", "research", "autonomous", "state", "district", "general", "sciences", "science", "education",
            "academy", "post", "graduate", "allopathic", "national", "indian", "all", "india", "central", "campus",
-           "teaching", "memorial", "and", "dr", "shri", "sri", "smt", "late", "for", "women", "trust", "society"}
+           "teaching", "memorial", "and", "dr", "shri", "sri", "smt", "late", "for", "women", "trust", "society",
+           "welcome", "home", "page", "homepage", "official", "website", "portal", "site", "to", "deemed", "be",
+           "an", "institution", "importance", "ministry", "govt", "goi", "estd", "established"}
+
+
+FAMILIES = (("aiims", r"\bAIIMS\b|All India Institute of Medical Sciences"), ("jipmer", r"\bJIPMER\b|Jawaharlal Institute of Post"),
+            ("iiit", r"\bIIIT\b|Indian Institute of Information Technology"),
+            ("iit", r"\bIIT\b|Indian Institute of Technology"), ("nit", r"\bNIT\b|National Institute of Technology"))
+
+
+def expand(text: str) -> str:
+    for pattern, long in ACRONYMS:
+        text = re.sub(pattern, long, text)
+    return text
+
+
+def _family(text: str) -> set[str]:
+    """AIIMS, JIPMER, IIIT, IIT, NIT: an institute's family must agree, like its kind."""
+    for family, pattern in FAMILIES:
+        if re.search(pattern, text, re.I):
+            return {f"family:{family}"}
+    return set()
 
 
 def _kind_and_names(text: str) -> tuple[set[str], set[str]]:
-    for pattern, long in ACRONYMS:
-        text = re.sub(pattern, long, text)
+    family = _family(text)
+    text = expand(text)
     text = re.sub(r"\b([A-Za-z])\.\s?([A-Za-z])\b\.?", r"\1\2", text)  # "H.P" → "HP"
     tokens = {t for t in _tokens(text) if len(t) > 1}
     _, index = geo._index()
     places = {t for t in tokens if t in index}
-    return tokens & KINDS, tokens - KINDS - GENERIC - STATE_SHORT - places
+    return (tokens & KINDS) | family, tokens - KINDS - GENERIC - STATE_SHORT - places
 
 
 def _close(a: str, b: str) -> bool:
@@ -100,6 +133,8 @@ def same_place_name(official: str, candidate: str) -> bool:
     k2, n2 = _kind_and_names(candidate)
     if k1 != k2:
         return False
+    if not n1 and not n2:
+        return similarity(expand(official), expand(candidate)) >= 0.6  # nothing distinctive: the wording must be close
     return all(any(_close(a, b) for b in n2) for a in n1) and all(any(_close(b, a) for a in n1) for b in n2)
 
 
@@ -147,13 +182,14 @@ TOWN_PAGES: dict[tuple, Fetched] = {}  # one Overpass look per town per run: man
 
 
 def around_town(fetcher: Fetcher, college: College, town: geo.Place) -> tuple[Found | None, str]:
-    """Every named college, university and hospital within 30 km of the town, best name match first."""
+    """Every named college, university and hospital within 20 km of the town, best name match first."""
     key = (town.name, town.lat, town.lng)
     page = TOWN_PAGES.get(key)
     if page is None:
-        query = (f'[out:json][timeout:60];(nwr(around:30000,{town.lat},{town.lng})["amenity"~"^(college|university|hospital)$"]["name"];'
-                 f'nwr(around:30000,{town.lat},{town.lng})["building"~"^(college|university)$"]["name"];);out center tags qt;')
-        page = fetcher.get(OVERPASS, data={"data": query}, api=True)
+        named = '["name"~"college|institute|university|aiims|jipmer|vidyap|academy|medical|campus",i]'
+        query = (f'[out:json][timeout:60];(nwr(around:20000,{town.lat},{town.lng})["amenity"~"^(college|university|hospital)$"]{named};'
+                 f'nwr(around:20000,{town.lat},{town.lng})["building"~"^(college|university)$"]{named};);out center tags qt;')
+        page = overpass(fetcher, query)
         if page.ok:
             TOWN_PAGES[key] = page
     if not page.ok:
@@ -172,14 +208,14 @@ def around_town(fetcher: Fetcher, college: College, town: geo.Place) -> tuple[Fo
                 d = geo.km(point[0], point[1], town.lat, town.lng)
                 best = (score, Found("overpass", page, label, point[0], point[1], tags.get("website") or tags.get("contact:website"),
                                      None, f"{e['type']}/{e['id']}", f"{d:.0f} km from {town.name}"))
-    return (best[1], "") if best else (None, f"no college of that name within 30 km of {town.name} on OpenStreetMap")
+    return (best[1], "") if best else (None, f"no college of that name within 20 km of {town.name} on OpenStreetMap")
 
 
 def nominatim(fetcher: Fetcher, college: College, town: geo.Place | None) -> tuple[Found | None, str]:
     why = "not found on OpenStreetMap"
-    for q in _variants(college, town):
+    for q in _variants(college, town)[:2]:
         page = fetcher.get(NOMINATIM, params={"q": q, "format": "jsonv2", "limit": "3", "countrycodes": "in",
-                                              "extratags": "1"}, api=True)
+                                              "extratags": "1"}, api=True, cache_days=CACHE_DAYS)
         if not page.ok:
             return None, f"Nominatim failed ({page.error})"
         for hit in json.loads(page.body or b"[]"):
@@ -257,7 +293,7 @@ def values_for(fetcher: Fetcher, college: College) -> tuple[list[Value], str]:
     if found.website:
         vals.append(Value("location.website", {"url": found.website}, doc, locator=found.ref,
                           quote=f"website={found.website}", generated_by=gen, at=at))
-    page = fetcher.get(OVERPASS, data={"data": overpass_query(found.lat, found.lng)}, api=True)
+    page = overpass(fetcher, overpass_query(found.lat, found.lng))
     if page.ok:
         doc = _doc(OSM, page, f"OpenStreetMap places near {college.canonical_name}")
         for attribute, hit in nearest(json.loads(page.body).get("elements", []), found.lat, found.lng).items():
@@ -274,9 +310,9 @@ def values_for(fetcher: Fetcher, college: College) -> tuple[list[Value], str]:
 
 
 def run(db: Session, fetcher: Fetcher, root=None, limit: int | None = None, refresh: bool = False,
-        batch: int = 25, progress=print) -> dict:
+        batch: int = 10, progress=print) -> dict:
     TOWN_PAGES.clear()
-    colleges = list(db.execute(select(College).order_by(College.id)).scalars())
+    colleges = sorted(db.execute(select(College)).scalars(), key=lambda c: (c.college_type not in NATIONAL, c.id))
     if not refresh:
         colleges = [c for c in colleges if "location.coordinates" not in store.current(db, "college", c.id,
                                                                                       attributes=["location.coordinates"])]
@@ -308,7 +344,7 @@ if __name__ == "__main__":
 
     args = sys.argv[1:]
     limit = int(args[args.index("--limit") + 1]) if "--limit" in args else None
-    with SessionLocal() as session, Fetcher(get_settings().source_store_path) as fetcher:
+    with SessionLocal() as session, Fetcher(get_settings().source_store_path, min_interval=4.0) as fetcher:
         result = run(session, fetcher, limit=limit, refresh="--refresh" in args, progress=lambda m: print(m, flush=True))
     print("placed:", result["placed"], "| commits:", result["commits"], "| problems:", result.get("problems", [])[:10])
     print("not placed:", len(result["unplaced"]), *result["unplaced"], sep="\n  ")

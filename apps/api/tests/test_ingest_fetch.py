@@ -105,3 +105,18 @@ def test_nirf_ranks_reach_the_bundle_and_the_facts(tmp_path, db_session):
     assert shown["quote"] == "IR-E-U-0306 Indian Institute of Technology Bombay Mumbai Maharashtra 83.65 3"
     assert bundle.head(tmp_path / "okf"), "committed to the bundle's own repo"
     assert "IIT Bombay" in db_session.get(type(iitb), iitb.id).aliases
+
+
+def test_an_answer_from_the_last_month_is_reused(tmp_path):
+    calls = []
+
+    def handler(request):
+        calls.append(request.url.path)
+        return httpx.Response(200, json={"elements": []}, headers={"content-type": "application/json"})
+
+    f = fetcher(tmp_path, handler)
+    first = f.get("https://overpass.example/api/interpreter", data={"data": "q"}, api=True, cache_days=30)
+    again = f.get("https://overpass.example/api/interpreter", data={"data": "q"}, api=True, cache_days=30)
+    other = f.get("https://overpass.example/api/interpreter", data={"data": "q2"}, api=True, cache_days=30)
+    assert calls == ["/api/interpreter", "/api/interpreter"], "the same question isn't asked twice"
+    assert again.sha256 == first.sha256 and again.retrieved_at == first.retrieved_at and other.ok
