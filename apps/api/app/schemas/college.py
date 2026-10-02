@@ -42,8 +42,8 @@ class CollegeSummary(BaseModel):
     is_demo_data: bool
     average_rating: float | None = None
     review_count: int = 0
-    nirf_rank: int | None = None  # from the researched profile, when there is one
-    researched: bool = False  # fees, placements and surroundings researched
+    nirf_rank: int | None = None  # NIRF's own ranking pages (facts), else the researched profile
+    researched: bool = False  # has a hand-researched profile
 
     model_config = {"from_attributes": True}
 
@@ -129,6 +129,10 @@ class CollegeDetail(CollegeSummary):
     courses_offered: list[CollegeCourseOut] = Field(default_factory=list)
     profile: CollegeProfileOut | None = None
     admission: AdmissionSummaryOut | None = None
+    # Phase 6: everything known from outside, grouped (Academic, Financial, Campus, Location,
+    # Admissions), each a FactView with its source and freshness; and the documents behind them.
+    facts: dict[str, dict[str, dict]] = Field(default_factory=dict)
+    sources: list[dict] = Field(default_factory=list)
 
 
 class CutoffOut(BaseModel):
@@ -172,6 +176,7 @@ class CollegeCompareRow(BaseModel):
     average_rating: float | None
     profile: CollegeProfileOut | None = None
     admission: AdmissionSummaryOut | None = None
+    facts: dict[str, dict | None] = Field(default_factory=dict)  # comparison cells, each with source and freshness
 
 
 class CollegeCompareResponse(BaseModel):

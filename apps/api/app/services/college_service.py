@@ -21,7 +21,7 @@ from app.schemas.college import (
     CutoffOut,
     ProvenanceOut,
 )
-from app.facts import topics
+from app.facts import discover, store, topics
 from app.services import college_profiles
 
 
@@ -32,7 +32,31 @@ def _rating_stats(db: Session, college_id: int) -> tuple[float | None, int]:
     return round(mean(ratings), 1), len(ratings)
 
 
-def to_summary(db: Session, college: College) -> CollegeSummary:
+def _nirf_rank(db: Session, college_id: int) -> int | None:
+    from app.facts import store
+
+    ranks = [v["value"]["rank"] for v in store.current(db, "college", college_id, prefix="ranking.nirf").values()
+             if (v["value"] or {}).get("rank")]
+    return min(ranks) if ranks else None
+
+
+def sources_for(db: Session, college_id: int) -> list[dict]:
+    """Every document behind this college's current facts: publisher and tier, address, when fetched."""
+    seen, out = set(), []
+    views = topics.facts(db, college_id).values()
+    for view in [v for top in views for v in [top, *(top["conflict"] or [])]]:  # a conflict's sources too
+        src = view["source"]
+        key = (src["url"], src["document"])
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({"document": src["document"], "publisher": src["name"], "tier": src["tier"], "kind": src["kind"],
+                    "official": src["official"], "url": src["url"], "retrieved_at": view["retrieved_at"]})
+    return sorted(out, key=lambda s: (s["tier"], s["publisher"], s["document"]))
+
+
+def to_summary(db: Session, college: College, nirf: int | None = -1) -> CollegeSummary:
+    """nirf: the college's NIRF rank when the caller already looked it up (-1: look it up here)."""
     avg_rating, count = _rating_stats(db, college.id)
     profile = college_profiles.profile_for(college.canonical_name)
     return CollegeSummary(
@@ -45,7 +69,7 @@ def to_summary(db: Session, college: College) -> CollegeSummary:
         is_demo_data=college.is_demo_data,
         average_rating=avg_rating,
         review_count=count,
-        nirf_rank=((profile or {}).get("nirf") or {}).get("rank"),
+        nirf_rank=(_nirf_rank(db, college.id) if nirf == -1 else nirf) or ((profile or {}).get("nirf") or {}).get("rank"),
         researched=profile is not None,
     )
 
@@ -76,6 +100,8 @@ def to_detail(db: Session, college: College) -> CollegeDetail:
         courses_offered=courses_offered,
         profile=profile,
         admission=college_profiles.admission_summary(db, college.id),
+        facts=discover.grouped(topics.facts(db, college.id)),
+        sources=sources_for(db, college.id),
     )
 
 
@@ -139,7 +165,9 @@ def search_colleges(
     if q:
         wanted = " ".join(q.lower().split())
         exact = {c.id for c in colleges if wanted == c.canonical_name.lower() or any(wanted == a.lower() for a in c.aliases)}
-    summaries = [to_summary(db, c) for c in colleges]
+    ranks = {i: min((v["value"]["rank"] for v in views.values() if (v["value"] or {}).get("rank")), default=None)
+             for i, views in store.current_many(db, "college", [c.id for c in colleges], prefixes=["ranking.nirf"]).items()}
+    summaries = [to_summary(db, c, nirf=ranks.get(c.id)) for c in colleges]
     # What they typed exactly ("IIT BHU") first; then researched colleges (best NIRF rank first), then by name.
     summaries.sort(key=lambda s: (s.id not in exact, not s.researched, s.nirf_rank or 10_000, s.canonical_name.lower()))
     return summaries
@@ -195,6 +223,11 @@ def get_reviews(db: Session, college_id: int) -> list[CollegeReviewOut]:
     return [CollegeReviewOut.model_validate(r) for r in reviews]
 
 
+COMPARE = ("fee.tuition.annual", "fee.hostel.annual", "fee.mess.annual", "facility.hostel", "facility.medical",
+           "near.railway_station", "near.airport", "near.hospital", "ranking.nirf.engineering", "ranking.nirf.medical",
+           "admission.route")
+
+
 def compare_colleges(db: Session, college_ids: list[int]) -> CollegeCompareResponse:
     rows = []
     for college_id in college_ids:
@@ -205,9 +238,7 @@ def compare_colleges(db: Session, college_ids: list[int]) -> CollegeCompareRespo
         lowest_closing = min((c.closing_rank for c in cutoffs), default=None)
         tuition = (known.get("fee.tuition.annual") or {}).get("value") or {}
         avg_cost = tuition.get("amount")
-        hostel = (known.get("facility.hostel") or {}).get("value")
-        hostel_available = hostel if isinstance(hostel, bool) else (
-            bool(hostel["available"]) if isinstance(hostel, dict) and "available" in hostel else None)
+        hostel_available = discover.has_facility(known.get("facility.hostel"))
         avg_rating, _ = _rating_stats(db, college_id)
         profile = college_profiles.profile_for(college.canonical_name)
         if avg_cost is None and profile and profile.get("fees"):
@@ -221,6 +252,7 @@ def compare_colleges(db: Session, college_ids: list[int]) -> CollegeCompareRespo
                 hostel_available=hostel_available,
                 placement_percentage=None,
                 average_package=None,
+                facts={a: discover.brief(a, known.get(a)) for a in COMPARE},
                 average_rating=avg_rating,
                 profile=profile,
                 admission=college_profiles.admission_summary(db, college_id),

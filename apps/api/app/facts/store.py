@@ -22,7 +22,7 @@ from collections import defaultdict
 from datetime import date, datetime, timezone
 from typing import Iterable
 
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
 from app.facts import freshness
@@ -200,27 +200,15 @@ def _rank(fact: Fact) -> tuple:
             -(checked.timestamp() if checked else 0), -fact.id)
 
 
-def current(db: Session, entity_type: str, entity_id: int, attributes: Iterable[str] | None = None,
-            prefix: str | None = None, today: date | None = None) -> dict[str, dict]:
-    """The value to show for each attribute of one entity, as FactViews."""
-    today = today or _now().date()
-    query = select(Fact).where(Fact.entity_type == entity_type, Fact.entity_id == entity_id,
-                               Fact.superseded_by.is_(None), Fact.status.in_(SHOWN))
-    if attributes is not None:
-        query = query.where(Fact.attribute.in_(list(attributes)))
-    if prefix:
-        query = query.where(Fact.attribute.startswith(prefix))
+def _choose(facts: list[Fact], conflicts: list[FactConflict], today: date) -> dict[str, dict]:
     by_attribute: dict[str, list[Fact]] = defaultdict(list)
-    for fact in db.execute(query).scalars():
+    for fact in facts:
         by_attribute[fact.attribute].append(fact)
-    conflicts = db.execute(select(FactConflict).where(
-        FactConflict.entity_type == entity_type, FactConflict.entity_id == entity_id,
-        FactConflict.resolution == "unresolved")).scalars().all()
     out = {}
-    for attribute, facts in by_attribute.items():
-        years = sorted({f.academic_year for f in facts if f.academic_year})
+    for attribute, group in by_attribute.items():
+        years = sorted({f.academic_year for f in group if f.academic_year})
         year = years[-1] if years else None
-        candidates = [f for f in facts if f.academic_year == year] or facts
+        candidates = [f for f in group if f.academic_year == year] or group
         if any(f.value is not None for f in candidates):
             candidates = [f for f in candidates if f.value is not None]
         best = min(candidates, key=_rank)
@@ -229,6 +217,49 @@ def current(db: Session, entity_type: str, entity_id: int, attributes: Iterable[
         others = [f for f in candidates if clash and f.id in clash.fact_ids and f.id != best.id]
         out[attribute] = view(best, today, conflict=others or None)
     return out
+
+
+def _shown(entity_type: str, ids, attributes=None, prefixes=None):
+    query = select(Fact).where(Fact.entity_type == entity_type, Fact.entity_id.in_(list(ids)),
+                               Fact.superseded_by.is_(None), Fact.status.in_(SHOWN))
+    if attributes is not None:
+        query = query.where(Fact.attribute.in_(list(attributes)))
+    if prefixes:
+        query = query.where(or_(*(Fact.attribute.startswith(p) for p in prefixes)))
+    return query
+
+
+def current(db: Session, entity_type: str, entity_id: int, attributes: Iterable[str] | None = None,
+            prefix: str | None = None, today: date | None = None) -> dict[str, dict]:
+    """The value to show for each attribute of one entity, as FactViews."""
+    today = today or _now().date()
+    facts = db.execute(_shown(entity_type, [entity_id], attributes, [prefix] if prefix else None)).scalars().all()
+    conflicts = db.execute(select(FactConflict).where(
+        FactConflict.entity_type == entity_type, FactConflict.entity_id == entity_id,
+        FactConflict.resolution == "unresolved")).scalars().all()
+    return _choose(list(facts), list(conflicts), today)
+
+
+def current_many(db: Session, entity_type: str, ids: Iterable[int], prefixes: Iterable[str] | None = None,
+                 today: date | None = None) -> dict[int, dict[str, dict]]:
+    """current() for many entities in two queries — for lists and comparisons."""
+    from sqlalchemy.orm import selectinload
+
+    today = today or _now().date()
+    ids = list(ids)
+    if not ids:
+        return {}
+    facts = db.execute(_shown(entity_type, ids, None, list(prefixes) if prefixes else None)
+                       .options(selectinload(Fact.document).selectinload(SourceDocument.source))).scalars().all()
+    conflicts = db.execute(select(FactConflict).where(
+        FactConflict.entity_type == entity_type, FactConflict.entity_id.in_(ids),
+        FactConflict.resolution == "unresolved")).scalars().all()
+    facts_by, conflicts_by = defaultdict(list), defaultdict(list)
+    for f in facts:
+        facts_by[f.entity_id].append(f)
+    for c in conflicts:
+        conflicts_by[c.entity_id].append(c)
+    return {i: _choose(facts_by.get(i, []), conflicts_by.get(i, []), today) for i in ids}
 
 
 def history(db: Session, entity_type: str, entity_id: int, attribute: str) -> list[Fact]:

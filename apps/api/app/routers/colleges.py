@@ -14,7 +14,7 @@ from app.schemas.college import (
     CollegeSummary,
     CutoffOut,
 )
-from app.facts import topics
+from app.facts import discover, topics
 from app.services import college_service
 
 router = APIRouter(prefix="/api/colleges", tags=["colleges"])
@@ -35,6 +35,21 @@ def list_colleges(
         db, q=q, exam_code=exam_code, state=state, city=city,
         ownership=ownership, college_type=college_type, course_name=course_name,
     )
+
+
+@router.get("/discover")
+def discover_colleges(career: str | None = None, degree: str | None = None, state: str | None = None,
+                      exam: str | None = None, home: str | None = None, home_state: str | None = None,
+                      radius_km: float | None = None, budget_max: int | None = None, hostel: bool = False,
+                      medical: bool = False, sort: str = "name", limit: int = 50, db: Session = Depends(get_db)) -> dict:
+    """Career or degree → colleges offering it → the student's filters → plain attributes, sorted by
+    what the student chose (name, distance, fee, nirf). No overall score. Colleges left out because
+    something isn't known are counted in `left_out`."""
+    if sort not in discover.SORTS:
+        raise HTTPException(status_code=400, detail=f"sort must be one of {list(discover.SORTS)}")
+    return discover.discover(db, career=career, degree=degree, state=state, exam=exam, home=home, home_state=home_state,
+                             radius_km=radius_km, budget_max=budget_max, hostel=hostel, medical=medical, sort=sort,
+                             limit=min(limit, 200))
 
 
 @router.post("/compare", response_model=CollegeCompareResponse)
@@ -66,6 +81,13 @@ def get_facts(college_id: int, topic: str | None = None, db: Session = Depends(g
     if topic is not None and topic not in topics.TOPICS:
         raise HTTPException(status_code=400, detail=f"topic must be one of {sorted(topics.TOPICS)}")
     return {"college_id": college_id, "facts": topics.facts(db, college_id, topic)}
+
+
+@router.get("/{college_id}/sources")
+def get_sources(college_id: int, db: Session = Depends(get_db)) -> list[dict]:
+    """Every document behind what MAYA shows about this college, best tier first."""
+    college_service.get_college_or_404(db, college_id)
+    return college_service.sources_for(db, college_id)
 
 
 @router.post("/{college_id}/refresh")
