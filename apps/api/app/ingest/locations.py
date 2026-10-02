@@ -325,12 +325,14 @@ def values_for(fetcher: Fetcher, college: College) -> tuple[list[Value], str]:
 
 
 def run(db: Session, fetcher: Fetcher, root=None, limit: int | None = None, refresh: bool = False,
-        batch: int = 10, progress=print) -> dict:
+        batch: int = 10, progress=print, reverse: bool = False) -> dict:
+    """reverse: from the other end of the list — a second worker, using Overpass's second slot."""
     TOWN_PAGES.clear()
     colleges = sorted(db.execute(select(College)).scalars(), key=lambda c: (c.college_type not in NATIONAL, c.id))
     if not refresh:
         colleges = [c for c in colleges if "location.coordinates" not in store.current(db, "college", c.id,
                                                                                       attributes=["location.coordinates"])]
+    colleges = list(reversed(colleges)) if reverse else colleges
     colleges = colleges[:limit] if limit else colleges
     report = {"placed": 0, "unplaced": [], "notes": [], "commits": 0}
     pending: dict = {}
@@ -360,7 +362,8 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     limit = int(args[args.index("--limit") + 1]) if "--limit" in args else None
     with SessionLocal() as session, Fetcher(get_settings().source_store_path, min_interval=4.0) as fetcher:
-        result = run(session, fetcher, limit=limit, refresh="--refresh" in args, progress=lambda m: print(m, flush=True))
+        result = run(session, fetcher, limit=limit, refresh="--refresh" in args, progress=lambda m: print(m, flush=True),
+                     reverse="--reverse" in args)
     print("placed:", result["placed"], "| commits:", result["commits"], "| problems:", result.get("problems", [])[:10])
     print("not placed:", len(result["unplaced"]), *result["unplaced"], sep="\n  ")
     print("notes:", *result["notes"][:50], sep="\n  ")

@@ -32,6 +32,7 @@ NAMES = {
     "admission.application_window": ("Applications", "आवेदन"),
     "admission.exam_date": ("Exam date", "परीक्षा की तारीख़"),
     "admission.counselling": ("Counselling", "काउंसलिंग"),
+    "admission.result_date": ("Result", "परिणाम"),
     "academic.university": ("University", "विश्वविद्यालय"),
     "academic.established": ("Established", "स्थापना"),
     "ranking.nirf.engineering": ("NIRF rank (engineering)", "NIRF रैंक (इंजीनियरिंग)"),
@@ -44,6 +45,8 @@ PER = {"year": ("a year", "सालाना"), "semester": ("a semester", "प
 
 
 def name(attribute: str, lang: str = "en") -> str:
+    if attribute not in NAMES and attribute.count(".") > 1 and ".".join(attribute.split(".")[:2]) in NAMES:
+        attribute = ".".join(attribute.split(".")[:2])  # admission.exam_date.session_1 → its kind
     en, hi = NAMES.get(attribute, (attribute.split(".")[-1].replace("_", " ").capitalize(),) * 2)
     return hi if lang == "hi" else en
 
@@ -80,7 +83,16 @@ def value_text(attribute: str, value, lang: str = "en") -> str:
         if "lat" in value and "lng" in value:
             return f"{value['lat']:.4f}, {value['lng']:.4f}"
         if "from" in value:
-            return f"{value['from']} – {value['to']}" if value.get("to") else str(value["from"])
+            from datetime import date
+
+            def day(iso: str) -> str:
+                try:
+                    return date.fromisoformat(iso).strftime("%-d %b %Y")
+                except (TypeError, ValueError):
+                    return str(iso)
+
+            span = f"{day(value['from'])} – {day(value['to'])}" if value.get("to") and value["to"] != value["from"] else day(value["from"])
+            return f"{value['label']}: {span}" if value.get("label") else span
         if "route" in value:
             via = "से" if lang == "hi" else "via"
             n = value.get("programmes")

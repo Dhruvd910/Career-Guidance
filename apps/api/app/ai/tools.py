@@ -108,6 +108,17 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "admission_dates",
+            "description": "Key dates for an entrance exam's admissions — applications, the exam, the result, "
+                           "counselling — from the official bulletins, by cycle, each with its source; and whether "
+                           "the next cycle's dates have been announced. Never give a date that isn't here.",
+            "parameters": {"type": "object", "properties": {
+                "exam": {"type": "string", "enum": ["JEE_MAIN", "JEE_ADVANCED", "NEET_UG"]}}, "required": ["exam"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "search_documents",
             "description": "Search official admission documents (JoSAA business rules, MCC counselling scheme, NTA "
                            "information bulletins, JEE Advanced brochure, colleges' own notices) for what they say: "
@@ -445,6 +456,22 @@ def execute_tool(db: Session, profile: StudentProfile, name: str, args: dict[str
                 "Say where each value comes from and how recently it was checked; for 'Needs verification' or "
                 "'Stale', say so. Anything not listed here is unknown: say you couldn't verify it."
                 if found else f"Nothing verified about this college's {args.get('topic')} yet — say so plainly.")}
+        if name == "admission_dates":
+            from app.facts import describe, store
+            from app.models.exam import Exam
+
+            exam = db.query(Exam).filter(Exam.code == args.get("exam")).one_or_none()
+            if exam is None:
+                return {"error": "No such exam."}
+            facts = store.current(db, "exam", exam.id, prefix="admission.")
+            by_year: dict = {}
+            for attribute, v in sorted(facts.items(), key=lambda kv: (kv[1]["value"] or {}).get("from") or ""):
+                by_year.setdefault(v["academic_year"] or "?", []).append(
+                    {"what": describe.name(attribute), "when": describe.value_text(attribute, v["value"]),
+                     "source": v["source"]["document"], "where": v["source"]["locator"], "checked": v["label"]["en"]})
+            return {"exam": exam.name, "cycles": by_year, "note": (
+                "Give the newest cycle's dates; if its dates say 'Not available', the next cycle isn't announced yet — "
+                "say so, and give last cycle's dates only as last year's, never as this year's.")}
         if name == "search_documents":
             from app import rag
             from app.providers.registry import get_embedding_provider
