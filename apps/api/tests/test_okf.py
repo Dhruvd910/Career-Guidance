@@ -146,3 +146,21 @@ def test_what_the_loader_tolerates_and_reports(tmp_path, db_session):
     assert "notes/broken.md" not in str(run.problems) and "notes/broken: no frontmatter" in run.problems
     assert any("no college called" in p and "Institute That Isn't In The Data" in p for p in run.problems)
     assert run.facts == 0, "a concept MAYA didn't write is read, not rejected"
+
+
+def test_the_review_command(tmp_path, db_session, monkeypatch):
+    from app.ingest import review
+
+    college(db_session)
+    upsert(tmp_path, MANIT, fees() + [
+        Value("fee.one_time", money(5), FEES, "2026-27", flags=["₹5 is below the expected range"], at=T0),
+        Value("fee.hostel.annual", money(38000), JOSAA, "2026-27", at=T0)])
+    items = review.waiting(tmp_path)
+    assert [(i["attribute"], i["why"]) for i in items] == [
+        ("fee.hostel.annual", "official sources disagree"), ("fee.one_time", "₹5 is below the expected range"),
+        ("fee.hostel.annual", "official sources disagree")]
+    monkeypatch.setattr(review.loader, "bundle_root", lambda: tmp_path)
+    monkeypatch.setattr("app.core.db.SessionLocal", lambda: db_session)
+    assert review.main(["reject", "2", "--by", "dhruv", "--note", "misread"]) == 0
+    assert [i["attribute"] for i in review.waiting(tmp_path)] == ["fee.hostel.annual", "fee.hostel.annual"]
+    assert "human:dhruv" in (tmp_path / "log.md").read_text()

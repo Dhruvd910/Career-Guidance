@@ -337,17 +337,61 @@ College data is real, not samples:
   JIPMER, government colleges' 15% All-India quota, central and deemed universities).
   2026 counselling is still running (round 3 is due 30 September), so these closing ranks
   will loosen and predictions say they lean cautious.
-- **Researched profiles** for the 28 colleges students compare most (top IITs and NITs,
-  AIIMS, JIPMER, leading government medical colleges): NIRF 2025 rank, fees with waivers and
-  hostel costs, placements (median and highest package, with the year and source), the
-  teaching hospital, and what's around the campus — nearest airport and station, local
-  transport, daily needs. Kept in `apps/api/app/seed/data/college_profiles.json`, every
-  figure with its source; add a college by adding an entry under its official name.
+- **Facts from official sources** (Phase 6) for everything else, each with its source, academic
+  year and how fresh it is:
+  - **Fees, hostel and mess, the health centre:** read from each college's own website. The 105
+    national institutes come first (IITs, NITs, IIITs, AIIMS, JIPMER, IISc, IIEST).
+  - **NIRF ranks:** from the ministry's ranking pages.
+  - **Where each campus is, and the nearest station, airport, hospital, bus stand, pharmacy and
+    ATM:** from OpenStreetMap, as straight-line distances.
+  - **Admission dates:** from NTA's bulletins.
 
-**Compare** (pick 2–4 colleges on the Colleges page, or tap **+ Compare** on predicted
-colleges) opens with a verdict — best ranked, lowest fees, best median package, hardest and
-easiest to get into — then ranking, getting in, cost, placements and surroundings side by
-side. A college's own page lists its closing ranks for your category, program by program.
+  Unknown is said, never filled in: *not available on the official website*, *needs verification*,
+  *stale — as of …*. When two official sources disagree, both are shown.
+
+**A college's page** shows each value with a coloured line: its source, academic year and freshness.
+Tap a value for the document, the exact words it was read from, and a QR code to open it on a
+phone. **Check for updates** queues the college for tonight's refresh, and **Where this comes
+from** lists every document.
+
+**Find colleges** (from the colleges list, or a career's page) filters by distance from your town,
+yearly tuition, exam, hostel and medical facility. You sort by nearest, lowest fee, NIRF rank or
+name. There's never a "best college" score, and colleges left out because something about them
+isn't known are counted on screen. **Compare** puts the same facts side by side, each with its
+source.
+
+**Ask MAYA** "MANIT ka hostel fee kitna hai?", "Indore se 300 km mein kaunse NIT hain?" or "JEE Main
+2027 ka form kab aayega?". She answers from these facts with their source and date, and says when
+she couldn't verify something. A guard stops any rupee figure she hasn't seen in a tool's
+answer or your own words.
+
+### Where college knowledge lives
+
+- **`apps/api/data/okf`**: the knowledge bundle in Google's [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+  (v0.2). It has one markdown file per college per topic, every value with its sources, who
+  checked it and when it goes stale. It's its own git repository, so
+  `git -C apps/api/data/okf log` shows every change. The database is loaded from it.
+- **`apps/api/data/sources`**: the raw documents it was read from, kept by their sha256.
+- **The jobs** (`apps/api`, `.venv/bin/python -m …`):
+
+  | Job | What it does |
+  |---|---|
+  | `app.ingest.official_tables` | Identities, short names and admission routes from JoSAA/MCC |
+  | `app.ingest.nirf` | NIRF ranks |
+  | `app.ingest.locations` | Locations and nearby places (OpenStreetMap) |
+  | `app.ingest.websites` | Official websites, confirmed by the sites themselves |
+  | `app.ingest.college_facts` | Fees and facilities, read with Gemini 2.5 Flash, every quote checked on the Pi |
+  | `app.ingest.documents` | National bulletins, for MAYA's document search |
+  | `app.ingest.admissions` | Admission dates |
+  | `app.ingest.refresh` | All of the above, as due |
+
+- **Nightly refresh:** `app.ingest.refresh` runs from a systemd user timer at 02:30, within a
+  nightly reading budget of `REFRESH_BUDGET_USD`, $0.10 by default. Check it with
+  `systemctl --user list-timers maya-refresh.timer`; stop it with
+  `systemctl --user disable --now maya-refresh.timer`.
+- **Review:** values the checks hold back (odd amounts, secondary sources, unconfirmed scans) wait
+  for review, decided in the bundle. Decisions are recorded as `human:<you>` in its `verified`
+  field.
 
 To reload the official data (e.g. after a database reset):
 
@@ -411,8 +455,13 @@ everything stays on show.
   85% of government medical seats go through each state's own counselling. JoSAA covers
   central institutes only, not state engineering colleges (e.g. through JEE Main-based state
   counselling).
-- **Most colleges have cutoffs but no researched profile**: 28 are researched; for the rest
-  the app says so rather than guessing, and points to the official website.
+- **College facts start with the 105 national institutes.** Their official websites are read
+  for fees and facilities. The other 600-odd colleges have cutoffs, NIRF ranks where ranked,
+  locations and nearby places, and say *not available* for what hasn't been read yet.
+  Official sites are slow, change layout and sometimes block automated reading; a site that
+  couldn't be read is reported, never filled in.
+- **Wikidata isn't used:** its API now requires a contact address in every request, and none is
+  shared. Locations come from OpenStreetMap alone, so some colleges have no known location yet.
 - **Name spelling by voice**: Whisper can mis-hear uncommon names (in testing it heard a
   synthetic voice's "Dhruv" as "D.H. Ruff"). That's why MAYA reads your name back and the
   name box stays tappable to fix it.
@@ -476,7 +525,7 @@ docs/           Architecture plan and API reference
 
 ```bash
 cd apps/api
-./.venv/bin/python -m app.seed.seed --reset    # exams, careers, sample data
+./.venv/bin/python -m app.seed.seed --reset    # exams, courses, careers, practice questions (no colleges)
 ./.venv/bin/python -m app.seed.josaa           # then the real engineering cutoffs
 ./.venv/bin/python -m app.seed.mcc             # and the real medical cutoffs
 ```
