@@ -8,6 +8,7 @@ apps/api/data/*.db-journal
 # Phase 6: the OKF bundle is its own git repo; raw documents are large and re-fetchable
 apps/api/data/okf/
 apps/api/data/sources/
+apps/api/data/.okf.lock
 *.egg-info/
 
 # Node
