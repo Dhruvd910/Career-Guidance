@@ -164,3 +164,13 @@ def test_the_review_command(tmp_path, db_session, monkeypatch):
     assert review.main(["reject", "2", "--by", "dhruv", "--note", "misread"]) == 0
     assert [i["attribute"] for i in review.waiting(tmp_path)] == ["fee.hostel.annual", "fee.hostel.annual"]
     assert "human:dhruv" in (tmp_path / "log.md").read_text()
+
+
+def test_the_recheck_keeps_not_found_records():
+    from app.ingest.recheck import weak
+
+    assert weak({"attribute": "facility.medical", "value": {"text": "Has a hospital"}, "status": "verified", "quote": "Hospital"})
+    assert not weak({"attribute": "facility.medical", "value": None, "status": "not_available", "quote": None}), \
+        "'not found on the official website' has no quote by design"
+    assert not weak({"attribute": "facility.library", "value": {"text": "Central library"}, "status": "verified",
+                     "quote": "Central Library, open 8 am to midnight"})

@@ -18,6 +18,9 @@ from app.okf.facts import Entity, _refresh
 
 
 def weak(f: dict) -> bool:
+    """A value whose quote is too thin to be evidence. "Not found" records have no quote by design."""
+    if f.get("value") is None or f.get("status") == "not_available":
+        return False
     quote = (f.get("quote") or "").strip()
     return f["attribute"] in TEXT and (len(quote) < 12 or len(quote.split()) < 2)
 
