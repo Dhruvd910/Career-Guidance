@@ -81,9 +81,14 @@ def extract_name(transcript: str) -> str | None:
 # ---------------- class level ----------------
 
 _CLASS_WORDS = {
-    "eight": 8, "eighth": 8, "nine": 9, "ninth": 9, "ten": 10, "tenth": 10,
-    "eleven": 11, "eleventh": 11, "twelve": 12, "twelfth": 12,
+    "six": 6, "sixth": 6, "chhathi": 6, "chhati": 6, "seven": 7, "seventh": 7, "saatvi": 7, "satvi": 7,
+    "eight": 8, "eighth": 8, "aathvi": 8, "nine": 9, "ninth": 9, "nauvi": 9, "ten": 10, "tenth": 10, "dasvi": 10,
+    "eleven": 11, "eleventh": 11, "gyarahvi": 11, "twelve": 12, "twelfth": 12, "barahvi": 12,
 }
+# A college student: the answer to "which class are you in?" (parse_class returns COLLEGE).
+COLLEGE = "college"
+_COLLEGE = re.compile(r"\b(college|graduation|graduating|undergrad\w*|degree|university|b\.?\s?tech|b\.?\s?sc|b\.?\s?com|"
+                      r"bba|bca|mbbs|diploma|polytechnic|(first|second|third|fourth|final|1st|2nd|3rd|4th)\s+year)\b", re.I)
 # Regional names for classes 11/12: Kerala/TN "plus one/two", Karnataka PUC, AP/Telangana "inter".
 _CLASS_PHRASES = [
     (r"\bplus\s*(one|1)\b|\+\s*1\b", 11),
@@ -93,20 +98,43 @@ _CLASS_PHRASES = [
 ]
 
 
-def parse_class(transcript: str) -> int | None:
+def parse_class(transcript: str) -> int | str | None:
+    """6-12, COLLEGE for a college student, or None."""
     if not is_meaningful(transcript):
         return None
     text = transcript.lower()
-    for pattern, level in _CLASS_PHRASES:
+    for pattern, level in _CLASS_PHRASES:  # before college: "inter first year" is class 11
         if re.search(pattern, text):
             return level
-    digit = re.search(r"\b(8|9|10|11|12)(st|nd|rd|th)?\b", text)
+    if _COLLEGE.search(text):
+        return COLLEGE
+    digit = re.search(r"\b(6|7|8|9|10|11|12)(st|nd|rd|th)?\b", text)
     if digit:
         return int(digit.group(1))
     for word in re.findall(r"[a-z]+", text):
         if word in _CLASS_WORDS:
             return _CLASS_WORDS[word]
     return None
+
+
+_YEARS = [(r"\b(first|1st|one|pehla|pehle)\b", 1), (r"\b(second|2nd|two|doosra|dusra)\b", 2),
+          (r"\b(third|3rd|three|teesra|tisra)\b", 3), (r"\b(fourth|4th|four|chautha)\b", 4),
+          (r"\b(fifth|5th|five|paanchva)\b", 5)]
+_FINISHED = re.compile(r"\b(graduated|finished|completed|done|passed out|pass out|ho gaya|ho gayi|khatam)\b", re.I)
+
+
+def parse_college_year(transcript: str) -> str | None:
+    """'second year' → 'ug_y2', 'I've graduated' → 'graduate', else None."""
+    if not is_meaningful(transcript):
+        return None
+    text = transcript.lower()
+    if _FINISHED.search(text):
+        return "graduate"
+    for pattern, year in _YEARS:
+        if re.search(pattern, text):
+            return f"ug_y{year}"
+    digit = re.search(r"\b([1-5])\b", text)
+    return f"ug_y{digit.group(1)}" if digit else None
 
 
 # ---------------- yes / no ----------------

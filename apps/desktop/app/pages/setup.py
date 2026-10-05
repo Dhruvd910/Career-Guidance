@@ -1,5 +1,6 @@
-"""MAYA's first-run questions, one at a time: name, class, board, where you live, and — for
-classes 11/12, where admission prediction needs them — domicile and category.
+"""MAYA's first-run questions, one at a time: name, class (6 to 12, or college — then which year
+instead of the school board), board, where you live, and — for classes 11/12, where admission
+prediction needs them — domicile and category.
 
 Every question can be answered by voice (MAYA asks it out loud and listens), by tapping one
 of the choices, or by typing on the on-screen keyboard. Back and Next move between questions,
@@ -22,8 +23,8 @@ from app.pages.greeting import salutation
 from app.session import session
 from app.voice import IDLE
 from app.voice_parsing import (
-    BOARDS, STATES, extract_name, is_unsure, matching_states, parse_board, parse_category, parse_class,
-    parse_state, parse_yes_no, wants_to_go_back, wants_to_skip,
+    BOARDS, COLLEGE, STATES, extract_name, is_unsure, matching_states, parse_board, parse_category, parse_class,
+    parse_college_year, parse_state, parse_yes_no, wants_to_go_back, wants_to_skip,
 )
 from app.config import PORTRAIT_RATIO
 from app.theme import FOREGROUND, PRIMARY
@@ -32,13 +33,16 @@ from app.widgets.maya_status import MayaStatus
 from app.widgets.svg_icons import icon_pixmap, svg_icon
 from app.workers import run_async
 
-NAME, CLASS, BOARD, STATE, DOMICILE_SAME, DOMICILE, CATEGORY, REVIEW = (
-    "name", "class", "board", "state", "domicile_same", "domicile", "category", "review",
+NAME, CLASS, COLLEGE_YEAR, BOARD, STATE, DOMICILE_SAME, DOMICILE, CATEGORY, REVIEW = (
+    "name", "class", "college_year", "board", "state", "domicile_same", "domicile", "category", "review",
 )
 ANSWER_KEYS = {
-    NAME: "name", CLASS: "class_level", BOARD: "school_board", STATE: "state",
+    NAME: "name", CLASS: "class_level", COLLEGE_YEAR: "education_stage", BOARD: "school_board", STATE: "state",
     DOMICILE_SAME: "domicile_same", DOMICILE: "domicile_state", CATEGORY: "category",
 }
+CLASSES = (6, 7, 8, 9, 10, 11, 12)
+COLLEGE_YEARS = [("1st year", "ug_y1"), ("2nd year", "ug_y2"), ("3rd year", "ug_y3"), ("4th year", "ug_y4"),
+                 ("5th year", "ug_y5"), ("Finished", "graduate")]
 SKIPPED = ""  # the category answer for "I'd rather not say"
 SENIOR_CLASS = 11  # domicile and category only matter for JEE/NEET admission prediction
 
@@ -50,6 +54,7 @@ RETRIES = 1
 QUESTIONS = {
     NAME: "What's your name?",
     CLASS: "Which class are you in?",
+    COLLEGE_YEAR: "Which year of college are you in?",
     BOARD: "Which board is your school?",
     STATE: "Where do you live?",
     DOMICILE_SAME: "Is {state} your domicile state too?",
@@ -59,7 +64,8 @@ QUESTIONS = {
 }
 HINTS = {
     NAME: "Say your name, or tap the box to type it.",
-    CLASS: "Say it, or tap your class.",
+    CLASS: "Say it, or tap your class — or College.",
+    COLLEGE_YEAR: "Say it, or tap your year.",
     BOARD: "Say it, or tap your board.",
     STATE: "Say your state or city — or type it and tap a suggestion.",
     DOMICILE_SAME: "Domicile is the state you're officially a resident of. It decides which state-quota seats you can get.",
@@ -199,7 +205,9 @@ class SetupPage(BasePage):
         self.name_input.setProperty("variant", "big")
         self.name_input.setPlaceholderText("Your name")
         self.name_input.returnPressed.connect(self._next)
-        self.class_choices = ChoiceGrid([(f"{c}th", c) for c in (8, 9, 10, 11, 12)], 5, lambda v: self._pick(CLASS, v))
+        self.class_choices = ChoiceGrid([(f"{c}th", c) for c in CLASSES] + [("College", COLLEGE)], 4,
+                                        lambda v: self._pick(CLASS, v))
+        self.year_choices = ChoiceGrid(COLLEGE_YEARS, 3, lambda v: self._pick(COLLEGE_YEAR, v))
         self.board_choices = ChoiceGrid([(b, b) for b in BOARDS], 2, lambda v: self._pick(BOARD, v))
         self.state_field = StateField("Your state", lambda v: self._pick(STATE, v), self._next)
         self.domicile_same_choices = ChoiceGrid(
@@ -216,7 +224,8 @@ class SetupPage(BasePage):
         self.review_rows.setSpacing(0)
 
         self._inputs = {
-            NAME: self.name_input, CLASS: self.class_choices, BOARD: self.board_choices, STATE: self.state_field,
+            NAME: self.name_input, CLASS: self.class_choices, COLLEGE_YEAR: self.year_choices,
+            BOARD: self.board_choices, STATE: self.state_field,
             DOMICILE_SAME: self.domicile_same_choices, DOMICILE: self.domicile_field,
             CATEGORY: self.category_choices, REVIEW: self.review,
         }
@@ -255,13 +264,25 @@ class SetupPage(BasePage):
             answers["school_board"] = "Other"
         if profile.get("state") and profile.get("domicile_state"):
             answers["domicile_same"] = profile["domicile_state"] == profile["state"]
+        stage = profile.get("education_stage") or ""
+        if stage.startswith("ug_") or stage in ("pg", "graduate"):
+            answers["class_level"] = COLLEGE
+        else:
+            answers.pop("education_stage", None)
         return answers
+
+    def _in_college(self) -> bool:
+        return self.answers.get("class_level") == COLLEGE
+
+    def _school_class(self) -> int:
+        level = self.answers.get("class_level")
+        return level if isinstance(level, int) else 0
 
     # ---------------- steps ----------------
 
     def _steps(self) -> list[str]:
-        steps = [NAME, CLASS, BOARD, STATE]
-        if (self.answers.get("class_level") or 0) >= SENIOR_CLASS:
+        steps = [NAME, CLASS, COLLEGE_YEAR, STATE] if self._in_college() else [NAME, CLASS, BOARD, STATE]
+        if self._school_class() >= SENIOR_CLASS:
             steps.append(DOMICILE_SAME)
             if self.answers.get("domicile_same") is False:
                 steps.append(DOMICILE)
@@ -297,6 +318,7 @@ class SetupPage(BasePage):
         self.hint.setText(HINTS[step])
 
         self.class_choices.set_selected(self.answers.get("class_level"))
+        self.year_choices.set_selected(self.answers.get("education_stage"))
         self.board_choices.set_selected(self.answers.get("school_board"))
         self.domicile_same_choices.set_selected(self.answers.get("domicile_same"))
         self.category_choices.set_selected(self.answers.get("category"))
@@ -349,7 +371,8 @@ class SetupPage(BasePage):
         if self._step in steps and steps.index(self._step) > 0:
             return "page"
         profile = session.profile or {}
-        details_saved = all(profile.get(k) for k in ("state", "domicile_state", "school_board"))
+        needed = ("state", "domicile_state") if self._in_college() else ("state", "domicile_state", "school_board")
+        details_saved = all(profile.get(k) for k in needed)
         return "history" if self.editing and details_saved else "blocked"
 
     def go_back(self) -> None:
@@ -362,7 +385,7 @@ class SetupPage(BasePage):
     # ---------------- review ----------------
 
     REVIEW_ROWS = {
-        NAME: ("user", "Name"), CLASS: ("class", "Class"), BOARD: ("board", "Board"), STATE: ("pin", "Lives in"),
+        NAME: ("user", "Name"), CLASS: ("class", "Class"), COLLEGE_YEAR: ("class", "Year"), BOARD: ("board", "Board"), STATE: ("pin", "Lives in"),
         DOMICILE_SAME: ("home", "Domicile"), DOMICILE: ("home", "Domicile state"), CATEGORY: ("users", "Category"),
     }
 
@@ -397,7 +420,9 @@ class SetupPage(BasePage):
     def _display_value(self, step: str) -> str:
         value = self.answers.get(ANSWER_KEYS[step])
         if step == CLASS:
-            return f"Class {value}"
+            return "College" if value == COLLEGE else f"Class {value}"
+        if step == COLLEGE_YEAR:
+            return dict((v, k) for k, v in COLLEGE_YEARS).get(value, str(value))
         if step == DOMICILE_SAME:
             return "Same as where I live" if value else "A different state"
         if step == CATEGORY:
@@ -429,10 +454,14 @@ class SetupPage(BasePage):
             return (sorry if kind == "retry" else "") + "What's your name?"
         if step == CLASS:
             if kind == "retry":
-                return "Sorry, which class are you in? Eight, nine, ten, eleven, or twelve?"
+                return "Sorry, which class are you in? Anything from six to twelve — or say college."
             if kind == "first" and self._came_from == NAME and first:
                 return f"Nice to meet you, {first}! Which class are you in?"
             return "Which class are you in?"
+        if step == COLLEGE_YEAR:
+            if kind == "retry":
+                return "Sorry, which year — first, second, third, fourth? Or say finished."
+            return "Which year of college are you in?"
         if step == BOARD:
             if kind == "retry":
                 return sorry + "Is it CBSE, ICSE, or a state board?"
@@ -457,8 +486,13 @@ class SetupPage(BasePage):
     def _spoken_review(self) -> str:
         a = self.answers
         board = {"State Board": "a state board", "Other": "another board"}.get(a.get("school_board"), f"{a.get('school_board')} board")
-        parts = [f"{a.get('name', '').split(' ')[0]}, class {a.get('class_level')}, {board}, living in {a.get('state')}"]
-        if (a.get("class_level") or 0) >= SENIOR_CLASS:
+        first = a.get('name', '').split(' ')[0]
+        if self._in_college():
+            year = self._display_value(COLLEGE_YEAR).lower()
+            parts = [f"{first}, at college, {'finished' if year == 'finished' else year}, living in {a.get('state')}"]
+        else:
+            parts = [f"{first}, class {a.get('class_level')}, {board}, living in {a.get('state')}"]
+        if self._school_class() >= SENIOR_CLASS:
             if a.get("domicile_same") is False:
                 parts.append(f"domicile {a.get('domicile_state')}")
             if a.get("category"):
@@ -470,7 +504,7 @@ class SetupPage(BasePage):
             self.go_back()
             return
         handlers = {
-            NAME: self._heard_name, CLASS: self._heard_class, BOARD: self._heard_board,
+            NAME: self._heard_name, CLASS: self._heard_class, COLLEGE_YEAR: self._heard_college_year, BOARD: self._heard_board,
             STATE: self._heard_state, DOMICILE_SAME: self._heard_domicile_same, DOMICILE: self._heard_domicile,
             CATEGORY: self._heard_category, REVIEW: self._heard_review,
         }
@@ -491,9 +525,17 @@ class SetupPage(BasePage):
 
     def _heard_class(self, transcript: str) -> bool:
         level = parse_class(transcript)
+        if level == COLLEGE and (year := parse_college_year(transcript)):
+            self.answers["education_stage"] = year  # "second year B.Tech" answers both
         if level:
             self._pick(CLASS, level)
         return level is not None
+
+    def _heard_college_year(self, transcript: str) -> bool:
+        year = parse_college_year(transcript)
+        if year:
+            self._pick(COLLEGE_YEAR, year)
+        return year is not None
 
     def _heard_board(self, transcript: str) -> bool:
         board = parse_board(transcript)
@@ -562,15 +604,19 @@ class SetupPage(BasePage):
 
     def _details(self) -> dict:
         a = self.answers
-        senior = a["class_level"] >= SENIOR_CLASS
-        return {
+        senior = self._school_class() >= SENIOR_CLASS
+        details = {
             "name": a["name"],
-            "class_level": a["class_level"],
-            "school_board": a["school_board"],
+            # A college student has finished class 12; where they are now is education_stage.
+            "class_level": 12 if self._in_college() else a["class_level"],
+            "education_stage": a["education_stage"] if self._in_college() else f"class_{a['class_level']}",
             "state": a["state"],
             "domicile_state": a["domicile_state"] if senior and a.get("domicile_same") is False else a["state"],
             "category": (a.get("category") or None) if senior else None,
         }
+        if not self._in_college():
+            details["school_board"] = a["school_board"]
+        return details
 
     def _set_next_text(self, text: str) -> None:
         self.next_btn.setText(f"{text}  ")

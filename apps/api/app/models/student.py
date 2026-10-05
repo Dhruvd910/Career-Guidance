@@ -13,7 +13,7 @@ class StudentProfile(Base, TimestampMixin):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), unique=True)
 
     name: Mapped[str] = mapped_column(String(255))
-    class_level: Mapped[int] = mapped_column(Integer)  # 8-12
+    class_level: Mapped[int] = mapped_column(Integer)  # 6-12; 12 for a college student (see education_stage)
     # Beyond class 12 too (spec §18): class_6…class_12 | dropper | ug_y1…ug_y5 | pg | graduate
     education_stage: Mapped[str | None] = mapped_column(String(20), nullable=True)
     stream: Mapped[str | None] = mapped_column(String(20), nullable=True)  # PCM | PCB | PCMB | commerce | humanities

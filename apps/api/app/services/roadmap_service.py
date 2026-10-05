@@ -86,7 +86,7 @@ def generate_roadmap(db: Session, profile: StudentProfile) -> RoadmapResponse:
         .first()
     )
 
-    if profile.class_level in (8, 9):
+    if profile.class_level <= 9:
         titles = [
             ("Explore interests & strengths", "Take the career exploration assessment and try varied activities."),
             ("Choose a stream in Class 10", "Use your exploration results to guide PCM/PCB/Commerce/Arts choice."),

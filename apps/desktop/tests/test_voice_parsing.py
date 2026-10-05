@@ -1,7 +1,8 @@
 import pytest
 
 from app.voice_parsing import (
-    clean_dictation, extract_name, is_meaningful, parse_class, parse_exam_choice, parse_number, parse_yes_no,
+    COLLEGE, clean_dictation, extract_name, is_meaningful, parse_class, parse_college_year, parse_exam_choice,
+    parse_number, parse_yes_no,
 )
 
 
@@ -34,13 +35,23 @@ def test_extract_name_rejects_non_answers(transcript):
     ("11", 11), ("Class 12.", 12), ("I'm in 11th.", 11), ("tenth", 10),
     ("I study in class eleven", 11), ("Twelfth standard.", 12), ("8th", 8), ("nine", 9),
     ("plus two", 12), ("Plus one.", 11), ("first year PUC", 11), ("second PUC", 12),
-    ("Inter second year", 12),
+    ("Inter second year", 12), ("class 7", 7), ("sixth", 6), ("main saatvi mein hoon", 7),
+    ("I'm in college", COLLEGE), ("doing B.Tech", COLLEGE), ("second year", COLLEGE), ("BSc first year", COLLEGE),
 ])
 def test_parse_class(transcript, expected):
     assert parse_class(transcript) == expected
 
 
-@pytest.mark.parametrize("transcript", ["", "I'm sixteen years old", "Thank you.", "class 7"])
+@pytest.mark.parametrize("transcript, expected", [
+    ("second year", "ug_y2"), ("I'm in my 3rd year", "ug_y3"), ("first", "ug_y1"), ("4", "ug_y4"),
+    ("I've graduated", "graduate"), ("college khatam ho gaya", "graduate"),
+])
+def test_parse_college_year(transcript, expected):
+    assert parse_college_year(transcript) == expected
+    assert parse_college_year("Thank you.") is None
+
+
+@pytest.mark.parametrize("transcript", ["", "I'm sixteen years old", "Thank you.", "class 5"])
 def test_parse_class_rejects_out_of_range_or_empty(transcript):
     assert parse_class(transcript) is None
 

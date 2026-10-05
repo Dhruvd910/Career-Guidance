@@ -6,7 +6,7 @@ from app.pages.base import BasePage
 from app.session import session
 from app.voice_parsing import parse_exam_choice, parse_yes_no
 from app.config import PORTRAIT_RATIO
-from app.widgets.common import Card, arrow_button, clear_layout, error_label, muted, set_error
+from app.widgets.common import Card, arrow_button, clear_layout, error_label, muted, secondary_button, set_error
 from app.widgets.maya_status import MayaStatus
 from app.widgets.svg_icons import svg_icon
 from app.workers import run_async
@@ -118,6 +118,12 @@ class OnboardingPage(BasePage):
             self._render_redirect_card("Start Exploration", "class8_9_exploration",
                                         "We'll ask about your interests, favorite subjects, and the kind of work "
                                         "you imagine enjoying — no pressure to decide anything yet.")
+        elif name == "memory_permission":
+            self._render_memory_permission()
+        elif name == "skills_assessment":
+            self._render_redirect_card("Check my skills", "college_skills",
+                                        "A few short checks on your skills, then where your degree can lead — "
+                                        "projects, internships and jobs that fit.")
         elif name == "stream_assessment":
             self._render_redirect_card("Start Stream Assessment", "class10_stream",
                                         "A short set of questions to recommend PCM, PCB, Commerce, or Arts.")
@@ -176,6 +182,23 @@ class OnboardingPage(BasePage):
         btn = arrow_button(button_text)
         btn.clicked.connect(lambda: self._finish_to_careers(assessment_type))
         self.content_holder.addWidget(btn)
+
+    def _render_memory_permission(self) -> None:
+        """Asked once: "Set it up" opens the permissions (with the notice and, under 18, the guardian's
+        agreement); "Not now" is recorded, so it isn't asked again — it stays in MAYA's memory menu."""
+        self.content_holder.addWidget(muted("With it, I'll remember the topics you're deciding, what you like and "
+                                            "what we agreed — and you can see or delete any of it."))
+        setup = arrow_button("Set it up")
+        setup.clicked.connect(lambda: self.ctx.navigate("memory", tab="permissions"))
+        self.content_holder.addWidget(setup)
+        later = secondary_button("Not now")
+        later.clicked.connect(self._memory_not_now)
+        self.content_holder.addWidget(later)
+
+    def _memory_not_now(self) -> None:
+        self.ctx.voice.cancel()
+        run_async(api_client.set_consent, "long_term_memory", False, on_success=lambda _r: self._load_step(),
+                  on_error=self._failed)
 
     def _render_career_goal_question(self) -> None:
         """Two big answers, stacked: "✓ Yes, I know" and "Not sure yet"."""

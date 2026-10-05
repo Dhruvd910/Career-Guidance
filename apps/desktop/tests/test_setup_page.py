@@ -4,7 +4,8 @@ for a hidden page) and no network calls happen."""
 
 import pytest
 
-from app.pages.setup import CATEGORY, CLASS, DOMICILE, DOMICILE_SAME, NAME, REVIEW, SKIPPED, SetupPage
+from app.pages.setup import CATEGORY, CLASS, COLLEGE_YEAR, DOMICILE, DOMICILE_SAME, NAME, REVIEW, SKIPPED, SetupPage
+from app.voice_parsing import COLLEGE
 from app.voice import Voice
 
 
@@ -104,7 +105,7 @@ def test_junior_details_use_the_home_state_and_no_category(page):
     answer_all(page, class_level=9)
     page.answers["category"] = "General"  # answered earlier, before the class was changed
     assert page._details() == {
-        "name": "Riya", "class_level": 9, "school_board": "CBSE",
+        "name": "Riya", "class_level": 9, "education_stage": "class_9", "school_board": "CBSE",
         "state": "Karnataka", "domicile_state": "Karnataka", "category": None,
     }
 
@@ -135,3 +136,41 @@ def test_top_bar_counts_the_questions_then_says_almost_done(page):
     page.answers.update(name="Asha", class_level=9, school_board="CBSE", state="Delhi")
     page._show_step("review")
     assert page.ctx.progress == ("Almost done", 4, 5)
+
+
+def test_class_6_and_7_can_set_up(page):
+    page._show_step(CLASS)
+    assert page._heard_class("main saatvi mein hoon")
+    assert page.answers["class_level"] == 7 and page._steps() == [NAME, CLASS, "board", "state", REVIEW]
+    page._pick(CLASS, 6)
+    assert page.answers["class_level"] == 6
+
+
+def test_a_college_student_is_asked_their_year_instead_of_the_school_board(page):
+    page.answers = {"name": "Arjun"}
+    page._show_step(CLASS)
+    assert page._heard_class("I'm doing B.Tech")
+    assert page.answers["class_level"] == COLLEGE
+    assert page._steps() == [NAME, CLASS, COLLEGE_YEAR, "state", REVIEW], "no board, no domicile or category"
+    assert page._step == COLLEGE_YEAR
+    assert page._heard_college_year("third year")
+    page.answers |= {"state": "Bihar"}
+    assert page._details() == {"name": "Arjun", "class_level": 12, "education_stage": "ug_y3",
+                               "state": "Bihar", "domicile_state": "Bihar", "category": None}
+    assert page._display_value(COLLEGE_YEAR) == "3rd year" and page._display_value(CLASS) == "College"
+    assert "at college, 3rd year" in page._spoken_review()
+
+
+def test_class_and_year_in_one_answer(page):
+    page.answers = {"name": "Arjun"}
+    page._show_step(CLASS)
+    assert page._heard_class("second year BSc")
+    assert page.answers["education_stage"] == "ug_y2" and page._step == "state"
+
+
+def test_editing_a_college_students_details_starts_from_their_stage(page, monkeypatch):
+    monkeypatch.setattr("app.pages.setup.session", type("S", (), {"profile": {
+        "name": "Arjun", "class_level": 12, "education_stage": "ug_y2", "state": "Bihar", "domicile_state": "Bihar",
+        "school_board": None}})())
+    answers = page._answers_from_profile()
+    assert answers["class_level"] == COLLEGE and answers["education_stage"] == "ug_y2"

@@ -2,10 +2,15 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
+# Class 6 to 12 at school. A college student keeps class_level 12 (school finished) and says where they
+# are with education_stage.
+MIN_CLASS, MAX_CLASS = 6, 12
+EDUCATION_STAGE = r"^(class_([6-9]|1[0-2])|dropper|ug_y[1-5]|pg|graduate)$"
+
 
 class StudentProfileUpdate(BaseModel):
     name: str | None = None
-    class_level: int | None = Field(default=None, ge=8, le=12)
+    class_level: int | None = Field(default=None, ge=MIN_CLASS, le=MAX_CLASS)
     school_board: str | None = None
     state: str | None = None
     domicile_state: str | None = None
@@ -15,7 +20,7 @@ class StudentProfileUpdate(BaseModel):
     knows_career_goal: bool | None = None
     target_exam_code: str | None = None
     onboarding_completed: bool | None = None
-    education_stage: str | None = None  # class_6…class_12 | dropper | ug_y1…ug_y5 | pg | graduate
+    education_stage: str | None = Field(default=None, pattern=EDUCATION_STAGE)  # class_6…class_12 | dropper | ug_y1…ug_y5 | pg | graduate
     stream: str | None = None  # PCM | PCB | PCMB | commerce | humanities
     birth_year: int | None = Field(default=None, ge=1950, le=2030)
     city: str | None = None
@@ -48,7 +53,7 @@ class StudentProfileOut(BaseModel):
 
 class AcademicRecordCreate(BaseModel):
     academic_year: str
-    class_level: int = Field(ge=8, le=12)
+    class_level: int = Field(ge=MIN_CLASS, le=MAX_CLASS)
     board_percentage: float | None = Field(default=None, ge=0, le=100)
     subject_marks: dict[str, float] = Field(default_factory=dict)
 

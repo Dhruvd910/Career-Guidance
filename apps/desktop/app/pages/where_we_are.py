@@ -71,8 +71,10 @@ class WhereWeArePage(BasePage):
         lang = preferred_language(self.ctx)
         clear_layout(self.body_layout)
         who = b["who"]
-        self.sub.setText(", ".join(x for x in (who.get("name"), f"class {who['class_level']}" if who.get("class_level") else None,
-                                               who.get("stream"), who.get("town")) if x))
+        stage = who.get("education_stage") or ""
+        where = (f"college, year {stage[4:]}" if stage.startswith("ug_y") else "graduated" if stage in ("graduate", "pg")
+                 else f"class {who['class_level']}" if who.get("class_level") else None)
+        self.sub.setText(", ".join(x for x in (who.get("name"), where, who.get("stream"), who.get("town")) if x))
 
         last = b.get("last_stopped")
         card = Card()

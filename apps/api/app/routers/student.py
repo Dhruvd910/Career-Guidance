@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile
+from app.core.observability import audit
 from app.models.student import StudentProfile
 from app.schemas.student import (
     AcademicRecordCreate,
@@ -27,6 +28,7 @@ def edit_profile(
     profile: StudentProfile = Depends(get_current_student_profile),
     db: Session = Depends(get_db),
 ) -> StudentProfile:
+    audit("profile_updated", student=profile.id, fields=",".join(sorted(payload.model_dump(exclude_unset=True))))
     return update_profile(db, profile, payload)
 
 
@@ -42,5 +44,6 @@ def create_academic_record(
 @router.get("/onboarding/next-step", response_model=NextOnboardingStep)
 def onboarding_next_step(
     profile: StudentProfile = Depends(get_current_student_profile),
+    db: Session = Depends(get_db),
 ) -> NextOnboardingStep:
-    return get_next_onboarding_step(profile)
+    return get_next_onboarding_step(profile, db)
