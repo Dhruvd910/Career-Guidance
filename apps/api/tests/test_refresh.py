@@ -50,3 +50,39 @@ def test_the_nightly_refresh(tmp_path, db_session, monkeypatch):
     assert "documents" not in calls and "dates" not in calls, "the documents were fetched two days ago"
     assert report["asked"] == 1 and report["fees"] == 0 and "nirf" in calls and "places" in calls
     assert 0.2 <= report["cost"] < 0.45, "reading stops once the night's budget is spent"
+
+
+def test_a_college_just_looked_at_waits_and_the_longest_unvisited_goes_first(tmp_path, db_session, monkeypatch):
+    """The same few colleges used to be re-read every night (and paid for) when their site couldn't be
+    read or their values waited for review, while the rest were never reached."""
+    from app.models.college import College
+    from app.models.facts import RefreshAttempt
+
+    tried = College(canonical_name="Indian Institute of Technology Bombay", college_type="IIT", ownership="government",
+                    state="Maharashtra", city="Mumbai", is_demo_data=False)
+    db_session.add(tried)
+    db_session.flush()
+    fresh = manit(db_session)  # never looked at
+    db_session.add(RefreshAttempt(college_id=tried.id, topic="fee.", found=0,
+                                  attempted_at=datetime.now(timezone.utc) - timedelta(days=1)))
+    db_session.commit()
+    read = []
+    monkeypatch.setattr(college_facts, "site_of", lambda db, c: "https://example.org/")
+    monkeypatch.setattr(college_facts, "values_for",
+                        lambda db, fetcher, c, usage, reader=None, **kw: read.append(c.canonical_name) or ([], ["unreadable"]))
+    for job in ("nirf", "locations"):
+        monkeypatch.setattr(getattr(refresh, job), "run", lambda *a, **k: {"ranked": {}, "placed": 0})
+    monkeypatch.setattr(refresh.documents, "run", lambda *a, **k: {"documents": []})
+    monkeypatch.setattr(refresh.admissions, "run", lambda *a, **k: {"dates": 0})
+    monkeypatch.setattr(refresh.locations, "NATIONAL", {"IIT", "NIT"})
+
+    refresh.run(db_session, fetcher=None, root=tmp_path / "okf", progress=lambda m: None)
+    assert read == [fresh.canonical_name], "IIT Bombay was tried yesterday and found nothing: it waits 14 days"
+    refresh.run(db_session, fetcher=None, root=tmp_path / "okf", progress=lambda m: None)
+    assert read == [fresh.canonical_name], "nor is MANIT read again the next night"
+    assert db_session.query(RefreshAttempt).filter_by(college_id=fresh.id).one().found == 0
+
+    db_session.query(RefreshAttempt).update({"attempted_at": datetime.now(timezone.utc) - timedelta(days=15)})
+    db_session.commit()
+    refresh.run(db_session, fetcher=None, root=tmp_path / "okf", per_night=1, progress=lambda m: None)
+    assert read[-1] == tried.canonical_name, "after 14 days both are due again: the longest-unvisited goes first"

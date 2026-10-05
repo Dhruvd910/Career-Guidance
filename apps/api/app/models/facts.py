@@ -152,3 +152,18 @@ class RefreshRequest(Base):
     requested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     done_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     outcome: Mapped[str | None] = mapped_column(String(300), nullable=True)
+
+
+class RefreshAttempt(Base):
+    """The nightly refresh looking at one college's topic ("fee."), whatever came of it. A site that
+    couldn't be read, or values still waiting for review, aren't due again the next night: without
+    this the same colleges were re-read (and paid for) every night while the rest waited."""
+
+    __tablename__ = "refresh_attempts"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    college_id: Mapped[int] = mapped_column(ForeignKey("colleges.id", ondelete="CASCADE"), index=True)
+    topic: Mapped[str] = mapped_column(String(40))
+    attempted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    found: Mapped[int] = mapped_column(Integer, default=0)  # values read
+    cost: Mapped[float] = mapped_column(Float, default=0.0)

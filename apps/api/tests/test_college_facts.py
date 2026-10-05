@@ -3,6 +3,7 @@ found, every value checked against the document's own words, and 'not on the off
 said plainly. A fake site and a fake model; never the web or a real model."""
 
 import httpx
+import pytest
 
 from app.facts import store
 from app.ingest import college_facts, read as reading, websites
@@ -166,3 +167,32 @@ def test_reading_a_site_again_replaces_what_it_said_before(tmp_path, db_session,
     assert "fee.one_time" not in shown, "a value the site no longer gives is withdrawn"
     assert "location.website" in shown, "only what a site read produces is replaced"
     assert "**Withdrawn**: One-time fees" in (tmp_path / "okf" / "log.md").read_text()
+
+
+def test_an_unchanged_document_is_not_paid_for_twice(monkeypatch):
+    """The same document asked the same way gets the answer kept from last time; a changed page or
+    another model is read again."""
+    import json
+
+    calls = []
+
+    def answer(request):
+        calls.append(json.loads(request.content)["model"])
+        return httpx.Response(200, json={"choices": [{"message": {"content": '{"facts": []}'}}],
+                                         "usage": {"prompt_tokens": 9000, "completion_tokens": 20, "cost": 0.006}})
+
+    settings = reading.get_settings()
+    monkeypatch.setattr(settings, "openrouter_api_key", "sk-test")
+    client = httpx.Client(transport=httpx.MockTransport(answer))
+    page = Extracted("html", ["Fee structure 2026-27: Tuition Fee 62,500 per semester"])
+    usage = reading.Usage()
+    ask = lambda doc: reading.ask(reading.messages_for("MANIT", "Bhopal", "Fees", "https://manit.ac.in/fees", doc), usage, client)
+
+    ask(page)
+    ask(page)
+    assert calls == [settings.extraction_model] and usage.reused == 1 and usage.cost == pytest.approx(0.006)
+    ask(Extracted("html", ["Fee structure 2027-28: Tuition Fee 65,000 per semester"]))
+    assert len(calls) == 2, "the page changed: read again"
+    monkeypatch.setattr(settings, "extraction_model", "google/another-model")
+    ask(page)
+    assert calls[-1] == "google/another-model", "another model: read again"

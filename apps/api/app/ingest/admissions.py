@@ -83,15 +83,22 @@ def read_dates(doc: Extracted, title: str, url: str, usage: reading.Usage, pages
     return reads
 
 
-def run(db: Session, fetcher: Fetcher, root=None, next_cycle: int | None = None, reader=read_dates) -> dict:
-    """Dates from every indexed bulletin; and, for the next cycle, whether its bulletin is out yet."""
+def run(db: Session, fetcher: Fetcher, root=None, next_cycle: int | None = None, reader=read_dates,
+        usage: reading.Usage | None = None, budget: float | None = None) -> dict:
+    """Dates from every indexed bulletin; and, for the next cycle, whether its bulletin is out yet.
+    usage/budget: the nightly refresh's spending so far and its limit — reading stops at the limit
+    (a bulletin read before, unchanged, costs nothing: see read.ask)."""
     today = datetime.now(timezone.utc).date()
     next_cycle = next_cycle or (today.year + 1 if today.month >= 7 else today.year)
     exams = {f"exam:{e.code}": e for e in db.execute(select(Exam)).scalars()}
-    usage, values, report = reading.Usage(), {}, {"dates": 0, "documents": 0, "next_cycle": next_cycle, "problems": []}
+    usage = usage if usage is not None else reading.Usage()
+    values, report = {}, {"dates": 0, "documents": 0, "next_cycle": next_cycle, "problems": []}
     for row in db.execute(select(SourceDocument).where(SourceDocument.superseded_by.is_(None))).scalars():
         about = [exams[a] for a in (row.entity_refs or []) if a in exams]
         if not about or row.source.tier != 3 or not row.sha256:
+            continue
+        if budget is not None and usage.cost >= budget:
+            report["problems"].append(f"{row.title}: not read — tonight's reading budget is spent")
             continue
         raw = next(iter(sorted((fetcher.store / row.sha256[:2]).glob(f"{row.sha256}.*"))), None)
         if raw is None:

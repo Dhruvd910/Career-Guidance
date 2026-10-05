@@ -33,7 +33,7 @@ def test_dates_must_be_in_the_quoted_words():
     assert admissions.check(invented, doc) is None, "words that aren't in the document are thrown away"
 
 
-def test_dates_reach_the_exam_and_maya(tmp_path, db_session, monkeypatch):
+def bulletin_on_record(tmp_path, db_session):
     neet = Exam(code="NEET_UG", name="NEET-UG", category="medical")
     db_session.add(neet)
     db_session.flush()
@@ -44,6 +44,11 @@ def test_dates_reach_the_exam_and_maya(tmp_path, db_session, monkeypatch):
     src = store.source(db_session, "nta-neet", "National Testing Agency (NEET-UG)", 3)
     store.document(db_session, src, "https://neet.nta.nic.in/bulletin-2026.pdf", "Information Bulletin for NEET(UG)-2026",
                    sha256=sha, parse_status="text", entity_refs=["exam:NEET_UG"])
+    return neet
+
+
+def test_dates_reach_the_exam_and_maya(tmp_path, db_session, monkeypatch):
+    neet = bulletin_on_record(tmp_path, db_session)
 
     def fake_reader(doc, title, url, usage):
         return [Read("admission.application_window", {"from": "2026-02-07", "to": "2026-03-07", "label": "Online application"},
@@ -77,3 +82,16 @@ def test_dates_reach_the_exam_and_maya(tmp_path, db_session, monkeypatch):
     assert "Online application: 7 Feb 2026 – 7 Mar 2026" in {c["when"] for c in said["cycles"]["2026-27"]}
     assert "never as this year's" in said["note"]
     assert date.today()  # the cycle is computed from today's date when not given
+
+
+def test_the_weekly_dates_stay_within_the_nights_budget(tmp_path, db_session):
+    """The nightly refresh passes its spending so far: once it's at the limit, no bulletin is read."""
+    from app.ingest import read as reading
+
+    bulletin_on_record(tmp_path, db_session)
+    read = []
+    spent = reading.Usage(cost=0.10)
+    with Fetcher(tmp_path / "sources", transport=httpx.MockTransport(lambda r: httpx.Response(404))) as f:
+        report = admissions.run(db_session, f, root=tmp_path / "okf", next_cycle=2027,
+                                reader=lambda *a: read.append(a) or [], usage=spent, budget=0.10)
+    assert read == [] and "budget is spent" in report["problems"][0]

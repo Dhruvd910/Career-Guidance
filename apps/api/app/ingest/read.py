@@ -13,14 +13,22 @@ returns each value with the words it read it from, copied exactly, and the page.
 
 Calls go to OpenRouter (EXTRACTION_MODEL, default google/gemini-2.5-flash); each call's tokens
 and cost are reported.
+
+**An unchanged document isn't paid for twice.** Each answer is kept under a fingerprint of the exact
+request — model, instructions and the document's text or page images — in <source store>/reads/.
+The same document asked the same way gets the kept answer; a changed page, a new prompt or another
+model is a new request and is read again. Delete reads/ to make everything be read afresh.
 """
 
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import re
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
 
 import httpx
 
@@ -74,6 +82,7 @@ class Usage:
     prompt_tokens: int = 0
     completion_tokens: int = 0
     cost: float = 0.0
+    reused: int = 0  # answers kept from an earlier read of the same document: free
 
     def add(self, usage: dict) -> None:
         self.calls += 1
@@ -82,14 +91,28 @@ class Usage:
         self.cost += float(usage.get("cost") or 0.0)
 
 
+def _kept(body: dict) -> Path:
+    key = hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+    return Path(get_settings().source_store_path) / "reads" / key[:2] / f"{key}.json"
+
+
 def ask(messages: list[dict], usage: Usage, client: httpx.Client | None = None) -> dict:
-    """One JSON-mode call to the extraction model through OpenRouter."""
+    """One JSON-mode call to the extraction model through OpenRouter — or, for a request made before
+    (the same document, prompt and model), the answer it got then."""
     s = get_settings()
-    if not s.openrouter_api_key:
-        raise RuntimeError("OPENROUTER_API_KEY isn't set")
     body = {"model": s.extraction_model, "messages": messages, "temperature": 0,
             "response_format": {"type": "json_object"}, "usage": {"include": True}, "reasoning": {"enabled": False},
             "max_tokens": 3000}  # a page's facts fit easily; a runaway reply is cut off, not paid for
+    kept = _kept(body)
+    if kept.exists():
+        try:
+            answer = json.loads(kept.read_text())["answer"]
+            usage.reused += 1
+            return answer
+        except (ValueError, KeyError):
+            pass  # a damaged file: read the document again
+    if not s.openrouter_api_key:
+        raise RuntimeError("OPENROUTER_API_KEY isn't set")
     http = client or httpx.Client(timeout=180)
     try:
         r = http.post(f"{s.openrouter_base_url}/chat/completions", json=body,
@@ -102,7 +125,11 @@ def ask(messages: list[dict], usage: Usage, client: httpx.Client | None = None) 
     usage.add(data.get("usage") or {})
     content = data["choices"][0]["message"].get("content") or "{}"
     content = re.sub(r"^```(?:json)?|```$", "", content.strip()).strip()
-    return json.loads(content)
+    answer = json.loads(content)
+    kept.parent.mkdir(parents=True, exist_ok=True)
+    kept.write_text(json.dumps({"model": s.extraction_model, "at": datetime.now(timezone.utc).isoformat(),
+                                "cost": (data.get("usage") or {}).get("cost"), "answer": answer}, ensure_ascii=False))
+    return answer
 
 
 def messages_for(college: str, place: str, title: str, url: str, doc: Extracted, images: list[bytes] | None = None,
