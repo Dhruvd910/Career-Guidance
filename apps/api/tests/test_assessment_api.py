@@ -35,7 +35,7 @@ def test_take_an_assessment_and_see_the_directions(client, db_session):
     seed_careers(db_session)
     token = register(client)
     listed = client.get("/api/assessment/instruments", headers=auth(token)).json()
-    assert [i["key"] for i in listed] == ["interests", "aptitude", "skills", "academic", "coding_check"]
+    assert [i["key"] for i in listed] == ["interests", "aptitude", "skills", "academic", "coding_check", "spatial"]
     assert listed[0]["title"] == {"en": "What you enjoy", "hi": "आपको क्या पसंद है"}
 
     done = run_through(client, token, "interests", lambda item: {"option": item["options"][0]["key"]})

@@ -33,11 +33,11 @@ def hindi_texts(instrument, options=True):
             yield option.label.hi
 
 
-def test_the_five_instruments_exist():
-    assert set(instrument_files()) == {"interests", "aptitude", "skills", "coding_check", "academic"}
+def test_the_six_instruments_exist():
+    assert set(instrument_files()) == {"interests", "aptitude", "skills", "coding_check", "academic", "spatial"}
 
 
-@pytest.mark.parametrize("key", ["interests", "aptitude", "skills", "coding_check", "academic"])
+@pytest.mark.parametrize("key", ["interests", "aptitude", "skills", "coding_check", "academic", "spatial"])
 def test_hindi_is_written_in_hindi_and_never_as_a_gendered_slash(key):
     """MAYA reads these aloud: "करता/करती" would come out as nonsense."""
     for hi in hindi_texts(spec(key)):
@@ -91,3 +91,13 @@ def test_every_career_has_needs_questions_and_a_domain():
             assert weight in (1, 2, 3)
         assert len(entry["ask_yourself"]) == 2 and all(q["en"] and q["hi"] for q in entry["ask_yourself"])
         assert library[key]["category"] in NEEDS["domains"]
+
+
+def test_the_spatial_puzzles_can_be_answered_by_voice():
+    """Spec §8's spatial reasoning, as puzzles to picture, not pictures: one right answer each, every
+    option distinct, and an explanation for reviewing afterwards."""
+    puzzles = spec("spatial")
+    assert puzzles.category == "aptitude" and len(puzzles.items) == 8
+    for item in puzzles.items:
+        labels = [o.label.en for o in item.options]
+        assert len(set(labels)) == 4 and item.answer in {o.key for o in item.options} and item.explanation, item.key

@@ -39,11 +39,11 @@
    "ask_yourself": [
     {"en": "Does the idea of bringing power — solar, grids, motors — to millions of people excite you?", "hi": "क्या लाखों लोगों तक बिजली पहुँचाने — सोलर, ग्रिड, मोटर — का विचार आपको उत्साहित करता है?"},
     {"en": "Would you be comfortable working at plants and sites, not only at a desk?", "hi": "क्या आप सिर्फ़ डेस्क पर ही नहीं, प्लांट और साइट पर काम करने में सहज होंगे?"}]},
-  "mechanical": {"needs": {"academic:physics": 3, "academic:maths": 2, "aptitude:numerical": 2, "skill:hands_on": 2},
+  "mechanical": {"needs": {"academic:physics": 3, "academic:maths": 2, "aptitude:numerical": 2, "skill:hands_on": 2, "aptitude:spatial": 1},
    "ask_yourself": [
     {"en": "When you see an engine or a machine, do you want to know how every part moves?", "hi": "जब आप कोई इंजन या मशीन देखते हैं, क्या आप जानना चाहते हैं कि उसका हर हिस्सा कैसे चलता है?"},
     {"en": "Would you enjoy working in factories and workshops as well as on a computer?", "hi": "क्या आपको कंप्यूटर के साथ-साथ फ़ैक्ट्री और वर्कशॉप में काम करना अच्छा लगेगा?"}]},
-  "civil": {"needs": {"academic:physics": 2, "academic:maths": 2, "aptitude:numerical": 2, "skill:organising": 1, "skill:hands_on": 1},
+  "civil": {"needs": {"academic:physics": 2, "academic:maths": 2, "aptitude:numerical": 2, "skill:organising": 1, "skill:hands_on": 1, "aptitude:spatial": 1},
    "ask_yourself": [
     {"en": "Would you like to see something you designed — a bridge, a building — stand for decades?", "hi": "क्या आप चाहेंगे कि आपका डिज़ाइन किया हुआ कुछ — पुल, इमारत — दशकों तक खड़ा रहे?"},
     {"en": "Are you happy spending a lot of time outdoors at construction sites?", "hi": "क्या आप निर्माण स्थलों पर बाहर काफ़ी समय बिताकर ख़ुश रहेंगे?"}]},
@@ -51,15 +51,15 @@
    "ask_yourself": [
     {"en": "Are you interested in how everyday things — fuel, plastic, medicine — are made at a huge scale?", "hi": "क्या आपको यह जानने में रुचि है कि रोज़ की चीज़ें — ईंधन, प्लास्टिक, दवाइयाँ — बड़े पैमाने पर कैसे बनती हैं?"},
     {"en": "Would you be comfortable working in industrial plants?", "hi": "क्या आप इंडस्ट्रियल प्लांट में काम करने में सहज होंगे?"}]},
-  "aerospace": {"needs": {"academic:physics": 3, "academic:maths": 3, "aptitude:numerical": 3, "aptitude:logical": 2},
+  "aerospace": {"needs": {"academic:physics": 3, "academic:maths": 3, "aptitude:numerical": 3, "aptitude:logical": 2, "aptitude:spatial": 1},
    "ask_yourself": [
     {"en": "Do aircraft, rockets and satellites fascinate you enough for years of hard physics and maths?", "hi": "क्या हवाई जहाज़, रॉकेट और सैटेलाइट आपको इतना खींचते हैं कि आप सालों तक कठिन फ़िज़िक्स और मैथ्स कर सकें?"},
     {"en": "This field has fewer jobs than most — would you also be happy in mechanical or electronics work?", "hi": "इस क्षेत्र में ज़्यादातर क्षेत्रों से कम नौकरियाँ हैं — क्या आप मैकेनिकल या इलेक्ट्रॉनिक्स के काम में भी ख़ुश रहेंगे?"}]},
-  "architecture": {"needs": {"skill:design": 3, "academic:maths": 2, "aptitude:numerical": 1},
+  "architecture": {"needs": {"skill:design": 3, "academic:maths": 2, "aptitude:numerical": 1, "aptitude:spatial": 2},
    "ask_yourself": [
     {"en": "Do you notice how buildings and spaces make people feel?", "hi": "क्या आप ध्यान देते हैं कि इमारतें और जगहें लोगों को कैसा महसूस कराती हैं?"},
     {"en": "Are you ready for a five-year course with a lot of drawing and late-night projects?", "hi": "क्या आप पाँच साल के कोर्स के लिए तैयार हैं, जिसमें बहुत ड्रॉइंग और देर रात तक प्रोजेक्ट होते हैं?"}]},
-  "design": {"needs": {"skill:design": 3, "aptitude:verbal": 1, "skill:speaking": 1},
+  "design": {"needs": {"skill:design": 3, "aptitude:verbal": 1, "skill:speaking": 1, "aptitude:spatial": 2},
    "ask_yourself": [
     {"en": "When an app or product is confusing, do you think about how you'd make it better?", "hi": "जब कोई ऐप या प्रोडक्ट उलझाने वाला होता है, क्या आप सोचते हैं कि आप उसे बेहतर कैसे बनाते?"},
     {"en": "Can you take criticism of your work and keep improving it?", "hi": "क्या आप अपने काम की आलोचना सुनकर उसे बेहतर करते रह सकते हैं?"}]},

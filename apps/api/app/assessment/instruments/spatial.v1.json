@@ -1,0 +1,490 @@
+{
+ "key": "spatial",
+ "version": 1,
+ "category": "aptitude",
+ "title": {
+  "en": "Space and shape",
+  "hi": "जगह और आकार"
+ },
+ "about": {
+  "en": "8 short puzzles about directions, folding, mirrors and shapes — all in your head. It shows how you did today, nothing more.",
+  "hi": "दिशाओं, मोड़ने, आईने और आकारों पर 8 छोटी पहेलियाँ — सब मन में। यह बस बताता है कि आज आपने कैसा किया।"
+ },
+ "intro": {
+  "en": "Eight short puzzles about space and shape — picture each one in your head. If you're not sure, have a go or say skip.",
+  "hi": "जगह और आकार की आठ छोटी पहेलियाँ — हर एक को मन में सोचिए। पक्का न हो तो अंदाज़ा लगाइए या 'छोड़ो' कहिए।"
+ },
+ "scoring_method": "correct_answers",
+ "est_minutes": 5,
+ "dimensions": {
+  "aptitude:spatial": {
+   "en": "thinking in space and shape",
+   "hi": "जगह और आकार में सोचना",
+   "group": "aptitude"
+  }
+ },
+ "items": [
+  {
+   "key": "s1",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You are facing north. You turn right, and then right again. Which way are you facing now?",
+    "hi": "आप उत्तर की ओर मुँह करके खड़े हैं। आप दाईं ओर मुड़ते हैं, फिर दोबारा दाईं ओर। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     },
+     "keywords": {
+      "hinglish": [
+       "uttar"
+      ]
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     },
+     "keywords": {
+      "hinglish": [
+       "purab",
+       "poorv"
+      ]
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     },
+     "keywords": {
+      "hinglish": [
+       "dakshin"
+      ]
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     },
+     "keywords": {
+      "hinglish": [
+       "paschim",
+       "pashchim"
+      ]
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "One right turn from north faces east; a second faces south.",
+    "hi": "उत्तर से एक बार दाएँ मुड़ने पर पूर्व, दूसरी बार मुड़ने पर दक्षिण।"
+   }
+  },
+  {
+   "key": "s2",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You walk a few steps north, turn left and walk the same number of steps. In which direction are you now from where you started?",
+    "hi": "आप कुछ कदम उत्तर की ओर चलते हैं, फिर बाईं ओर मुड़कर उतने ही कदम चलते हैं। अब आप शुरुआत की जगह से किस दिशा में हैं?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "North-east",
+      "hi": "उत्तर-पूर्व"
+     },
+     "keywords": {
+      "hinglish": [
+       "uttar purab"
+      ]
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "North-west",
+      "hi": "उत्तर-पश्चिम"
+     },
+     "keywords": {
+      "hinglish": [
+       "uttar paschim"
+      ]
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South-west",
+      "hi": "दक्षिण-पश्चिम"
+     },
+     "keywords": {
+      "hinglish": [
+       "dakshin paschim"
+      ]
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     },
+     "keywords": {
+      "hinglish": [
+       "paschim"
+      ]
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "North, then left from north is west: you end up north and west of the start.",
+    "hi": "पहले उत्तर, फिर उत्तर से बाएँ यानी पश्चिम: आप शुरुआत से उत्तर-पश्चिम में हैं।"
+   }
+  },
+  {
+   "key": "s3",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A square sheet of paper is folded in half, then in half again. You punch one hole through all the layers. How many holes are there when you open it?",
+    "hi": "एक चौकोर कागज़ को आधा मोड़ा, फिर दोबारा आधा। सब परतों में से एक छेद किया। खोलने पर कितने छेद होंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Two folds make four layers, and the punch goes through all four.",
+    "hi": "दो बार मोड़ने से चार परतें बनती हैं, और छेद चारों में होता है।"
+   }
+  },
+  {
+   "key": "s4",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 3 o'clock. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 3 बजे हैं। आईने में वह कितने बजे दिखाएगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "3 o'clock",
+      "hi": "3 बजे"
+     },
+     "keywords": {
+      "hinglish": [
+       "teen"
+      ]
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6 o'clock",
+      "hi": "6 बजे"
+     },
+     "keywords": {
+      "hinglish": [
+       "chhe"
+      ]
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "9 o'clock",
+      "hi": "9 बजे"
+     },
+     "keywords": {
+      "hinglish": [
+       "nau"
+      ]
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "12 o'clock",
+      "hi": "12 बजे"
+     },
+     "keywords": {
+      "hinglish": [
+       "barah"
+      ]
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "A mirror swaps left and right: the hour hand pointing right seems to point left, at 9.",
+    "hi": "आईना दाएँ-बाएँ बदल देता है: दाईं ओर की सुई बाईं ओर, यानी 9 पर दिखती है।"
+   }
+  },
+  {
+   "key": "s5",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Turn the small letter b upside down — half a turn. Which letter does it look like now?",
+    "hi": "छोटे अक्षर b को आधा घुमाकर उल्टा कर दीजिए। अब वह कौन-सा अक्षर लगता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "p",
+      "hi": "p"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "b",
+      "hi": "b"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Half a turn moves the round part from bottom-right to top-left: q.",
+    "hi": "आधा घुमाने पर गोल हिस्सा नीचे-दाएँ से ऊपर-बाएँ आ जाता है: q।"
+   }
+  },
+  {
+   "key": "s6",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Turn the capital letter N a quarter turn. Which letter does it look like now?",
+    "hi": "बड़े अक्षर N को चौथाई घुमाइए। अब वह कौन-सा अक्षर लगता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "M",
+      "hi": "M"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Z",
+      "hi": "Z"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "W",
+      "hi": "W"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "U",
+      "hi": "U"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "A quarter turn lays the two upright lines flat, with the slant between them: Z.",
+    "hi": "चौथाई घुमाने पर दोनों खड़ी लाइनें लेट जाती हैं और बीच की तिरछी लाइन रहती है: Z।"
+   }
+  },
+  {
+   "key": "s7",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A wooden cube painted red on every face is cut into 27 equal small cubes, three by three by three. How many small cubes have no red at all?",
+    "hi": "हर तरफ़ से लाल रंगा लकड़ी का एक घन 27 बराबर छोटे घनों में काटा गया, तीन गुणा तीन गुणा तीन। कितने छोटे घनों पर बिल्कुल लाल रंग नहीं है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "0",
+      "hi": "0"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Only the one cube in the very middle touches no outside face.",
+    "hi": "सिर्फ़ बिल्कुल बीच वाला एक घन किसी बाहरी सतह को नहीं छूता।"
+   }
+  },
+  {
+   "key": "s8",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "The same cube, cut into 27 small cubes. How many of them have exactly two red faces?",
+    "hi": "वही घन, 27 छोटे घनों में कटा हुआ। कितने छोटे घनों पर ठीक दो तरफ़ लाल रंग है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "One in the middle of each of the cube's 12 edges: corners have three red faces, face centres one.",
+    "hi": "घन के 12 किनारों में से हर एक के बीच वाला: कोनों पर तीन तरफ़ लाल होता है, सतह के बीच वाले पर एक।"
+   }
+  }
+ ]
+}

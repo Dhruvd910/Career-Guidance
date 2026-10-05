@@ -321,7 +321,7 @@ nodes:
       developed_by: [project:app_redesign]
   - key: skill:spatial_visualisation
     name: {en: Thinking in space and form, hi: जगह और आकार में सोचना}
-    attrs: {kind: creative}
+    attrs: {kind: creative, measured_by: [aptitude:spatial]}
     edges:
       skill_prerequisite: [skill:drawing_sketching]
       developed_by: [project:room_plan]
