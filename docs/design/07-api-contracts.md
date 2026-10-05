@@ -114,6 +114,12 @@ An item view: `{key, type: choice\|anchored\|problem\|marks, section, prompt {en
 | `GET /api/college/{id}` | all facts grouped (academic, financial, campus, location, admissions) |
 | `GET /api/college/{id}/sources` | every source document used, tier, retrieved/verified dates |
 | `POST /api/colleges/compare` | existing; rows become `FactView`s, conflicts shown |
+| `GET /api/colleges/{id}/programs` | (2026-10-05) programmes from the official JoSAA/MCC lists: course, branch, exam, seats, provenance |
+| `GET /api/colleges/{id}/admissions` | (2026-10-05) `{routes, facts}`: admission routes and the dates/windows known, as `FactView`s |
+
+Also added on 2026-10-05: `POST /api/counselling/session` (the same as `POST /api/conversation/start`),
+`GET /api/health` (database, services, breakers) and `GET /api/metrics` (device only). AI, login and
+refresh endpoints are rate-limited (429 + Retry-After); every response carries `X-Request-ID`.
 
 `FactView` = `{value, unit, status, verified_label, academic_year, source_name, source_url,
 conflict?: [{value, source_name, source_url}]}`.

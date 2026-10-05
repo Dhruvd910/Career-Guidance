@@ -1,3 +1,5 @@
+> **Superseded (2026-10-05).** This is the original architecture plan from before the phased build. The current design is in [`docs/design/`](design/00-README.md) — start with its README; the API is in [07-api-contracts](design/07-api-contracts.md) and FastAPI's own `/docs`.
+
 # Architecture
 
 Status: Phase 1 + MVP (see the master spec's own §53 phasing). This document describes

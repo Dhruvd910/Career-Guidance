@@ -1,19 +1,20 @@
 # AI Career Guide — MAYA
 
 AI-powered career guidance, exam prediction, and college discovery for Indian students
-(Class 8–12), covering JEE, NEET, and open-ended career counselling — presented through
-**MAYA**, an animated voice-assistant desktop app.
+from Class 6 to college, covering JEE, NEET, and open-ended career counselling — presented
+through **MAYA**, an animated, voice-first assistant on a Raspberry Pi.
 
-This is a **Phase 1 + MVP** build (see `docs/architecture.md` for the full phasing
-rationale). Every college/cutoff/fee figure in the seeded dataset is **clearly marked
-demo data** — fictional college names, not real admissions numbers.
+Phases 1–7 of the design in `docs/design/` are built (see its `00-README.md`), plus the fixes from
+the 2026-10-05 audit (`docs/design/17-audit-fixes.md`). College data is real: official JoSAA/MCC
+tables and facts read from official sites, each with its source. Fictional colleges exist only in
+the tests.
 
 ## Stack
 
 - **Backend**: FastAPI + SQLAlchemy + Alembic on PostgreSQL 17 + pgvector (SQLite until Phase 2; still works without the memory features)
 - **Desktop app (primary frontend)**: PySide6 (Qt) native app — `apps/desktop/`
 - **Web app (kept as-is, no longer the active frontend)**: Next.js 16 + TypeScript + Tailwind — `apps/web/`
-- **AI**: LLM via OpenRouter, speech-to-text via Groq (Whisper), text-to-speech via Cartesia — all behind provider-abstraction interfaces so any can be swapped. OpenRouter and Groq are verified against real keys; Cartesia is MAYA's only voice (see below).
+- **AI**: LLM via OpenRouter (`openai/gpt-6-luna` live, `openai/gpt-oss-120b` for background work and as fallback — see "What it costs"), speech-to-text via Groq (Whisper), text-to-speech via Cartesia — all behind provider-abstraction interfaces so any can be swapped.
 
 ## Prerequisites
 
@@ -102,8 +103,9 @@ until you add:
 - `GROQ_API_KEY` — https://console.groq.com/keys (speech-to-text)
 - `CARTESIA_API_KEY` + `CARTESIA_VOICE_ID` — https://play.cartesia.ai/keys (text-to-speech)
 
-See `.env.example` at the repo root for the full list and defaults. **Never put real
-keys in `.env.example`** — it's the template meant to be safe to share/commit; real
+See `.env.example` at the repo root for the full list and defaults — including
+`OPENROUTER_FALLBACK_MODELS`, `MEMORY_MODEL`, `OPENROUTER_DATA_COLLECTION` and `MEMORY_ENCRYPTION_KEY`.
+**Never put real keys in `.env.example`** — it's the template meant to be safe to share/commit; real
 values belong only in the gitignored `apps/api/.env`.
 
 OpenRouter (chat + tool-calling) and Groq (transcription) have been verified against real
@@ -116,9 +118,10 @@ https://play.cartesia.ai, then restart the backend so it picks up the new `.env`
 ## Talking to MAYA — voice or typing, everywhere
 
 - **She speaks first.** On first boot she greets you by time of day and asks for your
-  details one question at a time — name, class, board, where you live, and (for classes
-  11/12, where admission prediction needs them) domicile and category — then reads the
-  whole lot back for confirmation. On every later boot she says good morning/afternoon/
+  details one question at a time — name, class (6 to 12, or college — then which year instead
+  of the school board), board, where you live, and (for classes 11/12, where admission prediction
+  needs them) domicile and category — then reads the whole lot back for confirmation. Next she
+  asks, once, whether she may remember your conversations (see "MAYA's memory"). On every later boot she says good morning/afternoon/
   evening by name and moves on by herself.
 - **One question per screen.** Every question takes a spoken answer, a tap, or typing, and
   has its own Back/Next; the last screen lists every answer with a Change button. Answers
@@ -186,18 +189,24 @@ the accepted greetings are `WAKE_GREETINGS` in the same file.
 
 ## MAYA's memory
 
-With permission — for anyone under 18, a parent's or guardian's (menu → **MAYA's memory** →
-Permissions) — MAYA remembers across conversations: the topics you're still deciding (PCM vs PCB),
+With permission — for anyone under 18, a parent's or guardian's — MAYA remembers across conversations.
+She asks once, right after the first-run questions (**Set it up** opens the permissions; **Not now** is
+recorded and not asked again); it's always in menu → **MAYA's memory** → Permissions. She remembers: the topics you're still deciding (PCM vs PCB),
 what you've said about your interests, goals and constraints, a summary of each conversation, and
 a timeline of your journey. Coming back after a while, she opens with where you left off.
 
-- **Written when a conversation ends** (10 minutes without a new turn, or leaving): a stronger model
-  (`MEMORY_MODEL`, default `anthropic/claude-haiku-4.5` via OpenRouter) writes the notes in the
-  background, and every item must quote what you actually said — anything it can't back up is dropped.
-- **Read before every reply**: open topics, the last conversation, and the memories closest in
-  meaning to what you just said, found by a multilingual embedding model that runs on the Pi
-  (no extra wait, and your memories aren't sent anywhere to be indexed). Private things (family,
-  money) come up only when you're talking about them.
+- **Written when a conversation ends** (10 minutes without a new turn, or leaving): the background
+  model (`MEMORY_MODEL`, default `openai/gpt-oss-120b`) writes the notes, and every item must quote
+  what you actually said — anything it can't back up is dropped.
+- **Read before every reply**: open topics, the last conversation, and the memories that matter most
+  for what you just said — closest in meaning first, with recent ones and ones you've said more than
+  once preferred among the equally relevant — found by a multilingual embedding model that runs on
+  the Pi (no extra wait, and your memories aren't sent anywhere to be indexed). Private things
+  (family, money) come up only when you're talking about them.
+- **Stored encrypted**: what you say, MAYA's notes, private constraints, how-you-seem readings and a
+  guardian's contact reach the database only encrypted, with a key the database never sees
+  (`MEMORY_ENCRYPTION_KEY`, or the key file `apps/api/data/memory.key` made on first use). **Back the
+  key up separately from the database** — without it that data can't be read.
 - **Yours to see and delete**: MAYA's memory → *What she remembers* (delete any item, or
   everything) and *My journey*. Switching memory off deletes what it covered.
 - **How you seem** (confused, under pressure…) is a separate permission: uncertain signals that only
@@ -287,6 +296,7 @@ English or Hindi, taken by voice or touch and in any order:
 | Your skills | eight skills, each picked from four concrete levels ("I've built something small on my own") | ~3 min |
 | Your marks | your latest marks per subject (by class and stream; also saved to your academic record) | ~2 min |
 | Coding check | eight short pieces of pseudo-code to read | ~6 min |
+| Space and shape | eight puzzles to picture: directions, folding, mirrors, a cut cube | ~5 min |
 
 MAYA reads each question out and understands answers in English, Hindi and Hinglish ("mujhe
 maths bahut pasand hai", "doosra wala", "sattasi percent", "peeche", "chhodo"). The Pi matches
@@ -329,7 +339,12 @@ official JoSAA/MCC 2026 programme lists on the Pi. So she can answer:
 - "PCB lu toh kya options khule rahenge?" — what each stream keeps open, what needs one more
   subject, and what closes (menu → **Stream explorer**).
 - "Agar mujhe AI karna hai toh mere aas paas kaunse colleges hain?" — real colleges in your
-  state. Fees, hostels and facilities aren't collected yet, and she says so.
+  state, with fees, hostels and distances from the college facts where they're known.
+- "Which careers need strong maths?", "biology ke bina kya kar sakte hain?", "what can I do with
+  JEE?" — the graph the other way round: careers by subject, skill or exam.
+- "CSE mein kaunsi specialisation hoti hai?" — the specialisations each degree comes with (Cyber
+  Security, VLSI, Data Science…), read from the official programme names, with how many colleges
+  offer each.
 
 Careers is organised by area, and every career's page shows all of this, with or without an
 assessment. With assessments, gaps are only claimed where something was actually measured.
@@ -398,7 +413,12 @@ answer or your own words.
   | `app.ingest.refresh` | All of the above, as due |
 
 - **Nightly refresh:** `app.ingest.refresh` runs from a systemd user timer at 02:30, within a
-  nightly reading budget of `REFRESH_BUDGET_USD`, $0.10 by default. Check it with
+  nightly reading budget of `REFRESH_BUDGET_USD`, $0.10 by default. Colleges are visited
+  longest-unvisited first, and one just looked at waits (60 days, or 14 if its site couldn't be read)
+  — before 2026-10-05 the same eight colleges were re-read, and paid for, every night. A document
+  that hasn't changed since it was last read isn't sent to the model again: the answer is kept under a
+  fingerprint of the exact request in `data/sources/reads/` (delete that folder to re-read everything).
+  The weekly admission-date reading counts toward the same nightly budget. Check it with
   `systemctl --user list-timers maya-refresh.timer`; stop it with
   `systemctl --user disable --now maya-refresh.timer`.
 - **Review:** values the checks hold back (odd amounts, secondary sources, unconfirmed scans) wait
@@ -489,6 +509,41 @@ practice papers default to it, careers on your track come first, and MAYA is tol
 you're preparing for so she stops offering engineering to a NEET student. Until you choose,
 everything stays on show.
 
+## What it costs, and the models
+
+Measured on MAYA's own benchmark (2026-10-05): the same nine conversations — Hindi, Hinglish and
+English; stream choice, routes, fees, colleges, safety, "where we left off" — through each model,
+checking it called the right tool, answered in the student's language, never guessed their gender
+and got the facts right, with the cost OpenRouter reported.
+
+| Use | Model | Why |
+|---|---|---|
+| MAYA's replies | `openai/gpt-6-luna` | right tool every time, short spoken replies; about $0.0002 a turn once the prompt is cached (gpt-4o-mini: $0.0007, and it skipped tools) |
+| Session notes, how-you-seem readings | `openai/gpt-oss-120b` | caught all nine things claude-haiku-4.5 did in a test session, at 1/16 of its cost |
+| Fallback when the live model is down | `openai/gpt-oss-120b` | OpenRouter tries it automatically |
+
+**Free models aren't used.** The free ones that keep students' words private were rate-limited
+(4 of 6 requests refused) and took up to 36 s to start answering; the others train on what's sent,
+which isn't acceptable for minors' conversations. Every OpenRouter request says
+`data_collection: deny`, so a provider that stores or trains on inputs is never used.
+
+Each model call's tokens and cost go in the API log (`app.llm`) and `/api/metrics`; each turn's are
+saved on the reply. The prompt is ordered for the providers' caches (rules first, the student's steady
+context next, what changes each message last), which is most of the saving.
+
+## Health, logs and limits
+
+- **`/api/health`**: the database, each AI service (configured, its circuit breaker, its last failure),
+  the embedding model; `"status": "degraded"` when something's down. Never includes keys.
+- **`/api/metrics`** (from the Pi itself only): requests by route with p50/p95 latency, model calls with
+  tokens and cost, interruptions, rate-limited requests.
+- **Logs** are JSON lines (`LOG_FORMAT=json`, or `text`), each with the request id that's also returned
+  as `X-Request-ID`. Logins, permission changes, deletions and profile edits are written to the
+  `app.audit` log by id and field name, never the values.
+- **Rate limits**: 30 AI requests a minute per student (replies, voice, speech), 10 logins a minute per
+  address; over that, 429 with Retry-After (spoken turns get a "give me a few seconds").
+- **Production** (`ENVIRONMENT=production`) refuses to start with the development `JWT_SECRET_KEY`.
+
 ## Known limitations (honest, not glossed over)
 
 - **The GUI is developed headlessly**: work happens over SSH with no X server, so screens
@@ -535,6 +590,7 @@ cd apps/api
 ./.venv/bin/pytest
 ```
 
+The tests never call a real AI service (the keys are blanked for them) or touch the real database.
 Covers: prediction-engine band classification (🟢/🟡/🔴) against known synthetic cutoffs,
 auth register/login, one full register → profile → exam-profile → predict → college-detail
 integration test, practice papers (subject mix, marking, review, and the rules that answers

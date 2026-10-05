@@ -104,7 +104,7 @@ Never "load everything". A **retrieval plan** comes from the turn's intent:
 | `college_search` | profile location/budget/constraints · current career direction · shortlist events |
 | `small_talk` / unknown | profile snapshot + open-thread titles only |
 
-Then: candidates → score = `relevance × recency_decay × salience` → pack into the token
+Then: candidates → score = `relevance + 0.03·recency + 0.03·salience` (built 2026-10-05 as a sum, not a product: this model's similarities sit within ~0.1 of each other, so a multiplier would let an unrelated but recent memory win) → pack into the token
 budget (doc 01 §4), each item tagged with its id so the reply and the summary can cite it.
 The intent classifier is the same cheap LLM call as the state analyzer (one call returns both).
 
@@ -130,7 +130,8 @@ The student can say "let's talk about something else" and the thread stays `open
   with layers 1–2 only.
 - "My memory" screen: the student can see every memory item and event, correct or delete
   them; deletion is real (row delete + embedding delete), recorded in `data_requests`.
-- `sensitivity=sensitive` (family conflict, health access needs, finances) → encrypted
-  column, never sent to the LLM unless the retrieval plan explicitly asks for that kind.
+- `sensitivity=sensitive` (family conflict, health access needs, finances) → never sent to the LLM
+  unless the question is about it. Built 2026-10-05: memories, constraints, summaries, concerns and
+  messages are encrypted columns for everyone (app/core/crypto.py), not only the sensitive rows.
 - Retention: raw audio is not stored by default; transcripts retained N months (config),
   summaries/events kept until deletion.
