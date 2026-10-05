@@ -8,7 +8,7 @@ nodes:
   # ---------------- technology ----------------
   - key: career:cse
     name: {en: Computer Science & Software Engineering, hi: कंप्यूटर साइंस और सॉफ़्टवेयर इंजीनियरिंग}
-    aliases: [computer science, computer science engineering, कंप्यूटर साइंस, software engineer, software developer, programmer, coder, coding, programming, apps, IT]
+    aliases: [computer science, computer science engineering, कंप्यूटर साइंस, software engineer, software developer, programmer, coder, coding, programming, apps, IT, software engineering, सॉफ्टवेयर इंजीनियर]
     edges:
       part_of: [domain:technology]
       requires_skill:
@@ -28,7 +28,7 @@ nodes:
         - {to: degree:bsc_cs, commonness: alternative}
   - key: career:ai_data
     name: {en: Data Science & Artificial Intelligence, hi: डेटा साइंस और आर्टिफ़िशियल इंटेलिजेंस}
-    aliases: [AI engineer, ML engineer, machine learning, data scientist, AI, artificial intelligence]
+    aliases: [AI engineer, ML engineer, machine learning, data scientist, AI, artificial intelligence, data science, data analyst, data analytics, ML, डेटा साइंस]
     edges:
       part_of: [domain:technology]
       requires_skill:
@@ -87,7 +87,7 @@ nodes:
   # ---------------- engineering ----------------
   - key: career:ece
     name: {en: Electronics & Communication Engineering, hi: इलेक्ट्रॉनिक्स और कम्युनिकेशन इंजीनियरिंग}
-    aliases: [electronics engineer, chip design, VLSI]
+    aliases: [electronics engineer, chip design, VLSI, electronics, electronics and communication]
     edges:
       part_of: [domain:engineering]
       requires_skill:
@@ -103,6 +103,7 @@ nodes:
         - {to: degree:btech_engineering_physics, commonness: alternative}
   - key: career:electrical
     name: {en: Electrical Engineering, hi: इलेक्ट्रिकल इंजीनियरिंग}
+    aliases: [electrical engineer, electrical engineering, power engineer]
     edges:
       part_of: [domain:engineering]
       requires_skill:
@@ -117,6 +118,7 @@ nodes:
         - {to: degree:btech_ece, commonness: alternative}
   - key: career:mechanical
     name: {en: Mechanical Engineering, hi: मैकेनिकल इंजीनियरिंग}
+    aliases: [mechanical engineer, mechanical engineering, automobile engineer, cars, machines]
     edges:
       part_of: [domain:engineering]
       requires_skill:
@@ -132,6 +134,7 @@ nodes:
         - {to: degree:btech_aerospace, commonness: alternative}
   - key: career:civil
     name: {en: Civil Engineering, hi: सिविल इंजीनियरिंग}
+    aliases: [civil engineer, civil engineering, construction, bridges]
     edges:
       part_of: [domain:engineering]
       requires_skill:
@@ -145,6 +148,7 @@ nodes:
         - {to: degree:bplan, commonness: alternative}
   - key: career:chemical
     name: {en: Chemical Engineering, hi: केमिकल इंजीनियरिंग}
+    aliases: [chemical engineer, chemical engineering]
     edges:
       part_of: [domain:engineering]
       requires_skill:
@@ -177,6 +181,7 @@ nodes:
   # ---------------- design & architecture ----------------
   - key: career:architecture
     name: {en: Architecture, hi: आर्किटेक्चर}
+    aliases: [architect, आर्किटेक्ट]
     edges:
       part_of: [domain:design]
       requires_skill:
@@ -190,7 +195,7 @@ nodes:
         - {to: degree:bplan, commonness: alternative}
   - key: career:design
     name: {en: "Design (UX, Product & Communication)", hi: "डिज़ाइन (UX, प्रोडक्ट और कम्युनिकेशन)"}
-    aliases: [UX designer, product designer, graphic designer, designing, design]
+    aliases: [UX designer, product designer, graphic designer, designing, design, designer, UI designer, UX design]
     edges:
       part_of: [domain:design, domain:technology]
       requires_skill:
@@ -206,7 +211,7 @@ nodes:
   # ---------------- medicine & health ----------------
   - key: career:mbbs
     name: {en: Doctor (MBBS), hi: डॉक्टर (MBBS)}
-    aliases: [doctor, physician, surgeon]
+    aliases: [doctor, physician, surgeon, डॉक्टर, MBBS, medicine]
     edges:
       part_of: [domain:health]
       requires_skill:
@@ -221,6 +226,7 @@ nodes:
         - {to: degree:mbbs, commonness: common}
   - key: career:bds
     name: {en: Dentist (BDS), hi: डेंटिस्ट (BDS)}
+    aliases: [dentist, dental, BDS]
     edges:
       part_of: [domain:health]
       requires_skill:
@@ -233,6 +239,7 @@ nodes:
         - {to: degree:bds, commonness: common}
   - key: career:pharmacy
     name: {en: Pharmacy, hi: फ़ार्मेसी}
+    aliases: [pharmacist, B.Pharm]
     edges:
       part_of: [domain:health]
       requires_skill:
@@ -245,6 +252,7 @@ nodes:
         - {to: degree:bpharm, commonness: common}
   - key: career:nursing
     name: {en: Nursing, hi: नर्सिंग}
+    aliases: [nurse, नर्स]
     edges:
       part_of: [domain:health]
       requires_skill:
@@ -257,6 +265,7 @@ nodes:
         - {to: degree:bsc_nursing, commonness: common}
   - key: career:physiotherapy
     name: {en: Physiotherapy, hi: फ़िज़ियोथेरेपी}
+    aliases: [physiotherapist, physio]
     edges:
       part_of: [domain:health]
       requires_skill:
@@ -284,6 +293,7 @@ nodes:
   # ---------------- science & research ----------------
   - key: career:biotech
     name: {en: Biotechnology & Life Sciences Research, hi: बायोटेक्नोलॉजी और लाइफ़ साइंसेज़ रिसर्च}
+    aliases: [biotechnology, biotech, genetics, life sciences, biologist]
     edges:
       part_of: [domain:science]
       requires_skill:
@@ -352,7 +362,7 @@ nodes:
   # ---------------- law, government & defence ----------------
   - key: career:law
     name: {en: Law, hi: क़ानून}
-    aliases: [lawyer, advocate, judge]
+    aliases: [lawyer, advocate, judge, वकील, LLB]
     edges:
       part_of: [domain:law]
       requires_skill:
@@ -383,7 +393,7 @@ nodes:
       requires_exam: [exam:UPSC_CSE]
   - key: career:defence
     name: {en: "Defence Officer (Army, Navy, Air Force)", hi: "रक्षा अधिकारी (सेना, नौसेना, वायुसेना)"}
-    aliases: [army officer, army, navy, air force, fauji]
+    aliases: [army officer, army, navy, air force, fauji, fighter pilot, NDA, फौज]
     edges:
       part_of: [domain:public_service]
       requires_skill:
@@ -399,7 +409,7 @@ nodes:
   # ---------------- media, education & society, hospitality ----------------
   - key: career:journalism
     name: {en: Journalism & Media, hi: पत्रकारिता और मीडिया}
-    aliases: [journalist, reporter, news anchor, news, media]
+    aliases: [journalist, reporter, news anchor, news, media, journalism, पत्रकार]
     edges:
       part_of: [domain:media]
       requires_skill:
@@ -413,7 +423,7 @@ nodes:
         - {to: degree:ba_humanities, commonness: alternative}
   - key: career:psychology
     name: {en: Psychology, hi: मनोविज्ञान}
-    aliases: [psychologist, counsellor, therapist]
+    aliases: [psychologist, counsellor, therapist, psychology, मनोवैज्ञानिक]
     edges:
       part_of: [domain:people]
       requires_skill:
@@ -427,7 +437,7 @@ nodes:
         - {to: degree:ma_msc_psychology, commonness: common}
   - key: career:teaching
     name: {en: Teaching & Education, hi: शिक्षण}
-    aliases: [teacher, professor, lecturer, teaching]
+    aliases: [teacher, professor, lecturer, teaching, शिक्षक, टीचर]
     edges:
       part_of: [domain:people]
       requires_skill:
@@ -442,7 +452,7 @@ nodes:
         - {to: degree:ba_humanities, commonness: alternative}
   - key: career:hotel
     name: {en: Hotel Management & Hospitality, hi: होटल मैनेजमेंट और हॉस्पिटैलिटी}
-    aliases: [hotel manager, chef, hospitality, cooking]
+    aliases: [hotel manager, chef, hospitality, cooking, hotel management]
     edges:
       part_of: [domain:hospitality]
       requires_skill:

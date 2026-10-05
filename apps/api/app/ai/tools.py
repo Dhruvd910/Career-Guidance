@@ -383,10 +383,31 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "degree_specialisations",
+            "description": "The specialisations each degree into a career comes with (CSE with Cyber Security, ECE with "
+                           "VLSI…), from official JoSAA/MCC programme names, with how many colleges offer each. For "
+                           "'CSE mein kaunsi specialisation hoti hai?', 'what branches of AI can I choose?'.",
+            "parameters": {"type": "object", "properties": {"career": {"type": "string", "description": "a career key or its everyday name"}}, "required": ["career"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "careers_needing",
+            "description": "The other way round: which careers need a school subject, a skill or an entrance exam, and "
+                           "how (required on every route, some routes, or central to the work). Call it for 'which "
+                           "careers need maths?', 'biology ke bina kya kar sakte hain?', 'what can I do with JEE?', "
+                           "'careers that use Python' — never answer those from memory.",
+            "parameters": {"type": "object", "properties": {"thing": {"type": "string", "description": "a subject (maths, biology), skill (Python, public speaking) or exam (JEE Main, NEET, CLAT)"}}, "required": ["thing"]},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "colleges_offering",
             "description": "Colleges with an official JoSAA/MCC 2026 programme on a route into a career — near the student "
-                           "(their state) unless another state or city is given. Names, places and programmes only: fees, "
-                           "hostels and facilities aren't available yet.",
+                           "(their state) unless another state or city is given. Names, places and programmes; for fees, "
+                           "hostels and distances use college_facts or find_colleges.",
             "parameters": {"type": "object", "properties": {
                 "career": {"type": "string"}, "state": {"type": "string"}, "city": {"type": "string"}},
                 "required": ["career"]},

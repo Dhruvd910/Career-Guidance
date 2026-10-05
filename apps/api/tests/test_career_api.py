@@ -81,7 +81,7 @@ def test_the_tools_answer_from_the_graph(db_session, official):
 
     near = execute_tool(db_session, asha, "colleges_offering", {"career": "ai_data"})
     assert near["state"] == "Madhya Pradesh" and near["total"] == 1
-    assert near["colleges"][0]["admission_through"] == ["JEE_MAIN"] and "never estimate" in near["not_available"]
+    assert near["colleges"][0]["admission_through"] == ["JEE_MAIN"] and "college_facts" in near["for_fees_hostels_distances"]
 
     skills = execute_tool(db_session, asha, "career_skills", {"career": "cse"})
     assert skills["gaps"] == [] and skills["learning_path"][0]["step"] == 1

@@ -134,3 +134,39 @@ def test_colleges_from_official_programmes_by_state(store, official):
     assert branches == {"Artificial Intelligence and Data Science", "Computer Science and Engineering"}
     assert mp["colleges"][0]["sources"] == [{"ref": "JoSAA opening & closing ranks", "academic_year": "2026-27"}]
     assert "fees" in mp["not_included"]
+
+
+def test_which_careers_need_a_subject_a_skill_or_an_exam(store, db_session):
+    """Spec §10's questions the other way round — "which careers need strong maths?" — answered from
+    the graph, not the model's memory (which once listed medicine)."""
+    maths = {r["key"]: r for r in store.careers_needing("subject:mathematics")}
+    assert maths["career:ai_data"]["needed_on"] == "every common route" and maths["career:ai_data"]["draws_on"] == 1.0
+    assert "career:mbbs" not in maths, "MBBS goes through PCB: maths isn't needed"
+    biology = {r["key"] for r in store.careers_needing("subject:biology")}
+    assert {"career:mbbs", "career:bds"} <= biology and "career:cse" not in biology
+    python = [r["key"] for r in store.careers_needing("skill:python")]
+    assert python[0] == "career:ai_data"
+    neet = {r["key"]: r for r in store.careers_needing("exam:NEET_UG")}
+    assert neet["career:mbbs"]["needed_on"] == "a common route" and "career:cse" not in neet
+    assert store.careers_needing("subject:nothing") == []
+
+    from app.knowledge.tools import careers_needing
+
+    said = careers_needing(db_session, None, {"thing": "ganit"})
+    assert said["for"] == "Mathematics" and said["careers"][0]["required"] == "every common route"
+    assert careers_needing(db_session, None, {"thing": "NEET"})["for"] == "NEET-UG"
+    assert "error" in careers_needing(db_session, None, {"thing": "juggling"})
+
+
+def test_specialisations_come_from_the_official_programme_names(store, db_session):
+    """Spec §10's specialisations layer, read from JoSAA/MCC names — never made up."""
+    from app.knowledge.graph_store import _specialisation_in
+
+    assert _specialisation_in("Computer Science and Engineering (Cyber Security)") == "Cyber Security"
+    assert _specialisation_in("Mechanical Engineering with specialization in Design and Manufacturing") == "Design and Manufacturing"
+    assert _specialisation_in("Computer Science Engineering (Artificial lntelligence)") == "Artificial Intelligence"
+    for plain in ("Computer Science and Engineering", "Information Technology (IT)", "B.Tech. (Computer Science and Engineering) - MBA",
+                  "B. Tech. and M. Tech. in Engineering Physics (Dual Degree)"):
+        assert _specialisation_in(plain) is None, plain
+    found = store.specialisations("degree:btech_ai_ds")
+    assert found["general"] == 1 and found["specialisations"] == [], "the fixture's MANIT programme is a plain one"

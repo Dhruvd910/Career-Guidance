@@ -11,6 +11,7 @@ same on PostgreSQL and SQLite.
 
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 
 from sqlalchemy import bindparam, select, text
@@ -19,6 +20,30 @@ from sqlalchemy.orm import Session
 from app.models.knowledge import KgEdge, KgNode
 
 MAX_PREREQUISITE_DEPTH = 4
+# The specialisation in an official programme name: "(Cyber Security)", "with specialization in Data Science".
+_SPECIALISED = re.compile(r"\(([^)]+)\)|with (?:specialization|specialisation|major|minor|specialization of) (?:in |of )?(.+)$", re.I)
+_WORD = re.compile(r"[a-z]+")
+_FORMAT_WORDS = {"dual", "degree", "integrated", "year", "years", "five", "four", "b", "m", "tech", "bachelor", "master",
+                 "of", "and", "programme", "program", "course"}
+
+
+def _specialisation_in(branch: str) -> str | None:
+    """'Computer Science and Engineering (Cyber Security)' → 'Cyber Security'; None for a plain
+    programme, or when the brackets only hold an abbreviation ("(CSE)") or the branch's own name again."""
+    m = _SPECIALISED.search(branch)
+    if not m:
+        return None
+    name = re.sub(r"\bln(?=[a-z])", "In", (m.group(1) or m.group(2)).strip(" ()-"))  # "lntelligence" in the official lists
+    name = re.sub(r"^with (?:specialization|specialisation) (?:in|of) ", "", name, flags=re.I)
+    words = _WORD.findall(name.lower())
+    if not any(len(w) > 3 for w in words) or name.replace(" ", "").isupper() or set(words) <= _FORMAT_WORDS:
+        return None
+    base = set(_WORD.findall(branch[:m.start()].lower()))
+    if base <= _FORMAT_WORDS:
+        return None  # "B.Tech (Computer Science and Engineering) - MBA": the brackets hold the branch itself
+    if sum(w in base for w in words) >= 0.7 * len(words):
+        return None
+    return name
 # College types roughly in the order students ask about them — for listing, never for judging.
 COLLEGE_TYPE_ORDER = ["IIT", "NIT", "IIIT", "GFTI", "Medical-Govt", "Medical", "State", "Deemed", "Private"]
 
@@ -290,6 +315,87 @@ class GraphStore:
         rows = sorted(out.values(), key=lambda r: (r["via"] != "related", -r.get("overlap", 0), r["key"]))[:limit]
         return [{**r, "name": names.get(r["key"]), "shared_skills": [{"key": s, "name": names[s]} for s in r["shared_skills"]]}
                 for r in rows if r["key"] in names]
+
+    def specialisations(self, degree: str) -> dict:
+        """The specialisations a degree is offered with, read from the official programme names on its
+        offered_at edges ("Computer Science and Engineering (Cyber Security)", "… with specialization in
+        Data Science"): {"general": colleges offering the plain programme, "specialisations": [{name,
+        colleges, programmes}]}, most widely offered first."""
+        general: set[int] = set()
+        found: dict[str, dict] = {}
+        for e in self.out(degree, "offered_at"):
+            college = e["other"]
+            for programme in e["attrs"].get("programmes", []):
+                branch = " ".join((programme.get("branch") or "").split())
+                name = _specialisation_in(branch)
+                if name is None:
+                    general.add(college)
+                    continue
+                key = re.sub(r"\W+", " ", name.lower().replace("&", "and")).strip()
+                entry = found.setdefault(key, {"name": name, "colleges": set(), "programmes": set()})
+                entry["colleges"].add(college)
+                entry["programmes"].add(branch)
+        rows = sorted(found.values(), key=lambda r: (-len(r["colleges"]), r["name"]))
+        return {"general": len(general), "specialisations": [
+            {"name": r["name"], "colleges": len(r["colleges"]), "programmes": sorted(r["programmes"])[:3]} for r in rows]}
+
+    def careers_needing(self, key: str) -> list[dict]:
+        """The other way round from a career's own page: which careers need this subject, skill or
+        exam, and how. Each row: {key, name, draws_on (0-1, how central it is to the work), needed_on:
+        "every common route" | "some routes" | "recommended" | None, via: [what makes it needed]}."""
+        node = self.node(key)
+        if node is None:
+            return []
+        rows: dict[str, dict] = {}
+
+        def row(career: str) -> dict:
+            return rows.setdefault(career, {"key": career, "draws_on": None, "needed_on": None, "via": []})
+
+        careers = {c["key"] for c in self.of_type("career")}
+        if node["type"] == "subject":
+            for e in self.into(key, "related_subject"):
+                if e["other"] in careers:
+                    row(e["other"])["draws_on"] = e["attrs"].get("strength", 0.5)
+            for career in careers:
+                common = [e["other"] for e in self.out(career, "entered_through") if e["attrs"].get("commonness", "common") == "common"]
+                needs = [self.degree_requirements(d) for d in common]
+                mandatory = [key in r["mandatory"] or any(key in g and len(g) == 1 for g in r["one_of"].values()) for r in needs]
+                recommended = [any(x["key"] == key for x in r["recommended"]) for r in needs]
+                if mandatory and all(mandatory):
+                    row(career)["needed_on"] = "every common route"
+                elif any(mandatory):
+                    row(career)["needed_on"] = "some routes"
+                elif any(recommended):
+                    row(career)["needed_on"] = "recommended"
+        elif node["type"] == "skill":
+            builds_on_it = {e["other"] for e in self.into(key, "skill_prerequisite")}
+            for e in self.into(key, "requires_skill"):
+                if e["other"] in careers:
+                    r = row(e["other"])
+                    r["draws_on"] = max(r["draws_on"] or 0, e["attrs"].get("importance", 0.5))
+            for skill in builds_on_it:  # needed underneath a skill the career needs
+                for e in self.into(skill, "requires_skill"):
+                    if e["other"] in careers:
+                        r = row(e["other"])
+                        r["via"].append(skill)
+                        r["draws_on"] = r["draws_on"] or round(e["attrs"].get("importance", 0.5) * 0.7, 2)
+        elif node["type"] == "exam":
+            for e in self.into(key, "requires_exam"):
+                if e["other"] in careers:
+                    row(e["other"])["needed_on"] = "the career itself"
+                elif e["other"].startswith("degree:"):
+                    for c in self.into(e["other"], "entered_through"):
+                        if c["other"] in careers:
+                            r = row(c["other"])
+                            r["via"].append(e["other"])
+                            r["needed_on"] = r["needed_on"] or (
+                                "a common route" if c["attrs"].get("commonness", "common") == "common" else "an alternative route")
+        names = self.names(list(rows) + [v for r in rows.values() for v in r["via"]])
+        order = {"every common route": 0, "the career itself": 0, "a common route": 1, "some routes": 1,
+                 "recommended": 2, "an alternative route": 2, None: 3}
+        out = [{**r, "name": names[r["key"]], "via": [{"key": v, "name": names[v]} for v in dict.fromkeys(r["via"]) if v in names]}
+               for r in rows.values() if r["key"] in names and (r["draws_on"] or r["needed_on"])]
+        return sorted(out, key=lambda r: (order[r["needed_on"]], -(r["draws_on"] or 0), r["key"]))
 
     def domain_of(self, career: str) -> dict | None:
         for e in self.out(career, "part_of"):
