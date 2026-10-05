@@ -127,4 +127,8 @@ def test_the_reply_sees_what_she_remembers(client, db_session, monkeypatch):
     monkeypatch.setattr(orchestrator, "get_embedding_provider", lambda: EMBED)
     client.post("/api/ai/chat", json={"message": "What should I study?"}, headers={"Authorization": f"Bearer {token}"})
     system = [m["content"] for m in llm.seen[0] if m["role"] == "system"]
-    assert system[1].startswith(retrieval.HEADER) and "Interests: Robotics" in system[1]
+    remembered = [i for i, text in enumerate(system) if text.startswith(retrieval.HEADER)]
+    assert remembered and "Interests: Robotics" in system[remembered[0]]
+    # The same rules for everyone first, then this student's steady context, and only then what changes
+    # with every message — so the providers' prompt caches can reuse the beginning.
+    assert system[0] == orchestrator.SYSTEM_PROMPT and "Asha" in system[1] and remembered[0] > 1

@@ -126,8 +126,9 @@ def test_a_live_turn_is_read_in_the_background_on_the_same_database(client, db_s
         async def chat(self, messages, tools=None, json_mode=False):
             return {"role": "assistant", "content": READING}
 
-    monkeypatch.setattr(conversation_session, "get_llm_provider",
-                        lambda: ReplyAndReading("Koi baat nahi, chalo dekhte hain."))
+    model = ReplyAndReading("Koi baat nahi, chalo dekhte hain.")
+    monkeypatch.setattr(conversation_session, "get_llm_provider", lambda: model)
+    monkeypatch.setattr(conversation_session, "get_notes_llm_provider", lambda: model)  # the reading: background model
     monkeypatch.setattr(conversation_session, "get_tts_provider", lambda: FakeTTS())
     with connect(client, token) as ws:
         ws.receive_json()

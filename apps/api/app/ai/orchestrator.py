@@ -18,15 +18,17 @@ from app.mentor.context import mentor_context
 from app.roadmap.context import roadmap_context
 from app.memory.retrieval import build_memory_context
 from app.memory.state import schedule_analysis, tone_note
-from app.providers.llm import LLMProvider, TextDelta, ToolCall
-from app.providers.registry import get_embedding_provider, get_llm_provider
+from app.providers.llm import Done, LLMProvider, TextDelta, ToolCall, Usage
+from app.providers.registry import get_embedding_provider, get_llm_provider, get_notes_llm_provider
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile
-from app.services.student_service import student_track
+from app.services.student_service import stage_label, student_track
 from app.schemas.ai import ChatResponse
 
 SYSTEM_PROMPT = """You are MAYA, the AI Career Guide counsellor — a knowledgeable, patient, honest career and \
-admissions counsellor for Indian students in Class 8-12, covering JEE, NEET, and other career paths. When you \
+admissions counsellor for Indian students from Class 6 to college, covering JEE, NEET, and other career paths. \
+Match the student's stage: in classes 6-8, curiosity and exploring, never pressure to choose; in 9-10, streams; \
+in 11-12, exams, degrees and colleges; at college, skills, projects, internships and jobs. When you \
 introduce yourself, you are MAYA.
 
 Hard rules, no exceptions:
@@ -59,9 +61,11 @@ not "you are". If they haven't taken one and are unsure what suits them, offer i
 rather than guessing their strengths. For "how much have I improved", use compare_assessments and call a \
 change an improvement only when it says so.
 - How to get into a career (streams, subjects, exams, degrees), what to learn for it, which careers a stream \
-keeps open, and which colleges offer it come only from career_pathways, career_skills, what_stays_open and \
-colleges_offering — never from your own memory, however well you think you know it (call the tool even for \
-doctor, lawyer or IAS).
+keeps open, which careers need a subject, skill or exam, and which colleges offer it come only from \
+career_pathways, career_skills, what_stays_open, careers_needing, degree_specialisations and colleges_offering — \
+never from your own memory, however well you think you know it (call the tool even for doctor, lawyer, IAS or \
+"which careers need maths"). If you're about to name a subject, stream, exam or degree a career needs, you must \
+have a tool result that says so in this conversation.
 - What a college costs, its hostel and medical facility, where it is and what's near it, its NIRF rank and \
 admission dates come only from college_facts, find_colleges and admission_dates; what official documents say \
 about rules and eligibility, from search_documents. Say where each value comes from and how fresh it is ("per \
@@ -77,7 +81,9 @@ roadmap or a step has changed unless a roadmap tool has just returned that.
 - Ask focused follow-up questions to fill in missing information (rank, category, preferences) rather than \
 assuming defaults, but don't re-ask for anything you can already see in get_student_profile / \
 get_exam_profile.
-- Keep answers concise, warm, and free of unexplained jargon.
+- Keep answers concise, warm, and free of unexplained jargon. Never mention tools, tool results or lookups to the \
+student ("the tool says"): say where the information comes from instead ("the official JoSAA list", "NIT \
+Trichy's fee notice", "what I know about this career").
 - Everything you say is read aloud by MAYA's voice. Talk like a person, not a document: usually two to \
 four short sentences, no markdown, no bullet or numbered lists, no tables. If there is more to cover, give \
 the most useful part, then offer to go on or ask a question that narrows it down.
@@ -134,7 +140,7 @@ TRACK_RULES = {
 def _student_context(profile: StudentProfile) -> str:
     """What MAYA already knows, so she doesn't have to ask (or guess) the basics — above all
     which exam the student picked, which is what keeps her off the wrong track."""
-    known = [f"Name: {profile.name}", f"Class: {profile.class_level}"]
+    known = [f"Name: {profile.name}", f"Stage: {stage_label(profile)}"]
     for label, value in (
         ("Board", profile.school_board), ("State", profile.state),
         ("Domicile state", profile.domicile_state), ("Category", profile.category),
@@ -161,7 +167,7 @@ HISTORY_BUDGET_CHARS = 10_000
 INTERRUPTED_NOTE = " [The student interrupted you here; they did not hear the rest.]"
 
 
-def _history_as_messages(conversation: Conversation, profile: StudentProfile) -> list[dict]:
+def _history_as_messages(conversation: Conversation) -> list[dict]:
     earlier: list[dict] = []
     used = 0
     for m in reversed(conversation.messages):
@@ -172,8 +178,7 @@ def _history_as_messages(conversation: Conversation, profile: StudentProfile) ->
             break
         used += len(content)
         earlier.append({"role": m.role, "content": content})
-    system = {"role": "system", "content": SYSTEM_PROMPT + "\n\n" + _student_context(profile)}
-    return [system, *reversed(earlier)]
+    return list(reversed(earlier))
 
 
 @dataclass(frozen=True)
@@ -205,15 +210,17 @@ class Reply:
         self.db, self.profile = db, profile
         self.tag = detect(message, heard=heard_language, previous=usual_language(profile.language_stats))
         profile.language_stats = updated_stats(profile.language_stats, self.tag)
-        self.messages = _history_as_messages(conversation, profile)
+        # Ordered for the providers' prompt caches, which reuse an unchanged beginning at a fraction of
+        # the price: the rules (the same for everyone), then what's steady about this student, then the
+        # conversation so far — and only then what changes with every message.
+        about = [_student_context(profile), assessment_context(db, profile), roadmap_context(db, profile),
+                 mentor_context(db, profile, session_started=conversation.created_at)]
+        self.messages = [{"role": "system", "content": SYSTEM_PROMPT},
+                         {"role": "system", "content": "\n\n".join(part for part in about if part)},
+                         *_history_as_messages(conversation)]
         remembered = build_memory_context(db, profile, message, get_embedding_provider())
         if remembered:
-            self.messages.insert(1, {"role": "system", "content": remembered})
-        self.messages.insert(2 if remembered else 1, {"role": "system", "content": assessment_context(db, profile)})
-        self.messages.insert(3 if remembered else 2, {"role": "system", "content": roadmap_context(db, profile)})
-        mentor = mentor_context(db, profile, session_started=conversation.created_at)
-        if mentor:
-            self.messages.insert(4 if remembered else 3, {"role": "system", "content": mentor})
+            self.messages.append({"role": "system", "content": remembered})
         tone = tone_note(db, conversation.id)
         if tone:
             self.messages.append({"role": "system", "content": tone})
@@ -228,6 +235,7 @@ class Reply:
         self.text = ""
         self.tool_calls_used: list[str] = []
         self.suggestions: list[dict] = []
+        self.usage = Usage()  # every model call this reply took, added up
 
     def _add(self, piece: str) -> str:
         if self.text and not self.text[-1].isspace() and not piece[:1].isspace():
@@ -254,6 +262,8 @@ class Reply:
                         yield piece
                 elif isinstance(event, ToolCall):
                     calls.append(event)
+                elif isinstance(event, Done):
+                    self.usage = self.usage + event.usage
             rest = self.guard.flush()
             if rest:
                 piece = self._say(rest, written)
@@ -303,7 +313,7 @@ async def handle_chat(
     db.commit()
 
     llm = get_llm_provider()
-    schedule_analysis(db, profile, said.id, llm)
+    schedule_analysis(db, profile, said.id, get_notes_llm_provider())
     if llm is None:
         return ChatResponse(conversation_id=conversation.id, reply=NOT_CONFIGURED, tool_calls_used=[],
                             ai_configured=False, language=reply.tag.lang)
@@ -312,7 +322,8 @@ async def handle_chat(
         pass
     final_content = reply.text.strip() or "I don't have a response for that right now."
     db.add(Message(conversation_id=conversation.id, role="assistant", content=final_content,
-                   language=reply.tag.lang))
+                   language=reply.tag.lang, tool_calls=list(reply.tool_calls_used),
+                   latency={k: v for k, v in reply.usage.as_dict().items() if v is not None} or None))
     db.commit()
 
     return ChatResponse(

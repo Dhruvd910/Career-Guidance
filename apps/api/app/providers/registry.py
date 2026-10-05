@@ -18,12 +18,21 @@ from app.providers.tts import CartesiaTTS, TTSProvider
 settings = get_settings()
 
 
+def _openrouter(model: str, name: str, fallbacks: list[str] | None = None) -> OpenAICompatibleLLM:
+    """Every OpenRouter call: the data policy, what it cost (logged per call), and fallback models."""
+    extra: dict = {"usage": {"include": True}, "provider": {"data_collection": settings.openrouter_data_collection}}
+    others = [m for m in (fallbacks or []) if m != model]
+    if others:
+        extra["models"] = [model, *others]
+    return OpenAICompatibleLLM(settings.openrouter_base_url, model, settings.openrouter_api_key, name=name,
+                               extra=extra)
+
+
 def get_llm_provider() -> LLMProvider | None:
     if settings.llm_provider == "openrouter":
         if not settings.openrouter_api_key:
             return None
-        return OpenAICompatibleLLM(settings.openrouter_base_url, settings.openrouter_model,
-                                   settings.openrouter_api_key, name="openrouter")
+        return _openrouter(settings.openrouter_model, "openrouter", settings.openrouter_fallback_models)
     if settings.llm_provider == "openai_compatible":
         if not (settings.llm_base_url and settings.llm_model):
             return None
@@ -33,11 +42,12 @@ def get_llm_provider() -> LLMProvider | None:
 
 
 def get_notes_llm_provider() -> LLMProvider | None:
-    """The model that writes session notes (MEMORY_MODEL) — on OpenRouter, where any model is a
-    name away. With another LLM provider, the live model does it."""
+    """The background model (MEMORY_MODEL): session notes, and how the student seems in each message
+    — work nobody waits for. On OpenRouter, where any model is a name away; with another LLM
+    provider, the live model does it."""
     if settings.llm_provider == "openrouter" and settings.memory_model and settings.openrouter_api_key:
-        return OpenAICompatibleLLM(settings.openrouter_base_url, settings.memory_model, settings.openrouter_api_key,
-                                   name="openrouter-notes")
+        return _openrouter(settings.memory_model, "openrouter-notes",
+                           [settings.openrouter_model, *settings.openrouter_fallback_models])
     return get_llm_provider()
 
 

@@ -149,6 +149,11 @@ def updated_stats(stats: dict | None, tag: LanguageTag) -> dict | None:
 
 
 _SPOKEN = "Your reply will be read aloud: keep it short, with no lists, tables or symbols."
+# Hindi verbs carry gender. A name says nothing reliable about it, so the student is addressed in the
+# plural forms that don't assume one — only their own words ("main karti hoon") can say otherwise.
+_NEUTRAL = (" Talk to the student in plural verb forms that don't assume a gender (tum karte ho, kar sakte ho, "
+            "aap chahenge) — never feminine or masculine singular ones (karti ho, sakti ho, chahengi, karta hai) "
+            "unless they have used them about themselves. For yourself, feminine forms (main batati hoon).")
 
 _HINDI_REGISTER = (
     "conversational Hindi the way Indian students actually talk — simple everyday words, not "
@@ -166,6 +171,6 @@ def reply_instruction(tag: LanguageTag) -> str:
     if tag.script == LATIN:
         return (f"The student is writing {who} in English letters. Reply the same way: "
                 f"{_HINDI_REGISTER}, all written in English letters (Roman script), as they wrote. "
-                + _SPOKEN)
+                + _SPOKEN + _NEUTRAL)
     return (f"The student is speaking {who}. Reply in {_HINDI_REGISTER}. Write Hindi words in "
-            "Devanagari script — never Urdu script — and English words in English letters. " + _SPOKEN)
+            "Devanagari script — never Urdu script — and English words in English letters. " + _SPOKEN + _NEUTRAL)

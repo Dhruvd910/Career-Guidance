@@ -26,15 +26,17 @@ from sqlalchemy.orm import Session
 
 from app.ai.orchestrator import NOT_CONFIGURED, Reply, ToolActivity, UiSuggestion
 from app.conversation.chunker import SentenceSplitter
+from app.core import observability, ratelimit
 from app.memory.opening import opening_line
 from app.memory.state import schedule_analysis
 from app.models.chat import Conversation, Message
 from app.models.student import StudentProfile
 from app.providers.http import ProviderError, warm
-from app.providers.registry import get_llm_provider, get_stt_provider, get_tts_provider
+from app.providers.registry import get_llm_provider, get_notes_llm_provider, get_stt_provider, get_tts_provider
 
 logger = logging.getLogger(__name__)
 
+LATENCY_KEYS = {"stt", "first_token", "first_audio", "total"}
 MAX_AUDIO_BYTES = 2 * 1024 * 1024  # ~60 s of 16 kHz WAV; a turn is one utterance
 
 # Whisper "hears" these in silence, fan noise or a cough. Dropped when it also doubted there
@@ -189,6 +191,12 @@ class ConversationSession:
         """A new turn implicitly ends the previous one. `over`: what MAYA was saying when this
         utterance cut in (a barge-in), so her own voice leaking past the echo canceller can be
         told apart from the student's."""
+        wait = ratelimit.allow("ai", f"user:{self.profile.user_id}")
+        if wait:
+            observability.count("rate_limited.ai")
+            await self.send({"type": "error", "turn_id": turn_id, "code": "rate_limited", "retryable": True,
+                             "message": "That's a lot of questions at once — give me a few seconds."})
+            return
         if self.turn is not None:
             await self._end_previous(self.turn)
         await self._continue_or_start_session()
@@ -214,6 +222,7 @@ class ConversationSession:
         await self._stop(turn)
         self._save_reply(turn, heard_text(turn, seq, played_ms), interrupted=True)
         await self.send({"type": "turn.cancelled", "turn_id": turn.id})
+        observability.count("turns.interrupted")
         logger.info("turn %s interrupted at sentence %d (+%.0fms)", turn.id, seq, played_ms)
 
     async def close(self) -> None:
@@ -266,7 +275,7 @@ class ConversationSession:
                            modality="voice" if audio is not None else "text")
             self.db.add(said)
             self.db.commit()
-            schedule_analysis(self.db, self.profile, said.id, get_llm_provider())
+            schedule_analysis(self.db, self.profile, said.id, get_notes_llm_provider())
             await self.send({"type": "turn.transcript", "turn_id": turn.id, "text": text,
                              "language": reply.tag.lang, "script": reply.tag.script, "confidence": stt_confidence})
 
@@ -278,11 +287,13 @@ class ConversationSession:
             await self.send({"type": "turn.thinking", "turn_id": turn.id})
             await self._stream_reply(turn, reply, llm, ms)
             turn.latency["total"] = ms()
+            observability.count("turns.voice" if audio is not None else "turns.text")
+            turn.latency.update({k: v for k, v in reply.usage.as_dict().items() if v is not None})
             self._save_reply(turn, reply.text.strip(), interrupted=False)
             await self.send({"type": "reply.done", "turn_id": turn.id, "text": reply.text.strip(),
                              "language": reply.tag.lang, "tool_calls_used": reply.tool_calls_used})
-            logger.info("turn %s (%s, %s): %s", turn.id, "voice" if audio is not None else "text",
-                        reply.tag.lang, " ".join(f"{k}={v}ms" for k, v in turn.latency.items()))
+            logger.info("turn %s (%s, %s): %s", turn.id, "voice" if audio is not None else "text", reply.tag.lang,
+                        " ".join(f"{k}={v}" + ("ms" if k in LATENCY_KEYS else "") for k, v in turn.latency.items()))
         except ProviderError as e:
             logger.warning("turn %s failed at %s: %s", turn.id, stage, e)
             self._save_partial(turn)

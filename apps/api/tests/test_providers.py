@@ -9,7 +9,7 @@ import pytest
 from app.providers import http as provider_http
 from app.providers import registry
 from app.providers.http import CircuitBreaker, ProviderError, ProviderUnavailable
-from app.providers.llm import Done, OpenAICompatibleLLM, TextDelta, ToolCall
+from app.providers.llm import Done, OpenAICompatibleLLM, TextDelta, ToolCall, Usage
 from app.providers.stt import GroqWhisperSTT
 from app.providers.tts import CartesiaTTS
 from tests.fakes import FakeSTT
@@ -226,6 +226,33 @@ def test_a_local_openai_compatible_server_is_a_config_change(monkeypatch):
     monkeypatch.setattr(registry.settings, "llm_api_key", None)
     provider = registry.get_llm_provider()
     assert isinstance(provider, OpenAICompatibleLLM) and provider.model_id == "qwen2.5-7b-instruct"
+
+
+def test_openrouter_calls_keep_students_words_from_providers_that_train_on_them(monkeypatch):
+    monkeypatch.setattr(registry.settings, "llm_provider", "openrouter")
+    monkeypatch.setattr(registry.settings, "openrouter_api_key", "sk-test")
+    monkeypatch.setattr(registry.settings, "openrouter_model", "qwen/some-model:free")
+    monkeypatch.setattr(registry.settings, "openrouter_fallback_models", ["openai/gpt-oss-120b"])
+    provider = registry.get_llm_provider()
+    client = network(httpx.Response(200, json={"model": "openai/gpt-oss-120b", "choices": [
+        {"message": {"role": "assistant", "content": "ok"}}], "usage": {
+        "prompt_tokens": 8000, "completion_tokens": 40, "prompt_tokens_details": {"cached_tokens": 6000}, "cost": 0.0004}}))
+    provider._client = client
+    asyncio.run(provider.chat([{"role": "user", "content": "hi"}]))
+    body = json.loads(client.requests[0].content)
+    assert body["provider"] == {"data_collection": "deny"} and body["usage"] == {"include": True}
+    assert body["models"] == ["qwen/some-model:free", "openai/gpt-oss-120b"], "the free model first, then a fallback"
+    assert provider.last_usage == Usage("openai/gpt-oss-120b", 8000, 6000, 40, 0.0004), "who answered, and what it cost"
+
+
+def test_a_streamed_reply_reports_what_it_used():
+    client = network(sse(
+        {"choices": [{"delta": {"content": "Hi."}, "finish_reason": "stop"}]},
+        {"model": "some/model", "choices": [], "usage": {"prompt_tokens": 10, "completion_tokens": 2, "cost": 0.00001}},
+    ))
+    events = collect(llm(client).stream([{"role": "user", "content": "hi"}]))
+    assert events[-1] == Done("stop", Usage("some/model", 10, 0, 2, 0.00001))
+    assert (Usage(cost=0.1) + Usage(cost=0.2) + None).cost == pytest.approx(0.3)
 
 
 def test_unconfigured_services_are_none_not_errors(monkeypatch):
