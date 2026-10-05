@@ -74,10 +74,9 @@ def to_summary(db: Session, college: College, nirf: int | None = -1) -> CollegeS
     )
 
 
-def to_detail(db: Session, college: College) -> CollegeDetail:
-    summary = to_summary(db, college)
-    college_courses = db.query(CollegeCourse).filter(CollegeCourse.college_id == college.id).all()
-    courses_offered = [
+def programs_of(db: Session, college_id: int) -> list[CollegeCourseOut]:
+    """Its programmes from the official JoSAA/MCC lists, each with where that came from."""
+    return [
         CollegeCourseOut(
             id=cc.id,
             course_name=cc.course.name,
@@ -86,8 +85,13 @@ def to_detail(db: Session, college: College) -> CollegeDetail:
             total_seats=cc.total_seats,
             provenance=ProvenanceOut.model_validate(cc),
         )
-        for cc in college_courses
+        for cc in db.query(CollegeCourse).filter(CollegeCourse.college_id == college_id).all()
     ]
+
+
+def to_detail(db: Session, college: College) -> CollegeDetail:
+    summary = to_summary(db, college)
+    courses_offered = programs_of(db, college.id)
     profile = college_profiles.profile_for(college.canonical_name)
     return CollegeDetail(
         **summary.model_dump(),

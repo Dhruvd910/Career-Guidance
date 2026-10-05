@@ -72,3 +72,20 @@ def test_search_puts_researched_colleges_first(client, db_session, seeded_jee):
     names = [c["canonical_name"] for c in client.get("/api/colleges").json()]
     assert names[0] == "AIIMS, New Delhi"
     assert college_profiles.researched_names()
+
+
+def test_a_colleges_programmes_and_admissions_have_their_own_routes(client, seeded_jee):
+    """Spec §25: GET /colleges/{id}/programs and /colleges/{id}/admissions."""
+    college = seeded_jee["college"]
+    programmes = client.get(f"/api/colleges/{college.id}/programs").json()
+    assert programmes and programmes[0]["exam_code"] == "JEE_MAIN" and "source" in programmes[0]["provenance"]
+    admissions = client.get(f"/api/colleges/{college.id}/admissions").json()
+    assert set(admissions) == {"college_id", "routes", "facts"}
+    assert client.get("/api/colleges/999999/programs").status_code == 404
+
+
+def test_a_counselling_session_starts_like_a_conversation(client):
+    token = client.post("/api/auth/register", json={"email": "s@example.com", "password": "password123", "name": "S",
+                                                     "class_level": 10}).json()["access_token"]
+    started = client.post("/api/counselling/session", json={"channel": "text"}, headers={"Authorization": f"Bearer {token}"})
+    assert started.status_code == 200 and started.json()["session_id"]

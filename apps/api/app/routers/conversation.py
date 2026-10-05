@@ -20,6 +20,7 @@ from app.memory.opening import opening_line
 from app.core.config import get_settings
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile, student_profile_for_token
+from app.core.ratelimit import limit
 from app.models.chat import Conversation
 from app.models.student import StudentProfile
 from app.providers.registry import get_llm_provider
@@ -70,7 +71,8 @@ def _start(db: Session, profile: StudentProfile, channel: str) -> Conversation:
     return conversation
 
 
-@router.post("/api/conversation/start", response_model=StartResponse)
+@router.post("/api/counselling/session", response_model=StartResponse, dependencies=[Depends(limit("ai"))])
+@router.post("/api/conversation/start", response_model=StartResponse, dependencies=[Depends(limit("ai"))])
 async def start(payload: StartRequest, profile: StudentProfile = Depends(get_current_student_profile),
                 db: Session = Depends(get_db)) -> StartResponse:
     conversation = _start(db, profile, payload.channel)
@@ -79,7 +81,7 @@ async def start(payload: StartRequest, profile: StudentProfile = Depends(get_cur
     return StartResponse(session_id=conversation.id, opening=opening[0] if opening else None)
 
 
-@router.post("/api/conversation/message", response_model=ChatResponse)
+@router.post("/api/conversation/message", response_model=ChatResponse, dependencies=[Depends(limit("ai"))])
 async def message(payload: MessageRequest, profile: StudentProfile = Depends(get_current_student_profile),
                   db: Session = Depends(get_db)) -> ChatResponse:
     if _owned(db, profile, payload.session_id) is None:

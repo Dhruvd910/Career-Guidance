@@ -4,10 +4,12 @@ from sqlalchemy.orm import Session
 from app.ai.summarize import generate_college_comparison_summary
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile
+from app.core.ratelimit import limit
 from app.models.student import StudentProfile
 from app.schemas.college import (
     CollegeCompareRequest,
     CollegeCompareResponse,
+    CollegeCourseOut,
     CollegeDetail,
     CollegeReviewCreate,
     CollegeReviewOut,
@@ -15,7 +17,7 @@ from app.schemas.college import (
     CutoffOut,
 )
 from app.facts import discover, topics
-from app.services import college_service
+from app.services import college_profiles, college_service
 
 router = APIRouter(prefix="/api/colleges", tags=["colleges"])
 
@@ -65,6 +67,22 @@ def get_college(college_id: int, db: Session = Depends(get_db)) -> CollegeDetail
     return college_service.to_detail(db, college)
 
 
+@router.get("/{college_id}/programs", response_model=list[CollegeCourseOut])
+def get_programs(college_id: int, db: Session = Depends(get_db)) -> list[CollegeCourseOut]:
+    """Its programmes (degree and branch, admission exam, seats), from the official JoSAA/MCC lists."""
+    college_service.get_college_or_404(db, college_id)
+    return college_service.programs_of(db, college_id)
+
+
+@router.get("/{college_id}/admissions")
+def get_admissions(college_id: int, db: Session = Depends(get_db)) -> dict:
+    """How admission works (the routes, from the official counselling tables) and the dates and
+    application windows known, each with its source and freshness."""
+    college_service.get_college_or_404(db, college_id)
+    return {"college_id": college_id, "routes": college_profiles.admission_summary(db, college_id),
+            "facts": topics.facts(db, college_id, "admissions")}
+
+
 @router.get("/{college_id}/cutoffs", response_model=list[CutoffOut])
 def get_cutoffs(
     college_id: int, category: str | None = None, branch_name: str | None = None, db: Session = Depends(get_db)
@@ -90,7 +108,7 @@ def get_sources(college_id: int, db: Session = Depends(get_db)) -> list[dict]:
     return college_service.sources_for(db, college_id)
 
 
-@router.post("/{college_id}/refresh")
+@router.post("/{college_id}/refresh", dependencies=[Depends(limit("refresh"))])
 def request_refresh(college_id: int, db: Session = Depends(get_db)) -> dict:
     """'Check for updates': the college is looked at first in tonight's refresh. Asking twice
     before then doesn't queue it twice."""
