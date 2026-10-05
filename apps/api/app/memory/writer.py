@@ -385,7 +385,7 @@ def _write_memories(db: Session, profile: StudentProfile, conversation_id: int, 
         MemoryItem.student_profile_id == profile.id, MemoryItem.status == "active")).scalars()}
     for update, vector in zip(updates, vectors):
         if vector is not None:
-            nearest = search_memories(db, profile.id, vector, k=1, include_sensitive=True)
+            nearest = search_memories(db, profile.id, vector, k=1, include_sensitive=True, rerank=False)
             if nearest and nearest[0][1] >= DUPLICATE_SIMILARITY and nearest[0][0].id not in update.supersedes:
                 same = nearest[0][0]
                 same.salience = min(1.0, same.salience + 0.1)  # said again: it matters more

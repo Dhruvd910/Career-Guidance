@@ -67,3 +67,23 @@ def test_sensitive_memories_only_when_asked_for(db_session):
 
 def test_no_memories_yet(db_session):
     assert find(db_session, student(db_session, "new"), "anything") == []
+
+
+def test_recent_and_important_memories_win_among_the_equally_relevant(db_session):
+    """Spec §7: relevance + recency + importance. Two memories about the same thing: the newer one, or
+    the one said more than once, comes first — but never ahead of a clearly more relevant one."""
+    from datetime import datetime, timedelta, timezone
+
+    asha = student(db_session, "asha")
+    now = datetime.now(timezone.utc)
+    old = remember(db_session, asha, "wants to study medicine", created_at=now - timedelta(days=400))
+    new = remember(db_session, asha, "wants to study medicine", created_at=now - timedelta(days=2))
+    remember(db_session, asha, "plays cricket for the school team", created_at=now, salience=1.0)
+    found = [m for m, _ in search_memories(db_session, asha.id, EMBED.embed(["study medicine"], "query")[0], k=3, now=now)]
+    assert found[:2] == [new, old], "same meaning: the recent one first"
+    assert found[2].text.startswith("plays cricket"), "recent and important, but not about this: still last"
+
+    new.created_at = old.created_at
+    old.salience = 0.9  # said again, more than once
+    found = [m for m, _ in search_memories(db_session, asha.id, EMBED.embed(["study medicine"], "query")[0], k=2, now=now)]
+    assert found == [old, new], "same meaning and age: the one that matters more first"
