@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile
+from app.core.observability import audit
 from app.memory import consent as consent_service
 from app.memory.opening import counselling_state
 from app.models.memory import (
@@ -80,6 +81,8 @@ def decide(payload: ConsentDecision, profile: StudentProfile = Depends(get_curre
             db, profile, payload.kind, payload.granted, payload.guardian.model_dump() if payload.guardian else None)
     except consent_service.ConsentError as e:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, str(e)) from e
+    audit("consent", student=profile.id, kind=payload.kind, granted=payload.granted,
+          by="guardian" if payload.guardian else "student")
     return ConsentResult(kind=payload.kind, state=_state(db, profile, payload.kind), deleted=deleted)
 
 
@@ -188,6 +191,7 @@ def forget_one(kind: str, item_id: int, profile: StudentProfile = Depends(get_cu
     db.delete(item)
     db.add(DataRequest(student_profile_id=profile.id, kind=f"delete_{kind}", detail={"id": item_id}))
     db.commit()
+    audit("memory_deleted", student=profile.id, kind=kind, id=item_id)
     return Deleted(deleted={model.__tablename__: 1})
 
 
@@ -197,6 +201,7 @@ def forget_everything(profile: StudentProfile = Depends(get_current_student_prof
     """Clears what MAYA remembers; the permission itself stays as it was."""
     counts = consent_service.forget(db, profile, consent_service.LONG_TERM_MEMORY, reason="student asked")
     db.commit()
+    audit("memory_cleared", student=profile.id, deleted=sum(counts.values()))
     return Deleted(deleted=counts)
 
 

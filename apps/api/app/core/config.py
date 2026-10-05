@@ -3,6 +3,9 @@ from functools import lru_cache
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+DEV_JWT_SECRET = "dev-only-insecure-secret-change-me"
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
@@ -15,7 +18,7 @@ class Settings(BaseSettings):
     postgres_url: str | None = None
     postgres_test_url: str | None = None
 
-    jwt_secret_key: str = "dev-only-insecure-secret-change-me"
+    jwt_secret_key: str = DEV_JWT_SECRET  # refused in production (get_settings)
     jwt_algorithm: str = "HS256"
     jwt_expire_minutes: int = 60 * 24 * 7  # 7 days
 
@@ -28,8 +31,16 @@ class Settings(BaseSettings):
 
     # LLM via OpenRouter — OpenAI-compatible chat completions + tool calling
     openrouter_api_key: str | None = None
-    openrouter_model: str = "openai/gpt-4o-mini"
+    # The live model. On MAYA's benchmark (2026-10-05) gpt-6-luna called the right tool every time,
+    # never guessed a student's gender and kept replies short, at gpt-4o-mini's cost per turn.
+    openrouter_model: str = "openai/gpt-6-luna"
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
+    # "deny": OpenRouter only routes to providers that neither store nor train on what's sent — students
+    # are mostly minors. (Free models whose provider trains on inputs are then unavailable, by design.)
+    openrouter_data_collection: str = "deny"
+    # Tried in order when the model above is unavailable or rate-limited (e.g. a free model's daily cap):
+    # OPENROUTER_FALLBACK_MODELS=["openai/gpt-oss-120b"]
+    openrouter_fallback_models: list[str] = ["openai/gpt-oss-120b"]
 
     # LLM via any other OpenAI-compatible server (OpenAI, llama.cpp, Ollama…), when
     # llm_provider=openai_compatible. A local server usually needs no key.
@@ -49,10 +60,11 @@ class Settings(BaseSettings):
     cartesia_base_url: str = "https://api.cartesia.ai"
     tts_sample_rate: int = 44100  # of the streamed PCM sent to the device
 
-    # The model that writes session notes into memory. It runs in the background after a session,
-    # so it can be stronger than the live one: on a test session, claude-haiku-4.5 caught the
-    # stated constraints and worries that gpt-4o-mini missed, for under a cent. Empty = the live model.
-    memory_model: str = "anthropic/claude-haiku-4.5"
+    # The background model: it writes session notes into memory and reads how the student seems.
+    # Nobody waits for it, so it's chosen for quality per rupee, not speed. On a test session
+    # (2026-10-05) gpt-oss-120b caught all 9 things claude-haiku-4.5 did — the constraints, worries
+    # and next step that gpt-4o-mini partly missed — for 1/16 of haiku's cost. Empty = the live model.
+    memory_model: str = "openai/gpt-oss-120b"
     # Phase 6: the model that reads official documents, and where college knowledge lives — the
     # OKF bundle (canonical, its own git repo) and the raw documents it was read from.
     extraction_model: str = "google/gemini-2.5-flash"
@@ -62,6 +74,14 @@ class Settings(BaseSettings):
     session_idle_minutes: int = 10
     memory_sweeper: bool = True  # off in tests, which must never touch the real database
 
+    # Encryption of students' words and MAYA's notes (app/core/crypto.py). Without a key here, one is
+    # made at memory_key_path on first use — back it up, separately from the database.
+    memory_encryption_key: str | None = None
+    memory_key_path: str = "./data/memory.key"
+
+    # Logs: "json" lines (spec §29) or "text".
+    log_format: str = "json"
+
     # Embeddings for MAYA's memory, computed on the Pi (app/providers/embedding.py)
     embedding_provider: str = "local_e5"  # local_e5 | none
     embedding_model_dir: str = "models/multilingual-e5-small"
@@ -69,4 +89,8 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    settings = Settings()
+    if settings.environment == "production" and (settings.jwt_secret_key == DEV_JWT_SECRET or len(settings.jwt_secret_key) < 32):
+        raise RuntimeError("JWT_SECRET_KEY must be set to a long random value in production "
+                           "(python3 -c \"import secrets; print(secrets.token_hex(32))\")")
+    return settings

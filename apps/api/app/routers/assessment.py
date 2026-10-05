@@ -10,6 +10,7 @@ from app.assessment.interpret import interpret
 from app.assessment.service import AssessmentError
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile
+from app.core.ratelimit import limit
 from app.models.student import StudentProfile
 from app.providers.registry import get_llm_provider
 
@@ -83,7 +84,7 @@ def back(body: Back, profile: StudentProfile = Depends(get_current_student_profi
         raise _fail(e) from e
 
 
-@router.post("/interpret")
+@router.post("/interpret", dependencies=[Depends(limit("ai"))])
 async def interpret_answer(body: Interpret, profile: StudentProfile = Depends(get_current_student_profile),
                            db: Session = Depends(get_db)) -> dict:
     """What a spoken answer the Pi couldn't match means — {"answer": … | null, "skip": bool}.

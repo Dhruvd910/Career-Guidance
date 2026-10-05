@@ -16,7 +16,7 @@ from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Te
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.db import Base
-from app.core.types import Embedding, Json
+from app.core.types import Embedding, EncryptedJson, EncryptedText, Json
 from app.models.mixins import TimestampMixin
 
 EMBEDDING_DIM = 384  # multilingual-e5-small
@@ -34,7 +34,7 @@ class Consent(Base, TimestampMixin):
     granted_by: Mapped[str] = mapped_column(String(20))  # student | guardian
     # For a minor: who consented — {name, relationship, contact}. Declared, not verified: DPDP's
     # "verifiable" parental consent needs an identity check this app can't do on its own.
-    guardian: Mapped[dict | None] = mapped_column(Json, nullable=True)
+    guardian: Mapped[dict | None] = mapped_column(EncryptedJson, nullable=True)
     verification: Mapped[str] = mapped_column(String(20), default="declared")
     notice_version: Mapped[str] = mapped_column(String(20))  # which wording they agreed to
     decided_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
@@ -80,7 +80,7 @@ class StudentConstraint(Base, TimestampMixin):
     id: Mapped[int] = mapped_column(primary_key=True)
     student_profile_id: Mapped[int] = mapped_column(ForeignKey("student_profiles.id"), index=True)
     kind: Mapped[str] = mapped_column(String(30))  # budget | location | relocation | time | family_expectation | other
-    detail: Mapped[str] = mapped_column(String(500))
+    detail: Mapped[str] = mapped_column(EncryptedText)
     # Family conflict, money, health: kept out of the prompt unless the question needs them.
     sensitivity: Mapped[str] = mapped_column(String(20), default="normal")  # normal | sensitive
     status: Mapped[str] = mapped_column(String(20), default="active")
@@ -116,7 +116,7 @@ class SessionSummary(Base, TimestampMixin):
     conversation_id: Mapped[int] = mapped_column(ForeignKey("conversations.id"), primary_key=True)
     student_profile_id: Mapped[int] = mapped_column(ForeignKey("student_profiles.id"), index=True)
     schema_version: Mapped[int] = mapped_column(Integer, default=1)
-    summary: Mapped[str] = mapped_column(Text)
+    summary: Mapped[str] = mapped_column(EncryptedText)
     important_context: Mapped[list] = mapped_column(Json, default=list)
     decisions: Mapped[list] = mapped_column(Json, default=list)
     unresolved_questions: Mapped[list] = mapped_column(Json, default=list)
@@ -158,7 +158,7 @@ class MemoryItem(Base, TimestampMixin):
     id: Mapped[int] = mapped_column(primary_key=True)
     student_profile_id: Mapped[int] = mapped_column(ForeignKey("student_profiles.id"), index=True)
     kind: Mapped[str] = mapped_column(String(20))  # fact | preference | concern | aspiration | constraint
-    text: Mapped[str] = mapped_column(Text)
+    text: Mapped[str] = mapped_column(EncryptedText)
     embedding: Mapped[list | None] = mapped_column(Embedding(EMBEDDING_DIM), nullable=True)
     embed_model: Mapped[str | None] = mapped_column(String(60), nullable=True)
     salience: Mapped[float] = mapped_column(Float, default=0.5)
@@ -182,7 +182,7 @@ class TurnAnalysis(Base):
     intent: Mapped[str | None] = mapped_column(String(60), nullable=True)
     topic: Mapped[str | None] = mapped_column(String(120), nullable=True)
     emotion_signals: Mapped[list] = mapped_column(Json, default=list)  # [{"signal": "confusion", "confidence": 0.72}]
-    underlying_concerns: Mapped[list] = mapped_column(Json, default=list)
+    underlying_concerns: Mapped[list] = mapped_column(EncryptedJson, default=list)
     safety: Mapped[str] = mapped_column(String(20), default="none")  # none | self_harm | abuse
     model: Mapped[str | None] = mapped_column(String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

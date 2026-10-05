@@ -1,6 +1,9 @@
-"""Column types that differ between SQLite (tests, the original install) and PostgreSQL."""
+"""Column types that differ between SQLite (tests, the original install) and PostgreSQL, and the
+encrypted ones."""
 
-from sqlalchemy import JSON
+import json
+
+from sqlalchemy import JSON, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.types import TypeDecorator
 
@@ -32,3 +35,40 @@ class Embedding(TypeDecorator):
 
     def process_result_value(self, value, dialect):
         return None if value is None else [float(x) for x in value]
+
+
+class EncryptedText(TypeDecorator):
+    """Text the database only ever sees encrypted (app/core/crypto.py): what students said and what
+    MAYA noted about them. Rows written before encryption read as they are."""
+
+    impl = Text
+    cache_ok = True
+
+    def process_bind_param(self, value, dialect):
+        from app.core.crypto import encrypt
+
+        return None if value is None else encrypt(value)
+
+    def process_result_value(self, value, dialect):
+        from app.core.crypto import decrypt
+
+        return None if value is None else decrypt(value)
+
+
+class EncryptedJson(TypeDecorator):
+    """A JSON value kept as {"enc1": "<ciphertext>"} — the column stays jsonb, the contents unreadable."""
+
+    impl = Json
+    cache_ok = True
+
+    def process_bind_param(self, value, dialect):
+        from app.core.crypto import encrypt
+
+        return None if value is None else {"enc1": encrypt(json.dumps(value, ensure_ascii=False))}
+
+    def process_result_value(self, value, dialect):
+        from app.core.crypto import decrypt
+
+        if isinstance(value, dict) and set(value) == {"enc1"}:
+            return json.loads(decrypt(value["enc1"]))
+        return value

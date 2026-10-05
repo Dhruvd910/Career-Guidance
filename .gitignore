@@ -5,6 +5,8 @@ __pycache__/
 apps/api/.venv/
 apps/api/data/*.db
 apps/api/data/*.db-journal
+# copies of the database (app.db.before-postgres-…) hold students' data
+apps/api/data/*.db.*
 # Phase 6: the OKF bundle is its own git repo; raw documents are large and re-fetchable
 apps/api/data/okf/
 apps/api/data/sources/
@@ -45,3 +47,4 @@ Animations/
 
 # Embedding model for MAYA's memory (downloaded, ~135 MB)
 apps/api/models/
+apps/api/data/memory.key

@@ -1,7 +1,17 @@
 import os
+import tempfile
 
 # Never the background memory sweeper in tests: it would work on the real database.
 os.environ["MEMORY_SWEEPER"] = "false"
+# Never a real AI service either (they cost money): tests use the fakes in tests/fakes.py. Environment
+# variables win over apps/api/.env.
+for _key in ("OPENROUTER_API_KEY", "GROQ_API_KEY", "CARTESIA_API_KEY", "LLM_API_KEY"):
+    os.environ[_key] = ""
+# A fixed key, so tests never make (or read) the real key file in data/.
+os.environ["MEMORY_ENCRYPTION_KEY"] = "kVbz3tKG2Zy5W4mQx7L1o9N8dR0aHcEfJpUiYsTvBwA="
+os.environ["LOG_FORMAT"] = "text"
+# Fetched documents and kept model answers go to a throwaway folder, never apps/api/data/.
+os.environ["SOURCE_STORE_PATH"] = tempfile.mkdtemp(prefix="maya-sources-")
 
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
@@ -35,6 +45,15 @@ def db_session():
         session.close()
         Base.metadata.drop_all(bind=engine)
         engine.dispose()
+
+
+@pytest.fixture(autouse=True)
+def fresh_limits_and_counters():
+    """Rate-limit buckets and metrics live in the process: each test starts with its own."""
+    from app.core import observability, ratelimit
+
+    ratelimit.reset()
+    observability.reset()
 
 
 @pytest.fixture()

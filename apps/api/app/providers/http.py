@@ -55,6 +55,8 @@ class CircuitBreaker:
         self.name, self.threshold, self.cooldown, self._clock = name, threshold, cooldown, clock
         self.failures = 0
         self._open_until: float | None = None
+        self.last_error: str | None = None  # for /api/health
+        self.last_ok: float | None = None
 
     def check(self) -> None:
         if self._open_until is not None and self._clock() < self._open_until:
@@ -62,10 +64,11 @@ class CircuitBreaker:
                                                  f"after {self.failures} failures in a row")
 
     def record_success(self) -> None:
-        self.failures, self._open_until = 0, None
+        self.failures, self._open_until, self.last_ok = 0, None, time.time()
 
-    def record_failure(self) -> None:
+    def record_failure(self, error: str | None = None) -> None:
         self.failures += 1
+        self.last_error = (error or "")[:200] or None
         if self.failures >= self.threshold:
             # Half-open after the cool-down: one call goes through, and a failure re-opens at once.
             self._open_until = self._clock() + self.cooldown
@@ -73,7 +76,17 @@ class CircuitBreaker:
                            self.name, self.failures, self.cooldown)
 
 
+    def state(self) -> dict:
+        is_open = self._open_until is not None and self._clock() < self._open_until
+        return {"state": "open" if is_open else "closed", "failures_in_a_row": self.failures,
+                "last_error": self.last_error, "last_ok": self.last_ok}
+
+
 _breakers: dict[str, CircuitBreaker] = {}
+
+
+def breaker_states() -> dict[str, dict]:
+    return {name: b.state() for name, b in _breakers.items()}
 
 
 def breaker(name: str) -> CircuitBreaker:
@@ -126,7 +139,7 @@ async def send(client: httpx.AsyncClient, build: Callable[[], httpx.Request], *,
         except RETRYABLE_ERRORS as e:
             error, retryable, counts = ProviderError(provider, f"{type(e).__name__}: {e}"), True, True
         except httpx.HTTPError as e:  # e.g. a read timeout: the provider had it, don't resend
-            guard.record_failure()
+            guard.record_failure(f"{type(e).__name__}: {e}")
             raise ProviderError(provider, f"{type(e).__name__}: {e}") from e
         else:
             if response.status_code < 400:
@@ -140,7 +153,7 @@ async def send(client: httpx.AsyncClient, build: Callable[[], httpx.Request], *,
             retry_after = response.headers.get("retry-after")
         if not retryable or attempt == MAX_ATTEMPTS:
             if counts:
-                guard.record_failure()
+                guard.record_failure(str(error))
             raise error
         delay = _backoff(attempt, retry_after)
         logger.info("%s; retrying in %.1fs (attempt %d of %d)", error, delay, attempt + 1, MAX_ATTEMPTS)

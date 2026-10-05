@@ -8,6 +8,7 @@ from app.ai.language import voice_for
 from app.ai.orchestrator import handle_chat
 from app.core.db import get_db
 from app.core.deps import get_current_student_profile, require_local_or_authenticated
+from app.core.ratelimit import limit
 from app.models.chat import Conversation
 from app.models.student import StudentProfile
 from app.providers.registry import get_stt_provider, get_tts_provider
@@ -41,7 +42,7 @@ async def _synthesize(text: str, language: str | None = None) -> tuple[str | Non
     return base64.b64encode(audio_bytes).decode("ascii"), content_type
 
 
-@router.post("/chat", response_model=ChatResponse)
+@router.post("/chat", response_model=ChatResponse, dependencies=[Depends(limit("ai"))])
 async def chat(
     payload: ChatRequest,
     profile: StudentProfile = Depends(get_current_student_profile),
@@ -50,7 +51,7 @@ async def chat(
     return await handle_chat(db, profile, payload.message, payload.conversation_id)
 
 
-@router.post("/voice-chat", response_model=VoiceChatResponse)
+@router.post("/voice-chat", response_model=VoiceChatResponse, dependencies=[Depends(limit("ai"))])
 async def voice_chat(
     audio: UploadFile = File(...),
     conversation_id: int | None = None,
@@ -76,7 +77,7 @@ async def voice_chat(
     )
 
 
-@router.post("/transcribe", response_model=TranscribeResponse)
+@router.post("/transcribe", response_model=TranscribeResponse, dependencies=[Depends(limit("ai"))])
 async def transcribe(
     audio: UploadFile = File(...),
     _: None = Depends(require_local_or_authenticated),
@@ -93,7 +94,7 @@ async def transcribe(
     return TranscribeResponse(transcript=heard.text.strip())
 
 
-@router.post("/speak", response_model=SpeakResponse)
+@router.post("/speak", response_model=SpeakResponse, dependencies=[Depends(limit("ai"))])
 async def speak(
     payload: SpeakRequest,
     _: None = Depends(require_local_or_authenticated),
