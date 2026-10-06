@@ -9,7 +9,7 @@ from app.knowledge import engine
 from app.memory import consent
 from app.models.memory import StudentInterest
 from app.seed.careers import seed_careers
-from tests.test_assessment_service import right, student, take
+from tests.test_assessment_service import right, scripted, student, take
 from tests.test_career_directions import TECH, answers
 from tests.test_graph_store import official  # noqa: F401 — fixture
 
@@ -74,10 +74,11 @@ def test_every_direction_explained_with_the_graph(db_session, library):
 def test_a_measured_gap_and_the_foundations_it_holds_back(db_session, library):
     asha = student(db_session)
     take(db_session, asha, "interests", answers(TECH))
-    take(db_session, asha, "coding_check", choose=lambda i: right(i, wrong={"c3", "c4", "c5", "c6", "c7", "c8"}))
+    # From level 2: right, right (2→3→4), then six wrong (4→3→2→1→1→1): (2+3+3+2+1+0+0+0)/40 = 0.275, a gap.
+    take(db_session, asha, "coding_check", choose=scripted({"check:programming": [True, True] + [False] * 6}))
     cse = career(engine.options(db_session, asha, embedder=None), "cse")
     gap = next(s for s in cse["skill_gaps"] if s["key"] == "skill:programming_fundamentals")
-    assert gap["measured_as"] == "check:programming" and gap["says"]["en"] == "2 of 8 right"
+    assert gap["measured_as"] == "check:programming" and gap["says"]["en"] == "level 3 of 5 · 2 of 8 right"
     assert {"key": "skill:data_structures_algorithms", "name": {"en": "Data structures and algorithms",
             "hi": "डेटा स्ट्रक्चर और एल्गोरिदम"}} in [g["needed_for"] for g in cse["foundation_gaps"]]
 

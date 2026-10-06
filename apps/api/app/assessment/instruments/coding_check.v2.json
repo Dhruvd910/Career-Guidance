@@ -1,0 +1,2793 @@
+{
+ "key": "coding_check",
+ "version": 2,
+ "category": "skill",
+ "title": {
+  "en": "Coding check",
+  "hi": "कोडिंग जाँच"
+ },
+ "about": {
+  "en": "8 short pieces of code to read — no programming language needed. They get harder as you get them right, and change every time. Best done on the screen.",
+  "hi": "पढ़ने के लिए कोड के 8 छोटे टुकड़े — कोई प्रोग्रामिंग भाषा आना ज़रूरी नहीं। सही जवाबों के साथ कठिन होते जाते हैं, और हर बार बदलते हैं। स्क्रीन पर करना सबसे अच्छा है।"
+ },
+ "intro": {
+  "en": "Eight short pieces of code. You don't need to know any programming language — just follow what each line does. It's easiest on the screen.",
+  "hi": "कोड के आठ छोटे टुकड़े। कोई प्रोग्रामिंग भाषा आना ज़रूरी नहीं — बस देखिए कि हर लाइन क्या करती है। स्क्रीन पर करना सबसे आसान है।"
+ },
+ "est_minutes": 7,
+ "scoring_method": "adaptive_correct",
+ "forms": [],
+ "adaptive": {
+  "per_dimension": 8,
+  "levels": 5,
+  "start": {
+   "6": 1,
+   "7": 1,
+   "8": 1,
+   "9": 1,
+   "10": 2,
+   "11": 3,
+   "12": 3,
+   "college": 3
+  }
+ },
+ "dimensions": {
+  "check:programming": {
+   "en": "reading code",
+   "hi": "कोड पढ़ना",
+   "group": "skill"
+  }
+ },
+ "items": [
+  {
+   "key": "code_L1_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is y at the end?",
+    "hi": "आख़िर में y क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "23",
+      "hi": "23"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "27",
+      "hi": "27"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "x becomes 7 + 5 = 12; then y = 12 × 2 = 24.",
+    "hi": "x = 7 + 5 = 12; फिर y = 12 × 2 = 24।"
+   },
+   "code": "x = 7\ny = 5\nx = x + y\ny = x * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is y at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में y क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "x becomes 5 + 7 = 12; then y = 12 × 4 = 48.",
+    "hi": "x = 5 + 7 = 12; फिर y = 12 × 4 = 48।"
+   },
+   "code": "x = 5\ny = 7\nx = x + y\ny = x * 4",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is y at the end?",
+    "hi": "आख़िर में y क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "63",
+      "hi": "63"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "59",
+      "hi": "59"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "60",
+      "hi": "60"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "x becomes 8 + 4 = 12; then y = 12 × 5 = 60.",
+    "hi": "x = 8 + 4 = 12; फिर y = 12 × 5 = 60।"
+   },
+   "code": "x = 8\ny = 4\nx = x + y\ny = x * 5",
+   "speak": {
+    "en": "Look at the code on the screen. What is y at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में y क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "x becomes 6 + 5 = 11; then y = 11 × 4 = 44.",
+    "hi": "x = 6 + 5 = 11; फिर y = 11 × 4 = 44।"
+   },
+   "code": "x = 6\ny = 5\nx = x + y\ny = x * 4",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "x becomes 3 + 9 = 12; then y = 12 × 2 = 24.",
+    "hi": "x = 3 + 9 = 12; फिर y = 12 × 2 = 24।"
+   },
+   "code": "x = 3\ny = 9\nx = x + y\ny = x * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is y at the end?",
+    "hi": "आख़िर में y क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "41",
+      "hi": "41"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "42",
+      "hi": "42"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "27",
+      "hi": "27"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "45",
+      "hi": "45"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "x becomes 5 + 9 = 14; then y = 14 × 3 = 42.",
+    "hi": "x = 5 + 9 = 14; फिर y = 14 × 3 = 42।"
+   },
+   "code": "x = 5\ny = 9\nx = x + y\ny = x * 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is y at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में y क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is y at the end?",
+    "hi": "आख़िर में y क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "19",
+      "hi": "19"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "x becomes 4 + 4 = 8; then y = 8 × 2 = 16.",
+    "hi": "x = 4 + 4 = 8; फिर y = 8 × 2 = 16।"
+   },
+   "code": "x = 4\ny = 4\nx = x + y\ny = x * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is y at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में y क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "x becomes 5 + 8 = 13; then y = 13 × 5 = 65.",
+    "hi": "x = 5 + 8 = 13; फिर y = 13 × 5 = 65।"
+   },
+   "code": "x = 5\ny = 8\nx = x + y\ny = x * 5",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "x becomes 2 + 4 = 6; then y = 6 × 5 = 30.",
+    "hi": "x = 2 + 4 = 6; फिर y = 6 × 5 = 30।"
+   },
+   "code": "x = 2\ny = 4\nx = x + y\ny = x * 5",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L1_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 1,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is y at the end?",
+    "hi": "आख़िर में y क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "29",
+      "hi": "29"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "33",
+      "hi": "33"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "x becomes 9 + 6 = 15; then y = 15 × 2 = 30.",
+    "hi": "x = 9 + 6 = 15; फिर y = 15 × 2 = 30।"
+   },
+   "code": "x = 9\ny = 6\nx = x + y\ny = x * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is y at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में y क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "25",
+      "hi": "25"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "35",
+      "hi": "35"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "30 > 12, so x becomes 25.",
+    "hi": "30 > 12, इसलिए x = 25।"
+   },
+   "code": "x = 30\nif x > 12:\n    x = x - 5\nelse:\n    x = x + 5",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "27",
+      "hi": "27"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "19",
+      "hi": "19"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "19 > 12, so x becomes 11.",
+    "hi": "19 > 12, इसलिए x = 11।"
+   },
+   "code": "x = 19\nif x > 12:\n    x = x - 8\nelse:\n    x = x + 8",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "17",
+      "hi": "17"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "21",
+      "hi": "21"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "21 > 5, so x becomes 16.",
+    "hi": "21 > 5, इसलिए x = 16।"
+   },
+   "code": "x = 21\nif x > 5:\n    x = x - 5\nelse:\n    x = x + 5",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "31",
+      "hi": "31"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "22",
+      "hi": "22"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "22 > 16, so x becomes 13.",
+    "hi": "22 > 16, इसलिए x = 13।"
+   },
+   "code": "x = 22\nif x > 16:\n    x = x - 9\nelse:\n    x = x + 9",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "6 is not more than 22, so x becomes 8.",
+    "hi": "6 बड़ा नहीं है 22, इसलिए x = 8।"
+   },
+   "code": "x = 6\nif x > 22:\n    x = x - 2\nelse:\n    x = x + 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "17",
+      "hi": "17"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "25",
+      "hi": "25"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "17 is not more than 23, so x becomes 25.",
+    "hi": "17 बड़ा नहीं है 23, इसलिए x = 25।"
+   },
+   "code": "x = 17\nif x > 23:\n    x = x - 8\nelse:\n    x = x + 8",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "7 is not more than 9, so x becomes 10.",
+    "hi": "7 बड़ा नहीं है 9, इसलिए x = 10।"
+   },
+   "code": "x = 7\nif x > 9:\n    x = x - 3\nelse:\n    x = x + 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "21",
+      "hi": "21"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "23",
+      "hi": "23"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "23 > 12, so x becomes 20.",
+    "hi": "23 > 12, इसलिए x = 20।"
+   },
+   "code": "x = 23\nif x > 12:\n    x = x - 3\nelse:\n    x = x + 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "10 > 6, so x becomes 7.",
+    "hi": "10 > 6, इसलिए x = 7।"
+   },
+   "code": "x = 10\nif x > 6:\n    x = x - 3\nelse:\n    x = x + 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L2_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 2,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "-4",
+      "hi": "-4"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "5 is not more than 14, so x becomes 14.",
+    "hi": "5 बड़ा नहीं है 14, इसलिए x = 14।"
+   },
+   "code": "x = 5\nif x > 14:\n    x = x - 9\nelse:\n    x = x + 9",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "72",
+      "hi": "72"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "74",
+      "hi": "74"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "56",
+      "hi": "56"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "2 × (1 + 2 + … + 8) = 72.",
+    "hi": "2 × (1 + 2 + … + 8) = 72।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 8:\n    total = total + i * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "29",
+      "hi": "29"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "21",
+      "hi": "21"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "1 × (1 + 2 + … + 7) = 28.",
+    "hi": "1 × (1 + 2 + … + 7) = 28।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 7:\n    total = total + i * 1",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "42",
+      "hi": "42"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "56",
+      "hi": "56"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "58",
+      "hi": "58"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "2 × (1 + 2 + … + 7) = 56.",
+    "hi": "2 × (1 + 2 + … + 7) = 56।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 7:\n    total = total + i * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "45",
+      "hi": "45"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "48",
+      "hi": "48"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "3 × (1 + 2 + … + 5) = 45.",
+    "hi": "3 × (1 + 2 + … + 5) = 45।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 5:\n    total = total + i * 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "45",
+      "hi": "45"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "63",
+      "hi": "63"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "66",
+      "hi": "66"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "3 × (1 + 2 + … + 6) = 63.",
+    "hi": "3 × (1 + 2 + … + 6) = 63।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 6:\n    total = total + i * 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "33",
+      "hi": "33"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "3 × (1 + 2 + … + 4) = 30.",
+    "hi": "3 × (1 + 2 + … + 4) = 30।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 4:\n    total = total + i * 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "32",
+      "hi": "32"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "2 × (1 + 2 + … + 5) = 30.",
+    "hi": "2 × (1 + 2 + … + 5) = 30।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 5:\n    total = total + i * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "22",
+      "hi": "22"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "2 × (1 + 2 + … + 4) = 20.",
+    "hi": "2 × (1 + 2 + … + 4) = 20।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 4:\n    total = total + i * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "42",
+      "hi": "42"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "44",
+      "hi": "44"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "2 × (1 + 2 + … + 6) = 42.",
+    "hi": "2 × (1 + 2 + … + 6) = 42।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 6:\n    total = total + i * 2",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L3_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 3,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is total at the end?",
+    "hi": "आख़िर में total क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "22",
+      "hi": "22"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "21",
+      "hi": "21"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "1 × (1 + 2 + … + 6) = 21.",
+    "hi": "1 × (1 + 2 + … + 6) = 21।"
+   },
+   "code": "total = 0\nrepeat for i = 1 to 6:\n    total = total + i * 1",
+   "speak": {
+    "en": "Look at the code on the screen. What is total at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में total क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Take away 3 until x is no longer more than 11: 10.",
+    "hi": "x के 11 से बड़ा न रहने तक 3 घटाते रहें: 10।"
+   },
+   "code": "x = 67\nwhile x > 11:\n    x = x - 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "17",
+      "hi": "17"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "21",
+      "hi": "21"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Take away 4 until x is no longer more than 20: 17.",
+    "hi": "x के 20 से बड़ा न रहने तक 4 घटाते रहें: 17।"
+   },
+   "code": "x = 37\nwhile x > 20:\n    x = x - 4",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "23",
+      "hi": "23"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Take away 7 until x is no longer more than 16: 16.",
+    "hi": "x के 16 से बड़ा न रहने तक 7 घटाते रहें: 16।"
+   },
+   "code": "x = 44\nwhile x > 16:\n    x = x - 7",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Take away 3 until x is no longer more than 13: 11.",
+    "hi": "x के 13 से बड़ा न रहने तक 3 घटाते रहें: 11।"
+   },
+   "code": "x = 50\nwhile x > 13:\n    x = x - 3",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "17",
+      "hi": "17"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Take away 7 until x is no longer more than 18: 16.",
+    "hi": "x के 18 से बड़ा न रहने तक 7 घटाते रहें: 16।"
+   },
+   "code": "x = 65\nwhile x > 18:\n    x = x - 7",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is count at the end? (% gives the remainder)",
+    "hi": "आख़िर में count क्या है? (% शेषफल देता है)"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Multiples of 6 up to 30: 5.",
+    "hi": "30 तक 6 के गुणज: 5।"
+   },
+   "code": "count = 0\nrepeat for i = 1 to 30:\n    if i % 6 == 0:\n        count = count + 1",
+   "speak": {
+    "en": "Look at the code on the screen. What is count at the end? (% gives the remainder)",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में count क्या है? (% शेषफल देता है)"
+   }
+  },
+  {
+   "key": "code_L4_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is count at the end? (% gives the remainder)",
+    "hi": "आख़िर में count क्या है? (% शेषफल देता है)"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Multiples of 4 up to 36: 9.",
+    "hi": "36 तक 4 के गुणज: 9।"
+   },
+   "code": "count = 0\nrepeat for i = 1 to 36:\n    if i % 4 == 0:\n        count = count + 1",
+   "speak": {
+    "en": "Look at the code on the screen. What is count at the end? (% gives the remainder)",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में count क्या है? (% शेषफल देता है)"
+   }
+  },
+  {
+   "key": "code_L4_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Take away 6 until x is no longer more than 9: 5.",
+    "hi": "x के 9 से बड़ा न रहने तक 6 घटाते रहें: 5।"
+   },
+   "code": "x = 65\nwhile x > 9:\n    x = x - 6",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Take away 4 until x is no longer more than 12: 9.",
+    "hi": "x के 12 से बड़ा न रहने तक 4 घटाते रहें: 9।"
+   },
+   "code": "x = 61\nwhile x > 12:\n    x = x - 4",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L4_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 4,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is x at the end?",
+    "hi": "आख़िर में x क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Take away 6 until x is no longer more than 6: 6.",
+    "hi": "x के 6 से बड़ा न रहने तक 6 घटाते रहें: 6।"
+   },
+   "code": "x = 42\nwhile x > 6:\n    x = x - 6",
+   "speak": {
+    "en": "Look at the code on the screen. What is x at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में x क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is s at the end?",
+    "hi": "आख़िर में s क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "42",
+      "hi": "42"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "36",
+      "hi": "36"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "33",
+      "hi": "33"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "(1 + … + 3) × (1 + … + 3) = 36.",
+    "hi": "(1 + … + 3) × (1 + … + 3) = 36।"
+   },
+   "code": "s = 0\nrepeat for i = 1 to 3:\n    repeat for j = 1 to 3:\n        s = s + i * j",
+   "speak": {
+    "en": "Look at the code on the screen. What is s at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में s क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is answer at the end?",
+    "hi": "आख़िर में answer क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "f(4) = 4 + 3 + … + 1 + 0 = 10.",
+    "hi": "f(4) = 4 + 3 + … + 1 + 0 = 10।"
+   },
+   "code": "function f(n):\n    if n == 0:\n        return 0\n    return n + f(n - 1)\n\nanswer = f(4)",
+   "speak": {
+    "en": "Look at the code on the screen. What is answer at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में answer क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is answer at the end?",
+    "hi": "आख़िर में answer क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "27",
+      "hi": "27"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "21",
+      "hi": "21"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "f(6) = 6 + 5 + … + 1 + 0 = 21.",
+    "hi": "f(6) = 6 + 5 + … + 1 + 0 = 21।"
+   },
+   "code": "function f(n):\n    if n == 0:\n        return 0\n    return n + f(n - 1)\n\nanswer = f(6)",
+   "speak": {
+    "en": "Look at the code on the screen. What is answer at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में answer क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is answer at the end?",
+    "hi": "आख़िर में answer क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "f(5) = 5 + 4 + … + 1 + 0 = 15.",
+    "hi": "f(5) = 5 + 4 + … + 1 + 0 = 15।"
+   },
+   "code": "function f(n):\n    if n == 0:\n        return 0\n    return n + f(n - 1)\n\nanswer = f(5)",
+   "speak": {
+    "en": "Look at the code on the screen. What is answer at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में answer क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is answer at the end?",
+    "hi": "आख़िर में answer क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "f(3) = 3 + 2 + … + 1 + 0 = 6.",
+    "hi": "f(3) = 3 + 2 + … + 1 + 0 = 6।"
+   },
+   "code": "function f(n):\n    if n == 0:\n        return 0\n    return n + f(n - 1)\n\nanswer = f(3)",
+   "speak": {
+    "en": "Look at the code on the screen. What is answer at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में answer क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is s at the end?",
+    "hi": "आख़िर में s क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "23",
+      "hi": "23"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "(1 + … + 2) × (1 + … + 3) = 18.",
+    "hi": "(1 + … + 2) × (1 + … + 3) = 18।"
+   },
+   "code": "s = 0\nrepeat for i = 1 to 2:\n    repeat for j = 1 to 3:\n        s = s + i * j",
+   "speak": {
+    "en": "Look at the code on the screen. What is s at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में s क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is s at the end?",
+    "hi": "आख़िर में s क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "100",
+      "hi": "100"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "108",
+      "hi": "108"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "96",
+      "hi": "96"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "(1 + … + 4) × (1 + … + 4) = 100.",
+    "hi": "(1 + … + 4) × (1 + … + 4) = 100।"
+   },
+   "code": "s = 0\nrepeat for i = 1 to 4:\n    repeat for j = 1 to 4:\n        s = s + i * j",
+   "speak": {
+    "en": "Look at the code on the screen. What is s at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में s क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is s at the end?",
+    "hi": "आख़िर में s क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "36",
+      "hi": "36"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "(1 + … + 2) × (1 + … + 4) = 30.",
+    "hi": "(1 + … + 2) × (1 + … + 4) = 30।"
+   },
+   "code": "s = 0\nrepeat for i = 1 to 2:\n    repeat for j = 1 to 4:\n        s = s + i * j",
+   "speak": {
+    "en": "Look at the code on the screen. What is s at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में s क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is s at the end?",
+    "hi": "आख़िर में s क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "36",
+      "hi": "36"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "(1 + … + 4) × (1 + … + 2) = 30.",
+    "hi": "(1 + … + 4) × (1 + … + 2) = 30।"
+   },
+   "code": "s = 0\nrepeat for i = 1 to 4:\n    repeat for j = 1 to 2:\n        s = s + i * j",
+   "speak": {
+    "en": "Look at the code on the screen. What is s at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में s क्या है?"
+   }
+  },
+  {
+   "key": "code_L5_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "check:programming",
+   "difficulty": 5,
+   "section": {
+    "en": "Code",
+    "hi": "कोड"
+   },
+   "prompt": {
+    "en": "What is s at the end?",
+    "hi": "आख़िर में s क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "15",
+      "hi": "15"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "23",
+      "hi": "23"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "(1 + … + 3) × (1 + … + 2) = 18.",
+    "hi": "(1 + … + 3) × (1 + … + 2) = 18।"
+   },
+   "code": "s = 0\nrepeat for i = 1 to 3:\n    repeat for j = 1 to 2:\n        s = s + i * j",
+   "speak": {
+    "en": "Look at the code on the screen. What is s at the end?",
+    "hi": "स्क्रीन पर कोड देखिए। आख़िर में s क्या है?"
+   }
+  }
+ ]
+}

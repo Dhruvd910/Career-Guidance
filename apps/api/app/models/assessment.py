@@ -68,6 +68,7 @@ class AssessmentAttempt(Base):
     form: Mapped[str | None] = mapped_column(String(5), nullable=True)
     mode: Mapped[str] = mapped_column(String(10), default="touch")  # touch | voice | mixed
     language: Mapped[str] = mapped_column(String(10), default="en")  # en | hi
+    track: Mapped[str | None] = mapped_column(String(20), nullable=True)  # what the student was heading for (tracks.py)
     status: Mapped[str] = mapped_column(String(20), default="in_progress")  # in_progress | completed | abandoned
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     last_activity_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

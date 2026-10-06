@@ -8,7 +8,7 @@ from app.assessment.context import NONE_YET, assessment_context
 from app.models.student import StudentProfile
 from app.seed.careers import seed_careers
 from tests.fakes import FakeLLM
-from tests.test_assessment_service import right, student, take
+from tests.test_assessment_service import right, scripted, student, take
 from tests.test_career_directions import TECH, answers
 from tests.test_conversation_ws import connect, register, services, until  # noqa: F401 — fixture
 
@@ -32,14 +32,14 @@ def test_every_reply_knows_the_results_even_without_the_memory_permission(db_ses
     seed_careers(db_session)
     asha = student(db_session, memory=False)
     take(db_session, asha, "interests", answers(TECH))
-    take(db_session, asha, "aptitude", choose=lambda i: right(i, wrong={"a_verb_1"}))
+    take(db_session, asha, "aptitude", choose=scripted({"aptitude:verbal": [True, True, True, True, False]}))
     text = assessment_context(db_session, asha)
     lines = text.splitlines()
     assert lines[1].startswith("- Career directions — strong alignment: ")
     assert "Computer Science & Software Engineering" in lines[1]
     assert "- What you enjoy [interests] (today): enjoys maths, computers and coding" in text
     assert "; matters to them: earning well" in text
-    assert "- Thinking skills [aptitude] (today): " in text and "understanding words 4 of 5 right" in text
+    assert "- Thinking skills [aptitude] (today): " in text and "understanding words level 5 of 5 · 4 of 5 right" in text
     assert lines[-1].startswith("- Not taken yet: ") and "Your skills" in lines[-1]
     assert len(text) <= 1400
 
@@ -70,15 +70,15 @@ def test_the_tools(db_session):
 
 def test_how_much_have_i_improved(db_session):
     asha = student(db_session)
-    take(db_session, asha, "aptitude", choose=lambda i: right(i, wrong={"a_num_1", "a_num_2", "a_num_3"}))
+    take(db_session, asha, "aptitude", choose=scripted({"aptitude:numerical": [False, False, False, True, True]}))
     take(db_session, asha, "aptitude", choose=right)
     take(db_session, asha, "skills")  # taken once: nothing to compare there
     out = execute_tool(db_session, asha, "compare_assessments", {})  # without a key: everything retaken
     assert set(out["compared"]) == {"aptitude"}
     rows = out["compared"]["aptitude"]["since_previous"]
     numbers = next(r for r in rows if r["dimension"] == "working with numbers")
-    assert numbers == {"dimension": "working with numbers", "before": "2 of 5 right", "after": "5 of 5 right",
-                       "change": 1, "note": None}
+    assert numbers == {"dimension": "working with numbers", "before": "level 2 of 5 · 2 of 5 right",
+                       "after": "level 5 of 5 · 5 of 5 right", "change": 1, "note": None}
     assert next(r for r in rows if r["dimension"] == "understanding words")["change"] == 0
     assert "taken 2 times — compare_assessments shows the change" in assessment_context(db_session, asha)
 
@@ -94,7 +94,7 @@ def test_offering_an_assessment_puts_a_button_on_screen(client, db_session, serv
         seen = until(ws, "reply.done")
     suggestion = next(m for m in seen if m["type"] == "ui.suggest")
     assert suggestion["action"] == "open_assessment" and suggestion["instrument_key"] == "aptitude"
-    assert suggestion["title"]["hi"] == "सोचने की क्षमता" and suggestion["est_minutes"] == 10
+    assert suggestion["title"]["hi"] == "सोचने की क्षमता" and suggestion["est_minutes"] == 12
     tool_reply = next(m for m in services["llm"].seen[1] if m["role"] == "tool")
     assert '"ui"' not in tool_reply["content"] and "Thinking skills" in tool_reply["content"]
     assert NONE_YET in system_text(services["llm"])

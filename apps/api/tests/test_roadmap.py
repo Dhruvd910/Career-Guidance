@@ -13,7 +13,7 @@ from app.roadmap import progress, service
 from app.roadmap.generator import Inputs, build
 from app.roadmap.templates import templates
 from app.seed.careers import seed_careers
-from tests.test_assessment_service import right, student, take
+from tests.test_assessment_service import right, scripted, student, take
 
 TODAY = date(2026, 10, 1)
 GUARDIAN = {"name": "Sunita", "relationship": "mother", "contact": "x"}
@@ -169,7 +169,7 @@ def test_a_measured_strength_completes_its_module_with_the_evidence(db_session, 
     v = service.view(db_session, asha)
     logic = next(n for n in _flat(v["stages"]) if n["node_key"] == "module:skill:logical_reasoning")
     assert logic["status"] == "done" and logic["evidence"][0]["kind"] == "assessment"
-    assert logic["evidence"][0]["says"]["en"] == "5 of 5 right"
+    assert logic["evidence"][0]["says"]["en"] == "level 5 of 5 · 5 of 5 right"
     assessment = next(n for n in _flat(v["stages"]) if n["node_key"] == "task:assessment:aptitude")
     assert assessment["status"] == "done"
 
@@ -208,13 +208,13 @@ def test_the_timeline_only_with_the_memory_permission(db_session, store):
 
 def test_skill_progress_from_measurements_only(db_session, store):
     asha = _ready(db_session)
-    take(db_session, asha, "aptitude", choose=lambda i: right(i, wrong={"a_log_1", "a_log_2", "a_log_3"}))
+    take(db_session, asha, "aptitude", choose=scripted({"aptitude:logical": [False, False, False, True, True]}))
     take(db_session, asha, "aptitude", choose=right)
     service.update_progress(db_session, asha, "module:skill:probability_statistics", "done")
     series = {s["skill"]: s for s in progress.skill_series(db_session, asha)}
     logic = series["skill:logical_reasoning"]
-    assert (logic["initial"], logic["current"], logic["change"]) == (0.4, 1.0, 1)
-    assert logic["points"][0]["says"]["en"] == "2 of 5 right" and logic["points"][0]["source"] == "assessment"
+    assert (logic["initial"], logic["current"], logic["change"]) == (0.24, 0.88, 1)
+    assert logic["points"][0]["says"]["en"] == "level 2 of 5 · 2 of 5 right" and logic["points"][0]["source"] == "assessment"
     assert "skill:probability_statistics" not in series, "ticking a module done isn't a measurement"
     assert db_session.query(SkillMeasurement).filter_by(skill_key="skill:problem_solving").count() == 2
 

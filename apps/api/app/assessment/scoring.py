@@ -6,6 +6,11 @@ explain to the student who took it:
   follow-up only asked because you like a subject doesn't count against anything).
 - correct_answers (aptitude, coding check): right answers over questions shown, per dimension.
   A skipped question counts as shown and not right — "7 of 10 right, 1 skipped".
+- adaptive_correct (aptitude, spatial, coding check since v2): the questions get harder after a right
+  answer and easier after a wrong one, so the count of right answers alone says little. Each question
+  is worth its level if right and one less if not (a hard question missed still says more than an easy
+  one missed); the score is those points over the most possible (level 5 every time). Shown as the
+  highest level answered right and the count: "level 4 of 5 · 3 of 5 right".
 - anchored_levels (skills): the level picked, 0–3, as 0–1.
 - marks: the percentage, as 0–1.
 
@@ -75,6 +80,27 @@ def correct_answers(shown: list[Shown]) -> list[Score]:
     return [Score(dim, round(t["correct"] / t["asked"], 4), t["asked"], t) for dim, t in sorted(tally.items())]
 
 
+LEVELS = 5
+
+
+def adaptive_correct(shown: list[Shown]) -> list[Score]:
+    tally: dict[str, dict] = {}
+    for s in shown:
+        level = s.item.get("difficulty") or 1
+        t = tally.setdefault(s.item["dimension"], {"correct": 0, "asked": 0, "skipped": 0, "points": 0,
+                                                   "levels": [], "level_reached": 0, "levels_max": LEVELS})
+        t["asked"] += 1
+        t["levels"].append(level)
+        right = not s.skipped and s.answer is not None and s.answer.get("option") == s.item["answer"]
+        if right:
+            t["correct"] += 1
+            t["level_reached"] = max(t["level_reached"], level)
+        elif s.skipped or s.answer is None:
+            t["skipped"] += 1
+        t["points"] += level if right else level - 1
+    return [Score(dim, round(t["points"] / (t["asked"] * LEVELS), 4), t["asked"], t) for dim, t in sorted(tally.items())]
+
+
 def anchored_levels(shown: list[Shown]) -> list[Score]:
     scores = []
     for s in shown:
@@ -97,6 +123,7 @@ def marks(shown: list[Shown]) -> list[Score]:
 METHODS = {
     "weighted_options": weighted_options,
     "correct_answers": correct_answers,
+    "adaptive_correct": adaptive_correct,
     "anchored_levels": anchored_levels,
     "marks": marks,
 }
@@ -118,6 +145,8 @@ def changed(method: str, before: dict, after: dict) -> int:
         enough = abs(after["detail"].get("level", 0) - before["detail"].get("level", 0)) >= 1
     elif method == "marks":
         enough = abs(delta) >= 0.05 - 1e-9  # five percentage points
+    elif method == "adaptive_correct":
+        enough = abs(delta) >= 0.15 - 1e-9  # about a level, on average, over the questions
     else:
         enough = abs(delta) >= 0.25 - 1e-9
     return 0 if not enough else (1 if delta > 0 else -1)

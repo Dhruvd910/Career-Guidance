@@ -43,6 +43,9 @@ class AppliesTo(BaseModel):
 
     class_levels: list[int] | None = None
     streams: list[str] | None = None  # PCM | PCB | PCMB | commerce | humanities; None = any
+    # Not asked of a student on these tracks (app/assessment/tracks.py): no hospital questions for a
+    # JEE student heading for computer science.
+    skip_for_tracks: list[Literal["engineering", "medical", "commerce", "humanities"]] | None = None
 
 
 class Item(BaseModel):
@@ -59,7 +62,7 @@ class Item(BaseModel):
     requires: dict[str, list[str]] = {}  # earlier item key → answers that make this one apply
     applies_to: AppliesTo | None = None
     form: str | None = None
-    difficulty: int | None = Field(default=None, ge=1, le=3)
+    difficulty: int | None = Field(default=None, ge=1, le=5)  # 1 easy … 3 (fixed tests); 1 … 5 (adaptive ones)
 
     @model_validator(mode="after")
     def _shape(self) -> "Item":
@@ -89,6 +92,16 @@ class Dimension(BaseModel):
     group: str  # subject | riasec | work_style | values | learning | aptitude | skill | academic
 
 
+class Adaptive(BaseModel):
+    """An adaptive test: per_dimension questions on each dimension, one level up after a right answer and one
+    down after a wrong one, starting at the level for the student's class — so it settles where they are, and a
+    retake draws different questions from the bank."""
+
+    per_dimension: int = Field(ge=1, le=20)
+    levels: int = Field(default=5, ge=2, le=9)
+    start: dict[str, int]  # class "6" … "12", "college" → the level to start at
+
+
 class Instrument(BaseModel):
     key: str = Field(pattern=r"^[a-z_]+$")
     version: int = Field(ge=1)
@@ -96,9 +109,10 @@ class Instrument(BaseModel):
     title: Text
     about: Text  # one line on the assessment's own screen
     intro: Text  # what MAYA says before the first question
-    scoring_method: Literal["weighted_options", "correct_answers", "anchored_levels", "marks"]
+    scoring_method: Literal["weighted_options", "correct_answers", "anchored_levels", "marks", "adaptive_correct"]
     est_minutes: int
     forms: list[str] = []
+    adaptive: Adaptive | None = None
     dimensions: dict[str, Dimension]
     items: list[Item]
 
@@ -128,6 +142,17 @@ class Instrument(BaseModel):
             if self.scoring_method == "weighted_options" and any(not o.weights for o in item.options):
                 raise ValueError(f"{item.key}: every option needs weights")
             seen[item.key] = item
+        if self.adaptive is not None:
+            a = self.adaptive
+            if self.scoring_method != "adaptive_correct":
+                raise ValueError("an adaptive instrument is scored adaptive_correct")
+            for dim in self.dimensions:
+                for level in range(1, a.levels + 1):
+                    n = sum(1 for i in self.items if i.dimension == dim and i.difficulty == level and i.type == "problem")
+                    if n < a.per_dimension:  # a student can stay at one level the whole way through
+                        raise ValueError(f"{dim}: level {level} has {n} questions, fewer than the {a.per_dimension} asked")
+            if any(not 1 <= v <= a.levels for v in a.start.values()):
+                raise ValueError("a start level is outside 1..levels")
         return self
 
     @property

@@ -1,0 +1,2543 @@
+{
+ "key": "spatial",
+ "version": 2,
+ "category": "aptitude",
+ "title": {
+  "en": "Space and shape",
+  "hi": "जगह और आकार"
+ },
+ "about": {
+  "en": "8 puzzles about directions, folding, mirrors and shapes — all in your head. They get harder or easier with your answers, and change every time.",
+  "hi": "दिशाओं, मोड़ने, आईने और आकारों पर 8 पहेलियाँ — सब मन में। आपके जवाबों से कठिन या आसान होती हैं, और हर बार बदलती हैं।"
+ },
+ "intro": {
+  "en": "Eight puzzles about space and shape — picture each one in your head. If you're not sure, have a go or say skip.",
+  "hi": "जगह और आकार की आठ पहेलियाँ — हर एक को मन में सोचिए। पक्का न हो तो अंदाज़ा लगाइए या 'छोड़ो' कहिए।"
+ },
+ "est_minutes": 6,
+ "scoring_method": "adaptive_correct",
+ "forms": [],
+ "adaptive": {
+  "per_dimension": 8,
+  "levels": 5,
+  "start": {
+   "6": 1,
+   "7": 1,
+   "8": 2,
+   "9": 2,
+   "10": 3,
+   "11": 3,
+   "12": 3,
+   "college": 3
+  }
+ },
+ "dimensions": {
+  "aptitude:spatial": {
+   "en": "thinking in space and shape",
+   "hi": "जगह और आकार में सोचना",
+   "group": "aptitude"
+  }
+ },
+ "items": [
+  {
+   "key": "spa_L1_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You face west. You turn right and then right. Which way do you face now?",
+    "hi": "आपका मुँह पश्चिम की ओर है। आप दाएँ, फिर दाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing east.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह पूर्व की ओर।"
+   }
+  },
+  {
+   "key": "spa_L1_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You face west. You turn right and then right and then right. Which way do you face now?",
+    "hi": "आपका मुँह पश्चिम की ओर है। आप दाएँ, फिर दाएँ, फिर दाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing south.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह दक्षिण की ओर।"
+   }
+  },
+  {
+   "key": "spa_L1_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A sheet of paper is folded in half once. You punch 1 hole through all the layers. How many holes are there when you open it?",
+    "hi": "एक कागज़ को एक बार आधा मोड़ा गया। सारी परतों में 1 छेद किए गए। खोलने पर कितने छेद होंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "1 fold make 2 layers; 1 × 2 = 2.",
+    "hi": "1 बार मोड़ने से 2 परतें; 1 × 2 = 2।"
+   }
+  },
+  {
+   "key": "spa_L1_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Turn the character u upside down — half a turn. What does it look like now?",
+    "hi": "u को आधा घुमाकर उल्टा कीजिए। अब वह कैसा दिखता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "W",
+      "hi": "W"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "n",
+      "hi": "n"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Half a turn swaps top with bottom and left with right: u becomes n.",
+    "hi": "आधा घुमाव ऊपर-नीचे और दाएँ-बाएँ बदल देता है: u n बन जाता है।"
+   }
+  },
+  {
+   "key": "spa_L1_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Turn the character b upside down — half a turn. What does it look like now?",
+    "hi": "b को आधा घुमाकर उल्टा कीजिए। अब वह कैसा दिखता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "b",
+      "hi": "b"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "p",
+      "hi": "p"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Half a turn swaps top with bottom and left with right: b becomes q.",
+    "hi": "आधा घुमाव ऊपर-नीचे और दाएँ-बाएँ बदल देता है: b q बन जाता है।"
+   }
+  },
+  {
+   "key": "spa_L1_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A sheet of paper is folded in half once. You punch 2 holes through all the layers. How many holes are there when you open it?",
+    "hi": "एक कागज़ को एक बार आधा मोड़ा गया। सारी परतों में 2 छेद किए गए। खोलने पर कितने छेद होंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "1 fold make 2 layers; 2 × 2 = 4.",
+    "hi": "1 बार मोड़ने से 2 परतें; 2 × 2 = 4।"
+   }
+  },
+  {
+   "key": "spa_L1_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You face north. You turn right and then right and then right. Which way do you face now?",
+    "hi": "आपका मुँह उत्तर की ओर है। आप दाएँ, फिर दाएँ, फिर दाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing west.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह पश्चिम की ओर।"
+   }
+  },
+  {
+   "key": "spa_L1_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Turn the character n upside down — half a turn. What does it look like now?",
+    "hi": "n को आधा घुमाकर उल्टा कीजिए। अब वह कैसा दिखता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "p",
+      "hi": "p"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "u",
+      "hi": "u"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Half a turn swaps top with bottom and left with right: n becomes u.",
+    "hi": "आधा घुमाव ऊपर-नीचे और दाएँ-बाएँ बदल देता है: n u बन जाता है।"
+   }
+  },
+  {
+   "key": "spa_L1_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Turn the character 6 upside down — half a turn. What does it look like now?",
+    "hi": "6 को आधा घुमाकर उल्टा कीजिए। अब वह कैसा दिखता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "n",
+      "hi": "n"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "M",
+      "hi": "M"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Half a turn swaps top with bottom and left with right: 6 becomes 9.",
+    "hi": "आधा घुमाव ऊपर-नीचे और दाएँ-बाएँ बदल देता है: 6 9 बन जाता है।"
+   }
+  },
+  {
+   "key": "spa_L1_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 1,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You face north. You turn left and then left. Which way do you face now?",
+    "hi": "आपका मुँह उत्तर की ओर है। आप बाएँ, फिर बाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing south.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह दक्षिण की ओर।"
+   }
+  },
+  {
+   "key": "spa_L2_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "On a normal die, opposite faces always add up to 7. If 3 is on top, what is on the bottom?",
+    "hi": "एक साधारण पासे पर आमने-सामने के अंकों का जोड़ हमेशा 7 होता है। ऊपर 3 है, तो नीचे क्या होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "7 − 3 = 4.",
+    "hi": "7 − 3 = 4।"
+   }
+  },
+  {
+   "key": "spa_L2_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "On a normal die, opposite faces always add up to 7. If 1 is on top, what is on the bottom?",
+    "hi": "एक साधारण पासे पर आमने-सामने के अंकों का जोड़ हमेशा 7 होता है। ऊपर 1 है, तो नीचे क्या होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "7 − 1 = 6.",
+    "hi": "7 − 1 = 6।"
+   }
+  },
+  {
+   "key": "spa_L2_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You hold the small letter q up to a mirror. Which letter do you see?",
+    "hi": "छोटे अक्षर q को आईने के सामने रखें। आईने में कौन सा अक्षर दिखेगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "p",
+      "hi": "p"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "b",
+      "hi": "b"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "A mirror swaps left and right, but not top and bottom.",
+    "hi": "आईना दाएँ-बाएँ बदलता है, ऊपर-नीचे नहीं।"
+   }
+  },
+  {
+   "key": "spa_L2_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A sheet of paper is folded in half three times. You punch 1 hole through all the layers. How many holes are there when you open it?",
+    "hi": "एक कागज़ को तीन बार आधा मोड़ा गया। सारी परतों में 1 छेद किए गए। खोलने पर कितने छेद होंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "3 folds make 8 layers; 1 × 8 = 8.",
+    "hi": "3 बार मोड़ने से 8 परतें; 1 × 8 = 8।"
+   }
+  },
+  {
+   "key": "spa_L2_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You hold the small letter p up to a mirror. Which letter do you see?",
+    "hi": "छोटे अक्षर p को आईने के सामने रखें। आईने में कौन सा अक्षर दिखेगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "p",
+      "hi": "p"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "b",
+      "hi": "b"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "A mirror swaps left and right, but not top and bottom.",
+    "hi": "आईना दाएँ-बाएँ बदलता है, ऊपर-नीचे नहीं।"
+   }
+  },
+  {
+   "key": "spa_L2_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You face north. You turn left and then left. Which way do you face now?",
+    "hi": "आपका मुँह उत्तर की ओर है। आप बाएँ, फिर बाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing south.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह दक्षिण की ओर।"
+   }
+  },
+  {
+   "key": "spa_L2_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You hold the small letter b up to a mirror. Which letter do you see?",
+    "hi": "छोटे अक्षर b को आईने के सामने रखें। आईने में कौन सा अक्षर दिखेगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "p",
+      "hi": "p"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "b",
+      "hi": "b"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "A mirror swaps left and right, but not top and bottom.",
+    "hi": "आईना दाएँ-बाएँ बदलता है, ऊपर-नीचे नहीं।"
+   }
+  },
+  {
+   "key": "spa_L2_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "You hold the small letter d up to a mirror. Which letter do you see?",
+    "hi": "छोटे अक्षर d को आईने के सामने रखें। आईने में कौन सा अक्षर दिखेगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "d",
+      "hi": "d"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "p",
+      "hi": "p"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "q",
+      "hi": "q"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "b",
+      "hi": "b"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "A mirror swaps left and right, but not top and bottom.",
+    "hi": "आईना दाएँ-बाएँ बदलता है, ऊपर-नीचे नहीं।"
+   }
+  },
+  {
+   "key": "spa_L2_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A sheet of paper is folded in half once. You punch 1 hole through all the layers. How many holes are there when you open it?",
+    "hi": "एक कागज़ को एक बार आधा मोड़ा गया। सारी परतों में 1 छेद किए गए। खोलने पर कितने छेद होंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "1 fold make 2 layers; 1 × 2 = 2.",
+    "hi": "1 बार मोड़ने से 2 परतें; 1 × 2 = 2।"
+   }
+  },
+  {
+   "key": "spa_L2_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 2,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A sheet of paper is folded in half, then in half again. You punch 2 holes through all the layers. How many holes are there when you open it?",
+    "hi": "एक कागज़ को आधा, फिर दोबारा आधा मोड़ा गया। सारी परतों में 2 छेद किए गए। खोलने पर कितने छेद होंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "2 folds make 4 layers; 2 × 4 = 8.",
+    "hi": "2 बार मोड़ने से 4 परतें; 2 × 4 = 8।"
+   }
+  },
+  {
+   "key": "spa_L3_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 5:10. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 5:10 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6:10",
+      "hi": "6:10"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "5:10",
+      "hi": "5:10"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "11:10",
+      "hi": "11:10"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6:50",
+      "hi": "6:50"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 6:50.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 6:50।"
+   }
+  },
+  {
+   "key": "spa_L3_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A round cake is cut with 5 straight cuts, each through the centre. How many pieces are there?",
+    "hi": "एक गोल केक को 5 सीधे कट से काटा गया, हर कट बीच से होकर। कितने टुकड़े बने?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "11",
+      "hi": "11"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "25",
+      "hi": "25"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Each cut through the centre adds two pieces: 5 × 2 = 10.",
+    "hi": "बीच से हर कट दो टुकड़े जोड़ता है: 5 × 2 = 10।"
+   }
+  },
+  {
+   "key": "spa_L3_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 64 equal small cubes (4 by 4 by 4). How many small cubes have exactly one painted face?",
+    "hi": "हर सतह से रंगा एक घन 64 बराबर छोटे घनों (4 × 4 × 4) में काटा गया। कितने छोटे घनों पर ठीक एक सतह रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "48",
+      "hi": "48"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Those are the middles of the 6 faces: 6 × 2² = 24.",
+    "hi": "ये हैं 6 सतहों के बीच वाले: 6 × 2² = 24।"
+   }
+  },
+  {
+   "key": "spa_L3_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A round cake is cut with 4 straight cuts, each through the centre. How many pieces are there?",
+    "hi": "एक गोल केक को 4 सीधे कट से काटा गया, हर कट बीच से होकर। कितने टुकड़े बने?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Each cut through the centre adds two pieces: 4 × 2 = 8.",
+    "hi": "बीच से हर कट दो टुकड़े जोड़ता है: 4 × 2 = 8।"
+   }
+  },
+  {
+   "key": "spa_L3_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 4:00. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 4:00 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10:00",
+      "hi": "10:00"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4:00",
+      "hi": "4:00"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "8:05",
+      "hi": "8:05"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8:00",
+      "hi": "8:00"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 8:00.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 8:00।"
+   }
+  },
+  {
+   "key": "spa_L3_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A round cake is cut with 3 straight cuts, each through the centre. How many pieces are there?",
+    "hi": "एक गोल केक को 3 सीधे कट से काटा गया, हर कट बीच से होकर। कितने टुकड़े बने?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Each cut through the centre adds two pieces: 3 × 2 = 6.",
+    "hi": "बीच से हर कट दो टुकड़े जोड़ता है: 3 × 2 = 6।"
+   }
+  },
+  {
+   "key": "spa_L3_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 6:40. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 6:40 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6:40",
+      "hi": "6:40"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "5:40",
+      "hi": "5:40"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "12:40",
+      "hi": "12:40"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "5:20",
+      "hi": "5:20"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 5:20.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 5:20।"
+   }
+  },
+  {
+   "key": "spa_L3_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 4:40. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 4:40 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "7:20",
+      "hi": "7:20"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4:40",
+      "hi": "4:40"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10:40",
+      "hi": "10:40"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "7:40",
+      "hi": "7:40"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 7:20.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 7:20।"
+   }
+  },
+  {
+   "key": "spa_L3_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 11:00. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 11:00 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "1:05",
+      "hi": "1:05"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1:00",
+      "hi": "1:00"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "11:00",
+      "hi": "11:00"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "5:00",
+      "hi": "5:00"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 1:00.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 1:00।"
+   }
+  },
+  {
+   "key": "spa_L3_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 3,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 7:20. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 7:20 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "7:20",
+      "hi": "7:20"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1:20",
+      "hi": "1:20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "4:40",
+      "hi": "4:40"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "4:20",
+      "hi": "4:20"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 4:40.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 4:40।"
+   }
+  },
+  {
+   "key": "spa_L4_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 27 equal small cubes (3 by 3 by 3). How many small cubes have exactly one painted face?",
+    "hi": "हर सतह से रंगा एक घन 27 बराबर छोटे घनों (3 × 3 × 3) में काटा गया। कितने छोटे घनों पर ठीक एक सतह रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Those are the middles of the 6 faces: 6 × 1² = 6.",
+    "hi": "ये हैं 6 सतहों के बीच वाले: 6 × 1² = 6।"
+   }
+  },
+  {
+   "key": "spa_L4_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 1:50. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 1:50 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10:10",
+      "hi": "10:10"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7:50",
+      "hi": "7:50"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1:50",
+      "hi": "1:50"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "10:50",
+      "hi": "10:50"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 10:10.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 10:10।"
+   }
+  },
+  {
+   "key": "spa_L4_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 6 km north, then 2 km west, then 6 km south, then 6 km west. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 6 किमी उत्तर, फिर 2 किमी पश्चिम, फिर 6 किमी दक्षिण, फिर 6 किमी पश्चिम चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "South-west",
+      "hi": "दक्षिण-पश्चिम"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Overall she is 8 km west of home.",
+    "hi": "कुल मिलाकर वह घर से 8 किमी पश्चिम में है।"
+   }
+  },
+  {
+   "key": "spa_L4_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 64 equal small cubes (4 by 4 by 4). How many small cubes have exactly one painted face?",
+    "hi": "हर सतह से रंगा एक घन 64 बराबर छोटे घनों (4 × 4 × 4) में काटा गया। कितने छोटे घनों पर ठीक एक सतह रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "48",
+      "hi": "48"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Those are the middles of the 6 faces: 6 × 2² = 24.",
+    "hi": "ये हैं 6 सतहों के बीच वाले: 6 × 2² = 24।"
+   }
+  },
+  {
+   "key": "spa_L4_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 3 km east, then 3 km north, then 6 km west. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 3 किमी पूर्व, फिर 3 किमी उत्तर, फिर 6 किमी पश्चिम चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "North-east",
+      "hi": "उत्तर-पूर्व"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North-west",
+      "hi": "उत्तर-पश्चिम"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Overall she is 3 km west and 3 km north of home.",
+    "hi": "कुल मिलाकर वह घर से 3 किमी पश्चिम और 3 किमी उत्तर में है।"
+   }
+  },
+  {
+   "key": "spa_L4_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 3 km north, then 4 km east. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 3 किमी उत्तर, फिर 4 किमी पूर्व चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "North-east",
+      "hi": "उत्तर-पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "South-east",
+      "hi": "दक्षिण-पूर्व"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Overall she is 4 km east and 3 km north of home.",
+    "hi": "कुल मिलाकर वह घर से 4 किमी पूर्व और 3 किमी उत्तर में है।"
+   }
+  },
+  {
+   "key": "spa_L4_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 64 equal small cubes (4 by 4 by 4). How many small cubes have no paint at all?",
+    "hi": "हर सतह से रंगा एक घन 64 बराबर छोटे घनों (4 × 4 × 4) में काटा गया। कितने छोटे घनों पर कोई भी सतह रंगी नहीं है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Those are the hidden inside: 2³ = 8.",
+    "hi": "ये हैं भीतर छिपे: 2³ = 8।"
+   }
+  },
+  {
+   "key": "spa_L4_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 27 equal small cubes (3 by 3 by 3). How many small cubes have exactly two painted faces?",
+    "hi": "हर सतह से रंगा एक घन 27 बराबर छोटे घनों (3 × 3 × 3) में काटा गया। कितने छोटे घनों पर ठीक दो सतहें रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Those are the middles of the 12 edges: 12 × 1 = 12.",
+    "hi": "ये हैं 12 किनारों के बीच वाले: 12 × 1 = 12।"
+   }
+  },
+  {
+   "key": "spa_L4_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 64 equal small cubes (4 by 4 by 4). How many small cubes have exactly three painted faces?",
+    "hi": "हर सतह से रंगा एक घन 64 बराबर छोटे घनों (4 × 4 × 4) में काटा गया। कितने छोटे घनों पर ठीक तीन सतहें रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Those are the 8 corners = 8.",
+    "hi": "ये हैं 8 कोने = 8।"
+   }
+  },
+  {
+   "key": "spa_L4_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 4,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 11:15. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 11:15 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "12:45",
+      "hi": "12:45"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "12:15",
+      "hi": "12:15"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "11:15",
+      "hi": "11:15"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "5:15",
+      "hi": "5:15"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 12:45.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 12:45।"
+   }
+  },
+  {
+   "key": "spa_L5_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 7:08. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 7:08 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "7:08",
+      "hi": "7:08"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4:52",
+      "hi": "4:52"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "4:08",
+      "hi": "4:08"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "1:08",
+      "hi": "1:08"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 4:52.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 4:52।"
+   }
+  },
+  {
+   "key": "spa_L5_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 64 equal small cubes (4 by 4 by 4). How many small cubes have exactly three painted faces?",
+    "hi": "हर सतह से रंगा एक घन 64 बराबर छोटे घनों (4 × 4 × 4) में काटा गया। कितने छोटे घनों पर ठीक तीन सतहें रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Those are the 8 corners = 8.",
+    "hi": "ये हैं 8 कोने = 8।"
+   }
+  },
+  {
+   "key": "spa_L5_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 7:56. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 7:56 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "7:56",
+      "hi": "7:56"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4:56",
+      "hi": "4:56"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1:56",
+      "hi": "1:56"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "4:04",
+      "hi": "4:04"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 4:04.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 4:04।"
+   }
+  },
+  {
+   "key": "spa_L5_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 64 equal small cubes (4 by 4 by 4). How many small cubes have at least one painted face?",
+    "hi": "हर सतह से रंगा एक घन 64 बराबर छोटे घनों (4 × 4 × 4) में काटा गया। कितने छोटे घनों पर कम से कम एक सतह रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "56",
+      "hi": "56"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "48",
+      "hi": "48"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "96",
+      "hi": "96"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "All but the hidden inner 2×2×2 = 8: 64 − 8 = 56.",
+    "hi": "भीतर छिपे 8 को छोड़कर: 64 − 8 = 56।"
+   }
+  },
+  {
+   "key": "spa_L5_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 6 km north, then 2 km west, then 6 km south, then 6 km west. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 6 किमी उत्तर, फिर 2 किमी पश्चिम, फिर 6 किमी दक्षिण, फिर 6 किमी पश्चिम चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "North-east",
+      "hi": "उत्तर-पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Overall she is 8 km west of home.",
+    "hi": "कुल मिलाकर वह घर से 8 किमी पश्चिम में है।"
+   }
+  },
+  {
+   "key": "spa_L5_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A clock shows 1:05. What time does it seem to show in a mirror?",
+    "hi": "घड़ी में 1:05 बजे हैं। आईने में वह कितने बजे दिखेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10:05",
+      "hi": "10:05"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7:05",
+      "hi": "7:05"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10:55",
+      "hi": "10:55"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "1:05",
+      "hi": "1:05"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Subtract from 11:60 (that is, 12:00): the mirror shows 10:55.",
+    "hi": "11:60 (यानी 12:00) में से घटाएँ: आईने में 10:55।"
+   }
+  },
+  {
+   "key": "spa_L5_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 2 km north, then 7 km east, then 2 km south. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 2 किमी उत्तर, फिर 7 किमी पूर्व, फिर 2 किमी दक्षिण चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "South-west",
+      "hi": "दक्षिण-पश्चिम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North-east",
+      "hi": "उत्तर-पूर्व"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Overall she is 7 km east of home.",
+    "hi": "कुल मिलाकर वह घर से 7 किमी पूर्व में है।"
+   }
+  },
+  {
+   "key": "spa_L5_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 125 equal small cubes (5 by 5 by 5). How many small cubes have exactly three painted faces?",
+    "hi": "हर सतह से रंगा एक घन 125 बराबर छोटे घनों (5 × 5 × 5) में काटा गया। कितने छोटे घनों पर ठीक तीन सतहें रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "27",
+      "hi": "27"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "54",
+      "hi": "54"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "36",
+      "hi": "36"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Those are the 8 corners = 8.",
+    "hi": "ये हैं 8 कोने = 8।"
+   }
+  },
+  {
+   "key": "spa_L5_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "A cube painted on every face is cut into 125 equal small cubes (5 by 5 by 5). How many small cubes have at least one painted face?",
+    "hi": "हर सतह से रंगा एक घन 125 बराबर छोटे घनों (5 × 5 × 5) में काटा गया। कितने छोटे घनों पर कम से कम एक सतह रंगी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "150",
+      "hi": "150"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "27",
+      "hi": "27"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "98",
+      "hi": "98"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "90",
+      "hi": "90"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "All but the hidden inner 3×3×3 = 27: 125 − 27 = 98.",
+    "hi": "भीतर छिपे 27 को छोड़कर: 125 − 27 = 98।"
+   }
+  },
+  {
+   "key": "spa_L5_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:spatial",
+   "difficulty": 5,
+   "section": {
+    "en": "Space and shape",
+    "hi": "जगह और आकार"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 3 km north, then 4 km east. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 3 किमी उत्तर, फिर 4 किमी पूर्व चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "South-east",
+      "hi": "दक्षिण-पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "North-west",
+      "hi": "उत्तर-पश्चिम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North-east",
+      "hi": "उत्तर-पूर्व"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Overall she is 4 km east and 3 km north of home.",
+    "hi": "कुल मिलाकर वह घर से 4 किमी पूर्व और 3 किमी उत्तर में है।"
+   }
+  }
+ ]
+}

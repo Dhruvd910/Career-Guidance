@@ -12,10 +12,11 @@ speaks the same words.
 
 from __future__ import annotations
 
+import random
 from datetime import datetime, timedelta, timezone
 
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, object_session
 
 from app.assessment import scoring
 from app.assessment.loader import spec_for, sync_instruments
@@ -58,6 +59,8 @@ def _applies(item: AssessmentItem, attempt: AssessmentAttempt, profile: StudentP
     applies_to = content.get("applies_to") or {}
     if applies_to.get("class_levels") and profile.class_level not in applies_to["class_levels"]:
         return False
+    if attempt.track and attempt.track in (applies_to.get("skip_for_tracks") or ()):
+        return False
     for earlier, options in (content.get("requires") or {}).items():
         if (answers.get(earlier) or {}).get("option") not in options:
             return False
@@ -69,7 +72,74 @@ def _answers(attempt: AssessmentAttempt) -> dict[str, dict]:
     return {r.item.key: r.answer for r in attempt.responses if not r.skipped and r.answer is not None}
 
 
+# ---------------- adaptive tests ----------------
+#
+# One level up after a right answer, one down after a wrong (or skipped) one, from the level for the
+# student's class; the dimensions take turns. Among the questions at that level: not one shown already
+# in this attempt, preferably not one from an earlier attempt, picked at random — seeded by the attempt
+# and the position, so going back brings the very same question up again.
+
+def _adaptive(attempt: AssessmentAttempt):
+    try:
+        return spec_for(attempt.instrument.key, attempt.instrument.version).adaptive
+    except KeyError:
+        return None
+
+
+def _start_level(adaptive, profile: StudentProfile) -> int:
+    stage = profile.education_stage or ""
+    key = "college" if stage.startswith("ug_") or stage in ("pg", "graduate") else str(profile.class_level)
+    return adaptive.start.get(key, (adaptive.levels + 1) // 2)
+
+
+def _right(item: AssessmentItem, response: AssessmentResponse | None) -> bool:
+    return bool(response is not None and not response.skipped and response.answer
+                and response.answer.get("option") == item.content.get("answer"))
+
+
+def _seen_before(attempt: AssessmentAttempt) -> set[str]:
+    db = object_session(attempt)
+    if db is None:
+        return set()
+    paths = db.execute(select(AssessmentAttempt.path).where(
+        AssessmentAttempt.student_profile_id == attempt.student_profile_id,
+        AssessmentAttempt.instrument_id == attempt.instrument_id, AssessmentAttempt.id != attempt.id)).scalars()
+    return {key for path in paths for key in (path or [])}
+
+
+def _next_adaptive(attempt: AssessmentAttempt, profile: StudentProfile, adaptive) -> AssessmentItem | None:
+    items = {i.key: i for i in attempt.instrument.items}
+    responses = {r.item.key: r for r in attempt.responses}
+    shown = [items[k] for k in attempt.path if k in items]
+    dims = list(spec_for(attempt.instrument.key, attempt.instrument.version).dimensions)
+    asked = {d: [i for i in shown if i.content.get("dimension") == d] for d in dims}
+    open_dims = [d for d in dims if len(asked[d]) < adaptive.per_dimension]
+    if not open_dims:
+        return None
+    dim = min(open_dims, key=lambda d: (len(asked[d]), dims.index(d)))
+    if asked[dim]:
+        last = asked[dim][-1]
+        level = last.difficulty + (1 if _right(last, responses.get(last.key)) else -1)
+    else:
+        level = _start_level(adaptive, profile)
+    level = max(1, min(adaptive.levels, level))
+    unused = [i for i in attempt.instrument.items if i.content.get("dimension") == dim and i.key not in attempt.path]
+    before = _seen_before(attempt)
+    by_distance = sorted({abs(i.difficulty - level) for i in unused})
+    rng = random.Random(f"{attempt.id}:{len(attempt.path)}")
+    for distance in by_distance:  # the right level first; a neighbouring one only if it has run out
+        at = [i for i in unused if abs(i.difficulty - level) == distance]
+        fresh = [i for i in at if i.key not in before]
+        pool = sorted(fresh or at, key=lambda i: (i.difficulty, i.key))
+        if pool:
+            return rng.choice(pool)
+    return None
+
+
 def _next_item(attempt: AssessmentAttempt, profile: StudentProfile) -> AssessmentItem | None:
+    adaptive = _adaptive(attempt)
+    if adaptive is not None:
+        return _next_adaptive(attempt, profile, adaptive)
     answers = _answers(attempt)
     done = set(attempt.path)
     for item in attempt.instrument.items:
@@ -79,6 +149,10 @@ def _next_item(attempt: AssessmentAttempt, profile: StudentProfile) -> Assessmen
 
 
 def _remaining(attempt: AssessmentAttempt, profile: StudentProfile) -> int:
+    adaptive = _adaptive(attempt)
+    if adaptive is not None:
+        dims = spec_for(attempt.instrument.key, attempt.instrument.version).dimensions
+        return max(0, adaptive.per_dimension * len(dims) - len(attempt.path))
     answers = _answers(attempt)
     done = set(attempt.path)
     return sum(1 for i in attempt.instrument.items if i.key not in done and _applies(i, attempt, profile, answers))
@@ -198,8 +272,11 @@ def start(db: Session, profile: StudentProfile, key: str, language: str = "en", 
             db.commit()
             return view(db, attempt, profile)
         attempt.status = "abandoned"
+    from app.assessment.tracks import track_for
+
     attempt = AssessmentAttempt(student_profile_id=profile.id, instrument=instrument,
-                                form=_pick_form(db, profile, instrument), language=language, mode=mode, path=[])
+                                form=_pick_form(db, profile, instrument), language=language, mode=mode, path=[],
+                                track=track_for(db, profile))
     db.add(attempt)
     _prefill(db, attempt, profile)
     db.commit()
@@ -361,6 +438,11 @@ def _phrase(dim: str, s: AssessmentScore, method: str, lang: str) -> str:
     if method == "correct_answers":
         extra = (f", {d['skipped']} skipped" if lang == "en" else f", {d['skipped']} छोड़े") if d.get("skipped") else ""
         return f"{d['correct']} of {d['asked']} right{extra}" if lang == "en" else f"{d['asked']} में से {d['correct']} सही{extra}"
+    if method == "adaptive_correct":
+        reached = d.get("level_reached") or 0
+        if lang == "en":
+            return (f"level {reached} of {d.get('levels_max', 5)}" if reached else "below level 1") + f" · {d['correct']} of {d['asked']} right"
+        return (f"स्तर {d.get('levels_max', 5)} में से {reached}" if reached else "स्तर 1 से नीचे") + f" · {d['asked']} में से {d['correct']} सही"
     if method == "anchored_levels":
         # Counted from 1, the way the four lines are numbered on screen and read out.
         return f"level {d['level'] + 1} of {d['of'] + 1}" if lang == "en" else f"स्तर {d['of'] + 1} में से {d['level'] + 1}"
@@ -387,7 +469,7 @@ def result(db: Session, attempt: AssessmentAttempt) -> dict:
     out = {"attempt_id": attempt.id, "instrument": attempt.instrument.key, "version": attempt.instrument.version,
            "title": attempt.instrument.title, "method": method, "form": attempt.form, "language": attempt.language,
            "completed_at": attempt.completed_at.isoformat() if attempt.completed_at else None, "scores": scores}
-    if method == "correct_answers":
+    if method in ("correct_answers", "adaptive_correct"):
         out["review"] = _review(attempt)
     return out
 

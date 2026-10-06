@@ -5,7 +5,7 @@ import json
 from app.assessment import alignment
 from app.models.assessment import CareerAlignmentSnapshot
 from app.seed.careers import load_library, seed_careers
-from tests.test_assessment_service import right, student, take
+from tests.test_assessment_service import right, scripted, student, take
 
 TECH = {"int_maths": "love", "maths_style": "logic", "int_physics": "like", "physics_side": "numericals",
         "build_things": "maybe", "int_chemistry": "meh", "int_biology": "hard", "hospital": "avoid",
@@ -77,14 +77,14 @@ def test_measured_ability_shows_strengths_and_gaps_with_next_steps(db_session):
     seed_careers(db_session)
     asha = student(db_session)
     take(db_session, asha, "interests", answers(TECH))
-    wrong_logic = {"a_log_1", "a_log_2", "a_log_3", "a_log_4", "a_log_5"}
-    view, _ = take(db_session, asha, "aptitude", choose=lambda i: right(i, wrong=wrong_logic))
+    view, _ = take(db_session, asha, "aptitude", choose=scripted({"aptitude:logical": [False] * 5}))
     cse = career(alignment.directions(db_session, asha), "cse")
     assert cse["band"] == "potential", "loves it, but the central reasoning need came out low today"
-    assert cse["components"]["aptitude:logical"] == 0.0 and cse["components"]["aptitude:numerical"] == 1.0
-    assert {"en": "Working with numbers: 5 of 5 right", "hi": "संख्याओं के साथ काम: 5 में से 5 सही"} in cse["strengths"]
+    assert cse["components"]["aptitude:logical"] == 0.12 and cse["components"]["aptitude:numerical"] == 0.88
+    assert {"en": "Working with numbers: level 5 of 5 · 5 of 5 right",
+            "hi": "संख्याओं के साथ काम: स्तर 5 में से 5 · 5 में से 5 सही"} in cse["strengths"]
     gap = cse["development_areas"][0]
-    assert gap["text"]["en"] == "Logical reasoning: 0 of 5 right"
+    assert gap["text"]["en"] == "Logical reasoning: below level 1 · 0 of 5 right"
     assert gap["next_step"]["en"].startswith("Solve a few logic puzzles")
     assert {"dimension": "aptitude:logical", "measured_as": "aptitude:logical", "instrument": "aptitude",
             "attempt_id": view["attempt_id"]} in cse["evidence"]
@@ -105,10 +105,12 @@ def test_the_coding_check_counts_over_a_self_rating(db_session):
     asha = student(db_session)
     take(db_session, asha, "interests", answers(TECH))
     take(db_session, asha, "skills", choose=lambda item: {"option": "l3"})
-    take(db_session, asha, "coding_check", choose=lambda i: right(i, wrong={"c6", "c7", "c8"}))
+    # Class 10 starts the coding check at level 2: right, right, right, right (2→3→4→5→5), then four wrong (5→4→3→2):
+    # (2+3+4+5+4+3+2+1)/40 = 0.6 — the check outweighs a self-rating of the top level.
+    take(db_session, asha, "coding_check", choose=scripted({"check:programming": [True] * 4 + [False] * 4}))
     cse = career(alignment.directions(db_session, asha), "cse")
-    assert cse["components"]["skill:programming"] == 0.625
-    assert {"en": "Reading code: 5 of 8 right", "hi": "कोड पढ़ना: 8 में से 5 सही"} not in cse["strengths"]
+    assert cse["components"]["skill:programming"] == 0.6
+    assert not any(s["en"].startswith("Reading code") for s in cse["strengths"])
 
 
 def test_directions_are_kept_and_reused_until_something_changes(db_session):

@@ -46,15 +46,40 @@ def test_hindi_is_written_in_hindi_and_never_as_a_gendered_slash(key):
         assert re.search(r"[ऀ-ॿ]", hi), f"no Devanagari: {hi}"
 
 
-def test_the_aptitude_forms_are_parallel():
-    aptitude = spec("aptitude")
-    shape = {form: Counter((i.dimension, i.difficulty) for i in aptitude.items if i.form == form) for form in aptitude.forms}
-    assert shape["A"] == shape["B"]
-    assert sum(shape["A"].values()) == 15
-    assert {d for d, _ in shape["A"]} == {"aptitude:numerical", "aptitude:logical", "aptitude:verbal"}
+@pytest.mark.parametrize("key", ["aptitude", "spatial", "coding_check"])
+def test_the_adaptive_banks_have_enough_at_every_level(key):
+    """A student can stay at one level the whole way (always right, or always wrong), and three takes in a row
+    shouldn't repeat a question: ten at every level of every dimension."""
+    inst = spec(key)
+    assert inst.adaptive is not None and inst.scoring_method == "adaptive_correct"
+    shape = Counter((i.dimension, i.difficulty) for i in inst.items)
+    for dim in inst.dimensions:
+        for level in range(1, inst.adaptive.levels + 1):
+            assert shape[(dim, level)] >= 10, (dim, level)
+    assert inst.adaptive.start["6"] == 1 and inst.adaptive.start["12"] >= 2
 
 
-@pytest.mark.parametrize("key", ["aptitude", "coding_check"])
+def _run(code: str) -> dict:
+    """The coding check's pseudo-code, run as Python."""
+    import re as _re
+
+    py = _re.sub(r"repeat for (\w+) = (\d+) to (\d+):", r"for \1 in range(\2, \3 + 1):", code)
+    py = _re.sub(r"for each (\w+) in (\w+):", r"for \1 in \2:", py).replace("function f(n):", "def f(n):")
+    scope: dict = {}
+    exec(py, scope)  # noqa: S102 — our own generated questions (one namespace, so f can call itself)
+    return scope
+
+
+def test_every_code_question_is_marked_by_running_its_code():
+    for item in spec("coding_check").items:
+        if not item.code:
+            continue
+        var = re.search(r"What is (\w+) at the end", item.prompt.en).group(1)
+        expected = next(o.label.en for o in item.options if o.key == item.answer)
+        assert str(_run(item.code)[var]) == expected, item.key
+
+
+@pytest.mark.parametrize("key", ["aptitude", "coding_check", "spatial"])
 def test_every_problem_has_one_clear_answer(key):
     for item in spec(key).items:
         for lang in ("en", "hi"):
@@ -63,10 +88,12 @@ def test_every_problem_has_one_clear_answer(key):
         assert item.explanation is not None
 
 
-def test_answers_are_spread_over_the_options():
+@pytest.mark.parametrize("key", ["aptitude", "spatial", "coding_check"])
+def test_answers_are_spread_over_the_options(key):
     """If B were always right, guessing B would look like ability."""
-    answers = Counter(i.answer for i in spec("aptitude").items)
-    assert len(answers) >= 3 and max(answers.values()) <= 16
+    items = spec(key).items
+    answers = Counter(i.answer for i in items)
+    assert len(answers) == 4 and max(answers.values()) <= 0.35 * len(items)
 
 
 def test_skills_are_concrete_levels():
@@ -97,7 +124,7 @@ def test_the_spatial_puzzles_can_be_answered_by_voice():
     """Spec §8's spatial reasoning, as puzzles to picture, not pictures: one right answer each, every
     option distinct, and an explanation for reviewing afterwards."""
     puzzles = spec("spatial")
-    assert puzzles.category == "aptitude" and len(puzzles.items) == 8
+    assert puzzles.category == "aptitude" and len(puzzles.items) >= 50
     for item in puzzles.items:
         labels = [o.label.en for o in item.options]
         assert len(set(labels)) == 4 and item.answer in {o.key for o in item.options} and item.explanation, item.key

@@ -1,0 +1,7553 @@
+{
+ "key": "aptitude",
+ "version": 2,
+ "category": "aptitude",
+ "title": {
+  "en": "Thinking skills",
+  "hi": "सोचने की क्षमता"
+ },
+ "about": {
+  "en": "15 problems with numbers, logic and words that get harder or easier with your answers — and are different each time. It shows how you did today, nothing more.",
+  "hi": "संख्याओं, तर्क और शब्दों के 15 सवाल, जो आपके जवाबों के साथ कठिन या आसान होते हैं — और हर बार अलग। यह बस बताता है कि आज आपने कैसा किया।"
+ },
+ "intro": {
+  "en": "Fifteen problems — numbers, logic and words. A right answer makes the next one harder, a wrong one makes it easier, so don't worry if they get tough. If you're not sure, have a go or say skip.",
+  "hi": "पंद्रह सवाल — संख्याएँ, तर्क और शब्द। सही जवाब पर अगला सवाल कठिन होगा, ग़लत पर आसान, इसलिए कठिन लगें तो घबराइए मत। पक्का न हो तो अंदाज़ा लगाइए या 'छोड़ो' कहिए।"
+ },
+ "est_minutes": 12,
+ "scoring_method": "adaptive_correct",
+ "forms": [],
+ "adaptive": {
+  "per_dimension": 5,
+  "levels": 5,
+  "start": {
+   "6": 1,
+   "7": 1,
+   "8": 2,
+   "9": 2,
+   "10": 3,
+   "11": 3,
+   "12": 3,
+   "college": 3
+  }
+ },
+ "dimensions": {
+  "aptitude:numerical": {
+   "en": "working with numbers",
+   "hi": "संख्याओं के साथ काम",
+   "group": "aptitude"
+  },
+  "aptitude:logical": {
+   "en": "logical reasoning",
+   "hi": "तार्किक सोच",
+   "group": "aptitude"
+  },
+  "aptitude:verbal": {
+   "en": "understanding words",
+   "hi": "शब्दों की समझ",
+   "group": "aptitude"
+  }
+ },
+ "items": [
+  {
+   "key": "num_L1_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "30 sweets are split into 5 equal parts. How many sweets are in 4 of those parts?",
+    "hi": "30 मिठाइयाँ 5 बराबर हिस्सों में बाँटी गईं। ऐसे 4 हिस्सों में कितनी मिठाइयाँ होंगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "30 ÷ 5 × 4 = 24.",
+    "hi": "30 ÷ 5 × 4 = 24।"
+   }
+  },
+  {
+   "key": "num_L1_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "70 sweets are split into 5 equal parts. How many sweets are in 4 of those parts?",
+    "hi": "70 मिठाइयाँ 5 बराबर हिस्सों में बाँटी गईं। ऐसे 4 हिस्सों में कितनी मिठाइयाँ होंगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "42",
+      "hi": "42"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "56",
+      "hi": "56"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "58",
+      "hi": "58"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "70",
+      "hi": "70"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "70 ÷ 5 × 4 = 56.",
+    "hi": "70 ÷ 5 × 4 = 56।"
+   }
+  },
+  {
+   "key": "num_L1_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is 25% of 280?",
+    "hi": "280 का 25% कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "140",
+      "hi": "140"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "35",
+      "hi": "35"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "70",
+      "hi": "70"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "99",
+      "hi": "99"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "25% of 280 = 280 × 25 ÷ 100 = 70.",
+    "hi": "280 का 25% = 280 × 25 ÷ 100 = 70।"
+   }
+  },
+  {
+   "key": "num_L1_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is 10% of 160?",
+    "hi": "160 का 10% कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "32",
+      "hi": "32"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "33",
+      "hi": "33"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "16",
+      "hi": "16"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "10% of 160 = 160 × 10 ÷ 100 = 16.",
+    "hi": "160 का 10% = 160 × 10 ÷ 100 = 16।"
+   }
+  },
+  {
+   "key": "num_L1_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is 10% of 140?",
+    "hi": "140 का 10% कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "14",
+      "hi": "14"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "10% of 140 = 140 × 10 ÷ 100 = 14.",
+    "hi": "140 का 10% = 140 × 10 ÷ 100 = 14।"
+   }
+  },
+  {
+   "key": "num_L1_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "20 sweets are split into 4 equal parts. How many sweets are in 2 of those parts?",
+    "hi": "20 मिठाइयाँ 4 बराबर हिस्सों में बाँटी गईं। ऐसे 2 हिस्सों में कितनी मिठाइयाँ होंगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "12",
+      "hi": "12"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "10",
+      "hi": "10"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "5",
+      "hi": "5"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "13",
+      "hi": "13"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "20 ÷ 4 × 2 = 10.",
+    "hi": "20 ÷ 4 × 2 = 10।"
+   }
+  },
+  {
+   "key": "num_L1_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A notebook costs ₹39. How much do 3 notebooks cost?",
+    "hi": "एक कॉपी ₹39 की है। 3 कॉपियाँ कितने की होंगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹78",
+      "hi": "₹78"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹156",
+      "hi": "₹156"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹117",
+      "hi": "₹117"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹69",
+      "hi": "₹69"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "39 × 3 = 117.",
+    "hi": "39 × 3 = 117।"
+   }
+  },
+  {
+   "key": "num_L1_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "You buy things worth ₹374 and pay with a ₹500 note. How much change do you get?",
+    "hi": "आप ₹374 का सामान ख़रीदते हैं और ₹500 का नोट देते हैं। कितने पैसे वापस मिलेंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹136",
+      "hi": "₹136"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹226",
+      "hi": "₹226"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹116",
+      "hi": "₹116"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹126",
+      "hi": "₹126"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "500 − 374 = 126.",
+    "hi": "500 − 374 = 126।"
+   }
+  },
+  {
+   "key": "num_L1_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "You buy things worth ₹275 and pay with a ₹500 note. How much change do you get?",
+    "hi": "आप ₹275 का सामान ख़रीदते हैं और ₹500 का नोट देते हैं। कितने पैसे वापस मिलेंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹225",
+      "hi": "₹225"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹235",
+      "hi": "₹235"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹215",
+      "hi": "₹215"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹325",
+      "hi": "₹325"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "500 − 275 = 225.",
+    "hi": "500 − 275 = 225।"
+   }
+  },
+  {
+   "key": "num_L1_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 1,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is 10% of 40?",
+    "hi": "40 का 10% कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "10% of 40 = 40 × 10 ÷ 100 = 4.",
+    "hi": "40 का 10% = 40 × 10 ÷ 100 = 4।"
+   }
+  },
+  {
+   "key": "num_L2_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "₹125 is shared between two friends in the ratio 1:4. How much does the one with the bigger share get?",
+    "hi": "₹125 दो दोस्तों में 1:4 के अनुपात में बाँटे गए। ज़्यादा हिस्से वाले को कितने मिले?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹125",
+      "hi": "₹125"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹62",
+      "hi": "₹62"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹100",
+      "hi": "₹100"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹25",
+      "hi": "₹25"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "125 ÷ (1+4) = 25 per part; × 4 = 100.",
+    "hi": "125 ÷ (1+4) = 25 प्रति भाग; × 4 = 100।"
+   }
+  },
+  {
+   "key": "num_L2_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "₹416 is shared between two friends in the ratio 3:5. How much does the one with the bigger share get?",
+    "hi": "₹416 दो दोस्तों में 3:5 के अनुपात में बाँटे गए। ज़्यादा हिस्से वाले को कितने मिले?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹156",
+      "hi": "₹156"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹312",
+      "hi": "₹312"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹208",
+      "hi": "₹208"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹260",
+      "hi": "₹260"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "416 ÷ (3+5) = 52 per part; × 5 = 260.",
+    "hi": "416 ÷ (3+5) = 52 प्रति भाग; × 5 = 260।"
+   }
+  },
+  {
+   "key": "num_L2_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A bus covers 288 km in 4 hours at a steady speed. What is its speed?",
+    "hi": "एक बस 4 घंटे में 288 किमी चलती है। उसकी रफ़्तार क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "72 km per hour",
+      "hi": "72 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "77 km per hour",
+      "hi": "77 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "67 km per hour",
+      "hi": "67 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "82 km per hour",
+      "hi": "82 किमी प्रति घंटा"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "288 ÷ 4 = 72 km/h.",
+    "hi": "288 ÷ 4 = 72 किमी प्रति घंटा।"
+   }
+  },
+  {
+   "key": "num_L2_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the simple interest on ₹3000 at 6% a year for 4 years?",
+    "hi": "₹3000 पर 6% सालाना दर से 4 साल का साधारण ब्याज कितना होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹3,720",
+      "hi": "₹3,720"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹720",
+      "hi": "₹720"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹180",
+      "hi": "₹180"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹900",
+      "hi": "₹900"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "3000 × 6 × 4 ÷ 100 = 720.",
+    "hi": "3000 × 6 × 4 ÷ 100 = 720।"
+   }
+  },
+  {
+   "key": "num_L2_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "₹930 is shared between two friends in the ratio 3:7. How much does the one with the bigger share get?",
+    "hi": "₹930 दो दोस्तों में 3:7 के अनुपात में बाँटे गए। ज़्यादा हिस्से वाले को कितने मिले?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹279",
+      "hi": "₹279"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹465",
+      "hi": "₹465"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹651",
+      "hi": "₹651"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹744",
+      "hi": "₹744"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "930 ÷ (3+7) = 93 per part; × 7 = 651.",
+    "hi": "930 ÷ (3+7) = 93 प्रति भाग; × 7 = 651।"
+   }
+  },
+  {
+   "key": "num_L2_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the simple interest on ₹9500 at 4% a year for 5 years?",
+    "hi": "₹9500 पर 4% सालाना दर से 5 साल का साधारण ब्याज कितना होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹11,400",
+      "hi": "₹11,400"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹380",
+      "hi": "₹380"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹2,280",
+      "hi": "₹2,280"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹1,900",
+      "hi": "₹1,900"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "9500 × 4 × 5 ÷ 100 = 1900.",
+    "hi": "9500 × 4 × 5 ÷ 100 = 1900।"
+   }
+  },
+  {
+   "key": "num_L2_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the simple interest on ₹7000 at 6% a year for 5 years?",
+    "hi": "₹7000 पर 6% सालाना दर से 5 साल का साधारण ब्याज कितना होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹2,100",
+      "hi": "₹2,100"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹420",
+      "hi": "₹420"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹9,100",
+      "hi": "₹9,100"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹2,520",
+      "hi": "₹2,520"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "7000 × 6 × 5 ÷ 100 = 2100.",
+    "hi": "7000 × 6 × 5 ÷ 100 = 2100।"
+   }
+  },
+  {
+   "key": "num_L2_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A bag costs ₹1800. In a sale it is 15% off. What is the sale price?",
+    "hi": "एक बैग ₹1800 का है। सेल में 15% की छूट है। सेल में दाम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹1,680",
+      "hi": "₹1,680"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹1,530",
+      "hi": "₹1,530"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹270",
+      "hi": "₹270"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹1,395",
+      "hi": "₹1,395"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "15% of 1800 is 270; 1800 − 270 = 1530.",
+    "hi": "1800 का 15% = 270; 1800 − 270 = 1530।"
+   }
+  },
+  {
+   "key": "num_L2_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "₹380 is shared between two friends in the ratio 1:4. How much does the one with the bigger share get?",
+    "hi": "₹380 दो दोस्तों में 1:4 के अनुपात में बाँटे गए। ज़्यादा हिस्से वाले को कितने मिले?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹380",
+      "hi": "₹380"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹76",
+      "hi": "₹76"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹304",
+      "hi": "₹304"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹190",
+      "hi": "₹190"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "380 ÷ (1+4) = 76 per part; × 4 = 304.",
+    "hi": "380 ÷ (1+4) = 76 प्रति भाग; × 4 = 304।"
+   }
+  },
+  {
+   "key": "num_L2_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 2,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the simple interest on ₹7500 at 12% a year for 4 years?",
+    "hi": "₹7500 पर 12% सालाना दर से 4 साल का साधारण ब्याज कितना होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹900",
+      "hi": "₹900"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹4,500",
+      "hi": "₹4,500"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹11,100",
+      "hi": "₹11,100"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹3,600",
+      "hi": "₹3,600"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "7500 × 12 × 4 ÷ 100 = 3600.",
+    "hi": "7500 × 12 × 4 ÷ 100 = 3600।"
+   }
+  },
+  {
+   "key": "num_L3_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A shopkeeper buys a toy for ₹400 and sells it for ₹500. What is the profit percentage?",
+    "hi": "दुकानदार एक खिलौना ₹400 में ख़रीदकर ₹500 में बेचता है। मुनाफ़ा कितने प्रतिशत है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "25%",
+      "hi": "25%"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "30%",
+      "hi": "30%"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "50%",
+      "hi": "50%"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "20%",
+      "hi": "20%"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Profit 100 on cost 400: 100 ÷ 400 × 100 = 25%.",
+    "hi": "लागत 400 पर मुनाफ़ा 100: 100 ÷ 400 × 100 = 25%।"
+   }
+  },
+  {
+   "key": "num_L3_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A shopkeeper buys a toy for ₹1600 and sells it for ₹1920. What is the profit percentage?",
+    "hi": "दुकानदार एक खिलौना ₹1600 में ख़रीदकर ₹1920 में बेचता है। मुनाफ़ा कितने प्रतिशत है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "25%",
+      "hi": "25%"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20%",
+      "hi": "20%"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "16.7%",
+      "hi": "16.7%"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "40%",
+      "hi": "40%"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Profit 320 on cost 1600: 320 ÷ 1600 × 100 = 20%.",
+    "hi": "लागत 1600 पर मुनाफ़ा 320: 320 ÷ 1600 × 100 = 20%।"
+   }
+  },
+  {
+   "key": "num_L3_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A price goes up by 10% and then down by 10%. What is the overall change?",
+    "hi": "एक दाम 10% बढ़ता है और फिर 10% घटता है। कुल बदलाव क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "5% decrease",
+      "hi": "5% की कमी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1% increase",
+      "hi": "1% की बढ़त"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1% decrease",
+      "hi": "1% की कमी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "No change",
+      "hi": "कोई बदलाव नहीं"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "100 → 110 → 110 × 90/100 = 99: a 1% fall.",
+    "hi": "100 → 110 → 110 × 90/100 = 99: 1% की कमी।"
+   }
+  },
+  {
+   "key": "num_L3_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A price goes up by 40% and then down by 40%. What is the overall change?",
+    "hi": "एक दाम 40% बढ़ता है और फिर 40% घटता है। कुल बदलाव क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "No change",
+      "hi": "कोई बदलाव नहीं"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20% decrease",
+      "hi": "20% की कमी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "16% increase",
+      "hi": "16% की बढ़त"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "16% decrease",
+      "hi": "16% की कमी"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "100 → 140 → 140 × 60/100 = 84: a 16% fall.",
+    "hi": "100 → 140 → 140 × 60/100 = 84: 16% की कमी।"
+   }
+  },
+  {
+   "key": "num_L3_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A shopkeeper buys a toy for ₹1400 and sells it for ₹1575. What is the profit percentage?",
+    "hi": "दुकानदार एक खिलौना ₹1400 में ख़रीदकर ₹1575 में बेचता है। मुनाफ़ा कितने प्रतिशत है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "12.5%",
+      "hi": "12.5%"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "11.1%",
+      "hi": "11.1%"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "25%",
+      "hi": "25%"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "17.5%",
+      "hi": "17.5%"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Profit 175 on cost 1400: 175 ÷ 1400 × 100 = 12.5%.",
+    "hi": "लागत 1400 पर मुनाफ़ा 175: 175 ÷ 1400 × 100 = 12.5%।"
+   }
+  },
+  {
+   "key": "num_L3_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "8 workers build a wall in 15 days. How many days would 24 workers take, at the same pace?",
+    "hi": "8 मज़दूर एक दीवार 15 दिन में बनाते हैं। उसी रफ़्तार से 24 मज़दूर कितने दिन लेंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "3 days",
+      "hi": "3 days"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "7 days",
+      "hi": "7 days"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "5 days",
+      "hi": "5 days"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "45 days",
+      "hi": "45 days"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "The job is 8 × 15 = 120 worker-days; ÷ 24 = 5.",
+    "hi": "काम = 8 × 15 = 120 मज़दूर-दिन; ÷ 24 = 5।"
+   }
+  },
+  {
+   "key": "num_L3_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A car goes to a town at 40 km/h and comes back the same way at 60 km/h. What is its average speed for the whole trip?",
+    "hi": "एक कार 40 किमी प्रति घंटा से शहर जाती है और उसी रास्ते 60 किमी प्रति घंटा से लौटती है। पूरे सफ़र की औसत रफ़्तार कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "54 km per hour",
+      "hi": "54 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "44 km per hour",
+      "hi": "44 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "50 km per hour",
+      "hi": "50 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "48 km per hour",
+      "hi": "48 किमी प्रति घंटा"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Average speed = 2 × 40 × 60 ÷ (40 + 60) = 48 — not the plain average.",
+    "hi": "औसत रफ़्तार = 2 × 40 × 60 ÷ (40 + 60) = 48 — सीधा औसत नहीं।"
+   }
+  },
+  {
+   "key": "num_L3_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A car goes to a town at 45 km/h and comes back the same way at 90 km/h. What is its average speed for the whole trip?",
+    "hi": "एक कार 45 किमी प्रति घंटा से शहर जाती है और उसी रास्ते 90 किमी प्रति घंटा से लौटती है। पूरे सफ़र की औसत रफ़्तार कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "60 km per hour",
+      "hi": "60 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "67 km per hour",
+      "hi": "67 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "56 km per hour",
+      "hi": "56 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "66 km per hour",
+      "hi": "66 किमी प्रति घंटा"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Average speed = 2 × 45 × 90 ÷ (45 + 90) = 60 — not the plain average.",
+    "hi": "औसत रफ़्तार = 2 × 45 × 90 ÷ (45 + 90) = 60 — सीधा औसत नहीं।"
+   }
+  },
+  {
+   "key": "num_L3_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A shopkeeper buys a toy for ₹880 and sells it for ₹1056. What is the profit percentage?",
+    "hi": "दुकानदार एक खिलौना ₹880 में ख़रीदकर ₹1056 में बेचता है। मुनाफ़ा कितने प्रतिशत है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "25%",
+      "hi": "25%"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20%",
+      "hi": "20%"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "16.7%",
+      "hi": "16.7%"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "40%",
+      "hi": "40%"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Profit 176 on cost 880: 176 ÷ 880 × 100 = 20%.",
+    "hi": "लागत 880 पर मुनाफ़ा 176: 176 ÷ 880 × 100 = 20%।"
+   }
+  },
+  {
+   "key": "num_L3_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 3,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "Rohan can finish a job in 10 days and a friend in 15 days. Working together, how many days will it take?",
+    "hi": "एक व्यक्ति काम को 10 दिन में और उसका दोस्त 15 दिन में पूरा करता है। साथ में कितने दिन लगेंगे?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "12 days",
+      "hi": "12 days"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8 days",
+      "hi": "8 days"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "6 days",
+      "hi": "6 days"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "5 days",
+      "hi": "5 days"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Together they do 1/10 + 1/15 = 1/6 of the job a day.",
+    "hi": "साथ में रोज़ 1/10 + 1/15 = 1/6 काम होता है।"
+   }
+  },
+  {
+   "key": "num_L4_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the compound interest on ₹4000 at 20% a year for 2 years?",
+    "hi": "₹4000 पर 20% सालाना की दर से 2 साल का चक्रवृद्धि ब्याज कितना होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹1,600",
+      "hi": "₹1,600"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹2,560",
+      "hi": "₹2,560"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹800",
+      "hi": "₹800"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹1,760",
+      "hi": "₹1,760"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "4000 × (1.20)² − 4000 = 1760.",
+    "hi": "4000 × (1 + 20/100)² − 4000 = 1760।"
+   }
+  },
+  {
+   "key": "num_L4_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A train 300 m long passes a pole in 10 seconds. What is its speed in km per hour?",
+    "hi": "300 मीटर लंबी ट्रेन एक खंभे को 10 सेकंड में पार करती है। उसकी रफ़्तार किमी प्रति घंटा में कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "108 km per hour",
+      "hi": "108 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "126 km per hour",
+      "hi": "126 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "54 km per hour",
+      "hi": "54 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "30 km per hour",
+      "hi": "30 किमी प्रति घंटा"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "300 ÷ 10 = 30 m/s; × 18/5 = 108 km/h.",
+    "hi": "300 ÷ 10 = 30 मीटर प्रति सेकंड; × 18/5 = 108 किमी प्रति घंटा।"
+   }
+  },
+  {
+   "key": "num_L4_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "Two dice are thrown. What is the probability that the numbers add up to 4?",
+    "hi": "दो पासे फेंके गए। अंकों का जोड़ 4 होने की प्रायिकता क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "1 in 4",
+      "hi": "4 में 1"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1 in 12",
+      "hi": "12 में 1"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1 in 6",
+      "hi": "6 में 1"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "1 in 9",
+      "hi": "9 में 1"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "3 of the 36 equally likely pairs add to 4: {'en': '1 in 12', 'hi': '12 में 1'}.",
+    "hi": "36 में से 3 जोड़ियों का जोड़ 4 है: {'en': '1 in 12', 'hi': '12 में 1'}।"
+   }
+  },
+  {
+   "key": "num_L4_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "Two discounts, 20% and then 20%, equal one single discount of how much?",
+    "hi": "पहले 20% और फिर 20% की छूट — यह एक बार की कितनी छूट के बराबर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "40%",
+      "hi": "40%"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "38%",
+      "hi": "38%"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "36%",
+      "hi": "36%"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "5%",
+      "hi": "5%"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "20 + 20 − 20×20/100 = 36%.",
+    "hi": "20 + 20 − 20×20/100 = 36%।"
+   }
+  },
+  {
+   "key": "num_L4_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A train 280 m long passes a pole in 14 seconds. What is its speed in km per hour?",
+    "hi": "280 मीटर लंबी ट्रेन एक खंभे को 14 सेकंड में पार करती है। उसकी रफ़्तार किमी प्रति घंटा में कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "20 km per hour",
+      "hi": "20 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "72 km per hour",
+      "hi": "72 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "36 km per hour",
+      "hi": "36 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "90 km per hour",
+      "hi": "90 किमी प्रति घंटा"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "280 ÷ 14 = 20 m/s; × 18/5 = 72 km/h.",
+    "hi": "280 ÷ 14 = 20 मीटर प्रति सेकंड; × 18/5 = 72 किमी प्रति घंटा।"
+   }
+  },
+  {
+   "key": "num_L4_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A train 425 m long passes a pole in 17 seconds. What is its speed in km per hour?",
+    "hi": "425 मीटर लंबी ट्रेन एक खंभे को 17 सेकंड में पार करती है। उसकी रफ़्तार किमी प्रति घंटा में कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "108 km per hour",
+      "hi": "108 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "45 km per hour",
+      "hi": "45 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "90 km per hour",
+      "hi": "90 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "25 km per hour",
+      "hi": "25 किमी प्रति घंटा"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "425 ÷ 17 = 25 m/s; × 18/5 = 90 km/h.",
+    "hi": "425 ÷ 17 = 25 मीटर प्रति सेकंड; × 18/5 = 90 किमी प्रति घंटा।"
+   }
+  },
+  {
+   "key": "num_L4_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the compound interest on ₹20000 at 20% a year for 2 years?",
+    "hi": "₹20000 पर 20% सालाना की दर से 2 साल का चक्रवृद्धि ब्याज कितना होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹12,800",
+      "hi": "₹12,800"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹4,000",
+      "hi": "₹4,000"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹8,000",
+      "hi": "₹8,000"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹8,800",
+      "hi": "₹8,800"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "20000 × (1.20)² − 20000 = 8800.",
+    "hi": "20000 × (1 + 20/100)² − 20000 = 8800।"
+   }
+  },
+  {
+   "key": "num_L4_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A father is 3 times as old as his son. In 10 years he will be 2 times as old. How old is the son now?",
+    "hi": "एक पिता अपने बेटे से 3 गुना बड़े हैं। 10 साल बाद वे 2 गुना बड़े होंगे। बेटे की उम्र अभी कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "10 years",
+      "hi": "10 years"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "13 years",
+      "hi": "13 years"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "14 years",
+      "hi": "14 years"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8 years",
+      "hi": "8 years"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "3S + 10 = 2(S + 10) gives S = 10; the father is 30.",
+    "hi": "3S + 10 = 2(S + 10) से S = 10; पिता 30 के हैं।"
+   }
+  },
+  {
+   "key": "num_L4_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A train 210 m long passes a pole in 7 seconds. What is its speed in km per hour?",
+    "hi": "210 मीटर लंबी ट्रेन एक खंभे को 7 सेकंड में पार करती है। उसकी रफ़्तार किमी प्रति घंटा में कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "30 km per hour",
+      "hi": "30 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "54 km per hour",
+      "hi": "54 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "108 km per hour",
+      "hi": "108 किमी प्रति घंटा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "126 km per hour",
+      "hi": "126 किमी प्रति घंटा"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "210 ÷ 7 = 30 m/s; × 18/5 = 108 km/h.",
+    "hi": "210 ÷ 7 = 30 मीटर प्रति सेकंड; × 18/5 = 108 किमी प्रति घंटा।"
+   }
+  },
+  {
+   "key": "num_L4_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 4,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A father is 4 times as old as his son. In 6 years he will be 3 times as old. How old is the son now?",
+    "hi": "एक पिता अपने बेटे से 4 गुना बड़े हैं। 6 साल बाद वे 3 गुना बड़े होंगे। बेटे की उम्र अभी कितनी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "16 years",
+      "hi": "16 years"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "10 years",
+      "hi": "10 years"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "18 years",
+      "hi": "18 years"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "12 years",
+      "hi": "12 years"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "4S + 6 = 3(S + 6) gives S = 12; the father is 48.",
+    "hi": "4S + 6 = 3(S + 6) से S = 12; पिता 48 के हैं।"
+   }
+  },
+  {
+   "key": "num_L5_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the remainder when 3^35 is divided by 10?",
+    "hi": "3^35 को 10 से भाग देने पर शेषफल क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "3",
+      "hi": "3"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "8",
+      "hi": "8"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "The remainders of 3, 3², 3³… repeat in a cycle; following it to the 35th power gives 7.",
+    "hi": "3, 3², 3³… के शेषफल एक चक्र में दोहराते हैं; 35वीं घात तक चलने पर 7 आता है।"
+   }
+  },
+  {
+   "key": "num_L5_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the remainder when 3^50 is divided by 10?",
+    "hi": "3^50 को 10 से भाग देने पर शेषफल क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "9",
+      "hi": "9"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1",
+      "hi": "1"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "0",
+      "hi": "0"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "The remainders of 3, 3², 3³… repeat in a cycle; following it to the 50th power gives 9.",
+    "hi": "3, 3², 3³… के शेषफल एक चक्र में दोहराते हैं; 50वीं घात तक चलने पर 9 आता है।"
+   }
+  },
+  {
+   "key": "num_L5_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A coin is tossed 4 times. What is the probability of getting at least one head?",
+    "hi": "एक सिक्का 4 बार उछाला गया। कम से कम एक बार हेड आने की प्रायिकता क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "1 in 2",
+      "hi": "2 में 1"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1 in 16",
+      "hi": "16 में 1"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "15 in 16",
+      "hi": "16 में 15"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "1 in 4",
+      "hi": "4 में 1"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "1 − (no heads at all) = 1 − 1/16 = {'en': '15 in 16', 'hi': '16 में 15'}.",
+    "hi": "1 − (एक भी हेड नहीं) = 1 − 1/16 = {'en': '15 in 16', 'hi': '16 में 15'}।"
+   }
+  },
+  {
+   "key": "num_L5_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "What is the remainder when 2^46 is divided by 9?",
+    "hi": "2^46 को 9 से भाग देने पर शेषफल क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "4",
+      "hi": "4"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6",
+      "hi": "6"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "2",
+      "hi": "2"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "7",
+      "hi": "7"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "The remainders of 2, 2², 2³… repeat in a cycle; following it to the 46th power gives 7.",
+    "hi": "2, 2², 2³… के शेषफल एक चक्र में दोहराते हैं; 46वीं घात तक चलने पर 7 आता है।"
+   }
+  },
+  {
+   "key": "num_L5_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "Pipe A fills a tank in 8 hours and pipe B in 12 hours; a leak empties it in 24 hours. With all three open, how long does it take to fill?",
+    "hi": "पाइप A टंकी 8 घंटे में और पाइप B 12 घंटे में भरता है; एक रिसाव उसे 24 घंटे में खाली करता है। तीनों खुले हों तो टंकी कितने घंटे में भरेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "6 hours",
+      "hi": "6 hours"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "8 hours",
+      "hi": "8 hours"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "4 hours",
+      "hi": "4 hours"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "12 hours",
+      "hi": "12 hours"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Per hour: 1/8 + 1/12 − 1/24 = 1/6.",
+    "hi": "हर घंटे: 1/8 + 1/12 − 1/24 = 1/6।"
+   }
+  },
+  {
+   "key": "num_L5_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "On ₹5000 at 10% a year for 2 years, how much more is compound interest than simple interest?",
+    "hi": "₹5000 पर 10% सालाना, 2 साल: चक्रवृद्धि ब्याज साधारण ब्याज से कितना ज़्यादा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹55",
+      "hi": "₹55"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹50",
+      "hi": "₹50"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹500",
+      "hi": "₹500"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹100",
+      "hi": "₹100"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "The difference is P × (R/100)² = 5000 × (10/100)² = 50.",
+    "hi": "अंतर = P × (R/100)² = 5000 × (10/100)² = 50।"
+   }
+  },
+  {
+   "key": "num_L5_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "Pipe A fills a tank in 4 hours and pipe B in 6 hours; a leak empties it in 12 hours. With all three open, how long does it take to fill?",
+    "hi": "पाइप A टंकी 4 घंटे में और पाइप B 6 घंटे में भरता है; एक रिसाव उसे 12 घंटे में खाली करता है। तीनों खुले हों तो टंकी कितने घंटे में भरेगी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "2 hours",
+      "hi": "2 hours"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "6 hours",
+      "hi": "6 hours"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "3 hours",
+      "hi": "3 hours"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "5 hours",
+      "hi": "5 hours"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Per hour: 1/4 + 1/6 − 1/12 = 1/3.",
+    "hi": "हर घंटे: 1/4 + 1/6 − 1/12 = 1/3।"
+   }
+  },
+  {
+   "key": "num_L5_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A coin is tossed 5 times. What is the probability of getting at least one head?",
+    "hi": "एक सिक्का 5 बार उछाला गया। कम से कम एक बार हेड आने की प्रायिकता क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "5 in 32",
+      "hi": "32 में 5"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "1 in 2",
+      "hi": "2 में 1"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1 in 32",
+      "hi": "32 में 1"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "31 in 32",
+      "hi": "32 में 31"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "1 − (no heads at all) = 1 − 1/32 = {'en': '31 in 32', 'hi': '32 में 31'}.",
+    "hi": "1 − (एक भी हेड नहीं) = 1 − 1/32 = {'en': '31 in 32', 'hi': '32 में 31'}।"
+   }
+  },
+  {
+   "key": "num_L5_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "On ₹10000 at 4% a year for 2 years, how much more is compound interest than simple interest?",
+    "hi": "₹10000 पर 4% सालाना, 2 साल: चक्रवृद्धि ब्याज साधारण ब्याज से कितना ज़्यादा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "₹16",
+      "hi": "₹16"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "₹21",
+      "hi": "₹21"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "₹32",
+      "hi": "₹32"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "₹400",
+      "hi": "₹400"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "The difference is P × (R/100)² = 10000 × (4/100)² = 16.",
+    "hi": "अंतर = P × (R/100)² = 10000 × (4/100)² = 16।"
+   }
+  },
+  {
+   "key": "num_L5_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:numerical",
+   "difficulty": 5,
+   "section": {
+    "en": "Numbers",
+    "hi": "संख्याएँ"
+   },
+   "prompt": {
+    "en": "A coin is tossed 3 times. What is the probability of getting at least one head?",
+    "hi": "एक सिक्का 3 बार उछाला गया। कम से कम एक बार हेड आने की प्रायिकता क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "1 in 8",
+      "hi": "8 में 1"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "3 in 8",
+      "hi": "8 में 3"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "1 in 2",
+      "hi": "2 में 1"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "7 in 8",
+      "hi": "8 में 7"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "1 − (no heads at all) = 1 − 1/8 = {'en': '7 in 8', 'hi': '8 में 7'}.",
+    "hi": "1 − (एक भी हेड नहीं) = 1 − 1/8 = {'en': '7 in 8', 'hi': '8 में 7'}।"
+   }
+  },
+  {
+   "key": "log_L1_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 10, 13, 16, 19, ?",
+    "hi": "आगे क्या आएगा: 10, 13, 16, 19, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "22",
+      "hi": "22"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "23",
+      "hi": "23"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "25",
+      "hi": "25"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Each number is 3 more than the last.",
+    "hi": "हर संख्या पिछली से 3 ज़्यादा है।"
+   }
+  },
+  {
+   "key": "log_L1_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Zoya is taller than Riya. Riya is taller than Arjun. Who is the tallest?",
+    "hi": "Zoya की लंबाई Riya से ज़्यादा है। Riya की लंबाई Arjun से ज़्यादा है। सबसे ज़्यादा लंबाई किसकी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Can't tell",
+      "hi": "पता नहीं चल सकता"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Zoya",
+      "hi": "Zoya"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Riya",
+      "hi": "Riya"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Arjun",
+      "hi": "Arjun"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Zoya > Riya > Arjun.",
+    "hi": "Zoya > Riya > Arjun।"
+   }
+  },
+  {
+   "key": "log_L1_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "You face west. You turn left. Which way do you face now?",
+    "hi": "आपका मुँह पश्चिम की ओर है। आप बाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing south.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह दक्षिण की ओर।"
+   }
+  },
+  {
+   "key": "log_L1_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Which number is the odd one out: 24, 40, 42, 72?",
+    "hi": "कौन सी संख्या अलग है: 24, 40, 42, 72?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "72",
+      "hi": "72"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "42",
+      "hi": "42"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "40",
+      "hi": "40"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "All the others are multiples of 6.",
+    "hi": "बाक़ी सब 6 के गुणज हैं।"
+   }
+  },
+  {
+   "key": "log_L1_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Zoya is taller than Riya. Riya is taller than Kabir. Who is the shortest?",
+    "hi": "Zoya की लंबाई Riya से ज़्यादा है। Riya की लंबाई Kabir से ज़्यादा है। सबसे कम लंबाई किसकी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Kabir",
+      "hi": "Kabir"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Zoya",
+      "hi": "Zoya"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Riya",
+      "hi": "Riya"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Can't tell",
+      "hi": "पता नहीं चल सकता"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Zoya > Riya > Kabir.",
+    "hi": "Zoya > Riya > Kabir।"
+   }
+  },
+  {
+   "key": "log_L1_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "You face south. You turn left. Which way do you face now?",
+    "hi": "आपका मुँह दक्षिण की ओर है। आप बाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing east.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह पूर्व की ओर।"
+   }
+  },
+  {
+   "key": "log_L1_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Riya is taller than Isha. Isha is taller than Anika. Who is the tallest?",
+    "hi": "Riya की लंबाई Isha से ज़्यादा है। Isha की लंबाई Anika से ज़्यादा है। सबसे ज़्यादा लंबाई किसकी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Can't tell",
+      "hi": "पता नहीं चल सकता"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Anika",
+      "hi": "Anika"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Riya",
+      "hi": "Riya"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Isha",
+      "hi": "Isha"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Riya > Isha > Anika.",
+    "hi": "Riya > Isha > Anika।"
+   }
+  },
+  {
+   "key": "log_L1_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "You face south. You turn right and then right and then right. Which way do you face now?",
+    "hi": "आपका मुँह दक्षिण की ओर है। आप दाएँ, फिर दाएँ, फिर दाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing east.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह पूर्व की ओर।"
+   }
+  },
+  {
+   "key": "log_L1_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Vikram is taller than Arjun. Arjun is taller than Anika. Who is the tallest?",
+    "hi": "Vikram की लंबाई Arjun से ज़्यादा है। Arjun की लंबाई Anika से ज़्यादा है। सबसे ज़्यादा लंबाई किसकी है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Vikram",
+      "hi": "Vikram"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Anika",
+      "hi": "Anika"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Can't tell",
+      "hi": "पता नहीं चल सकता"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Arjun",
+      "hi": "Arjun"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Vikram > Arjun > Anika.",
+    "hi": "Vikram > Arjun > Anika।"
+   }
+  },
+  {
+   "key": "log_L1_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 1,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "You face east. You turn right. Which way do you face now?",
+    "hi": "आपका मुँह पूर्व की ओर है। आप दाएँ मुड़ते हैं। अब आपका मुँह किस ओर है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "South",
+      "hi": "दक्षिण"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Each right turn is a quarter turn clockwise; you end facing south.",
+    "hi": "हर दायाँ मोड़ घड़ी की दिशा में चौथाई घुमाव है; अंत में मुँह दक्षिण की ओर।"
+   }
+  },
+  {
+   "key": "log_L2_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 11, 16, 20, 25, 29, ?",
+    "hi": "आगे क्या आएगा: 11, 16, 20, 25, 29, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "36",
+      "hi": "36"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "38",
+      "hi": "38"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "34",
+      "hi": "34"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "35",
+      "hi": "35"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "It adds 5, then 4, in turn.",
+    "hi": "बारी-बारी से 5 और 4 जुड़ते हैं।"
+   }
+  },
+  {
+   "key": "log_L2_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: A, E, I, M, ?",
+    "hi": "आगे क्या आएगा: A, E, I, M, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "R",
+      "hi": "R"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "P",
+      "hi": "P"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "V",
+      "hi": "V"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Q",
+      "hi": "Q"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Each letter is 4 places after the last.",
+    "hi": "हर अक्षर पिछले से 4 जगह आगे है।"
+   }
+  },
+  {
+   "key": "log_L2_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If today is Sunday, what day will it be 38 days from now?",
+    "hi": "अगर आज रविवार है, तो 38 दिन बाद कौन सा दिन होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Thursday",
+      "hi": "गुरुवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Saturday",
+      "hi": "शनिवार"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "38 = 5 weeks and 3 days: 3 days after Sunday.",
+    "hi": "38 = 5 हफ़्ते और 3 दिन: रविवार के 3 दिन बाद।"
+   }
+  },
+  {
+   "key": "log_L2_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "In a code, BOX is written as DQZ. How is CAT written?",
+    "hi": "एक कोड में BOX को DQZ लिखा जाता है। CAT कैसे लिखा जाएगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "TAC",
+      "hi": "TAC"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "ECV",
+      "hi": "ECV"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "FDW",
+      "hi": "FDW"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "AYR",
+      "hi": "AYR"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Each letter moves 2 places forward.",
+    "hi": "हर अक्षर 2 जगह आगे खिसकता है।"
+   }
+  },
+  {
+   "key": "log_L2_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If today is Thursday, what day will it be 37 days from now?",
+    "hi": "अगर आज गुरुवार है, तो 37 दिन बाद कौन सा दिन होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Thursday",
+      "hi": "गुरुवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Saturday",
+      "hi": "शनिवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Friday",
+      "hi": "शुक्रवार"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "37 = 5 weeks and 2 days: 2 days after Thursday.",
+    "hi": "37 = 5 हफ़्ते और 2 दिन: गुरुवार के 2 दिन बाद।"
+   }
+  },
+  {
+   "key": "log_L2_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 5, 10, 15, 20, 25, ?",
+    "hi": "आगे क्या आएगा: 5, 10, 15, 20, 25, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "32",
+      "hi": "32"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "29",
+      "hi": "29"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "31",
+      "hi": "31"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "It adds 5, then 5, in turn.",
+    "hi": "बारी-बारी से 5 और 5 जुड़ते हैं।"
+   }
+  },
+  {
+   "key": "log_L2_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 6, 11, 20, 25, 34, ?",
+    "hi": "आगे क्या आएगा: 6, 11, 20, 25, 34, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "39",
+      "hi": "39"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "48",
+      "hi": "48"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "40",
+      "hi": "40"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "41",
+      "hi": "41"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "It adds 5, then 9, in turn.",
+    "hi": "बारी-बारी से 5 और 9 जुड़ते हैं।"
+   }
+  },
+  {
+   "key": "log_L2_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "In a code, HAT is written as IBU. How is BAG written?",
+    "hi": "एक कोड में HAT को IBU लिखा जाता है। BAG कैसे लिखा जाएगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "DCI",
+      "hi": "DCI"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "CBH",
+      "hi": "CBH"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "AZF",
+      "hi": "AZF"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "GAB",
+      "hi": "GAB"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Each letter moves 1 place forward.",
+    "hi": "हर अक्षर 1 जगह आगे खिसकता है।"
+   }
+  },
+  {
+   "key": "log_L2_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "In a code, DOG is written as FQI. How is SUN written?",
+    "hi": "एक कोड में DOG को FQI लिखा जाता है। SUN कैसे लिखा जाएगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "VXQ",
+      "hi": "VXQ"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "NUS",
+      "hi": "NUS"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "UWP",
+      "hi": "UWP"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "QSL",
+      "hi": "QSL"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Each letter moves 2 places forward.",
+    "hi": "हर अक्षर 2 जगह आगे खिसकता है।"
+   }
+  },
+  {
+   "key": "log_L2_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 2,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If today is Friday, what day will it be 19 days from now?",
+    "hi": "अगर आज शुक्रवार है, तो 19 दिन बाद कौन सा दिन होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Saturday",
+      "hi": "शनिवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Sunday",
+      "hi": "रविवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "19 = 2 weeks and 5 days: 5 days after Friday.",
+    "hi": "19 = 2 हफ़्ते और 5 दिन: शुक्रवार के 5 दिन बाद।"
+   }
+  },
+  {
+   "key": "log_L3_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What is the smaller angle between the hour and minute hands of a clock at 8:40?",
+    "hi": "8:40 बजे घड़ी की घंटे और मिनट की सुइयों के बीच छोटा कोण कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "20°",
+      "hi": "20°"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "0°",
+      "hi": "0°"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "10°",
+      "hi": "10°"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "35°",
+      "hi": "35°"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Hour hand at 260°, minute hand at 240°: the gap is 20°.",
+    "hi": "घंटे की सुई 260° पर, मिनट की 240° पर: अंतर 20°।"
+   }
+  },
+  {
+   "key": "log_L3_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: All pens are cups. Some chairs are pens. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: सभी कलम कप हैं। कुछ कुर्सियाँ कलम हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "All chairs are cups.",
+      "hi": "सभी कुर्सियाँ कप हैं।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Some chairs are cups.",
+      "hi": "कुछ कुर्सियाँ कप हैं।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "No chairs are cups.",
+      "hi": "कोई भी कुर्सी कप नहीं है।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "All cups are pens.",
+      "hi": "सभी कप कलम हैं।"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L3_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 64, 81, 100, 121, ?",
+    "hi": "आगे क्या आएगा: 64, 81, 100, 121, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "145",
+      "hi": "145"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "165",
+      "hi": "165"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "144",
+      "hi": "144"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "146",
+      "hi": "146"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "They are squares of numbers in a row.",
+    "hi": "ये लगातार संख्याओं के वर्ग हैं।"
+   }
+  },
+  {
+   "key": "log_L3_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 2, 4, 8, 16, ?",
+    "hi": "आगे क्या आएगा: 2, 4, 8, 16, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "33",
+      "hi": "33"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "40",
+      "hi": "40"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "34",
+      "hi": "34"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "32",
+      "hi": "32"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Each number is 2 times the last.",
+    "hi": "हर संख्या पिछली की 2 गुना है।"
+   }
+  },
+  {
+   "key": "log_L3_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: Some rings are pens. All pens are phones. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: कुछ अंगूठियाँ कलम हैं। सभी कलम फ़ोन हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Some rings are phones.",
+      "hi": "कुछ अंगूठियाँ फ़ोन हैं।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "All rings are phones.",
+      "hi": "सभी अंगूठियाँ फ़ोन हैं।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "No rings are phones.",
+      "hi": "कोई भी अंगूठी फ़ोन नहीं है।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "All phones are pens.",
+      "hi": "सभी फ़ोन कलम हैं।"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L3_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: Some lamps are chairs. All chairs are rings. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: कुछ लैंप कुर्सियाँ हैं। सभी कुर्सियाँ अंगूठियाँ हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "All rings are chairs.",
+      "hi": "सभी अंगूठियाँ कुर्सियाँ हैं।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Some lamps are rings.",
+      "hi": "कुछ लैंप अंगूठियाँ हैं।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "No lamps are rings.",
+      "hi": "कोई भी लैंप अंगूठी नहीं है।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "All lamps are rings.",
+      "hi": "सभी लैंप अंगूठियाँ हैं।"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L3_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: No phones are rings. All pens are phones. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: कोई भी फ़ोन अंगूठी नहीं है। सभी कलम फ़ोन हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "All rings are pens.",
+      "hi": "सभी अंगूठियाँ कलम हैं।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Some pens are rings.",
+      "hi": "कुछ कलम अंगूठियाँ हैं।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "No pens are rings.",
+      "hi": "कोई भी कलम अंगूठी नहीं है।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "All phones are pens.",
+      "hi": "सभी फ़ोन कलम हैं।"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L3_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: All cups are rings. All rings are boxes. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: सभी कप अंगूठियाँ हैं। सभी अंगूठियाँ डिब्बे हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "All boxes are cups.",
+      "hi": "सभी डिब्बे कप हैं।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Some boxes are not rings.",
+      "hi": "कुछ डिब्बे अंगूठियाँ नहीं हैं।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "No cups are boxes.",
+      "hi": "कोई भी कप डिब्बा नहीं है।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "All cups are boxes.",
+      "hi": "सभी कप डिब्बे हैं।"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L3_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What is the smaller angle between the hour and minute hands of a clock at 4:00?",
+    "hi": "4:00 बजे घड़ी की घंटे और मिनट की सुइयों के बीच छोटा कोण कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "120°",
+      "hi": "120°"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "130°",
+      "hi": "130°"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "90°",
+      "hi": "90°"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "135°",
+      "hi": "135°"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Hour hand at 120°, minute hand at 0°: the gap is 120°.",
+    "hi": "घंटे की सुई 120° पर, मिनट की 0° पर: अंतर 120°।"
+   }
+  },
+  {
+   "key": "log_L3_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 3,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What is the smaller angle between the hour and minute hands of a clock at 11:40?",
+    "hi": "11:40 बजे घड़ी की घंटे और मिनट की सुइयों के बीच छोटा कोण कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "125°",
+      "hi": "125°"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "80°",
+      "hi": "80°"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "90°",
+      "hi": "90°"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "110°",
+      "hi": "110°"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Hour hand at 350°, minute hand at 240°: the gap is 110°.",
+    "hi": "घंटे की सुई 350° पर, मिनट की 240° पर: अंतर 110°।"
+   }
+  },
+  {
+   "key": "log_L4_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "11 July 2026 is a Saturday. What day of the week is 30 September 2026?",
+    "hi": "11 जुलाई 2026 को शनिवार है। 30 सितंबर 2026 को कौन सा दिन होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Sunday",
+      "hi": "रविवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Monday",
+      "hi": "सोमवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "It is 81 days later: 11 weeks and 4 days.",
+    "hi": "यह 81 दिन बाद है: 11 हफ़्ते और 4 दिन।"
+   }
+  },
+  {
+   "key": "log_L4_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "27 August 2026 is a Thursday. What day of the week is 7 December 2026?",
+    "hi": "27 अगस्त 2026 को गुरुवार है। 7 दिसंबर 2026 को कौन सा दिन होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Monday",
+      "hi": "सोमवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Thursday",
+      "hi": "गुरुवार"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "It is 102 days later: 14 weeks and 4 days.",
+    "hi": "यह 102 दिन बाद है: 14 हफ़्ते और 4 दिन।"
+   }
+  },
+  {
+   "key": "log_L4_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 9, 10, 12, 15, 19, ?",
+    "hi": "आगे क्या आएगा: 9, 10, 12, 15, 19, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "25",
+      "hi": "25"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "26",
+      "hi": "26"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "24",
+      "hi": "24"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "The gaps grow by 1 each time.",
+    "hi": "अंतर हर बार 1 से बढ़ता है।"
+   }
+  },
+  {
+   "key": "log_L4_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: No rings are cups. All kites are rings. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: कोई भी अंगूठी कप नहीं है। सभी पतंगें अंगूठियाँ हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "All rings are kites.",
+      "hi": "सभी अंगूठियाँ पतंगें हैं।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "All cups are kites.",
+      "hi": "सभी कप पतंगें हैं।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Some kites are cups.",
+      "hi": "कुछ पतंगें कप हैं।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "No kites are cups.",
+      "hi": "कोई भी पतंग कप नहीं है।"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L4_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "In a queue, Kabir is 10th from the front and 9th from the back. How many people are in the queue?",
+    "hi": "एक क़तार में कबीर आगे से 10वाँ और पीछे से 9वाँ है। क़तार में कितने लोग हैं?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "18",
+      "hi": "18"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "20",
+      "hi": "20"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "19",
+      "hi": "19"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "17",
+      "hi": "17"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "10 + 9 − 1 = 18: Kabir is counted twice otherwise.",
+    "hi": "10 + 9 − 1 = 18: नहीं तो कबीर दो बार गिना जाता।"
+   }
+  },
+  {
+   "key": "log_L4_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: No phones are chairs. All kites are phones. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: कोई भी फ़ोन कुर्सी नहीं है। सभी पतंगें फ़ोन हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "All phones are kites.",
+      "hi": "सभी फ़ोन पतंगें हैं।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "No kites are chairs.",
+      "hi": "कोई भी पतंग कुर्सी नहीं है।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "All chairs are kites.",
+      "hi": "सभी कुर्सियाँ पतंगें हैं।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Some kites are chairs.",
+      "hi": "कुछ पतंगें कुर्सियाँ हैं।"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L4_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If these are true: All boxes are phones. All phones are bells. Which of these must also be true?",
+    "hi": "अगर ये सही हैं: सभी डिब्बे फ़ोन हैं। सभी फ़ोन घंटियाँ हैं। इनमें से क्या ज़रूर सही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "No boxes are bells.",
+      "hi": "कोई भी डिब्बा घंटी नहीं है।"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "All bells are boxes.",
+      "hi": "सभी घंटियाँ डिब्बे हैं।"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "All boxes are bells.",
+      "hi": "सभी डिब्बे घंटियाँ हैं।"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Some bells are not phones.",
+      "hi": "कुछ घंटियाँ फ़ोन नहीं हैं।"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Only this one follows from both statements; the others might or might not be true.",
+    "hi": "सिर्फ़ यही दोनों बातों से निकलता है; बाक़ी सही भी हो सकते हैं और नहीं भी।"
+   }
+  },
+  {
+   "key": "log_L4_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "If A = 1, B = 2, C = 3 … Z = 26, what do the letters of STAR add up to?",
+    "hi": "अगर A = 1, B = 2, C = 3 … Z = 26 हो, तो STAR के अक्षरों का जोड़ कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "56",
+      "hi": "56"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "59",
+      "hi": "59"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "61",
+      "hi": "61"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "58",
+      "hi": "58"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "19 + 20 + 1 + 18 = 58.",
+    "hi": "19 + 20 + 1 + 18 = 58."
+   }
+  },
+  {
+   "key": "log_L4_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 3, 7, 13, 21, 31, ?",
+    "hi": "आगे क्या आएगा: 3, 7, 13, 21, 31, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "43",
+      "hi": "43"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "45",
+      "hi": "45"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "44",
+      "hi": "44"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "53",
+      "hi": "53"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "The gaps grow by 2 each time.",
+    "hi": "अंतर हर बार 2 से बढ़ता है।"
+   }
+  },
+  {
+   "key": "log_L4_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 4,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "16 August 2026 is a Sunday. What day of the week is 16 November 2026?",
+    "hi": "16 अगस्त 2026 को रविवार है। 16 नवंबर 2026 को कौन सा दिन होगा?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Sunday",
+      "hi": "रविवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Monday",
+      "hi": "सोमवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Thursday",
+      "hi": "गुरुवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "It is 92 days later: 13 weeks and 1 days.",
+    "hi": "यह 92 दिन बाद है: 13 हफ़्ते और 1 दिन।"
+   }
+  },
+  {
+   "key": "log_L5_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What is the smaller angle between the hour and minute hands of a clock at 2:10?",
+    "hi": "2:10 बजे घड़ी की घंटे और मिनट की सुइयों के बीच छोटा कोण कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "25°",
+      "hi": "25°"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "0°",
+      "hi": "0°"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "5°",
+      "hi": "5°"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "20°",
+      "hi": "20°"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Hour hand at 65°, minute hand at 60°: the gap is 5°.",
+    "hi": "घंटे की सुई 65° पर, मिनट की 60° पर: अंतर 5°।"
+   }
+  },
+  {
+   "key": "log_L5_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What is the smaller angle between the hour and minute hands of a clock at 5:54?",
+    "hi": "5:54 बजे घड़ी की घंटे और मिनट की सुइयों के बीच छोटा कोण कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "162°",
+      "hi": "162°"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "117°",
+      "hi": "117°"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "174°",
+      "hi": "174°"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "147°",
+      "hi": "147°"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Hour hand at 177°, minute hand at 324°: the gap is 147°.",
+    "hi": "घंटे की सुई 177° पर, मिनट की 324° पर: अंतर 147°।"
+   }
+  },
+  {
+   "key": "log_L5_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "1 January 2023 was a Sunday. What day was 1 January 2024?",
+    "hi": "1 जनवरी 2023 को रविवार था। 1 जनवरी 2024 को कौन सा दिन था?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Monday",
+      "hi": "सोमवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Friday",
+      "hi": "शुक्रवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Saturday",
+      "hi": "शनिवार"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "2023 has 365 days: that's 52 weeks and 1 day.",
+    "hi": "2023 में 365 दिन हैं: 52 हफ़्ते और 1 दिन।"
+   }
+  },
+  {
+   "key": "log_L5_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What is the smaller angle between the hour and minute hands of a clock at 4:44?",
+    "hi": "4:44 बजे घड़ी की घंटे और मिनट की सुइयों के बीच छोटा कोण कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "144°",
+      "hi": "144°"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "122°",
+      "hi": "122°"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "92°",
+      "hi": "92°"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "137°",
+      "hi": "137°"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Hour hand at 142°, minute hand at 264°: the gap is 122°.",
+    "hi": "घंटे की सुई 142° पर, मिनट की 264° पर: अंतर 122°।"
+   }
+  },
+  {
+   "key": "log_L5_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 6 km north, then 2 km west, then 6 km south, then 6 km west. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 6 किमी उत्तर, फिर 2 किमी पश्चिम, फिर 6 किमी दक्षिण, फिर 6 किमी पश्चिम चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "North-east",
+      "hi": "उत्तर-पूर्व"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Overall she is 8 km west of home.",
+    "hi": "कुल मिलाकर वह घर से 8 किमी पश्चिम में है।"
+   }
+  },
+  {
+   "key": "log_L5_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What comes next: 1, 5, 6, 11, 17, ?",
+    "hi": "आगे क्या आएगा: 1, 5, 6, 11, 17, ?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "30",
+      "hi": "30"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "34",
+      "hi": "34"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "29",
+      "hi": "29"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "28",
+      "hi": "28"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Each is the sum of the two before it.",
+    "hi": "हर संख्या पिछली दो का जोड़ है।"
+   }
+  },
+  {
+   "key": "log_L5_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "1 January 2028 was a Saturday. What day was 1 January 2029?",
+    "hi": "1 जनवरी 2028 को शनिवार था। 1 जनवरी 2029 को कौन सा दिन था?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Monday",
+      "hi": "सोमवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Saturday",
+      "hi": "शनिवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Thursday",
+      "hi": "गुरुवार"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "2028 has 366 days: that's 52 weeks and 2 days.",
+    "hi": "2028 में 366 दिन हैं: 52 हफ़्ते और 2 दिन।"
+   }
+  },
+  {
+   "key": "log_L5_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "Starting from home, Zoya walks 3 km east, then 3 km north, then 6 km west. In which direction is she from home now?",
+    "hi": "घर से ज़ोया 3 किमी पूर्व, फिर 3 किमी उत्तर, फिर 6 किमी पश्चिम चलती है। अब वह घर से किस दिशा में है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "North",
+      "hi": "उत्तर"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "East",
+      "hi": "पूर्व"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "North-west",
+      "hi": "उत्तर-पश्चिम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "West",
+      "hi": "पश्चिम"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Overall she is 3 km west and 3 km north of home.",
+    "hi": "कुल मिलाकर वह घर से 3 किमी पश्चिम और 3 किमी उत्तर में है।"
+   }
+  },
+  {
+   "key": "log_L5_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "1 January 2024 was a Monday. What day was 1 January 2025?",
+    "hi": "1 जनवरी 2024 को सोमवार था। 1 जनवरी 2025 को कौन सा दिन था?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Monday",
+      "hi": "सोमवार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Sunday",
+      "hi": "रविवार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Tuesday",
+      "hi": "मंगलवार"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Wednesday",
+      "hi": "बुधवार"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "2024 has 366 days: that's 52 weeks and 2 days.",
+    "hi": "2024 में 366 दिन हैं: 52 हफ़्ते और 2 दिन।"
+   }
+  },
+  {
+   "key": "log_L5_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:logical",
+   "difficulty": 5,
+   "section": {
+    "en": "Logic",
+    "hi": "तर्क"
+   },
+   "prompt": {
+    "en": "What is the smaller angle between the hour and minute hands of a clock at 8:54?",
+    "hi": "8:54 बजे घड़ी की घंटे और मिनट की सुइयों के बीच छोटा कोण कितना है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "57°",
+      "hi": "57°"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "27°",
+      "hi": "27°"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "84°",
+      "hi": "84°"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "72°",
+      "hi": "72°"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Hour hand at 267°, minute hand at 324°: the gap is 57°.",
+    "hi": "घंटे की सुई 267° पर, मिनट की 324° पर: अंतर 57°।"
+   }
+  },
+  {
+   "key": "verb_L1_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'ancient'?",
+    "hi": "'प्राचीन' का विलोम (उल्टा) क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "old",
+      "hi": "पुराना"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "modern",
+      "hi": "आधुनिक"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "famous",
+      "hi": "प्रसिद्ध"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "broken",
+      "hi": "टूटा हुआ"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Ancient means very old; modern is new.",
+    "hi": "प्राचीन यानी बहुत पुराना; आधुनिक यानी नया।"
+   }
+  },
+  {
+   "key": "verb_L1_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'generous'?",
+    "hi": "'उदार' का विलोम (उल्टा) क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "kind",
+      "hi": "दयालु"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "brave",
+      "hi": "बहादुर"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "stingy",
+      "hi": "कंजूस"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "rich",
+      "hi": "अमीर"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Generous people give freely; stingy people don't.",
+    "hi": "उदार व्यक्ति खुलकर देता है; कंजूस नहीं।"
+   }
+  },
+  {
+   "key": "verb_L1_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: apple, mango, carrot, banana?",
+    "hi": "इनमें से कौन अलग है: सेब, आम, गाजर, केला?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "banana",
+      "hi": "केला"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "apple",
+      "hi": "सेब"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "mango",
+      "hi": "आम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "carrot",
+      "hi": "गाजर"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "The others are fruits; a carrot is a vegetable.",
+    "hi": "बाक़ी फल हैं; गाजर सब्ज़ी है।"
+   }
+  },
+  {
+   "key": "verb_L1_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: chair, table, sofa, spoon?",
+    "hi": "इनमें से कौन अलग है: कुर्सी, मेज़, सोफ़ा, चम्मच?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "spoon",
+      "hi": "चम्मच"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "table",
+      "hi": "मेज़"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "sofa",
+      "hi": "सोफ़ा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "chair",
+      "hi": "कुर्सी"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "The others are furniture.",
+    "hi": "बाक़ी सब फ़र्नीचर हैं।"
+   }
+  },
+  {
+   "key": "verb_L1_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the same as 'big'?",
+    "hi": "'बड़ा' का समानार्थी शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "tiny",
+      "hi": "नन्हा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "large",
+      "hi": "विशाल"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "thin",
+      "hi": "पतला"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "short",
+      "hi": "छोटा"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Large and big mean the same.",
+    "hi": "विशाल और बड़ा का अर्थ एक है।"
+   }
+  },
+  {
+   "key": "verb_L1_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Bird is to sky as fish is to …?",
+    "hi": "जैसे पक्षी का संबंध आकाश से है, वैसे ही मछली का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "sand",
+      "hi": "रेत"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "tree",
+      "hi": "पेड़"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "water",
+      "hi": "पानी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "nest",
+      "hi": "घोंसला"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "A bird moves in the sky; a fish in water.",
+    "hi": "पक्षी आकाश में चलता है; मछली पानी में।"
+   }
+  },
+  {
+   "key": "verb_L2_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Book is to reading as fork is to …?",
+    "hi": "जैसे किताब का संबंध पढ़ने से है, वैसे ही काँटे (फ़ोर्क) का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "cooking",
+      "hi": "पकाना"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "writing",
+      "hi": "लिखना"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "drawing",
+      "hi": "चित्र बनाना"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "eating",
+      "hi": "खाना"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "A book is used for reading; a fork for eating.",
+    "hi": "किताब पढ़ने के काम आती है; काँटा खाने के।"
+   }
+  },
+  {
+   "key": "verb_L2_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Doctor is to hospital as teacher is to …?",
+    "hi": "जैसे डॉक्टर का संबंध अस्पताल से है, वैसे ही शिक्षक का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "school",
+      "hi": "विद्यालय"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "library",
+      "hi": "पुस्तकालय"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "office",
+      "hi": "दफ़्तर"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "market",
+      "hi": "बाज़ार"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Where each one works.",
+    "hi": "जहाँ हर कोई काम करता है।"
+   }
+  },
+  {
+   "key": "verb_L2_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the same as 'rapid'?",
+    "hi": "'तीव्र' का समानार्थी शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "late",
+      "hi": "देर से"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "fast",
+      "hi": "तेज़"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "slow",
+      "hi": "धीमा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "calm",
+      "hi": "शांत"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Rapid means fast.",
+    "hi": "तीव्र यानी तेज़।"
+   }
+  },
+  {
+   "key": "verb_L2_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'expand'?",
+    "hi": "'फैलना' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "open",
+      "hi": "खुलना"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "grow",
+      "hi": "बढ़ना"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "shrink",
+      "hi": "सिकुड़ना"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "spread",
+      "hi": "बिखरना"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "To expand is to grow larger; to shrink is to grow smaller.",
+    "hi": "फैलना यानी बड़ा होना; सिकुड़ना यानी छोटा होना।"
+   }
+  },
+  {
+   "key": "verb_L2_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: Mercury, Venus, Moon, Mars?",
+    "hi": "इनमें से कौन अलग है: बुध, शुक्र, चंद्रमा, मंगल?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Venus",
+      "hi": "शुक्र"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Mercury",
+      "hi": "बुध"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Mars",
+      "hi": "मंगल"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Moon",
+      "hi": "चंद्रमा"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "The others are planets; the Moon is a satellite.",
+    "hi": "बाक़ी ग्रह हैं; चंद्रमा उपग्रह है।"
+   }
+  },
+  {
+   "key": "verb_L2_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Choose the word that fits: 'She was so ___ that she fell asleep in class.'",
+    "hi": "सही शब्द चुनें: 'वह इतनी ___ थी कि कक्षा में ही सो गई।'"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "tired",
+      "hi": "थकी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "hungry",
+      "hi": "भूखी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "excited",
+      "hi": "उत्साहित"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "angry",
+      "hi": "नाराज़"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Being tired makes you fall asleep.",
+    "hi": "थकान से नींद आती है।"
+   }
+  },
+  {
+   "key": "verb_L3_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'reluctant'?",
+    "hi": "'अनिच्छुक' के सबसे क़रीबी अर्थ वाला शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "angry",
+      "hi": "ग़ुस्से में"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "unwilling",
+      "hi": "जिसका मन न हो"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "careful",
+      "hi": "सावधान"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "eager",
+      "hi": "उत्सुक"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Reluctant means not wanting to do something.",
+    "hi": "अनिच्छुक यानी कुछ करने का मन न होना।"
+   }
+  },
+  {
+   "key": "verb_L3_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'abundant'?",
+    "hi": "'प्रचुर' का सबसे क़रीबी अर्थ क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "empty",
+      "hi": "ख़ाली"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "costly",
+      "hi": "महँगा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "plentiful",
+      "hi": "भरपूर"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "rare",
+      "hi": "दुर्लभ"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Abundant means more than enough.",
+    "hi": "प्रचुर यानी ज़रूरत से ज़्यादा।"
+   }
+  },
+  {
+   "key": "verb_L3_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "'Although the test was difficult, most students finished it on time.' What does this tell us?",
+    "hi": "'हालाँकि परीक्षा कठिन थी, फिर भी ज़्यादातर छात्रों ने उसे समय पर पूरा कर लिया।' इससे क्या पता चलता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "The test had no time limit",
+      "hi": "परीक्षा में समय की सीमा नहीं थी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Most students did not finish",
+      "hi": "ज़्यादातर छात्रों ने पूरा नहीं किया"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "The test was easy",
+      "hi": "परीक्षा आसान थी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Most finished even though it was hard",
+      "hi": "कठिन होने पर भी ज़्यादातर ने पूरा किया"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "'Although' sets the difficulty against the result.",
+    "hi": "'हालाँकि' कठिनाई और नतीजे का विरोध दिखाता है।"
+   }
+  },
+  {
+   "key": "verb_L3_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Pen is to writer as brush is to …?",
+    "hi": "जैसे कलम का संबंध लेखक से है, वैसे ही ब्रश का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "painter",
+      "hi": "चित्रकार"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "doctor",
+      "hi": "डॉक्टर"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "farmer",
+      "hi": "किसान"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "singer",
+      "hi": "गायक"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Each is the tool of that worker.",
+    "hi": "हर एक उस काम करने वाले का औज़ार है।"
+   }
+  },
+  {
+   "key": "verb_L3_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'transparent'?",
+    "hi": "'पारदर्शी' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "clear",
+      "hi": "साफ़"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "opaque",
+      "hi": "अपारदर्शी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "bright",
+      "hi": "चमकीला"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "thin",
+      "hi": "पतला"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Light passes through transparent things, not opaque ones.",
+    "hi": "पारदर्शी चीज़ से रोशनी आर-पार जाती है, अपारदर्शी से नहीं।"
+   }
+  },
+  {
+   "key": "verb_L3_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Choose the word that fits: 'The scientist's ___ was proved right by the experiment.'",
+    "hi": "सही शब्द चुनें: 'प्रयोग ने वैज्ञानिक की ___ को सही साबित किया।'"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "hunger",
+      "hi": "भूख"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "holiday",
+      "hi": "छुट्टी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "hypothesis",
+      "hi": "परिकल्पना"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "hobby",
+      "hi": "शौक़"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "An experiment tests a hypothesis.",
+    "hi": "प्रयोग से परिकल्पना जाँची जाती है।"
+   }
+  },
+  {
+   "key": "verb_L4_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'meticulous'?",
+    "hi": "'सूक्ष्मदर्शी (बारीकी से काम करने वाला)' के सबसे क़रीबी अर्थ वाला शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "noisy",
+      "hi": "शोर करने वाला"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "careless",
+      "hi": "लापरवाह"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "quick",
+      "hi": "जल्दबाज़"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "very careful",
+      "hi": "बेहद सावधान"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Meticulous means paying great attention to detail.",
+    "hi": "यानी हर छोटी बात पर ध्यान देना।"
+   }
+  },
+  {
+   "key": "verb_L4_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'scarce'?",
+    "hi": "'दुर्लभ' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "plentiful",
+      "hi": "प्रचुर"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "tiny",
+      "hi": "नन्हा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "rare",
+      "hi": "विरल"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "valuable",
+      "hi": "क़ीमती"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Scarce means there is little of it.",
+    "hi": "दुर्लभ यानी जो कम मिले।"
+   }
+  },
+  {
+   "key": "verb_L4_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Fire is to ash as tree is to …?",
+    "hi": "जैसे आग का संबंध राख से है, वैसे ही पेड़ का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "leaf",
+      "hi": "पत्ता"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "wood",
+      "hi": "लकड़ी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "forest",
+      "hi": "जंगल"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "root",
+      "hi": "जड़"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Ash is what fire leaves; wood is what a felled tree gives.",
+    "hi": "आग से राख बचती है; कटा पेड़ लकड़ी देता है।"
+   }
+  },
+  {
+   "key": "verb_L4_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "'Not all who wander are lost.' Which statement means the same?",
+    "hi": "'हर भटकने वाला खोया हुआ नहीं होता।' किस वाक्य का अर्थ यही है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "Everyone who wanders is lost",
+      "hi": "हर भटकने वाला खोया हुआ है"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "Nobody ever wanders",
+      "hi": "कोई कभी नहीं भटकता"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "Some people who wander know where they are going",
+      "hi": "कुछ भटकने वाले जानते हैं कि वे कहाँ जा रहे हैं"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "Lost people never wander",
+      "hi": "खोए हुए लोग कभी नहीं भटकते"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "'Not all' means at least some are not.",
+    "hi": "'हर… नहीं' यानी कम से कम कुछ नहीं।"
+   }
+  },
+  {
+   "key": "verb_L4_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: novel, poem, essay, microscope?",
+    "hi": "इनमें से कौन अलग है: उपन्यास, कविता, निबंध, सूक्ष्मदर्शी?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "novel",
+      "hi": "उपन्यास"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "poem",
+      "hi": "कविता"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "essay",
+      "hi": "निबंध"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "microscope",
+      "hi": "सूक्ष्मदर्शी"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "The others are kinds of writing.",
+    "hi": "बाक़ी सब लेखन के प्रकार हैं।"
+   }
+  },
+  {
+   "key": "verb_L4_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Choose the word that fits: 'The judge's decision was ___: it could not be changed.'",
+    "hi": "सही शब्द चुनें: 'न्यायाधीश का फ़ैसला ___ था: उसे बदला नहीं जा सकता था।'"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "final",
+      "hi": "अंतिम"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "funny",
+      "hi": "मज़ेदार"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "flexible",
+      "hi": "लचीला"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "unclear",
+      "hi": "अस्पष्ट"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "A decision that can't be changed is final.",
+    "hi": "जो फ़ैसला न बदले, वह अंतिम है।"
+   }
+  },
+  {
+   "key": "verb_L5_01",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'ephemeral'?",
+    "hi": "'क्षणभंगुर' के सबसे क़रीबी अर्थ वाला शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "ancient",
+      "hi": "प्राचीन"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "short-lived",
+      "hi": "थोड़े समय का"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "heavy",
+      "hi": "भारी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "eternal",
+      "hi": "शाश्वत"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Ephemeral things last a very short time.",
+    "hi": "क्षणभंगुर चीज़ें बहुत कम समय रहती हैं।"
+   }
+  },
+  {
+   "key": "verb_L5_02",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'benevolent'?",
+    "hi": "'परोपकारी' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "wealthy",
+      "hi": "धनी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "cheerful",
+      "hi": "प्रसन्न"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "malicious",
+      "hi": "द्वेषी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "kind",
+      "hi": "दयालु"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Benevolent means wishing others well; malicious, wishing them harm.",
+    "hi": "परोपकारी दूसरों का भला चाहता है; द्वेषी बुरा।"
+   }
+  },
+  {
+   "key": "verb_L5_03",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Architect is to blueprint as composer is to …?",
+    "hi": "जैसे वास्तुकार का संबंध नक़्शे से है, वैसे ही संगीतकार का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "piano",
+      "hi": "पियानो"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "concert",
+      "hi": "संगीत-सभा"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "audience",
+      "hi": "श्रोता"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "score",
+      "hi": "स्वरलिपि"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Each plans the work on paper first: a blueprint, a score.",
+    "hi": "दोनों पहले काग़ज़ पर योजना बनाते हैं: नक़्शा, स्वरलिपि।"
+   }
+  },
+  {
+   "key": "verb_L5_04",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "'His argument was cogent.' What does 'cogent' mean here?",
+    "hi": "'उसका तर्क अकाट्य था।' यहाँ 'अकाट्य' का क्या अर्थ है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "clear and convincing",
+      "hi": "स्पष्ट और विश्वसनीय"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "long and boring",
+      "hi": "लंबा और उबाऊ"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "angry",
+      "hi": "ग़ुस्से भरा"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "confused",
+      "hi": "उलझा हुआ"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "A cogent argument persuades because it is clear and logical.",
+    "hi": "अकाट्य तर्क स्पष्ट और तार्किक होने से मनवा लेता है।"
+   }
+  },
+  {
+   "key": "verb_L5_05",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Choose the word that fits: 'Despite repeated warnings, he remained ___ and refused to change his plan.'",
+    "hi": "सही शब्द चुनें: 'बार-बार चेतावनी के बावजूद वह ___ रहा और अपनी योजना नहीं बदली।'"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "anxious",
+      "hi": "चिंतित"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "obstinate",
+      "hi": "ज़िद्दी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "obedient",
+      "hi": "आज्ञाकारी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "absent",
+      "hi": "अनुपस्थित"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Refusing to change despite warnings is being obstinate.",
+    "hi": "चेतावनी के बाद भी न बदलना ज़िद है।"
+   }
+  },
+  {
+   "key": "verb_L5_06",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: perimeter, area, volume, velocity?",
+    "hi": "इनमें से कौन अलग है: परिमाप, क्षेत्रफल, आयतन, वेग?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "volume",
+      "hi": "आयतन"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "area",
+      "hi": "क्षेत्रफल"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "velocity",
+      "hi": "वेग"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "perimeter",
+      "hi": "परिमाप"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "The others measure the size of shapes; velocity measures motion.",
+    "hi": "बाक़ी आकृतियों का माप हैं; वेग गति का।"
+   }
+  },
+  {
+   "key": "verb_L1_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'hot'?",
+    "hi": "'गर्म' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "soft",
+      "hi": "मुलायम"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "wet",
+      "hi": "गीला"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "warm",
+      "hi": "गुनगुना"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "cold",
+      "hi": "ठंडा"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Hot and cold are opposites.",
+    "hi": "गर्म और ठंडा उल्टे हैं।"
+   }
+  },
+  {
+   "key": "verb_L1_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: dog, cat, cow, eagle?",
+    "hi": "इनमें से कौन अलग है: कुत्ता, बिल्ली, गाय, गरुड़?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "eagle",
+      "hi": "गरुड़"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "cat",
+      "hi": "बिल्ली"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "cow",
+      "hi": "गाय"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "dog",
+      "hi": "कुत्ता"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "The eagle is a bird; the others are four-legged animals.",
+    "hi": "गरुड़ पक्षी है; बाक़ी चार पैरों वाले जानवर हैं।"
+   }
+  },
+  {
+   "key": "verb_L1_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the same as 'happy'?",
+    "hi": "'प्रसन्न' का समानार्थी शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "angry",
+      "hi": "नाराज़"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "glad",
+      "hi": "ख़ुश"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "tired",
+      "hi": "थका हुआ"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "sad",
+      "hi": "दुखी"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "Glad and happy mean the same.",
+    "hi": "ख़ुश और प्रसन्न का अर्थ एक है।"
+   }
+  },
+  {
+   "key": "verb_L1_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 1,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Pen is to ink as car is to …?",
+    "hi": "जैसे कलम का संबंध स्याही से है, वैसे ही कार का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "road",
+      "hi": "सड़क"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "wheel",
+      "hi": "पहिया"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "petrol",
+      "hi": "पेट्रोल"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "driver",
+      "hi": "चालक"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "A pen runs on ink; a car runs on petrol.",
+    "hi": "कलम स्याही से चलती है; कार पेट्रोल से।"
+   }
+  },
+  {
+   "key": "verb_L2_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'victory'?",
+    "hi": "'जीत' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "game",
+      "hi": "खेल"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "prize",
+      "hi": "इनाम"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "team",
+      "hi": "टीम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "defeat",
+      "hi": "हार"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Victory and defeat are opposites.",
+    "hi": "जीत और हार उल्टे हैं।"
+   }
+  },
+  {
+   "key": "verb_L2_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the same as 'begin'?",
+    "hi": "'आरंभ करना' का समानार्थी कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "start",
+      "hi": "शुरू करना"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "wait",
+      "hi": "रुकना"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "stop",
+      "hi": "रोकना"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "finish",
+      "hi": "ख़त्म करना"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Begin and start mean the same.",
+    "hi": "आरंभ करना और शुरू करना एक ही है।"
+   }
+  },
+  {
+   "key": "verb_L2_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: triangle, square, circle, cube?",
+    "hi": "इनमें से कौन अलग है: त्रिभुज, वर्ग, वृत्त, घन?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "square",
+      "hi": "वर्ग"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "cube",
+      "hi": "घन"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "triangle",
+      "hi": "त्रिभुज"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "circle",
+      "hi": "वृत्त"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "A cube is solid (3D); the others are flat shapes.",
+    "hi": "घन ठोस (3D) है; बाक़ी समतल आकृतियाँ हैं।"
+   }
+  },
+  {
+   "key": "verb_L2_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 2,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Choose the word that fits: 'It was raining, so we took an ___.'",
+    "hi": "सही शब्द चुनें: 'बारिश हो रही थी, इसलिए हमने ___ लिया।'"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "orange",
+      "hi": "संतरा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "apple",
+      "hi": "सेब"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "umbrella",
+      "hi": "छाता"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "eraser",
+      "hi": "रबर"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "An umbrella keeps the rain off.",
+    "hi": "छाता बारिश से बचाता है।"
+   }
+  },
+  {
+   "key": "verb_L3_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'fragile'?",
+    "hi": "'नाज़ुक' के सबसे क़रीबी अर्थ वाला शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "colourful",
+      "hi": "रंगीन"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "very strong",
+      "hi": "बहुत मज़बूत"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "heavy",
+      "hi": "भारी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "easily broken",
+      "hi": "आसानी से टूटने वाला"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Fragile things break easily.",
+    "hi": "नाज़ुक चीज़ें आसानी से टूट जाती हैं।"
+   }
+  },
+  {
+   "key": "verb_L3_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'permanent'?",
+    "hi": "'स्थायी' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "temporary",
+      "hi": "अस्थायी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "old",
+      "hi": "पुराना"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "fixed",
+      "hi": "तय"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "lasting",
+      "hi": "टिकाऊ"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Permanent lasts; temporary doesn't.",
+    "hi": "स्थायी टिकता है; अस्थायी नहीं।"
+   }
+  },
+  {
+   "key": "verb_L3_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Teacher is to students as doctor is to …?",
+    "hi": "जैसे शिक्षक का संबंध छात्रों से है, वैसे ही डॉक्टर का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "hospitals",
+      "hi": "अस्पताल"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "patients",
+      "hi": "मरीज़"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "nurses",
+      "hi": "नर्सें"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "medicines",
+      "hi": "दवाइयाँ"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "The people each one looks after.",
+    "hi": "जिन लोगों की देखभाल हर कोई करता है।"
+   }
+  },
+  {
+   "key": "verb_L3_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 3,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "'She did not just pass the exam; she topped it.' What does this tell us?",
+    "hi": "'वह परीक्षा में सिर्फ़ पास नहीं हुई, बल्कि सबसे आगे रही।' इससे क्या पता चलता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "She missed the exam",
+      "hi": "उसने परीक्षा नहीं दी"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "She barely passed",
+      "hi": "वह मुश्किल से पास हुई"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "She got the highest marks",
+      "hi": "उसके सबसे ज़्यादा अंक आए"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "She failed",
+      "hi": "वह फ़ेल हो गई"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "'Not just… but' adds something bigger: she came first.",
+    "hi": "'सिर्फ़… नहीं, बल्कि' कुछ बड़ा जोड़ता है: वह सबसे आगे रही।"
+   }
+  },
+  {
+   "key": "verb_L4_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'diligent'?",
+    "hi": "'परिश्रमी' के सबसे क़रीबी अर्थ वाला शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "clever",
+      "hi": "चालाक"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "polite",
+      "hi": "विनम्र"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "lazy",
+      "hi": "आलसी"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "hard-working",
+      "hi": "मेहनती"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "Diligent people work hard and carefully.",
+    "hi": "परिश्रमी लोग लगन से मेहनत करते हैं।"
+   }
+  },
+  {
+   "key": "verb_L4_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'artificial'?",
+    "hi": "'कृत्रिम' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "natural",
+      "hi": "प्राकृतिक"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "useful",
+      "hi": "उपयोगी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "modern",
+      "hi": "आधुनिक"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "fake",
+      "hi": "नक़ली"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Artificial is made by people; natural is not.",
+    "hi": "कृत्रिम इंसान बनाते हैं; प्राकृतिक नहीं।"
+   }
+  },
+  {
+   "key": "verb_L4_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Seed is to tree as egg is to …?",
+    "hi": "जैसे बीज का संबंध पेड़ से है, वैसे ही अंडे का संबंध किससे है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "food",
+      "hi": "भोजन"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "bird",
+      "hi": "पक्षी"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "nest",
+      "hi": "घोंसला"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "shell",
+      "hi": "छिलका"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "What each one grows into.",
+    "hi": "हर एक जिसमें बदलकर बड़ा होता है।"
+   }
+  },
+  {
+   "key": "verb_L4_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 4,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which is the odd one out: metre, kilometre, centimetre, kilogram?",
+    "hi": "इनमें से कौन अलग है: मीटर, किलोमीटर, सेंटीमीटर, किलोग्राम?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "kilometre",
+      "hi": "किलोमीटर"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "centimetre",
+      "hi": "सेंटीमीटर"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "kilogram",
+      "hi": "किलोग्राम"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "metre",
+      "hi": "मीटर"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "The others measure length; a kilogram measures mass.",
+    "hi": "बाक़ी लंबाई के माप हैं; किलोग्राम भार का।"
+   }
+  },
+  {
+   "key": "verb_L5_07",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word is closest in meaning to 'ambiguous'?",
+    "hi": "'द्वयर्थक' के सबसे क़रीबी अर्थ वाला शब्द कौन सा है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "extremely large",
+      "hi": "बहुत बड़ा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "very clear",
+      "hi": "बिल्कुल साफ़"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "done quickly",
+      "hi": "जल्दी किया हुआ"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "having more than one meaning",
+      "hi": "एक से ज़्यादा अर्थ वाला"
+     }
+    }
+   ],
+   "answer": "d",
+   "explanation": {
+    "en": "An ambiguous sentence can be read in more than one way.",
+    "hi": "द्वयर्थक वाक्य के एक से ज़्यादा अर्थ निकल सकते हैं।"
+   }
+  },
+  {
+   "key": "verb_L5_08",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Which word means the opposite of 'frugal'?",
+    "hi": "'मितव्ययी' का विलोम क्या है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "extravagant",
+      "hi": "फ़िज़ूलख़र्च"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "careful",
+      "hi": "सावधान"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "thrifty",
+      "hi": "किफ़ायती"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "poor",
+      "hi": "ग़रीब"
+     }
+    }
+   ],
+   "answer": "a",
+   "explanation": {
+    "en": "Frugal people spend little; extravagant people spend a lot.",
+    "hi": "मितव्ययी कम ख़र्च करते हैं; फ़िज़ूलख़र्च बहुत।"
+   }
+  },
+  {
+   "key": "verb_L5_09",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "Drought is to water as famine is to …?",
+    "hi": "जैसे सूखे का संबंध पानी की कमी से है, वैसे ही अकाल का संबंध किसकी कमी से है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "money",
+      "hi": "पैसा"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "food",
+      "hi": "भोजन"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "rain",
+      "hi": "बारिश"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "land",
+      "hi": "ज़मीन"
+     }
+    }
+   ],
+   "answer": "b",
+   "explanation": {
+    "en": "A drought is a lack of water; a famine, of food.",
+    "hi": "सूखा पानी की कमी है; अकाल भोजन की।"
+   }
+  },
+  {
+   "key": "verb_L5_10",
+   "type": "problem",
+   "form": null,
+   "dimension": "aptitude:verbal",
+   "difficulty": 5,
+   "section": {
+    "en": "Words",
+    "hi": "शब्द"
+   },
+   "prompt": {
+    "en": "'The evidence was circumstantial.' What does this suggest?",
+    "hi": "'सबूत परिस्थितिजन्य थे।' इससे क्या पता चलता है?"
+   },
+   "options": [
+    {
+     "key": "a",
+     "label": {
+      "en": "It was completely made up",
+      "hi": "वे पूरी तरह गढ़े गए थे"
+     }
+    },
+    {
+     "key": "b",
+     "label": {
+      "en": "It proved everything beyond doubt",
+      "hi": "उन्होंने बिना शक के सब साबित कर दिया"
+     }
+    },
+    {
+     "key": "c",
+     "label": {
+      "en": "It pointed to the answer but did not prove it directly",
+      "hi": "वे जवाब की ओर इशारा करते थे, पर सीधे साबित नहीं करते थे"
+     }
+    },
+    {
+     "key": "d",
+     "label": {
+      "en": "There was no evidence",
+      "hi": "कोई सबूत नहीं था"
+     }
+    }
+   ],
+   "answer": "c",
+   "explanation": {
+    "en": "Circumstantial evidence suggests, without proving directly.",
+    "hi": "परिस्थितिजन्य सबूत इशारा करते हैं, सीधे साबित नहीं करते।"
+   }
+  }
+ ]
+}

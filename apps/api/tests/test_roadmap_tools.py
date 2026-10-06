@@ -5,7 +5,7 @@ from app.ai.tools import TOOL_SPECS, execute_tool
 from app.roadmap.context import NONE_YET, roadmap_context
 from app.seed.careers import seed_careers
 from tests.fakes import FakeLLM
-from tests.test_assessment_service import right, student, take
+from tests.test_assessment_service import right, scripted, student, take
 from tests.test_conversation_ws import register
 
 
@@ -80,12 +80,12 @@ def test_the_three_sentences_through_the_tools(db_session):
 
 def test_how_much_have_i_improved(db_session):
     asha = ready(db_session)
-    take(db_session, asha, "aptitude", choose=lambda i: right(i, wrong={"a_log_1", "a_log_2", "a_log_3"}))
+    take(db_session, asha, "aptitude", choose=scripted({"aptitude:logical": [False, False, False, True, True]}))
     take(db_session, asha, "aptitude", choose=right)
     out = execute_tool(db_session, asha, "my_progress", {})
     logic = next(s for s in out["skills"] if s["skill"] == "Logical reasoning")
-    assert (logic["first"], logic["now"], logic["change"]) == (40, 100, "improved")
-    assert (logic["first_result"], logic["latest_result"]) == ("2 of 5 right", "5 of 5 right")
+    assert (logic["first"], logic["now"], logic["change"]) == (24, 88, "improved")
+    assert (logic["first_result"], logic["latest_result"]) == ("level 2 of 5 · 2 of 5 right", "level 5 of 5 · 5 of 5 right")
 
 
 def test_the_study_plan_only_for_jee_and_neet(db_session):
