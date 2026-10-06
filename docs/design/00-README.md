@@ -2,7 +2,7 @@
 
 Status (2026-10-05): **Phases 1-7 built** (voice mentor; memory; assessment; career engine; roadmap;
 college intelligence, whose data runs are still filling in; the continuous mentor), **plus the audit
-fixes in [17](17-audit-fixes.md)**. All seven phases are awaiting their hands-on tests. Written against
+fixes in [17](17-audit-fixes.md)** and **the usability fixes in [18](18-usability-fixes.md)**. All seven phases are awaiting their hands-on tests. Written against
 the code in `apps/` (MAYA).
 
 | # | Document | Answers |
@@ -24,6 +24,7 @@ the code in `apps/` (MAYA).
 | 15 | [Phase 6 plan](15-phase6-plan.md) | College intelligence: facts with provenance and freshness, official documents, fees, hostels, admissions, location, discovery |
 | 16 | [Phase 7 plan](16-phase7-plan.md) | The continuous mentor: the brief (§37's eight questions), the agenda, session ends that record what happened, shortlist, reassessment |
 | 17 | [Audit fixes](17-audit-fixes.md) | Gaps against the spec and their fixes; the model benchmark and costs |
+| 18 | [Usability fixes](18-usability-fixes.md) | Back and Home, the home screen's order, *How MAYA works*, Learn (a video per topic, by QR), adaptive and goal-aware tests |
 | — | [Phase 1 test](phase1-test-script.md) · [Phase 2 test](phase2-test-script.md) · [Phase 3 test](phase3-test-script.md) · [Phase 4 test](phase4-test-script.md) · [Phase 5 test](phase5-test-script.md) · [Phase 6 test](phase6-test-script.md) | Hands-on checks with a person |
 
 ---
