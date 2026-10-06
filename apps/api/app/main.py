@@ -18,7 +18,7 @@ from app.core.deps import LOOPBACK_HOSTS
 from app.providers.embedding import LocalE5Embedding
 from app.providers.http import ProviderError, breaker_states
 from app.routers import (
-    ai, assessment, auth, career, careers, colleges, conversation, exams, memory, mentor, mock_tests, practice,
+    ai, assessment, auth, career, careers, colleges, conversation, exams, learn, memory, mentor, mock_tests, practice,
     predictions, roadmap, saved_items, student,
 )
 
@@ -102,6 +102,7 @@ app.include_router(roadmap.router)
 app.include_router(roadmap.progress_router)
 app.include_router(saved_items.router)
 app.include_router(mentor.router)
+app.include_router(learn.router)
 app.include_router(ai.router)
 app.include_router(conversation.router)
 app.include_router(memory.router)

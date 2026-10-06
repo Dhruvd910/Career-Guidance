@@ -165,9 +165,12 @@ def _learning_path(store: GraphStore, skills: list[dict], results: dict) -> list
         if status["status"] == "strong":
             continue  # already there
         builds = store.developed_by(step["key"])[:2]
+        from app.knowledge.learning import for_skill  # (learning builds on this module)
+
         path.append({**status, "needs": step["needs"],
                      "try": [{"key": b["key"], "type": b["type"], "name": b["name"], "url": b["attrs"].get("url"),
-                              "hours": b["attrs"].get("hours")} for b in builds]})
+                              "hours": b["attrs"].get("hours")} for b in builds],
+                     "learn": for_skill(step["key"], step["name"]["en"])})
     return path[:MAX_LEARNING_STEPS]
 
 

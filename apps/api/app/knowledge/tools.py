@@ -223,6 +223,50 @@ def degree_specialisations(db: Session, profile: StudentProfile, args: dict) -> 
             "note": "A specialisation is chosen when applying (it's a separate programme with its own cutoff)."}
 
 
+def _resolve_skill(store: GraphStore, said: str) -> str | None:
+    """'python' → skill:python, 'maths' → skill:school_mathematics (a subject is learnt as its skill)."""
+    from app.knowledge.linking import _aliases, _lexical
+    from app.roadmap.generator import SUBJECT_SKILLS
+
+    skills = store.of_type("skill")
+    aliases = _aliases(store, [n["key"] for n in skills])
+    found = _lexical(said, [(n["key"], [*SAID_AS.get(n["key"], []), n["name"]["en"], n["name"]["hi"], *aliases[n["key"]],
+                                        n["key"].split(":", 1)[1].replace("_", " ")]) for n in skills])
+    if found:
+        return found[0]
+    thing = _resolve_thing(store, said)
+    if thing and thing.startswith("subject:"):
+        return SUBJECT_SKILLS.get(thing.split(":", 1)[1])
+    return None
+
+
+def learning_videos(db: Session, profile: StudentProfile, args: dict) -> dict:
+    from app.knowledge import learning
+
+    store = graph(db)
+    said = str(args.get("topic") or args.get("career") or "").strip()
+    skill = _resolve_skill(store, said) if said else None
+    if skill:
+        name = store.node(skill)["name"]
+        where = learning.for_skill(skill, name["en"])
+        return {"topic": name["en"], "videos": [{k: v[k] for k in ("lang", "title", "channel", "length")}
+                                                for v in where["videos"]],
+                "note": "Name the video and channel; never read a web address aloud — the screen offers a button "
+                        "with a QR code to open it on a phone.",
+                "ui": {"action": "open_learn", "skill": skill, "title": name}}
+    plan = learning.learning_plan(db, profile, said or None)
+    if plan["career"] is None:
+        return {"error": f"Nothing called '{said}' — try a topic (Python, maths, drawing) or a career."
+                if said else "No focus career yet: ask which career, or offer the assessments."}
+    first = [s for s in plan["steps"] if s["status"] != "strong"][:4]
+    return {"career": plan["career"]["name"]["en"], "why_this_career": plan["why"],
+            "learn_in_order": [{"topic": s["name"]["en"], "status": s["status"],
+                                "first_video": next(({k: v[k] for k in ("lang", "title", "channel")}
+                                                     for v in s["videos"]), None)} for s in first],
+            "note": "Never read web addresses aloud: the screen offers the videos with QR codes.",
+            "ui": {"action": "open_learn", "career": plan["career"]["key"], "title": plan["career"]["name"]}}
+
+
 GRAPH_TOOLS = {
     "career_pathways": career_pathways,
     "career_skills": career_skills,
@@ -231,4 +275,5 @@ GRAPH_TOOLS = {
     "colleges_offering": colleges_offering,
     "careers_needing": careers_needing,
     "degree_specialisations": degree_specialisations,
+    "learning_videos": learning_videos,
 }

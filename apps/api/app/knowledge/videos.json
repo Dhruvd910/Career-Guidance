@@ -1,0 +1,1380 @@
+{
+ "skills": {
+  "skill:arithmetic": {
+   "query": {
+    "en": "fractions decimals percentages basics",
+    "hi": "percentage fraction decimal basic maths hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "-Xt4UDk7Kzw",
+     "title": "Converting Between Fractions, Decimals, and Percentages",
+     "channel": "Professor Dave Explains",
+     "length": "5:21",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "gbR_m1byDns",
+     "title": "Percentage Tricks/Shortcuts/Formula | Percentage Problems Tricks and Shortcuts | DSSSB, CTET, KVS",
+     "channel": "Dear Sir",
+     "length": "21:51",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:school_mathematics": {
+   "query": {
+    "en": "algebra basics for beginners",
+    "hi": "algebra basics class 9 maths hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "MHeirBPOI6w",
+     "title": "Algebra For Beginners - Basic Introduction",
+     "channel": "The Organic Chemistry Tutor",
+     "length": "59:07",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:calculus": {
+   "query": {
+    "en": "calculus for beginners derivatives and integrals",
+    "hi": "calculus basics class 12 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "WsQQvHm4lSw",
+     "title": "Understand Calculus in 35 Minutes",
+     "channel": "The Organic Chemistry Tutor",
+     "length": "36:22",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "2n41IqOMbdc",
+     "title": "1. What is Calculus | (Hindi)",
+     "channel": "Ashiesh Kapoor",
+     "length": "4:23",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:linear_algebra": {
+   "query": {
+    "en": "vectors chapter 1 essence of linear algebra",
+    "hi": "matrices and determinants class 12 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "fNk_zzaMoSs",
+     "title": "Vectors | Chapter 1, Essence of linear algebra",
+     "channel": "3Blue1Brown",
+     "length": "9:52",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:probability_statistics": {
+   "query": {
+    "en": "statistics and probability full course for beginners",
+    "hi": "probability class 12 hindi"
+   },
+   "videos": [
+    {
+     "lang": "hi",
+     "id": "lrjsbWU0ARA",
+     "title": "PROBABILITY | CLASS 12TH MATHS CHAPTER 13 | ONE SHOT | BAYES THEOREM/INVERSE/CONDITIONAL PROBABILITY",
+     "channel": "Dear Sir",
+     "length": "2:13:35",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:logical_reasoning": {
+   "query": {
+    "en": "logical reasoning for students olympiad",
+    "hi": "mental ability test class 9 10 one shot hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "UD_5IXy3IpU",
+     "title": "How to Pass LOGICAL REASONING TEST – Questions and Answers with Solutions",
+     "channel": "Online Training for Everyone",
+     "length": "48:32",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "95vc7mahV_s",
+     "title": "Complete MAT in 1 Shot | Class-9th & 10th | AITS 2023 💯",
+     "channel": "Physics Wallah Foundation",
+     "length": "5:40:12",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:problem_solving": {
+   "query": {
+    "en": "problem solving for programming beginners",
+    "hi": "how to solve coding problems hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "xo7XrRVxH8Y",
+     "title": "8 patterns to solve 80% Leetcode problems",
+     "channel": "Sahil & Sarra",
+     "length": "7:30",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "3xC0F9bj9FU",
+     "title": "How to build Strong Programming Logic? | College Placement & Internships",
+     "channel": "Apna College",
+     "length": "14:06",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:physics_fundamentals": {
+   "query": {
+    "en": "physics basics units and measurement motion explained",
+    "hi": "class 11 physics basics hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "b1t41Q3xRM8",
+     "title": "Physics - Basic Introduction",
+     "channel": "The Organic Chemistry Tutor",
+     "length": "53:37",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "DbO6Vn-2uZc",
+     "title": "11th basic physics class 11 basic physics in hindi Disha Science Classes ||",
+     "channel": "Disha Science Classes",
+     "length": "48:20",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:chemistry_fundamentals": {
+   "query": {
+    "en": "basic concepts of chemistry mole concept explained",
+    "hi": "mole concept class 11 hindi"
+   },
+   "videos": [
+    {
+     "lang": "hi",
+     "id": "eS9rsxgszeI",
+     "title": "MOLE CONCEPT in One Shot || मोल अवधारणा || UMMEED NEET हिंदी",
+     "channel": "NEET Wallah हिन्दी माध्यम",
+     "length": "6:41:13",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:biology_fundamentals": {
+   "query": {
+    "en": "cell structure and function explained",
+    "hi": "cell the unit of life class 11 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "t5DvF5OVr1Y",
+     "title": "Cell Biology | Cell Structure & Function",
+     "channel": "Ninja Nerd",
+     "length": "55:35",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "4U389vVoJ8k",
+     "title": "Cell - The Unit of Life One Shot | कोशिका जीवन की इकाई | UMMEED NEET हिंदी",
+     "channel": "NEET Wallah हिन्दी माध्यम",
+     "length": "4:22:02",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:scientific_method": {
+   "query": {
+    "en": "the scientific method explained for students",
+    "hi": "scientific method hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "xOLcZMw0hd4",
+     "title": "The Scientific Method: Crash Course Biology #2",
+     "channel": "CrashCourse",
+     "length": "15:09",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:reading_comprehension": {
+   "query": {
+    "en": "how to improve reading comprehension",
+    "hi": "reading comprehension tips hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "3nLX0CjMO-Q",
+     "title": "How To Improve Your Reading Comprehension",
+     "channel": "Steve Kaufmann - lingosteve",
+     "length": "6:51",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "qwgkK7IxD0g",
+     "title": "READING COMPREHENSION | UNSEEN PASSAGE | CUET ENGLISH 2026 | FULL EXPLANATION WITH EXAMPLES/PRACTICE",
+     "channel": "Dear Sir",
+     "length": "28:52",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:english_communication": {
+   "query": {
+    "en": "spoken english practice for beginners",
+    "hi": "spoken english for beginners hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "iVtYMMcQP1k",
+     "title": "👉Easily Learn English Speaking for Beginners | Daily English Conversation Practice",
+     "channel": "Easy English Practice",
+     "length": "37:41",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "91ptZp3Si0s",
+     "title": "Premium Spoken English Course |  Full Course/Practice/Video/In Hindi | Learn English Speaking Course",
+     "channel": "Dear Sir",
+     "length": "3:33:31",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:writing": {
+   "query": {
+    "en": "how to write a good essay tips",
+    "hi": "essay writing tips hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "liyFKUFCQno",
+     "title": "How to write a good essay",
+     "channel": "Professor Tim Wilson",
+     "length": "8:24",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "F28M0rcF1A8",
+     "title": "Nibandh Lekhan in Hindi | Nibandh Kaise Likhen | निबंध लेखन हिंदी | Nibandh Lekhan Hindi Vyakaran",
+     "channel": "Hindi Adhyapak",
+     "length": "9:56",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:public_speaking": {
+   "query": {
+    "en": "public speaking tips for students",
+    "hi": "public speaking tips hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "eIho2S0ZahI",
+     "title": "How to Speak So That People Want to Listen | Julian Treasure | TED",
+     "channel": "TED",
+     "length": "9:59",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "buJTqUIKMdQ",
+     "title": "बोलने में माहिर कैसे बनें? | Think Fast, Talk Smart : Communication Techniques | Hindi Audiobook",
+     "channel": "Rethink ",
+     "length": "32:35",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:leadership_teamwork": {
+   "query": {
+    "en": "teamwork and collaboration skills ted",
+    "hi": "teamwork skills hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "8goi3AD4RWo",
+     "title": "How to Be a Team Player — Without Burning Out | The Way We Work, a TED series",
+     "channel": "TED",
+     "length": "5:37",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:planning_organisation": {
+   "query": {
+    "en": "time management tips for students",
+    "hi": "time management for students hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "iDbdXTMnOmE",
+     "title": "How to manage your time more effectively (according to machines) - Brian Christian",
+     "channel": "TED-Ed",
+     "length": "5:10",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "TEnks7wOBKs",
+     "title": "How to make the Best Time Table? | Time Management for Students",
+     "channel": "Apna College",
+     "length": "8:50",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:drawing_sketching": {
+   "query": {
+    "en": "how to draw for beginners sketching basics",
+    "hi": "drawing for beginners hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "1jjmOF1hQqI",
+     "title": "LEARN TO DRAW FROM 0 to 100! | Roadmap| DrawlikeaSir",
+     "channel": "Draw like a Sir",
+     "length": "22:52",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "8WGSNa7xx_4",
+     "title": "Sketching Class in Hindi | Drawing Class from Zero to Pro | Drawing class Beginner to Professional",
+     "channel": "Artwala Academy",
+     "length": "9:48",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:hands_on_building": {
+   "query": {
+    "en": "diy electronics projects for beginners",
+    "hi": "simple electronics project at home hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "FtClUenzCRQ",
+     "title": "Top 10 Electronics Projects with Basic Components",
+     "channel": "Soldering Tech",
+     "length": "58:47",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:empathy_listening": {
+   "query": {
+    "en": "active listening skills",
+    "hi": "active listening skills hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "i3ku5nx4tMU",
+     "title": "4 things all great listeners know",
+     "channel": "TED-Ed",
+     "length": "5:07",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:current_affairs": {
+   "query": {
+    "en": "how to read the newspaper for upsc",
+    "hi": "newspaper kaise padhe upsc hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "WWhFzhzj4Ik",
+     "title": "How to read and learn newspapers and editorials for UPSC uploaded without edits | Manuj Jindal IAS",
+     "channel": "Manuj Jindal IAS",
+     "length": "10:39",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "q11qSk-U_NA",
+     "title": "How Important Is Newspaper Reading for UPSC? | Importance of Editorials | Drishti IAS",
+     "channel": "Drishti IAS",
+     "length": "27:43",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:physical_fitness": {
+   "query": {
+    "en": "home workout for beginners no equipment",
+    "hi": "home workout for beginners hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "cbKkB3POqaY",
+     "title": "25 MIN FULL BODY HIIT for Beginners - No Equipment - No Repeat Home Workout",
+     "channel": "growingannanas",
+     "length": "28:19",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "eU3KKODtdgI",
+     "title": "15 Min CARDIO WORKOUT AT HOME For Beginners in Hindi🔥LOSE BELLY FAT FAST🔥No Equipment, No Repeat",
+     "channel": "Being The Fittest",
+     "length": "19:07",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:programming_fundamentals": {
+   "query": {
+    "en": "programming for beginners full course",
+    "hi": "c language tutorial for beginners hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "zOjov-2OZ0E",
+     "title": "Introduction to Programming and Computer Science - Full Course",
+     "channel": "freeCodeCamp.org",
+     "length": "1:59:09",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "irqbmMNs2Bo",
+     "title": "C Language Tutorial for Beginners (with Notes & Practice Questions)",
+     "channel": "Apna College",
+     "length": "10:32:07",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:python": {
+   "query": {
+    "en": "python full course for beginners",
+    "hi": "python tutorial for beginners hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "K5KVEU3aaeQ",
+     "title": "Python Full Course for Beginners",
+     "channel": "Programming with Mosh",
+     "length": "2:02:21",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "UrsmFxEIp5k",
+     "title": "Python Tutorial For Beginners in Hindi | Complete Python Course 🔥",
+     "channel": "CodeWithHarry",
+     "length": "10:53:55",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:data_structures_algorithms": {
+   "query": {
+    "en": "data structures and algorithms full course",
+    "hi": "data structures and algorithms hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "8hly31xKli0",
+     "title": "Algorithms and Data Structures Tutorial - Full Course for Beginners",
+     "channel": "freeCodeCamp.org",
+     "length": "5:22:09",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "qNGyI95E5AE",
+     "title": "Lec-1: Roadmap 🛣️ of DSA | Syllabus of Data structure | Data Structure for Beginners",
+     "channel": "Gate Smashers",
+     "length": "10:20",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:web_development": {
+   "query": {
+    "en": "web development full course html css javascript",
+    "hi": "web development full course hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "zJSY8tbf_ys",
+     "title": "Frontend Web Development Bootcamp Course (JavaScript, HTML, CSS)",
+     "channel": "freeCodeCamp.org",
+     "length": "21:14:42",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "ktoYUycRXTA",
+     "title": "Web Development Complete RoadMap | from Basics to Advanced",
+     "channel": "Apna College",
+     "length": "24:17",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:databases_sql": {
+   "query": {
+    "en": "sql full course for beginners",
+    "hi": "sql tutorial hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "7S_tz1z_5bA",
+     "title": "SQL Course for Beginners [Full Course]",
+     "channel": "Programming with Mosh",
+     "length": "3:10:19",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "hlGoQC332VM",
+     "title": "SQL - Complete Course in 3 Hours | SQL One Shot using MySQL",
+     "channel": "Apna College",
+     "length": "3:16:14",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:computer_networks": {
+   "query": {
+    "en": "computer networking full course",
+    "hi": "computer networks hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "IPvYjXCsTg8",
+     "title": "Computer Networking Full Course - OSI Model Deep Dive with Real Life Examples",
+     "channel": "Kunal Kushwaha",
+     "length": "4:06:56",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "q3Z3Qa1UNBA",
+     "title": "Complete CN Computer Networks in one shot | Semester Exam | Hindi",
+     "channel": "KnowledgeGATE by Sanchit Sir",
+     "length": "6:18:26",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:linux_command_line": {
+   "query": {
+    "en": "linux command line for beginners",
+    "hi": "linux commands tutorial hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "_btosHOwIFk",
+     "title": "🔥Linux Command Line for Beginners | Linux Tutorial for Complete Beginners | Intellipaat",
+     "channel": "Intellipaat",
+     "length": "1:31:57",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "_tCY-c-sPZc",
+     "title": "Linux Tutorial For Beginners in Hindi",
+     "channel": "CodeWithHarry",
+     "length": "1:03:00",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:software_engineering": {
+   "query": {
+    "en": "git and github for beginners",
+    "hi": "git and github tutorial hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "apGV9Kg7ics",
+     "title": "Complete Git and GitHub Tutorial",
+     "channel": "Kunal Kushwaha",
+     "length": "1:12:40",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "Ez8F0nW6S-w",
+     "title": "Complete Git and GitHub Tutorial for Beginners",
+     "channel": "Apna College",
+     "length": "1:14:17",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:data_analysis": {
+   "query": {
+    "en": "data analysis with python pandas full course",
+    "hi": "data analysis with python hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "gtjxAH8uaP0",
+     "title": "Pandas & Python for Data Analysis by Example – Full Course for Beginners",
+     "channel": "freeCodeCamp.org",
+     "length": "4:57:59",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "zqhC7MdOrjc",
+     "title": "EDA with Python Full Course in Hindi | Exploratory Data Analysis (EDA) Using Python | Great Learning",
+     "channel": "Great Learning",
+     "length": "2:19:05",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:machine_learning": {
+   "query": {
+    "en": "machine learning full course for beginners",
+    "hi": "machine learning tutorial hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "ytl-gtw0LcY",
+     "title": "Machine Learning Full Course Free 2026 | Learn ML from Scratch | Intellipaat",
+     "channel": "Intellipaat",
+     "length": "11:19:12",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "bZxAKA69xqg",
+     "title": "AI Complete OneShot Course | Learn AI & Deep Learning from Scratch",
+     "channel": "Apna College",
+     "length": "1:23:35",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:cybersecurity_fundamentals": {
+   "query": {
+    "en": "cybersecurity full course for beginners",
+    "hi": "cyber security course hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "hxXbvu9J5Pg",
+     "title": "Cybersecurity Full Course 2026 [FREE] | Cybersecurity Tutorial | Cybersecurity Course | Simplilearn",
+     "channel": "Simplilearn",
+     "length": "47:07:31",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "vK4Mno4QYqk",
+     "title": "CYBERSECURITY RoadMap : How to become Ethical Hacker in 2024?",
+     "channel": "Apna College",
+     "length": "8:34",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:ethical_hacking": {
+   "query": {
+    "en": "ethical hacking full course for beginners",
+    "hi": "ethical hacking course hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "3lGLccc5VaU",
+     "title": "Ethical Hacking Full Course 2026 | Complete Ethical Hacking Course For Beginners | Simplilearn",
+     "channel": "Simplilearn",
+     "length": "23:57:42",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "vK4Mno4QYqk",
+     "title": "CYBERSECURITY RoadMap : How to become Ethical Hacker in 2024?",
+     "channel": "Apna College",
+     "length": "8:34",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:circuits_electronics": {
+   "query": {
+    "en": "basic electronics for beginners",
+    "hi": "basic electronics hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "uXr4lXYjXuU",
+     "title": "Basic Electronics For Beginners",
+     "channel": "The Organic Chemistry Tutor",
+     "length": "30:15",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:embedded_systems": {
+   "query": {
+    "en": "arduino tutorial for beginners",
+    "hi": "arduino tutorial hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "DPqiIzK97K0",
+     "title": "Arduino Course for Everybody",
+     "channel": "freeCodeCamp.org",
+     "length": "10:28:56",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "KOa1aVijhao",
+     "title": "Complete Arduino programming in Hindi | ARDUINO PROGRAMMING in 5 hour | Free",
+     "channel": "SBS online classes",
+     "length": "5:08:22",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:sensors_actuators": {
+   "query": {
+    "en": "arduino sensors tutorial for beginners",
+    "hi": "arduino sensors tutorial hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "DPqiIzK97K0",
+     "title": "Arduino Course for Everybody",
+     "channel": "freeCodeCamp.org",
+     "length": "10:28:56",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "C_WHQFtJI40",
+     "title": "What is Arduino | All Basic Concept of ArduinoUno in hindi | Arduino tutorial in hindi | ArduinoUno",
+     "channel": "Technical Pahadi",
+     "length": "14:05",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:control_systems": {
+   "query": {
+    "en": "control systems lectures introduction brian douglas",
+    "hi": "control system lecture 1 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "3eDDTFcSC_Y",
+     "title": "Control Systems Lectures - LTI Systems",
+     "channel": "Brian Douglas",
+     "length": "7:51",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:mechanics": {
+   "query": {
+    "en": "engineering mechanics introduction lecture",
+    "hi": "engineering mechanics hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "nGfVTNfNwnk",
+     "title": "Lec 01 Introduction to Engineering Mechanics I",
+     "channel": "NPTEL-NOC IITM",
+     "length": "36:10",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:engineering_drawing_cad": {
+   "query": {
+    "en": "autocad tutorial for beginners",
+    "hi": "autocad tutorial hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "VtLXKU1PpRU",
+     "title": "AutoCAD for Beginners - Full University Course",
+     "channel": "freeCodeCamp.org",
+     "length": "6:18:16",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "yE-2V6-9bEk",
+     "title": "AutoCAD Tutorial in Hindi for Beginners - 1 | ऑटोकैड सीखें हिंदी भाषा में | ऑटोकैड इन हिंदी",
+     "channel": "AutoCAD in Hindi",
+     "length": "16:27",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:thermodynamics": {
+   "query": {
+    "en": "thermodynamics basics explained",
+    "hi": "thermodynamics class 11 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "8N1BxHgsoOw",
+     "title": "The Laws of Thermodynamics, Entropy, and Gibbs Free Energy",
+     "channel": "Professor Dave Explains",
+     "length": "8:12",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "2oseYXxigs8",
+     "title": "Thermodynamics in One Shot || ऊष्मागतिकी  || UMMEED NEET हिंदी",
+     "channel": "NEET Wallah हिन्दी माध्यम",
+     "length": "7:27:05",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:structural_design": {
+   "query": {
+    "en": "structural analysis basics civil engineering",
+    "hi": "structural analysis lecture hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "89Ck2QkwTX4",
+     "title": "Basics of Structural Design",
+     "channel": "Civil Engineering",
+     "length": "7:40",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "zuqYEDGGESY",
+     "title": "Quick Revision of Structural Analysis | Civil Engineering | By Amit Zarola Sir",
+     "channel": "GATE ACADEMY by Umesh Dhande",
+     "length": "5:21:45",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:electrical_power": {
+   "query": {
+    "en": "electrical machines basics explained",
+    "hi": "electrical machines hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "59HBoIXzX_c",
+     "title": "How Electric Motors Work - 3 phase AC induction motors  ac motor",
+     "channel": "The Engineering Mindset",
+     "length": "15:34",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "Vz1yJaTvb9A",
+     "title": "Electric Machine | ONESHOT | BEEE | First Year Engineering | Pradeep Giri Sir",
+     "channel": "Pradeep Giri Academy",
+     "length": "35:29",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:aerodynamics": {
+   "query": {
+    "en": "how airplanes fly aerodynamics explained",
+    "hi": "how aeroplane fly hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "p4VHMsIuPmk",
+     "title": "How do airplanes actually fly? - Raymond Adkins",
+     "channel": "TED-Ed",
+     "length": "5:03",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:chemical_processes": {
+   "query": {
+    "en": "introduction to chemical engineering",
+    "hi": "chemical engineering basics hindi lecture"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "WgWNQVdhE9A",
+     "title": "Introduction to Chemical Engineering | Lecture 1",
+     "channel": "Stanford",
+     "length": "48:09",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:robot_motion": {
+   "query": {
+    "en": "robotics kinematics lecture",
+    "hi": "robotics course hindi lecture"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "unwUt3kkgvE",
+     "title": "#12 Inverse Kinematics | Introduction to Robotics",
+     "channel": "NPTEL-NOC IITM",
+     "length": "53:24",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:anatomy_physiology": {
+   "query": {
+    "en": "anatomy and physiology introduction",
+    "hi": "human anatomy hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "uBGl2BujkPQ",
+     "title": "Introduction to Anatomy & Physiology: Crash Course Anatomy & Physiology #1",
+     "channel": "CrashCourse",
+     "length": "11:20",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "39ZWoGi4k4Q",
+     "title": "Human anatomy in hindi | human anatomy and physiology in hindi",
+     "channel": "RanKplus MLT",
+     "length": "38:50",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:pharmacology": {
+   "query": {
+    "en": "pharmacology introduction basics",
+    "hi": "pharmacology basics hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "r95HUvHa4VM",
+     "title": "Introduction to Pharmacology",
+     "channel": "Professor Dave Explains",
+     "length": "7:38",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "svUh0pyo8u4",
+     "title": "Pharmacology Introduction in Hindi || Basic terms || Nursing || Pharmacy || 2nd year",
+     "channel": "Paramedical Vigyan",
+     "length": "16:16",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:patient_care": {
+   "query": {
+    "en": "basic nursing skills patient care",
+    "hi": "nursing care hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "sklquo00ElQ",
+     "title": "Patient Positioning Nursing Care | Nursing Fundamentals Next Generation NCLEX Review",
+     "channel": "RegisteredNurseRN",
+     "length": "14:27",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "Bt-YDsW0H1s",
+     "title": "Nursing Care Plan || Nursing Care Plan IN Hindi || Easy NCP || Nursing Sagar",
+     "channel": "Nursing Sagar",
+     "length": "7:26",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:clinical_reasoning": {
+   "query": {
+    "en": "clinical reasoning for medical students",
+    "hi": "clinical examination hindi"
+   },
+   "videos": [
+    {
+     "lang": "hi",
+     "id": "qs8-ueEr-DU",
+     "title": "Examination of Abdomen (Full), MUHS pattern, English/Hindi, Fluid thrill, Shifting Dullness,#MBBS",
+     "channel": "MBBS Physiology - Dr. Waqas Khan",
+     "length": "26:43",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:lab_techniques": {
+   "query": {
+    "en": "basic laboratory techniques biology lab",
+    "hi": "biology practical class 11 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "tcPgdR9_t64",
+     "title": "DNA Extraction Protocol - Part 1",
+     "channel": "The Jackson Laboratory",
+     "length": "8:14",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:animal_care": {
+   "query": {
+    "en": "veterinary science introduction animal care",
+    "hi": "veterinary science course hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "objP3E625Xo",
+     "title": "What Being a Veterinarian Really Takes | Melanie Bowden, DVM | TEDxCoeurdalene",
+     "channel": "TEDx Talks",
+     "length": "19:05",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:research_methods": {
+   "query": {
+    "en": "research methodology basics",
+    "hi": "research methodology hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "TEqYnV6KWfY",
+     "title": "Research Methodology 101: Simple Explainer With Examples (+ FREE Template)",
+     "channel": "Grad Coach",
+     "length": "1:04:04",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "p_Wjdz3eJw0",
+     "title": "Lect-1 Research Methodology (शोध पद्धति ) ll अनुसंधान का अर्थ, प्रकार और महत्व ll By Dr.S.P Goswami",
+     "channel": "The Vision Geography",
+     "length": "54:41",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:visual_design": {
+   "query": {
+    "en": "graphic design basics for beginners",
+    "hi": "graphic design for beginners hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "GQS7wPujL2k",
+     "title": "Graphic Design Basics | FREE COURSE",
+     "channel": "Envato Tuts+",
+     "length": "1:03:05",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "90Zaa8dH4SU",
+     "title": "Full Graphic Design Premium Crash Course for Beginners in Hindi (0 to Hero)",
+     "channel": "Shruti Rajput",
+     "length": "5:20:41",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:user_research": {
+   "query": {
+    "en": "ux design full course for beginners",
+    "hi": "ui ux design full course hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "MBblN98-5lg",
+     "title": "UI UX Design Course FREE | UI UX Design Full Course For Beginners (2025) | Intellipaat",
+     "channel": "Intellipaat",
+     "length": "10:50:52",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:spatial_visualisation": {
+   "query": {
+    "en": "spatial reasoning practice mirror images and paper folding",
+    "hi": "mirror image water image reasoning hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "11ZwRCvNzpY",
+     "title": "Paper Cutting and Folding Reasoning Tricks | Reasoning for all Competitive Exams by Swapnil Mam",
+     "channel": "SSC LAB",
+     "length": "12:41",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:accounting": {
+   "query": {
+    "en": "accounting basics for beginners",
+    "hi": "accountancy class 11 chapter 1 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "yYX4bvQSqbo",
+     "title": "ACCOUNTING BASICS: a Guide to (Almost) Everything",
+     "channel": "Accounting Stuff",
+     "length": "14:13",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:taxation_audit": {
+   "query": {
+    "en": "income tax basics explained",
+    "hi": "income tax basics hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "MQpbxF_RngI",
+     "title": "Indian Tax System Explained | All you need to know | Easiest explanation Ever | Aaditya Iyengar CFA",
+     "channel": "Aaditya Iyengar",
+     "length": "13:56",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "Gvccx1tDYRY",
+     "title": "What is Income Tax & Should It Be Abolished | Know Everything | Drishti IAS",
+     "channel": "Drishti IAS",
+     "length": "8:00",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:financial_analysis": {
+   "query": {
+    "en": "financial statement analysis basics",
+    "hi": "financial statement analysis hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "Fi1wkUczuyk",
+     "title": "FINANCIAL STATEMENTS: all the basics in 8 MINS!",
+     "channel": "Accounting Stuff",
+     "length": "9:06",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "CZscpOND3Vs",
+     "title": "Financial Ratios & Analysis - Explained in Hindi | #26 Master Investor",
+     "channel": "Asset Yogi",
+     "length": "11:54",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:economics_concepts": {
+   "query": {
+    "en": "microeconomics basics introduction",
+    "hi": "microeconomics class 12 hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "8ssjKR7nNck",
+     "title": "Lec 1: Introduction to Principles of Microeconomics and Supply & Demand",
+     "channel": "MIT OpenCourseWare",
+     "length": "38:29",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:legal_reasoning": {
+   "query": {
+    "en": "legal reasoning clat preparation lecture",
+    "hi": "legal reasoning clat hindi lecture"
+   },
+   "videos": []
+  },
+  "skill:argument_research": {
+   "query": {
+    "en": "how to debate and argue well",
+    "hi": "how to debate in hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "NKEhdsnKKHs",
+     "title": "How to Argue - Philosophical Reasoning: Crash Course Philosophy #2",
+     "channel": "CrashCourse",
+     "length": "9:43",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:governance_polity": {
+   "query": {
+    "en": "indian polity basics constitution",
+    "hi": "indian polity basics hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "aKCK5SvHY7k",
+     "title": "Easiest Tricks to Learn Indian Constitution",
+     "channel": "Priya Jain",
+     "length": "24:14",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "RV_u8bb2vyI",
+     "title": "Indian Government [In Hindi]| Legislature, Executive, Judiciary | Political Science",
+     "channel": "Satya - Vishal Gangwani",
+     "length": "6:37",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:reporting_storytelling": {
+   "query": {
+    "en": "how to write a news story journalism basics",
+    "hi": "news writing journalism hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "flq29zwRrZA",
+     "title": "How to Write a News Story STUDENTS WATCH ALL!",
+     "channel": "VelocityWriting | Momentum for Writers",
+     "length": "8:22",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:teaching_explaining": {
+   "query": {
+    "en": "how to explain things clearly",
+    "hi": "teaching skills hindi"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "EMbZ72cCAzI",
+     "title": "How to explain something complicated",
+     "channel": "TED-Ed",
+     "length": "9:29",
+     "checked": "2026-10-05"
+    },
+    {
+     "lang": "hi",
+     "id": "oSD1vWa1JWA",
+     "title": "कैसे बनें अच्छे अध्यापक ? | Dr Vikas Divyakirti | Drishti IAS",
+     "channel": "Drishti IAS",
+     "length": "4:47",
+     "checked": "2026-10-05"
+    }
+   ]
+  },
+  "skill:hospitality_service": {
+   "query": {
+    "en": "hotel management hospitality basics lecture",
+    "hi": "hotel management basics hindi lecture"
+   },
+   "videos": [
+    {
+     "lang": "en",
+     "id": "WCK9zQyW9pc",
+     "title": "Hospitality Management - Travel and tourism",
+     "channel": "TutorialsPoint",
+     "length": "11:52",
+     "checked": "2026-10-05"
+    }
+   ]
+  }
+ },
+ "about": "Topic videos for each skill, found by scripts/find_videos.py and checked against YouTube's oEmbed on the date given. Shown with a QR code to open on a phone."
+}

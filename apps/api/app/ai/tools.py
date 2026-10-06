@@ -383,6 +383,19 @@ TOOL_SPECS: list[dict[str, Any]] = [
     {
         "type": "function",
         "function": {
+            "name": "learning_videos",
+            "description": "Where to learn: a checked video in English and in Hindi for a topic (Python, maths, "
+                           "drawing…) or, for a career, its topics in learning order with the first video for each. "
+                           "Use for 'X kahan se seekhu?', 'videos for python', 'how do I start learning data science'. "
+                           "Name the videos and channels; the screen shows them with QR codes.",
+            "parameters": {"type": "object", "properties": {
+                "topic": {"type": "string", "description": "a topic or skill (python, maths, public speaking)"},
+                "career": {"type": "string", "description": "a career, for its whole learning path"}}},
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "degree_specialisations",
             "description": "The specialisations each degree into a career comes with (CSE with Cyber Security, ECE with "
                            "VLSI…), from official JoSAA/MCC programme names, with how many colleges offer each. For "
