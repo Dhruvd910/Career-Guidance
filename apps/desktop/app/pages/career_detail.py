@@ -69,6 +69,10 @@ class CareerDetailPage(BasePage):
 
         self.body_layout.addWidget(heading(career["name"]))
         self.body_layout.addWidget(subtitle(career["category"]))
+        if career.get("key"):
+            learn = primary_button("▶  What to learn for this career — videos")
+            learn.clicked.connect(lambda: self.ctx.navigate("learn", career=career["key"]))
+            self.body_layout.addWidget(learn)
         if d.get("overview"):
             overview = QLabel(d["overview"])
             overview.setWordWrap(True)

@@ -18,7 +18,7 @@ from PySide6.QtWidgets import (
 from app.api_client import ApiError, api_client
 from app.layout import page_margins
 from app.pages.base import BasePage
-from app.widgets.common import Card, error_label, ghost_button, heading, muted, primary_button, secondary_button, set_error, subtitle
+from app.widgets.common import Card, button_text, error_label, ghost_button, heading, muted, primary_button, secondary_button, set_error, subtitle
 from app.widgets.icons import mic_icon
 from app.workers import run_async
 
@@ -189,7 +189,7 @@ class PracticeTestPage(BasePage):
         chosen = self.answers.get(question["id"])
         for i, btn in enumerate(self.option_buttons):
             if i < len(question["options"]):
-                btn.setText(f"{OPTION_LABELS[i]}.  {question['options'][i]}")
+                btn.setText(button_text(f"{OPTION_LABELS[i]}.  {question['options'][i]}"))
                 btn.setVisible(True)
                 btn.setProperty("selected", "true" if chosen == i else "false")
                 btn.style().unpolish(btn)

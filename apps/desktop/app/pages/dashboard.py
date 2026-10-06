@@ -6,14 +6,15 @@ from app.pages.base import BasePage
 from app.session import session
 from app.theme import FOREGROUND, MUTED, PRIMARY, TILE_COLORS
 from app.widgets.brand import HandText
+from app.widgets.common import button_text
 from app.widgets.icons import maya_face_icon
 from app.widgets.svg_icons import icon_pixmap, svg_icon
 from app.workers import run_async
 
 
 class Tile(QFrame):
-    """One of the dashboard's five pastel cards: glyph, title, a line under it, and a round
-    arrow. The whole card is the tap target."""
+    """One of the home screen's pastel cards: glyph, title and a line saying what it's for. The
+    whole card is the tap target."""
 
     clicked = Signal()
 
@@ -25,14 +26,14 @@ class Tile(QFrame):
                            f"QFrame#Tile QLabel {{ background: transparent; }}")
         self.setCursor(Qt.PointingHandCursor)
         col = QVBoxLayout(self)
-        col.setContentsMargins(8, 18, 8, 14)
-        col.setSpacing(4)
-        self.setMaximumHeight(270)
+        col.setContentsMargins(6, 10, 6, 8)
+        col.setSpacing(2)
+        self.setMaximumHeight(150)
         icon = QLabel()
-        icon.setPixmap(icon_pixmap(glyph, accent, 52))
+        icon.setPixmap(icon_pixmap(glyph, accent, 40))
         icon.setAlignment(Qt.AlignCenter)
         col.addWidget(icon)
-        col.addSpacing(4)
+        col.addSpacing(2)
         name = QLabel(title)
         name.setAlignment(Qt.AlignCenter)
         name.setWordWrap(True)
@@ -44,13 +45,6 @@ class Tile(QFrame):
         line.setStyleSheet(f"font-size: 11px; color: {MUTED};")
         col.addWidget(line)
         col.addStretch(1)
-        col.addSpacing(8)
-        arrow = QLabel()
-        arrow.setFixedSize(34, 34)
-        arrow.setAlignment(Qt.AlignCenter)
-        arrow.setPixmap(icon_pixmap("arrow-right", FOREGROUND, 16, 2.4))
-        arrow.setStyleSheet("background: white; border-radius: 17px;")
-        col.addWidget(arrow, alignment=Qt.AlignHCenter)
 
     def mouseReleaseEvent(self, event) -> None:
         if self.rect().contains(event.position().toPoint()):
@@ -59,20 +53,28 @@ class Tile(QFrame):
 
 
 class DashboardPage(BasePage):
-    # (title, line under it, glyph, colour, page)
-    TILES = [
-        ("Career Paths", "Find the right\npath for you", "compass", "blue", "careers"),
-        ("Colleges", "Compare\ncolleges & cutoffs", "cap", "green", "colleges"),
-        ("Exams", "JEE, NEET\nand more", "exam", "red", "exams"),
-        ("Mock Tests", "Practice\nand improve", "clipboard", "purple", "mock_tests"),
-        ("Roadmap", "Your step-by-step\nplan", "road", "yellow", "roadmap"),
+    # Every main part of MAYA, in the order a student goes through them — nothing important hidden
+    # in the settings menu. (row heading, [(title, what it's for, glyph, colour, page)])
+    ROWS = [
+        ("1  Find your path", [
+            ("My Tests", "Find out what\nsuits you", "bulb", "blue", "assessment"),
+            ("Career Paths", "Explore careers\n& your matches", "compass", "teal", "careers"),
+            ("My Roadmap", "Your step-by-step\nplan", "road", "yellow", "roadmap"),
+            ("Learn", "Videos for each\ntopic to learn", "video", "red", "learn"),
+        ]),
+        ("2  Get there", [
+            ("Colleges", "Find, compare\n& shortlist", "cap", "green", "colleges"),
+            ("Exams", "JEE, NEET &\nyour chances", "exam", "orange", "exams"),
+            ("Mock Tests", "Practice\npapers", "clipboard", "purple", "mock_tests"),
+            ("My Progress", "See how\nyou've grown", "chart", "pink", "progress"),
+        ]),
     ]
 
     def __init__(self, ctx):
         super().__init__(ctx)
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(14, 8, 14, 12)
-        layout.setSpacing(14)
+        layout.setContentsMargins(14, 6, 14, 8)
+        layout.setSpacing(6)
 
         # Where we are: the most pressing thing, one tap from the full page (Phase 7).
         self.next_strip = QPushButton("Where we are  ›")
@@ -82,20 +84,25 @@ class DashboardPage(BasePage):
         self.next_strip.clicked.connect(lambda: self.ctx.navigate("where_we_are"))
         layout.addWidget(self.next_strip)
 
-        tiles = QHBoxLayout()
-        tiles.setSpacing(10)
-        for title, blurb, glyph, colour, target in self.TILES:
-            tile = Tile(title, blurb, glyph, colour)
-            tile.clicked.connect(lambda t=target: self._open(t))
-            tiles.addWidget(tile)
-        layout.addStretch(1)
-        layout.addLayout(tiles, stretch=3)
-        layout.addStretch(1)
+        self.tiles: dict[str, Tile] = {}
+        for heading_text, tiles in self.ROWS:
+            heading = QLabel(heading_text)
+            heading.setStyleSheet(f"font-size: 12px; font-weight: 700; color: {MUTED}; padding-left: 2px;")
+            layout.addWidget(heading)
+            row = QHBoxLayout()
+            row.setSpacing(8)
+            for title, blurb, glyph, colour, target in tiles:
+                tile = Tile(title, blurb, glyph, colour)
+                tile.clicked.connect(lambda t=target: self._open(t))
+                row.addWidget(tile)
+                self.tiles[target] = tile
+            layout.addLayout(row, stretch=1)
 
+        layout.addSpacing(2)
         ask_row = QHBoxLayout()
         ask_row.setSpacing(10)
         face = QLabel()
-        face.setPixmap(maya_face_icon(46).pixmap(QSize(46, 46)))
+        face.setPixmap(maya_face_icon(40).pixmap(QSize(40, 40)))
         ask_row.addWidget(face)
 
         bar = QFrame()
@@ -164,7 +171,7 @@ class DashboardPage(BasePage):
         if items:
             first = items[0]
             label = "आगे" if lang == "hi" else "Next"
-            self.next_strip.setText(f"{label}: {first['title'][lang]} — {first['why'][lang]}  ›")
+            self.next_strip.setText(button_text(f"{label}: {first['title'][lang]} — {first['why'][lang]}  ›"))
         else:
             self.next_strip.setText("हम कहाँ हैं  ›" if lang == "hi" else "Where we are  ›")
 

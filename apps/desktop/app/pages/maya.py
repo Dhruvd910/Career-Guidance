@@ -13,7 +13,7 @@ from app.conversation_client import ConversationClient
 from app.theme import CARD_BORDER, FOREGROUND, PRIMARY
 from app.pages.base import BasePage
 from app.voice import LISTENING, THINKING
-from app.widgets.common import error_label, ghost_button, heading, primary_button, set_error, subtitle
+from app.widgets.common import button_text, error_label, ghost_button, heading, primary_button, set_error, subtitle
 from app.widgets.icons import mic_icon, stop_icon
 from app.widgets.maya_status import MayaStatus
 from app.workers import run_async
@@ -400,8 +400,8 @@ class MayaPage(BasePage):
             self._add_bubble("assistant", f"⚠ {message.get('message') or 'Something went wrong.'}")
 
     def offer(self, suggestion: dict) -> None:
-        """A button for what MAYA just offered — today, starting an assessment."""
-        if suggestion.get("action") != "open_assessment":
+        """A button for what MAYA just offered: starting an assessment, or the videos for a topic."""
+        if suggestion.get("action") not in ("open_assessment", "open_learn"):
             return
         self._suggestion = suggestion
         self._label_suggestion()
@@ -413,12 +413,16 @@ class MayaPage(BasePage):
             return
         lang = "hi" if self.language in ("hi", "hinglish") else "en"
         title = (suggestion.get("title") or {}).get(lang) or suggestion.get("instrument_key", "")
+        if suggestion.get("action") == "open_learn":
+            self.suggestion_btn.setText(button_text(f"▶  वीडियो देखें: {title}" if lang == "hi" else f"▶  Watch videos: {title}"))
+            self.suggestion_btn.setVisible(True)
+            return
         minutes = suggestion.get("est_minutes")
         if lang == "hi":
             text = f"शुरू करें: {title}" + (f" · लगभग {minutes} मिनट" if minutes else "")
         else:
             text = f"Start: {title}" + (f" · about {minutes} min" if minutes else "")
-        self.suggestion_btn.setText(text)
+        self.suggestion_btn.setText(button_text(text))
         self.suggestion_btn.setVisible(True)
 
     def _invite_to_assess(self, instruments: list) -> None:
@@ -436,6 +440,9 @@ class MayaPage(BasePage):
         self.suggestion_btn.setVisible(False)
         if suggestion:
             self.voice.cancel()
+            if suggestion.get("action") == "open_learn":
+                self.ctx.navigate("learn", career=suggestion.get("career"), skill=suggestion.get("skill"))
+                return
             language = "hi" if self.language in ("hi", "hinglish") else "en"
             self.ctx.navigate("assessment_run", key=suggestion["instrument_key"], language=language)
 

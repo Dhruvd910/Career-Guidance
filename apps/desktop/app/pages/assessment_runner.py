@@ -34,12 +34,12 @@ WORDS = {
            "hint": "Tap an answer, or just say it. You can say “go back” or “skip”.",
            "no_voice": "Voice isn't available right now — tap an answer instead.",
            "tap": "No problem — tap an answer, or tap Answer by voice to try again.",
-           "checking": "Let me check what you meant…", "next": "Next", "skip": "Skip", "back": "Back"},
+           "checking": "Let me check what you meant…", "next": "Next", "skip": "Skip", "back": "Previous question"},
     "hi": {"question": "सवाल {n} / लगभग {total}", "sorry": "माफ़ कीजिए, मैं ठीक से सुन नहीं पाई।",
            "hint": "जवाब पर टैप कीजिए, या बोलिए। आप “पीछे” या “छोड़ो” भी कह सकते हैं।",
            "no_voice": "अभी आवाज़ काम नहीं कर रही — जवाब पर टैप कीजिए।",
            "tap": "कोई बात नहीं — जवाब पर टैप कीजिए, या दोबारा बोलने के लिए 'Answer by voice' दबाइए।",
-           "checking": "देखती हूँ आपका मतलब क्या था…", "next": "आगे", "skip": "छोड़ें", "back": "पीछे"},
+           "checking": "देखती हूँ आपका मतलब क्या था…", "next": "आगे", "skip": "छोड़ें", "back": "पिछला सवाल"},
 }
 
 
@@ -184,6 +184,7 @@ class AssessmentRunnerPage(BasePage):
         self.hint.setText(self._words("hint"))
         self.back_btn.setText("←  " + self._words("back"))
         self.back_btn.setEnabled(bool(view.get("can_go_back")))
+        self.back_btn.setVisible(bool(view.get("can_go_back")))  # on the first question it would do nothing
         self.skip_btn.setText(self._words("skip"))
         set_error(self.error, None)
         self._build_answers(item)
@@ -275,7 +276,9 @@ class AssessmentRunnerPage(BasePage):
                   transcript, by, response_ms, on_success=self._render, on_error=self._failed)
 
     def back_mode(self) -> str:
-        return "page" if self.view and not self.view.get("complete") and self.view.get("can_go_back") else "history"
+        """The top Back leaves the test (it picks up where you stopped next time); "Previous question"
+        below the answers steps back inside it."""
+        return "history"
 
     def go_back(self) -> None:
         if self._busy or self.view is None or not self.view.get("can_go_back"):

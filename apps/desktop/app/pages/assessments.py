@@ -47,8 +47,8 @@ class AssessmentsPage(BasePage):
         layout = QVBoxLayout(self)
         layout.setContentsMargins(*page_margins())
         layout.setSpacing(10)
-        layout.addWidget(heading("My assessment"))
-        layout.addWidget(subtitle("Five short checks, in any order. Each one makes your career directions clearer — "
+        layout.addWidget(heading("My Tests"))
+        layout.addWidget(subtitle("Short checks, in any order. Each one makes your career directions clearer — "
                                   "none of them decides anything for you."))
 
         language_row = QHBoxLayout()

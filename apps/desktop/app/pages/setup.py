@@ -311,7 +311,7 @@ class SetupPage(BasePage):
             self.ctx.set_progress("Almost done", total - 1, total)
         on_review = step == REVIEW
         self.voice_btn.setVisible(not on_review)
-        self.back_btn.setVisible(on_review)
+        self.back_btn.setVisible(False)  # the top bar's Back does this; two Backs on one screen confused people
         first_run_intro = step == NAME and not self.editing
         self.question.setText("Hi, I'm MAYA! What's your name?" if first_run_intro else
                               QUESTIONS[step].format(state=self.answers.get("state", "that")))

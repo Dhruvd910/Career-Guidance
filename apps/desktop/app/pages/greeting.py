@@ -90,7 +90,7 @@ class GreetingPage(BasePage):
 
         first_name = (session.profile or {}).get("name", "").split(" ")[0]
         self.salute.setText(f"{salutation()}," if first_name else f"{salutation()}!")
-        self.name_label.setText(f"{first_name}! 👋" if first_name else "")
+        self.name_label.setText(f"{first_name}!" if first_name else "")  # (no 👋: the Pi's fonts draw a box)
         self.name_label.setVisible(bool(first_name))
         greeting = f"{salutation()}, {first_name}!" if first_name else f"{salutation()}!"
         self.ctx.voice.say(f"{greeting} I'm MAYA, your AI career guidance assistant. "

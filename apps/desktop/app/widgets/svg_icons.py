@@ -37,6 +37,9 @@ OUTLINE = {
     "pin": '<path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="currentColor"/>'
            '<circle cx="12" cy="10" r="2.6" fill="#ffffff" stroke="none"/>',
     "home": '<path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/>',
+    "help": '<circle cx="12" cy="12" r="9.5"/><path d="M9.5 9.2a2.6 2.6 0 0 1 5 .8c0 1.8-2.5 2.2-2.5 4"/>'
+            '<circle cx="12" cy="17.3" r=".9" fill="currentColor"/>',
+    "play": '<path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/>',
     "users": '<circle cx="9" cy="8" r="3.5" fill="currentColor"/><path d="M2 20c0-3.9 3.1-6 7-6s7 2.1 7 6z" '
              'fill="currentColor"/><circle cx="17" cy="9" r="2.8" fill="currentColor"/>'
              '<path d="M17.5 13.5c2.6.3 4.5 2.2 4.5 5.5h-4" fill="currentColor"/>',
@@ -59,6 +62,13 @@ SOLID = {
     "clipboard": '<rect x="8" y="7" width="32" height="38" rx="5" fill="{c}"/><rect x="16" y="3" width="16" '
                  'height="9" rx="3" fill="{c}" stroke="#fff" stroke-width="2"/><path d="m16 27 6 6 11-12" '
                  'fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>',
+    "bulb": '<path d="M24 3a15 15 0 0 0-9 27v5h18v-5A15 15 0 0 0 24 3z" fill="{c}"/>'
+            '<rect x="16" y="37" width="16" height="4" rx="2" fill="{c}"/><rect x="19" y="43" width="10" height="3.5" '
+            'rx="1.75" fill="{c}"/><path d="m17.5 18 5 5 8-9" fill="none" stroke="#fff" stroke-width="3.5" '
+            'stroke-linecap="round" stroke-linejoin="round"/>',
+    "video": '<rect x="2" y="8" width="44" height="32" rx="8" fill="{c}"/><path d="M19.5 16v16l13-8z" fill="#fff"/>',
+    "chart": '<rect x="5" y="27" width="9" height="16" rx="2.5" fill="{c}"/><rect x="19.5" y="17" width="9" height="26" '
+             'rx="2.5" fill="{c}"/><rect x="34" y="6" width="9" height="37" rx="2.5" fill="{c}"/>',
     "road": '<path d="M17 4h14l13 40H4z" fill="{c}"/><path d="M24 8v6M24 20v7M24 33v8" stroke="#fff" '
             'stroke-width="3.5" stroke-linecap="round"/>',
 }

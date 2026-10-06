@@ -66,7 +66,7 @@ class ProgressPage(BasePage):
         if not data["skills"]:
             skills.addWidget(muted(words(lang, "Nothing measured yet. Each assessment or practice paper adds a point here.",
                                          "अभी कुछ मापा नहीं गया। हर आकलन या प्रैक्टिस पेपर यहाँ एक बिंदु जोड़ता है।")))
-            go = secondary_button(words(lang, "My assessments", "मेरे आकलन"))
+            go = secondary_button(words(lang, "My Tests", "मेरे टेस्ट"))
             go.clicked.connect(lambda: self.ctx.navigate("assessment"))
             skills.addWidget(go)
         for s in data["skills"]:

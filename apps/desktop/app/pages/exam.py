@@ -31,10 +31,11 @@ from app.widgets.common import (
 )
 from app.workers import run_async
 
+# A coloured dot rather than an emoji: the Pi's fonts have no 🔴, which showed as an empty box.
 BAND_TITLES = [
-    ("high_probability", "🟢 High chance"),
-    ("possible", "🟡 Possible"),
-    ("ambitious", "🔴 Ambitious / dream"),
+    ("high_probability", '<span style="color:#16a34a">●</span> High chance'),
+    ("possible", '<span style="color:#ca8a04">●</span> Possible'),
+    ("ambitious", '<span style="color:#dc2626">●</span> Ambitious / dream'),
 ]
 STATUSES = [("preparing", "Still preparing"), ("appeared", "Appeared, waiting for result"), ("qualified", "Have my result")]
 

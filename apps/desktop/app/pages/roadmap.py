@@ -341,6 +341,11 @@ class RoadmapNodePage(BasePage):
         reason = (node.get("attrs") or {}).get("reason")
         if node["state"] != "active" or reason:
             self.body_layout.addWidget(muted((reason or {}).get(lang) or words(lang, "Parked for now.", "अभी रोका गया है।")))
+        skill = (node.get("attrs") or {}).get("skill")
+        if skill:
+            watch = primary_button(words(lang, "▶  Watch videos for this step", "▶  इस कदम के वीडियो देखें"))
+            watch.clicked.connect(lambda: self.ctx.navigate("learn", skill=skill))
+            self.body_layout.addWidget(watch)
         for key, en, hi in (("why", "Why", "क्यों"), ("done_when", "Done when", "कब पूरा")):
             if detail.get(key):
                 card = Card()

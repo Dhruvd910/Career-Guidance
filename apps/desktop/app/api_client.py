@@ -290,6 +290,9 @@ class ApiClient:
 
     # ---------------- MAYA's memory ----------------
 
+    def learn(self, career: str | None = None) -> dict:
+        return self.get("/api/learn", params={"career": career} if career else None)
+
     def get_consent(self) -> dict:
         return self.get("/api/consent")
 

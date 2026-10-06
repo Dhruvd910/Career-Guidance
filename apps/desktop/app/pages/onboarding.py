@@ -53,6 +53,13 @@ class OnboardingPage(BasePage):
         self.content_holder = QVBoxLayout()
         self.content_holder.setSpacing(10)
         card.layout_.addLayout(self.content_holder)
+        # Name, class, board… are changed on purpose, here — not by pressing Back.
+        details = QPushButton("Change my details (name, class…)")
+        details.setProperty("variant", "link")
+        details.setCursor(Qt.PointingHandCursor)
+        details.clicked.connect(lambda: self.ctx.navigate("setup", edit=True))
+        card.layout_.addSpacing(4)
+        card.addWidget(details)
         grid.addWidget(card, 0, 1, alignment=Qt.AlignTop)
 
         self.next_btn = arrow_button("Next")
@@ -75,20 +82,17 @@ class OnboardingPage(BasePage):
     # ---------------- back ----------------
 
     def back_mode(self) -> str:
-        return "page"
+        """Back from a step after "do you know your career?" un-answers it. Anywhere else it's the
+        screen you came from, like everywhere in MAYA — never the first-run details form, which used
+        to come up here (that's "Change my details", below the question)."""
+        return "page" if (self._step or {}).get("step") in AFTER_CAREER_GOAL else "history"
 
     def go_back(self) -> None:
-        """Back from a later step un-answers "do you know your career?"; from the first
-        question it goes to your details (name, class, board…) to change them."""
-        step = (self._step or {}).get("step")
         self.ctx.voice.cancel()
-        if step in AFTER_CAREER_GOAL:
-            run_async(
-                api_client.update_profile_fields, {"knows_career_goal": None},
-                on_success=lambda _r: self._load_step(), on_error=self._failed,
-            )
-        else:
-            self.ctx.navigate("setup", edit=True)
+        run_async(
+            api_client.update_profile_fields, {"knows_career_goal": None},
+            on_success=lambda _r: self._load_step(), on_error=self._failed,
+        )
 
     def _clear_content(self) -> None:
         clear_layout(self.content_holder)

@@ -42,6 +42,8 @@ from app.pages.assessment_runner import AssessmentRunnerPage
 from app.pages.directions import DirectionPage, DirectionsPage
 from app.pages.streams import StreamExplorerPage
 from app.pages.career_detail import CareerDetailPage
+from app.pages.guide import GuidePage
+from app.pages.learn import LearnPage
 from app import touch_calibration
 
 PAGE_TITLES = {
@@ -52,14 +54,17 @@ PAGE_TITLES = {
     "compare": "Compare colleges", "roadmap": "My roadmap", "calibrate": "Touch calibration",
     "roadmap_node": "Roadmap step", "roadmap_changes": "What changed", "progress": "My progress",
     "study_plan": "Study plan",
-    "assessment": "My assessment", "assessment_run": "Assessment", "assessment_result": "My result",
+    "assessment": "My Tests", "assessment_run": "Test", "assessment_result": "My result",
     "assessment_history": "How I've changed", "directions": "Career directions", "direction": "Career direction", "streams": "Stream explorer",
-    "career_detail": "Career guide", "memory": "MAYA's memory",
+    "career_detail": "Career guide", "memory": "MAYA's memory", "learn": "Learn", "guide": "How MAYA works",
 }
 # Screens that belong to starting up, not to using the app: no top bar, no
 # wake word, and never somewhere Back returns to.
 STARTUP_PAGES = ("", "greeting", "calibrate")
 HISTORY_LIMIT = 30
+# One-off requests to a page ("wake up and listen", "ask this", "a result just in") that coming
+# Back to it must not repeat.
+TRANSIENT = ("wake", "greet", "ask", "returning", "fresh")
 # The wake word starts listening once MAYA has been quiet this long — not in the gap between
 # her asking a question and listening for the answer.
 WAKE_WORD_IDLE_MS = 1500
@@ -146,6 +151,16 @@ class MainWindow(QMainWindow):
         self.back_btn.clicked.connect(self.go_back)
         row.addWidget(self.back_btn)
 
+        # Home, one tap from anywhere — the logo does it too, but nobody guesses that.
+        self.home_btn = QPushButton()
+        self.home_btn.setObjectName("IconButton")
+        self.home_btn.setIcon(svg_icon("home", FOREGROUND, 22))
+        self.home_btn.setIconSize(QSize(22, 22))
+        self.home_btn.setToolTip("Home")
+        self.home_btn.setCursor(Qt.PointingHandCursor)
+        self.home_btn.clicked.connect(self._go_home)
+        row.addWidget(self.home_btn)
+
         self.logo = Logo(34)
         self.logo.clicked.connect(self._go_home)
         self._lead_stretch = QWidget()  # centres the logo in flow mode
@@ -189,6 +204,15 @@ class MainWindow(QMainWindow):
         self.clock = Clock()
         row.addWidget(self.clock)
 
+        self.help_btn = QPushButton()
+        self.help_btn.setObjectName("IconButton")
+        self.help_btn.setIcon(svg_icon("help", FOREGROUND, 26, 1.8))
+        self.help_btn.setIconSize(QSize(26, 26))
+        self.help_btn.setToolTip("How MAYA works")
+        self.help_btn.setCursor(Qt.PointingHandCursor)
+        self.help_btn.clicked.connect(lambda: self.navigate("guide"))
+        row.addWidget(self.help_btn)
+
         self.settings_btn = QPushButton()
         self.settings_btn.setObjectName("IconButton")
         self.settings_btn.setIcon(svg_icon("settings", FOREGROUND, 26, 1.8))
@@ -218,6 +242,8 @@ class MainWindow(QMainWindow):
         mode = self._header_mode()
         flow, home, inner = mode == "flow", mode == "home", mode == "inner"
         self.back_btn.setVisible(not home)
+        self.home_btn.setVisible(inner and bool((session.profile or {}).get("onboarding_completed")))
+        self.help_btn.setVisible(home)
         self._lead_stretch.setVisible(flow)
         self.title_label.setVisible(inner)
         self.welcome_label.setVisible(home)
@@ -248,8 +274,10 @@ class MainWindow(QMainWindow):
         self._arrange_header()
 
     def _go_home(self) -> None:
+        """Home is where every journey starts: going there starts Back's history afresh."""
         if self._home_available():
-            self.navigate("dashboard")
+            self._history.clear()
+            self._show("dashboard", {})
 
     def _open_settings(self) -> None:
         menu = QMenu(self)
@@ -257,17 +285,11 @@ class MainWindow(QMainWindow):
             "QMenu { background: white; border: 1px solid #dde6f3; border-radius: 10px; padding: 6px; }"
             "QMenu::item { padding: 10px 22px; font-size: 14px; border-radius: 8px; }"
             "QMenu::item:selected { background: #e8f0fe; color: #0f1f3d; }")
+        # Settings only: every part of MAYA itself is a tile on the home screen.
         menu.addAction("Edit my details", lambda: self.navigate("setup", edit=True))
-        menu.addAction("Change goal", self.pages["dashboard"].change_goal)
-        menu.addAction("Talk to MAYA", lambda: self.navigate("maya"))
-        menu.addAction("Where we are", lambda: self.navigate("where_we_are"))
-        menu.addAction("My roadmap", lambda: self.navigate("roadmap"))
-        menu.addAction("My progress", lambda: self.navigate("progress"))
-        menu.addAction("My shortlist", lambda: self.navigate("shortlist"))
-        menu.addAction("My assessment", lambda: self.navigate("assessment"))
-        menu.addAction("Career directions", lambda: self.navigate("directions"))
-        menu.addAction("Stream explorer", lambda: self.navigate("streams"))
-        menu.addAction("MAYA's memory", lambda: self.navigate("memory"))
+        menu.addAction("Change my goal", self.pages["dashboard"].change_goal)
+        menu.addAction("What MAYA remembers (privacy)", lambda: self.navigate("memory"))
+        menu.addAction("How MAYA works", lambda: self.navigate("guide"))
         menu.addAction("Calibrate touch", lambda: self.navigate("calibrate"))
         below = self.settings_btn.mapToGlobal(self.settings_btn.rect().bottomRight())
         menu.exec(below - QPoint(menu.sizeHint().width(), 0))
@@ -339,6 +361,8 @@ class MainWindow(QMainWindow):
         self.pages["streams"] = StreamExplorerPage(self)
         self.pages["career_detail"] = CareerDetailPage(self)
         self.pages["memory"] = MemoryPage(self)
+        self.pages["learn"] = LearnPage(self)
+        self.pages["guide"] = GuidePage(self)
         for name, page in self.pages.items():
             # Every page scrolls. When the keyboard takes the bottom ~195px of the 480px panel,
             # a page taller than what's left scrolls instead of forcing the window taller than
@@ -355,13 +379,19 @@ class MainWindow(QMainWindow):
 
     # ---------------- navigation ----------------
 
+    @staticmethod
+    def _entry(name: str, kwargs: dict) -> tuple[str, dict]:
+        return name, {k: v for k, v in kwargs.items() if k not in TRANSIENT}
+
     def navigate(self, name: str, **kwargs) -> None:
         # A page that redirects from its own on_show() (dashboard -> onboarding) replaces
         # the screen being opened rather than stacking another entry onto the history.
         redirect = self._showing_depth > 0
-        if not redirect and self._current_page not in STARTUP_PAGES and self._current_page != name:
-            # Transient requests (wake=True) aren't replayed when coming back.
-            self._history.append((self._current_page, {k: v for k, v in self._current_kwargs.items() if k not in ("wake", "greet", "ask", "returning")}))
+        here = self._entry(self._current_page, self._current_kwargs)
+        # One career to a related one, one college to another: the same page with something else
+        # in it is a new screen too — Back returns to the one before.
+        if not redirect and self._current_page not in STARTUP_PAGES and here != self._entry(name, kwargs):
+            self._history.append(here)
             del self._history[:-HISTORY_LIMIT]
         self._show(name, kwargs)
 
@@ -394,9 +424,10 @@ class MainWindow(QMainWindow):
         if mode == "page":
             page.go_back()
         elif mode == "history":
+            here = self._entry(self._current_page, self._current_kwargs)
             while self._history:
                 name, kwargs = self._history.pop()
-                if name != self._current_page:
+                if (name, kwargs) != here:
                     # Pages keep what they were showing when you come back to them.
                     self._show(name, {**kwargs, "returning": True})
                     return

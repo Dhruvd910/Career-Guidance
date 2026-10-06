@@ -60,9 +60,16 @@ def demo_badge() -> QLabel:
 
 
 def chance_badge(band: str, band_label: str, emoji: str) -> QLabel:
-    label = QLabel(f"{emoji} {band_label}")
+    """The band in its colour. (The emoji the API sends isn't shown: the Pi's fonts lack some of them.)"""
+    label = QLabel(band_label)
     label.setStyleSheet(chance_style(band))
     return label
+
+
+def button_text(text: str) -> str:
+    """Names, titles and answers on a button exactly as written: Qt reads "&" in a button's text as a
+    keyboard-shortcut marker, so "Science & Engineering" showed as "Science _Engineering"."""
+    return text.replace("&", "&&")
 
 
 def secondary_button(text: str) -> QPushButton:

@@ -26,6 +26,9 @@ TILE_COLORS = {
     "red": ("#fee2e2", "#ef4444", "#ffffff"),
     "purple": ("#ede9fe", "#7c3aed", "#ffffff"),
     "yellow": ("#fef3c7", "#f59e0b", "#ffffff"),
+    "teal": ("#ccfbf1", "#0d9488", "#ffffff"),
+    "orange": ("#ffedd5", "#ea580c", "#ffffff"),
+    "pink": ("#fce7f3", "#db2777", "#ffffff"),
 }
 
 CHANCE_HIGH_BG = "#dcfce7"

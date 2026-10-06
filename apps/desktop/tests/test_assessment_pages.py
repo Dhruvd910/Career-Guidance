@@ -194,7 +194,7 @@ def texts(widget):
 def button(widget, text):
     """The visible button showing `text` — replaced ones linger, hidden, until Qt deletes them."""
     return next(b for b in widget.findChildren(QPushButton) if b.isVisibleTo(widget)
-                and (b.text() == text or any(lbl.text() == text for lbl in b.findChildren(QLabel))))
+                and (b.text().replace("&&", "&") == text or any(lbl.text() == text for lbl in b.findChildren(QLabel))))
 
 
 # ---------------- the hub ----------------
@@ -226,7 +226,7 @@ def runner(qapp, api):
 def test_a_question_is_shown_read_out_and_answered_by_a_tap(runner, api):
     assert runner.prompt.text() == "How do you feel about maths?"
     assert runner.ctx.voice.asked[-1][:2] == ("Let's find out. How do you feel about maths?", "en")
-    assert not runner.back_btn.isEnabled()
+    assert not runner.back_btn.isEnabled() and not runner.back_btn.isVisibleTo(runner), "nothing to go back to"
     button(runner, "I like it").click()
     assert api.calls[-1][:6] == ("answer", "int_maths", {"option": "like"}, False, None, "touch")
     assert runner.prompt.text() == PROBLEM["prompt"]["en"] and "A    ₹50" in texts(runner)
@@ -266,6 +266,16 @@ def test_going_back_and_skipping_by_voice(runner, api):
     on_answer("peeche")
     assert api.calls[-1] == ("back",)
     assert button(runner, "I like it").property("selected") == "true", "the earlier answer is shown"
+
+
+def test_previous_question_steps_back_inside_the_test_and_the_top_back_leaves_it(runner, api):
+    button(runner, "I like it").click()
+    assert runner.back_btn.text() == "←  Previous question" and runner.back_btn.isEnabled()
+    runner.back_btn.click()
+    assert api.calls[-1] == ("back",) and runner.prompt.text() == "How do you feel about maths?"
+    assert runner.back_mode() == "history", "the top Back leaves; the test picks up where they stopped"
+    runner._render(view(PROBLEM, answered=1, language="hi"))
+    assert runner.back_btn.text() == "←  पिछला सवाल"
 
 
 def test_a_late_voice_answer_for_an_old_question_is_ignored(runner, api):

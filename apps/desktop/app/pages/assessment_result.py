@@ -80,7 +80,7 @@ class AssessmentResultPage(BasePage):
         directions = primary_button("See my career directions")
         directions.clicked.connect(lambda: self.ctx.navigate("directions"))
         actions.addWidget(directions)
-        hub = secondary_button("My assessments")
+        hub = secondary_button("My Tests")
         hub.clicked.connect(lambda: self.ctx.navigate("assessment"))
         actions.addWidget(hub)
         actions.addStretch(1)
